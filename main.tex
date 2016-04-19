@@ -292,7 +292,7 @@ anchorcolor=OliveGreen}
 \begin{abstract}
 The fundamental problem of causal inference is to infer from a given probability distribution over observed variables, what causal structures, possibly incorporating hidden variables, could have given rise to that distribution. Given some candidate causal structure, it is therefore valuable to derive infeasibility criteria, such that %any distribution violating an infeasibility criterion cannot be realized from the given causal structure.
 the hypothesis is not a feasible causal explanation whenever the observed distribution violates an infeasibility criterion.
-The problem of causal inference via infeasibility criteria comes up in many fields. Special infeasibility criteria are Bell inequalities (which distinguish non-classical from classical distributions) and Tsirelson inequalities (which distinguish quantum from post-quantum distributions), and Pearl's instrumental inequality. All of these are limited to very specific causal structures. Analogues of such inequalities for more-general causal structures, i.e., necessary criteria respectively for classical and quantum distributions to be realizable from the structure, are highly sought after. 
+The problem of causal inference via infeasibility criteria comes up in many fields. Special infeasibility criteria are Bell inequalities (which distinguish non-classical from classical distributions) and Tsirelson inequalities (which distinguish quantum from post-quantum distributions), and Pearl's instrumental inequality. All of these are limited to very specific causal structures. Analogues of such inequalities for more-general causal structures, i.e., necessary criteria for either classical or quantum distributions to be realizable from the structure, are highly sought after. 
 
 We here introduce a technique for deriving such infeasibility criteria, applicable to any causal structure. It consists of first \textit{inflating} the causal structure and then translating weak constraints on the inflated structure into stronger constraints on the original structure. Moreover, we show how our technique can be tuned to yield either classical criteria (i.e., that may have quantum violations), or post-classical criteria (i.e., that hold even in the context of general probability theories), depending on whether or not the inflation implicitly broadcasts the value of a hidden variable. Concretely, we derive polynomial inequalities for the so-called Triangle scenario, and we show how all Bell inequalities also follow from our method. %analyze Pearl's instrumental inequality from our perspective. 
 Furthermore, given both a causal structure and a specific probability distribution, our technique can be used to efficiently witness their inconsistency, even absent explicit inequalities. The inflation technique is therefore both relevant and practical for general causal inference tasks with hidden variables.
@@ -563,18 +563,18 @@ an inequality known as monogamy of correlations \cite{fritz2012bell}. It forbids
 
 
 \example{: \tred{The W-type distribution cannot arise from the Triangle scenario}}\par\smallskip\nobreak
-Another distribution inconsistent with the Triangle scenario is the W-type distribution, named after a quantum state appearing in Ref. \cite{3Qubits2Ways}. To our knowledge, the infeasibility of the W-type distribution on the Triangle scenario is a novel result here. The distribution $P_{\text{W}}\parenths{A B C}$ is given by
+Another distribution inconsistent with the Triangle scenario is the W-type distribution, named after a quantum state appearing in Ref. \cite{3Qubits2Ways}. To our knowledge, the infeasibility of the Triangle causal structure to explain the W-type distribution is a novel result here. The distribution $P_{\text{W}}\parenths{A B C}$ is given by
 \begin{align}\label{eq:wdistribution1}
 p_{\text{W}}\parens{a b c}=\frac{[100]+[010]+[001]}{3}=\begin{cases}\tfrac{1}{3}&\text{if }\; a+b+c=1, \\ 0&\text{otherwise}.\end{cases}
 \end{align}
-To prove its infeasibility, consider the inflation DAG of \cref{fig:Tri222}. The set $\{A_2 C_1\}$ is injectable, so $P_{\text{W}}$ implies that $C_1\eql 0$ whenever $A_2 \eql 1$. Similarly, $B_1\eql 0$ whenever $C_2\eql 1$, and $A_1\eql 0$ whenever $B_2\eql 1$. The independence of $A_2$,$B_2$, and $C_2$ means that $\p{A_2\eql B_2\eql C_2\eql 1}=\nicefrac{1}{8}$ according to $P_{\text{W}}$. But that would imply $\p{A_1\eql B_1\eql C_1\eql 0}\geq\nicefrac{1}{8}$, which contradicts $P_{\text{W}}$, hence $P_{\text{W}}$ cannot arise from the Triangle scenario.
+To prove that  $P_{\text{W}}$ clashes with the Triangle causal structure, consider the inflation DAG of \cref{fig:Tri222}. The set $\{A_2 C_1\}$ is injectable, so $P_{\text{W}}$ implies that $C_1\eql 0$ whenever $A_2 \eql 1$. Similarly, $B_1\eql 0$ whenever $C_2\eql 1$, and $A_1\eql 0$ whenever $B_2\eql 1$. The independence of $A_2$,$B_2$, and $C_2$ means that $\p{A_2\eql B_2\eql C_2\eql 1}=\nicefrac{1}{8}$ according to $P_{\text{W}}$. But that would imply $\p{A_1\eql B_1\eql C_1\eql 0}\geq\nicefrac{1}{8}$, which contradicts $P_{\text{W}}$, hence $P_{\text{W}}$ cannot arise from the Triangle scenario.
 
-The W-type distribution is difficult to witness as infeasible using conventional causal inference techniques.
+The W-type distribution is difficult to witness as unrealizable using conventional causal inference techniques.
 \begin{compactenum}
 \item There are no conditional independence relations between the observable nodes of the Triangle scenario. %, so the distribution is observationally Markov with respect to the DAG. 
 \item Shannon-type entropic inequalities cannot detect this distribution as not allowed by the Triangle scenario~\cite{fritz2013marginal,chaves2014novel,chaves2014informationinference}. 
 \item Moreover, \emph{no} entropic inequality can witness the W-type distribution as unrealizable. \citet{weilenmann2016entropic} have constructed an inner approximation to the entropic cone of the Triangle causal structure, and the W-distribution lies inside this. In other words, a distribution with the same entropic profile as the W-type distribution \emph{can} arise from the Triangle scenario.
-\item The newly-developed method of covariance matrix causal inference due to \citet{kela2016covariance}, which gives tighter constraints than entropic inequalities for the Triangle scenario, also cannot detect the infeasibility of the W-type distribution.
+\item The newly-developed method of covariance matrix causal inference due to \citet{kela2016covariance}, which gives tighter constraints than entropic inequalities for the Triangle scenario, also cannot detect inconsistency with the W-type distribution.
 \end{compactenum}
 \par\noindent But the inflation DAG approach can, and does so very easily.
 
@@ -667,7 +667,7 @@ It is not difficult to transform this argument into a polynomial inequality for 
 \section{A procedure for deriving polynomial inequalities}
 \label{sec:ineqs}
 
-\purp{NEW PLAN (As of Sunday): Main text gets marginal's problem explanation, appendix get full nonlinear treatment.} 
+%\purp{NEW PLAN (As of Sunday): Main text gets marginal's problem explanation, appendix get full nonlinear treatment.} 
 
 Our final goal in deriving polynomial inequalities is to derive constraints on the distribution of the observable variables in the original DAG. We accomplish this by proxy, namely by deriving constraints on the distributions over the variables in the pre-injectable sets of the inflation DAG. Just as distributions over the pre-injectable sets translate into distributions pertaining to the original DAG variables per \cref{eq:coincidingdistrodef}, so do \emph{constraints} on the distributions of pre-injectable sets translate into constraints on the original DAG variables.
 
@@ -678,37 +678,74 @@ Our method is based on deriving inequalities for the so-called \tblue{marginal p
 
 \step{: \tred{Identifying the Pre-Injectable Sets}}\label{step:findpreinjectable}\par\smallskip\nobreak
 
-To identify the pre-injectable sets, we first identify the injectable set. To this end, it is useful to construct an auxiliary graph from the inflation DAG. Let the nodes of these auxiliary graphs be the observable nodes in the inflation DAG. The \tblue{injection graph}, then, is the undirected graph in which a pair of nodes $A_i$ and $B_j$ are adjacent if  $\An{A_i B_j}$ is irredundant. The injectable sets are then precisely the cliques\footnote{A clique is a set of nodes such that every single node is connected to every other.} in this graph, per \cref{eq:definjectable2}. 
+To identify the pre-injectable sets, we first identify the injectable sets. To this end, it is useful to construct an auxiliary graph from the inflation DAG. Let the nodes of these auxiliary graphs be the observable nodes in the inflation DAG. The \tblue{injection graph}, then, is the undirected graph in which a pair of nodes $A_i$ and $B_j$ are adjacent if  $\An{A_i B_j}$ is irredundant. The injectable sets are then precisely the cliques\footnote{A clique is a set of nodes such that every single node is connected to every other.} in this graph, per \cref{eq:definjectable2}. 
 
-Determining the pre-injectable sets from there can be done via constructing another graph that we call the \tblue{independence graph}. Its nodes are the injectable sets, and we connect two of these by an edge if their ancestral subgraphs are disjoint. Then by definition, the pre-injectable sets can be obtained as the cliques in this graph by taking the union of all the injectable sets represented by the nodes in such a clique. Since it is sufficient to consider the maximal pre-injectable sets only, one can eliminate all those pre-injectable sets that are contained in other ones as a final step.
+Determining the pre-injectable sets from there can be done via constructing another graph that we call the \tblue{independence graph}. Its nodes are the injectable sets, and we connect two of these by an edge if their ancestral subgraphs are disjoint. Then by definition, the pre-injectable sets can be obtained as the cliques in this graph. Taking the union of all the injectable sets in such a clique results in a pre-injectable set. Since it is sufficient to only consider the maximal pre-injectable sets, one can eliminate all those pre-injectable sets that are contained in other ones, as a final step.
 
-%Let us also define the \tblue{ancestral dependence graph}, in which two nodes are adjacent if they share a common ancestor, and its complement the \tblue{ancestral independence graph}, in the ancestrally independent nodes are adjacent. To ascertain the factorization of a node set $\bm{U}$ into ancestrally-independent partitions one considers the subgraph on  $\bm{U}$ of the ancestral dependence graph: the ancestrally-independent partitions are identically the distinct connected components of that subgraph. By examining the injection graph and the ancestral dependence graph, therefore, one is able to quickly determine all injectable sets and all ancestral independence relations.
+Let us also define the \tblue{ancestral dependence graph}, in which two nodes are adjacent if they share a common ancestor, and its complement the \tblue{ancestral independence graph}, in the ancestrally independent nodes are adjacent. To ascertain the factorization of a node set $\bm{U}$ into ancestrally-independent partitions one considers the subgraph on  $\bm{U}$ of the ancestral dependence graph: the ancestrally-independent partitions are identically the distinct connected components of that subgraph. By examining the injection graph and the ancestral dependence graph, therefore, one is able to quickly determine all injectable sets and all ancestral independence relations.
 
-% It is also useful to define another auxiliary graph, the \tblue{pre-injection graph} in which a pair of nodes $A_i$ and $B_j$ are connected if either $\An{A_i B_j}$ or if $A_i\aindep B_j$. The pre-injection graph is identically the union of the injection graph with the ancestral independence graph. Any clique in the pre-injection graph is \emph{not} necessarily a pre-injectable set, but every pre-injectable set must correspond to a clique in the pre-injection graph, per \cref{eq:defpreinjectable}. Moreover, maximal-size pre-injectable sets must correspond to maximal cliques in the pre-injection graph. This makes the pre-injection graph a handy tool for determining the pre-injectable sets. We start by enumerating all maximal cliques in the pre-injection graph to obtain candidate pre-injectable sets. Each candidate set is then factored into ancestrally-independent partitions by means of the ancestral dependence graph. A candidate set is a legitimately pre-injectable if and only if all of its ancestrally-independent partitions are themselves injectable. Isolating the genuine pre-injectable sets from the candidates is therefore quite easy, especially since the complete set of injectable sets is already known.
+%It is also useful to define another auxiliary graph, the \tblue{pre-injection graph} in which a pair of nodes $A_i$ and $B_j$ are connected if either $\An{A_i B_j}$ or if $A_i\aindep B_j$. The pre-injection graph is identically the union of the injection graph with the ancestral independence graph. Any clique in the pre-injection graph is \emph{not} necessarily a pre-injectable set, but every pre-injectable set must correspond to a clique in the pre-injection graph, per \cref{eq:defpreinjectable}. Moreover, maximal-size pre-injectable sets must correspond to maximal cliques in the pre-injection graph. This makes the pre-injection graph a handy tool for determining the pre-injectable sets. We start by enumerating all maximal cliques in the pre-injection graph to obtain candidate pre-injectable sets. Each candidate set is then factored into ancestrally-independent partitions by means of the ancestral dependence graph. A candidate set is a legitimately pre-injectable if and only if all of its ancestrally-independent partitions are themselves injectable. Isolating the genuine pre-injectable sets from the candidates is therefore quite easy, especially since the complete set of injectable sets is already known.
 
 \purp{Elie will add figures.}
+\begin{figure}[t]
+\centering
+\begin{minipage}[b]{0.3\linewidth}
+\centering
+\includegraphics[scale=1]{injectiongraph222.pdf}
+\caption{The auxiliary injection graph corresponding to the inflation DAG in \cref{fig:Tri222}, wherein a pair of nodes are adjacent iff they are pairwise injectable.}\label{fig:injection222}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.3\linewidth}
+\centering
+\includegraphics[scale=1]{ancestraldependancegraph222.pdf}
+\caption{An auxiliary ancestral dependance graph corresponding to the inflation DAG in \cref{fig:Tri222}, wherein a pair of nodes are adjacent iff they share a common ancestor.}\label{fig:dependances222}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.3\linewidth}
+\centering
+\includegraphics[scale=0.2]{simplicialcomplex.pdf}
+\caption{The simplicial complex... \purp{Tobias - you please caption this?}The 5 faces in this figure correspond to the pre-injectable sets.}\label{fig:simplicialcomplex222}
+\end{minipage}
+\end{figure}
 
 Applying these prescriptions to the inflation DAG in \cref{fig:Tri222} identifies the following 
-% ancestral independences 
+ ancestral independences 
 maximal injectable and maximal pre-injectable sets as follows:
 \begin{align}\label{eq:basicsetup222}
-%{\underbrace{\begin{matrix}
-%A_2\aindep B_1\\
-%A_2\aindep C_2\\
-%B_2\aindep A_2\\
-%B_2\aindep C_1\\
-%C_2\aindep A_1\\
-%C_2\aindep B_2
-%\end{matrix}}_{\text{ancestral independences}}}
-%\qquad\qquad
+{\underbrace{\begin{matrix}
+A_2\aindep B_1\\
+A_2\aindep C_2\\
+B_2\aindep A_2\\
+B_2\aindep C_1\\
+C_2\aindep A_1\\
+C_2\aindep B_2
+\end{matrix}}_{\substack{\text{pairwise}\\\text{ancestral}\\\text{independences}}}}
+\qquad\quad
+{\underbrace{\begin{matrix}
+\\ \\
+\brackets{A_2}\aindep \brackets{B_1 B_2 C_2}\\
+\brackets{B_2}\aindep \brackets{A_2 C_1 C_2}\\
+\brackets{C_2}\aindep \brackets{A_1 A_2 B_2}\\
+\brackets{A_2}\aindep \brackets{B_2}\aindep \brackets{C_2}
+\end{matrix}}_{\substack{\text{maximal}\\\text{ancestral}\\\text{independences}}}}
+\qquad\quad
+{\underbrace{\begin{matrix}
+\brackets{ A_1 B_1 }\\
+\brackets{ B_1 C_1 }\\
+\brackets{ A_1 C_1 }\\
+\brackets{ A_2 C_1 }\\
+\brackets{ B_2 A_1 }\\
+\brackets{ C_2 B_1 }\\
+\end{matrix}}_{\substack{\text{pairwise}\\\text{injectable}\\\text{sets}}}}
+\qquad\quad
 {\underbrace{\begin{array}{l}
 \\ \\
 \brackets{A_1 B_2}\\
 \brackets{B_1 C_2}\\
 \brackets{A_2 C_1}\\
 \brackets{A_1 B_1 C_1}
-\end{array}}_{\text{maximal injectable sets}}}
-\qquad\qquad
+\end{array}}_{\substack{\text{maximal}\\\text{injectable}\\\text{sets}}}}
+\qquad\quad
 {\underbrace{\begin{matrix}
 \\
 \brackets{A_1 B_1 C_1} \\
@@ -716,7 +753,7 @@ maximal injectable and maximal pre-injectable sets as follows:
 \brackets{A_2 B_1 C_2} \\
 \brackets{A_2 B_2 C_1} \\
 \brackets{A_2 B_2 C_2}
-\end{matrix}}_{\text{maximal pre-injectable sets}}}
+\end{matrix}}_{\substack{\text{maximal}\\\text{pre-injectable}\\\text{sets}}}}
 \end{align}
 such that the distributions on the pre-injectable sets relate to the original DAG distribution via
 \begin{align}\label{eq:preinjectableuses222}
@@ -739,7 +776,7 @@ is the \emph{existence of a joint probability distribution} over all the observa
 
 \purp{Comment about how solving marginals problem still gives polynomial inequalities.}
 
-From now on, one can apply \emph{any} method for dealing with the marginal problem. For example if one has a particular distribution $P$ over the original DAG given, then one can use~\cref{eq:preinjfactor} to compute the marginal distributions over the pre-injectable sets in an inflation DAG, and use linear programming to check whether there exists a joint distribution reproducing these marginals. If there is no such distribution, then the infeasibility of the distribution with the original DAG has been witnesses; otherwise, the problem remains open, and one can try again using a different inflation.
+From now on, one can apply \emph{any} method for dealing with the marginal problem. For example if one is given a particular distribution $P$ over the original scenario variables, then one can use~\cref{eq:preinjfactor} to compute the marginal distributions over the pre-injectable sets in an inflation DAG. Efficient linear programming can be used to to check whether there exists a joint distribution reproducing these marginals \cite{Korovin2012ImplementingCRA,Bobot2012SimplexSAT}. If such a joint distribution does not exist, then the given original-scenario distribution is witnessed as inconsistent with the original causal structure. If a joint distribution \emph{does} exist then the problem remains open, and one can try again using a different inflation.
 
 In order to derive inequalities that hold for \emph{all} distributions that are feasible on the original DAG, say for a given number of outcomes per variable, we can formally solve the marginal problem via linear quantifier elimination, as we review in the following. This consists of eliminating unknowns from a set of linear inequalities and equalities.
 
