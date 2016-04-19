@@ -247,10 +247,9 @@ anchorcolor=OliveGreen}
 
 %\newcommand{\subsim}[1]{\substack{\textstyle #1\\[-0.3ex]\sim}}
 %\newcommand{\subsim}{\utilde}
-\newcommand{\subsim}{\tilde}
-%\def\subsim#1{\mathord{\vtop{\ialign{##\crcr
-%$\hfil\displaystyle{#1}\hfil$\crcr\noalign{\kern1.5pt\nointerlineskip}
-%$\hfil\tilde{}\hfil$\crcr\noalign{\kern1.5pt}}}}}
+\def\subsim#1{\mathord{\vtop{\ialign{##\crcr
+$\hfil\displaystyle{#1}\hfil$\crcr\noalign{\kern1.5pt\nointerlineskip}
+$\hfil\tilde{}\hfil$\crcr\noalign{\kern1.5pt}}}}}
 
 \newcommand{\cramp}[1]{\ensuremath{\mathord{#1}}}
 %\newcommand{\cramp}[1]{\ensuremath{\mathopen{}#1\mathclose{}}} oldway. New way is better.
@@ -261,7 +260,7 @@ anchorcolor=OliveGreen}
 
 
 %%%% Tobias: to mark my edits and stuff
-%\usepackage{showkeys}
+\usepackage{showkeys}
 \usepackage[draft]{fixme}
 \newcommand{\btob}{\color{OliveGreen}}
 \newcommand{\etob}{\color{black}}
@@ -482,10 +481,10 @@ It is useful to consider a looser notion than injectability. A set of nodes in t
 %\end{split}\end{align}
 
 For us, the crucial property of a pre-injectable set $\bm{U}$ is that in an inflation model, $\pdf{\bm{U}}$ is fully determined by the original causal model via \cref{eq:funcdepends}. More concretely, if $\bm{U}_1,\ldots,\bm{U}_n$ are the weakly connected components of $\bm{U}$, then in an inflation model we must have
-\begin{align}\label{eq:defpreinjectable}
-	P(\bm{U}) = P(\bm{U}_1) \cdots P(\bm{U}_n) = P(\subsim{\bm{U}_1}) \cdots P(\subsim{\bm{U}_n}).
-\end{align}
-%\fxnote{replace subsim by tilde?}
+\[
+	P(\bm{U}) = P(\bm{U}_1) \cdots P(\bm{U}_n) = P(\subsim{\bm{U}}_1) \cdots P(\subsim{\bm{U}}_n).
+\]
+\fxnote{replace subsim by tilde?}
 % but there are other possibilities as well, such as when $\pdf{\bm{U}}=\pdf{\bm{X}}\pdf{\bm{Y}}$ due to $\bm{X}\aindep\bm{Y}$. In this example, if $\bm{X}$ and $\bm{Y}$ are both injectable sets, then consequently $\bm{U}$ is pre-injectable, even if $\bm{U}$ is redundant, and hence the distribution over $\bm{U}$ would be $\pdf{\bm{U}}=\pdf{\subsim{\bm{X}}}\pdf{\subsim{\bm{Y}}}$.
 For this reason, pre-injectable sets will play a role in deriving polynomial inequalities via polytope projection techniques.
 
@@ -495,20 +494,18 @@ So a non-broadcasting inflation DAG is one in which the set of children of every
 \begin{align}\label{eq:nonbroadcastinginflationDAG}
 G'\in\SmallNamedFunction{NonBroadcastingInflations}{G} \quad\text{ iff }\quad \forall_{\text{latent }A_i\in G'}\; \Ch[G']{A_i} \text{ is an irredundant set.}
 \end{align}
-We also find it useful to define the notion of a non-broadcasting subset of nodes within some larger broadcasting inflation DAG. Let's define any pair of redundant nodes which share a latent parent to be a \tblue{fundamental broadcasting pair}. An inflation DAG is non-broadcasting if it does not contain any fundamental broadcasting pairs. Similarly, a set of nodes $\bm{U}$ is a \tblue{non-broadcasting set} iff $\An[G']{\bm{U}}$ is free of any fundamental broadcasting pairs. 
+We also find it useful to define the notion of a non-broadcasting subset of nodes within some larger broadcasting inflation DAG. A set of nodes $\bm{U}$ is a \tblue{non-broadcasting set} iff $\ansubgraph[G']{\bm{U}}$ is a non-broadcasting inflation DAG. Any inference about the original DAG which can be made by referencing exclusively to non-broadcasting sets hold in both the classical and quantum paradigms. Broadcasting inflation DAGs are therefore especially useful for deriving criteria which distinguish quantum and classical probability distributions, but we anticipate them to be valuable for broader causal inference tasks as well.
 
-Any inference about the original DAG which can be made by referencing exclusively to non-broadcasting sets hold in both the classical and quantum paradigms. Broadcasting inflation DAGs are therefore especially useful for deriving criteria which distinguish quantum and classical probability distributions, but we anticipate them to be valuable for broader causal inference tasks as well.
+In classical causal structures the latent nodes correspond to classical hidden variables. In quantum causal structures, however, the latent nodes are taken to be quantum systems. Some quantum causal structures are famously capable of realizing distributions that would not be possible classically, although the set of quantum distribution is superficially quite similar to the classical subset \cite{pusey2014gdag,fritz2012bell}. For example, classical and quantums distributions alike respect all conditional independence relations implied by the common underlying causal structure \cite{pusey2014gdag}. Recent work has found that quantum causal structure implies many of the entropic inequalities implied by their classical counterparts \cite{pusey2014gdag,Chaves2015infoquantum,ChavesNoSignalling}. To-date, no quantum distribution has been witnessed to violate a Shannon-type entropic inequality on observable variables derived from the Markov conditions on all nodes \cite{chaves2012entropic,fritz2012bell}. Fine-graining the scenario by conditioning on discrete settings leads to a different kind of entropic inequality, and these have proven somewhat quantum-sensitive \cite{braunstein1988entropic,SchumacherInequality,chaves2014novel}. Such \citet{braunstein1988entropic} type inequalities are still limited, however, in that they rely on root observable nodes\footnote{Rafael Chaves and E.W. are exploring the potential of entropic analysis based on fine-graining causal structures over non-root observable nodes. This generalizes the method of entropic inequalities, and might be capable of providing much stronger entropic infeasibility criteria.}, and they still fail to detect certain extremal non-classical distributions \cite{chaves2014novel,fritz2012bell}.  
 
-In classical causal structures the latent nodes correspond to classical hidden variables. In quantum causal structures, however, the latent nodes are taken to be quantum systems. Some quantum causal structures are famously capable of realizing distributions that would not be possible classically, although the set of quantum distribution is superficially quite similar to the classical subset \cite{pusey2014gdag,fritz2012bell}. For example, classical and quantums distributions alike respect all conditional independence relations implied by the common underlying causal structure \cite{pusey2014gdag}. Recent work has found that quantum causal structure implies many of the entropic inequalities implied by their classical counterparts \cite{pusey2014gdag,Chaves2015infoquantum,ChavesNoSignalling}. To-date, no quantum distribution has been witnessed to violate a Shannon-type entropy inequality on observable variables derived from the Markov conditions on all nodes \cite{chaves2012entropic,fritz2012bell}. Fine-graining the scenario by conditioning on discrete settings leads to a different kind of entropic inequality, and these have proven somewhat quantum-sensitive \cite{braunstein1988entropic,SchumacherInequality,chaves2014novel}. Such \citet{braunstein1988entropic} type inequalities are still limited, however, in that they rely on root observable nodes\footnote{Rafael Chaves and E.W. are exploring the potential of entropic analysis based on fine-graining causal structures over non-root observable nodes. This generalizes the method of entropic inequalities, and might be capable of providing much stronger entropic infeasibility criteria.}, and they still fail to detect certain extremal non-classical distributions \cite{chaves2014novel,fritz2012bell}.  
-
-The insufficiency of entropic inequalities is a pressing concern in quantum information theory since they often fail to detect the infeasibility of quantum distributions, for instance in the Triangle scenario \citep[Prob. 2.17]{fritz2012bell}. The superficial similarity between quantum and classical distributions demands especially sensitive causal infeasibility criteria in order to distinguish them;  polynomial inequalities derived from broadcasting inflation DAGS appear to be suitable tools for this purpose.
+The insufficiency of entropic inequalities is a pressing concern in quantum information theory since they often fail to detect the infeasibility of quantum distributions, for instance in the Triangle scenario \citep[Prob. 2.17]{fritz2012bell}. The superficial similarity between quantum and classical distributions demands especially sensitive causal infeasibility criteria in order to distinguish them. We hope that polynomial inequalities derived from broadcasting inflation DAGs will be suitable tools for this purpose.
 
 
 \section{The Inflation DAG Technique}\label{sec:mainalgorithm}
 
 Our main contribution here is in recognizing that inferences about the original DAG can be made by proxy, so to speak, using the inflation DAG. If a distribution can arise from the original DAG, then the corresponding specification of the injectable sets must also be realizable from the inflation DAG. \tred{Conversely, one may certify that a distribution is inconsistent with the original DAG by proxy, namely by proving that there is no inflation model on the inflation DAG that would reproduced the known probabilities on observed nodes.}
 
-We illustrate this principle by first showing how inflation DAG considerations can be used to prove the infeasibility of particularly distributions. Polynomial inequality constraints are derived later on in~\cref{sec:ineqs}.
+We illustrate this principle by first showing how inflation DAG considerations can be used to prove the infeasibility of particular distributions. Polynomial inequality constraints are derived later on in~\cref{sec:ineqs}.
 
 
 
@@ -538,9 +535,9 @@ Let us ask, is it possible for the three original-scenario observable variables 
 \begin{align}\label{eq:ghzdistribution1}
 p_{\text{GHZ}}\parens{a b c}=\frac{[000]+[111]}{2}=\begin{cases}\tfrac{1}{2}&\text{if }\; a=b=c, \\ 0&\text{otherwise}.\end{cases}
 \end{align}
-We assume uniform binary variables for the sake of concreteness, but the argument is general. Let's temporarily (falsely) assume $P_{\text{GHZ}}$ to be realizable for the triangle scenario. Since $\brackets{A_2 C_1}$ is an injectable set we have $\pdf{A_2 C_1}=\pdf{A C}$, and therefore $P_{\text{GHZ}}$ means $A_2$ and $C_1$ are perfectly correlated. Similarly, since $\brackets{B_1 C_1}$ is an injectable set we have $\pdf{B_1 C_1}=\pdf{A C}$, and therefore $P_{\text{GHZ}}$ means $B_1$ and $C_1$ are perfectly correlated, and by extension that $B_1$ and $A_2$ are perfectly correlation. On the other hand, $A_2$ and $B_1$ should be statistically independent, as they do not share any common causal ancestor. This contradicts our assumption, and thus by \textit{reductio ad absurdum} we have certified that $P_{\text{GHZ}}$ is not realizable from the Triangle causal structure, recovering the seminar result of \citet{steudel2010ancestors}.
+We assume uniform binary variables for the sake of concreteness, but the argument is general. Let's temporarily (falsely) assume $P_{\text{GHZ}}$ to be feasible for the triangle scenario. Since $\brackets{A_2 C_1}$ is an injectable set we have $\pdf{A_2 C_1}=\pdf{A C}$, and therefore $P_{\text{GHZ}}$ implies that $A_2$ and $C_1$ are perfectly correlated. Similarly, since $\brackets{B_1 C_1}$ is an injectable set we have $\pdf{B_1 C_1}=\pdf{A C}$, and therefore $B_1$ and $C_1$ must be perfectly correlated, and by extension $B_1$ and $A_2$ are perfectly correlated as well. On the other hand, $A_2$ and $B_1$ must be statistically independent, as they do not share any common ancestor. The only way for two variables to be \emph{both} perfectly correlated and independent is by being deterministic. This is not the case in $P_{\text{GHZ}}$, and thus we have certified that $P_{\text{GHZ}}$ is not realizable from the Triangle causal structure, recovering the seminal result of \citet{steudel2010ancestors}.
 
-To be clear, one can employ \emph{any} kind of causal infeasibility criteria on the inflation DAGs to constrain the original DAG by implication. Here's the same proof against perfect correlation using \cref{fig:simplestinflation}, this time using entropic arguments: Trivially $H(A_2|B_2)\leq H(A_2|C_1)+H(C_1|B_1)$, because the amount of information required to learn $A_2$ from $B_2$ is surely less than the amount of information required to learn  $A_2$ from $C_1$ and also to learn $C_1$ from $B_1$. On the other hand, the marginal independence of $A_2$ and $B_2$ implies $H(A_2|B_2)=H(A_2)$. $P_{\text{GHZ}}$ is rules out, because it would yield $H(A_2|C_1)=H(C_1|B_1)=0$ while $H(A_2)=1$. The entropic conclusion is $H(A_2)\leq H(A_2|C_1)+H(C_1|B_1)$, or equivalently, $I(A_2:C_1)+I(B_1:C_1)\leq H(C_1)$. The injectability of sets per \cref{fig:TriDagSubA2B1C1} in turn yields
+To be clear, one can employ \emph{any} kind of causal infeasibility criteria on the inflation DAGs to constrain the distributions on the original DAG. For example, here's a quantitative version of the same proof against perfect correlation in the Triangle scenario, this time using entropic arguments: Trivially $H(A_2|B_1)\leq H(A_2|C_1)+H(C_1|B_1)$, because the amount of information required to learn $A_2$ from $B_1$ is surely less than the amount of information required to learn  $A_2$ from $C_1$ and also to learn $C_1$ from $B_1$. On the other hand, the marginal independence of $A_2$ and $B_1$ implies $H(A_2|B_1)=H(A_2)$. $P_{\text{GHZ}}$ is ruled out, because it would yield $H(A_2|C_1)=H(C_1|B_1)=0$ while $H(A_2)=1$. The entropic conclusion is $H(A_2)\leq H(A_2|C_1)+H(C_1|B_1)$, or equivalently, $I(A_2:C_1)+I(B_1:C_1)\leq H(C_1)$. The injectability of sets per \cref{fig:TriDagSubA2B1C1} in turn yields
 \begin{align}\label{eq:monogomyofcorrelations}
 I(A:C)+I(B:C)\leq H(C),
 \end{align}
@@ -562,11 +559,11 @@ I(A:C)+I(B:C)\leq H(C),
 \label[]{eq:monogomyofcorrelations}
 \end{align}
 \end{comment}
-an inequality known as monogamy of correlations \cite{fritz2012bell}, and it forbids perfect correlation of all three variables. Because \cref{eq:monogomyofcorrelations} is derivable from a non-broadcasting inflation DAG, it follows that monogamy of correlations holds even in the context of generalized probabilistic theories. This recovers a result of \citet[Cor. 24]{pusey2014gdag}. Indeed, Fig. 5 in Ref. \cite{pusey2014gdag} is essentially equivalent to \cref{fig:TriDagSubA2B1C1} here.
+an inequality known as monogamy of correlations \cite{fritz2012bell}. It forbids perfect correlation of all three variables. Because \cref{eq:monogomyofcorrelations} is derivable from a non-broadcasting inflation DAG, it follows that monogamy of correlations holds even in the context of generalized probabilistic theories. This recovers a result of \citet[Cor. 24]{pusey2014gdag}. Indeed, Fig. 5 in Ref. \cite{pusey2014gdag} is essentially equivalent to \cref{fig:TriDagSubA2B1C1} here.
 
 
 \example{: \tred{The W-type distribution cannot arise from the Triangle scenario}}\par\smallskip\nobreak
-Another distribution inconsistent with the Triangle scenario is the W-type distribution, named after a quantum state appearing in Ref. \cite{3Qubits2Ways}. To the author's knowledge, the unrealizability of the W-type distribution from the Triangle scenario is a novel result here.
+Another distribution inconsistent with the Triangle scenario is the W-type distribution, named after a quantum state appearing in Ref. \cite{3Qubits2Ways}. To our knowledge, the unrealizability of the W-type distribution from the Triangle scenario is a novel result here.
 \begin{align}\label{eq:wdistribution1}
 {P_{\text{W}}}\parenths{A B C} \coloneqq\quad p_{\text{W}}\parens{a b c}=\frac{[100]+[010]+[001]}{3}=\begin{cases}\tfrac{1}{3}&\text{if }\; a+b+c=1 \\ 0&\text{otherwise}\end{cases}
 \end{align}
@@ -601,7 +598,7 @@ The W-type distribution is extremely difficult to detect using conventional caus
 
 Consider the causal structure associated to the Bell/CHSH \cite{bell1964einstein,Brunner2013Bell,bell1966lhvm,CHSHOriginal} experiment [\citealp{pusey2014gdag}~(Fig.~E\#2), \citealp{WoodSpekkens}~(Fig.~19), \citealp{chaves2014novel}~(Fig.~1), \citealp{BeyondBellII}~(Fig.~1), \citealp{wolfe2015nonconvexity}~(Fig.~2b), \citealp{steeg2011relaxation}~(Fig.~2)], depicted here in \cref{fig:NewBellDAG1}. $\brackets{A,B,X,Y}$ are all observable variables, and $\Lambda$ is the latent common cause of $A$ and $B$. An inflation of the Bell scenario is show in \cref{fig:BellDagCopy1}.
 
-The \citet{PROriginal} PR-box distribution is famously inconsistent with the Bell scenario \cite{PROriginal,PRUnit}. Here we prove its unrealizability using inflation DAG logic.
+The PR-box distribution is famously inconsistent with the Bell scenario \cite{PROriginal,PRUnit}. Here we prove its unrealizability using inflation DAG logic.
 \begin{align}\begin{split}\label{eq:PRbox}
 &{P_{\text{PR}}}\parenths{A B X Y} \coloneqq\quad p_{\text{PR}}\parens{a b |x y}=\frac{[00|00]+[11|00]+[00|10]+[11|10]+[00|01]+[11|01]+[01|11]+[10|11]}{8}\\
 &\text{or, more succinctly,}\quad p_{\text{PR}}\parens{a b |x y}=\begin{cases}\tfrac{1}{2}&\text{if }\; \SmallNamedFunction[2]{mod}{a+b}=x*y \\ 0&\text{otherwise}\end{cases}
@@ -671,19 +668,16 @@ It is not difficult to transform this argument into a polynomial inequality for 
 
 \purp{NEW PLAN (As of Sunday): Main text gets marginal's problem explanation, appendix get full nonlinear treatment.} 
 
-The end-goal in deriving polynomial inequalities is to derive constraints on the observable variables in the original DAG. We accomplish this by proxy, namely by deriving constraints on the pre-injectable set of the inflation DAG. Just as distributions over the pre-injectable sets translate into distributions pertaining to the original DAG variables per \cref{eq:coincidingdistrodef}, so to \emph{constraints} on the distributions of pre-injectable sets translate into constraints on the original DAG variables. The authors are aware of a variety of methods for identifying interesting constraints on the pre-injectable sets. In the main text of this article the method of the so-called \tblue{marginals problem} is considered, which relies on computationally-amenable linear quantifier elimination. A nonlinear method for deriving even tighter constraints is discussed in \cref{sec:nonlinearelimination}. The simpler method discussed below consists of two steps: 1) Identify the pre-injectable sets, and 2) Solve the marginals problem with respect to the pre-injectable sets.
+The end-goal in deriving polynomial inequalities is to derive constraints on the observable variables in the original DAG. We accomplish this by proxy, namely by deriving constraints on the pre-injectable set of the inflation DAG. Just as distributions over the pre-injectable sets translate into distributions pertaining to the original DAG variables per \cref{eq:coincidingdistrodef}, so to \emph{constraints} on the distributions of pre-injectable sets translate into constraints on the original DAG variables. The authors are aware of a variety of methods for identifying interesting constraints on the pre-injectable sets. In the main text of this article the method of the so-called \tblue{marginals problem} is considered, which relies on computationally-amenable linear quantifier elimination. A nonlinear method for deriving even tighter constraints is discussed in appendix \cref{sec:nonlinearelimination}. The simpler method discussed below consists of two steps: 1) Identify the pre-injectable sets, and 2) Solve the marginals problem with respect to the pre-injectable sets.
 
 
 \step{: \tred{Identifying the Pre-Injectable Sets}}\label{step:findpreinjectable}\par\smallskip\nobreak
 
 To identify the pre-injectable sets it is useful to imagine first constructing simple graphs from the inflation DAG. Let the nodes of the simple graphs be the subset of nodes in the inflation DAG which are observable. The \tblue{injection graph}, then, is the simple graph in which a pair of nodes $A_i$ and $B_j$ are connected if $\An{A_i B_j}$ is irredundant. Any clique\footnote{A clique is a set of nodes such that every single node is connected to every other.} in the injection graph is an injectable set, per \cref{eq:definjectable2}. 
 
-Let us also define the \tblue{ancestral dependence graph}, in which a pair of nodes are connected only if they share a common ancestor%, and its complement the \tblue{ancestral independence graph}, in which are of only ancestrally independent nodes are connected
-. To ascertain the factorization of a node set $\bm{U}$ into ancestrally-independent partitions one considers the subgraph on  $\bm{U}$ of the ancestral dependence graph: the ancestrally-independent partitions are identically the distinct connected components of that subgraph. By examining the injection graph and the ancestral dependence graph, therefore, one is able to quickly determine all injectable sets and all factorization relations. 
+Let us also define the \tblue{ancestral dependence graph}, in which a pair of nodes are connected only if they share a common ancestor, and its complement the \tblue{ancestral independence graph}, in which are of only ancestrally independent nodes are connected. To ascertain the factorization of a node set $\bm{U}$ into ancestrally-independent partitions one considers the subgraph on  $\bm{U}$ of the ancestral dependence graph: the ancestrally-independent partitions are identically the distinct connected components of that subgraph. By examining the injection graph and the ancestral dependence graph, therefore, one is able to quickly determine all injectable sets and all ancestral independence relations.
 
-Isolating the pre-injectable sets can be done in a variety of ways, the simplest of which is perhaps as follows. Begin with a collection of all possible subsets of the observable variables. Factor each subset into ancestrally independent partitions.  A candidate set, then, is a legitimately pre-injectable if and only if all of its ancestrally-independent partitions are themselves injectable. As the complete set of injectable sets is already known, this filtering is easily accomplished.
-
-%It is also useful to define another simple graph, the \tblue{pre-injection graph} in which a pair of nodes $A_i$ and $B_j$ are connected if either $\An{A_i B_j}$ or if $A_i\aindep B_j$. The pre-injection graph is identically the union of the injection graph with the ancestral independence graph. Any clique in the pre-injection graph is \emph{not} necessarily a pre-injectable set, but every pre-injectable set must correspond to a clique in the pre-injection graph, per \cref{eq:defpreinjectable}. Moreover, maximal-size pre-injectable sets must correspond to maximal cliques in the pre-injection graph. This makes the pre-injection graph a handy tool for determining the pre-injectable sets. We start by enumerating all maximal cliques in the pre-injection graph to obtain candidate pre-injectable sets. Each candidate set is then factored into ancestrally-independent partitions by means of the ancestral dependence graph. A candidate set is a legitimately pre-injectable if and only if all of its ancestrally-independent partitions are themselves injectable. Isolating the genuine pre-injectable sets from the candidates is therefore quite easy, especially since the complete set of injectable sets is already known.
+It is also useful to define another simple graph, the \tblue{pre-injection graph} in which a pair of nodes $A_i$ and $B_j$ are connected if either $\An{A_i B_j}$ or if $A_i\aindep B_j$. The pre-injection graph is identically the union of the injection graph with the ancestral independence graph. Any clique in the pre-injection graph is \emph{not} necessarily a pre-injectable set, but every pre-injectable set must correspond to a clique in the pre-injection graph, per \cref{eq:defpreinjectable}. Moreover, maximal-size pre-injectable sets must correspond to maximal cliques in the pre-injection graph. This makes the pre-injection graph a handy tool for determining the pre-injectable sets. We start by enumerating all maximal cliques in the pre-injection graph to obtain candidate pre-injectable sets. Each candidate set is then factored into ancestrally-independent partitions by means of the ancestral dependence graph. A candidate set is a legitimately pre-injectable if and only if all of its ancestrally-independent partitions are themselves injectable. Isolating the genuine pre-injectable sets from the candidates is therefore quite easy, especially since the complete set of injectable sets is already known.
 
 \purp{Elie will add figures.}
 
@@ -730,7 +724,7 @@ Having identified the pre-injectable sets (and how to use them), we next turn to
 
 \step{: \tred{Constraining the Pre-Injectable Sets via the Marginals Problem}}\label{step:marginalsproblem}\par\smallskip\nobreak
 
-The most trivial constraint possible on the pre-injectable set is the \emph{existence of a joint probability distribution} over all the observable variables in the inflation DAG. Each of the five three-variable distributions in \cref{eq:preinjectableuses222} is a different marginal distribution of the six-variable joint distribution $\pdf{A_1 A_2 B_1 B_2 C_1 C_2}$. Solving the marginals problem means finding inequalities on the marginal-set distributions such that the inequalities will satisfied only if there \emph{exists} some joint distribution from which the distributions on the marginal sets can be recovered through marginalization, i.e. if the distributions are \tblue{marginally compatible}. The marginals problem is foundational in many applications, and has been studied extensively. \purp{Tobias, say better? And add citations please!} 
+The most trivial constraint possible on the pre-injectable set is the \emph{existence of a joint probability distribution} over all the observable variables in the inflation DAG. Each of the five three-variable distributions in \cref{eq:preinjectableuses222} is a different marginal distribution of the six-variable joint distribution $\pdf{A_1 A_2 B_1 B_2 C_1 C_2}$. Solving the marginals problem means finding inequalities on the marginal-set distributions such that the inequalities will satisfied only if there \emph{exists} some joint distribution from which the distributions on the marginal sets can be recovered through marginalization. The marginals problem is foundational in many applications, and has been studied extensively. \purp{Tobias, say better? And add citations please!} 
 
 \purp{Comment about how solving marginals problem still gives polynomial inequalities.}
 
@@ -777,12 +771,7 @@ Linear quantifier elimination routines are available in many software tools\foot
 
 Linear quantifier elimination is already widely used in causal inference to derive entropic inequalities \cite{fritz2013marginal,chaves2014novel,chaves2014informationinference}. In that task, however, the quantifiers being eliminated are those entropies which refer to hidden variables. By contrast, the probabilities we consider here are exclusively in terms of observable variables right from the very start. The quantifiers we eliminate are the gedankenprobabilities, which are quite different from probabilities involving hidden variables.
 
-One may also substitute numeric values for all the pre-injectable probabilities appearing in the marginals problem. Upon doing so, the quantifier elimination problem is converted to a quantifier existence problem: Do there exist gedankenprobabilities that satisfy the resulting system of inequalities? Most computer algebra systems can resolve such \emph{satisfiability} questions quite rapidly, even when the problem is formulated nonlinearly\footnote{For example \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$} \href[pdfnewwindow]{http://reference.wolfram.com/language/Experimental/ref/ExistsRealQ.html}{\texttt{Reduce\`{}ExistsRealQ}} function. Specialized satisfiability software such as SMT-LIB's \href[pdfnewwindow]{http://smtlib.cs.uiowa.edu/solvers.shtml}{\texttt{check-sat}} \cite{BarFT-SMTLIB} are particularly apt for this purpose. %One can also exploit the fact than any nonlinear optimizer will return an error when a set of constraints cannot be satisfied. Nonlinear optimizers include \textit{Maple$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://www.maplesoft.com/support/help/Maple/view.aspx?path=Optimization/NLPSolveMatrixForm}{\texttt{NLPSolve}}, \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://reference.wolfram.com/language/ref/message/NMinimize/nsol.html}{\texttt{NMinimize}}, and dozens of free and commercial optimizers for \href[pdfnewwindow]{http://ampl.com/products/solvers/all-solvers-for-ampl}{\textit{AMPL}} and/or \href[pdfnewwindow]{https://neos-server.org/neos/solvers/index.html\#nco}{\textit{GAMS}}
-}, all the more so when the quantifiers are linear \cite{Korovin2012ImplementingCRA,Bobot2012SimplexSAT}.
-
-Note that real-world data with uncertainties can also be incorporated into these satisfiability questions. Instead of asserting that a particular probability is equal to a given \emph{value}, one can incorporate new inequalities which constrain the experimentally-known probabilities to lie in given \emph{intervals}. Assigning probabilities to intervals as opposed to numeric values results in further free parameters in the system, but the problem nevertheless remains one of \emph{universal} existential closure, and can be tested with extreme efficiency.
-
-Although linear quantifier elimination can be highly optimized, it can still prove computationally difficult. It is therefore sometimes useful to consider relaxations of the marginals problem. The \emph{full} marginals problem is to find inequalities on the marginal-set distributions such that the inequalities will satisfied \emph{if and only if} the distributions are marginally compatible. It is much easier to generate necessary-but-insufficient inequalities, i.e. satisfied by all compatible marginal-set distributions but such that no-violation does not certify marginal compatibility. The authors have identified a technique for rapidly generating such quantifier-free inequalities by restricting the search to inequalities of a very particular form. We found this alternative technique — trading generality for speed — to be extraordinarily practical. The form of inequality subtype we consider is shaped by a certain tautology in classical propositional logic, see \cref{sec:TSEM} for further details.
+Although linear quantifier elimination can be highly optimized, it can still prove computationally difficult. It is therefore sometimes useful to consider relaxations of the marginals problem. The \emph{full} marginals problem is to find inequalities on the marginal-set distributions such that the inequalities will satisfied \emph{if and only if} the distributions are compatible. It is much easier to generate necessary-but-insufficient inequalities, i.e. satisfied by all compatible marginal-set distributions but such that no-violation does not certify compatibility. The authors have identified a technique for rapidly generating such quantifier-free inequalities by restricting the search to inequalities of a very particular form. We found this alternative technique — trading generality for speed — to be extraordinarily practical. The form of inequality subtype we consider is shaped by a certain tautology in classical propositional logic, see \cref{sec:TSEM} for further details.
 
 %One useful alternative to linear quantifier elimination is to identify representative probability distributions which are incompatible with the (unprojected) constraints; \citet{ChavesNoSignalling} use this technique, for example. %That technique essentially translates the elimination problem to a satisfiability problem, and moreover an ultra-efficient \emph{linear} quantifier existence problem at that! In the context of polytope projection, these representative probability distributions correspond to extreme rays of the so-called ``projection cone" \cite{jones2004equality,Jones2008,BalasProjectionCone}.
 
@@ -805,20 +794,20 @@ The nontrivial polynomial inequality
 \begin{align}\label{eq:tritrivial1}
 {\p{a} + \p{b} + \p{c}} \leq {1 + \p{a} \p{b} + \p{a c} + \p{b c}}
 \end{align}
-is found to be a constraint on the Triangle scenario through by summing the follow two nonnegativity inequalities
+is found to be a constraint on the Triangle scenario through by summing the follow two inequalities
 \begin{align}\begin{split}\label{eq:trisimplestunmapped}
  &0\leq  1 -\p{a_2} - \p{b_1} - \p{c_1}+ \p{a_2 b_1} + \p{a_2 c_1} + \p{b_1 c_1}  -\p{a_2 b_1 c_1} \quad\left[=\p{\n{a}_2 \n{b}_1 \n{c}_1}\right]
 \\&0\leq \p{a_2 b_1 c_1}
 \end{split}\\
 \shortintertext{subject to the following transformations}
-&  \underbrace{\larray{\\\p{a_2 b_1} \to \p{a_2} \p{b_1}}}_{\text{via ancestral independence}} \quad \text{and}\qquad
+&  \underbrace{\larray{\\\p{a_2 b_1} \to \p{a_2} \p{b_1}}}_{\text{Factorization relation, per \cref{eq:dfac222}.}} \quad \text{and}\qquad
  \underbrace{\begin{array}{c}
  \p{a_2}\to\p{a}\,, 
 \; \p{b_1}\to\p{b}\,, 
 \; \p{c_1}\to\p{c},
 \\ \p{a_2 c_1}\to \p{a c},
 \; \p{b_1 c_1}\to \p{b c}
-\end{array}}_{\text{via injectable sets}}.
+\end{array}}_{\text{Mapping relations, per \cref{eq:map222}}}.
 \end{align}
 Indeed, this example has been chosen because \cref{eq:tritrivial1} can be derived directly from the small ancestral subgraph of $\{A_2 B_1 C_1\}$, namely \cref{fig:TriDagSubA2B1C1}.
 
@@ -849,13 +838,13 @@ Slightly more involved but otherwise analogous considerations give rise to the i
  \p{a_2 b_1 c_2}\to \p{a_2} \p{b_1 c_2} \\
  \p{a_2 b_2 c_1}\to \p{b_2} \p{a_2 c_1} \\
  \p{a_2 b_2 c_2}\to \p{a_2} \p{b_2} \p{c_2} \\
-\end{array}}_{\text{via ancestral independence}}   \quad \text{ and }\quad
+\end{array}}_{\text{Factorization relations}}   \quad \text{ and }\quad
 \underbrace{\begin{array}{l}
 \p{a_1 b_2} \to \p{a b} \\
 \p{a_2 c_1} \to \p{a c} \\
 \p{b_1 c_2} \to \p{b c} \\
 \p{\n{a}_1 \n{b}_1 \n{c}_1}\to \p{\n{a} \n{b} \n{c}}  \\
-\end{array}\,.}_{\text{via pre-injectable sets}}
+\end{array}\,.}_{\text{Nontrivial mapping relations}}
 \end{align}
 A consequence of \cref{eq:FritzF3} is that the W-type distribution per \cref{eq:wdistribution1}
 %\begin{align}\label{eq:wdistribution}
@@ -1348,15 +1337,15 @@ Note that real-world data with uncertainties can also be incorporated into these
 \hline
 Approach & Also Known As & Difficulty & End Results \\
 \bottomrule
-Nonlinear Quantifier Elimination & Resolving Partial Existential Closure & Very Hard & Polynomial Inequalities \\
+Nonlinear Quantifier Elimination & Resolving Partial Existential Closure & Very Hard & Necessary-but-not-Sufficient Polynomial Inequalities \\
 \hline
 Nonlinear Quantifier Satisfiability & Universal Existential Closure,\newline Nonlinear Programming & Easy & Certify the infeasibility of a specific distribution \\
 \hline
-Linear Quantifier Elimination & Polytope Projection,\newline Solving the Marginals Problem & Moderate & Polynomial Inequalities \\
+Linear Quantifier Elimination & Polytope Projection & Moderate & Necessary-but-not-Sufficient Polynomial Inequalities \\
 \hline
 Linear Quantifier Satisfiability & Linear Programming,\newline Universal Existential Closure & Very Easy & Certify the infeasibility of a specific distribution \\
 \hline
-Alternate: Logical Tautologies & Combinatorial / Set-Theoretic Implications & Easy & Polynomial Inequalities 
+Alternate: Logical Tautologies & Combinatorial / Set-Theoretic Implications & Easy & Necessary-but-not-Sufficient Polynomial Inequalities 
 \\\toprule
 \end{tabularx}
 \end{table*}
@@ -1373,7 +1362,7 @@ Another positive feature of the ESP algorithm is that it commences outputting qu
 Vertex projection (VP) algorithms are another computational tool which may be used to assist in linear quantifier elimination \cite{Avis2000lrs}. VP works by first enumerating the vertices of the initial polytope (H-rep to V-rep), projecting the vertices, and then converting back to inequalities (V-rep to H-rep). For generic high-dimensional polytopes, the operation of converting from a representation in terms of halfspaces to one in terms of extremal-vertices representations can be computationally costly (high-$d$ H-rep to V-rep). Starting from a vertex representation in a high dimensional space, however, one can immediately determine the vertex representation of the polytope's projection in a lower dimensional space. The projection is along the coordinate axes, so one just ``discards" the coordinate of the eliminated quantifier. To obtain the inequalities which characterize the projected polytope one then applies a convex hull algorithm to the projected vertices (low-$d$ V-rep to H-rep).
 
 For probability distributions, however, the extremal vertices are precisely the deterministic possibilities. Since the extremal vertices of the initial polytope are easily enumerated, it is possible to avoid the high-$d$ V-rep to H-rep step entirely. There is a one-to-one correspondence between the inflation-DAG's initial generating inequalities and its initial extreme observable probability distributions. 
-We used this V-rep to H-rep technique to project the initial marginals-problem polytope implied by \cref{fig:Tri222} to an intermediate 23-dimensional polytope, where the 23 remaining dimensions correspond to the probabilities pertainining to  pre-injectable sets. Only then did we translate those probabilities into probabilities pertaining to the original DAG, and in so doing we convert linear inflation-DAG inequalities to polynomial inequalities pertaining to the original DAG. We found that the V-rep to H-rep technique, using \textit{lrs} [\href[pdfnewwindow]{http://cgm.cs.mcgill.ca/~avis/C/lrslib/USERGUIDE.html#Installation\%20Section}{\texttt{lrs}}], was orders-of-magnitude faster than FM elimination at obtaining the same result.
+We used this V-rep to H-rep technique to project the initial polytope implied by \cref{fig:Tri222} (\cref{step:generateineqs}) to an intermediate 23-dimensional polytope, where each of the 23 remaining can be mapped the original DAG.  Only then did we apply the transformations of factorization and mappings (\cref{step:fac,step:findmap}) to convert those linear inequalities to polynomial inequalities pertaining to the original DAG. We found that the V-rep to H-rep technique, using \textit{lrs} [\href[pdfnewwindow]{http://cgm.cs.mcgill.ca/~avis/C/lrslib/USERGUIDE.html#Installation\%20Section}{\texttt{lrs}}], was orders-of-magnitude faster than FM elimination at obtaining the same result.
 
 Yet another technique is also possible. Suppose the initial polytope is given by $\brackets{\vec{x},\vec{y}\,|\hat{A}.\vec{x}+\hat{B}.\vec{y}\geq\bm{c}}$, where $y$ are the quantifiers. If we can find any completely nonnegative vector $\bm{w}$ such that $\bm{w}.\hat{B}=\vec{0}$ then we automatically establish the quantifier-free inequality $\bm{w}.\hat{A}.\vec{x}\geq\bm{w}.\bm{c}$. Solving for ``random" nonnegative vectors $\bm{w}$ is easy; solving for all possible solutions is rather more difficult. \citet{BalasProjectionCone} refined this method so that each extremal construction of $\bm{w}$ corresponds to an irredundant inequality in the H-rep description of the projected polytope. Nevertheless, even without utilizing the full projection cone, this technique can be used to rapidly obtain a few quantifier-free inequalities. 
 
@@ -1439,8 +1428,6 @@ If $\hat{A}$ is the matrix who's rows are nonnegativity inequalities, then the f
  &\hspace{-\mathindent}\texttt{RedundantRowQ}[A\_?\texttt{MatrixQ},n\_\texttt{Integer}]\text{:=}\texttt{PositiveLinearSolveTest@@Reverse}[\texttt{Transpose/@TakeDrop}[A,\{n\}]].
 \end{align*}
 Note that a \texttt{True} response from \texttt{RedundantRowQ} indicates that the row $n$ is redundant.
-
-Redundant inequalities can also be filtered out using Cernikov rules \cite{Shapot2012,Bastrakov2015}. We find the strategy of employing linear programming in concert with the second Cernikov rule to be extremely efficient.
 
 %Obtaining a redundancy-free collection of (convex) polyhedral-cone inequalities is therefore related to obtaining a non-negative factorization of a matrix. \purp{Need citation. Also, give explicit connection between NN factorization and redundancy elimination. Does this connection appears elsewhere in the literature?}
 
