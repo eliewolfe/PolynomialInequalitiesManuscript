@@ -351,39 +351,48 @@ The inflation DAG technique that we introduce will define a novel sort of constr
 
 We now introduce the notion of \tblue{the inflation of a causal model}.  We describe what inflation means for the causal structure and the parameters.  Let $C=(G,\mathcal{P}(G))$ denote the original causal model and $C'=(G',\mathcal{P'}(G'))$ its inflation.
 
-For $C'$ to be an inflation of $C$, the DAG $G'$ must be related to $G$ as follows:  (i) For each node of $G$, $G'$ contains one or more copies of that node. If $A$ denotes a node in the DAG $G$, then we denote its copies in the inflation DAG $G'$ by $A_1,\ldots, A_k$.  The variable that indexes the copies is termed {\em the copy-index}, and a set of variables in $G'$ that differ only by copy-index are called a {\em copy set} and denoted $\SmallNamedFunction{CopySet}{A}$; (ii) the ancestral subgraph in $G'$ of a node $A_i$ is equivalent, under removal of the copy-index, to the ancestral subgraph in $G$ of the node $A$.  
+For $C'$ to be an inflation of $C$, the DAG $G'$ must be related to $G$ as follows:  (i) For each node of $G$, $G'$ contains one or more copies of that node. If $A$ denotes a node in the DAG $G$, then we denote its copies in the inflation DAG $G'$ by $A_1,\ldots, A_k$.  The variable that indexes the copies is termed {\em the copy-index}, and a set of variables in $G'$ that differ only by copy-index are called a {\em copy set} and we denote the set of these by $\SmallNamedFunction{CopySets}{G'}$; (ii) the ancestral subgraph in $G'$ of a node $A_i$ is equivalent, under removal of the copy-index, to the ancestral subgraph in $G$ of the node $A$.  
 
 When two objects (e.g.~nodes, sets of nodes, DAGs, etc\ldots) are the same up to copy-indices, then we use $\sim$ to indicate this, so $A_i\sim A_j\sim A$.  Given this notational convention, we can formalize the condition for $G'$ to be the DAG for an inflation of a causal model with DAG $G$ as follows:
 \begin{align}\label{eq:definflationDAG}
 %\forall A \in \SmallNamedFunction{Nodes}{G}, ???\nonumber\\
 G' \in\SmallNamedFunction{Inflations}{G} \quad\text{ iff }\quad \forall A_i\in \SmallNamedFunction{Nodes}{G'}:\; \ansubgraph[G']{A_i}\sim\ansubgraph[G]{A}.
 \end{align}
-Note that this implies that certain subgraphs of $G'$ are identical.  Specifically, 
 
-Furthermore, For $C'$ to be an inflation of $C$, the parameters $\mathcal{P'}(G')$ must be related to the parameters $\mathcal{P}(G)$ as follows: 
+Note that this implies that if $G'$ is a DAG arising from inflation, then certain subgraphs of $G'$ are identical,
+\begin{align}\label{eq:ConstraintOnInflationDAG}
+\forall S \in \SmallNamedFunction{CopySets}{G'}: A_i,A_j \in S \implies \ansubgraph[G']{A_i}\sim\ansubgraph[G]{A}.
+\end{align}
+
+
+Furthermore, For the causal model $C'$ to be an inflation of the causal model $C$, the parameters $\mathcal{P'}(G')$ must be related to the parameters $\mathcal{P}(G)$ as follows: 
 For every node $A_i$ in $G'$, the manner in which $A_i$ causally depends on its parents within $G'$ must be the same as the manner in which $A$ causally depends on its parents within $G$.   Formally, 
 \begin{align}\label{eq:funcdependences}
 \forall A_i \in \SmallNamedFunction{Nodes}{G'}:\; \pdf{A_i| {\rm Pa}_{G'}(A_i)}=\pdf{A|{\rm Pa}_{G}(A)}.
 \end{align}
 
-Now suppose one considers the set $\mathcal{C}_G$ of all causal models associated with a DAG $G$, which is to say the set of pairs $(G, \mathcal{P}(G))$ wherein $\mathcal{P}(G)$ are a set of valid conditional probabilities, 
+Note that this implies that if $\mathcal{P}(G')$ are the parameters of a causal model arising from inflation, then these are constrained relative to the set of possible parameters that could be defined for a DAG $G'$.  The constraint is:
+\begin{align}\label{eq:ConstraintOnFuncdependences}
+\forall S \in \SmallNamedFunction{CopySets}{G'}: A_i,A_j \in S \implies \pdf{A_i| {\rm Pa}_{G'}(A_i)}=\pdf{A_j|{\rm Pa}_{G'}(A_j)}.
+\end{align}
+
+It is worth emphasizing the significance of the latter constraint.  Let the set $\mathcal{C}_G$ be the set of all causal models associated with a DAG $G$, which is to say the set of pairs $(G, \mathcal{P}(G))$ wherein $\mathcal{P}(G)$ are a set of valid conditional probabilities, 
 \begin{align}
 \mathcal{C}_G \equiv \{ C: \SmallNamedFunction{DAG}{C} =G\}.
 \end{align}
-Let the set of causal models $\mathcal{C}'_{G'}$ be the image of $\mathcal{C}_G$ under some nontrivial inflation map.  We note that $\mathcal{C}'_{G'}$ is {\em not} the set of all causal models associated with $G'$.  Rather, there is a nontrivial constraint on the parameters.  Given Eq.~\eqref{eq:funcdependences}, we see that for any node of $G$ for which $G'$ constains multiple copies, the conditional probability distributions associated to the latter are the same.  That is, if $A_i \sim A_j$, then 
-\begin{align}
-\pdf{A_i| {\rm Pa}_{G'}(A_i)}=\pdf{A_j|{\rm Pa}_{G'}(A_j)}.
-\end{align}
+Let the set of causal models $\mathcal{C}'_{G'}$ be the image of $\mathcal{C}_G$ under some nontrivial inflation map.  $\mathcal{C}'_{G'}$ is {\em not} the set of all causal models associated with $G'$ but rather the subset that satisfy Eq.~\eqref{eq:ConstraintOnFuncdependences}.
+
+\color{red}
+
+A {\em causal hypothesis} is a pair consisting of a DAG and a set of constraints on the parameters supplementing the DAG.  Effectively therefore, a causal hypothesis is a set of causal models.  (is this standard usage of the term "model"?  In physics, a model typically does not include a specification of the boundary conditions, or does it?)
+
+Inflation is a map from a causal hypothesis on a DAG G to a causal hypothesis on a DAG G', where both G' and the set of constraints on the parameters supplementing G' depend on G.  Note that nontrivial constraints on the causal hypothesis on G also get mapped under inflation into nontrivial constraints on the causal hypothesis on G'.  
+
+A causal model specifies the causal structure and the autonomous causal mechanisms.  Inflation is a mapping to a new causal structure wherein each given variable in the original may have counterparts in the inflation and {\em where the causal mechanisms in the inflation DAG are given by the corresponding autonomous causal mechanisms in the original DAG.}  The duplication of variables implies that causal mechanisms in the inflation DAG are not necessarily autonomous.
 
 
-
- only if $G' \in \SmallNamedFunction{Inflations}{G}$ and 
-%A set of causal models $\mathcal{C}'_{G'}$ is the image of $\mathcal{C}_G$ under some inflation map only if $G' \in \SmallNamedFunction{Inflations}{G}$ and 
-
-
-
-What follows from this definition?
-The idea is that at the level of distributions, this property guarantees that all copies of a node in the inflation DAG have the same distribution as the corresponding node in the original DAG \emph{if} the functional dependencies among the variables are taken to be the same.
+%What follows from this definition?
+%The idea is that at the level of distributions, this property guarantees that all copies of a node in the inflation DAG have the same distribution as the corresponding node in the original DAG \emph{if} the functional dependencies among the variables are taken to be the same.
 
 
  \color{black}
