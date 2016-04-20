@@ -1191,6 +1191,30 @@ Research at Perimeter Institute is supported by the Government of Canada through
 \setcounter{equation}{0}
 
 \section{Nonlinear Quantifier Elimination Approach}\label{sec:nonlinearelimination}
+In the main text we considered deriving constraints on the pre-injectable sets via the marginal problem. There are further implications in the inflation DAG, however, which can be leveraged to further constrain the marginal distributions consisted with the inflation DAG.
+
+The most familiar such further constraints are the conditional independence relations relating observable variables in the inflation DAG. Conditional independence relations are inferred by $d$-separation; if $\bm{X}$ and $\bm{Y}$ are $d$-separated in the (inflation) DAG by $\bm{Z}$, then we infer $\bm{X}\bot\bm{Y}|\bm{Z}$. The $d$-separation criterion is explained at length in Refs. \cite{pearl2009causality,studeny2005probabilistic,WoodSpekkens,pusey2014gdag}, we present it only informally here.
+
+We first define the notion of \tblue{exclusive ancestors}, because the usual notion of ancestors is inclusive, i.e. $\An{\bm{Z}}$ contains $\bm{Z}$. Let the exclusive ancestors of $\bm{Z}$ so that $\An{\setminus\bm{Z}}\coloneqq\An{\bm{Z}}\setminus\bm{Z}$. Next we define \tblue{conditioning a DAG} over $\bm{Z}$, i.e. $G_{\setminus\bm{Z}}$, which is formed by deleting any outgoing edges from $\bm{Z}$ in $G$. Conditional DAGs enable the definition of \tblue{conditional ancestors}, i.e. 
+\begin{align}
+    \An[G]{\bm{X}|\bm{Z}}\coloneqq \begin{cases}
+    \An[G_{\setminus\bm{Z}}]{\bm{X}}& \text{if } \An[G_{\setminus\bm{Z}}]{\bm{X}} and \An[G]{\setminus\bm{Z}} are disjoint\\
+    \An[G_{\setminus\bm{Z}}]{\bm{X}} \bigcup \An[G]{\setminus\bm{Z}} & \text{if } \An[G_{\setminus\bm{Z}}]{\bm{X}} and \An[G]{\setminus\bm{Z}} overlap.
+    \end{cases}
+\end{align}
+Finally, $\bm{X}$ and $\bm{Y}$ are $d$-separated by $\bm{Z}$ iff $\An[G]{\bm{X}|\bm{Z}}$ and $\An[G]{\bm{Y}|\bm{Z}}$ are disjoint.
+
+Every conditional independence relation can be translated into a nonlinear constraint on probabilities, as $\bm{X}\bot\bm{Y}|\bm{Z}$ implies $\p{\bm{x}\bm{y}|\bm{z}}=\p{\bm{x}|\bm{z}}\p{\bm{y}|\bm{z}}$ for all $\bm{x}$, $\bm{y}$, and $\bm{z}$. As we generally prefer to work with unconditional probabilities, we summarize as follows: If $\bm{X}$ and $\bm{Y}$ are $d$-separated by $\bm{Z}$ then $\p{\bm{x}\bm{y}\bm{z}}\p{\bm{z}}=\p{\bm{x}\bm{z}}\p{\bm{y}\bm{z}}$ for all $\bm{x}$, $\bm{y}$, and $\bm{z}$. Such nonlinear constraints can be incorporated as restrictions on the injectable sets in the inflation DAG, supplementing the more trivial marginal-problem type constraints.
+
+
+
+
+
+
+
+In principle one can exploit any $d$-separation criteria from the inflation DAG in order to transform or supplement the inequalities. If $\bm{X}$ and $\bm{Y}$ are $d$-separated by $Z$, then $\p{\bm{x} \bm{y} \bm{z}}=\frac{\p{\bm{x}\bm{z}}\p{\bm{y}\bm{z}}}{\p{\bm{z}}}$ \cite{pearl2009causality,spirtes2011causation,studeny2005probabilistic,koller2009probabilistic}.
+
+
 \purp{At the moment this is just a text dump from the earlier manuscript. Needs extensive cleanup!!!}
 
 
