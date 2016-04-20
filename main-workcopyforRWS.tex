@@ -330,11 +330,15 @@ Similarly, we indicate probability distributions using upper-case $P$, whereas l
 
 % We choose to indicate logical negation by $\n{x}\coloneqq\SmallNamedFunction{Not}{x}$, such that $\n{x}$ references the possibility of \emph{any} outcome other than $x$, so that $\p{\n{x}}\coloneqq\p{X\cramp{\neq}x}=1-\p{X\cramp{=}x}$. This convention effectively coarse-grains the outcome space into just two possibilities: $x$ and $\n{x}$. %Logical conjunction is herein represented by default, such that $\p{x y}$ is the joint probability of the two events  $X\cramp{=}x$ \emph{and} $Y\cramp{=}y$. 
 
-\color{blue} A causal model consists of a pair of objects: a causal structure and a set of parameters.  The causal structure is a directed acyclic graph (DAG), where each node in the DAG corresponds to a localized system and a directed edge between two nodes corresponds to there being a direct causal influence from one system to the other.  The parameters specify, for each root node, how the system corresponding to that node is prepared, and for each node that has parents in the DAG, the precise manner in which it causally depends on its parents.  If a DAG is denoted $G$ and the parameters thereon are denoted $\mathcal{P}(G)$, then the corresponding causal model is the pair $C = (G,\mathcal{P}(G))$.
+\color{blue} A causal model consists of a pair of objects: a causal structure and a set of parameters.  The causal structure is a directed acyclic graph (DAG).  Recall that a DAG $G$ consists of a set of nodes and directed edges (i.e., ordered pairs of nodes), which we denote by $\SmallNamedFunction{Nodes}{G}$ and $\SmallNamedFunction{Edges}{G}$ respectively.  Physically, each node in the DAG corresponds to a localized system and a directed edge between two nodes corresponds to there being a direct causal influence from one system to the other.  The parameters specify, for each root node, how the system corresponding to that node is prepared, and for each node that has parents in the DAG, the precise manner in which it causally depends on its parents.  If a DAG is denoted $G$ and the parameters thereon are denoted $\mathcal{P}(G)$, then the corresponding causal model is the pair $C = (G,\mathcal{P}(G))$.  We shall also make use of the notation $\SmallNamedFunction{DAG}(C)$ for $G$ and $\SmallNamedFunction{Params}(C)$ for $\mathcal{P}(G)$.
 
-In a {\em classical} causal model, the localized systems are random variables, and the parameters are probabilities and conditional probabilities on these random variables.  Specifically, for each root node, the model specifies a probability distribution over the values of the associated random variable, and for each non-root node, it specifies a conditional probability distribution over the values of the random variable associated to that node, given the values of the variables associated to its parents in the DAG.  Classical causal models will be the primary focus of this article.
+In a {\em classical} causal model, the localized systems are random variables, and the parameters are probabilities and conditional probabilities on these random variables.  Specifically, for each root node, the model specifies a probability distribution over the values of the associated random variable, and for each non-root node, it specifies a conditional probability distribution over the values of the random variable associated to that node, given the values of the variables associated to its parents in the DAG.  Denoting the conditional probability distribution associated to a node $A$ in the DAG $G$ by $P_G(A|{\rm Pa}(A))$, we have
+\begin{align}
+\mathcal{P}(G) \equiv \{ P_G(A|{\rm Pa}(A)): A \in \SmallNamedFunction{Nodes}{G}\}.
+\end{align}
+Note that the root nodes are included as those for which the parents are the null set and the conditional probability distribution is simply a probability distribution.
 
-There is a quantum generalization of the notion of a causal model that will feature in our discussions at the end of this article.  In a {\em quantum} causal model\cite{leifer2013conditionalstates}, the localized systems are types of quantum systems (specified by Hilbert space dimensionality), and the parameters are quantum operations.  Specifically, for each root node, the model specifies a unit-trace positive operator on the Hilbert space for that system and for each non-root node, the model specifies a trace-preserving completely-positive linear map from the operators on the Hilbert space of the parents of the system to the operators on the Hilbert space of the system.  Certain nodes in a quantum causal model may be considered classical, in which case all states and operations must be diagonal in some fixed basis on that system.  One can also generalize the notion of a causal model further still to the case of generalized probabilistic theories, as was done in Ref.~\cite{pusey2014gdag}.
+Classical causal models will be the primary focus of this article. Nonetheless, there is a quantum generalization of the notion of a causal model that will feature in our discussions at the end of this article.  In a {\em quantum} causal model\cite{leifer2013conditionalstates}, the localized systems are types of quantum systems (specified by Hilbert space dimensionality), and the parameters are quantum operations.  Specifically, for each root node, the model specifies a unit-trace positive operator on the Hilbert space for that system and for each non-root node, the model specifies a trace-preserving completely-positive linear map from the operators on the Hilbert space of the parents of the system to the operators on the Hilbert space of the system.  Certain nodes in a quantum causal model may be considered classical, in which case all states and operations must be diagonal in some fixed basis on that system.  One can also generalize the notion of a causal model further still to the case of generalized probabilistic theories, as was done in Ref.~\cite{pusey2014gdag}.
  %random variable\footnote{In the quantum context, however, only \emph{observable} nodes correspond to classical random variables, such as the outcomes of measurements. Latent nodes, however, represent quantum systems. Functional dependence is replaced by the action of a quantum operation, and edges then dictate the ways in which quantum systems factor and/or compose. See Refs. \cite{pusey2014gdag,leifer2013conditionalstates}. \purp{Rob, add appendix? Classical/Quantum/GPT everything? I'm thinking a table would be nice.}}, while each edge represents a possible causal influence between variables. 
 
 When a causal model constitutes a hypothesis for explaining a probability distribution over a set of observed variables, then it is natural to distinguish the nodes in the DAG that correspond to observed variables and those that correspond to unobserved variables.  As is standard, the only unobserved variables worth incorporating into one's DAG are those that act as common causes of observed variables.  These are termed {\em latent variables}.  In our graphical depictions of the DAG, we follow the convention of representing the latent nodes by circles, and observable nodes by triangles \cite{pusey2014gdag}.
@@ -347,24 +351,39 @@ The inflation DAG technique that we introduce will define a novel sort of constr
 
 We now introduce the notion of \tblue{the inflation of a causal model}.  We describe what inflation means for the causal structure and the parameters.  Let $C=(G,\mathcal{P}(G))$ denote the original causal model and $C'=(G',\mathcal{P'}(G'))$ its inflation.
 
-For $C'$ to be an inflation of $C$, the DAG $G'$ must be related to $G$ as follows:  (i) For each node of $G$, $G'$ contains one or more copies of that node. If $A$ denotes a node in the DAG $G$, then we denote its copies in the inflation DAG $G'$ by $A_1,\ldots, A_k$, where the variable that indexes the copies is termed {\em the copy-index}; (ii) the ancestral subgraph in $G'$ of a node $A_i$ is equivalent, under removal of the copy-index, to the ancestral subgraph in $G$ of the node $A$.  
+For $C'$ to be an inflation of $C$, the DAG $G'$ must be related to $G$ as follows:  (i) For each node of $G$, $G'$ contains one or more copies of that node. If $A$ denotes a node in the DAG $G$, then we denote its copies in the inflation DAG $G'$ by $A_1,\ldots, A_k$.  The variable that indexes the copies is termed {\em the copy-index}, and a set of variables in $G'$ that differ only by copy-index are called a {\em copy set} and denoted $\SmallNamedFunction{CopySet}{A}$; (ii) the ancestral subgraph in $G'$ of a node $A_i$ is equivalent, under removal of the copy-index, to the ancestral subgraph in $G$ of the node $A$.  
 
-When two objects (e.g.~nodes, sets of nodes, DAGs, etc\ldots) are the same up to copy-indices, then we use $\sim$ to indicate this, so $A_i\sim A_j\sim A$. 
+When two objects (e.g.~nodes, sets of nodes, DAGs, etc\ldots) are the same up to copy-indices, then we use $\sim$ to indicate this, so $A_i\sim A_j\sim A$.  Given this notational convention, we can formalize the condition for $G'$ to be the DAG for an inflation of a causal model with DAG $G$ as follows:
+\begin{align}\label{eq:definflationDAG}
+%\forall A \in \SmallNamedFunction{Nodes}{G}, ???\nonumber\\
+G' \in\SmallNamedFunction{Inflations}{G} \quad\text{ iff }\quad \forall A_i\in \SmallNamedFunction{Nodes}{G'}:\; \ansubgraph[G']{A_i}\sim\ansubgraph[G]{A}.
+\end{align}
+Note that this implies that certain subgraphs of $G'$ are identical.  Specifically, 
 
 Furthermore, For $C'$ to be an inflation of $C$, the parameters $\mathcal{P'}(G')$ must be related to the parameters $\mathcal{P}(G)$ as follows: 
-(i) For any root node $A_i$ in $G'$, the probability distribution 
+For every node $A_i$ in $G'$, the manner in which $A_i$ causally depends on its parents within $G'$ must be the same as the manner in which $A$ causally depends on its parents within $G$.   Formally, 
+\begin{align}\label{eq:funcdependences}
+\forall A_i \in \SmallNamedFunction{Nodes}{G'}:\; \pdf{A_i| {\rm Pa}_{G'}(A_i)}=\pdf{A|{\rm Pa}_{G}(A)}.
+\end{align}
 
+Now suppose one considers the set $\mathcal{C}_G$ of all causal models associated with a DAG $G$, which is to say the set of pairs $(G, \mathcal{P}(G))$ wherein $\mathcal{P}(G)$ are a set of valid conditional probabilities, 
+\begin{align}
+\mathcal{C}_G \equiv \{ C: \SmallNamedFunction{DAG}{C} =G\}.
+\end{align}
+Let the set of causal models $\mathcal{C}'_{G'}$ be the image of $\mathcal{C}_G$ under some nontrivial inflation map.  We note that $\mathcal{C}'_{G'}$ is {\em not} the set of all causal models associated with $G'$.  Rather, there is a nontrivial constraint on the parameters.  Given Eq.~\eqref{eq:funcdependences}, we see that for any node of $G$ for which $G'$ constains multiple copies, the conditional probability distributions associated to the latter are the same.  That is, if $A_i \sim A_j$, then 
+\begin{align}
+\pdf{A_i| {\rm Pa}_{G'}(A_i)}=\pdf{A_j|{\rm Pa}_{G'}(A_j)}.
+\end{align}
+
+
+
+ only if $G' \in \SmallNamedFunction{Inflations}{G}$ and 
+%A set of causal models $\mathcal{C}'_{G'}$ is the image of $\mathcal{C}_G$ under some inflation map only if $G' \in \SmallNamedFunction{Inflations}{G}$ and 
 
 
 
 What follows from this definition?
 The idea is that at the level of distributions, this property guarantees that all copies of a node in the inflation DAG have the same distribution as the corresponding node in the original DAG \emph{if} the functional dependencies among the variables are taken to be the same.
-
-
-The formal definition of an inflation DAG is therefore as follows:
-\begin{align}\label{eq:definflationDAG}
-G'\in\SmallNamedFunction{Inflations}{G} \quad\text{ iff }\quad \forall_{A_i\in G'}\; \ansubgraph[G']{A_i}\sim\ansubgraph[G]{A}.
-\end{align}
 
 
  \color{black}

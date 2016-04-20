@@ -1082,7 +1082,7 @@ Not every inflation requires broadcasting, however, and hence not every gedanken
 \cref{fig:TriDagSubA2B1C1} is an example of a non-broadcasting inflation.
 Constraints derived from non-broadcasting inflations are valid even in the GPT paradigm. Consequently the inequality in \cref{eq:tritrivial1}, which was derived from \cref{fig:TriDagSubA2B1C1}, is therefore a causal infeasibility criterion which holds for the Triangle scenario even when the latent nodes are allowed to be quantum states. This confirms our numerical computations, which indicated that~\eqref{eq:tritrivial1} does not have any quantum violations. The same is true for monogamy of correlations, per \cref{eq:monogomyofcorrelations}. Since the GHZ-type distribution~\cref{eq:ghzdistribution1} violates both of these inequalities, it is forbidden even per the relaxed GPT Triangle scenario, as was pointed out earlier. 
 
-It might also be possible to derive quantum causal infeasibility criteria if one appropriately modifies \cref{step:generateineqs} to generate a different initial set of nonnegativity inequalities. This new set should capture the nonnegativity of only quantum-physically-meaningful marginal probability distributions. From this perspective, a broadcasting inflation DAG is an abstract logical concept, as opposed to a hypothetical physical construct. Indeed, the distributions in a quantum broadcasting inflation DAG can be characterized in terms of the logical broadcasting maps of \citet{Coecke2011}. Note that $\p{a_1,a_2}$ and other broadcasting-implicit gedankenprobabilities can be \emph{negative} pursuant to a logical broadcasting map, and hence \cref{step:generateineqs} in \cref{sec:mainalgorithm} would need to be modified.
+It might also be possible to derive quantum causal infeasibility criteria if one appropriately modifies \cref{sec:ineqs} to generate a different initial set of nonnegativity inequalities. This new set should capture the nonnegativity of only quantum-physically-meaningful marginal probability distributions. From this perspective, a broadcasting inflation DAG is an abstract logical concept, as opposed to a hypothetical physical construct. Indeed, the distributions in a quantum broadcasting inflation DAG can be characterized in terms of the logical broadcasting maps of \citet{Coecke2011}. Note that $\p{a_1,a_2}$ and other broadcasting-implicit gedankenprobabilities can be \emph{negative} pursuant to a logical broadcasting map, and hence the marginal problem should be reformulated as to the questioning the existence of non-broadcastings sets rather than the existence of a full joint distribution from which the marginal distributions might be recovered.
 
 An analysis along these lines has already been carried out successfully by \citet{Chaves2015infoquantum} in the derivation of entropic inequalities for non-classical causal structures. Although \citet{Chaves2015infoquantum} do not invoke inflation DAGs, they do employ conditional structure, which therefore gives rise to broadcasting sets. \citet{Chaves2015infoquantum} take pains to avoid including broadcasting gedankenentropies in any of their initial entropic inequalities, precisely as we would want to do in constructing our initial probability inequalities. Unlike entropic inequalities, the derivation of probability inequalities has not yet been achieved for non-classical causal structures other than Bell scenarios. 
 
@@ -1130,20 +1130,20 @@ applied to our inflation of the Triangle scenario would imply the causal infeasi
 \end{align}
 pursuant to \cref{fig:TriDagSubA2B1C1}.
 
-In fact, many of the polynomial inequalities of this paper are TSEM inequalities. The Triangle scenario inequality \cref{eq:trifancyunmapped} corresponds to the logical TSEM
+In fact, many of the polynomial inequalities of this paper are TSEM inequalities; for example, the Triangle scenario inequality \cref{eq:trifancyunmapped} corresponds to the logical TSEM
 \begin{align}
     \NamedFunction{And}{\mgreen{a_2} , \mgreen{b_2} , \mgreen{c_2}}\implies 
 \NamedFunction{Or}{\NamedFunction{And}{\n{a}_1 , \n{b}_1 , \n{c}_1},\\ \NamedFunction{And}{a_1 , \mgreen{b_2} , \mgreen{c_2}},\\ \NamedFunction{And}{\mgreen{a_2} , b_1 , \mgreen{c_2}},\\ \NamedFunction{And}{\mgreen{a_2} , \mgreen{b_2} , c_1}}
 \end{align}
-and the CHSH inequality in \cref{eq:bellypolyunmapped} follows from the logical TSEM
-\begin{align}
- \NamedFunction{And}{\mgreen{a_1} , \mgreen{b_1} , \mgreen{x_1} , \mgreen{\n{x}_2}, \mgreen{y_1} ,  \mgreen{\n{y}_2}}
-\implies
-\NamedFunction{Or}{\NamedFunction{And}{\n{a}_2 , \mgreen{b_1} , \mgreen{x_1}, \mgreen{\n{x}_2} , \mgreen{y_1} , \mgreen{\n{y}_2}}\\
-\NamedFunction{And}{\mgreen{a_1} , \n{b}_2 , \mgreen{x_1} ,\mgreen{\n{x}_2},\mgreen{y_1},\mgreen{\n{y}_2}}\\
-\NamedFunction{And}{a_2 , b_2 , \mgreen{x_1}, \mgreen{\n{x}_2}, \mgreen{y_1}, \mgreen{\n{y}_2}}}
-\end{align}
-etc.
+%and the CHSH inequality in \cref{eq:bellypolyunmapped} follows from the logical TSEM
+%\begin{align}
+% \NamedFunction{And}{\mgreen{a_1} , \mgreen{b_1} , \mgreen{x_1} , \mgreen{\n{x}_2}, \mgreen{y_1} ,  \mgreen{\n{y}_2}}
+%\implies
+%\NamedFunction{Or}{\NamedFunction{And}{\n{a}_2 , \mgreen{b_1} , \mgreen{x_1}, \mgreen{\n{x}_2} , \mgreen{y_1} , \mgreen{\n{y}_2}}\\
+%\NamedFunction{And}{\mgreen{a_1} , \n{b}_2 , \mgreen{x_1} ,\mgreen{\n{x}_2},\mgreen{y_1},\mgreen{\n{y}_2}}\\
+%\NamedFunction{And}{a_2 , b_2 , \mgreen{x_1}, \mgreen{\n{x}_2}, \mgreen{y_1}, \mgreen{\n{y}_2}}}
+%\end{align}
+%etc.
 
 Generating TSEM inequalities is computationally much easier than performing the linear quantifier elimination, and we now outline how to do this. First, by symmetry we may assume that the left-hand side of the tautology contains only unnegated variables. Thus formally, the tautology consists of
 \[
@@ -1163,7 +1163,8 @@ Restricting one's search to TSEM inequalities makes deriving causal infeasibilit
 
 In order to make a TSEM inequality as compelling as possible one should ensure that every event on the left hand side is also referenced at least once on the right hand side. If one find a TSEM inequality lacking this property then one should tighten the inequalities by deleting any events which occur only on the left hand side. This preserves the tautology while increasing the probability of the left hand side.
 
-We note that the connection between classical propositional logic and linear inequalities has been used previously in the task of causal inference. We reiterate that inequalities resulting from propositional logic, however, are a subset of the inequalities that result from linear quantifier elimination. Consequently, linear quantifier elimination is the preferable tool for deriving inequalities whenever the elimination is computationally tractable. Noteworthy examples of works deriving causal infeasibility criteria via classical logic are \citet{Pitowsky1989} and \citet{Ghirardi08}: \cref{eq:trisimplestunmapped} here corresponds to Eq. (2-4) in Ref. \cite{Pitowsky1989}, and \cref{eq:bellcondeq} here corresponds to Eq. (30) in Ref. \cite{Ghirardi08}.
+We note that the connection between classical propositional logic and linear inequalities has been used previously in the task of causal inference. We reiterate that inequalities resulting from propositional logic, however, are a subset of the inequalities that result from linear quantifier elimination. Consequently, linear quantifier elimination is the preferable tool for deriving inequalities whenever the elimination is computationally tractable. Noteworthy examples of works deriving causal infeasibility criteria via classical logic are \citet{Pitowsky1989} and \citet{Ghirardi08}: \cref{eq:trisimplestunmapped} here corresponds to Eq. (2-4) in Ref. \cite{Pitowsky1989}%, and \cref{eq:bellcondeq} here corresponds to Eq. (30) in Ref. \cite{Ghirardi08}
+.
 
 
 
@@ -1265,24 +1266,26 @@ It is also possible to use a mixed strategy of linear and nonlinear quantifier e
 By restricting our attention to inflation models we see that sometimes the distributions of different injectable sets coincide, i.e. 
 $\pdf{\bm{X}}=\pdf{\bm{Y}}$ whenever both $\bm{X}$ and $\bm{Y}$ are injectable, and $\subsim{\bm{X}}=\subsim{\bm{Y}}$. Sometimes sets of random variables which are \emph{not} injectable, however, can also be shown to have necessarily coinciding distributions. Coinciding (non-necessarily-injectable) marginal distributions among the inflation DAG variables is a consequence of \cref{eq:funcdepends}. For example, we can verify that $\pdf{A_1 A_2 B_1}=\pdf{A_1 A_2 B_2}$ follows from \cref{fig:Tri222}, even though $\brackets{A_1 A_2 B_1}=\brackets{A_1 A_2 B_2}$ are not injectable sets. Here we formalize this type of constraint more generally.
 
-For any two nodes sets $\bm{X}$ and $\bm{Y}$ such that $\subsim{\bm{X}}=\subsim{\bm{Y}}$ there exists an \tblue{inflationary isomorphism} which related the two sets such that nodes in $\bm{X}$ are mapped one-to-one to nodes in $\bm{Y}$ such that nodes are mapped to copies, i.e. $A_i\leftrightarrow A_i$ or $A_i\leftrightarrow A_j$ but never $A_i\leftrightarrow B_i$ nor  $A_i\leftrightarrow B_j$.
-
-
-
-Consider and inflation DAG $G'$ and two sets of nodes $\bm{X}$ and $\bm{Y}$ such that $\ansubgraph[G']{\bm{U}}\sim\ansubgraph[G']{\bm{U}}$.
-
-
-The natural generalization of \cref{eq:singlevariatecoincidence}, therefore, is,
-\begin{align}\label{eq:coincidingdistrodef}
-\pdf{\bm{U}}=\pdf{\subsim{\bm{U}}} \quad\text{ whenever }\quad\ansubgraph[G']{\bm{U}}\sim\ansubgraph[G]{\subsim{\bm{U}}}.
+For any two nodes sets $\bm{X}$ and $\bm{Y}$ such that $\subsim{\bm{X}}=\subsim{\bm{Y}}$ there exists an \tblue{inflationary isomorphism} which related the two sets such that nodes in $\bm{X}$ are mapped one-to-one to nodes in $\bm{Y}$ such that nodes are mapped to copies, i.e. $A_i\leftrightarrow A_i$ or $A_i\leftrightarrow A_j$ but never $A_i\leftrightarrow B_i$ nor  $A_i\leftrightarrow B_j$. There may exist multiple inflationary isomorphisms, for example the sets $\brackets{A_1 A_2 B_1}$ and $\brackets{A_1 A_2 B_2}$ can be related by either 
+\begin{align}
+    \begin{pmatrix}
+     A_1 \leftrightarrow A_1 \\
+     A_2 \leftrightarrow A_2 \\
+     B_1 \leftrightarrow B_2 \\
+    \end{pmatrix}
+    \qquad\text{or}\qquad
+    \begin{pmatrix}
+     A_1 \leftrightarrow A_2 \\
+     A_2 \leftrightarrow A_1 \\
+     B_1 \leftrightarrow B_2 \\
+    \end{pmatrix}
 \end{align}
+Two different inflation DAGs $G'_1$ and $G'_2$ are said to be inflationary isomorphic if there exists a graph isomorphism between them which is itself also an inflationary isomorphism. This occurs iff $G'_1\sim G'_2$.
+We say that one isomorphim \tblue{contains} another if the rule-set of the latter is a subset of the rule-set of the former.
 
-Recall that the random variables in the inflated DAG are constructed to be copies of the original random variables. As such, it is possible that two distinct subgraphs of the inflated DAG may represent precisely the \emph{same} causal structure, if the two subgraphs are equivalent up to ``dummy index" of the copied variables. Moreover, some subgraphs of the inflated DAG are equivalent to subgraphs of the original DAG, in the same sense of equivalent. When two graphs are equivalent in this sense we call them \tblue{copy equivalent}. Note that this notion of copy equivalence is stronger than merely graph isomorphism: For two causal structures to be copy equivalent there must exist an isomorphism between the graphs such that every random variables is mapped to itself or a copy of itself. \purp{With expanded notation moved up front, this discussion should be trimmed.}
+Now, consider and inflation DAG $G'$ and two sets of nodes $\bm{X}$ and $\bm{Y}$ such that not only $\subsim{\bm{X}}=\subsim{\bm{Y}}$ but also $\ansubgraph[G']{\bm{X}}\sim\ansubgraph[G']{\bm{Y}}$. If an inflationary isomorphism between $\ansubgraph[G']{\bm{X}}$ and $\ansubgraph[G']{\bm{Y}}$ \emph{contains} an inflationary isomorphism between $\bm{X}$ and $\bm{Y}$, then $\pdf{\bm{X}}=\pdf{\bm{Y}}$.
 
-Consider, now, two different subsets of observable random variables in the inflated DAG. Both subsets should be described by the same marginal probability distribution if the \tblue{ancestral subgraphs} of both sets are copy equivalent. We define the ancestral subgraph of a set of variables $\bm{V}$ to mean the subgraph of the causal structure containing $\bm{V}$'s complete causal history, i.e. $\NamedFunction{Ancestors}{\!\bm{V}\!}$. $\NamedFunction{Ancestors}{\!\bm{V}\!}$ refers to the set $\bm{V}$ along with any vertices that have a directed path to leading from them to $\bm{V}$. Thus the ancestral subgraph of $\bm{V}$ consists of the vertices $\NamedFunction{Ancestors}{\!\bm{V}\!}$ and all edges between them per the original graph. As an example: \cref{fig:Tri222} is the ancestral subgraph of \cref{fig:TriFullDouble} on the six observable variables $\{A_1 A_2 B_1 B_2 C_1 C_2\}$. The ancestral subgraph corresponding to observables $\brackets{A_1 B_2 C_1}$ is illustrated in \cref{fig:TriDagSubA1B2C1}. In contrast, the ancestral subgraph of $\brackets{A_1 B_1 C_1}$ is copy equivalent to \cref{fig:TriMainDAG}. When a set of variables admits partitioning into causally independent partitions, then the ancestral subgraph of that set will have unconnected components. An example of a multiple-components ancestral subgraph is \cref{fig:TriDagSubA2B1C2}, where ${A_2\,\bot\,\brackets{B_1 C_2}}$, as per \cref{eq:dfac222}.
-
-
-In sum: If two sets of random variables, $\bm{S}$ and $\bm{T}$, are equivalent up to their dummy indices AND the ancestral subgraphs of $\bm{S}$ and $\bm{T}$ are copy equivalent, then $\pdf{\bm{S}}=\pdf{\bm{T}}$. By inspecting different ancestral subgraphs for copy equivalence we can establish perfect equivalence of various marginal distributions.
+Constraints of this form be used to supplement the marginal problem without requiring nonlinear quantifier elimination, but they will not have \emph{impact} unless used with conditional independence relations and hence nonlinear quantifier elimination. \purp{Find a good way to explain why not? No impact of projected polytope because...}
 
 
 \end{asparadesc}
