@@ -538,7 +538,7 @@ Let us ask, is it possible for the three original-scenario observable variables 
 \begin{align}\label{eq:ghzdistribution1}
 p_{\text{GHZ}}\parens{a b c}=\frac{[000]+[111]}{2}=\begin{cases}\tfrac{1}{2}&\text{if }\; a=b=c, \\ 0&\text{otherwise}.\end{cases}
 \end{align}
-We assume uniform binary variables for the sake of concreteness, but the argument is general. Let's temporarily (falsely) assume $P_{\text{GHZ}}$ to be feasible for the triangle scenario. Since $\brackets{A_2 C_1}$ is an injectable set we have $\pdf{A_2 C_1}=\pdf{A C}$, and therefore $P_{\text{GHZ}}$ implies that $A_2$ and $C_1$ are perfectly correlated. Similarly, since $\brackets{B_1 C_1}$ is an injectable set we have $\pdf{B_1 C_1}=\pdf{A C}$, and therefore $B_1$ and $C_1$ must be perfectly correlated, and by extension $B_1$ and $A_2$ are perfectly correlated as well. On the other hand, $A_2$ and $B_1$ must be statistically independent, as they do not share any common ancestor. The only way for two variables to be \emph{both} perfectly correlated and independent is by being deterministic. This is not the case in $P_{\text{GHZ}}$, and thus we have certified that $P_{\text{GHZ}}$ is not realizable from the Triangle causal structure, recovering the seminal result of \citet{steudel2010ancestors}.
+We assume uniform binary variables for the sake of concreteness, but the argument is general. Let's temporarily (falsely) assume $P_{\text{GHZ}}$ to be realizable for the triangle scenario. Since $\brackets{A_2 C_1}$ is an injectable set we have $\pdf{A_2 C_1}=\pdf{A C}$, and therefore $P_{\text{GHZ}}$ implies that $A_2$ and $C_1$ are perfectly correlated. Similarly, since $\brackets{B_1 C_1}$ is an injectable set we have $\pdf{B_1 C_1}=\pdf{A C}$, and therefore $B_1$ and $C_1$ must be perfectly correlated, and by extension $B_1$ and $A_2$ are perfectly correlated as well. On the other hand, $A_2$ and $B_1$ must be statistically independent, as they do not share any common ancestor. The only way for two variables to be \emph{both} perfectly correlated and independent is by being deterministic. This is not the case in $P_{\text{GHZ}}$, and thus we have certified that $P_{\text{GHZ}}$ is not realizable from the Triangle causal structure, recovering the seminal result of \citet{steudel2010ancestors}.
 
 To be clear, one can employ \emph{any} kind of causal infeasibility criteria on the inflation DAGs to constrain the distributions on the original DAG. For example, here's a quantitative version of the same proof against perfect correlation in the Triangle scenario, this time using entropic arguments: Trivially $H(A_2|B_1)\leq H(A_2|C_1)+H(C_1|B_1)$, because the amount of information required to learn $A_2$ from $B_1$ is surely less than the amount of information required to learn  $A_2$ from $C_1$ and also to learn $C_1$ from $B_1$. On the other hand, the marginal independence of $A_2$ and $B_1$ implies $H(A_2|B_1)=H(A_2)$. $P_{\text{GHZ}}$ is ruled out, because it would yield $H(A_2|C_1)=H(C_1|B_1)=0$ while $H(A_2)=1$. The entropic conclusion is $H(A_2)\leq H(A_2|C_1)+H(C_1|B_1)$, or equivalently, $I(A_2:C_1)+I(B_1:C_1)\leq H(C_1)$. The injectability of sets per \cref{fig:TriDagSubA2B1C1} in turn yields
 \begin{align}\label{eq:monogomyofcorrelations}
@@ -601,7 +601,7 @@ The W-type distribution is difficult to witness as unrealizable using convention
 
 Consider the causal structure associated to the Bell \cite{bell1964einstein,Brunner2013Bell,bell1966lhvm,CHSHOriginal} scenario [\citealp{pusey2014gdag}~(Fig.~E\#2), \citealp{WoodSpekkens}~(Fig.~19), \citealp{chaves2014novel}~(Fig.~1), \citealp{BeyondBellII}~(Fig.~1), \citealp{wolfe2015nonconvexity}~(Fig.~2b), \citealp{steeg2011relaxation}~(Fig.~2)], depicted here in \cref{fig:NewBellDAG1}. The observable variables are $\brackets{A,B,X,Y}$, and $\Lambda$ is the latent common cause of $A$ and $B$. An inflation of the Bell scenario is show in \cref{fig:BellDagCopy1}.
 
-The PR-box distribution is famously inconsistent with the Bell scenario \cite{PROriginal,PRUnit}. Here we prove its unrealizability using inflation DAG logic. The distribution  is given by ${P_{\text{PR}}}\parenths{A B X Y} = P_{\text{PR}}\parenths{A B | X Y} P(X) P(Y)$, where $P(X)$ and $P(Y)$ are arbitrary full-support distributions\footnote{In the literature on the Bell scenario, these variables are known as ``settings''. Generally, We may think of endogenous observable variables as settings, coloring them light green in the DAG figures. Settings variables are natural candidates for conditioning on.} over the binary variables $X$ and $Y$, and
+The \citet{PROriginal} PR-box distribution is famously inconsistent with the Bell scenario \cite{PROriginal,PRUnit}. Here we prove its unrealizability using inflation DAG logic. The distribution  is given by ${P_{\text{PR}}}\parenths{A B X Y} = P_{\text{PR}}\parenths{A B | X Y} P(X) P(Y)$, where $P(X)$ and $P(Y)$ are arbitrary full-support distributions\footnote{In the literature on the Bell scenario, these variables are known as ``settings''. Generally, We may think of endogenous observable variables as settings, coloring them light green in the DAG figures. Settings variables are natural candidates for conditioning on.} over the binary variables $X$ and $Y$, and
 \begin{align}\begin{split}\label{eq:PRbox}
 % & p_{\text{PR}}\parens{a b |x y}=\frac{[00|00]+[11|00]+[00|10]+[11|10]+[00|01]+[11|01]+[01|11]+[10|11]}{8}\\
 p_{\text{PR}}\parens{a b |x y}=\begin{cases}\tfrac{1}{2}&\text{if }\; \SmallNamedFunction[2]{mod}{a+b}=x\cdot y, \\ 0&\text{otherwise}.\end{cases}
@@ -676,7 +676,7 @@ Our final goal in deriving polynomial inequalities is to derive constraints on t
 
 We are aware of a variety of methods for identifying interesting constraints on the distributions over the variables in the pre-injectable sets. But here, we focus on the very simplest and weakest such constraint: the nonnegativity of probabilities together with the factorization~\cref{eq:preinjfactor}. In fact, this is all that we have used in the previous section as well.
 
-Our method is based on deriving inequalities for the so-called \tblue{marginal problem}. This relies on linear quantifier elimination, which is computationally feasible in at least some cases. A nonlinear method for deriving even tighter constraints is discussed in appendix \cref{sec:nonlinearelimination}. The simpler method discussed here consists of two steps: 1) Identify the pre-injectable sets, and 2) Solve the marginal problem with respect to the pre-injectable sets.
+Our method is based on deriving inequalities for the so-called \tblue{marginal problem}. This relies on linear quantifier elimination, which is computationally feasible in at least some cases. A nonlinear method for deriving even tighter constraints is discussed in \cref{sec:nonlinearelimination}. The simpler method discussed here consists of two steps: 1) Identify the pre-injectable sets, and 2) Solve the marginal problem with respect to the pre-injectable sets.
 
 
 \step{: \tred{Identifying the Pre-Injectable Sets}}\label{step:findpreinjectable}\par\smallskip\nobreak
@@ -774,7 +774,7 @@ Having identified the pre-injectable sets (and how to use them), we next turn to
 
 The most trivial constraint possible 
 %on the pre-injectable set
-is the \emph{existence of a joint probability distribution} over all the observable variables in the inflation DAG. Each of the five three-variable distributions in \cref{eq:preinjectableuses222} is a different marginal distribution of the six-variable joint distribution $\pdf{A_1 A_2 B_1 B_2 C_1 C_2}$. Solving the marginal problem means finding inequalities on the marginal distributions such that the inequalities will satisfied only if there exists some joint distribution from which the distributions on the marginal sets can be recovered through marginalization. The marginal problem comes up in a variety of applications, and has been studied extensively; see~\cite{fritz2013marginal} for further references.\purp{Tobias, say better? And add citations please!} \purp{T: Ok, I'll get back to this on my second iteration} 
+is the \emph{existence of a joint probability distribution} over all the observable variables in the inflation DAG. Each of the five three-variable distributions in \cref{eq:preinjectableuses222} is a different marginal distribution of the six-variable joint distribution $\pdf{A_1 A_2 B_1 B_2 C_1 C_2}$. Solving the marginal problem means finding inequalities on the marginal distributions such that the inequalities will satisfied only if there exists some joint distribution from which the distributions on the marginal sets can be recovered through marginalization, i.e. if the distributions are \tblue{marginally compatible}. The marginal problem comes up in a variety of applications, and has been studied extensively; see~\cite{fritz2013marginal} for further references.\purp{Tobias, say better? And add citations please!} \purp{T: Ok, I'll get back to this on my second iteration} 
 
 \purp{Comment about how solving marginals problem still gives polynomial inequalities.}
 
@@ -824,7 +824,9 @@ Linear quantifier elimination routines are available in many software tools\foot
 
 Linear quantifier elimination is already widely used in causal inference to derive entropic inequalities \cite{fritz2013marginal,chaves2014novel,chaves2014informationinference}. In that task, however, the quantifiers being eliminated are those entropies which refer to hidden variables. By contrast, the probabilities we consider here are exclusively in terms of observable variables right from the very start. The quantifiers we eliminate are the gedankenprobabilities, which are quite different from probabilities involving hidden variables.
 
-Although linear quantifier elimination can be highly optimized, it can still prove computationally difficult. It is therefore sometimes useful to consider relaxations of the marginals problem. The \emph{full} marginals problem is to find inequalities on the marginal distributions such that the inequalities are satisfied \emph{if and only if} the given marginal distributions can be extended. It is much easier to generate necessary-but-insufficient inequalities, i.e. satisfied by all compatible marginal distributions but such that no-violation does not certify compatibility. We have identified a technique for rapidly generating such quantifier-free inequalities by restricting the search to inequalities of a very particular form. We found this alternative technique — trading generality for speed — to be extraordinarily practical. The type of inequalities that we consider are given by a certain class of tautologies in classical propositional logic, see \cref{sec:TSEM} for further details.
+One may also substitute numeric values for all the pre-injectable probabilities appearing in the marginals problem. Upon doing so, the quantifier elimination problem is converted to a quantifier existence problem: Do there exist gedankenprobabilities that satisfy the resulting system of inequalities? Such \emph{satisfiability} questions can be resolved quite rapidly, especially when the quantifiers are linear \cite{Korovin2012ImplementingCRA,Bobot2012SimplexSAT}. Note that real-world data with uncertainties can also be incorporated into these satisfiability questions. Instead of asserting that a particular probability is equal to a given \emph{value}, one can incorporate new inequalities which constrain the experimentally-known probabilities to lie in given \emph{intervals}. Assigning probabilities to intervals as opposed to numeric values results in further free parameters in the system, but the problem nevertheless remains one of \emph{universal} existential closure, and can be resolved with extreme efficiency.
+
+Although linear quantifier elimination can be highly optimized, it can still prove computationally difficult. It is therefore sometimes useful to consider relaxations of the marginals problem. The \emph{full} marginals problem is to find inequalities on the marginal distributions such that the inequalities are satisfied \emph{if and only if} the given marginal distributions can be extended. It is much easier to generate necessary-but-insufficient inequalities, i.e. satisfied by all compatible marginal distributions but such that no-violation does not certify marginal compatibility. We have identified a technique for rapidly generating such quantifier-free inequalities by restricting the search to inequalities of a very particular form. We found this alternative technique — trading generality for speed — to be extraordinarily practical. The type of inequalities that we consider are given by a certain class of tautologies in classical propositional logic, see \cref{sec:TSEM} for further details.
 
 %One useful alternative to linear quantifier elimination is to identify representative probability distributions which are incompatible with the (unprojected) constraints; \citet{ChavesNoSignalling} use this technique, for example. %That technique essentially translates the elimination problem to a satisfiability problem, and moreover an ultra-efficient \emph{linear} quantifier existence problem at that! In the context of polytope projection, these representative probability distributions correspond to extreme rays of the so-called ``projection cone" \cite{jones2004equality,Jones2008,BalasProjectionCone}.
 
@@ -850,20 +852,20 @@ The nontrivial polynomial inequality
 \begin{align}\label{eq:tritrivial1}
 {\p{a} + \p{b} + \p{c}} \leq {1 + \p{a} \p{b} + \p{a c} + \p{b c}}
 \end{align}
-is found to be a constraint on the Triangle scenario through by summing the follow two inequalities
+is found to be a constraint on the Triangle scenario through by summing the follow two nonnegativity inequalities
 \begin{align}\begin{split}\label{eq:trisimplestunmapped}
  &0\leq  1 -\p{a_2} - \p{b_1} - \p{c_1}+ \p{a_2 b_1} + \p{a_2 c_1} + \p{b_1 c_1}  -\p{a_2 b_1 c_1} \quad\left[=\p{\n{a}_2 \n{b}_1 \n{c}_1}\right]
 \\&0\leq \p{a_2 b_1 c_1}
 \end{split}\\
 \shortintertext{subject to the following transformations}
-&  \underbrace{\larray{\\\p{a_2 b_1} \to \p{a_2} \p{b_1}}}_{\text{Factorization relation, per \cref{eq:dfac222}.}} \quad \text{and}\qquad
+&  \underbrace{\larray{\\\p{a_2 b_1} \to \p{a_2} \p{b_1}}}_{\text{via ancestral independence}} \quad \text{and}\qquad
  \underbrace{\begin{array}{c}
  \p{a_2}\to\p{a}\,, 
 \; \p{b_1}\to\p{b}\,, 
 \; \p{c_1}\to\p{c},
 \\ \p{a_2 c_1}\to \p{a c},
 \; \p{b_1 c_1}\to \p{b c}
-\end{array}}_{\text{Mapping relations, per \cref{eq:map222}}}.
+\end{array}}_{\text{via injectable set}}.
 \end{align}
 Indeed, this example has been chosen because \cref{eq:tritrivial1} can be derived directly from the small ancestral subgraph of $\{A_2 B_1 C_1\}$, namely \cref{fig:TriDagSubA2B1C1}.
 
@@ -900,13 +902,13 @@ Slightly more involved but otherwise analogous considerations give rise to the i
  \p{a_2 b_1 c_2}\to \p{a_2} \p{b_1 c_2} \\
  \p{a_2 b_2 c_1}\to \p{b_2} \p{a_2 c_1} \\
  \p{a_2 b_2 c_2}\to \p{a_2} \p{b_2} \p{c_2} \\
-\end{array}}_{\text{Factorization relations}}   \quad \text{ and }\quad
+\end{array}}_{\text{via ancestral independence}}   \quad \text{ and }\quad
 \underbrace{\begin{array}{l}
 \p{a_1 b_2} \to \p{a b} \\
 \p{a_2 c_1} \to \p{a c} \\
 \p{b_1 c_2} \to \p{b c} \\
 \p{\n{a}_1 \n{b}_1 \n{c}_1}\to \p{\n{a} \n{b} \n{c}}  \\
-\end{array}\,.}_{\text{Nontrivial mapping relations}}
+\end{array}\,.}_{\text{via injectable sets}}
 \end{align}
 A consequence of \cref{eq:FritzF3} is that the W-type distribution per \cref{eq:wdistribution1}
 %\begin{align}\label{eq:wdistribution}
@@ -1474,7 +1476,7 @@ Another positive feature of the ESP algorithm is that it commences outputting qu
 Vertex projection (VP) algorithms are another computational tool which may be used to assist in linear quantifier elimination \cite{Avis2000lrs}. VP works by first enumerating the vertices of the initial polytope (H-rep to V-rep), projecting the vertices, and then converting back to inequalities (V-rep to H-rep). For generic high-dimensional polytopes, the operation of converting from a representation in terms of halfspaces to one in terms of extremal-vertices representations can be computationally costly (high-$d$ H-rep to V-rep). Starting from a vertex representation in a high dimensional space, however, one can immediately determine the vertex representation of the polytope's projection in a lower dimensional space. The projection is along the coordinate axes, so one just ``discards" the coordinate of the eliminated quantifier. To obtain the inequalities which characterize the projected polytope one then applies a convex hull algorithm to the projected vertices (low-$d$ V-rep to H-rep).
 
 For probability distributions, however, the extremal vertices are precisely the deterministic possibilities. Since the extremal vertices of the initial polytope are easily enumerated, it is possible to avoid the high-$d$ V-rep to H-rep step entirely. There is a one-to-one correspondence between the inflation-DAG's initial generating inequalities and its initial extreme observable probability distributions. 
-We used this V-rep to H-rep technique to project the initial polytope implied by \cref{fig:Tri222} (\cref{step:generateineqs}) to an intermediate 23-dimensional polytope, where each of the 23 remaining can be mapped the original DAG.  Only then did we apply the transformations of factorization and mappings (\cref{step:fac,step:findmap}) to convert those linear inequalities to polynomial inequalities pertaining to the original DAG. We found that the V-rep to H-rep technique, using \textit{lrs} [\href[pdfnewwindow]{http://cgm.cs.mcgill.ca/~avis/C/lrslib/USERGUIDE.html#Installation\%20Section}{\texttt{lrs}}], was orders-of-magnitude faster than FM elimination at obtaining the same result.
+We used this V-rep to H-rep technique to project the initial marginals-problem polytope implied by \cref{fig:Tri222} to an intermediate 23-dimensional polytope, where the 23 remaining dimensions correspond to the probabilities pertainining to  pre-injectable sets.  Only then did we apply translate those probabilities into probabilities pertaining to the original DAG, and in so doing we convert linear inflation-DAG inequalities to polynomial inequalities pertaining to the original DAG. We found that the V-rep to H-rep technique, using \textit{lrs} [\href[pdfnewwindow]{http://cgm.cs.mcgill.ca/~avis/C/lrslib/USERGUIDE.html#Installation\%20Section}{\texttt{lrs}}], was orders-of-magnitude faster than FM elimination at obtaining the same result.
 
 Yet another technique is also possible. Suppose the initial polytope is given by $\brackets{\vec{x},\vec{y}\,|\hat{A}.\vec{x}+\hat{B}.\vec{y}\geq\bm{c}}$, where $y$ are the quantifiers. If we can find any completely nonnegative vector $\bm{w}$ such that $\bm{w}.\hat{B}=\vec{0}$ then we automatically establish the quantifier-free inequality $\bm{w}.\hat{A}.\vec{x}\geq\bm{w}.\bm{c}$. Solving for ``random" nonnegative vectors $\bm{w}$ is easy; solving for all possible solutions is rather more difficult. \citet{BalasProjectionCone} refined this method so that each extremal construction of $\bm{w}$ corresponds to an irredundant inequality in the H-rep description of the projected polytope. Nevertheless, even without utilizing the full projection cone, this technique can be used to rapidly obtain a few quantifier-free inequalities. 
 
@@ -1540,6 +1542,8 @@ If $\hat{A}$ is the matrix who's rows are nonnegativity inequalities, then the f
  &\hspace{-\mathindent}\texttt{RedundantRowQ}[A\_?\texttt{MatrixQ},n\_\texttt{Integer}]\text{:=}\texttt{PositiveLinearSolveTest@@Reverse}[\texttt{Transpose/@TakeDrop}[A,\{n\}]].
 \end{align*}
 Note that a \texttt{True} response from \texttt{RedundantRowQ} indicates that the row $n$ is redundant.
+
+Redundant inequalities can also be filtered out using Cernikov rules \cite{Shapot2012,Bastrakov2015}. We find the strategy of employing linear programming in concert with the second Cernikov rule to be extremely efficient.
 
 %Obtaining a redundancy-free collection of (convex) polyhedral-cone inequalities is therefore related to obtaining a non-negative factorization of a matrix. \purp{Need citation. Also, give explicit connection between NN factorization and redundancy elimination. Does this connection appears elsewhere in the literature?}
 
