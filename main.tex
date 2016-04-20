@@ -1083,13 +1083,15 @@ Our current inflation DAG method can be employed to derive causal infeasibility 
 
 \section{Tautologies of the Supplemented Excluded Middle}\label{sec:TSEM}
 
-The process of linear quantifier elimination, while orders of magnitude more computationally amenable than its nonlinear variant, is nevertheless nontrivial. When the number of observable random variables in the inflation DAG is too large, it quickly happens that even the linear quantifier elimination algorithms may be too slow for practical application. To this end we have developed a strategy that identifies only one particular class of causal infeasibility criteria, but does so nearly instantly.
+The process of linear quantifier elimination, while orders of magnitude more computationally amenable than its nonlinear variant, is nevertheless nontrivial. When the number of observable random variables in the inflation DAG is too large, it quickly happens that even the most advanced linear quantifier elimination algorithms become too slow for practical application. To this end we have developed a strategy that identifies only one particular class of inequalities for the marginal problem, but does so very efficiently. Using the inflation DAG technique, we can subsequently convert these into polynomial inequalities for causal inference.
+
+As it currently stands, the TSEM method applies to binary variables only, say with values in $\{0,1\}$. This is what we assume from now on.
 
 In this approach we construct polynomial inequalities corresponding to some tautology of the excluded middle (TEM). In classical logic, the TEM refers to that self-evident truism that every proposition is either true or false, and hence 
 \begin{align}
 \mathsf{True} \iff \NamedFunction{Or}{ A\cramp{=}a , A\cramp{\neq}a }\,.
 \end{align}
-Note that we treat statistical events such as random variables yielding particular outcomes as identically logical propositions. The TEM can also be supplemented with certain ``givens", which we take to be known-true propositions on the left-hand-side. These ``givens" can then be interspersed throughout the right-rand-side while still yielding a valid tautology. Thus
+Note that we treat statistical events such as random variables yielding particular outcomes as identically logical propositions. The TEM can also be supplemented with certain ``givens", which we take to be known-true propositions on the left-hand-side. These ``givens" can then be interspersed throughout the right-hand side while still yielding a valid tautology. Thus
 \begin{align}\label{eq:TSEMdemo}
 \NamedFunction{And}{ \mgreen{a} , \mgreen{b} }
 \implies 
@@ -1110,7 +1112,7 @@ The inequality which would correspond to the TSEM in \cref{eq:TSEMdemo} is
     \p{a b} \leq \p{a c}+\p{b \n{c}}\,.
 \end{align}
 
-TSEM inequalities can be used as precursors for polynomial inequalities by applying them to inflation DAGs. For example the TSEM inequality
+TSEM inequalities can be used as necessary constraints for the solvability of the marginal problem. As such, we can combine them with the inflation DAG technique in order to obtain polynomial inequalities for causal inference. For example the TSEM inequality
 \begin{align}
     \p{a_2 b_1} \leq \p{a_2 b_1}+\p{\n{b}_1 c_1}
 \end{align}
@@ -1120,12 +1122,12 @@ applied to our inflation of the Triangle scenario would imply the causal infeasi
 \end{align}
 pursuant to \cref{fig:TriDagSubA2B1C1}.
 
-In fact almost every causal infeasibility criterion in this paper is a TSEM inequality! The Triangle scenario inequality \cref{eq:trifancyunmapped} corresponds to the logical TSEM
+In fact, many of the polynomial inequalities of this paper are TSEM inequalities. The Triangle scenario inequality \cref{eq:trifancyunmapped} corresponds to the logical TSEM
 \begin{align}
     \NamedFunction{And}{\mgreen{a_2} , \mgreen{b_2} , \mgreen{c_2}}\implies 
 \NamedFunction{Or}{\NamedFunction{And}{\n{a}_1 , \n{b}_1 , \n{c}_1},\\ \NamedFunction{And}{a_1 , \mgreen{b_2} , \mgreen{c_2}},\\ \NamedFunction{And}{\mgreen{a_2} , b_1 , \mgreen{c_2}},\\ \NamedFunction{And}{\mgreen{a_2} , \mgreen{b_2} , c_1}}
 \end{align}
-and then Bell scenario inequality in \cref{eq:bellypolyunmapped} follows from the logical TSEM
+and the CHSH inequality in \cref{eq:bellypolyunmapped} follows from the logical TSEM
 \begin{align}
  \NamedFunction{And}{\mgreen{a_1} , \mgreen{b_1} , \mgreen{x_1} , \mgreen{\n{x}_2}, \mgreen{y_1} ,  \mgreen{\n{y}_2}}
 \implies
@@ -1135,14 +1137,21 @@ and then Bell scenario inequality in \cref{eq:bellypolyunmapped} follows from th
 \end{align}
 etc.
 
-Generating TSEM inequalities is computationally much easier than performing quantifier elimination. A practical alternative to \cref{sec:mainalgorithm}, then, is the four-step process
-\begin{compactenum}
-\item Generate TSEM inequalities on the inflation DAG.
-\item Factor the probabilities (same as \cref{step:fac} in \cref{sec:mainalgorithm}).
-\item Map as many probabilities to the original DAG as possible (same as \cref{step:findmap} in \cref{sec:mainalgorithm}).
-\item Discard any remaining inequalities which involve unmappable gedankenprobabilities.
-\end{compactenum}
-Restricting one's search to TSEM inequalities makes deriving causal infeasibility criteria extremely tractable even for large DAGs, but a consequence, however, is that only one class of possible inequalities is being considered.
+Generating TSEM inequalities is computationally much easier than performing the linear quantifier elimination, and we now outline how to do this. First, by symmetry we may assume that the left-hand side of the tautology contains only unnegated variables. Thus formally, the tautology consists of
+\[
+	\bm{L} \quad\Longrightarrow\quad (\bm{A}_1,\bm{B}_1)\lor\ldots\lor(\bm{A}_n,\bm{B}_n),
+\]
+where each of these sets is a simplex in the simplicial complex that describes the marginal problem. In logical term, 
+
+
+%A practical alternative to \cref{sec:mainalgorithm}, then, is the four-step process
+%\begin{compactenum}
+%\item Generate TSEM inequalities on the inflation DAG.
+%\item Factor the probabilities (same as \cref{step:fac} in \cref{sec:mainalgorithm}).
+%\item Map as many probabilities to the original DAG as possible (same as \cref{step:findmap} in \cref{sec:mainalgorithm}).
+%\item Discard any remaining inequalities which involve unmappable gedankenprobabilities.
+%\end{compactenum}
+Restricting one's search to TSEM inequalities makes deriving causal infeasibility criteria tractable even for large DAGs, but a consequence, however, is that only one class of possible inequalities is being considered.
 
 In order to make a TSEM inequality as compelling as possible one should ensure that every event on the left hand side is also referenced at least once on the right hand side. If one find a TSEM inequality lacking this property then one should tighten the inequalities by deleting any events which occur only on the left hand side. This preserves the tautology while increasing the probability of the left hand side.
 
@@ -1165,18 +1174,19 @@ We note that the connection between classical propositional logic and linear ine
 %}
 
 %\begin{spacing}{2.0}
-Our main contribution is a new way of deriving causal infeasibility criteria, namely the inflation DAG approach. An inflation DAG naturally implies nonlinear hybrid inequalities, i.e. containing gedankenprobabilities, which implicitly constrain the set of distribution consistent with the original causal structure. If desirable, one can further eliminate the gedankenprobabilities via quantifier elimination. Polynomial inequalities can be obtained through linear elimination techniques.
+Our main contribution is a new way of deriving causal infeasibility criteria, namely the inflation DAG approach. An inflation DAG naturally carries inflation models, and the existence of an implies nonlinear hybrid inequalities, i.e. containing gedankenprobabilities, which implicitly constrain the set of distribution consistent with the original causal structure. If desirable, one can further eliminate the gedankenprobabilities via quantifier elimination. Polynomial inequalities can be obtained through linear elimination techniques.
 
-These inequalities are necessary but not sufficient conditions on a joint distribution for it to be explained by the causal structure. We've seen that they can be stronger than entropic inequalities sometimes, yet just how strong they are is still unclear. A distribution might satisfy all our polynomial inequalities and yet not be realizable from the causal structure. %What would such superficially-feasible distributions look like? Are inflation DAG inequalities ever tight? 
-Our methods yields tight causal infeasibility criteria for Bell scenarios, but those scenarios are exceptional in that the sets of realizable distributions form a convex polytope.
+These inequalities are necessary conditions on a joint distribution to be explained by the causal structure. We currently do not know to what extent they can also be considered sufficient, and there is somewhat conflicting evidence: as we have seen, the inflation DAG approach reproduces all Bell inequalities; but on the other hand, we have not been able to use it to rederive Pearl's instrumental inequality, although the instrumental scenario also contains only one latent node. By excluding the W-type distribution on the Triangle scenario, we have seen that our polynomial inequalities are stronger than entropic inequalities at least sometimes.
+% yet just how strong they are is still unclear. A distribution might satisfy all our polynomial inequalities and yet not be realizable from the causal structure. %What would such superficially-feasible distributions look like? Are inflation DAG inequalities ever tight? 
+% Our methods yields tight causal infeasibility criteria for Bell scenarios, but those scenarios are exceptional in that the sets of realizable distributions form a convex polytope.
 
 The most elementary of all causal infeasibility criteria are the conditional independence (CI) relations. Our method explicitly incorporates all marginal independence relations implied by a causal structure. We have found that generic CI relations also appear to be implied by our polynomial inequalities. In future research we hope to clarify the process through which CI relations are manifested as properties of the inflation DAG.
 
-A single causal structure has unlimited potential inflations. Selecting the right inflation from which to derive polynomial inequalities is an interesting challenge. To this end, it would be desirable to understand how particular features of the original causal structure are exposed when different nodes in the DAG are duplicated. By isolating which features are exposed in each inflation we could conceivably quantify the causal inference strength of each inflation. In so doing, we might find that inflated DAGs beyond a certain level of variable duplication need not be considered. The multiplicity beyond which further inflation is irrelevant is presumably related to the maximum degree of those polynomials which tightly characterize a causal scenario. Presently, however, it is not clear how to upper bound either number.
+A single causal structure has unlimited potential inflations. Selecting a good inflation from which strong polynomial inequalities can be derived is an interesting challenge. To this end, it would be desirable to understand how particular features of the original causal structure are exposed when different nodes in the DAG are duplicated. By isolating which features are exposed in each inflation, we could conceivably quantify the causal inference strength of each inflation. In so doing, we might find that inflated DAGs beyond a certain level of variable duplication need not be considered. The multiplicity beyond which further inflation is irrelevant may be related to the maximum degree of those polynomials which tightly characterize a causal scenario. Presently, however, it is not clear how to upper bound either number.
 
 %that one inflation DAG is or is not ``stronger" than another? Can we upper bound the maximum dimension of those polynomials which in-principle tightly characterize a given causal structure? A ``yes" answer to any of the aformentioned questions means that that perhaps inflation DAGs beyond a certain level of complexity need not be considered. These remain open questions, however.
 
-Our method turns the quantum no-broadcasting theorem \cite{NoCloningQuantum1996,NoCloningGeneral2006} on its head by emphasizing that classical hidden variables \emph{can}, in-principle, be cloned. This classical cloning possibility motivates the inflation DAG method, and underpins the implied causal infeasibility criteria. We have speculated about generalizing our method to obtain causal infeasibility criteria that constitute necessary constraints even for \emph{quantum} causal scenarios, a common desideratum in recent works \cite{fritz2012bell,pusey2014gdag,Chaves2015infoquantum,ChavesNoSignalling,BeyondBellII}. It would be enlightening to understand the extent to which our (classical) polynomial inequalities are violated in quantum theory. A variety of techniques exist for estimating the amount by which a linear inequality \cite{NPA2008Long,I3322NPA1} is violated in quantum theory, but finding the quantum violation of a \emph{polynomial} inequality is a more challenging task \cite{NPAReview}.
+Our method turns the quantum no-broadcasting theorem \cite{NoCloningQuantum1996,NoCloningGeneral2006} on its head by emphasizing that classical hidden variables \emph{can}, in-principle, be cloned. The possibility of classical cloning motivates the inflation DAG method, and underpins the implied causal infeasibility criteria. We have speculated about generalizing our method to obtain causal infeasibility criteria that constitute necessary constraints even for \emph{quantum} causal scenarios, a common desideratum in recent works \cite{fritz2012bell,pusey2014gdag,Chaves2015infoquantum,ChavesNoSignalling,BeyondBellII}. It would be enlightening to understand the extent to which our (classical) polynomial inequalities are violated in quantum theory. A variety of techniques exist for estimating the amount by which a Bell inequality \cite{NPA2008Long,I3322NPA1} is violated in quantum theory, but finding the quantum violation of one of our \emph{polynomial} inequalities looks like a more challenging task.
 
 The difference between classical ontic-state duplication and quantum no-broadcasting makes the inequalities that result from our consideration to be especially suited for distinguishing the set of quantum-realizable distributions from its subset of classically-realizable distributions. Causal infeasibility criteria that are sensitive to the classical-quantum distinction are precisely the sort of generalizations of the Bell inequalities which are sought after, in order to study the quantum features of generalized causal scenarios. Entropic inequalities have been lacking in this regard \cite{fritz2012bell,pusey2014gdag,Chaves2015infoquantum}, and the inflation DAG considerations proposed here constitute a significant alternative strategy.
 %\end{spacing}
@@ -1192,6 +1202,7 @@ Research at Perimeter Institute is supported by the Government of Canada through
 
 
 \onecolumngrid
+\newpage
 \appendix
 \renewcommand{\theequation}{A-\arabic{equation}}
 \setcounter{equation}{0}
