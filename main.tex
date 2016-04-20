@@ -261,7 +261,7 @@ anchorcolor=OliveGreen}
 
 
 %%%% Tobias: to mark my edits and stuff
-\usepackage{showkeys}
+%\usepackage{showkeys}
 \usepackage[draft]{fixme}
 \newcommand{\btob}{\color{OliveGreen}}
 \newcommand{\etob}{\color{black}}
@@ -452,11 +452,11 @@ because of \cref{eq:funcdepends} and $\ansubgraph[G']{A_i}\sim\ansubgraph[G]{A}$
 %\text{Let}\quad\p{a_1 a_2 ...}\coloneqq \p{A_1\cramp{=}a \bigwedge A_2\cramp{=}a \bigwedge ...} \quad\text{ and }\quad
 %\p{\n{a}_1 a_2 b_1...}= \p{A_1\cramp{\neq}a \bigwedge A_2\cramp{=}a \bigwedge B_1\cramp{=}b\bigwedge ...}\quad\text{etc.}
 %\end{align*}
-To be perfectly clear however, $a_1$ and $a_2$ \emph{do not} refer to two distinct possible outcomes of one random variable; rather $a_1\land a_2$  represents the event in which $A_1$ and $A_2$ both have the same outcome $a$. Moreover, generally $\p{a_1 a_2}\neq \p{a}$, because although $\pdf{A_1}=\pdf{A_2}$, nevertheless $A_1$ and $A_2$ may not be perfectly correlated. In the same vein, generally $\p{a_1 a_2}\neq \p{a_1}\p{a_2}$, because identically distributed does not mean independently distributed. Indeed, in \cref{fig:Tri222}, for example, $A_1$ and $A_2$ share the common ancestor $X_1$, and hence they are not independent. On the other hand, sometimes two copies of a random variable not share any common ancestor, such as $A_1$ and $A_4$ in \cref{fig:TriFullDouble}. \cref{fig:TriFullDouble} implies, therefore, that $\p{a_1 a_4}=\p{a_1}\p{a_4}$. \fxnote{need this?}
+To be perfectly clear however, $a_1$ and $a_2$ \emph{do not} refer to two distinct possible outcomes of one random variable; rather $a_1\land a_2$  represents the event in which $A_1$ and $A_2$ both have the same outcome $a$. Moreover, generally $\p{a_1 a_2}\neq \p{a}$, because although $\pdf{A_1}=\pdf{A_2}$, nevertheless $A_1$ and $A_2$ may not be perfectly correlated. In the same vein, generally $\p{a_1 a_2}\neq \p{a_1}\p{a_2}$, because identically distributed does not mean independently distributed. Indeed, in \cref{fig:Tri222}, for example, $A_1$ and $A_2$ share the common ancestor $X_1$, and hence they are not independent. On the other hand, sometimes two copies of a random variable not share any common ancestor, such as $A_1$ and $A_4$ in \cref{fig:TriFullDouble}. \cref{fig:TriFullDouble} implies, therefore, that $\p{a_1 a_4}=\p{a_1}\p{a_4}$. 
 
 Any subset of nodes of the inflation DAG which contains multiple copies of some node is considered a \tblue{redundant} set. Formally, $\bm{U}$ is redundant if and only if there are $A$ and indices $i,j$ such that $\brackets{A_i,A_j}\subseteq\bm{U}$. Otherwise, $\bm{U}$ is said to be irredundant. Alternatively, $\bm{U}\subseteq\nodes{G'}$ is irredundant if and only if there is $\bm{V}\subseteq\nodes{G}$ such that $\bm{U}\sim\bm{V}$. 
 %A graph $Q$ is said to be irredundant iff $\nodes{Q}$ are irredundant. 
-When discussing irredundant sets we hereafter denote the corresponding original-DAG node-set by underscript $\sim$, i.e.
+When discussing irredundant sets we hereafter denote the corresponding original-DAG node-set by overscript $\sim$, i.e.
 $\bm{U}\sim\subsim{\bm{U}}$ where $\subsim{\bm{U}}\subseteq\nodes{G}$. 
 
 Critically, the idea that coinciding causal histories implies coinciding distributions can be generalized from individual nodes to irredundant sets. While generally $\pdf{\bm{U}}\neq\pdf{\subsim{\bm{U}}}$,  $\bm{U}$ and $\subsim{\bm{U}}$ \emph{must} have coinciding distribution whenever their respective ancestral subgraphs are equivalent up to dummy indices, as a consequence of  \cref{eq:funcdepends}.
@@ -824,6 +824,9 @@ Linear quantifier elimination routines are available in many software tools\foot
 
 Linear quantifier elimination is already widely used in causal inference to derive entropic inequalities \cite{fritz2013marginal,chaves2014novel,chaves2014informationinference}. In that task, however, the quantifiers being eliminated are those entropies which refer to hidden variables. By contrast, the probabilities we consider here are exclusively in terms of observable variables right from the very start. The quantifiers we eliminate are the gedankenprobabilities, which are quite different from probabilities involving hidden variables.
 
+One may include further linear constraints beyond the usual marginals problem. For example, we know that sometimes the distributions of different injectable sets coincide, i.e. 
+$\pdf{\bm{X}}=\pdf{\bm{Y}}$ whenever both $\bm{X}$ and $\bm{Y}$ are injectable, and $\subsim{\bm{X}}=\subsim{\bm{Y}}$, because injectability implies $\pdf{\bm{X}}=\pdf{\subsim{\bm{X}}}$ etc. Such equations relating coinciding marginal distributions can be used to further constrain the gedankenprobabilities; they can even be used to pre-eliminate some gedankenprobabilities through Gaussian elimination, slightly reducing the need for linear quantifier elimination. These linear constraints are not part of the usual marginal problem, however; see \cref{sec:nonlinearelimination} for further discussion.
+
 One may also substitute numeric values for all the pre-injectable probabilities appearing in the marginals problem. Upon doing so, the quantifier elimination problem is converted to a quantifier existence problem: Do there exist gedankenprobabilities that satisfy the resulting system of inequalities? Such \emph{satisfiability} questions can be resolved quite rapidly, especially when the quantifiers are linear \cite{Korovin2012ImplementingCRA,Bobot2012SimplexSAT}. Note that real-world data with uncertainties can also be incorporated into these satisfiability questions. Instead of asserting that a particular probability is equal to a given \emph{value}, one can incorporate new inequalities which constrain the experimentally-known probabilities to lie in given \emph{intervals}. Assigning probabilities to intervals as opposed to numeric values results in further free parameters in the system, but the problem nevertheless remains one of \emph{universal} existential closure, and can be resolved with extreme efficiency.
 
 Although linear quantifier elimination can be highly optimized, it can still prove computationally difficult. It is therefore sometimes useful to consider relaxations of the marginals problem. The \emph{full} marginals problem is to find inequalities on the marginal distributions such that the inequalities are satisfied \emph{if and only if} the given marginal distributions can be extended. It is much easier to generate necessary-but-insufficient inequalities, i.e. satisfied by all compatible marginal distributions but such that no-violation does not certify marginal compatibility. We have identified a technique for rapidly generating such quantifier-free inequalities by restricting the search to inequalities of a very particular form. We found this alternative technique — trading generality for speed — to be extraordinarily practical. The type of inequalities that we consider are given by a certain class of tautologies in classical propositional logic, see \cref{sec:TSEM} for further details.
@@ -1079,7 +1082,7 @@ Not every inflation requires broadcasting, however, and hence not every gedanken
 \cref{fig:TriDagSubA2B1C1} is an example of a non-broadcasting inflation.
 Constraints derived from non-broadcasting inflations are valid even in the GPT paradigm. Consequently the inequality in \cref{eq:tritrivial1}, which was derived from \cref{fig:TriDagSubA2B1C1}, is therefore a causal infeasibility criterion which holds for the Triangle scenario even when the latent nodes are allowed to be quantum states. This confirms our numerical computations, which indicated that~\eqref{eq:tritrivial1} does not have any quantum violations. The same is true for monogamy of correlations, per \cref{eq:monogomyofcorrelations}. Since the GHZ-type distribution~\cref{eq:ghzdistribution1} violates both of these inequalities, it is forbidden even per the relaxed GPT Triangle scenario, as was pointed out earlier. 
 
-It might also be possible to derive quantum causal infeasibility criteria if one appropriately modifies \cref{step:generateineqs} to generate a different initial set of nonnegativity inequalities. This new set should capture the nonnegativity of only quantum-physically-meaningful marginal probability distributions. From this perspective, a broadcasting inflation DAG is an abstract logical concept, as opposed to a hypothetical physical construct. Indeed, the distributions in a quantum broadcasting inflation DAG can be characterized in terms of the logical broadcasting maps of \citet{Coecke2011}. Note that $\p{a_1,a_2}$ and other broadcasting-implicit gedankenprobabilities can be \emph{negative} pursuant to a logical broadcasting map, and hence \cref{step:generateineqs} in \cref{sec:mainalgorithm} would need to be modified.
+It might also be possible to derive quantum causal infeasibility criteria if one appropriately modifies \cref{sec:ineqs} to generate a different initial set of nonnegativity inequalities. This new set should capture the nonnegativity of only quantum-physically-meaningful marginal probability distributions. From this perspective, a broadcasting inflation DAG is an abstract logical concept, as opposed to a hypothetical physical construct. Indeed, the distributions in a quantum broadcasting inflation DAG can be characterized in terms of the logical broadcasting maps of \citet{Coecke2011}. Note that $\p{a_1,a_2}$ and other broadcasting-implicit gedankenprobabilities can be \emph{negative} pursuant to a logical broadcasting map, and hence the marginal problem should be reformulated as to the questioning the existence of non-broadcastings sets rather than the existence of a full joint distribution from which the marginal distributions might be recovered.
 
 An analysis along these lines has already been carried out successfully by \citet{Chaves2015infoquantum} in the derivation of entropic inequalities for non-classical causal structures. Although \citet{Chaves2015infoquantum} do not invoke inflation DAGs, they do employ conditional structure, which therefore gives rise to broadcasting sets. \citet{Chaves2015infoquantum} take pains to avoid including broadcasting gedankenentropies in any of their initial entropic inequalities, precisely as we would want to do in constructing our initial probability inequalities. Unlike entropic inequalities, the derivation of probability inequalities has not yet been achieved for non-classical causal structures other than Bell scenarios. 
 
@@ -1140,20 +1143,20 @@ applied to our inflation of the Triangle scenario would imply the causal infeasi
 \end{align}
 pursuant to \cref{fig:TriDagSubA2B1C1}.
 
-In fact, many of the polynomial inequalities of this paper are TSEM inequalities. The Triangle scenario inequality \cref{eq:trifancyunmapped} corresponds to the logical TSEM
+In fact, many of the polynomial inequalities of this paper are TSEM inequalities; for example, the Triangle scenario inequality \cref{eq:trifancyunmapped} corresponds to the logical TSEM
 \begin{align}
     \NamedFunction{And}{\mgreen{a_2} , \mgreen{b_2} , \mgreen{c_2}}\implies 
 \NamedFunction{Or}{\NamedFunction{And}{\n{a}_1 , \n{b}_1 , \n{c}_1},\\ \NamedFunction{And}{a_1 , \mgreen{b_2} , \mgreen{c_2}},\\ \NamedFunction{And}{\mgreen{a_2} , b_1 , \mgreen{c_2}},\\ \NamedFunction{And}{\mgreen{a_2} , \mgreen{b_2} , c_1}}
 \end{align}
-and the CHSH inequality in \cref{eq:bellypolyunmapped} follows from the logical TSEM
-\begin{align}
- \NamedFunction{And}{\mgreen{a_1} , \mgreen{b_1} , \mgreen{x_1} , \mgreen{\n{x}_2}, \mgreen{y_1} ,  \mgreen{\n{y}_2}}
-\implies
-\NamedFunction{Or}{\NamedFunction{And}{\n{a}_2 , \mgreen{b_1} , \mgreen{x_1}, \mgreen{\n{x}_2} , \mgreen{y_1} , \mgreen{\n{y}_2}}\\
-\NamedFunction{And}{\mgreen{a_1} , \n{b}_2 , \mgreen{x_1} ,\mgreen{\n{x}_2},\mgreen{y_1},\mgreen{\n{y}_2}}\\
-\NamedFunction{And}{a_2 , b_2 , \mgreen{x_1}, \mgreen{\n{x}_2}, \mgreen{y_1}, \mgreen{\n{y}_2}}}
-\end{align}
-etc.
+%and the CHSH inequality in \cref{eq:bellypolyunmapped} follows from the logical TSEM
+%\begin{align}
+% \NamedFunction{And}{\mgreen{a_1} , \mgreen{b_1} , \mgreen{x_1} , \mgreen{\n{x}_2}, \mgreen{y_1} ,  \mgreen{\n{y}_2}}
+%\implies
+%\NamedFunction{Or}{\NamedFunction{And}{\n{a}_2 , \mgreen{b_1} , \mgreen{x_1}, \mgreen{\n{x}_2} , \mgreen{y_1} , \mgreen{\n{y}_2}}\\
+%\NamedFunction{And}{\mgreen{a_1} , \n{b}_2 , \mgreen{x_1} ,\mgreen{\n{x}_2},\mgreen{y_1},\mgreen{\n{y}_2}}\\
+%\NamedFunction{And}{a_2 , b_2 , \mgreen{x_1}, \mgreen{\n{x}_2}, \mgreen{y_1}, \mgreen{\n{y}_2}}}
+%\end{align}
+%etc.
 
 Generating TSEM inequalities is computationally much easier than performing the linear quantifier elimination, and we now outline how to do this. First, by symmetry we may assume that the left-hand side of the tautology contains only unnegated variables. Thus formally, the tautology consists of
 \[
@@ -1173,7 +1176,8 @@ Restricting one's search to TSEM inequalities makes deriving causal infeasibilit
 
 In order to make a TSEM inequality as compelling as possible one should ensure that every event on the left hand side is also referenced at least once on the right hand side. If one find a TSEM inequality lacking this property then one should tighten the inequalities by deleting any events which occur only on the left hand side. This preserves the tautology while increasing the probability of the left hand side.
 
-We note that the connection between classical propositional logic and linear inequalities has been used previously in the task of causal inference. We reiterate that inequalities resulting from propositional logic, however, are a subset of the inequalities that result from linear quantifier elimination. Consequently, linear quantifier elimination is the preferable tool for deriving inequalities whenever the elimination is computationally tractable. Noteworthy examples of works deriving causal infeasibility criteria via classical logic are \citet{Pitowsky1989} and \citet{Ghirardi08}: \cref{eq:trisimplestunmapped} here corresponds to Eq. (2-4) in Ref. \cite{Pitowsky1989}, and \cref{eq:bellcondeq} here corresponds to Eq. (30) in Ref. \cite{Ghirardi08}.
+We note that the connection between classical propositional logic and linear inequalities has been used previously in the task of causal inference. We reiterate that inequalities resulting from propositional logic, however, are a subset of the inequalities that result from linear quantifier elimination. Consequently, linear quantifier elimination is the preferable tool for deriving inequalities whenever the elimination is computationally tractable. Noteworthy examples of works deriving causal infeasibility criteria via classical logic are \citet{Pitowsky1989} and \citet{Ghirardi08}: \cref{eq:trisimplestunmapped} here corresponds to Eq. (2-4) in Ref. \cite{Pitowsky1989}%, and \cref{eq:bellcondeq} here corresponds to Eq. (30) in Ref. \cite{Ghirardi08}
+.
 
 
 
@@ -1236,8 +1240,8 @@ The most familiar such further constraints are the conditional independence rela
 We first define the notion of \tblue{exclusive ancestors}, because the usual notion of ancestors is inclusive, i.e. $\An{\bm{Z}}$ contains $\bm{Z}$. Let the exclusive ancestors of $\bm{Z}$ so that $\An{\setminus\bm{Z}}\coloneqq\An{\bm{Z}}\setminus\bm{Z}$. Next we define \tblue{conditioning a DAG} over $\bm{Z}$, i.e. $G_{\setminus\bm{Z}}$, which is formed by deleting any outgoing edges from $\bm{Z}$ in $G$. Conditional DAGs enable the definition of \tblue{conditional ancestors}, i.e. 
 \begin{align}
     \An[G]{\bm{X}|\bm{Z}}\coloneqq \begin{cases}
-    \An[G_{\setminus\bm{Z}}]{\bm{X}}& \text{if } \An[G_{\setminus\bm{Z}}]{\bm{X}} and \An[G]{\setminus\bm{Z}} are disjoint\\
-    \An[G_{\setminus\bm{Z}}]{\bm{X}} \bigcup \An[G]{\setminus\bm{Z}} & \text{if } \An[G_{\setminus\bm{Z}}]{\bm{X}} and \An[G]{\setminus\bm{Z}} overlap.
+    \An[G_{\setminus\bm{Z}}]{\bm{X}}& \text{if } \An[G_{\setminus\bm{Z}}]{\bm{X}}\text{ and }\An[G]{\setminus\bm{Z}}\text{ are disjoint}\\
+    \An[G_{\setminus\bm{Z}}]{\bm{X}} \bigcup \An[G]{\setminus\bm{Z}} & \text{if } \An[G_{\setminus\bm{Z}}]{\bm{X}}\text{ and } \An[G]{\setminus\bm{Z}}\text{ overlap.}
     \end{cases}
 \end{align}
 Finally, $\bm{X}$ and $\bm{Y}$ are $d$-separated by $\bm{Z}$ iff $\An[G]{\bm{X}|\bm{Z}}$ and $\An[G]{\bm{Y}|\bm{Z}}$ are disjoint.
@@ -1270,17 +1274,70 @@ Alternate: Logical Tautologies & Set-Theoretic Implications\newline (Partial Mar
 
 It is also possible to use a mixed strategy of linear and nonlinear quantifier elimination, such as \citet{ChavesPolynomial} advocates. The explicit results of Ref. \cite{ChavesPolynomial} are therefore consequences of any inflation DAG, achieved by applying a mixed quantifier elimination strategy.
 
-\medskip\item[\tred{Coinciding Marginal Distributions}] \noindent
+\clearpage\medskip\item[\tred{Coinciding Marginal Distributions}] \noindent
 \par\hspace{\parskip}
-Recall that the random variables in the inflated DAG are constructed to be copies of the original random variables. As such, it is possible that two distinct subgraphs of the inflated DAG may represent precisely the \emph{same} causal structure, if the two subgraphs are equivalent up to ``dummy index" of the copied variables. Moreover, some subgraphs of the inflated DAG are equivalent to subgraphs of the original DAG, in the same sense of equivalent. When two graphs are equivalent in this sense we call them \tblue{copy equivalent}. Note that this notion of copy equivalence is stronger than merely graph isomorphism: For two causal structures to be copy equivalent there must exist an isomorphism between the graphs such that every random variables is mapped to itself or a copy of itself. \purp{With expanded notation moved up front, this discussion should be trimmed.}
+By restricting our attention to inflation models we see that sometimes the distributions of different injectable sets coincide, i.e. 
+$\pdf{\bm{X}}=\pdf{\bm{Y}}$ whenever both $\bm{X}$ and $\bm{Y}$ are injectable, and $\subsim{\bm{X}}=\subsim{\bm{Y}}$. Sometimes sets of random variables which are \emph{not} injectable, however, can also be shown to have necessarily coinciding distributions. Coinciding (non-necessarily-injectable) marginal distributions among the inflation DAG variables is a consequence of \cref{eq:funcdepends}. For example, we can verify that $\pdf{A_1 A_2 B_1}=\pdf{A_1 A_2 B_2}$ follows from \cref{fig:Tri222}, even though $\brackets{A_1 A_2 B_1}=\brackets{A_1 A_2 B_2}$ are not injectable sets. Here we formalize this type of constraint more generally.
 
-Consider, now, two different subsets of observable random variables in the inflated DAG. Both subsets should be described by the same marginal probability distribution if the \tblue{ancestral subgraphs} of both sets are copy equivalent. We define the ancestral subgraph of a set of variables $\bm{V}$ to mean the subgraph of the causal structure containing $\bm{V}$'s complete causal history, i.e. $\NamedFunction{Ancestors}{\!\bm{V}\!}$. $\NamedFunction{Ancestors}{\!\bm{V}\!}$ refers to the set $\bm{V}$ along with any vertices that have a directed path to leading from them to $\bm{V}$. Thus the ancestral subgraph of $\bm{V}$ consists of the vertices $\NamedFunction{Ancestors}{\!\bm{V}\!}$ and all edges between them per the original graph. As an example: \cref{fig:Tri222} is the ancestral subgraph of \cref{fig:TriFullDouble} on the six observable variables $\{A_1 A_2 B_1 B_2 C_1 C_2\}$. The ancestral subgraph corresponding to observables $\brackets{A_1 B_2 C_1}$ is illustrated in \cref{fig:TriDagSubA1B2C1}. In contrast, the ancestral subgraph of $\brackets{A_1 B_1 C_1}$ is copy equivalent to \cref{fig:TriMainDAG}. When a set of variables admits partitioning into causally independent partitions, then the ancestral subgraph of that set will have unconnected components. An example of a multiple-components ancestral subgraph is \cref{fig:TriDagSubA2B1C2}, where ${A_2\,\bot\,\brackets{B_1 C_2}}$, as per \cref{eq:dfac222}.
+For any two nodes sets $\bm{X}$ and $\bm{Y}$ such that $\bm{X}\sim\bm{Y}$, there exists an \tblue{inflationary isomorphism} which related the two sets such that nodes in $\bm{X}$ are mapped bijectively to nodes in $\bm{Y}$ such that nodes are mapped to copies, i.e. $A_i\leftrightarrow A_i$ or $A_i\leftrightarrow A_j$ but never $A_i\leftrightarrow B_i$ nor  $A_i\leftrightarrow B_j$. There may exist multiple inflationary isomorphisms, for example the sets $\brackets{A_1 A_2 B_1}$ and $\brackets{A_1 A_2 B_2}$ can be related by either 
+\begin{align}
+    \begin{pmatrix}
+     A_1 \leftrightarrow A_1 \\
+     A_2 \leftrightarrow A_2 \\
+     B_1 \leftrightarrow B_2 \\
+    \end{pmatrix}
+    \qquad\text{or}\qquad
+    \begin{pmatrix}
+     A_1 \leftrightarrow A_2 \\
+     A_2 \leftrightarrow A_1 \\
+     B_1 \leftrightarrow B_2 \\
+    \end{pmatrix}
+\end{align}
+Two inflation DAGs $G'_1$ and $G'_2$ are said to be inflationarily isomorphic if there exists a graph isomorphism between them which is itself also an inflationary isomorphism. This occurs iff $G'_1\sim G'_2$.
+We say that one isomorphim \tblue{contains} another if the rule-set of the latter is a subset of the rule-set of the former.
+
+Now, consider an inflation DAG $G'$ and two sets of nodes $\bm{X}$ and $\bm{Y}$ such that not only $\bm{X}\sim\bm{Y}$ but also $\ansubgraph[G']{\bm{X}}\sim\ansubgraph[G']{\bm{Y}}$. If an inflationary isomorphism between $\ansubgraph[G']{\bm{X}}$ and $\ansubgraph[G']{\bm{Y}}$ \emph{contains} an inflationary isomorphism between $\bm{X}$ and $\bm{Y}$, then $\pdf{\bm{X}}=\pdf{\bm{Y}}$. In other words, $\pdf{\bm{X}}=\pdf{\bm{Y}}$ if and only if an inflationary graph isomorphism exists between $\ansubgraph[G']{\bm{X}}$ and $\ansubgraph[G']{\bm{Y}}$ which preserves the inflationary isomorphism between $\bm{X}$ and $\bm{Y}$.
+
+Coinciding ancestral subgraphs is not, by itself, a strong enough condition to justify coinciding distributions; rather the variables in question must play similar \emph{roles} in their coinciding ancestral subgraphs. To illustrate this, consider the inflation DAG in \cref{fig:ancestralsubgraphnotenough}. Both $\{X_1 Y_2 Z_1\}\sim\{X_1 Y_2 Z_2\}$ and $\ansubgraph[(\textrm{\cref{fig:ancestralsubgraphnotenough}})]{X_1 Y_2 Z_1}\sim\ansubgraph[(\textrm{\cref{fig:ancestralsubgraphnotenough}})]{X_1 Y_2 Z_2}$, but the graph isomorphism does not preserve the set isomorphism, so $\pdf{X_1 Y_2 Z_1}\neq\pdf{X_1 Y_2 Z_2}$
 
 
-In sum: If two sets of random variables, $\bm{S}$ and $\bm{T}$, are equivalent up to their dummy indices AND the ancestral subgraphs of $\bm{S}$ and $\bm{T}$ are copy equivalent, then $\pdf{\bm{S}}=\pdf{\bm{T}}$. By inspecting different ancestral subgraphs for copy equivalence we can establish perfect equivalence of various marginal distributions.
+\begin{figure}[H]
+    \centering
+    \begin{minipage}[t]{0.6\linewidth}      \centering
+    \includegraphics[scale=1]{instrumentalvariant.pdf}
+    \caption{An inflation DAG which illustrates why coinciding ancestral subgraphs don't necessarily imply coinciding distributions.}
+    \label{fig:ancestralsubgraphnotenough}
+    \end{minipage}
+\end{figure}
 
 
-\end{asparadesc}
+Constraints of this form be used to supplement the marginal problem without requiring nonlinear quantifier elimination, but they will not have \emph{impact} unless used with conditional independence relations and hence nonlinear quantifier elimination. \purp{Find a good way to explain why not? No impact of projected polytope because...}
+
+\end{asparadesc}\clearpage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \begin{comment}
