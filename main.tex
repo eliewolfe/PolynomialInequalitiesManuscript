@@ -261,7 +261,7 @@ anchorcolor=OliveGreen}
 
 
 %%%% Tobias: to mark my edits and stuff
-%\usepackage{showkeys}
+\usepackage{showkeys}
 \usepackage[draft]{fixme}
 \newcommand{\btob}{\color{OliveGreen}}
 \newcommand{\etob}{\color{black}}
@@ -1094,13 +1094,44 @@ Our current inflation DAG method can be employed to derive causal infeasibility 
 
 In the literature on Bell inequalities, it has been noticed that the infeasibility with the Bell scenario DAG can sometimes be witnessed by only consider which (joint) outcomes have zero probability and which ones have nonzero probability. In other words, instead of considering the probabilities of an outcome, it may sufficient to only contemplate their \emph{possibility}. This has been originally noticed by Hardy, and hence such possibilistic are also known as \tblue{Hardy-type paradoxes}.
 
-For example, suppose that in a scenario where the pairwise joint distributions of three variables $A$, $B$ and $C$ are given.
+For example, suppose that we are in a marginal scenario where the pairwise joint distributions of three variables $A$, $B$ and $C$ are given, and these two variables are binary with values in $\{0,1\}$. Then we have the implication
+\[
+	(A=0,C=1) \Longrightarrow (A=0,B=0) \lor (B=1,C=1),
+\]
+and using the union bound on the probabilities, this translates into the inequality
+\[
+	P_{AC}(01) \leq P_{AB}(00) + P_{BC}(11),
+\]
+which is therefore a necessary condition for the marginal problem to have a solution. Applying this together with the inflation technique to the Triangle scenario results precisely in our earlier inequality.
 
-\begin{itemize}
-	\item Classifying Hardy-type paradoxes amounts to enumerating the minimal transervals of a hypergraph, which is computationally relatively tractable.
-	\item Every Hardy-type paradox can be turned into an inequality at the level of probabilities.
-	\item Many of our inequalities can be obtained in this way.
-\end{itemize}
+We outline the general procedure using a slightly more sophisticated example. Consider the marginal scenario of~\cref{fig:simplicialcomplex222}, where the contexts are
+\begin{align*}
+	\{A_1 B_1 C_1\},\\
+	\{A_1 B_2 C_2\},\\
+	\{A_2 B_1 C_2\},\\
+	\{A_2 B_2 C_1\},\\
+	\{A_2 B_2 C_2\}.
+\end{align*}
+Now a possibilistic constraint on this marginal problem consists of a logical implication with one joint outcome as the implicant and a disjunction of joint outcomes as the conclusion (implicate?). In the following, we explain how to generate \emph{all} such implication which are tight in the sense that their right-hand sides are minimal. So let us fix some joint outcome as the left-hand side, taking
+\begin{equation}
+	\label{eq:lhshardy}
+	(A_2 = 1, B_2 = 1, C_2 = 1)
+\end{equation}
+for the sake of concreteness. Then assuming these values, the right-hand side of the implication needs to be a conjunction of joint outcomes which is such that for any deterministic assignment of values to the variables which extends~\cref{eq:lhshardy}, also one of the outcomes on the right-hand side occurs. To determine what the possibilities for choosing this right-hand side are, it helps to draw the hypergraph in which the set of nodes is the disjoint union of all the outcomes over all the contexts other than~\cref{eq:lhshardy}, and the hyperedges correspond to complete deterministic assignments of values to all variables extending~\cref{eq:lhshardy}, and such a hyperedge contains precisely those nodes that are the marginal outcomes to which it restricts. Then the possible right-hand sides of the implications are precisely the \tblue{transversals} of this hypergraph, i.e.~the sets of nodes which have the property that they intersect every hyperedge in at least one node. In order to get implications which are as tight as possible, it is sufficient to enumerate only the \tblue{minimal transversals}. Doing so is a well-studied problem for which various software suites exist. This enumeration, even for every possible left-hand side of the implication, is computationally much more tractable than the linear quantifier elimination.
+
+In our example, it is not hard to check that the right-hand side of
+\[
+	(A_2 = 1, B_2 = 1, C_2 = 1) \Longrightarrow (A_1 = 0, B_1 = 0, A_1 = 0) \lor (A_1 = 1, B_2 = 1, C_2 = 1) \lor (A_2 = 1, B_1 = 1, C_2 = 1) \lor (A_2 = 1, B_2 = 1, C_1 = 1)
+\]
+is such a minimal transversal: every assignment of values to all variables which extends the assignment on the left-hand side satisfies at least one of the terms on the right, but this ceases to hold as soon as one removes any one term on the right.
+
+Finally, we convert the implication into an inequality by replacing the implication itself by an inequality and the disjunctions by sums,
+\[
+	P_{A_2 B_2 C_2}(111) \leq P_{A_1 B_1 C_1}(000) + P_{A_1 B_2 C_2}(111) + P_{A_2 B_1 C_2}(111) + P_{A_2 B_2 C_1}(111).
+\]
+Applying this to our inflation DAG of~\cref{fig:Tri222} results again in one of our previous inequalities.
+
+Since also many Bell inequalities are of this form---such as the CHSH inequality which follows in this way from Hardy's original implication---we conclude that this still sufficiently powerful to generate plenty of interesting inequalities, and at the same time significantly easier to perform in practice than the full-fledged linear (let alone nonlinear) quantifier elimination.
 
 \section{Tautologies of the Supplemented Excluded Middle}\label{sec:TSEM}
 
