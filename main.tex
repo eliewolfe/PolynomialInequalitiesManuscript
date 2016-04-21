@@ -1126,87 +1126,13 @@ In our example, it is not hard to check that the right-hand side of
 \end{align*}
 is such a minimal transversal: every assignment of values to all variables which extends the assignment on the left-hand side satisfies at least one of the terms on the right, but this ceases to hold as soon as one removes any one term on the right.
 
-Finally, we convert the implication into an inequality by replacing the implication itself by an inequality and the disjunctions by sums,
+Finally, we convert the implication into an inequality by replacing ``$\Rightarrow$'' by ``$\leq$'' at the level of probabilities and the disjunctions by sums,
 \[
 	P_{A_2 B_2 C_2}(111) \leq P_{A_1 B_1 C_1}(000) + P_{A_1 B_2 C_2}(111) + P_{A_2 B_1 C_2}(111) + P_{A_2 B_2 C_1}(111).
 \]
-Applying this to our inflation DAG of~\cref{fig:Tri222} results again in one of our previous inequalities.
+Applying this to our inflation DAG of~\cref{fig:Tri222} results again in one of our previous inequalities,~\cref{eq:FritzF3}.
 
-Since also many Bell inequalities are of this form---such as the CHSH inequality which follows in this way from Hardy's original implication---we conclude that this still sufficiently powerful to generate plenty of interesting inequalities, and at the same time significantly easier to perform in practice than the full-fledged linear (let alone nonlinear) quantifier elimination.
-
-\section{Tautologies of the Supplemented Excluded Middle}\label{sec:TSEM}
-
-The process of linear quantifier elimination, while orders of magnitude more computationally amenable than its nonlinear variant, is nevertheless nontrivial. When the number of observable random variables in the inflation DAG is too large, it quickly happens that even the most advanced linear quantifier elimination algorithms become too slow for practical application. To this end we have developed a strategy that identifies only one particular class of inequalities for the marginal problem, but does so very efficiently. Using the inflation DAG technique, we can subsequently convert these into polynomial inequalities for causal inference.
-
-As it currently stands, the TSEM method applies to binary variables only, say with values in $\{0,1\}$. This is what we assume from now on.
-
-In this approach we construct polynomial inequalities corresponding to some tautology of the excluded middle (TEM). In classical logic, the TEM refers to that self-evident truism that every proposition is either true or false, and hence 
-\begin{align}
-\mathsf{True} \iff \NamedFunction{Or}{ A\cramp{=}a , A\cramp{\neq}a }\,.
-\end{align}
-Note that we treat statistical events such as random variables yielding particular outcomes as identically logical propositions. The TEM can also be supplemented with certain ``givens", which we take to be known-true propositions on the left-hand-side. These ``givens" can then be interspersed throughout the right-hand side while still yielding a valid tautology. Thus
-\begin{align}\label{eq:TSEMdemo}
-\NamedFunction{And}{ \mgreen{a} , \mgreen{b} }
-\implies 
-\NamedFunction{Or}{
-    \NamedFunction{And}{ \mgreen{a} , c } ,\\
-    \NamedFunction{And}{ \mgreen{b} , \n{c} }
-}
-\end{align}
-is an example of a tautology of the \emph{supplemented} excluded middle (T\emph{S}EM). For pedagogical clarity we color and bold the ``given" outcomes on both sides of the tautology.
-
-Every TSEM can be converted into a linear inequality by virtue of two connections between classical logical and probability:
-\begin{compactenum}
-\item As the antecedent always implies the consequent, the probability of the antecedent is necessarily less-than-or-equal-to the probability of the consequent. If $j \cramp{\scriptstyle \implies} k$ then $\p{j}\leq\p{k}$.
-\item The probability of a disjunction of events is less-than-or-equal-to the sum of the probabilities of the individual events, i.e. ${\p{j\lor k}=\p{j}+\p{k}-\p{j,k}\leq \p{j}+\p{k}}$.
-\end{compactenum}
-The inequality which would correspond to the TSEM in \cref{eq:TSEMdemo} is 
-\begin{align}
-    \p{a b} \leq \p{a c}+\p{b \n{c}}\,.
-\end{align}
-
-TSEM inequalities can be used as necessary constraints for the solvability of the marginal problem. As such, we can combine them with the inflation DAG technique in order to obtain polynomial inequalities for causal inference. For example the TSEM inequality
-\begin{align}
-    \p{a_2 b_1} \leq \p{a_2 b_1}+\p{\n{b}_1 c_1}
-\end{align}
-applied to our inflation of the Triangle scenario would imply the causal infeasibility criterion  
-\begin{align}
-    \p{a}\p{c} \leq \p{a b}+\p{\n{b} c}
-\end{align}
-pursuant to \cref{fig:TriDagSubA2B1C1}.
-
-In fact, many of the polynomial inequalities of this paper are TSEM inequalities; for example, the Triangle scenario inequality \cref{eq:trifancyunmapped} corresponds to the logical TSEM
-\begin{align}
-    \NamedFunction{And}{\mgreen{a_2} , \mgreen{b_2} , \mgreen{c_2}}\implies 
-\NamedFunction{Or}{\NamedFunction{And}{\n{a}_1 , \n{b}_1 , \n{c}_1},\\ \NamedFunction{And}{a_1 , \mgreen{b_2} , \mgreen{c_2}},\\ \NamedFunction{And}{\mgreen{a_2} , b_1 , \mgreen{c_2}},\\ \NamedFunction{And}{\mgreen{a_2} , \mgreen{b_2} , c_1}}
-\end{align}
-%and the CHSH inequality in \cref{eq:bellypolyunmapped} follows from the logical TSEM
-%\begin{align}
-% \NamedFunction{And}{\mgreen{a_1} , \mgreen{b_1} , \mgreen{x_1} , \mgreen{\n{x}_2}, \mgreen{y_1} ,  \mgreen{\n{y}_2}}
-%\implies
-%\NamedFunction{Or}{\NamedFunction{And}{\n{a}_2 , \mgreen{b_1} , \mgreen{x_1}, \mgreen{\n{x}_2} , \mgreen{y_1} , \mgreen{\n{y}_2}}\\
-%\NamedFunction{And}{\mgreen{a_1} , \n{b}_2 , \mgreen{x_1} ,\mgreen{\n{x}_2},\mgreen{y_1},\mgreen{\n{y}_2}}\\
-%\NamedFunction{And}{a_2 , b_2 , \mgreen{x_1}, \mgreen{\n{x}_2}, \mgreen{y_1}, \mgreen{\n{y}_2}}}
-%\end{align}
-%etc.
-
-Generating TSEM inequalities is computationally much easier than performing the linear quantifier elimination, and we now outline how to do this. First, by symmetry we may assume that the left-hand side of the tautology contains only unnegated variables. Thus formally, the tautology consists of
-\[
-	\bm{L} \quad\Longrightarrow\quad (\bm{A}_1,\bm{B}_1)\lor\ldots\lor(\bm{A}_n,\bm{B}_n),
-\]
-where each of these sets is a simplex in the simplicial complex that describes the marginal problem. In logical term, 
-
-
-%A practical alternative to \cref{sec:mainalgorithm}, then, is the four-step process
-%\begin{compactenum}
-%\item Generate TSEM inequalities on the inflation DAG.
-%\item Factor the probabilities (same as \cref{step:fac} in \cref{sec:mainalgorithm}).
-%\item Map as many probabilities to the original DAG as possible (same as \cref{step:findmap} in \cref{sec:mainalgorithm}).
-%\item Discard any remaining inequalities which involve unmappable gedankenprobabilities.
-%\end{compactenum}
-Restricting one's search to TSEM inequalities makes deriving causal infeasibility criteria tractable even for large DAGs, but a consequence, however, is that only one class of possible inequalities is being considered.
-
-In order to make a TSEM inequality as compelling as possible one should ensure that every event on the left hand side is also referenced at least once on the right hand side. If one find a TSEM inequality lacking this property then one should tighten the inequalities by deleting any events which occur only on the left hand side. This preserves the tautology while increasing the probability of the left hand side.
+Since also many Bell inequalities are of this form---such as the CHSH inequality which follows in this way from Hardy's original implication---we conclude that this method is still sufficiently powerful to generate plenty of interesting inequalities, and at the same time significantly easier to perform in practice than the full-fledged linear (let alone nonlinear) quantifier elimination.
 
 We note that the connection between classical propositional logic and linear inequalities has been used previously in the task of causal inference. We reiterate that inequalities resulting from propositional logic, however, are a subset of the inequalities that result from linear quantifier elimination. Consequently, linear quantifier elimination is the preferable tool for deriving inequalities whenever the elimination is computationally tractable. Noteworthy examples of works deriving causal infeasibility criteria via classical logic are \citet{Pitowsky1989} and \citet{Ghirardi08}: \cref{eq:trisimplestunmapped} here corresponds to Eq. (2-4) in Ref. \cite{Pitowsky1989}%, and \cref{eq:bellcondeq} here corresponds to Eq. (30) in Ref. \cite{Ghirardi08}
 .
@@ -1228,21 +1154,21 @@ We note that the connection between classical propositional logic and linear ine
 %}
 
 %\begin{spacing}{2.0}
-Our main contribution is a new way of deriving causal infeasibility criteria, namely the inflation DAG approach. An inflation DAG naturally carries inflation models, and the existence of an implies nonlinear hybrid inequalities, i.e. containing gedankenprobabilities, which implicitly constrain the set of distribution consistent with the original causal structure. If desirable, one can further eliminate the gedankenprobabilities via quantifier elimination. Polynomial inequalities can be obtained through linear elimination techniques.
+Our main contribution is a new way of deriving causal infeasibility criteria, namely the inflation DAG approach. An inflation DAG naturally carries inflation models, and the existence of an inflation model implies inequalities, containing gedankenprobabilities, which implicitly constrain the set of distribution consistent with the original causal structure. If desirable, one can further eliminate the gedankenprobabilities via quantifier elimination. Polynomial inequalities can be obtained through \emph{linear} elimination techniques, or through further relaxation to purely \emph{possibilistic} constraints.
 
-These inequalities are necessary conditions on a joint distribution to be explained by the causal structure. We currently do not know to what extent they can also be considered sufficient, and there is somewhat conflicting evidence: as we have seen, the inflation DAG approach reproduces all Bell inequalities; but on the other hand, we have not been able to use it to rederive Pearl's instrumental inequality, although the instrumental scenario also contains only one latent node. By excluding the W-type distribution on the Triangle scenario, we have seen that our polynomial inequalities are stronger than entropic inequalities at least sometimes.
+These inequalities are necessary conditions on a joint distribution to be explained by the causal structure. We currently do not know to what extent they can also be considered sufficient, and there is somewhat conflicting evidence: as we have seen, the inflation DAG approach reproduces all Bell inequalities; but on the other hand, we have not been able to use it to rederive Pearl's instrumental inequality, although the instrumental scenario also contains only one latent node. By excluding the W-type distribution on the Triangle scenario, we have seen that our polynomial inequalities are stronger than entropic inequalities in at least some cases.
 % yet just how strong they are is still unclear. A distribution might satisfy all our polynomial inequalities and yet not be realizable from the causal structure. %What would such superficially-feasible distributions look like? Are inflation DAG inequalities ever tight? 
 % Our methods yields tight causal infeasibility criteria for Bell scenarios, but those scenarios are exceptional in that the sets of realizable distributions form a convex polytope.
 
-The most elementary of all causal infeasibility criteria are the conditional independence (CI) relations. Our method explicitly incorporates all marginal independence relations implied by a causal structure. We have found that generic CI relations also appear to be implied by our polynomial inequalities. In future research we hope to clarify the process through which CI relations are manifested as properties of the inflation DAG.
+The most elementary of all causal infeasibility criteria are the conditional independence (CI) relations. Our method explicitly incorporates all marginal independence relations implied by a causal structure. We have found that some CI relations also appear to be implied by our polynomial inequalities. In future research we hope to clarify the process through which CI relations are manifested as properties of the inflation DAG.
 
 A single causal structure has unlimited potential inflations. Selecting a good inflation from which strong polynomial inequalities can be derived is an interesting challenge. To this end, it would be desirable to understand how particular features of the original causal structure are exposed when different nodes in the DAG are duplicated. By isolating which features are exposed in each inflation, we could conceivably quantify the causal inference strength of each inflation. In so doing, we might find that inflated DAGs beyond a certain level of variable duplication need not be considered. The multiplicity beyond which further inflation is irrelevant may be related to the maximum degree of those polynomials which tightly characterize a causal scenario. Presently, however, it is not clear how to upper bound either number.
 
 %that one inflation DAG is or is not ``stronger" than another? Can we upper bound the maximum dimension of those polynomials which in-principle tightly characterize a given causal structure? A ``yes" answer to any of the aformentioned questions means that that perhaps inflation DAGs beyond a certain level of complexity need not be considered. These remain open questions, however.
 
-Our method turns the quantum no-broadcasting theorem \cite{NoCloningQuantum1996,NoCloningGeneral2006} on its head by emphasizing that classical hidden variables \emph{can}, in-principle, be cloned. The possibility of classical cloning motivates the inflation DAG method, and underpins the implied causal infeasibility criteria. We have speculated about generalizing our method to obtain causal infeasibility criteria that constitute necessary constraints even for \emph{quantum} causal scenarios, a common desideratum in recent works \cite{fritz2012bell,pusey2014gdag,Chaves2015infoquantum,ChavesNoSignalling,BeyondBellII}. It would be enlightening to understand the extent to which our (classical) polynomial inequalities are violated in quantum theory. A variety of techniques exist for estimating the amount by which a Bell inequality \cite{NPA2008Long,I3322NPA1} is violated in quantum theory, but finding the quantum violation of one of our \emph{polynomial} inequalities looks like a more challenging task.
+Our method turns the quantum no-broadcasting theorem \cite{NoCloningQuantum1996,NoCloningGeneral2006} on its head by crucially relying on the fact that classical hidden variables \emph{can} be cloned. The possibility of classical cloning motivates the inflation DAG method, and underpins the implied causal infeasibility criteria. We have speculated about generalizing our method to obtain causal infeasibility criteria that constitute necessary constraints even for \emph{quantum} causal scenarios, a common desideratum in recent works \cite{fritz2012bell,pusey2014gdag,Chaves2015infoquantum,ChavesNoSignalling,BeyondBellII}. It would be enlightening to understand the extent to which our (classical) polynomial inequalities are violated in quantum theory. A variety of techniques exist for estimating the amount by which a Bell inequality \cite{NPA2008Long,I3322NPA1} is violated in quantum theory, but even finding a quantum violation of one of our \emph{polynomial} inequalities presents a new task for which we currently lack a systematic approach.
 
-The difference between classical ontic-state duplication and quantum no-broadcasting makes the inequalities that result from our consideration to be especially suited for distinguishing the set of quantum-realizable distributions from its subset of classically-realizable distributions. Causal infeasibility criteria that are sensitive to the classical-quantum distinction are precisely the sort of generalizations of the Bell inequalities which are sought after, in order to study the quantum features of generalized causal scenarios. Entropic inequalities have been lacking in this regard \cite{fritz2012bell,pusey2014gdag,Chaves2015infoquantum}, and the inflation DAG considerations proposed here constitute a significant alternative strategy.
+The difference between classical ontic-state duplication and quantum no-broadcasting makes the inequalities that result from our consideration to be especially suited for distinguishing the set of quantum-realizable distributions from its subset of classically-realizable distributions. Causal infeasibility criteria that are sensitive to the classical-quantum distinction are precisely the sort of generalizations of the Bell inequalities which are sought after, in order to study the quantum features of generalized causal scenarios. Entropic inequalities have been lacking in this regard \cite{fritz2012bell,pusey2014gdag,Chaves2015infoquantum}, and the inflation DAG considerations proposed here constitute an alternative strategy that holds some promise.
 %\end{spacing}
 
 
@@ -1262,44 +1188,48 @@ Research at Perimeter Institute is supported by the Government of Canada through
 \setcounter{equation}{0}
 
 \section{Nonlinear Quantifier Elimination Approach}\label{sec:nonlinearelimination}
-In the main text we considered deriving constraints on the pre-injectable sets via the marginal problem. There are further implications in the inflation DAG, however, which can be leveraged to further constrain the marginal distributions consisted with the inflation DAG.
+
+In the main text we considered deriving constraints on the marginal distributions on pre-injectable sets via the marginal problem. There are further constraints in the inflation DAG, however, which can be leveraged to further constrain the marginal distributions consisted with the inflation DAG.
 
 \begin{asparadesc}
 \medskip\item[\tred{Conditional Independence Relations}] \noindent
 \par\hspace{\parskip} 
-The most familiar such further constraints are the conditional independence relations relating observable variables in the inflation DAG. Conditional independence relations are inferred by $d$-separation; if $\bm{X}$ and $\bm{Y}$ are $d$-separated in the (inflation) DAG by $\bm{Z}$, then we infer $\bm{X}\bot\bm{Y}|\bm{Z}$. The $d$-separation criterion is explained at length in Refs. \cite{pearl2009causality,studeny2005probabilistic,WoodSpekkens,pusey2014gdag}, we present it only informally here.
+The most familiar such further constraints are the conditional independence relations relating observable variables in the inflation DAG. Conditional independence relations are inferred by $d$-separation; if $\bm{X}$ and $\bm{Y}$ are $d$-separated in the (inflation) DAG by $\bm{Z}$, then we infer the conditional independence $\bm{X}\bot\bm{Y}|\bm{Z}$. The $d$-separation criterion is explained at length in~\cite{pearl2009causality,studeny2005probabilistic,WoodSpekkens,pusey2014gdag}, and therefore we present it only very briefly here.
 
-We first define the notion of \tblue{exclusive ancestors}, because the usual notion of ancestors is inclusive, i.e. $\An{\bm{Z}}$ contains $\bm{Z}$. Let the exclusive ancestors of $\bm{Z}$ so that $\An{\setminus\bm{Z}}\coloneqq\An{\bm{Z}}\setminus\bm{Z}$. Next we define \tblue{conditioning a DAG} over $\bm{Z}$, i.e. $G_{\setminus\bm{Z}}$, which is formed by deleting any outgoing edges from $\bm{Z}$ in $G$. Conditional DAGs enable the definition of \tblue{conditional ancestors}, i.e. 
+% We first define the notion of \tblue{exclusive ancestors}, because the usual notion of ancestors is inclusive, i.e. $\An{\bm{Z}}$ contains $\bm{Z}$. Let the exclusive ancestors of $\bm{Z}$ be given by $\An{\setminus\bm{Z}}\coloneqq\An{\bm{Z}}\setminus\bm{Z}$.
+Next we define 
+% \tblue{conditioning a DAG} over $\bm{Z}$, i.e. $G_{\setminus\bm{Z}}$, which is formed by deleting any outgoing edges from $\bm{Z}$ in $G$. Conditional DAGs enable the definition of
+the notion of \tblue{conditional ancestors} for a set of nodes $\bm{X}$ relative to a set $\bm{Z}$ which is disjoint from $X$ as
 \begin{align}
     \An[G]{\bm{X}|\bm{Z}}\coloneqq \begin{cases}
-    \An[G_{\setminus\bm{Z}}]{\bm{X}}& \text{if } \An[G_{\setminus\bm{Z}}]{\bm{X}}\text{ and }\An[G]{\setminus\bm{Z}}\text{ are disjoint}\\
-    \An[G_{\setminus\bm{Z}}]{\bm{X}} \bigcup \An[G]{\setminus\bm{Z}} & \text{if } \An[G_{\setminus\bm{Z}}]{\bm{X}}\text{ and } \An[G]{\setminus\bm{Z}}\text{ overlap.}
+	    \An[G\setminus\bm{Z}]{\bm{X}}& \text{if } \An[G\setminus\bm{Z}]{\bm{X}}\text{ and }\An[G]{\bm{Z}}\setminus\bm{Z}\text{ are disjoint},\\
+	    \An[G\setminus\bm{Z}]{\bm{X}} \bigcup \An[G]{\bm{Z}}\setminus\bm{Z} & \text{if } \An[G\setminus\bm{Z}]{\bm{X}}\text{ and } \An[G]{\bm{Z}}\setminus\bm{Z}\text{ overlap.}
     \end{cases}
 \end{align}
-Finally, $\bm{X}$ and $\bm{Y}$ are $d$-separated by $\bm{Z}$ iff $\An[G]{\bm{X}|\bm{Z}}$ and $\An[G]{\bm{Y}|\bm{Z}}$ are disjoint.
+Then $\bm{X}$ and $\bm{Y}$ are $d$-separated by $\bm{Z}$ iff $\An[G]{\bm{X}|\bm{Z}}$ and $\An[G]{\bm{Y}|\bm{Z}}$ are disjoint.
 
-Every conditional independence relation can be translated into a nonlinear constraint on probabilities, as $\bm{X}\bot\bm{Y}|\bm{Z}$ implies $\p{\bm{x}\bm{y}|\bm{z}}=\p{\bm{x}|\bm{z}}\p{\bm{y}|\bm{z}}$ for all $\bm{x}$, $\bm{y}$, and $\bm{z}$. As we generally prefer to work with unconditional probabilities, we summarize as follows: If $\bm{X}$ and $\bm{Y}$ are $d$-separated by $\bm{Z}$ then $\p{\bm{x}\bm{y}\bm{z}}\p{\bm{z}}=\p{\bm{x}\bm{z}}\p{\bm{y}\bm{z}}$ for all $\bm{x}$, $\bm{y}$, and $\bm{z}$. Such nonlinear constraints can be incorporated as restrictions on distributions consistent with the inflation DAG, supplementing the more trivial marginal-problem type constraints, and hence implicitly further constraining the injectable sets. Nonlinear quantifier elimination can then be used to make the implied constraints explicit.
+Every conditional independence relation can be translated into a nonlinear constraint on probabilities, as $\bm{X}\bot\bm{Y}|\bm{Z}$ implies $\p{\bm{x}\bm{y}|\bm{z}}=\p{\bm{x}|\bm{z}}\p{\bm{y}|\bm{z}}$ for all $\bm{x}$, $\bm{y}$, and $\bm{z}$. As we generally prefer to work with unconditional probabilities, we rewrite this as follows: If $\bm{X}$ and $\bm{Y}$ are $d$-separated by $\bm{Z}$, then $\p{\bm{x}\bm{y}\bm{z}}\p{\bm{z}}=\p{\bm{x}\bm{z}}\p{\bm{y}\bm{z}}$ for all $\bm{x}$, $\bm{y}$, and $\bm{z}$. Such nonlinear constraints can be incorporated as restrictions on distributions consistent with the inflation DAG, supplementing the basic nonnegativity of probability constraints as we used them in~\cref{sec:ineqs}. Hence this additional constraints may impose further constrains on the distributions over the pre-injectable sets. Nonlinear quantifier elimination can then be used to determine the constraints at the level of the distribution on the original DAG, again by constraining the distributions on pre-injectables on the inflation DAG and applying~\cref{eq:preinjfactor}.
 
 Many modern computer algebra systems have functions capable of tackling nonlinear quantifier elimination symbolically\footnote{For example \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://reference.wolfram.com/language/ref/Resolve.html}{\texttt{Resolve}} command, \textit{Redlog}'s \href[pdfnewwindow]{http://www.redlog.eu/documentation/reals/rlqe.php}{\texttt{rlposqe}}, or \textit{Maple$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://maplesoft.com/support/help/Maple/view.aspx?path=RegularChains/SemiAlgebraicSetTools/RepresentingQuantifierFreeFormula}{\texttt{RepresentingQuantifierFreeFormula}}, etc.}. 
 %One might then hope to use such software systems to rid the hybrid inequalities of the gedankenprobabilities. 
-Currently, however, it is not practical to perform nonlinear quantifier elimination on large polynomial systems with many quantifiers. Nevertheless, the nonlinear constraints can be easily accounted for numerically. Upon substituting numeric values for all the injectable probabilities the former quantifier elimination problem is converted to a universal quantifier existence problem: Do there exist gedankenprobabilities that satisfy the full set of linear and nonlinear constraints? Most computer algebra systems can resolve such \emph{satisfiability} questions quite rapidly\footnote{For example \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$} \href[pdfnewwindow]{http://reference.wolfram.com/language/Experimental/ref/ExistsRealQ.html}{\texttt{Reduce\`{}ExistsRealQ}} function. Specialized satisfiability software such as SMT-LIB's \href[pdfnewwindow]{http://smtlib.cs.uiowa.edu/solvers.shtml}{\texttt{check-sat}} \cite{BarFT-SMTLIB} are particularly apt for this purpose.
+Currently, however, it is not practical to perform nonlinear quantifier elimination on large polynomial systems with many quantifiers. Nevertheless, the nonlinear constraints can be easily accounted for numerically. Upon substituting numerical values for all the injectable probabilities, the former quantifier elimination problem is converted to a universal quantifier existence problem: Do there exist gedankenprobabilities that satisfy the full set of linear and nonlinear constraints? Most computer algebra systems can resolve such \emph{satisfiability} questions quite rapidly\footnote{For example \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$} \href[pdfnewwindow]{http://reference.wolfram.com/language/Experimental/ref/ExistsRealQ.html}{\texttt{Reduce\`{}ExistsRealQ}} function. Specialized satisfiability software such as SMT-LIB's \href[pdfnewwindow]{http://smtlib.cs.uiowa.edu/solvers.shtml}{\texttt{check-sat}} \cite{BarFT-SMTLIB} are particularly apt for this purpose.
 %One can also exploit the fact than any nonlinear optimizer will return an error when a set of constraints cannot be satisfied. Nonlinear optimizers include \textit{Maple$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://www.maplesoft.com/support/help/Maple/view.aspx?path=Optimization/NLPSolveMatrixForm}{\texttt{NLPSolve}}, \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://reference.wolfram.com/language/ref/message/NMinimize/nsol.html}{\texttt{NMinimize}}, and dozens of free and commercial optimizers for \href[pdfnewwindow]{http://ampl.com/products/solvers/all-solvers-for-ampl}{\textit{AMPL}} and/or \href[pdfnewwindow]{https://neos-server.org/neos/solvers/index.html\#nco}{\textit{GAMS}}
 }.
 
-\begin{table*}[ht]\centering\caption{A comparison of different approaches constraining the pre-injectable sets. The primary divide is quantifier elimination versus quantifier existence, with approaches being further subdivided into linear and nonlinear variants.}
+\begin{table*}[ht]\centering\caption{A comparison of different approaches for constraining the distributions on the pre-injectable sets. The primary divide is quantifier elimination versus satisfiability, with approaches being further subdivided into linear and nonlinear variants.}
 \begin{tabularx}{\linewidth}{ |l|L|c|L| } 
 \hline
 Approach & Also Known As & Difficulty & End Results \\
 \bottomrule
-Nonlinear Quantifier Elimination & Resolving Partial Existential Closure & Very Hard & Polynomial Inequalities \\
+Nonlinear Quantifier Elimination & Resolving Partial Existential Closure & Very Hard & Polynomial Inequalities (tightest) \\
 \hline
-Nonlinear Quantifier Satisfiability & Universal Existential Closure,\newline Nonlinear Programming & Easy & Witness infeasibility for a specific distribution \\
+Nonlinear Satisfiability & Universal Existential Closure,\newline Nonlinear Programming & Easy & Witness infeasibility for a specific distribution \\
 \hline
-Linear Quantifier Elimination & Polytope Projection\newline (Full Marginal Problem) & Moderate & Polynomial Inequalities \\
+Linear Quantifier Elimination & Polytope Projection\newline (Full Marginal Problem) & Moderate & Polynomial Inequalities (less tight) \\
 \hline
-Linear Quantifier Satisfiability & Linear Programming,\newline Universal Existential Closure & Very Easy & Witness infeasibility for a specific distribution \\
+Linear Satisfiability & Linear Programming,\newline Universal Existential Closure & Very Easy & Witness infeasibility for a specific distribution \\
 \hline
-Alternate: Logical Tautologies & Set-Theoretic Implications\newline (Partial Marginal Problem) & Easy & Polynomial Inequalities 
+Possibilistic Constraints & Set-Theoretic Implications\newline (Partial Marginal Problem) & Easy & Polynomial Inequalities (least tight)
 \\\toprule
 \end{tabularx}
 \end{table*}
