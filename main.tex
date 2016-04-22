@@ -1238,10 +1238,11 @@ It is also possible to use a mixed strategy of linear and nonlinear quantifier e
 
 \clearpage\medskip\item[\tred{Coinciding Marginal Distributions}] \noindent
 \par\hspace{\parskip}
-By restricting our attention to inflation models we see that sometimes the distributions of different injectable sets coincide, i.e. 
-$\pdf{\bm{X}}=\pdf{\bm{Y}}$ whenever both $\bm{X}$ and $\bm{Y}$ are injectable, and $\subsim{\bm{X}}=\subsim{\bm{Y}}$. Sometimes sets of random variables which are \emph{not} injectable, however, can also be shown to have necessarily coinciding distributions. Coinciding (non-necessarily-injectable) marginal distributions among the inflation DAG variables is a consequence of \cref{eq:funcdepends}. For example, we can verify that $\pdf{A_1 A_2 B_1}=\pdf{A_1 A_2 B_2}$ follows from \cref{fig:Tri222}, even though $\brackets{A_1 A_2 B_1}=\brackets{A_1 A_2 B_2}$ are not injectable sets. Here we formalize this type of constraint more generally.
+By restricting our attention to inflation models, we see that sometimes the distributions of different injectable sets coincide, i.e. $\pdf{\bm{X}}=\pdf{\bm{Y}}$ whenever both $\bm{X}$ and $\bm{Y}$ are injectable, and $\subsim{\bm{X}}=\subsim{\bm{Y}}$. Sometimes sets of random variables which are \emph{not} injectable, however, can also be shown to have necessarily coinciding distributions. Coinciding (not necessarily injectable) marginal distributions among the inflation DAG variables is a consequence of \cref{eq:funcdepends}. For example, we can verify that $\pdf{A_1 A_2 B_1}=\pdf{A_1 A_2 B_2}$ follows from \cref{fig:Tri222}, even though $\brackets{A_1 A_2 B_1}$ and $\brackets{A_1 A_2 B_2}$ are not injectable sets. Here we formalize this type of constraint more generally.
 
-For any two nodes sets $\bm{X}$ and $\bm{Y}$ such that $\bm{X}\sim\bm{Y}$, there exists an \tblue{inflationary isomorphism} which relates the two sets such that nodes in $\bm{X}$ are mapped bijectively to nodes in $\bm{Y}$ such that nodes are mapped to copies, i.e. $A_i\leftrightarrow A_i$ or $A_i\leftrightarrow A_j$ but never $A_i\leftrightarrow B_i$ nor  $A_i\leftrightarrow B_j$. There may exist multiple inflationary isomorphisms, for example the sets $\brackets{A_1 A_2 B_1}$ and $\brackets{A_1 A_2 B_2}$ can be related by either 
+We call two sets of observable nodes $\bm{X}$ and $\bm{Y}$ \tblue{inflationarily isomorphic} if there exists an isomorphism $\ansubgraph[G']{\bm{X}}\sim\ansubgraph[G']{\bm{Y}}$ which has the additional property that it takes $\bm{X}$ itself bijectively to $\bm{Y}$. For example in~\cref{fig:Tri222}, the sets $\bm{X}=\{A_1 A_2 B_1\}$ and $\bm{Y}=\{A_1 A_2 B_2\}$ are inflationarily isomorphic. Then 
+
+In general there may exist multiple inflationary isomorphisms, for example the sets $\brackets{A_1 A_2 B_1}$ and $\brackets{A_1 A_2 B_2}$ can be related by either 
 \begin{align}
     \begin{pmatrix}
      A_1 \leftrightarrow A_1 \\
@@ -1255,13 +1256,12 @@ For any two nodes sets $\bm{X}$ and $\bm{Y}$ such that $\bm{X}\sim\bm{Y}$, there
      B_1 \leftrightarrow B_2 \\
     \end{pmatrix}
 \end{align}
-Two inflation DAGs $G'_1$ and $G'_2$ are said to be inflationarily isomorphic if there exists a graph isomorphism between them which is itself also an inflationary isomorphism. This occurs iff $G'_1\sim G'_2$.
-We say that one isomorphim \tblue{contains} another if the rule-set of the latter is a subset of the rule-set of the former.
+% Two inflation DAGs $G'_1$ and $G'_2$ are said to be inflationarily isomorphic if there exists a graph isomorphism between them which is itself also an inflationary isomorphism. This occurs iff $G'_1\sim G'_2$.
+% We say that one isomorphim \tblue{contains} another if the rule-set of the latter is a subset of the rule-set of the former.
 
-Now, consider an inflation DAG $G'$ and two sets of nodes $\bm{X}$ and $\bm{Y}$ such that not only $\bm{X}\sim\bm{Y}$ but also $\ansubgraph[G']{\bm{X}}\sim\ansubgraph[G']{\bm{Y}}$. If an inflationary isomorphism between $\ansubgraph[G']{\bm{X}}$ and $\ansubgraph[G']{\bm{Y}}$ \emph{contains} an inflationary isomorphism between $\bm{X}$ and $\bm{Y}$, then $\pdf{\bm{X}}=\pdf{\bm{Y}}$. In other words, $\pdf{\bm{X}}=\pdf{\bm{Y}}$ if and only if an inflationary graph isomorphism exists between $\ansubgraph[G']{\bm{X}}$ and $\ansubgraph[G']{\bm{Y}}$ which preserves the inflationary isomorphism between $\bm{X}$ and $\bm{Y}$.
+Now, consider an inflation DAG $G'$ and two sets of nodes $\bm{X}$ and $\bm{Y}$ such that not only $\bm{X}\sim\bm{Y}$ but also $\ansubgraph[G']{\bm{X}}\sim\ansubgraph[G']{\bm{Y}}$. If an inflationary isomorphism between $\ansubgraph[G']{\bm{X}}$ and $\ansubgraph[G']{\bm{Y}}$ \emph{contains} an inflationary isomorphism between $\bm{X}$ and $\bm{Y}$, then $\pdf{\bm{X}}=\pdf{\bm{Y}}$. In other words, $\pdf{\bm{X}}=\pdf{\bm{Y}}$ if and only if an inflationary graph isomorphism exists between $\ansubgraph[G']{\bm{X}}$ and $\ansubgraph[G']{\bm{Y}}$ which preserves the inflationary isomorphism between $\bm{X}$ and $\bm{Y}$. Then we can conclude that $P(\bm{X}) = P(\bm{Y})$ in any inflation model.
 
-Coinciding ancestral subgraphs is not, by itself, a strong enough condition to justify coinciding distributions; rather the variables in question must play similar \emph{roles} in their coinciding ancestral subgraphs. To illustrate this, consider the inflation DAG in \cref{fig:ancestralsubgraphnotenough}. Both $\{X_1 Y_2 Z_1\}\sim\{X_1 Y_2 Z_2\}$ and $\ansubgraph[(\textrm{\cref{fig:ancestralsubgraphnotenough}})]{X_1 Y_2 Z_1}\sim\ansubgraph[(\textrm{\cref{fig:ancestralsubgraphnotenough}})]{X_1 Y_2 Z_2}$, but the graph isomorphism does not preserve the set isomorphism, so $\pdf{X_1 Y_2 Z_1}\neq\pdf{X_1 Y_2 Z_2}$
-
+Coinciding ancestral subgraphs is not, by itself, a strong enough condition to justify coinciding distributions; rather the variables in question must play similar \emph{roles} in their coinciding ancestral subgraphs. To illustrate this, consider the inflation DAG in \cref{fig:ancestralsubgraphnotenough}. We have $\ansubgraph[(\textrm{\cref{fig:ancestralsubgraphnotenough}})]{X_1 Y_2 Z_1}\sim\ansubgraph[(\textrm{\cref{fig:ancestralsubgraphnotenough}})]{X_1 Y_2 Z_2}$, since both of these ancestral subgraphs are the entire DAG. But there is no isomorphism which in addition takes $\{X_1 Y_1 Z_1\}$ to $\{X_1 Y_2 Z_2\}$, since the induced subgraphs on these two nodes are different, and therefore $\{X_1 Y_1 Z_1\}\not\sim\{X_1 Y_2 Z_2\}$.
 
 \begin{figure}[H]
     \centering
@@ -1272,8 +1272,7 @@ Coinciding ancestral subgraphs is not, by itself, a strong enough condition to j
     \end{minipage}
 \end{figure}
 
-
-Constraints of this form be used to supplement the marginal problem without requiring nonlinear quantifier elimination, but they will not have \emph{impact} unless used with conditional independence relations and hence nonlinear quantifier elimination. \purp{Find a good way to explain why not? No impact of projected polytope because...}
+Constraints of the above form be used to supplement the marginal problem without requiring nonlinear quantifier elimination, but they will not have \emph{impact} unless used together with conditional independence relations and hence nonlinear quantifier elimination. \purp{Find a good way to explain why not? No impact of projected polytope because...}
 
 \end{asparadesc}\clearpage
 
@@ -1512,18 +1511,23 @@ Note that real-world data with uncertainties can also be incorporated into these
 
 \section{Further Polytope Projection Algorithms}\label{sec:projalgorithms}
 
-The Equality Set Projection (ESP) algorithm \cite{jones2004equality,JonesThesis2005} is ideal for handling inflation DAGs, because its computational complexity scales only according to the facet count of the final projection. Our use of larger-and-larger inflation DAGs to obtain causal infeasibility criteria on the same underlying original DAG means that while the complexity of the starting polytope is unbounded, the complexity of the projection is finite. Practically, this suggests that the ESP algorithm could parse the implications due to a very large inflation DAGs efficiently. Formally, ESP should require minimal computational overhead to consider a larger inflation DAG relative to considering a much smaller inflation DAG, when the \emph{implications} of the small and large inflations are similar. By contrast, the computation complexity of Fourier-Motzkin (FM) elimination algorithm scales with the number of quantifiers being eliminated. The number of gedankenprobabilities requiring elimination is exponentially related to the number of variables in the inflation DAG. The FM algorithm, therefore, is utterly impractical very for large inflation DAGs.
+\purp{T: ESP is supposed to be good when the number of vertices far exceeds the number of facets. Judging by the~\cref{fig:Tri222} situation, this is not a situation that we should expect. Is there still any chance that ESP is useful at all, or can this stuff be removed?}
+
+The Equality Set Projection (ESP) algorithm \cite{jones2004equality,JonesThesis2005} is ideal for handling inflation DAGs, because its computational complexity scales only according to the facet count of the final projection. Our use of larger-and-larger inflation DAGs to obtain causal infeasibility criteria on the same underlying original DAG means that while the complexity of the starting polytope is unbounded, the complexity of the projection is finite. Practically, this suggests that the ESP algorithm could parse the implications due to very large inflation DAGs efficiently. Formally, ESP should require minimal computational overhead to consider a larger inflation DAG relative to considering a much smaller inflation DAG, when the \emph{implications} of the small and large inflations are similar. By contrast, the computation complexity of Fourier-Motzkin (FM) elimination algorithm scales with the number of quantifiers being eliminated. The number of gedankenprobabilities requiring elimination is exponentially related to the number of variables in the inflation DAG. The FM algorithm, therefore, is utterly impractical very for large inflation DAGs.
 
 Another positive feature of the ESP algorithm is that it commences outputting quantifier-free inequalities immediately, and terminates upon deriving the complete set of inequalities. By contrast, FM works by eliminating one quantifier at a time. Terminating the ESP algorithm before it reaches completion would result in an incomplete list of inequalities. Even an incomplete list is valuable, though, since the causal infeasibility criteria we are deriving are anyways necessary but not sufficient.
 
-Vertex projection (VP) algorithms are another computational tool which may be used to assist in linear quantifier elimination \cite{Avis2000lrs}. VP works by first enumerating the vertices of the initial polytope (H-rep to V-rep), projecting the vertices, and then converting back to inequalities (V-rep to H-rep). For generic high-dimensional polytopes, the operation of converting from a representation in terms of halfspaces to one in terms of extremal-vertices representations can be computationally costly (high-$d$ H-rep to V-rep). Starting from a vertex representation in a high dimensional space, however, one can immediately determine the vertex representation of the polytope's projection in a lower dimensional space. The projection is along the coordinate axes, so one just ``discards" the coordinate of the eliminated quantifier. To obtain the inequalities which characterize the projected polytope one then applies a convex hull algorithm to the projected vertices (low-$d$ V-rep to H-rep).
+% Vertex projection (VP) algorithms are another computational tool which may be used to assist in linear quantifier elimination \cite{Avis2000lrs}. VP works by first enumerating the vertices of the initial polytope (H-rep to V-rep), projecting the vertices, and then converting back to inequalities (V-rep to H-rep). For generic high-dimensional polytopes, the operation of converting from a representation in terms of halfspaces to one in terms of extremal-vertices representations can be computationally costly (high-$d$ H-rep to V-rep). Starting from a vertex representation in a high dimensional space, however, one can immediately determine the vertex representation of the polytope's projection in a lower dimensional space. The projection is along the coordinate axes, so one just ``discards" the coordinate of the eliminated quantifier. To obtain the inequalities which characterize the projected polytope one then applies a convex hull algorithm to the projected vertices (low-$d$ V-rep to H-rep).
 
-For probability distributions, however, the extremal vertices are precisely the deterministic possibilities. Since the extremal vertices of the initial polytope are easily enumerated, it is possible to avoid the high-$d$ V-rep to H-rep step entirely. There is a one-to-one correspondence between the inflation-DAG's initial generating inequalities and its initial extreme observable probability distributions. 
-We used this V-rep to H-rep technique to project the initial marginals-problem polytope implied by \cref{fig:Tri222} to an intermediate 23-dimensional polytope, where the 23 remaining dimensions correspond to the probabilities pertainining to  pre-injectable sets.  Only then did we apply translate those probabilities into probabilities pertaining to the original DAG, and in so doing we convert linear inflation-DAG inequalities to polynomial inequalities pertaining to the original DAG. We found that the V-rep to H-rep technique, using \textit{lrs} [\href[pdfnewwindow]{http://cgm.cs.mcgill.ca/~avis/C/lrslib/USERGUIDE.html#Installation\%20Section}{\texttt{lrs}}], was orders-of-magnitude faster than FM elimination at obtaining the same result.
+% For probability distributions, however, the extremal vertices are precisely the deterministic possibilities. Since the extremal vertices of the initial polytope are easily enumerated, it is possible to avoid the high-$d$ V-rep to H-rep step entirely. There is a one-to-one correspondence between the inflation-DAG's initial generating inequalities and its initial extreme observable probability distributions. 
+% We used this V-rep to H-rep technique to project the initial marginals-problem polytope implied by \cref{fig:Tri222} to an intermediate 23-dimensional polytope, where the 23 remaining dimensions correspond to the probabilities pertainining to  pre-injectable sets.  Only then did we apply translate those probabilities into probabilities pertaining to the original DAG, and in so doing we convert linear inflation-DAG inequalities to polynomial inequalities pertaining to the original DAG. We found that the V-rep to H-rep technique, using \textit{lrs} [\href[pdfnewwindow]{http://cgm.cs.mcgill.ca/~avis/C/lrslib/USERGUIDE.html#Installation\%20Section}{\texttt{lrs}}], was orders-of-magnitude faster than FM elimination at obtaining the same result.
 
 Yet another technique is also possible. Suppose the initial polytope is given by $\brackets{\vec{x},\vec{y}\,|\hat{A}.\vec{x}+\hat{B}.\vec{y}\geq\bm{c}}$, where $y$ are the quantifiers. If we can find any completely nonnegative vector $\bm{w}$ such that $\bm{w}.\hat{B}=\vec{0}$ then we automatically establish the quantifier-free inequality $\bm{w}.\hat{A}.\vec{x}\geq\bm{w}.\bm{c}$. Solving for ``random" nonnegative vectors $\bm{w}$ is easy; solving for all possible solutions is rather more difficult. \citet{BalasProjectionCone} refined this method so that each extremal construction of $\bm{w}$ corresponds to an irredundant inequality in the H-rep description of the projected polytope. Nevertheless, even without utilizing the full projection cone, this technique can be used to rapidly obtain a few quantifier-free inequalities. 
 
 \section{Optimized Algorithm for Recognizing Redundant Inequalities}\label{sec:redundancy}
+
+\purp{T: I think that we should omit this entirely except for the final sentence, which can be moved to the main text. Any Mathematica code is too hard for the uninitiated reader (such as myself) to understand.}
+
 When performing Fourier-Motzkin linear quantifier elimination one must periodically filter out redundant inequalities from the set of linear inequalities. Equivalently, the means identifying redundant halfspace constraints in the description of the polytope. An individual constraint in a set is redundant if it is implied by the other constraints. 
 
 An individual linear inequality is redundant if and only if it is a \emph{positive} linear combination of the others [Thm. 5.8 in \citealp{fordan1999projection}]\footnote{The ``if" is obvious. The ``only if" is a consequence of Farka's lemma \cite{fordan1999projection}.}. This is related to the V-rep characterization of polyhedral cones: If a cone is defined such that $W_{\hat{M}}\coloneqq\brackets{\vec{x}\,|\exists_{\bm{v}\geq\bm{0}}:\, \hat{M}.\bm{v}=\vec{x}}$ then $\vec{b}\in W_{\hat{M}}$ if and only if the linear system of equations $\hat{M}.\bm{v}=\vec{b}$ has a solution such that all the elements of $\bm{v}$ are nonnegative.  Thus, the computational tool required is one which accepts as input the matrix $\hat{M}$ and the column vector $\vec{b}$ and returns $\vec{b}\in W_{\hat{M}}$ as True or False. 
@@ -1590,6 +1594,8 @@ Redundant inequalities can also be filtered out using Cernikov rules \cite{Shapo
 
 %Obtaining a redundancy-free collection of (convex) polyhedral-cone inequalities is therefore related to obtaining a non-negative factorization of a matrix. \purp{Need citation. Also, give explicit connection between NN factorization and redundancy elimination. Does this connection appears elsewhere in the literature?}
 
+%%% T: I've commented this out since we're not concerned here with observational equivalence, and I have the feeling that it would still require a major clean-up operation. The example of 6 observationally equivalent DAGs is not very good since they are all equivalent to A <-- S --> B, which doesn't contain any latent nodes
+\begin{comment}
 \clearpage\section{Recognizing observationally equivalent DAGs}
 
 %\purp{Notes to self: Comment about matching-up latent variables between causal structures, for ObsEquiv test.}
@@ -1649,66 +1655,8 @@ Naturally, two causal structures are observationally equivalent if one can be tr
 \renewcommand{\labelenumi}{(\alph{enumi})}
 \renewcommand{\theenumi}{(\alph{enumi})}
 \renewcommand{\labelitemi}{$\circ$}
+\end{comment}
 
-
-
-\section{Tobias's Original 7 Inequalities}
-
-``I present several inequalities... together with a method of proof which has a combinatorial flavour. No quantum violations of any of these inequalities has been found to date."
-%
-%In the following the complement of a value is marked by an empty circle accent, so $\mathring{b}$ means ``anything but $b$", and accordingly $P(\mathring{a}\mathring{b})=P(A\mathopen{\neq}a,B\mathopen{\neq}b)$. 
-%Additionally, an underscore stands for the corresponding marginal probability, like this: $P(\_b\_) := P(abc) + P(ab\mathring{c}) + P(\mathring{a}bc) + P(\mathring{a}b\mathring{c})$. 
-\begin{theorem}
-The following inequalities hold for all classical correlations in the triangle scenario:
-\begin{enumerate}
-\item
-\(\quad
-%--(a)--
-%p(0\_\_)p(\_\_1) \leq p(00\_)+p(\_11)
-p(a) p(c)  \leq  p(a b) + p(\nb c)
-\)
-\item
-\(\quad
-%--(b)--
-%p(001) p(010) p(100)  \leq  p(000) + p(11\_) p(001) p(0\_\_) + p(1\_1) p(010) p(\_\_0) + p(\_11) p(100) p(\_0\_)
-p(a b\nc) p(a \nb c) p(\na b c) \leq p(a b c) + p(\na \nb) p(a b \nc) p(a) + p(\na\nc) p(a\nb c) p(c)  + p(\nb \nc) p(\na b c) p(b)
-\)
-\item 
-\(\quad
-%--(c)--
-%p(001) p(010) p(100) \leq  p(000)^2 + 2 p(11\_) p(001) + 2 p(1\_1) p(010) + 2 p(\_11) p(100)
-p(a b\nc) p(a \nb c) p(\na b c) \leq p(a b c)^2 + 2\parens*{p(\na \nb) p(a b \nc) + p(\na\nc) p(a\nb c)  + p(\nb \nc) p(\na b c)}
-\)
-\item
-\(\quad
-%--(d)--
-%p(000)^2 p(111)  \leq  p(001) p(010) p(100) + (2 p(000) + p(111)) (1 - p(000) - p(111))
-p(a b c)^2 p(\na\nb\nc)  \leq  p(a b \nc) p(a \nb c) p(\na b c) + \parens*{2 p(a b c) + p(\na\nb\nc)} \parens*{1 - p(a b c) - p(\na\nb\nc)}
-\)
-\item
-\(\quad
-%--(e)--
-%p(000)^2 p(111)  \leq  p(000)^3 + (2 p(000) + p(111)) (1 - p(000) - p(111))
-p(a b c)^2 p(\na\nb\nc)  \leq  p(a b c)^3 + \parens*{2 p(a b c) + p(\na\nb\nc)} \parens*{1 - p(a b c) - p(\na\nb\nc)}
-\)
-\item
-\(\quad
-%--(f)--
-%p(1\_\_)p(\_1\_)p(\_\_1) \leq p(000)+p(11\_)p(\_\_1)+p(1\_1)p(\_1\_)+p(\_11)p(1\_\_)
-p(a) p(b) p(c) \leq  p(\na\nb\nc) + p(a b) p(c) + p(a c) p(b) + p(b c) p(a)
-\)
-\item
-\(\quad
-%--(g)--
-%p(1\_\_)p(\_1\_)p(\_\_1) \leq p(000)^2+2 p(11\_)p(\_\_1) + 2 p(1\_1)p(\_1\_) + 2 p(\_11)p(1\_\_)
-p(a) p(b) p(c) \leq  p(\na\nb\nc)^2 +2\parens[\Big]{ p(a b) p(c) + p(a c) p(b) + p(b c) p(a) }
-\)
-\end{enumerate}
-\end{theorem}
-
-It is quite likely that some of these inequalities are dominated by the others, but I do not know for sure whether any of them are actually redundant."
-
-\purp{Note that \cref{eq:FritzF3} implies inequalities (a), (b), and (f). I haven't checked the others yet. \quoteby EW}
 
 
 \section{Some of Elie's Triangle Scenario Inequalities}
@@ -1826,7 +1774,7 @@ The following inequalities follow from \cref{fig:Tri222} using linear quantifier
 \end{align*}
 
 \clearpage
-\includepdf[pages=-]{64InequalitiesForTobias.pdf}
+\includepdf[pages=-,scale=.95]{64InequalitiesForTobias.pdf}
 
 %\section*{References}
 %\nocite{*}
