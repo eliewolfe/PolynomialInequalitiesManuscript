@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.1.31)  21 APR 2016 19:41
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.1.31)  22 APR 2016 10:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1403,19 +1403,19 @@ Package microtype Info: Loading generic settings for font family
 Overfull \vbox (2.43394pt too high) has occurred while \output is active []
 
 
-[2] <TriDagRaw.pdf, id=151, 104.39pt x 110.4125pt>
+[2] <TriDagRaw.pdf, id=147, 104.39pt x 110.4125pt>
 File: TriDagRaw.pdf Graphic file (type pdf)
  <use TriDagRaw.pdf>
 Package pdftex.def Info: TriDagRaw.pdf used on input line 397.
 (pdftex.def)             Requested size: 104.38972pt x 110.41222pt.
 
-<TriDagFull222.pdf, id=152, 179.67125pt x 198.7425pt>
+<TriDagFull222.pdf, id=148, 179.67125pt x 198.7425pt>
 File: TriDagFull222.pdf Graphic file (type pdf)
  <use TriDagFull222.pdf>
 Package pdftex.def Info: TriDagFull222.pdf used on input line 403.
 (pdftex.def)             Requested size: 179.67079pt x 198.742pt.
 
-<TriDagSub222.pdf, id=153, 142.5325pt x 134.5025pt>
+<TriDagSub222.pdf, id=149, 142.5325pt x 134.5025pt>
 File: TriDagSub222.pdf Graphic file (type pdf)
  <use TriDagSub222.pdf>
 Package pdftex.def Info: TriDagSub222.pdf used on input line 409.
@@ -1442,7 +1442,7 @@ s with page group included in a single page
 Package hyperref Info: bookmark level for unknown fixme defaults to 0 on input 
 line 447.
 FiXme Note: 'adhesivity and non-Shannon-type ineqs' on input line 447.
- [4] <broadcastingexamplenohighlight.pdf, id=275, 123.46124pt x 110.4125pt>
+ [4] <broadcastingexamplenohighlight.pdf, id=271, 123.46124pt x 110.4125pt>
 File: broadcastingexamplenohighlight.pdf Graphic file (type pdf)
 
 <use broadcastingexamplenohighlight.pdf>
@@ -1454,7 +1454,7 @@ Underfull \hbox (badness 3291) in paragraph at lines 522--522
 []\OT1/cmr/m/n/9 (+20) FIG. 4. []A sim-ple in-fla-tion of
  []
 
-<nobroadcastingexamplenohighlight.pdf, id=278, 123.46124pt x 110.4125pt>
+<nobroadcastingexamplenohighlight.pdf, id=274, 123.46124pt x 110.4125pt>
 File: nobroadcastingexamplenohighlight.pdf Graphic file (type pdf)
 
 <use nobroadcastingexamplenohighlight.pdf>
@@ -1462,7 +1462,7 @@ Package pdftex.def Info: nobroadcastingexamplenohighlight.pdf used on input lin
 e 526.
 (pdftex.def)             Requested size: 123.46092pt x 110.41222pt.
 
-<TriDagSubA2B1C1.pdf, id=281, 159.59625pt x 53.19875pt>
+<TriDagSubA2B1C1.pdf, id=277, 159.59625pt x 53.19875pt>
 File: TriDagSubA2B1C1.pdf Graphic file (type pdf)
 
 <use TriDagSubA2B1C1.pdf>
@@ -1481,13 +1481,13 @@ lusion: multiple pdfs with page group included in a single page
 
 pdfTeX warning: pdflatex (file ./TriDagSubA2B1C1.pdf): PDF inclusion: multiple 
 pdfs with page group included in a single page
->] <BellDagRaw.pdf, id=375, 116.435pt x 80.3pt>
+>] <BellDagRaw.pdf, id=371, 116.435pt x 80.3pt>
 File: BellDagRaw.pdf Graphic file (type pdf)
  <use BellDagRaw.pdf>
 Package pdftex.def Info: BellDagRaw.pdf used on input line 591.
 (pdftex.def)             Requested size: 116.43471pt x 80.29979pt.
 
-<BellDagCopy.pdf, id=376, 202.7575pt x 80.3pt>
+<BellDagCopy.pdf, id=372, 202.7575pt x 80.3pt>
 File: BellDagCopy.pdf Graphic file (type pdf)
  <use BellDagCopy.pdf>
 Package pdftex.def Info: BellDagCopy.pdf used on input line 597.
@@ -1497,14 +1497,14 @@ FiXme Note: 'set notation for this?' on input line 611.
 
 pdfTeX warning: pdflatex (file ./BellDagCopy.pdf): PDF inclusion: multiple pdfs
  with page group included in a single page
->] <injectiongraph222.pdf, id=450, 116.435pt x 87.32625pt>
+>] <injectiongraph222.pdf, id=446, 116.435pt x 87.32625pt>
 File: injectiongraph222.pdf Graphic file (type pdf)
 
 <use injectiongraph222.pdf>
 Package pdftex.def Info: injectiongraph222.pdf used on input line 696.
 (pdftex.def)             Requested size: 116.43471pt x 87.32603pt.
 
-<ancestraldependancegraph222.pdf, id=453, 116.435pt x 87.32625pt>
+<ancestraldependancegraph222.pdf, id=449, 116.435pt x 87.32625pt>
 File: ancestraldependancegraph222.pdf Graphic file (type pdf)
 
 <use ancestraldependancegraph222.pdf>
@@ -1512,7 +1512,7 @@ Package pdftex.def Info: ancestraldependancegraph222.pdf used on input line 702
 .
 (pdftex.def)             Requested size: 116.43471pt x 87.32603pt.
 
-<simplicialcomplex.pdf, id=456, 361.35pt x 416.55624pt>
+<simplicialcomplex.pdf, id=452, 361.35pt x 416.55624pt>
 File: simplicialcomplex.pdf Graphic file (type pdf)
 
 <use simplicialcomplex.pdf>
@@ -1546,72 +1546,69 @@ LaTeX Warning: Reference `sec:TSEM' on page 1 undefined on input line 832.
 Overfull \vbox (2.90173pt too high) has occurred while \output is active []
 
 
-[10] [11] [12] [13]
-Overfull \vbox (1.66757pt too high) has occurred while \output is active []
-
-
-[14] [15]
-Package hyperref Info: Option `pdfnewwindow' set `true' on input line 1213.
-Package hyperref Info: Option `pdfnewwindow' set `true' on input line 1213.
-Package hyperref Info: Option `pdfnewwindow' set `true' on input line 1213.
-Package hyperref Info: Option `pdfnewwindow' set `true' on input line 1217.
-Package hyperref Info: Option `pdfnewwindow' set `true' on input line 1217.
- [16] <instrumentalvariant.pdf, id=729, 117.43875pt x 119.44624pt>
+[10] [11] [12] [13] [14] [15]
+Package hyperref Info: Option `pdfnewwindow' set `true' on input line 1211.
+Package hyperref Info: Option `pdfnewwindow' set `true' on input line 1211.
+Package hyperref Info: Option `pdfnewwindow' set `true' on input line 1211.
+Package hyperref Info: Option `pdfnewwindow' set `true' on input line 1215.
+Package hyperref Info: Option `pdfnewwindow' set `true' on input line 1215.
+ [16]
+<instrumentalvariant.pdf, id=725, 117.43875pt x 119.44624pt>
 File: instrumentalvariant.pdf Graphic file (type pdf)
 
 <use instrumentalvariant.pdf>
-Package pdftex.def Info: instrumentalvariant.pdf used on input line 1269.
+Package pdftex.def Info: instrumentalvariant.pdf used on input line 1267.
 (pdftex.def)             Requested size: 117.43845pt x 119.44594pt.
  [17 <./instrumentalvariant.pdf>] [18]
-Overfull \hbox (29.73627pt too wide) in paragraph at lines 1774--1774
+Overfull \hbox (29.73627pt too wide) in paragraph at lines 1772--1772
 [] 
  []
 
-[19] <64InequalitiesForTobias.pdf, id=774, 1020.81375pt x 1418.29875pt>
+[19] <64InequalitiesForTobias.pdf, id=770, 1020.81375pt x 1418.29875pt>
 File: 64InequalitiesForTobias.pdf Graphic file (type pdf)
 
 <use 64InequalitiesForTobias.pdf>
-Package pdftex.def Info: 64InequalitiesForTobias.pdf used on input line 1777.
+Package pdftex.def Info: 64InequalitiesForTobias.pdf used on input line 1775.
 (pdftex.def)             Requested size: 1020.81126pt x 1418.2953pt.
 File: 64InequalitiesForTobias.pdf Graphic file (type pdf)
  <use 64InequalitiesForTobias.pdf>
-Package pdftex.def Info: 64InequalitiesForTobias.pdf used on input line 1777.
+Package pdftex.def Info: 64InequalitiesForTobias.pdf used on input line 1775.
 (pdftex.def)             Requested size: 1020.81126pt x 1418.2953pt.
  [20]
-<64InequalitiesForTobias.pdf, id=781, page=1, 1020.81375pt x 1418.29875pt>
+<64InequalitiesForTobias.pdf, id=777, page=1, 1020.81375pt x 1418.29875pt>
 File: 64InequalitiesForTobias.pdf Graphic file (type pdf)
 
 <use 64InequalitiesForTobias.pdf, page 1>
 Package pdftex.def Info: 64InequalitiesForTobias.pdf, page1 used on input line 
-1777.
+1775.
 (pdftex.def)             Requested size: 1020.81126pt x 1418.2953pt.
 File: 64InequalitiesForTobias.pdf Graphic file (type pdf)
 
 <use 64InequalitiesForTobias.pdf, page 1>
 Package pdftex.def Info: 64InequalitiesForTobias.pdf, page1 used on input line 
-1777.
+1775.
 (pdftex.def)             Requested size: 969.76758pt x 1347.3762pt.
 File: 64InequalitiesForTobias.pdf Graphic file (type pdf)
 
 <use 64InequalitiesForTobias.pdf, page 1>
 Package pdftex.def Info: 64InequalitiesForTobias.pdf, page1 used on input line 
-1777.
+1775.
 (pdftex.def)             Requested size: 969.76758pt x 1347.3762pt.
 File: 64InequalitiesForTobias.pdf Graphic file (type pdf)
 
 <use 64InequalitiesForTobias.pdf, page 1>
 Package pdftex.def Info: 64InequalitiesForTobias.pdf, page1 used on input line 
-1777.
+1775.
 (pdftex.def)             Requested size: 969.76758pt x 1347.3762pt.
 File: 64InequalitiesForTobias.pdf Graphic file (type pdf)
 
 <use 64InequalitiesForTobias.pdf, page 1>
 Package pdftex.def Info: 64InequalitiesForTobias.pdf, page1 used on input line 
-1778.
+1776.
 (pdftex.def)             Requested size: 969.76758pt x 1347.3762pt.
  [21 <./64InequalitiesForTobias.pdf>]
 
-Package natbib Warning: Citation `apsrev41Control' undefined on input line 1785
+Package natbib Warning: Citation `apsrev41Control' undefined on input line 1783
 .
 
 (./main.bbl [22]
@@ -1632,75 +1629,62 @@ FiXme Summary: Number of notes: 2,
 Package nag Warning: 2 complaints in total.
 
 [23]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1788.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1786.
  (./main.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1788.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1788.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1786.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1786.
 
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: 24916CE0C2FFD76B37243BBA8339817D;1717.
 
-
-Package rerunfilecheck Warning: File `main.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: 415E2FC5AF6F169FBBE7C5309C9BDA09;1822
-(rerunfilecheck)             After:  24916CE0C2FFD76B37243BBA8339817D;1717.
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right .
-
-
  ) 
 Here is how much of TeX's memory you used:
- 21065 strings out of 493304
- 313630 string characters out of 6139871
+ 21055 strings out of 493304
+ 313442 string characters out of 6139871
  487573 words of memory out of 5000000
- 23802 multiletter control sequences out of 15000+600000
+ 23793 multiletter control sequences out of 15000+600000
  28219 words of font info for 186 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  41i,22n,78p,2228b,2000s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{section*.18} has been referenced but does not exi
-st, replaced by a fixed one
-
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi
-b10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmi
-b7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/sh
-are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmss8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmss9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
-5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/sh
-are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmtt8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmtt9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
-ts/symbols/msbm7.pfb>
-Output written on main.pdf (23 pages, 797396 bytes).
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+mib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cm
+mib7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/te
+xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmss8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmss9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+sy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmtt8.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmtt9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
+onts/symbols/msbm7.pfb>
+Output written on main.pdf (23 pages, 797047 bytes).
 PDF statistics:
- 1065 PDF objects out of 1200 (max. 8388607)
- 905 compressed objects within 10 object streams
- 173 named destinations out of 1000 (max. 500000)
- 31457 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 1061 PDF objects out of 1200 (max. 8388607)
+ 901 compressed objects within 10 object streams
+ 172 named destinations out of 1000 (max. 500000)
+ 31449 words of extra memory for PDF output out of 35830 (max. 10000000)
 
