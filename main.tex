@@ -1132,6 +1132,8 @@ Applying this to our inflation DAG of~\cref{fig:Tri222} results again in one of 
 
 Since also many Bell inequalities are of this form---such as the CHSH inequality which follows in this way from Hardy's original implication---we conclude that this method is still sufficiently powerful to generate plenty of interesting inequalities, and at the same time significantly easier to perform in practice than the full-fledged linear (let alone nonlinear) quantifier elimination.
 
+One can also come up with a \emph{satisfiability} version of a marginal problem at the possibilistic level. Possibilistic satisfiability is the following: for every joint marginal outcome with positive probability, one needs to find an assignment of values to all variables which extends the given marginal outcomes and such that the restriction to every context also has positive probability. This is very easy to do: one can simply enumerate all deterministic assignments of values to all observables, discard all those that have a marginal with zero probability, and then check whether the remaining assignments are enough to generate all the joint marginal outcomes with positive probability.
+
 We note that the connection between classical propositional logic and linear inequalities has been used previously in the task of causal inference. We reiterate that inequalities resulting from propositional logic, however, are a subset of the inequalities that result from linear quantifier elimination. Consequently, linear quantifier elimination is the preferable tool for deriving inequalities whenever the elimination is computationally tractable. Noteworthy examples of works deriving causal infeasibility criteria via classical logic are \citet{Pitowsky1989} and \citet{Ghirardi08}: \cref{eq:trisimplestunmapped} here corresponds to Eq. (2-4) in Ref. \cite{Pitowsky1989}%, and \cref{eq:bellcondeq} here corresponds to Eq. (30) in Ref. \cite{Ghirardi08}
 .
 
@@ -1214,25 +1216,29 @@ Currently, however, it is not practical to perform nonlinear quantifier eliminat
 %One can also exploit the fact than any nonlinear optimizer will return an error when a set of constraints cannot be satisfied. Nonlinear optimizers include \textit{Maple$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://www.maplesoft.com/support/help/Maple/view.aspx?path=Optimization/NLPSolveMatrixForm}{\texttt{NLPSolve}}, \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://reference.wolfram.com/language/ref/message/NMinimize/nsol.html}{\texttt{NMinimize}}, and dozens of free and commercial optimizers for \href[pdfnewwindow]{http://ampl.com/products/solvers/all-solvers-for-ampl}{\textit{AMPL}} and/or \href[pdfnewwindow]{https://neos-server.org/neos/solvers/index.html\#nco}{\textit{GAMS}}
 }.
 
-\begin{table*}[ht]\centering\caption{A comparison of different approaches for constraining the distributions on the pre-injectable sets. The primary divide is quantifier elimination versus satisfiability, with approaches being further subdivided into linear and nonlinear variants.}
+\begin{table*}[ht]\centering\caption{A comparison of different approaches for constraining the distributions on the pre-injectable sets. The primary divide is quantifier elimination, which is more difficult but produces inequalities, versus satisfiability which can witness the infeasibility of a specific distribution. The approaches subdivide further subdivided into nonlinear, linear, and possibilistic variants.}
 \begin{tabularx}{\linewidth}{ |l|L|c|L| } 
 \hline
-Approach & Also Known As & Difficulty & End Results \\
+Approach & General problem & Standard algorithm(s) & Difficulty \\
 \bottomrule
-Nonlinear Quantifier Elimination & Resolving Partial Existential Closure & Very Hard & Polynomial Inequalities (tightest) \\
+Nonlinear quantifier elimination & Real quantifier elimination & Cylindrical algebraic decomposition & Very hard \\
 \hline
-Nonlinear Satisfiability & Universal Existential Closure,\newline Nonlinear Programming & Easy & Witness infeasibility for a specific distribution \\
+Nonlinear satisfiability & Nonlinear programming,\newline polynomial optimization & e.g.~semidefinite Relaxations & Easy \\
 \hline
-Linear Quantifier Elimination & Polytope Projection\newline (Full Marginal Problem) & Moderate & Polynomial Inequalities (less tight) \\
+Linear quantifier elimination & Compute facets of polytope & Fourier-Motzkin elimination & Hard \\
 \hline
-Linear Satisfiability & Linear Programming,\newline Universal Existential Closure & Very Easy & Witness infeasibility for a specific distribution \\
+Linear satisfiability & Linear programming & Simplex method & Very easy \\
 \hline
-Possibilistic Constraints & Set-Theoretic Implications\newline (Partial Marginal Problem) & Easy & Polynomial Inequalities (least tight)
+Possibilistic quantifier elimination & Hypergraph transversal problem & & Very easy \\
+\hline 
+Possibilistic satisfiability & -- & -- & Super easy
 \\\toprule
 \end{tabularx}
 \end{table*}
 
 It is also possible to use a mixed strategy of linear and nonlinear quantifier elimination, such as \citet{ChavesPolynomial} advocates. The explicit results of Ref. \cite{ChavesPolynomial} are therefore consequences of any inflation DAG, achieved by applying a mixed quantifier elimination strategy.\purp{T: rewrite this in light of new narrative!}
+
+Especially in situations in which one is dealing with variables that have a large number of outcomes, it may be pertinent to derive entropic constraints for the marginal problem using linear quantifier elimination~\cite{fritz2013marginal}---as e.g.~in the entropic inequalities that have been derived for the Triangle scenario---and one can also consider the corresponding satisfiability problem as a linear program. This also has the advantage that conditional independence constraints on the inflation DAG are very easy to build in, as they are linear at the level of entropies.
 
 \clearpage\medskip\item[\tred{Coinciding Marginal Distributions}] \noindent
 \par\hspace{\parskip}
@@ -1590,7 +1596,7 @@ If $\hat{A}$ is the matrix who's rows are nonnegativity inequalities, then the f
 \end{align*}
 Note that a \texttt{True} response from \texttt{RedundantRowQ} indicates that the row $n$ is redundant.
 
-Redundant inequalities can also be filtered out using Cernikov rules \cite{Shapot2012,Bastrakov2015}. We find the strategy of employing linear programming in concert with the second Cernikov rule to be extremely efficient.
+Redundant inequalities can also be filtered out using Chernikov rules \cite{Shapot2012,Bastrakov2015}. We find the strategy of employing linear programming in concert with the second Cernikov rule to be extremely efficient.
 
 %Obtaining a redundancy-free collection of (convex) polyhedral-cone inequalities is therefore related to obtaining a non-negative factorization of a matrix. \purp{Need citation. Also, give explicit connection between NN factorization and redundancy elimination. Does this connection appears elsewhere in the literature?}
 
@@ -1659,12 +1665,15 @@ Naturally, two causal structures are observationally equivalent if one can be tr
 
 
 
-\section{Some of Elie's Triangle Scenario Inequalities}
+\section{Classifying polynomial inequalities for the Triangle scenario}
 
-The following inequalities follow from \cref{fig:Tri222} using linear quantifier elimination. The list is incomplete; longer inequalities have been excised in order to fit the page. A denser but complete list is embedded as the final page of this PDF. All the inequalities below are nontrivial, and are also unique under permutation of the parties or inverting outcomes. In expectation-value formation we imagine the two possible outcomes of each random variables to be $+1$ and $-1$.
+The following inequalities for the Triangle scenario have been derived using the linear quantifier elimination method of~\cref{sec:ineqs} using the inflation DAG of~\cref{fig:Tri222}. follow from \cref{fig:Tri222} using linear quantifier elimination. The list is incomplete; longer inequalities have been excised in order to fit the page. A denser but complete list is embedded as the final page of this PDF. All the inequalities below are nontrivial, 
+\purp{T: make sure about this!}
+and we list one representative inequality per symmetry class (under permutation of the variables or inverting outcomes). They are given in expectation-value form, where we assume the two possible outcomes of each variables to be $\{-1,+1\}$.
 
-\begin{align*}\def\arraystretch{1.5}
-\hspace{-\mathindent}\begin{array}{l}
+\purp{T: it may be better to list this as a table of coefficients, as e.g.~in \href{http://arxiv.org/abs/1101.2477}{arXiv:1101.2477}, p.14/15?}
+
+\begin{align*}\def\arraystretch{1.5} \hspace{-\mathindent}\begin{array}{l}
  0
 \leq
 {1 + \expec{A B} + \expec{A C} + \expec{B} \expec{C}} \\

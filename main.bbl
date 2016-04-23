@@ -115,7 +115,7 @@
 \bibitem [{\citenamefont {Fritz}(2015)}]{BeyondBellII}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {T.}~\bibnamefont
-  {Fritz}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Beyond bell's
+  {Fritz}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Beyond {B}ell's
   theorem {II}: Scenarios with arbitrary causal structure},}\ }\href {\doibase
   10.1007/s00220-015-2495-5} {\bibfield  {journal} {\bibinfo  {journal} {Comm.
   Math. Phys.}\ }\textbf {\bibinfo {volume} {341}},\ \bibinfo {pages} {391}
@@ -685,10 +685,10 @@
   {Eiter}}, \bibinfo {author} {\bibfnamefont {K.}~\bibnamefont {Makino}}, \
   and\ \bibinfo {author} {\bibfnamefont {G.}~\bibnamefont {Gottlob}},\
   }\bibfield  {title} {\enquote {\bibinfo {title} {Computational aspects of
-  monotone dualization: A brief survey},}\ }\href@noop {} {\bibfield  {journal}
-  {\bibinfo  {journal} {Discrete Appl. Math.}\ }\textbf {\bibinfo {volume}
-  {156}},\ \bibinfo {pages} {2035} (\bibinfo {year} {2008})}\BibitemShut
-  {NoStop}%
+  monotone dualization: A brief survey},}\ }\href {\doibase
+  10.1016/j.dam.2007.04.017} {\bibfield  {journal} {\bibinfo  {journal}
+  {Discrete Appl. Math.}\ }\textbf {\bibinfo {volume} {156}},\ \bibinfo {pages}
+  {2035} (\bibinfo {year} {2008})}\BibitemShut {NoStop}%
 \bibitem [{\citenamefont {{Pitowsky}}(1989)}]{Pitowsky1989}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {I.}~\bibnamefont
