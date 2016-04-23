@@ -1134,7 +1134,7 @@ Since also many Bell inequalities are of this form---such as the CHSH inequality
 
 One can also come up with a \emph{satisfiability} version of a marginal problem at the possibilistic level. Possibilistic satisfiability is the following: for every joint marginal outcome with positive probability, one needs to find an assignment of values to all variables which extends the given marginal outcomes and such that the restriction to every context also has positive probability. This is very easy to do: one can simply enumerate all deterministic assignments of values to all observables, discard all those that have a marginal with zero probability, and then check whether the remaining assignments are enough to generate all the joint marginal outcomes with positive probability.
 
-We note that the connection between classical propositional logic and linear inequalities has been used previously in the task of causal inference. We reiterate that inequalities resulting from propositional logic, however, are a subset of the inequalities that result from linear quantifier elimination. Consequently, linear quantifier elimination is the preferable tool for deriving inequalities whenever the elimination is computationally tractable. Noteworthy examples of works deriving causal infeasibility criteria via classical logic are \citet{Pitowsky1989} and \citet{Ghirardi08}: \cref{eq:trisimplestunmapped} here corresponds to Eq. (2-4) in Ref. \cite{Pitowsky1989}%, and \cref{eq:bellcondeq} here corresponds to Eq. (30) in Ref. \cite{Ghirardi08}
+We note that the connection between classical propositional logic and linear inequalities has been used previously in the task of causal inference. We reiterate that inequalities resulting from propositional logic, however, are a subset of the inequalities that result from linear quantifier elimination. Consequently, linear quantifier elimination is the preferable tool for deriving inequalities whenever the elimination is computationally tractable. Noteworthy examples of works deriving causal infeasibility criteria via classical logic are \citet{Pitowsky1989} and \citet{Ghirardi08}: \cref{eq:trisimplestunmapped} here corresponds to Eq. (2-4) in~\cite{Pitowsky1989}%, and \cref{eq:bellcondeq} here corresponds to Eq. (30) in Ref. \cite{Ghirardi08}
 .
 
 
@@ -1223,15 +1223,15 @@ Approach & General problem & Standard algorithm(s) & Difficulty \\
 \bottomrule
 Nonlinear quantifier elimination & Real quantifier elimination & Cylindrical algebraic decomposition & Very hard \\
 \hline
-Nonlinear satisfiability & Nonlinear programming,\newline polynomial optimization & e.g.~semidefinite Relaxations & Easy \\
+Nonlinear satisfiability & Nonlinear programming,\newline polynomial optimization & e.g.~semidefinite relaxations~\cite{laurent_polynomial_2012} & Easy \\
 \hline
 Linear quantifier elimination & Compute facets of polytope & Fourier-Motzkin elimination & Hard \\
 \hline
 Linear satisfiability & Linear programming & Simplex method & Very easy \\
 \hline
-Possibilistic quantifier elimination & Hypergraph transversal problem & & Very easy \\
+Possibilistic quantifier elimination & Hypergraph transversal problem & See~\citet{eiter_dualization_2008} & Very easy \\
 \hline 
-Possibilistic satisfiability & -- & -- & Super easy
+Possibilistic satisfiability & --- & --- & Super easy
 \\\toprule
 \end{tabularx}
 \end{table*}
