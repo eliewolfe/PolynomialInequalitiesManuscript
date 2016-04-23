@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.1.31)  22 APR 2016 10:03
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.1.31)  23 APR 2016 14:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1559,56 +1559,60 @@ File: instrumentalvariant.pdf Graphic file (type pdf)
 <use instrumentalvariant.pdf>
 Package pdftex.def Info: instrumentalvariant.pdf used on input line 1267.
 (pdftex.def)             Requested size: 117.43845pt x 119.44594pt.
- [17 <./instrumentalvariant.pdf>] [18]
-Overfull \hbox (29.73627pt too wide) in paragraph at lines 1772--1772
+
+Overfull \vbox (2.6152pt too high) has occurred while \output is active []
+
+
+[17 <./instrumentalvariant.pdf>] [18]
+Overfull \hbox (29.73627pt too wide) in paragraph at lines 1774--1774
 [] 
  []
 
-[19] <64InequalitiesForTobias.pdf, id=770, 1020.81375pt x 1418.29875pt>
+[19] <64InequalitiesForTobias.pdf, id=772, 1020.81375pt x 1418.29875pt>
 File: 64InequalitiesForTobias.pdf Graphic file (type pdf)
 
 <use 64InequalitiesForTobias.pdf>
-Package pdftex.def Info: 64InequalitiesForTobias.pdf used on input line 1775.
+Package pdftex.def Info: 64InequalitiesForTobias.pdf used on input line 1777.
 (pdftex.def)             Requested size: 1020.81126pt x 1418.2953pt.
 File: 64InequalitiesForTobias.pdf Graphic file (type pdf)
  <use 64InequalitiesForTobias.pdf>
-Package pdftex.def Info: 64InequalitiesForTobias.pdf used on input line 1775.
+Package pdftex.def Info: 64InequalitiesForTobias.pdf used on input line 1777.
 (pdftex.def)             Requested size: 1020.81126pt x 1418.2953pt.
  [20]
-<64InequalitiesForTobias.pdf, id=777, page=1, 1020.81375pt x 1418.29875pt>
+<64InequalitiesForTobias.pdf, id=779, page=1, 1020.81375pt x 1418.29875pt>
 File: 64InequalitiesForTobias.pdf Graphic file (type pdf)
 
 <use 64InequalitiesForTobias.pdf, page 1>
 Package pdftex.def Info: 64InequalitiesForTobias.pdf, page1 used on input line 
-1775.
+1777.
 (pdftex.def)             Requested size: 1020.81126pt x 1418.2953pt.
 File: 64InequalitiesForTobias.pdf Graphic file (type pdf)
 
 <use 64InequalitiesForTobias.pdf, page 1>
 Package pdftex.def Info: 64InequalitiesForTobias.pdf, page1 used on input line 
-1775.
+1777.
 (pdftex.def)             Requested size: 969.76758pt x 1347.3762pt.
 File: 64InequalitiesForTobias.pdf Graphic file (type pdf)
 
 <use 64InequalitiesForTobias.pdf, page 1>
 Package pdftex.def Info: 64InequalitiesForTobias.pdf, page1 used on input line 
-1775.
+1777.
 (pdftex.def)             Requested size: 969.76758pt x 1347.3762pt.
 File: 64InequalitiesForTobias.pdf Graphic file (type pdf)
 
 <use 64InequalitiesForTobias.pdf, page 1>
 Package pdftex.def Info: 64InequalitiesForTobias.pdf, page1 used on input line 
-1775.
+1777.
 (pdftex.def)             Requested size: 969.76758pt x 1347.3762pt.
 File: 64InequalitiesForTobias.pdf Graphic file (type pdf)
 
 <use 64InequalitiesForTobias.pdf, page 1>
 Package pdftex.def Info: 64InequalitiesForTobias.pdf, page1 used on input line 
-1776.
+1778.
 (pdftex.def)             Requested size: 969.76758pt x 1347.3762pt.
  [21 <./64InequalitiesForTobias.pdf>]
 
-Package natbib Warning: Citation `apsrev41Control' undefined on input line 1783
+Package natbib Warning: Citation `apsrev41Control' undefined on input line 1785
 .
 
 (./main.bbl [22]
@@ -1629,10 +1633,10 @@ FiXme Summary: Number of notes: 2,
 Package nag Warning: 2 complaints in total.
 
 [23]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1786.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1788.
  (./main.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1786.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1786.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1788.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1788.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 24916CE0C2FFD76B37243BBA8339817D;1717.
@@ -1640,13 +1644,17 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right .
+
+
  ) 
 Here is how much of TeX's memory you used:
- 21055 strings out of 493304
- 313442 string characters out of 6139871
+ 21056 strings out of 493304
+ 313461 string characters out of 6139871
  487573 words of memory out of 5000000
  23793 multiletter control sequences out of 15000+600000
- 28219 words of font info for 186 fonts, out of 8000000 for 9000
+ 28176 words of font info for 186 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  41i,22n,78p,2228b,2000s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
@@ -1681,10 +1689,10 @@ pe1/public/amsfonts/cm/cmtt8.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
 lic/amsfonts/cm/cmtt9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
 fonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
 onts/symbols/msbm7.pfb>
-Output written on main.pdf (23 pages, 797047 bytes).
+Output written on main.pdf (23 pages, 799127 bytes).
 PDF statistics:
- 1061 PDF objects out of 1200 (max. 8388607)
- 901 compressed objects within 10 object streams
- 172 named destinations out of 1000 (max. 500000)
+ 1063 PDF objects out of 1200 (max. 8388607)
+ 903 compressed objects within 10 object streams
+ 173 named destinations out of 1000 (max. 500000)
  31449 words of extra memory for PDF output out of 35830 (max. 10000000)
 
