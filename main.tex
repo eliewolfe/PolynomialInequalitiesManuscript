@@ -261,7 +261,7 @@ anchorcolor=OliveGreen}
 
 
 %%%% Tobias: to mark my edits and stuff
-%\usepackage{showkeys}
+\usepackage{showkeys}
 \usepackage[draft]{fixme}
 \newcommand{\btob}{\color{OliveGreen}}
 \newcommand{\etob}{\color{black}}
@@ -721,8 +721,92 @@ The mathematical structure of this proof parallels that of standard proofs of th
 Many causal inference techniques can be used to derive sufficient conditions for the inconsistency of the causal hypothesis $H_{G',S'}$ with the observational data $\forall \bm{U} \in \SmallNamedFunction{PreInjectableSets}{\bm{O}}: \pdf{\bm{U}} = \pdf{\subsim{\bm{U}_1}}\pdf{\subsim{\bm{U}_2}} \dots \pdf{\subsim{\bm{U}_n}}$. We will call sets of such conditions {\em inconsistency witnesses}.  
 
 \color{black}
+\section{Examples applications of the inflation technique}\label{sec:examplebaddistributions}
 
-\section{A procedure for deriving polynomial inequalities}
+Here are some examples of causal infeasibility criteria for the Triangle scenario which we can derive by considering inflation DAGs.
+
+The nontrivial polynomial inequality 
+\begin{align}\label{eq:tritrivial1}
+{\p{a} + \p{b} + \p{c}} \leq {1 + \p{a} \p{b} + \p{a c} + \p{b c}}
+\end{align}
+is found to be a constraint on the Triangle scenario through by summing the follow two nonnegativity inequalities
+\begin{align}\begin{split}\label{eq:trisimplestunmapped}
+ &0\leq  1 -\p{a_2} - \p{b_1} - \p{c_1}+ \p{a_2 b_1} + \p{a_2 c_1} + \p{b_1 c_1}  -\p{a_2 b_1 c_1} \quad\left[=\p{\n{a}_2 \n{b}_1 \n{c}_1}\right]
+\\&0\leq \p{a_2 b_1 c_1}
+\end{split}\\
+\shortintertext{subject to the following transformations}
+&  \underbrace{\larray{\\\p{a_2 b_1} \to \p{a_2} \p{b_1}}}_{\text{via ancestral independence}} \quad \text{and}\qquad
+ \underbrace{\begin{array}{c}
+ \p{a_2}\to\p{a}\,, 
+\; \p{b_1}\to\p{b}\,, 
+\; \p{c_1}\to\p{c},
+\\ \p{a_2 c_1}\to \p{a c},
+\; \p{b_1 c_1}\to \p{b c}
+\end{array}}_{\text{via injectable set}}.
+\end{align}
+Indeed, this example has been chosen because \cref{eq:tritrivial1} can be derived directly from the small ancestral subgraph of $\{A_2 B_1 C_1\}$, namely \cref{fig:TriDagSubA2B1C1}.
+
+\purp{add back monogomy of correlations?}
+It may be constructive to rewrite this inequality in correlator form using outcomes in $\{-1,+1\}$ as
+\[
+	\langle AC\rangle - \langle BC\rangle \leq 1 - \langle A\rangle\langle B\rangle,
+\]
+which indicates that like~\cref{eq:monogomyofcorrelations}, it is also a sort of monogamy inequality: it is impossible for $A$ and $C$ to be strongly correlated while $B$ and $C$ are strongly anticorrelated.
+
+A consequence of \cref{eq:tritrivial1} is that the perfect correlation distribution per \cref{eq:ghzdistribution1} 
+%\begin{align}\label{eq:ghzdistribution}
+%{P_{\text{GHZ}}}\parenths{A B C} \coloneqq\quad p_{\text{GHZ}}\parens{a b c}=\frac{[000]+[111]}{2}=\begin{cases}\tfrac{1}{2}&\text{if }\; a=b=c \\ 0&\text{otherwise}\end{cases}
+%\end{align}
+is found to be unrealizable from the Triangle scenario. This conclusions follows by considering the special case of \cref{eq:tritrivial1} where $a\cramp{\to}1$, $b\cramp{\to}1$, $c\cramp{\to}0$.
+%To see how this distribution is incompatible with \cref{eq:tritrivial1}, note that for three \emph{identically distributed} (but not independent) binary variables a further special case of \cref{eq:tritrivial1} is
+%\begin{align*}\begin{split}
+%&\hspace{-6ex}3\p{A\cramp{=}1}\leq 1+\p{A\cramp{=}1}^2+2\p{A\cramp{=}B\cramp{=}1}.
+%\end{split}\end{align*}
+%For the W-distribution ${\p{A\cramp{=}B\cramp{=}C\cramp{=}0}=0}$, and also ${\p{A\cramp{=}1,B\cramp{=}1}=0}$, yet ${\p{A\cramp{=}1}=\nicefrac{1}{3}}$. As ${(\nicefrac{1}{3})^3\nleq 0}$ we have proven that the W-type distribution is incompatible with the Triangle scenario.
+%Earlier works have already shown that the GHZ-type distribution is incompatible with the classical Triangle scenario \cite{steudel2010ancestors,fritz2012bell,chaves2014novel}. Interestingly, however, the entropic monogamy relation $I\parens{A:B}+I\parens{A:C}\leq H\parens{A}$ which rejects the GHZ-type distribution has been shown also to hold if the hidden shared resources are non-classical, even using generalized probabilistic theories \cite[Cor. 24]{pusey2014gdag}. 
+
+
+\bigskip
+Slightly more involved but otherwise analogous considerations give rise to the inequality
+\begin{align}\label{eq:trifancyunmapped}
+  &  \p{a_2 b_2 c_2}\leq {\p{\n{a}_1 \n{b}_1 \n{c}_1} + \p{a_1 b_2 c_2} + \p{a_2 b_1 c_2} + \p{a_2 b_2 c_1}} \\
+\shortintertext{which in turn yields}
+\label{eq:FritzF3}
+  & \p{a} \p{b} \p{c} \leq {\p{\n{a} \n{b} \n{c}} +\p{c}\p{a b}  + \p{b}\p{a c}  + \p{a} \p{b c}}\\
+\shortintertext{per}
+&\qquad
+ \underbrace{\begin{array}{l}
+ \p{a_1 b_2 c_2}\to \p{c_2} \p{a_1 b_2} \\
+ \p{a_2 b_1 c_2}\to \p{a_2} \p{b_1 c_2} \\
+ \p{a_2 b_2 c_1}\to \p{b_2} \p{a_2 c_1} \\
+ \p{a_2 b_2 c_2}\to \p{a_2} \p{b_2} \p{c_2} \\
+\end{array}}_{\text{via ancestral independence}}   \quad \text{ and }\quad
+\underbrace{\begin{array}{l}
+\p{a_1 b_2} \to \p{a b} \\
+\p{a_2 c_1} \to \p{a c} \\
+\p{b_1 c_2} \to \p{b c} \\
+\p{\n{a}_1 \n{b}_1 \n{c}_1}\to \p{\n{a} \n{b} \n{c}}  \\
+\end{array}\,.}_{\text{via injectable sets}}
+\end{align}
+A consequence of \cref{eq:FritzF3} is that the W-type distribution per \cref{eq:wdistribution1}
+%\begin{align}\label{eq:wdistribution}
+%{P_{\text{W}}}\parenths{A B C} \coloneqq\quad p_{\text{W}}\parens{a b c}=\frac{[100]+[010]+[001]}{3}=\begin{cases}\tfrac{1}{3}&\text{if }\; a+b+c=1 \\ 0&\text{otherwise}\end{cases}
+%\end{align}
+is found to be unrealizable from the Triangle scenario, by considering the special case of \cref{eq:FritzF3} where $a\cramp{\to}1$, $b\cramp{\to}1$, $c\cramp{\to}1$. \cref{eq:FritzF3} requires the use of a broadcasting inflation, and therefore does not hold in the context of general probability theories.
+
+%, where $a,b,c\in\brackets{0,1}$.
+%The W-distribution states that the in any event in which $A,B,C$ are observed, precisely one of them will be found to equal $1$ while the other two will equal $0$. The identity of the variable which takes the value $1$ is uniformly random. In informal but intuitive notation, the W-type distribution is ${\nicefrac{1}{3}[100]+\nicefrac{1}{3}[010]+\nicefrac{1}{3}[001]}$.
+%To see how this distribution is incompatible with \cref{eq:FritzF3}, note that for three \emph{identically distributed} (but not independent) binary variables a further special case of \cref{eq:FritzF3} is
+%\begin{align*}\begin{split}
+%&\hspace{-6ex}\p{A\cramp{=}1}^3\leq \p{A\cramp{=}B\cramp{=}C\cramp{=}0} + 3\times\p{A\cramp{=}B\cramp{=}1}\p{C\cramp{=}1}.
+%\end{split}\end{align*}
+%For the W-distribution ${\p{A\cramp{=}B\cramp{=}C\cramp{=}0}=0}$, and also ${\p{A\cramp{=}1,B\cramp{=}1}=0}$, yet ${\p{A\cramp{=}1}=\nicefrac{1}{3}}$. As ${(\nicefrac{1}{3})^3\nleq 0}$ we have proven that the W-type distribution is incompatible with the Triangle scenario.
+
+
+
+\cref{sec:38ineqs} provides a list of further polynomial inequalities that we have derived for the Triangle scenario using the method developed in the following section.
+
+\section{Deriving polynomial inequalities systematically}
 \label{sec:ineqs}
 
 We have defined causal inference as a decision problem, namely testing the consistency of some observational data with some some causal hypothesis. We've shown that this decision can be negatively answered by proxy, namely by demonstrating inconsistency of \emph{inflated} data with an \emph{inflated} hypothesis. The inflation technique can also be used to derive infeasibility criteria, however, by \tblue{deriving constraints on the pre-injectable sets}. Any such constraint is also an implicit consequence of the original hypothesis, and hence a relevant infeasibility criterion.
@@ -902,96 +986,10 @@ Although linear quantifier elimination can be highly optimized, it can still pro
 
 As far as we can tell, our inequalities are not related to the nonlinear infeasibility criteria which have been derived specifically to constrain classical networks \cite{TavakoliStarNetworks,RossetNetworks,TavakoliNoncyclicNetworks}, nor to the nonlinear inequalities which account for interventions to a given causal structure \cite{kang2007polynomialconstraints,steeg2011relaxation}.
 
-\section{Examples of Polynomial Inequalities for the Triangle Scenario}\label{sec:examplebaddistributions}
-
-\purp{T: why not just refer to the list of ineqs here, state that we've done a successful quantifier elimination to demonstrate its practicality, and discuss one or two of the most interesting ineqs?}
-
-Here are some examples of causal infeasibility criteria for the Triangle scenario which we can derive by considering inflation DAGs.
-
-The nontrivial polynomial inequality 
-\begin{align}\label{eq:tritrivial1}
-{\p{a} + \p{b} + \p{c}} \leq {1 + \p{a} \p{b} + \p{a c} + \p{b c}}
-\end{align}
-is found to be a constraint on the Triangle scenario through by summing the follow two nonnegativity inequalities
-\begin{align}\begin{split}\label{eq:trisimplestunmapped}
- &0\leq  1 -\p{a_2} - \p{b_1} - \p{c_1}+ \p{a_2 b_1} + \p{a_2 c_1} + \p{b_1 c_1}  -\p{a_2 b_1 c_1} \quad\left[=\p{\n{a}_2 \n{b}_1 \n{c}_1}\right]
-\\&0\leq \p{a_2 b_1 c_1}
-\end{split}\\
-\shortintertext{subject to the following transformations}
-&  \underbrace{\larray{\\\p{a_2 b_1} \to \p{a_2} \p{b_1}}}_{\text{via ancestral independence}} \quad \text{and}\qquad
- \underbrace{\begin{array}{c}
- \p{a_2}\to\p{a}\,, 
-\; \p{b_1}\to\p{b}\,, 
-\; \p{c_1}\to\p{c},
-\\ \p{a_2 c_1}\to \p{a c},
-\; \p{b_1 c_1}\to \p{b c}
-\end{array}}_{\text{via injectable set}}.
-\end{align}
-Indeed, this example has been chosen because \cref{eq:tritrivial1} can be derived directly from the small ancestral subgraph of $\{A_2 B_1 C_1\}$, namely \cref{fig:TriDagSubA2B1C1}.
-
-\purp{add back monogomy of correlations?}
-It may be constructive to rewrite this inequality in correlator form using outcomes in $\{-1,+1\}$ as
-\[
-	\langle AC\rangle - \langle BC\rangle \leq 1 - \langle A\rangle\langle B\rangle,
-\]
-which indicates that like~\cref{eq:monogomyofcorrelations}, it is also a sort of monogamy inequality: it is impossible for $A$ and $C$ to be strongly correlated while $B$ and $C$ are strongly anticorrelated.
-
-A consequence of \cref{eq:tritrivial1} is that the perfect correlation distribution per \cref{eq:ghzdistribution1} 
-%\begin{align}\label{eq:ghzdistribution}
-%{P_{\text{GHZ}}}\parenths{A B C} \coloneqq\quad p_{\text{GHZ}}\parens{a b c}=\frac{[000]+[111]}{2}=\begin{cases}\tfrac{1}{2}&\text{if }\; a=b=c \\ 0&\text{otherwise}\end{cases}
-%\end{align}
-is found to be unrealizable from the Triangle scenario. This conclusions follows by considering the special case of \cref{eq:tritrivial1} where $a\cramp{\to}1$, $b\cramp{\to}1$, $c\cramp{\to}0$.
-%To see how this distribution is incompatible with \cref{eq:tritrivial1}, note that for three \emph{identically distributed} (but not independent) binary variables a further special case of \cref{eq:tritrivial1} is
-%\begin{align*}\begin{split}
-%&\hspace{-6ex}3\p{A\cramp{=}1}\leq 1+\p{A\cramp{=}1}^2+2\p{A\cramp{=}B\cramp{=}1}.
-%\end{split}\end{align*}
-%For the W-distribution ${\p{A\cramp{=}B\cramp{=}C\cramp{=}0}=0}$, and also ${\p{A\cramp{=}1,B\cramp{=}1}=0}$, yet ${\p{A\cramp{=}1}=\nicefrac{1}{3}}$. As ${(\nicefrac{1}{3})^3\nleq 0}$ we have proven that the W-type distribution is incompatible with the Triangle scenario.
-%Earlier works have already shown that the GHZ-type distribution is incompatible with the classical Triangle scenario \cite{steudel2010ancestors,fritz2012bell,chaves2014novel}. Interestingly, however, the entropic monogamy relation $I\parens{A:B}+I\parens{A:C}\leq H\parens{A}$ which rejects the GHZ-type distribution has been shown also to hold if the hidden shared resources are non-classical, even using generalized probabilistic theories \cite[Cor. 24]{pusey2014gdag}. 
-
-
-\bigskip
-Slightly more involved but otherwise analogous considerations give rise to the inequality
-\begin{align}\label{eq:trifancyunmapped}
-  &  \p{a_2 b_2 c_2}\leq {\p{\n{a}_1 \n{b}_1 \n{c}_1} + \p{a_1 b_2 c_2} + \p{a_2 b_1 c_2} + \p{a_2 b_2 c_1}} \\
-\shortintertext{which in turn yields}
-\label{eq:FritzF3}
-  & \p{a} \p{b} \p{c} \leq {\p{\n{a} \n{b} \n{c}} +\p{c}\p{a b}  + \p{b}\p{a c}  + \p{a} \p{b c}}\\
-\shortintertext{per}
-&\qquad
- \underbrace{\begin{array}{l}
- \p{a_1 b_2 c_2}\to \p{c_2} \p{a_1 b_2} \\
- \p{a_2 b_1 c_2}\to \p{a_2} \p{b_1 c_2} \\
- \p{a_2 b_2 c_1}\to \p{b_2} \p{a_2 c_1} \\
- \p{a_2 b_2 c_2}\to \p{a_2} \p{b_2} \p{c_2} \\
-\end{array}}_{\text{via ancestral independence}}   \quad \text{ and }\quad
-\underbrace{\begin{array}{l}
-\p{a_1 b_2} \to \p{a b} \\
-\p{a_2 c_1} \to \p{a c} \\
-\p{b_1 c_2} \to \p{b c} \\
-\p{\n{a}_1 \n{b}_1 \n{c}_1}\to \p{\n{a} \n{b} \n{c}}  \\
-\end{array}\,.}_{\text{via injectable sets}}
-\end{align}
-A consequence of \cref{eq:FritzF3} is that the W-type distribution per \cref{eq:wdistribution1}
-%\begin{align}\label{eq:wdistribution}
-%{P_{\text{W}}}\parenths{A B C} \coloneqq\quad p_{\text{W}}\parens{a b c}=\frac{[100]+[010]+[001]}{3}=\begin{cases}\tfrac{1}{3}&\text{if }\; a+b+c=1 \\ 0&\text{otherwise}\end{cases}
-%\end{align}
-is found to be unrealizable from the Triangle scenario, by considering the special case of \cref{eq:FritzF3} where $a\cramp{\to}1$, $b\cramp{\to}1$, $c\cramp{\to}1$. \cref{eq:FritzF3} requires the use of a broadcasting inflation, and therefore does not hold in the context of general probability theories.
-
-%, where $a,b,c\in\brackets{0,1}$.
-%The W-distribution states that the in any event in which $A,B,C$ are observed, precisely one of them will be found to equal $1$ while the other two will equal $0$. The identity of the variable which takes the value $1$ is uniformly random. In informal but intuitive notation, the W-type distribution is ${\nicefrac{1}{3}[100]+\nicefrac{1}{3}[010]+\nicefrac{1}{3}[001]}$.
-%To see how this distribution is incompatible with \cref{eq:FritzF3}, note that for three \emph{identically distributed} (but not independent) binary variables a further special case of \cref{eq:FritzF3} is
-%\begin{align*}\begin{split}
-%&\hspace{-6ex}\p{A\cramp{=}1}^3\leq \p{A\cramp{=}B\cramp{=}C\cramp{=}0} + 3\times\p{A\cramp{=}B\cramp{=}1}\p{C\cramp{=}1}.
-%\end{split}\end{align*}
-%For the W-distribution ${\p{A\cramp{=}B\cramp{=}C\cramp{=}0}=0}$, and also ${\p{A\cramp{=}1,B\cramp{=}1}=0}$, yet ${\p{A\cramp{=}1}=\nicefrac{1}{3}}$. As ${(\nicefrac{1}{3})^3\nleq 0}$ we have proven that the W-type distribution is incompatible with the Triangle scenario.
 
 
 
-
-
-
-
-\section{Inequalities for the Bipartite Bell Scenario}
+\section{Bell scenarios and inflation}
 
 \begin{comment}
 
@@ -1517,10 +1515,11 @@ As it turns out, the inflation DAG technique is also useful outside of the probl
 	Consider the original DAG of~\cref{fig:beforecopy} and the associated inflation DAG of~\cref{fig:aftercopy}. If the original distribution $P_{ABC}$ is compatible with~\cref{fig:beforecopy}, then the associated inflation model marginalizes to a distribution $P_{AA'BC}$ which has the required properties. Hence it remains to be shown that every $P_{ABC}$ is compatible with~\cref{fig:beforecopy}. But this is easy: take $\lambda$ to be any sufficient statistic for the joint variable $(A,B)$ given $C$, such as $\lambda := (A,B,C)$.
 \end{proof}
 
-While it is also not hard to write down a distribution with the desired properties explicitly~\cite[Lemma~15.8]{yeung_network_2008}, our purpose of rederiving the lemma via inflation is our hope that more sophisticated applications of the inflation technique may also result in \emph{new} non-Shannon type entropic inequalities.
+While it is also not hard to write down a distribution with the desired properties explicitly~\cite[Lemma~15.8]{yeung_network_2008}, our purpose of rederiving the lemma via inflation is our hope that more sophisticated applications of the inflation technique will result in \emph{new} non-Shannon type entropic inequalities.
 
 
 \section{Classifying polynomial inequalities for the Triangle scenario}
+\label{sec:38ineqs}
 
 The following polynomial inequalities for the Triangle scenario have been derived via the linear quantifier elimination method of~\cref{sec:ineqs} using the inflation DAG of~\cref{fig:Tri222}. Initially this has resulted in 64 symmetry classes of inequalities, where the symmetries are given by permuting the variables and inverting the outcomes. For the resulting 64 inequalities, numerical checks have found violations of only 38 of them: although they are all facets of the marginal polytope over the distributions on pre-injectable sets, there is no guarantee that they are also nontrivial inequalities at the level of the original DAG, and this has indeed turned out not to be the case for 26 of these symmetry classes of inequalities. Moreover, it is still likely to be the case that some of these inequalities are redundant; we have not yet checked whether for every inequality there is a distribution which violates the inequality but satisfies all others.
 
