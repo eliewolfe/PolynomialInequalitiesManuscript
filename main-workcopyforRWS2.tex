@@ -334,6 +334,13 @@ Similarly, we indicate probability distributions using upper-case $P$, whereas l
 
 %We need to define several notions.
 
+%A causal inference problem is one whose input is some feature of observed statistical data---a sample of the probability distribution over the observed variables or some coarse-grained properties thereof, such as a list of conditional independence relations---and whose output is a verdict on (or probabilistic inference about) whether a given causal hypothesis can explain the observed data.   
+
+
+
+
+
+
 A causal model consists of a pair of objects: a causal structure and a set of parameters.  The causal structure is a directed acyclic graph (DAG).  Recall that a DAG $G$ consists of a set of nodes and directed edges (i.e., ordered pairs of nodes), which we denote by $\SmallNamedFunction{Nodes}{G}$ and $\SmallNamedFunction{Edges}{G}$ respectively.  Physically, each node in the DAG corresponds to a localized system and a directed edge between two nodes corresponds to there being a direct causal influence from one system to the other.  The parameters specify, for each root node, how the system corresponding to that node is prepared, and for each node that has parents in the DAG, the precise manner in which it causally depends on its parents.  If a DAG is denoted $G$ and the parameter values thereon are denoted $\mathcal{P}(G)$, then the corresponding causal model is the pair $C = (G,\mathcal{P}(G))$.  We shall also make use of the notation $\SmallNamedFunction{DAG}{C}$ for $G$ and $\SmallNamedFunction{ParamVals}{C}$ for $\mathcal{P}(G)$.
 
 Our terminology for the causal relations between the nodes in a DAG is the standard one. The parents of a node $X$ in a given graph $G$ are defined as those nodes which have directed edges originating at them and terminating at $X$, i.e. $\Pa[G]{X} = \{\:Y\:|\:Y\to X\:\}$.  Similarly the children of a node $X$ in a given graph $G$ are defined as those nodes which have have directed edges originating at $X$ and terminating at them, i.e. $\Ch[G]{X} = \{\:Y\:|\: X\to Y\:\}$. If $\bm{U}$ is a set of nodes, then we put $\Pa[G]{\bm{U}} := \bigcup_{X\in\bm{U}} \Pa[G]{X}$ and $\Ch[G]{\bm{U}} := \bigcup_{X\in\bm{U}} \Ch[G]{X}$.  The \tblue{ancestors} of a set of nodes $\bm{U}$, denoted $\An{\bm{U}}$, are defined as those nodes which have a directed \emph{path} to some node in $\bm{U}$, including the nodes in $\bm{U}$ themselves. Equivalently, $\An{\bm{U}} := \bigcup_{n\in\mathbb{N}} \mathsf{Pa}^n(\bm{U})$, where $\mathsf{Pa}^n(\bm{U})$ is inductively defined via $\mathsf{Pa}^0(\bm{U}) := \bm{U}$ and $\mathsf{Pa}^{n+1}(\bm{U}) := \mathsf{Pa}(\mathsf{Pa}^n(\bm{U}))$. 
@@ -343,19 +350,51 @@ It consists of the nodes $\bm{V}$ and the edges between pairs of nodes in $\bm{V
 \tblue{ancestral subgraph} of $\bm{V}$, denoted $\ansubgraph{\bm{V}}$, which is the minimal subgraph containing the full ancestry of $\bm{V}$, $\ansubgraph{\bm{V}}\coloneqq\subgraph{\An{\bm{V}}}$. 
 
 
-In a {\em classical} causal model, the localized systems are random variables, and the parameters are conditional probabilities\footnote{Classical causal models will be the primary focus of this article. Nonetheless, there is a quantum generalization of the notion of a causal model that will feature in our discussions at the end of this article.  In a {\em quantum} causal model\cite{leifer2013conditionalstates}, the localized systems are types of quantum systems (specified by Hilbert space dimensionality), and the parameters are quantum operations.  Specifically, for each root node, the model specifies a unit-trace positive operator on the Hilbert space for that system and for each non-root node, the model specifies a trace-preserving completely-positive linear map from the operators on the Hilbert space of the parents of the system to the operators on the Hilbert space of the system.  Certain nodes in a quantum causal model may be considered classical, in which case all states and operations must be diagonal in some fixed basis on that system.  One can also generalize the notion of a causal model further still to the case of generalized probabilistic theories, as was done in Ref.~\cite{pusey2014gdag}.
+In a causal model, the localized systems are random variables, and the parameters are conditional probabilities\footnote{This is the definitio of a {\em classical}  causal model, which will be the primary focus of this article. Nonetheless, there is a quantum generalization of the notion of a causal model that will feature in our discussions at the end of this article.  In a {\em quantum} causal model\cite{leifer2013conditionalstates}, the localized systems are types of quantum systems (specified by Hilbert space dimensionality), and the parameters are quantum operations.  Specifically, for each root node, the model specifies a unit-trace positive operator on the Hilbert space for that system and for each non-root node, the model specifies a trace-preserving completely-positive linear map from the operators on the Hilbert space of the parents of the system to the operators on the Hilbert space of the system.  Certain nodes in a quantum causal model may be considered classical, in which case all states and operations must be diagonal in some fixed basis on that system.  One can also generalize the notion of a causal model further still to the case of generalized probabilistic theories, as was done in Ref.~\cite{pusey2014gdag}.
 }.
  %probabilities and conditional probabilities on these random variables.  
 Specifically, for each node, the model specifies a conditional probability distribution over the values of the random variable associated to that node, given the values of the variables associated to its parents in the DAG.  (In the case of root nodes, the parents are the null set and the conditional probability distribution is simply a probability distribution.)
  %Specifically, for each root node, the model specifies a probability distribution over the values of the associated random variable, and for each non-root node, it specifies a conditional probability distribution over the values of the random variable associated to that node, given the values of the variables associated to its parents in the DAG.  
 Denoting the conditional probability distribution associated to a node $A$ in the DAG $G$ by $\pdf{A|\Pa[G]{A}}$, we have
 \begin{align}
-\mathcal{P}_G \equiv \{\pdf{A|\Pa[G]{A}}: A \in \SmallNamedFunction{Nodes}{G}\}.
+\mathcal{P}(G) \equiv \{\pdf{A|\Pa[G]{A}}: A \in \SmallNamedFunction{Nodes}{G}\}.
 \end{align}
 %Note that the root nodes are included as those for which the parents are the null set and the conditional probability distribution is simply a probability distribution.
-As is standard, we assume that the joint distribution defined by the causal model is $\pdf{\SmallNamedFunction{Nodes}{G}} = \Pi_{A\in \SmallNamedFunction{Nodes}{G}} \pdf{A|\Pa[G]{A}}$ (this is called the Markov condition).  The joint distribution over the observed variables is then obtained by marginalization over the latent variables $\pdf{\SmallNamedFunction{ObservedNodes}{G}} =  \sum_{\{X :X \in\SmallNamedFunction{LatentNodes}{G}\}} \pdf{\SmallNamedFunction{Nodes}{G}}$.
+As is standard, we assume that the joint distribution defined by the causal model is $\pdf{\SmallNamedFunction{Nodes}{G}} = \Pi_{A\in \SmallNamedFunction{Nodes}{G}} \pdf{A|\Pa[G]{A}}$ (this is called the Markov condition).  The subset of nodes of $G$ that are observed is denoted $\SmallNamedFunction{ObservedNodes}{G}$ and the rest are denoted $\SmallNamedFunction{LatentNodes}{G}$. 
+The joint distribution over the observed variables is obtained from the joint distribution over all variables by marginalization over the latent variables $\pdf{\SmallNamedFunction{ObservedNodes}{G}} =  \sum_{\{X :X \in\SmallNamedFunction{LatentNodes}{G}\}} \pdf{\SmallNamedFunction{Nodes}{G}}$.
 
-We now introduce the notion of \tblue{the inflation of a classical causal model}.  We describe what inflation means for the causal structure and the parameters in turn. 
+In addition to the notion of a causal model, we define the notion of a causal hypothesis, which is a set of causal models consistent with a single DAG. Specifically, if $G$ is a DAG and $S$ is a set of parameter values  consistent with $G$ (i.e. a set of possibilities for the conditional probability distributions at each node of $G$), then $G$ and $S$ define a causal hypothesis, which we denote by $H_{G,S}$, and which we define formally as the following set of causal models:
+\begin{align}
+H_{G,S} \equiv \{ C \mid \SmallNamedFunction{DAG}{C}=G, \SmallNamedFunction{ParamVals}{C} \in S\}.
+\end{align}
+% (is this standard usage of the term "model"?  In physics, a model typically does not include a specification of the boundary conditions, or does it?)
+We denote  the set of {\em all} parameter values consistent with $G$ by $S_{\rm full}$, so that $H_{G,{S_{\rm full}}}$ is simply the causal hypothesis that the DAG is $G$, that is, the hypothesis that there exists {\em some} parameter values supplementing $G$ such that the observed data can be explained by the resulting causal model. 
+
+
+With these notions in hand, we can give a broad definition of causal inference.  It is useful to characterize any algorithm for causal inference as one that takes two inputs:
+\begin{itemize}
+\item an {\em observational input}, which is a specification of some feature of observed statistical data
+%---a sample of the probability distribution over the observed variables or some coarse-grained properties thereof, such as a list of conditional independence relations
+\item a {\em causal input}, which is a specification of some causal hypothesis
+\end{itemize}
+and that outputs some sort of verdict about their compatibility.
+
+The most informative sort of observational input is a specification of the joint distributions over all of the observed variables.  The observational input in real-world applications necessarily falls short of this ideal because one only ever obtains a {\em finite sample} of the joint distribution.  Moreover, even if one sets aside finite-sample concerns and imagines the input as infinite-run statistics, there are other ways in which the observational input to a causal inference problem might be less informative than a specification of the joint distribution.  For instance, one might merely have a description of the conditional independence relations that hold among the observed variables.  Or one might merely have a specification of the marginals of the joint distribution for certain subsets of the observed variables.  Indeed, the latter sort of restriction on the observational input will be relevant for our inflation DAG technique.  
+
+The most fine-grained specification of the causal input is one wherein the causal hypothesis specifies a specific DAG as well as a complete specification of all the parameters supplementing the DAG.  The causal inference problem that is perhaps most widely studied is one wherein the causal hypothesis just concerns the DAG.  Between these are causal inference problems that explore more refined causal hypotheses, incorporating constraints on how  certain nodes in the DAG functionally depend on their parents.  An example is the assumption of an additive noise model for certain causal influences: if observed variable $Y$ has an observed variable $X$ as a parent and also a latent variable $U$, then the noise is deemed additive if $Y=\alpha X + \beta U$ for some scalars $\alpha$ and $\beta$ [provide references].  More general constraints on the causal dependences in the model have also been explored [provide references].  (Note that constraints on the probability distributions over the latent variables can be understood as a kind of constraint on the causal dependences.)
+%Another conceivable constraint on the parameters is a constraint on the form of the probabilities distributions over the latent variables.  
+Our inflation DAG technique will require consideration of a novel and unusual sort of constraint on the causal dependences of the model. 
+
+Finally, the verdict about the compatibility of the observational input and the causal hypothesis could come in different forms.  The simplest possibility is a specification of whether the observational input is consistent with the causal hypothesis.  However, the notion of compatibility at play might be more refined than this, for instance, the algorithm might specify a confidence level with which one can reject the given causal hypothesis as an explanation of the observational input.
+%output is a verdict on (or probabilistic inference about) whether a given causal hypothesis can explain the observed data.   
+
+%The most informative sort of observational input is a specification of the joint distributions over all of the observed variables.  Nonetheless, causal inference problems often proceed with a less informative sort of observational input.  For instance, one might merely have a description of the conditional independence relations that hold among the obeerved variables.  Another example of how the observational input might be less informative is if it merely specifies the marginals of the joint distribution for certain subsets of the observed variables.  (Indeed, the latter sort of observational input will be relevant for our inflation DAG technique.)   The observational input might also be less informative in another sense, namely, that it is merely a {\em finite sample} of some joint distribution.
+
+The inflation DAG technique is a way of mapping a given causal inference problem onto a new causal inference problem where the observational and causal inputs of the latter problem are determined by the observational and causal inputs of the original problem.   In particular, under the inflation map, the observational input becomes less informative while the causal hypothesis becomes more fine-grained, in a manner that we shall now make explicit.
+
+\subsection{Inflation: a tool for causal inference}
+
+We now introduce the notion of \tblue{the inflation of a causal model}.  We describe what inflation means for the causal structure and the parameters in turn. 
 %We will denote by $C'=(G',\mathcal{P'}(G'))$ the inflation of $C=(G,\mathcal{P}(G))$ and we will refer to ...
  Let $C=(G,\mathcal{P}(G))$ denote the original causal model and $C'=(G',\mathcal{P'}(G'))$ its inflation.  We say that the DAG $G'$ is the inflation of the DAG $G$, and that the parameters $\mathcal{P'}(G')$ are the inflationary image of the parameters $\mathcal{P}(G)$.
 
@@ -380,41 +419,44 @@ Next, we turn to defining the condition under which a set of parameters $\mathca
 
 The condition is simply that for every node $A_i$ in $G'$, the manner in which $A_i$ causally depends on its parents within $G'$ must be the same as the manner in which $A$ causally depends on its parents within $G$.   Formally, 
 \begin{align}\label{eq:funcdependences}
-\forall A_i \in \SmallNamedFunction{Nodes}{G'}:\; \pdf{A_i| \Pa[G']{A_i}}=\pdf{A|\Pa[G]{A}},
+\mathcal{P'}(G') = \SmallNamedFunction{Inflation}{\mathcal{P}(G)} \quad \text{iff}\quad \forall A_i \in \SmallNamedFunction{Nodes}{G'}:\; \pdf{A_i| \Pa[G']{A_i}}=\pdf{A|\Pa[G]{A}},
 \end{align}
 where Eq.~\eqref{eq:definflationDAG} guarantees that $A_i \sim A$ and $\Pa[G']{A_i} \sim \Pa[G]{A}$.  Note that the operation of equipping a modified DAG with the same functional dependencies as the original one also appears in the \emph{do calculus} of~\citet{pearl2009causality}. \fxnote{adhesivity and non-Shannon-type ineqs}
 
 %A causal model specifies the causal structure and the autonomous causal mechanisms.  
-To sum up then, inflation is a mapping to a new causal structure wherein each given variable in the original causal structure may have counterparts in the inflation and {\em where the causal mechanisms in the inflation DAG are given by the corresponding autonomous causal mechanisms in the original DAG.}  The duplication of variables implies that causal mechanisms in the inflation DAG are not necessarily autonomous, but rather often coincide with one another.
-
-In addition to the notion of a causal model, we define the notion of a causal hypothesis, which is a set of causal models consistent with a single DAG. Specifically, if $G$ is a DAG and $S$ is a set of parameter values  consistent with $G$ (i.e. a set of possibilities for the conditional probability distributions at each node of $G$), then $G$ and $S$ define a causal hypothesis, which we denote by $H_{G,S}$, and which we define formally as the following set of causal models:
-\begin{align}
-H_{G,S} \equiv \{ C \mid \SmallNamedFunction{DAG}{C}=G, \SmallNamedFunction{ParamVals}{C} \in S\}.
-\end{align}
-% (is this standard usage of the term "model"?  In physics, a model typically does not include a specification of the boundary conditions, or does it?)
-We denote  the set of {\em all} parameter values consistent with $G$ by $S_{\rm full}$, so that $H_{G,{S_{\rm full}}}$ is simply the causal hypothesis that the DAG is $G$, that is, the hypothesis there exists {\em some} parameter values supplementing $G$ such that the observed data can be explained by the resulting causal model. 
-
-A causal inference problem is one whose input is some observed data---a sample of the probability distribution over the observed variables or some coarse-grained properties thereof, such as a list of conditional independence relations---and whose output is a verdict on (or probabilistic inference about) whether a given causal hypothesis can explain the observed data.   The particular causal inference problem that is most widely studied is one wherein the causal hypothesis just concerns the DAG.  Nonetheless, some causal inference problems explore more refined causal hypotheses, incorporating constraints on how  certain nodes in the DAG functionally depend on their parents.  An example is the assumption of an additive noise model for certain causal influences: if observed variable $Y$ has an observed variable $X$ as a parent and also a latent variable $U$, then the noise is deemed additive if $Y=\alpha X + \beta U$ for some scalars $\alpha$ and $\beta$ [provide references].  More general constraints on the functional dependences have also been explored [provide references].  Another example of a constraint on the parameters is a constraint on the form of the probabilities distributions over the latent variables. 
+To sum up then, inflation is a mapping to a new causal structure wherein each given variable in the original causal structure may have counterparts in the inflation and {\em where the causal mechanisms in the inflation DAG are given by the corresponding 
+%autonomous 
+causal mechanisms in the original DAG.}  
+%The copying of variables under inflation implies that causal mechanisms in the inflation DAG are not necessarily autonomous, but rather often coincide with one another.
 
 
 %defines a novel sort of constraint on the parameters of a causal model.  We pause to describe this constraint in general terms, before introducing the notion of inflation.  The sorts of causal structures that can arise in our inflation scheme have the property that necessarily there will be certain pairs of variables which have the same ancestral subgraph.  The constraint on the parameters is that the two conditional probability distributions describing how each variable of the pair depends on its parents are quantitatively equal to one another.  (To our knowledge, this sort of constraint has not been considered before in causal inference.)
 
-Note that the distinction between observed nodes and latent nodes in the DAG $G$ is inherited by the DAG $G'$.
 %The inflation DAG technique that we introduce allows questions about the viability of one causal hypothesis for certain observed data to be turned into questions about the viability of a different sort of causal hypothesis for an inflation of the observed data.
 
+%Because we have defined inflation as a map on causal models, 
+Because causal hypotheses are sets of causal models, any inflation map, by virtue of being a map on causal models, induces a map on causal hypotheses. Specifically,
+\begin{align}
+\SmallNamedFunction{Inflation}{H_{G,S}} = \{ \SmallNamedFunction{Inflation}{C} : C \in H_{G,S}\}
+\end{align}
+%[Put this after the lemma] Inflation can be understood as a map over causal hypotheses as follows: An inflation map takes a causal hypothesis $H_{G,S}$  to a causal hypotheses $H_{G',S'}$, where $G'$ and $S'$ satisfy:
+%\begin{itemize}
+%\item The DAG $G'$ is an inflation of the DAG $G$ 
+%\item $\{ \pdf{A_i| \Pa[G']{A_i}} : A_i \in \SmallNamedFunction{Nodes}{G'}\} \in S'$ if only if  $\{ \pdf{A| \Pa[G]{A}} : A \in \SmallNamedFunction{Nodes}{G}\} \in S$.
+%\end{itemize}
 
-It follows that inflation maps a causal hypothesis $H_{G,S}$ 
-%for a probability distribution $\pdf[G]{\SmallNamedFunction{ObservedNodes}(G)}$ 
-to a causal hypotheses $H_{G',S'}$,
-% for a probability distribution $\pdf[G']{\SmallNamedFunction{ObservedNodes}(G')}$
- where $G'$ and $S'$ satisfy:
-\begin{itemize}
-\item The DAG $G'$ is an inflation of the DAG $G$ 
-\item $\{ \pdf{A_i| \Pa[G']{A_i}} : A_i \in \SmallNamedFunction{Nodes}{G'}\} \in S'$ if only if  $\{ \pdf{A| \Pa[G]{A}} : A \in \SmallNamedFunction{Nodes}{G}\} \in S$.
-\end{itemize}
 Note that even if $S=S_{\rm full}$, so that the original causal hypothesis puts no constraints on the parameter values, one generally has $S'\ne S'_{\rm full}$, that is, the inflationary image of the full set of parameter values on $G$ is not the full set of parameter values on $G'$. Rather, $S'$ incorporates a nontrivial restriction on the parameters consistent with $G'$, namely, that if nodes $A_i$ and $A_j$ on $G'$ are copies of a single node $A$ on $G$,then the parameter values on $G'$ are constrained to satisfy $\pdf{A_i| \Pa[G']{A_i}}=\pdf{A_j|\Pa[G']{A_j}}$.
 
-Finally, we can spell out how the inflation DAG technique is useful for causal inference.  Note, first of all, that for any sets of nodes $\bm{U}\in \SmallNamedFunction{Nodes}{G'}$ and   $\subsim{\bm{U}}\in \SmallNamedFunction{Nodes}{G}$,
+Finally, we can begin to spell out how the inflation DAG technique is useful for causal inference.  First, we emphasize the broad notion of causal inference that we have in mind here. 
+
+
+
+%[Note that the distinction between observed nodes and latent nodes in the DAG $G$ is inherited by the DAG $G'$.]
+
+
+To see how inflation is relevant for causal inference, we must explain how the distributions that can be achieved in the inflation model are constrained by those in the original model.
+
+Note, first of all, that for any sets of nodes $\bm{U}\in \SmallNamedFunction{Nodes}{G'}$ and   $\subsim{\bm{U}}\in \SmallNamedFunction{Nodes}{G}$,
 \begin{align}\label{eq:coincidingdistrodef}
 \text{if }\quad \ansubgraph[G']{\bm{U}}\sim\ansubgraph[G]{\subsim{\bm{U}}}\quad\text{then}\quad \pdf{\bm{U}}=\pdf{\subsim{\bm{U}}}.
 \end{align}
@@ -459,15 +501,33 @@ Because ancestral independence in the DAG implies statistical independence for a
 \begin{align}\label{eq:preinjfactor}
 \forall \bm{U}\in\SmallNamedFunction{PreInjectableSets}{G'}:	\pdf[G']{\bm{U}} = \pdf[G']{\bm{U}_1} \pdf[G']{\bm{U}_2}  \cdots \pdf[G']{\bm{U}_n}.
 \end{align}
-And because each injectable set of variables $\bm{U}_i$ satisfies Eq.~\eqref{eq:coincidingdistrodef}, it follows that such joint distributions in the inflation model can be expressed in terms of distributions defined on the original causal model,
+Furthermore, because each injectable set of variables $\bm{U}_i$ satisfies Eq.~\eqref{eq:coincidingdistrodef}, it follows that such joint distributions in the inflation model can be expressed in terms of distributions defined on the original causal model,
 \begin{align}\label{eq:preinjfactor}
 \forall \bm{U}\in\SmallNamedFunction{PreInjectableSets}{G'}:	\pdf[G']{\bm{U}} = \pdf[G]{\subsim{\bm{U}}_1} \pdf[G]{\subsim{\bm{U}}_2}  \cdots \pdf[G]{\subsim{\bm{U}}_n}.
 \end{align}
 This latter property implies that the probability distribution over any pre-injectable set in the inflation model is fully determined by the parameters in the original causal model.  Indeed, this relation is what motivates us to consider the pre-injectable sets.
 
-Let the set of observed variables be denoted by $\bm{O}$, and consider a given joint distribution over $\bm{O}$, denoted $\pdf{\bm{O}}$. 
- %$\pdf{\SmallNamedFunction{ObservedNodes}(G)}$. 
-The causal hypothesis $H_{G,S}$ is consistent with $\pdf{\bm{O}}$ if there exist choices of parameters consistent with hypothesis such that $\pdf[G]{\SmallNamedFunction{ObservedNodes[G]} = \pdf{\bm{O}}$. 
+Consider a causal inference problem where the input data is a joint distribution over a set of observed variables.  A causal model is only a candidate for a causal explanation of this joint distribution if it posits a DAG $G$ for which $\SmallNamedFunction{ObservedNodes}{G}$ corresponds to the set of observed variables, so we assume this henceforth. The causal hypothesis $H_{G,S}$ is consistent with data $\pdf{\SmallNamedFunction{ObservedNodes}{G}}$ if and only if there exists a causal model satisfying the constraints of the hypothesis, $C \in H_{G,S}$, such that $\pdf[C]{\SmallNamedFunction{ObservedNodes}{G}} = \pdf{\SmallNamedFunction{ObservedNodes}{G}}$. 
+
+\begin{lemma}
+The causal hypothesis $H_{G,S}$ is consistent with statistical data $\pdf{\SmallNamedFunction{ObservedNodes}{G}}$  if and only if the causal hypothesis $H_{G',S'}$ is consistent with the following constraints on the distribution over the observed variables in $G'$: 
+\begin{align}
+\forall \bm{U} \in \SmallNamedFunction{InjectableSets}{\SmallNamedFunction{ObservedNodes}{G'}}: \pdf[G']{\bm{U}} = \pdf{\subsim{\bm{U}}}.
+\end{align}
+\end{lemma}
+
+We see, therefore, that a causal inference problem at the level of the original DAG defines a causal inference problem at the level of the inflated DAG.
+
+
+%Let the set of observed variables be denoted by $\bm{O}$, and consider a given joint distribution over $\bm{O}$, denoted $\pdf{\bm{O}}$.  A causal model is only a candidate for a causal explanation of  $\pdf{\bm{O}}$ if it posits a DAG $G$ satisfying $\SmallNamedFunction{ObservedNodes}{G}=\bm{O}$, so we assume this henceforth.  
+%The causal hypothesis $H_{G,S}$ is consistent with data $\pdf{\bm{O}} if and only if there exists a causal model satisfying the constraints of the hypothesis, $C \in H_{G,S}$, such that $\pdf[C]{\SmallNamedFunction{ObservedNodes}{G}} = \pdf{\bm{O}}$. 
+%\begin{lemma}
+%The causal hypothesis $H_{G,S}$ is consistent with a distribution $\pdf{\bm{O}}$ over the observed variables in $G$  if and only if the causal hypothesis $H_{G',S'}$ is consistent with the following constraints on the distribution over the observed variables in $G'$: $\forall \bm{U} \in \SmallNamedFunction{InjectableSets}{\SmallNamedFunction{ObservedNodes}{G'}} \cap : \pdf[G']{\bm{U}} = \pdf{\subsim{\bm{U}}}$.
+%\end{lemma}
+
+
+%If the DAG $G$ is inflated to the DAG $G'$, then we denote the image of $\SmallNamedFunction{ObservedNodes}{G}$ under the inflation by $\SmallNamedFunction{ObservedNodes}{G'}$.  [....]
+
 
 %Therefore, for distributions that are Markov with respect to the DAG~\cite{pearl2009causality,spirtes2011causation,studeny2005probabilistic,koller2009probabilistic}, ancestral independence of nodes implies marginal independence of the random variables. For us, all distributions over the variables represented by the nodes of a DAG will be assumed Markov. Intuitively, we presume that no statistical correlation is possible without causal explanation. Thus if a DAG possesses the feature ${\bm{U}\aindep \bm{V}\aindep \bm{W}}$, we demand \color{red} [Isn't this implied by the definitions and therefore doesn't need to be demanded?] \color{black} factorization of the marginal distributions such that ${\pdf{\bm{U} \bm{V} \bm{W}} = \pdf{\bm{U}} \pdf{\bm{V}} \pdf{\bm{W}}}$.
 
@@ -777,32 +837,6 @@ No matter how biased the distributions $P(X)$ and $P(Y)$ are, however, surely th
 %&= \p{A_1\cramp{\neq}B_2|X_1\eql 0, Y_2\eql 1}+\p{A_2\cramp{\neq}B_1| Y_1\eql 0,X_2\eql 1}\\
 %&\therefore \p{A=B|X\eql Y\eql 0}\leq \p{A\neq B|X\eql 1,Y\eql 0}+\p{A\neq B|X\eql 0,Y\eql 1}
 %\end{split}\end{align}
-
-\begin{comment}
-\example{: \tred{The center-break distribution cannot arise from the Instrumental scenario}}\par\smallskip\nobreak
-\begin{figure}[t]
-\centering
-\begin{minipage}[b]{0.375\linewidth}
-\centering
-\includegraphics[scale=1]{InstrumentalDAGpearl.pdf}
-\caption{The Instrumental scenario}\label{fig:instrumental}
-\end{minipage}\hspace{80pt}
-\begin{minipage}[b]{0.4\linewidth}
-\centering
-\includegraphics[scale=1]{InstrumentalInflation.pdf}
-\caption{An inflation of the Instrumental scenario.}\label{fig:instrumentalinflation}
-\end{minipage}\hfill
-\end{figure}
-
-The (disallowed) center-break distribution for the Instrumental scenario is one in which $Y$ and $Z$ are perfectly correlated while $X$ is fixed as a point distribution, i.e. returning one outcome with 100$\%$ probability.
-\begin{align}
-\begin{split}\label{eq:PRbox}
-&{P_{\text{CB}}}\parenths{X Y Z} \coloneqq\quad p_{\text{CB}}\parens{x y z} y}=\frac{[000]+[011]}{2}=
-\begin{cases}\tfrac{1}{2}&\text{if }\; y\eql z \land x\eql0 \\ 0&\text{otherwise}\end{cases}
-\end{split}
-\end{align}
-We prove its infeasibility by considering the inflation DAG in \cref{fig:instrumentalinflation}. 
-\end{comment}
 
 
 The following section discusses how to procedurally derive polynomial infeasibility criteria pertaining to original DAG from properties of an inflation DAG. 

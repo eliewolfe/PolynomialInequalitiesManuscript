@@ -465,9 +465,6 @@ And because each injectable set of variables $\bm{U}_i$ satisfies Eq.~\eqref{eq:
 \end{align}
 This latter property implies that the probability distribution over any pre-injectable set in the inflation model is fully determined by the parameters in the original causal model.  Indeed, this relation is what motivates us to consider the pre-injectable sets.
 
-Let the set of observed variables be denoted by $\bm{O}$, and consider a given joint distribution over $\bm{O}$, denoted $\pdf{\bm{O}}$. 
- %$\pdf{\SmallNamedFunction{ObservedNodes}(G)}$. 
-The causal hypothesis $H_{G,S}$ is consistent with $\pdf{\bm{O}}$ if there exist choices of parameters consistent with hypothesis such that $\pdf[G]{\SmallNamedFunction{ObservedNodes[G]} = \pdf{\bm{O}}$. 
 
 %Therefore, for distributions that are Markov with respect to the DAG~\cite{pearl2009causality,spirtes2011causation,studeny2005probabilistic,koller2009probabilistic}, ancestral independence of nodes implies marginal independence of the random variables. For us, all distributions over the variables represented by the nodes of a DAG will be assumed Markov. Intuitively, we presume that no statistical correlation is possible without causal explanation. Thus if a DAG possesses the feature ${\bm{U}\aindep \bm{V}\aindep \bm{W}}$, we demand \color{red} [Isn't this implied by the definitions and therefore doesn't need to be demanded?] \color{black} factorization of the marginal distributions such that ${\pdf{\bm{U} \bm{V} \bm{W}} = \pdf{\bm{U}} \pdf{\bm{V}} \pdf{\bm{W}}}$.
 
@@ -794,13 +791,10 @@ No matter how biased the distributions $P(X)$ and $P(Y)$ are, however, surely th
 \end{minipage}\hfill
 \end{figure}
 
-The (disallowed) center-break distribution for the Instrumental scenario is one in which $Y$ and $Z$ are perfectly correlated while $X$ is fixed as a point distribution, i.e. returning one outcome with 100$\%$ probability.
-\begin{align}
-\begin{split}\label{eq:PRbox}
-&{P_{\text{CB}}}\parenths{X Y Z} \coloneqq\quad p_{\text{CB}}\parens{x y z} y}=\frac{[000]+[011]}{2}=
-\begin{cases}\tfrac{1}{2}&\text{if }\; y\eql z \land x\eql0 \\ 0&\text{otherwise}\end{cases}
-\end{split}
-\end{align}
+The (disallowed) center-break distribution for the Instrumental scenario is one in which $Y$ and $Z$ are perfectly correlated while $X$ is fixed as a point distribution, i.e. returning one outcome with 100\% probability.
+\begin{align}\begin{split}\label{eq:PRbox}
+&{P_{\text{CB}}}\parenths{X Y Z} \coloneqq\quad p_{\text{CB}}\parens{x y z} y}=\frac{[000]+[011]}{2}=\begin{cases}\tfrac{1}{2}&\text{if }\; y\eql z \land x\eql0 \\ 0&\text{otherwise}\end{cases}
+\end{split}\end{align}
 We prove its infeasibility by considering the inflation DAG in \cref{fig:instrumentalinflation}. 
 \end{comment}
 
