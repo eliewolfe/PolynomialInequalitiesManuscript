@@ -1665,6 +1665,41 @@ Naturally, two causal structures are observationally equivalent if one can be tr
 
 
 
+\section{The copy lemma and non-Shannon type entropic inequalities}
+
+As it turns out, the inflation DAG technique is also useful outside of the problem of causal inference. As we argue in the following, inflation is secretly what underlies the \tblue{copy lemma} in the derivation of non-Shannon type entropic inequalities~\cite[Chapter~15]{yeung_network_2008}. The following formulation of the copy lemma is the one of Kaced~\cite{kaced_equivalence_2013}.
+
+\begin{lemma}
+	Let $A$, $B$ and $C$ be random variables with distribution $P_{ABC}$. Then there exists a fourth random variable $A'$ and joint distribution $P_{AA'BC}$ such that:
+	\begin{enumerate}
+		\item $P_{AB} = P_{AB'}$,
+		\item $A' \perp AC \:|\: B$.
+	\label{copylemma}
+	\end{enumerate}
+\end{lemma}
+
+\begin{figure}[t]
+\centering
+\begin{minipage}[b]{0.23\linewidth}
+\centering
+%\includegraphics[scale=1]{}
+\caption{A causal structure that is compatible with any distribution $P_{ABC}$.}\label{fig:beforecopy}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.38\linewidth}
+\centering
+%\includegraphics[scale=1]{}
+\caption{An inflation.}\label{fig:aftercopy}
+\end{minipage}
+\end{figure}
+
+\begin{proof}
+	Consider the original DAG of~\cref{fig:beforecopy} and the associated inflation DAG of~\cref{fig:aftercopy}. If the original distribution $P_{ABC}$ is compatible with~\cref{fig:beforecopy}, then the associated inflation model marginalizes to a distribution $P_{AA'BC}$ which has the required properties. Hence it remains to be shown that every $P_{ABC}$ is compatible with~\cref{fig:beforecopy}. But this is easy: take $\lambda$ to be any sufficient statistic for the joint variable $(A,B)$ given $C$, such as $\lambda := (A,B,C)$.
+\end{proof}
+
+While it is also not hard to write down a distribution with the desired properties explicitly~\cite[Lemma~15.8]{yeung_network_2008}, our purpose of rederiving the lemma via inflation is our hope that more sophisticated applications of the inflation technique may also result in \emph{new} non-Shannon type entropic inequalities.
+
+
 \section{Classifying polynomial inequalities for the Triangle scenario}
 
 The following polynomial inequalities for the Triangle scenario have been derived via the linear quantifier elimination method of~\cref{sec:ineqs} using the inflation DAG of~\cref{fig:Tri222}. Initially this has resulted in 64 symmetry classes of inequalities, where the symmetries are given by permuting the variables and inverting the outcomes. For the resulting 64 inequalities, numerical checks have found violations of only 38 of them: although they are all facets of the marginal polytope over the distributions on pre-injectable sets, there is no guarantee that they are also nontrivial inequalities at the level of the original DAG, and this has indeed turned out not to be the case for 26 of these symmetry classes of inequalities. Moreover, it is still likely to be the case that some of these inequalities are redundant; we have not yet checked whether for every inequality there is a distribution which violates the inequality but satisfies all others.
