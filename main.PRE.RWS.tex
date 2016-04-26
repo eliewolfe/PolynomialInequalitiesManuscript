@@ -322,94 +322,75 @@ These criteria are generally based on the \emph{broadcasting} of the values of a
 % like Tsirelson inequalities \cite{Tsirelson1980,Brunner2013Bell}, i.e. constraints which are satisfied by all distributions realizable from a given quantum causal structure. 
 
 %\section{Notation}
-\section{Causal models and causal inference}\label{sec:definitions}
+\section{Notation and Definitions}\label{sec:definitions}
 
-\color{red}
+We follow the convention that upper-case letters indicate random variables while lower-case letters indicate some particular value associated with the corresponding random variable. In this convention, for example, a student's score on some exam $X$ might depend probabilistically on the amount of sleep $S$. The logical proposition, or \tblue{event}, $X\cramp{=}x,S\cramp{=}s$ should be understood as ``the student scores $x$ on the exam with a duration of sleep equal to $s$''. Events may be written in lower-case-only shorthand, such as $x,s$ instead of $X\cramp{=}x,S\cramp{=}s$.
 
-%We need to define several notions.
+Similarly, we indicate probability distributions using upper-case $P$, whereas lower-case $p$ is used to indicate the probability of particular events. Thus $\pdf{X, Y}$ is the multivariate probability distribution over the random variables $\{X Y\}$, and $\p{x, y}$ denotes the joint probability of the two events $X\cramp{=}x$ \emph{and} $Y\cramp{=}y$. We often omit the comma and just write $\pdf{X Y}$ and $\p{x y}$, respectively.
 
-%A causal inference problem is one whose input is some feature of observed statistical data---a sample of the probability distribution over the observed variables or some coarse-grained properties thereof, such as a list of conditional independence relations---and whose output is a verdict on (or probabilistic inference about) whether a given causal hypothesis can explain the observed data.   
+% We choose to indicate logical negation by $\n{x}\coloneqq\SmallNamedFunction{Not}{x}$, such that $\n{x}$ references the possibility of \emph{any} outcome other than $x$, so that $\p{\n{x}}\coloneqq\p{X\cramp{\neq}x}=1-\p{X\cramp{=}x}$. This convention effectively coarse-grains the outcome space into just two possibilities: $x$ and $\n{x}$. %Logical conjunction is herein represented by default, such that $\p{x y}$ is the joint probability of the two events  $X\cramp{=}x$ \emph{and} $Y\cramp{=}y$. 
 
-A causal model consists of a pair of objects: a causal structure and a set of parameters.  The causal structure is a directed acyclic graph (DAG).  Recall that a DAG $G$ consists of a set of nodes and directed edges (i.e., ordered pairs of nodes), which we denote by $\SmallNamedFunction{Nodes}{G}$ and $\SmallNamedFunction{Edges}{G}$ respectively.  Physically, each node in the DAG corresponds to a localized system and a directed edge between two nodes corresponds to there being a direct causal influence from one system to the other.  The parameters specify, for each root node, how the system corresponding to that node is prepared, and for each node that has parents in the DAG, the precise manner in which it causally depends on its parents.  If a DAG is denoted $G$ and the parameter values thereon are denoted $\mathcal{P}(G)$, then the corresponding causal model is the pair $C = (G,\mathcal{P}(G))$.  We shall also make use of the notation $\SmallNamedFunction{DAG}{C}$ for $G$ and $\SmallNamedFunction{ParamVals}{C}$ for $\mathcal{P}(G)$.
+A causal structure, for the purpose of this article, is taken to be given by a directed acyclic graph (DAG): each node in the DAG corresponds to a random variable\footnote{In the quantum context, however, only \emph{observable} nodes correspond to classical random variables, such as the outcomes of measurements. Latent nodes, however, represent quantum systems. Functional dependence is replaced by the action of a quantum operation, and edges then dictate the ways in which quantum systems factor and/or compose. See Refs. \cite{pusey2014gdag,leifer2013conditionalstates}. \purp{Rob, add appendix? Classical/Quantum/GPT everything? I'm thinking a table would be nice.}}, while each edge represents a possible causal influence between variables. In our graphical depictions we follow the convention of representing latent nodes by circles, and observable nodes by triangles \cite{pusey2014gdag}.
 
-Our terminology for the causal relations between the nodes in a DAG is the standard one. The parents of a node $X$ in a given graph $G$ are defined as those nodes which have directed edges originating at them and terminating at $X$, i.e. $\Pa[G]{X} = \{\:Y\:|\:Y\to X\:\}$.  Similarly the children of a node $X$ in a given graph $G$ are defined as those nodes which have have directed edges originating at $X$ and terminating at them, i.e. $\Ch[G]{X} = \{\:Y\:|\: X\to Y\:\}$. If $\bm{U}$ is a set of nodes, then we put $\Pa[G]{\bm{U}} := \bigcup_{X\in\bm{U}} \Pa[G]{X}$ and $\Ch[G]{\bm{U}} := \bigcup_{X\in\bm{U}} \Ch[G]{X}$.  The \tblue{ancestors} of a set of nodes $\bm{U}$, denoted $\An[G]{\bm{U}}$, are defined as those nodes which have a directed \emph{path} to some node in $\bm{U}$, including the nodes in $\bm{U}$ themselves. Equivalently (dropping the $G$ subscript), $\An{\bm{U}} := \bigcup_{n\in\mathbb{N}} \mathsf{Pa}^n(\bm{U})$, where $\mathsf{Pa}^n(\bm{U})$ is inductively defined via $\mathsf{Pa}^0(\bm{U}) := \bm{U}$ and $\mathsf{Pa}^{n+1}(\bm{U}) := \mathsf{Pa}(\mathsf{Pa}^n(\bm{U}))$. 
+Our terminology for the causal relations between the nodes in a DAG is the standard one. The parents of a node $X$ in a given graph $G$ are defined as those nodes which have directed edges originating at them and terminating at $X$, i.e. $\Pa[G]{X} = \{\:Y\:|\:Y\to X\:\}$. If $\bm{U}$ is a set of nodes, then we put $\Pa[G]{\bm{U}} := \bigcup_{X\in\bm{U}} \Pa[G]{X}$. Similarly the children of a node $X$ in a given graph $G$ are defined as those nodes which have have directed edges originating at $X$ and terminating at them, i.e. $\Ch[G]{X} = \{\:Y\:|\: X\to Y\:\}$. The \tblue{ancestors} $\An{\bm{U}}$ are defined as those nodes which have a directed \emph{path} to some node in $\bm{U}$, including the nodes in $\bm$ themselves. Equivalently, $\An{\bm{U}} := \bigcup_{n\in\mathbb{N}} \mathsf{Pa}^n(\bm{U})$, where $\mathsf{Pa}^n(\bm{U})$ is inductively defined via $\mathsf{Pa}^0(\bm{U}) := \bm{U}$ and $\mathsf{Pa}^{n+1}(\bm{U}) := \mathsf{Pa}(\mathsf{Pa}^n(\bm{U}))$. 
 
-The subgraph of $G$ induced by restricting attention to the set of nodes $\bm{V}$ will be denoted $\subgraph[G]{\bm{V}}$.
-It consists of the nodes $\bm{V}$ and the edges between pairs of nodes in $\bm{V}$ per the original graph. Of special importance to us is the 
-\tblue{ancestral subgraph} of $\bm{V}$, denoted $\ansubgraph[G]{\bm{V}}$, which is the minimal subgraph containing the full ancestry of $\bm{V}$, $\ansubgraph[G]{\bm{V}}\coloneqq\subgraph[G]{\An[G]{\bm{V}}}$. 
+We refer to a pair of nodes which not share any common ancestor as being \tblue{ancestrally independent}, for which we invent the notation $X\aindep Y$. Generalizing to sets, $\bm{U}\aindep \bm{V}$ indicates that no node in $\bm{U}$ shares a common ancestor with any node in $\bm{V}$, i.e.~$\An{\bm{U}}\cap\An{\bm{V}}=\emptyset$. It is possible for more than two sets to be ancestrally independent: the notation ${\bm{U}\aindep \bm{V}\aindep \bm{W}}$ should be understood as indicating that the ancestors of $\bm{U}$,$\bm{V}$, and $\bm{W}$ comprise three distinct non-overlapping sets, i.e.~$\bm{U}\aindep \bm{V}$ and $\bm{V}\aindep \bm{W}$ and $\bm{U}\aindep \bm{W}$.
 
-
-In a causal model, the localized systems are random variables, and the parameters are conditional probabilities\footnote{This is the definitio of a {\em classical}  causal model, which will be the primary focus of this article. Nonetheless, there is a quantum generalization of the notion of a causal model that will feature in our discussions at the end of this article.  In a {\em quantum} causal model\cite{leifer2013conditionalstates}, the localized systems are types of quantum systems (specified by Hilbert space dimensionality), and the parameters are quantum operations.  Specifically, for each root node, the model specifies a unit-trace positive operator on the Hilbert space for that system and for each non-root node, the model specifies a trace-preserving completely-positive linear map from the operators on the Hilbert space of the parents of the system to the operators on the Hilbert space of the system.  Certain nodes in a quantum causal model may be considered classical, in which case all states and operations must be diagonal in some fixed basis on that system.  One can also generalize the notion of a causal model further still to the case of generalized probabilistic theories, as was done in Ref.~\cite{pusey2014gdag}.
-}.
- %probabilities and conditional probabilities on these random variables.  
-Specifically, for each node, the model specifies a conditional probability distribution over the values of the random variable associated to that node, given the values of the variables associated to its parents in the DAG.  (In the case of root nodes, the parents are the null set and the conditional probability distribution is simply a probability distribution.)
- %Specifically, for each root node, the model specifies a probability distribution over the values of the associated random variable, and for each non-root node, it specifies a conditional probability distribution over the values of the random variable associated to that node, given the values of the variables associated to its parents in the DAG.  
-Denoting the conditional probability distribution associated to a node $A$ in the causal model $C$ by $\pdf[C]{A|\Pa[G]{A}}$, we have
-\begin{align}
-\mathcal{P}(G) \equiv \{\pdf[C]{A|\Pa[G]{A}}: A \in \SmallNamedFunction{Nodes}{G}\}.
-\end{align}
-%Note that the root nodes are included as those for which the parents are the null set and the conditional probability distribution is simply a probability distribution.
-As is standard, we assume that the joint distribution defined by the causal model is $\pdf[C]{\SmallNamedFunction{Nodes}{G}} = \Pi_{A\in \SmallNamedFunction{Nodes}{G}} \pdf[C]{A|\Pa[G]{A}}$ (this is called the Markov condition).  The subset of nodes of $G$ that are observed is denoted $\SmallNamedFunction{ObservedNodes}{G}$ and the rest are denoted $\SmallNamedFunction{LatentNodes}{G}$. 
-The joint distribution over the observed variables is obtained from the joint distribution over all variables by marginalization over the latent variables $\pdf[C]{\SmallNamedFunction{ObservedNodes}{G}} =  \sum_{\{X :X \in\SmallNamedFunction{LatentNodes}{G}\}} \pdf[C]{\SmallNamedFunction{Nodes}{G}}$.
-
-In addition to the notion of a causal model, we define the notion of a causal hypothesis, which is a set of causal models consistent with a single DAG. Specifically, if $G$ is a DAG and $S$ is a set of parameter values  consistent with $G$ (i.e. a set of possibilities for the conditional probability distributions at each node of $G$), then $G$ and $S$ define a causal hypothesis, which we denote by $H_{G,S}$, and which we define formally as the following set of causal models:
-\begin{align}
-H_{G,S} \equiv \{ C \mid \SmallNamedFunction{DAG}{C}=G, \SmallNamedFunction{ParamVals}{C} \in S\}.
-\end{align}
-% (is this standard usage of the term "model"?  In physics, a model typically does not include a specification of the boundary conditions, or does it?)
-We denote  the set of {\em all} parameter values consistent with $G$ by $S_{\textsf{full}}$, so that $H_{G,{S_{\textsf{full}}}}$ is simply the causal hypothesis that the DAG is $G$, that is, the hypothesis that there exists {\em some} parameter values supplementing $G$ such that the observed data can be explained by the resulting causal model. 
+Ancestral independence is equivalent to $d$-separation by the empty set \cite{pearl2009causality,spirtes2011causation,studeny2005probabilistic,koller2009probabilistic}. Therefore, for distributions that are Markov with respect to the DAG~\cite{pearl2009causality,spirtes2011causation,studeny2005probabilistic,koller2009probabilistic}, ancestral independence of nodes implies marginal independence of the random variables. For us, all distributions over the variables represented by the nodes of a DAG will be assumed Markov. Intuitively, we presume that no statistical correlation is possible without causal explanation. Thus if a DAG possesses the feature ${\bm{U}\aindep \bm{V}\aindep \bm{W}}$, we demand factorization of the marginal distributions such that ${\pdf{\bm{U} \bm{V} \bm{W}} = \pdf{\bm{U}} \pdf{\bm{V}} \pdf{\bm{W}}}$.
 
 
-With these notions in hand, we can give a broad definition of causal inference.  An algorithm for causal inference is one that takes two inputs:
-\begin{itemize}
-\item a specificaton of {\em observational data}
-%, which is a specification of some feature of observed statistical data
-%---a sample of the probability distribution over the observed variables or some coarse-grained properties thereof, such as a list of conditional independence relations
-\item a specification of a {\em causal hypothesis}
-%{\em causal input}, which is a specification of some causal hypothesis
-\end{itemize}
-and that outputs a verdict about their compatibility.
+$\subgraph[G]{\bm{V}}$ refers to the induced subgraph of $G$ on a set of nodes $\bm{V}$. It consists of the nodes $\bm{V}$ and the edges between pairs of nodes in $\bm{V}$ per the original graph. Of special importance to us is the %\tblue{parental subgraph}, $\pasubgraph[G]{\bm{V}}\coloneqq\subgraph{\bm{V}\bigcup\Pa{\bm{V}}}$, the subgraph on $\bm{V}$ and all the parents of $\bm{V}$. We also make use of the
+\tblue{ancestral subgraph}, $\ansubgraph{\bm{V}}\coloneqq\subgraph{\An{\bm{V}}}$, which is the minimal subgraph containing the full ancestry of $\bm{V}$. 
 
-The most informative sort of observational data is a specification of the joint distributions over all of the observed variables.  The observational data in real-world applications necessarily falls short of this ideal because one only ever obtains a {\em finite sample} of the joint distribution.  Moreover, even if one sets aside finite-sample concerns and imagines the data as infinite-run statistics, there are other ways in which the observational data for a causal inference problem might be less informative than a specification of the joint distribution.  For instance, one might merely have a description of the conditional independence relations that hold among the observed variables.  Or one might merely have a specification of the marginals of the joint distribution for certain subsets of the observed variables, in which case the causal inference problem corresponds to a version of the marginals problem, but where the joint distribution is constrained by the causal hypothesis.  Indeed, this latter sort of causally-constrained marginals problem 
-%restricted observational data
- will be relevant for our inflation DAG technique.  
- %Note that causal inference in this case corresponds to a version of the marginals problem, but where the joint distribution is constrained by the causal hypothesis. 
+%\purp{Only the parents matter, not full ancestry!!!! Inflation DAG defined in terms of PARENTAL subgraphs, ditto for mapping and coinciding distributions. Will fix shortly.}
 
-The most fine-grained sort of causal hypothesis is one that specifies not only a DAG but all of the parameters supplementing the DAG.  The causal inference problem that is perhaps most widely studied is one wherein the causal hypothesis just specifies a DAG.  Between these two cases are causal inference problems that explore more refined causal hypotheses, incorporating constraints on how  certain nodes in the DAG functionally depend on their parents.  An example is the assumption of an additive noise model for certain causal influences: if an observed variable $Y$ has an observed variable $X$ as a parent and also a latent variable $U$, then the noise is deemed additive if $Y=\alpha X + \beta U$ for some scalars $\alpha$ and $\beta$ [provide references].  More general constraints on the causal dependences in the model have also been explored [provide references].  (Note that constraints on the probability distributions over the latent variables can be understood as a kind of constraint on the causal dependences.)
-%Another conceivable constraint on the parameters is a constraint on the form of the probabilities distributions over the latent variables.  
-Our inflation DAG technique will require consideration of a novel and unusual sort of constraint on the causal dependences of the model. 
+%A \tblue{graph map} $f_{G\to H}$ from graph $G$ to graph $H$ is a function which takes every edge and node in $G$ to some edge or node respectively in $H$, such that $f_{G\to H}(G)=H$. A graph map is essentially a collection of rules about edges and nodes.
 
-Finally, the verdict about the compatibility of the observational input and the causal hypothesis could come in different forms.  The simplest possibility is a specification of whether the observational input is consistent with the causal hypothesis.  However, the notion of compatibility at play might be more refined than this, for instance, the algorithm might specify a confidence level with which one can reject the given causal hypothesis as an explanation of the observational input.
-%output is a verdict on (or probabilistic inference about) whether a given causal hypothesis can explain the observed data.   
+%A \tblue{node map} $f_{G,H}$ is a surjective function which maps nodes in graph $G$ to nodes in graph $H$. A node map should be thought of as a collection of rules about (some) of $\nodes{G}$. A node map is generically \emph{not} a graph map, i.e. $f(G)\neq H$. 
+%A \tblue{complete node map} $f_{G,H}$ maps \emph{every} $X\in\nodes{G}$ to some node in $\nodes{H}$. While the domain of $f$ is the set of $\nodes{G}$ whenever $f$ is a complete node map, nevertheless the codomain of $f$ need only be a subset of $\nodes{H}$. 
 
-%The most informative sort of observational input is a specification of the joint distributions over all of the observed variables.  Nonetheless, causal inference problems often proceed with a less informative sort of observational input.  For instance, one might merely have a description of the conditional independence relations that hold among the obeerved variables.  Another example of how the observational input might be less informative is if it merely specifies the marginals of the joint distribution for certain subsets of the observed variables.  (Indeed, the latter sort of observational input will be relevant for our inflation DAG technique.)   The observational input might also be less informative in another sense, namely, that it is merely a {\em finite sample} of some joint distribution.
+%A \tblue{bijective node map} maps unique nodes of $G$ to unique nodes of $H$. %A bijective node map does not need to be complete; it may only explicitly dictate how a subset of $\nodes{G}$ are mapped respective to a subset of $\nodes{H}$.
 
-The inflation DAG technique is a way of mapping a given causal inference problem onto a new causal inference problem where the observational and causal inputs of the latter problem are determined by the observational and causal inputs of the original problem.   In particular, under the inflation map, the observational input becomes less informative while the causal hypothesis becomes more fine-grained, in a manner that we shall now make explicit.
+%A \tblue{graph isomorphism} $\mbox{Iso}_{G,H}$ is both a complete bijective node map and a graph map which transforms $G$ to $H$. Both properties are required to be a graph isomorphism. That it to say, not only ${\mbox{Iso}}(G)=H$ but also every $X\in\nodes{G}$ is mapped to some unique $Y\in\nodes{H}$ in one-to-one correspondence.
 
-\section{Inflation: a tool for causal inference}
+%Node maps can be nested hierarchically: If the rules of map $f2$ are a subset of the rules of $f1$ then we say that $f2$ \tblue{respects} $f1$.
 
-We now introduce the notion of \tblue{an inflation of a causal model}.  Let $C_G$ denote a causal model associated to a DAG $G$.  An inflation of this model is another causal model, denoted $C_{G'}$ and associated to a different DAG, $G'$.  We refer to $G'$ as an inflation of $G$.  There are many possible choices of $G'$ for a given $G$ (specified below), hence many possible inflations of a given causal model.  We denote the set of these by $\SmallNamedFunction{Inflations}{G}$.   Once an element $G'\in \SmallNamedFunction{Inflations}{G}$ is specified, however, the parameters of the causal model $C_{G'}$ are fixed by the parameters of the causal model $C_{G}$.  We denote this function by $C_(G') = \SmallNamedFunction{Inflation}{C_(G)}$.
+%A \tblue{graph isomorphism} $\mbox{Iso}_{H,G}$ is both a special bijective map between $\nodes{H}$ and $\nodes{G}$ such that $H$ is transformed into $G$ under the action of map, i.e. $\mbox{Iso}(H)=G$. If a graph isomorphism exists which maps $H$ to $G$ then we say that $H$ and $G$ are isomorphic.
 
-% $\mathcal{P'}(G')$ are fixed uniquely by $\mathcal{P}(G)$.  We call the parameters $\mathcal{P'}(G')$ the inflationary image of the parameters $\mathcal{P}(G)$, and write $\mathcal{P'}(G') = \SmallNamedFunction{Inflation}{\mathcal{P}(G)}$.  Let $C=(G,\mathcal{P}(G))$ denote the original causal model and $C'=(G',\mathcal{P'}(G'))$ an inflation thereof.   We say that the DAG $G'$ is an inflation of the DAG $G$.  There are many possible choices of $G'$ for a given $G$, hence many possible inflations of a given causal model.  We denote this set by $\SmallNamedFunction{Inflations}{G}$.   Once an element $G'\in \SmallNamedFunction{Inflations}{G}$ is specified, however, the parameters $\mathcal{P'}(G')$ are fixed uniquely by $\mathcal{P}(G)$.  We call the parameters $\mathcal{P'}(G')$ the inflationary image of the parameters $\mathcal{P}(G)$, and write $\mathcal{P'}(G') = \SmallNamedFunction{Inflation}{\mathcal{P}(G)}$.
- %We now describe concretely what an inflation is for the DAG and for the parameters in turn.  
+%A \tblue{deflation map} $\mbox{Dmap}_{H,G}$ is a special surjective map between $\nodes{H}$ and $\nodes{G}$ such that ${\mbox{Dmap}\parenths*{\ansubgraph[H]{X}}=\ansubgraph[G]{\mbox{Dmap}\parenths*{X}}}$ for all $X\in\nodes{G'}$. If a deflation map exists from $\nodes{H}$ to $\nodes{G}$ then we say that $H$ is a valid \tblue{inflation} of $G$.
 
-We begin by defining the condition under which a DAG $G'$  is an inflation of a DAG $G$.
+%A (connected) subgraph of $H$, say $H'$, is said to be a \emph{deflatable subgraph} if the deflation map acts \mbox{Dmap} to transform $H'$ into a subgraph of $G$, ${\mbox{Dmap}\parenths*{H'}\subseteq G}$. By the definition of inflation, the ancestral subgraph of any single node in $H$ is a deflatable subgraph.
 
-For each node of $G$, $G'$ may contain one or more copies of that node. If $A$ denotes a node in the DAG $G$ that has copies in $G'$, then we denote these copies by $A_1,\ldots, A_k$.  The variable that indexes the copies is termed the {\em copy-index}.
-%, and a set of variables in $G'$ that differ only by copy-index are called a {\em copy set}.  
-The necessary condition on $G'$ for being an inflation of $G$ is that the ancestral subgraph in $G'$ of a node $A_i$ is equivalent, under removal of the copy-index, to the ancestral subgraph in $G$ of the node $A$.  
-When two objects (e.g.~nodes, sets of nodes, DAGs, etc\ldots) are the same up to copy-indices, then we use $\sim$ to indicate this.  For instance, we have $A_i\sim A_j\sim A$.  Given this notational convention, we can formalize the condition for $G'$ to be an inflation of $G$ as follows:
+%A set of nodes $\bm{U}$ is said to be a \emph{deflatable set} if its ancestral subgraph is deflatable, i.e. ${\mbox{Dmap}\parenths*{\ansubgraph[H]{\bm{U}}}=\ansubgraph[G]{\mbox{Dmap}\parenths*{\bm{U}}}}$. 
+
+
+
+%\begin{theorem}
+%$\mbox{Dmap}\parenths*{\ansubgraph[H]{X}}=\ansubgraph[G]{\mbox{Dmap}\parenths*{X}}$ for all $X\in\nodes{H}$ if and only if $\mbox{Dmap}\parenths*{\Pa[H]{X}}=\Pa[G]{\mbox{Dmap}\parenths*{X}}$ for all $X\in\nodes{H}$.
+%\end{theorem}
+
+
+%\begin{theorem}
+%${\mbox{Dmap}\parenths*{\ansubgraph[H]{\bm{U}}}=\ansubgraph[G]{\mbox{Dmap}\parenths*{\bm{U}}}}$ if and only if $\An[H]{\bm{U}}$ is ``duplicate free", that is to say, no two nodes in $\An{\bm{U}}$ deflate to the same node in $G$.
+%\end{theorem}
+
+
+We now introduce the notion of an \tblue{inflation DAG}. The nodes of an inflation DAG are copies $A_1,\ldots,A_k$ of the nodes of the original DAG, where the subscript $i$ is just a dummy index of sorts, and such that the following defining property holds: \tred{upon removing the subscripts indexing the copies, the ancestral subgraph in $G'$ of a node $A_i$ looks like the ancestral subgraph of the corresponding node $A$ in $G$.} The idea is that at the level of distributions, this property guarantees that all copies of a node in the inflation DAG have the same distribution as the corresponding node in the original DAG \emph{if} the functional dependencies among the variables are taken to be the same.
+
+%Intuitively, we may thing of a node in a DAG as a ``black box" system that outputs random signals. A directed edge from $U$ to $V$ is then analogous to a wire which takes some output from $U$ and passes it as input to $V$. Inflation consists of acting on the edges of the DAG in two possible ways:
+%\begin{itemize}
+%\item We can produce an arbitrary number of further copies of the output node  (resulting in new edges).
+%\item We can produce independent copies of the input node node (resulting in new nodes).
+%\end{itemize}
+
+When two objects (e.g.~nodes, sets of nodes, DAGs, etc\ldots) are the same up to dummy indices, then we use $\sim$ to indicate this, so $A_i\sim A_j\sim A$. 
+The formal definition of an inflation DAG is therefore as follows:
 \begin{align}\label{eq:definflationDAG}
-%\forall A \in \SmallNamedFunction{Nodes}{G}, ???\nonumber\\
-G' \in\SmallNamedFunction{Inflations}{G} \quad\text{ iff }\quad \forall A_i\in \SmallNamedFunction{Nodes}{G'}:\; \ansubgraph[G']{A_i}\sim\ansubgraph[G]{A}.
+G'\in\SmallNamedFunction{Inflations}{G} \quad\text{ iff }\quad \forall_{A_i\in G'}\; \ansubgraph[G']{A_i}\sim\ansubgraph[G]{A}.
 \end{align}
 
-To illustrate the notion of the inflation of a DAG, we consider the DAG of \cref{fig:TriMainDAG}, which is called the {\em Triangle scenario} (for obvious reasons) and which has been studied by many authors [\citealp{pusey2014gdag}~(Fig.~E\#8), \citealp{WoodSpekkens}~(Fig.~18b), \citealp{fritz2012bell}~(Fig.~3), \citealp{chaves2014novel}~(Fig.~6a), \citealp{Chaves2015infoquantum}~(Fig.~1a), \citealp{BilocalCorrelations}~(Fig.~8), \citealp{steudel2010ancestors}~(Fig.~1b), \citealp{chaves2014informationinference}~(Fig.~4b)]
-%As an example, consider the Triangle scenario [\citealp{pusey2014gdag}~(Fig.~E\#8), \citealp{WoodSpekkens}~(Fig.~18b), \citealp{fritz2012bell}~(Fig.~3), \citealp{chaves2014novel}~(Fig.~6a), \citealp{Chaves2015infoquantum}~(Fig.~1a), \citealp{BilocalCorrelations}~(Fig.~8), \citealp{steudel2010ancestors}~(Fig.~1b), \citealp{chaves2014informationinference}~(Fig.~4b)]. The associated DAG, the shape of which explains the name, is depicted here in \cref{fig:TriMainDAG}. 
-%The Triangle scenario is a correlation scenario in the sense of \citet{fritz2012bell}; see especially Sec. 2.3 there. 
-Different inflations of the Triangle scenario are depicted in \cref{fig:TriFullDouble,fig:Tri222,fig:simpleinflation,fig:simplestinflation,fig:TriDagSubA2B1C1}.
 
-\begin{figure}[h]
+\begin{figure}[t]
 \centering
 \begin{minipage}[b]{0.23\linewidth}
 \centering
@@ -430,7 +411,110 @@ Different inflations of the Triangle scenario are depicted in \cref{fig:TriFullD
 \end{minipage}
 \end{figure}
 
-\begin{figure}[hb]
+
+%To formally define an inflation DAG we first define the \tblue{deflation map}. The deflation map $\bm{\mbox{Dmap}}$ is the implicit function which maps the various $A_i$ to $A$, and it is generally a surjective function. Note that $\bm{\mbox{Dmap}}$ becomes bijective when restricted to the domain of any individual $A_i$. Now, an inflation DAG must posses the following recursive property:
+%For every $\bm{U}$ such that $\bm{\mbox{Dmap}}$ acts bijectively when restricted to the domain $\bm{U}$ it must also be true that $\bm{\mbox{Dmap}}$ also acts bijectively when restricted to the domain of $\bm{U}\bigcup\Pa{\bm{U}}$. 
+%Equivalently, $G'$ is a valid inflation DAG if and only if $\Pa[G']{A_i}\sim\Pa[G]{A}$ and $\An[G']{A_i}\sim\An[G]{A}$ for all $A$ and all $i$, where $\bm{U}\sim\bm{V}$ indicates one-to-one equivalence between $\bm{U}$ and $\bm{V}$ up to dummy indices.
+
+As an example, consider the Triangle scenario [\citealp{pusey2014gdag}~(Fig.~E\#8), \citealp{WoodSpekkens}~(Fig.~18b), \citealp{fritz2012bell}~(Fig.~3), \citealp{chaves2014novel}~(Fig.~6a), \citealp{Chaves2015infoquantum}~(Fig.~1a), \citealp{BilocalCorrelations}~(Fig.~8), \citealp{steudel2010ancestors}~(Fig.~1b), \citealp{chaves2014informationinference}~(Fig.~4b)]. The associated DAG, the shape of which explains the name, is depicted here in \cref{fig:TriMainDAG}. 
+%The Triangle scenario is a correlation scenario in the sense of \citet{fritz2012bell}; see especially Sec. 2.3 there. 
+Possible inflations of the Triangle scenario are depicted in \cref{fig:TriFullDouble,fig:Tri222}.
+
+%Possible inflations of the Triangle scenario are depicted in \cref{fig:TriFullDouble,fig:Tri222}; every copy of the random variable $A$ in an inflation has precisely two parents, one of which is a copy of the random variable $X$ and one of which is a copy of the random variable $Y$, just as in the original DAG. %The duplication of $Y$ into $Y_1$ and $Y_2$ leads to $X_1$ having outgoing edges to both $A_1$ and $A_2$ in \cref{fig:TriFullDouble,fig:Tri222}. Thus, inflating a DAG not only leads to duplicated nodes but to duplicated \emph{edges}. 
+
+
+
+%In order for $G'$ to be a a ``valid" inflation of $G$ it must satisfy two properties:
+%\begin{compactenum}
+%\item There exists a \tblue{deflation map} $dmap$, i.e. a complete node map from the inflation DAG to the original DAG. $dmap$ takes every node $X\in\nodes{G'}$ to some node in $\nodes{G}$. To make this clear we demand that all those nodes $\bm{A}\in\nodes{G'}$ which map to $A$ in $G$ should \emph{share the name} $A$, and be distinguished only by dummy indices $A_1,A_2...$. Using this labelling, we find that $\forall_i \;{dmap}(A_i)\cramp{=}A$. The deflation map is surjective, and generally not bijective. We refer to the various $A_i$ as multiple \tblue{copies} of $A$ in the inflation DAG.
+%\item For every node and every index $A_i$ in $G'$ it must be true that there exists an $f$-compatible graphical isomorphism between $\SmallNamedFunction{AnSubDAG}{A_i}$ (a subgraph of $G'$) and $\SmallNamedFunction{AnSubDAG}{A}$ (a subgraph of $G$). A graphical isomorphism is a bijective map between the nodes of $G'$ and the nodes of $G$ which also maps the (directed) edges in a one-to-one fashion. An isomorphism $Iso$ is $f$-compatible if $Iso(V_i)\to V$ for all $V_i \in \An{A_i}$.
+%\item The deflation map must be a graph isomorphism at least when considering ancestral subgraphs within the inflation DAG. Formally: For all $X\in\nodes{G'}$ it must be true that $dmap\parenths*{\Pa[G']{X}}=\Pa[G]{dmap\parenths*{X}}$, i.e. the parents of every individual node in the inflation DAG $G'$ map bijectively to the corresponding parents of the mapped node in the original DAG $G$\footnote{This is reminiscent of covering spaces in topology.}. 
+%\end{compactenum}
+
+%The latter property is equivalent to $dmap\parenths*{\ansubgraph[G']{X}}=\ansubgraph[G]{dmap\parenths*{X}}$ for all $X\in\nodes{G'}$. In other words, each individual random variable in the inflated DAG has precisely the same causal history as it \emph{would have had} in the original DAG, up to the dummy indices indicating the deflation map. 
+
+Any causal model for the original DAG specifies a corresponding causal model for the inflated DAG, by virtue of
+\begin{align}\label{eq:funcdepends}
+\forall_{A_i\in G'}\; \pdf{A_i|\Pa{A_i}}=\pdf{A|\Pa{A}},
+\end{align}
+where one identifies the parents of $A_i$ in $G'$ with the parents of $A$ in $G$. If a causal model on $G'$ is of this form, we call it an \tblue{inflation model}. In particular, all copies of exogenous (non-root) nodes in an inflation model share the same functional dependence on their parents, and all copies of endogenous (root) nodes in the inflated DAG are identically \emph{and independently} distributed. For us, the most relevant feature of an inflation model is that all the copies of a single random variable can have the same probability distribution as the corresponding variable in the original DAG,
+% Implicit constraints are embedded into every inflation DAG which restrict the sorts of causal models compatible with the inflation DAG. 
+%This follows from assuming that each copy of an exogenous (non-root) node has the same functional dependence on its parents, and that copies of endogenous (root) nodes in the inflated DAG are identically \emph{and independently} distributed. 
+%Coinciding causal histories implies coinciding distributions. Formally,
+\begin{align}\label{eq:singlevariatecoincidence}
+\forall_{A_i\in G'}\; \pdf{A_i}=\pdf{A},
+\end{align}
+because of \cref{eq:funcdepends} and $\ansubgraph[G']{A_i}\sim\ansubgraph[G]{A}$. Note that the operation of equipping a modified DAG with the same functional dependencies as the original one also appears in the \emph{do calculus} of~\citet{pearl2009causality}. \fxnote{adhesivity and non-Shannon-type ineqs}
+
+ 
+% When discussing inflation DAGs we shall encounter probabilities for logical conjunctions of events pertaining to multiple copies of the same original variables, such as $\p{A_1\cramp{=}0\land A_2\cramp{=}1}$. It is convenient to have a shorthand notation for such composite events. We therefore introduce special notation based on subscript-indexing of the lower-case value indicators, such that ${x_i\coloneqq X_i\eql x}$. In this notation, for example,
+%\begin{align*}
+%\text{Let}\quad\p{a_1 a_2 ...}\coloneqq \p{A_1\cramp{=}a \bigwedge A_2\cramp{=}a \bigwedge ...} \quad\text{ and }\quad
+%\p{\n{a}_1 a_2 b_1...}= \p{A_1\cramp{\neq}a \bigwedge A_2\cramp{=}a \bigwedge B_1\cramp{=}b\bigwedge ...}\quad\text{etc.}
+%\end{align*}
+To be perfectly clear however, $a_1$ and $a_2$ \emph{do not} refer to two distinct possible outcomes of one random variable; rather $a_1\land a_2$  represents the event in which $A_1$ and $A_2$ both have the same outcome $a$. Moreover, generally $\p{a_1 a_2}\neq \p{a}$, because although $\pdf{A_1}=\pdf{A_2}$, nevertheless $A_1$ and $A_2$ may not be perfectly correlated. In the same vein, generally $\p{a_1 a_2}\neq \p{a_1}\p{a_2}$, because identically distributed does not mean independently distributed. Indeed, in \cref{fig:Tri222}, for example, $A_1$ and $A_2$ share the common ancestor $X_1$, and hence they are not independent. On the other hand, sometimes two copies of a random variable not share any common ancestor, such as $A_1$ and $A_4$ in \cref{fig:TriFullDouble}. \cref{fig:TriFullDouble} implies, therefore, that $\p{a_1 a_4}=\p{a_1}\p{a_4}$. 
+
+Any subset of nodes of the inflation DAG which contains multiple copies of some node is considered a \tblue{redundant} set. Formally, $\bm{U}$ is redundant if and only if there are $A$ and indices $i,j$ such that $\brackets{A_i,A_j}\subseteq\bm{U}$. Otherwise, $\bm{U}$ is said to be irredundant. Alternatively, $\bm{U}\subseteq\nodes{G'}$ is irredundant if and only if there is $\bm{V}\subseteq\nodes{G}$ such that $\bm{U}\sim\bm{V}$. 
+%A graph $Q$ is said to be irredundant iff $\nodes{Q}$ are irredundant. 
+When discussing irredundant sets we hereafter denote the corresponding original-DAG node-set by overscript $\sim$, i.e.
+$\bm{U}\sim\subsim{\bm{U}}$ where $\subsim{\bm{U}}\subseteq\nodes{G}$. 
+
+Critically, the idea that coinciding causal histories implies coinciding distributions can be generalized from individual nodes to irredundant sets. While generally $\pdf{\bm{U}}\neq\pdf{\subsim{\bm{U}}}$,  $\bm{U}$ and $\subsim{\bm{U}}$ \emph{must} have coinciding distribution whenever their respective ancestral subgraphs are equivalent up to dummy indices, as a consequence of  \cref{eq:funcdepends}.
+The natural generalization of \cref{eq:singlevariatecoincidence}, therefore, is,
+\begin{align}\label{eq:coincidingdistrodef}
+\pdf{\bm{U}}=\pdf{\subsim{\bm{U}}} \quad\text{ whenever }\quad\ansubgraph[G']{\bm{U}}\sim\ansubgraph[G]{\subsim{\bm{U}}}.
+\end{align}
+
+For example, any individual node $\bm{U} = \{X\}$ has this property. General sets of nodes which posses this special property form the inferential link between the inflation DAG and the original DAG. An irredundant set of nodes $\bm{U}$ in the inflation DAG will be called \tblue{injectable} if $\bm{U}$ is a positive instance of \cref{eq:coincidingdistrodef}, i.e.
+\begin{align}\label{eq:definjectable}
+\bm{U}\in\SmallNamedFunction{Injectables}{G'} \quad\text{ iff }\quad \ansubgraph[G']{\bm{U}}\sim\ansubgraph[G]{\subsim{\bm{U}}}.
+\end{align}
+Any redundant set is obviously not injectable; it should be clear from \cref{eq:definjectable} that $\bm{U}$ is also not injectable whenever $\An{\bm{U}}$ is redundant. Moreover, 
+\begin{align}\label{eq:definjectable2}
+\bm{U} \text{ is injectable}\quad \text{iff}\quad \An{\bm{U}} \text{ is irredundant,}
+\end{align}
+because the edge structure is automatically preserved by the definition of an inflation DAG. If $\bm{U}$ is injectable, then any subset of $\bm{U}$ is also injectable. If $\bm{U}$ is not injectable, then any superset of $\bm{U}$ is not injectable. In \cref{fig:Tri222}, for example, $\brackets{A_1 B_1 C_1}$ and $\brackets{A_2 C_1}$ are both injectable, but $\brackets{A_1 A_2 C_1}$ and $\brackets{A_2 B_1 C_1}$ are both not injectable.
+
+It is useful to consider a looser notion than injectability. A set of nodes in the inflation DAG $\bm{U}$ will be called \tblue{pre-injectable} whenever it is a union of injectable sets with disjoint ancestries. Equivalently, a set of nodes is pre-injectable if and only if its (weakly) connected components are injectable. In particular, every injectable set is also pre-injectable.
+%\begin{align}\begin{split}\label{eq:defpreinjectable}
+%&\text{Let }\quad\SmallNamedFunction{DiscComp}{\bm{U}} = \text{\href[pdfnewwindow]{http://reference.wolfram.com/language/ref/WeaklyConnectedComponents.html}{\texttt{WeaklyConnectedComponents}}}\left[\ansubgraph[G']{\bm{U}}\right].\\
+%&\text{Then }\quad\bm{U}\in\SmallNamedFunction{PreInjectables}{\nodes{G'}} \quad\text{ iff }\quad \forall_{\bm{X}\in\SmallNamedFunction{DiscComp}{\bm{U}}} \;\bm{X} \text{ is injectable.}
+%\end{split}\end{align}
+
+For us, the crucial property of a pre-injectable set $\bm{U}$ is that in an inflation model, $\pdf{\bm{U}}$ is fully determined by the original causal model via \cref{eq:funcdepends}. More concretely, if $\bm{U}_1,\ldots,\bm{U}_n$ are the weakly connected components of $\bm{U}$, then in an inflation model we must have
+\begin{align}\label{eq:preinjfactor}
+	P(\bm{U}) = P(\bm{U}_1) \cdots P(\bm{U}_n) = P(\subsim{\bm{U}}_1) \cdots P(\subsim{\bm{U}}_n).
+\end{align}
+% but there are other possibilities as well, such as when $\pdf{\bm{U}}=\pdf{\bm{X}}\pdf{\bm{Y}}$ due to $\bm{X}\aindep\bm{Y}$. In this example, if $\bm{X}$ and $\bm{Y}$ are both injectable sets, then consequently $\bm{U}$ is pre-injectable, even if $\bm{U}$ is redundant, and hence the distribution over $\bm{U}$ would be $\pdf{\bm{U}}=\pdf{\subsim{\bm{X}}}\pdf{\subsim{\bm{Y}}}$.
+For this reason, pre-injectable sets will play a role in deriving polynomial inequalities via polytope projection techniques.
+
+It is worth noting that duplicating an outgoing edge in a causal structure means \tblue{broadcasting} the value of the random variable. For example in \cref{fig:simpleinflation}, the information about $X$ which was ``sent" to $A$ is effectively broadcast to both $A_1$ and $A_2$ in the inflation. This is quite intentional. Quantum theory is governed by a no-broadcasting theorem \cite{NoCloningQuantum1996,NoCloningGeneral2006}; by electing to embed broadcasting into an inflation DAG we can specifically construct a foil to quantum causal structures. Infeasibility constraints derived from \tblue{non-broadcasting inflations} on the other hand, such as \cref{fig:simplestinflation}, are valid even when relaxing the interpretation of latent nodes to allow for quantum or general probabilistic resources. This contrast is elaborated at length in \cref{sec:classicallity}.  
+
+So a non-broadcasting inflation DAG is one in which the set of children of every latent node in the inflation DAG $G'$ is irredundant, i.e.  
+\begin{align}\label{eq:nonbroadcastinginflationDAG}
+G'\in\SmallNamedFunction{NonBroadcastingInflations}{G} \quad\text{ iff }\quad \forall_{\text{latent }A_i\in G'}\; \Ch[G']{A_i} \text{ is an irredundant set.}
+\end{align}
+We also find it useful to define the notion of a non-broadcasting subset of nodes within some larger broadcasting inflation DAG.
+Let's define any pair of redundant nodes which share a latent parent to be a \tblue{fundamental broadcasting pair}. An inflation DAG is non-broadcasting if it does not contain any fundamental broadcasting pairs. Similarly, a set of nodes $\bm{U}$ is a \tblue{non-broadcasting set} iff $\An[G']{\bm{U}}$ is free of any fundamental broadcasting pairs.
+
+%A set of nodes $\bm{U}$ is a \tblue{non-broadcasting set} iff $\ansubgraph[G']{\bm{U}}$ is a non-broadcasting inflation DAG. Any inference about the original DAG which can be made by referencing exclusively to non-broadcasting sets hold in both the classical and quantum paradigms. Broadcasting inflation DAGs are therefore especially useful for deriving criteria which distinguish quantum and classical probability distributions, but we anticipate them to be valuable for broader causal inference tasks as well.
+
+In classical causal structures the latent nodes correspond to classical hidden variables. In quantum causal structures, however, the latent nodes are taken to be quantum systems. Some quantum causal structures are famously capable of realizing distributions that would not be possible classically, although the set of quantum distribution is superficially quite similar to the classical subset \cite{pusey2014gdag,fritz2012bell}. For example, classical and quantums distributions alike respect all conditional independence relations implied by the common underlying causal structure \cite{pusey2014gdag}. Recent work has found that quantum causal structure implies many of the entropic inequalities implied by their classical counterparts \cite{pusey2014gdag,Chaves2015infoquantum,ChavesNoSignalling}. To-date, no quantum distribution has been witnessed to violate a Shannon-type entropic inequality on observable variables derived from the Markov conditions on all nodes \cite{chaves2012entropic,fritz2012bell}. Fine-graining the scenario by conditioning on discrete settings leads to a different kind of entropic inequality, and these have proven somewhat quantum-sensitive \cite{braunstein1988entropic,SchumacherInequality,chaves2014novel}. Such \citet{braunstein1988entropic} type inequalities are still limited, however, in that they rely on root observable nodes\footnote{Rafael Chaves and E.W. are exploring the potential of entropic analysis based on fine-graining causal structures over non-root observable nodes. This generalizes the method of entropic inequalities, and might be capable of providing much stronger entropic infeasibility criteria.}, and they still fail to detect certain extremal non-classical distributions \cite{chaves2014novel,fritz2012bell}.  
+
+The insufficiency of entropic inequalities is a pressing concern in quantum information theory since they often fail to detect the infeasibility of quantum distributions, for instance in the Triangle scenario \citep[Prob. 2.17]{fritz2012bell}. The superficial similarity between quantum and classical distributions demands especially sensitive causal infeasibility criteria in order to distinguish them. We hope that polynomial inequalities derived from broadcasting inflation DAGs will be suitable tools for this purpose.
+
+
+\section{The Inflation DAG Technique}\label{sec:mainalgorithm}
+
+Our main contribution here is in recognizing that inferences about the original DAG can be made by proxy, so to speak, using the inflation DAG. If a distribution can arise from the original DAG, then the corresponding specification of the injectable sets must also be realizable from the inflation DAG. \tred{Conversely, one may certify that a distribution is inconsistent with the original DAG by proxy, namely by proving that there is no inflation model on the inflation DAG that would reproduced the known probabilities on observed nodes.}
+
+We illustrate this principle by first showing how inflation DAG considerations can be used to prove the infeasibility of particular distributions. Polynomial inequality constraints are derived later on in~\cref{sec:ineqs}.
+
+
+
+\example{: \tred{Perfect correlation cannot arise from the Triangle scenario.}}\par\smallskip\nobreak
+
+\begin{figure}[t]
 \centering
 \begin{minipage}[t]{0.3\linewidth}
 \centering
@@ -450,212 +534,43 @@ Different inflations of the Triangle scenario are depicted in \cref{fig:TriFullD
 \end{minipage}
 \end{figure}
 
-
-Next, we turn to specifying how the parameters in the inflation of a causal model are determined from those in the original model.
-%condition under which a set of parameters $\mathcal{P'}(G')$ are the inflationary image of the set of parameters $\mathcal{P}(G)$. 
-
-The condition is simply that for every node $A_i$ in the inflation DAG $G'$, the manner in which $A_i$ depends causally on its parents within $G'$ must be the same as the manner in which $A$ depends causally on its parents within the original DAG $G$.   Formally, 
-\begin{align}\label{eq:funcdependences}
-%\text{If} \quad G' \in\SmallNamedFunction{Inflations}{G}\quad \text{and} \quad \mathcal{P'}(G') = \SmallNamedFunction{Inflation}{\mathcal{P}(G)} \quad \text{then}\quad \forall A_i \in \SmallNamedFunction{Nodes}{G'}:\; \pdf{A_i| \Pa[G']{A_i}}=\pdf{A|\Pa[G]{A}},
-%\text{If} \quad G' \in\SmallNamedFunction{Inflations}{G}\quad \text{then} \quad C_{G'} = \SmallNamedFunction{Inflation}{C_{G}} \quad \text{iff}\quad \forall A_i \in \SmallNamedFunction{Nodes}{G'}:\; \pdf[C']{A_i| \Pa[G']{A_i}}=\pdf[C]{A|\Pa[G]{A}},
-C' \in \SmallNamedFunction{Inflations}{C} \quad \text{iff}\quad G' \in\SmallNamedFunction{Inflations}{G}
-%\SmallNamedFunction{DAG}{C'} \in \SmallNamedFunction{Inflations}{\SmallNamedFunction{DAG}{C}}
-\quad \text{and} \quad \forall A_i \in \SmallNamedFunction{Nodes}{G'}:\; \pdf[C']{A_i| \Pa[G']{A_i}}=\pdf[C]{A|\Pa[G]{A}},
-\end{align}
-where Eq.~\eqref{eq:definflationDAG} guarantees that $A_i \sim A$ and $\Pa[G']{A_i} \sim \Pa[G]{A}$.  
-
-%A causal model specifies the causal structure and the autonomous causal mechanisms.  
-To sum up then, inflation is a mapping to a new causal model wherein each given variable in the original DAG may have counterparts in the inflation DAG and where the causal dependences in the inflation DAG are given by the corresponding causal dependences in the original DAG.   Note that the operation of modifying a DAG and equipping the modified version with causal dependences that mirror those of the original also appears in the \emph{do calculus} of~\citet{pearl2009causality}. \fxnote{adhesivity and non-Shannon-type ineqs}
-%The copying of variables under inflation implies that causal mechanisms in the inflation DAG are not necessarily autonomous, but rather often coincide with one another.
-
-
-%defines a novel sort of constraint on the parameters of a causal model.  We pause to describe this constraint in general terms, before introducing the notion of inflation.  The sorts of causal structures that can arise in our inflation scheme have the property that necessarily there will be certain pairs of variables which have the same ancestral subgraph.  The constraint on the parameters is that the two conditional probability distributions describing how each variable of the pair depends on its parents are quantitatively equal to one another.  (To our knowledge, this sort of constraint has not been considered before in causal inference.)
-
-%The inflation DAG technique that we introduce allows questions about the viability of one causal hypothesis for certain observed data to be turned into questions about the viability of a different sort of causal hypothesis for an inflation of the observed data.
-
-%Because we have defined inflation as a map on causal models, 
-Because causal hypotheses are sets of causal models, any inflation map, by virtue of being a map on causal models, induces a map on causal hypotheses. Specifically,
-\begin{align}
-H_{G',S'} \in \SmallNamedFunction{Inflations}{H_{G,S}} \quad \text{iff}\quad 
-\quad G' \in\SmallNamedFunction{Inflations}{G}\quad \text{and} \quad 
-H_{G',S'} = \{ C' : C' = \SmallNamedFunction{Inflation}{C}, C \in H_{G,S} \}.
-%\forall C' \in H_{G',S'}  \exists C \in H_{G,S} : C' = \SmallNamedFunction{Inflation}{C}.
-%A_i \in \SmallNamedFunction{Nodes}{G'}:\; \pdf[C']{A_i| \Pa[G']{A_i}}=\pdf[C]{A|\Pa[G]{A}}, \SmallNamedFunction{Inflation}{H_{G,S}} = \{ \SmallNamedFunction{Inflation}{C} : C \in H_{G,S}\}
-%\SmallNamedFunction{Inflation}{H_{G,S}} = \{ \SmallNamedFunction{Inflation}{C} : C \in H_{G,S}\}
-\end{align}
-%[Put this after the lemma] Inflation can be understood as a map over causal hypotheses as follows: An inflation map takes a causal hypothesis $H_{G,S}$  to a causal hypotheses $H_{G',S'}$, where $G'$ and $S'$ satisfy:
-%\begin{itemize}
-%\item The DAG $G'$ is an inflation of the DAG $G$ 
-%\item $\{ \pdf{A_i| \Pa[G']{A_i}} : A_i \in \SmallNamedFunction{Nodes}{G'}\} \in S'$ if only if  $\{ \pdf{A| \Pa[G]{A}} : A \in \SmallNamedFunction{Nodes}{G}\} \in S$.
-%\end{itemize}
-
-Note that even if $S=S_{\textsf{full}}$, so that the original causal hypothesis puts no constraints on the parameter values, one generally has $S'\ne S'_{\textsf{full}}$, that is, the inflationary image of the full set of parameter values on $G$ is not the full set of parameter values on $G'$. Rather, $S'$ incorporates a nontrivial restriction on the parameters consistent with $G'$, namely, that if nodes $A_i$ and $A_j$ on $G'$ are copies of a single node $A$ on $G$,then the parameter values on $G'$ are constrained to satisfy $\pdf{A_i| \Pa[G']{A_i}}=\pdf{A_j|\Pa[G']{A_j}}$.
-
-%Finally, we can begin to spell out how the inflation technique is useful for causal inference.  
-%First, we emphasize the broad notion of causal inference that we have in mind here. 
-
-
-
-%[Note that the distinction between observed nodes and latent nodes in the DAG $G$ is inherited by the DAG $G'$.]
-
-
-To see how inflation is relevant for causal inference, we must explain how the distributions that can be achieved in the inflation model are constrained by those in the original model.  In what follows, we assume that $G' \in \SmallNamedFunction{Inflations}{G}$ and that $C' = \SmallNamedFunction{Inflation}{C}$.
-
-Note, first of all, that for any sets of nodes $\bm{U}\in \SmallNamedFunction{Nodes}{G'}$ and   $\subsim{\bm{U}}\in \SmallNamedFunction{Nodes}{G}$,
-\begin{align}\label{eq:coincidingdistrodef}
-\text{if }\quad \ansubgraph[G']{\bm{U}}\sim\ansubgraph[G]{\subsim{\bm{U}}}\quad\text{then}\quad \pdf[C']{\bm{U}}=\pdf[C]{\subsim{\bm{U}}}.
-\end{align}
-This follows from the fact that the probability distributions over $\bm{U}$ and $\subsim{\bm{U}}$ depend only on their ancestral subgraphs and the parameters defined thereon, which by the definition of inflation are the same for $\bm{U}$ and for $\subsim{\bm{U}}$.
-
-It is useful to have a name for a set of nodes in the inflation DAG, $\bm{U} \subseteq \SmallNamedFunction{Nodes}{G'}$, such that one can find a corresponding set in the original DAG, $\subsim{\bm{U}} \subseteq \SmallNamedFunction{Nodes}{G}$, which has an equivalent ancestral subgraph.   We say that such subsets of the nodes of $G'$ are injectable into $G$ and we call them the \tblue{injectable sets},
-% into $\SmallNamedFunction{Nodes}{G}$,
-\begin{align}\label{eq:definjectable}
-\bm{U}\in\SmallNamedFunction{InjectableSets}{G'} \quad\text{ iff }\quad \exists \subsim{\bm{U}}\subseteq \SmallNamedFunction{Nodes}{G}: \ansubgraph[G']{\bm{U}}\sim\ansubgraph[G]{\subsim{\bm{U}}}.
-\end{align}
-In \cref{fig:Tri222}, for example, the set $\brackets{A_1 B_1 C_1}$ is injectable because its ancestral subgraph is equivalent up to copy-indices to the ancestral subgraph of $\brackets{A B C}$ in the original DAG (which is just the full DAG), and the set $\brackets{A_2 C_1}$ is injectable because its ancestral subgraph is equivalent to that of $\brackets{ A C}$ in the original DAG. 
-
-Note that it is clear that a set of nodes in the inflation DAG can only be injectable if it contains at most one copy of any node from the original DAG.  Similarly, it can only be injectable if its ancestral subgraph also contains at most one copy of any node from the original DAG.  
-Thus, in \cref{fig:Tri222}, $\brackets{A_1 A_2 C_1}$ is not injectable because it contains two copies of $A$, and $\brackets{A_2 B_1 C_1}$ is not injectable because its ancestral subgraph contains two copies of $Y$. 
-
-%The relation between nodes of the inflation DAG $G'$ to nodes on the DAG $G$ that will be of primary interest to us is not injectability  actually slightly weaker than the notion of injectability.  
-The sets of nodes of $G'$ that will be of primary interest to us are not the injectable sets per se, but sets satisfying a slightly weaker constraint.
-%We call this notion {\em pre-injectability}.  
-To define the latter sorts of sets, which we term {\em pre-injectable}, we must first introduce some additional terminology. 
-
-We refer to a pair of nodes which do not share any common ancestor as being \tblue{ancestrally independent}, for which we invent the notation $X\aindep Y$. Generalizing to sets, $\bm{U}\aindep \bm{V}$ indicates that no node in $\bm{U}$ shares a common ancestor with any node in $\bm{V}$, 
-\begin{align}
-\bm{U}\aindep \bm{V} \quad \text{iff} \quad \An{\bm{U}}\cap\An{\bm{V}}=\emptyset.
-\end{align}
-%i.e.~$\An{\bm{U}}\cap\An{\bm{V}}=\emptyset$. 
-%It is possible for more than two sets to be ancestrally independent: the notation ${\bm{U}\aindep \bm{V}\aindep \bm{W}}$ should be understood as indicating that the ancestors of $\bm{U}$,$\bm{V}$, and $\bm{W}$ comprise three distinct non-overlapping sets, i.e.~$\bm{U}\aindep \bm{V}$ and $\bm{V}\aindep \bm{W}$ and $\bm{U}\aindep \bm{W}$.
-Ancestral independence is equivalent to $d$-separation by the empty set~\cite{pearl2009causality,spirtes2011causation,studeny2005probabilistic,koller2009probabilistic}. 
-
-
-A set of nodes $\bm{U}$ in the inflation DAG $G'$ will be called \tblue{pre-injectable} whenever it is a union of injectable sets with disjoint ancestries. 
-\begin{align}\label{eq:defpreinj}
-\bm{U}\in\SmallNamedFunction{PreInjectableSets}{G'} \quad\text{ iff }\quad  \exists \{ \bm{U}_i \in \SmallNamedFunction{InjectableSets}{G'} \} \quad \text{s.t.}\quad \bm{U}=\bigcup_i \bm{U}_i  \quad\text{and} \quad  \forall i\ne j: \bm{U}_i \aindep \bm{U}_j.
-%\bm{U}\in\SmallNamedFunction{PreInjectableSets}{G'} \quad\text{ iff }\quad  \exists \{ \bm{U}_i \}_i \quad \text{s.t.}\quad \bm{U}=\bigcup_i \bm{U}_i  \quad\text{and} \quad \forall i 
-%: \bm{U}_i \in \SmallNamedFunction{InjectableSets}{G'}\quad \text{and}\quad \forall i,j
-%: \bm{U}_i \aindep \bm{U}_j.
-\end{align}
-%Equivalently, a set of nodes is pre-injectable if and only if its (weakly) connected components are injectable. 
-Note that every injectable set is a trivial example of a pre-injectable set.
-
-Because ancestral independence in the DAG implies statistical independence for any probability distribution consistent with the DAG, it follows that  if 
-$\bm{U}$ is a pre-injectable set and $\bm{U}_1,\bm{U}_2,\ldots,\bm{U}_n$ are the ancestrally independent components of $\bm{U}$, then 
-\begin{align}%\label{eq:preinjfactor}
-%\forall \bm{U}\in\SmallNamedFunction{PreInjectableSets}{G'}:	
-\pdf[C']{\bm{U}} = \pdf[C']{\bm{U}_1} \pdf[C']{\bm{U}_2}  \cdots \pdf[C']{\bm{U}_n}.
-\end{align}
-Furthermore, because each injectable set of variables $\bm{U}_i$ satisfies Eq.~\eqref{eq:coincidingdistrodef}, it follows that joint distributions on pre-injectable sets in the inflation model can be expressed in terms of distributions defined on the original causal model,
-\begin{align}\label{eq:preinjfactor}
-%\forall \bm{U}\in\SmallNamedFunction{PreInjectableSets}{G'}:	
-\pdf[C']{\bm{U}} = \pdf[C]{\subsim{\bm{U}}_1} \pdf[C]{\subsim{\bm{U}}_2}  \cdots \pdf[C]{\subsim{\bm{U}}_n}.
-\end{align}
-This latter property implies that the probability distribution over any pre-injectable set in the inflation model is fully determined by the parameters in the original causal model.  Indeed, this relation is what motivates us to consider the pre-injectable sets.
-
-Consider a causal inference problem where the observational input is a probability distribution over a set $\bm{O}$ of observed variables, denoted $\pdf{\bm{O}}$ and the causal hypothesis is $H_{G,S}$ where $\SmallNamedFunction{ObservedNodes}{G}=\bm{O}$.  Suppose that one seeks only to determine whether the causal hypothesis is consistent with the observational input.  
-%Then the following condition is necessary and sufficient for such consistency
-This holds if and only if
-\begin{align}
-\exists C \in H_{G,S} : \pdf[C]{\SmallNamedFunction{ObservedNodes}{G}}= \pdf{\bm{O}}.
-\end{align}
-
-%Consider a causal inference problem where the input data is a joint distribution over a set of observed variables.  A causal model is only a candidate for a causal explanation of this joint distribution if it posits a DAG $G$ for which $\SmallNamedFunction{ObservedNodes}{G}$ corresponds to the set of observed variables, so we assume this henceforth. The causal hypothesis $H_{G,S}$ is consistent with data $\pdf{\SmallNamedFunction{ObservedNodes}{G}}$ if and only if there exists a causal model satisfying the constraints of the hypothesis, $C \in H_{G,S}$, such that $\pdf[C]{\SmallNamedFunction{ObservedNodes}{G}} = \pdf{\SmallNamedFunction{ObservedNodes}{G}}$. 
-
-
-
-%Suppose the original causal inference problem takes as its inputs  a probability distribution over a set $\bm{O}$ of observed variables, denoted $\pdf{\bm{O}}$, and a causal hypothesis, denoted $H_{G,S}$, and seeks to determine whether these are consistent.  
-
-Every inflation $G\to G'$
-%DAG $G' \in \SmallNamedFunction{Inflations}{G}$
- defines a new causal inference problem for which the decision regarding consistency is the same as for the original problem.  
-
-The causal hypothesis of the new causal inference problem is simply the image under a $G\to G'$ inflation of the causal hypothesis of the original causal inference problem, and one seeks to evaluate its consistency with observational data that is determined by the observational data of the original in the following way.
-%: for all pre-injectable sets on $G'$ consisting entirely of observed nodes on $G'$, the distribution over the set is given by the observed distribution over the corresponding nodes on $G$. 
-
-%We can formalize this as follows. 
-Let  $\bm{O}$ denote the image of $\subsim{\bm{O}}$ under the $G \to G'$ inflation, and consider the subsets of $\bm{O}$ that are pre-injectable relative to the $G \to G'$ inflation, denoted $\SmallNamedFunction{PreInjectableSets}{\bm{O}}$.  Recall that for every set of nodes $\bm{U} \in \SmallNamedFunction{PreInjectableSets}{\bm{O}}$ there is a partition $\bm{U} = \bigcup_i \bm{U}_i$ where the $\bm{U}_i$ are subsets of $\bm{O}$ that are injectable relative to the $G \to G'$ inflation and that are ancestrally independent.  Recall also that, by the definition of a $G\to G'$ inflation, for any set of nodes $\bm{U}_i \subseteq \bm{O}$ that is injectable, one can find a set of nodes $\subsim{\bm{U}}_i \subseteq \subsim{\bm{O}}$ such that $\forall  i: \bm{U}_i \sim \subsim{\bm{U}}_i$.  The observational data of the new causal inference problem is that $\forall \bm{U} \in \SmallNamedFunction{PreInjectableSets}{\bm{O}}: \pdf{\bm{U}} = \pdf{\subsim{\bm{U}_1}}\pdf{\subsim{\bm{U}_2}} \dots \pdf{\subsim{\bm{U}_n}}$, where $\pdf{\subsim{\bm{U}_i}}$ is the marginal of $\pdf{\subsim{\bm{O}}}$ on $\subsim{\bm{U}_i}$.
-
-Therefore the observational input to the new causal inference problem is not the distribution on $\bm{O}$, but rather a specification of the marginals of this distribution on each of the pre-injectable sets of $\bm{O}$ under the $G\to G'$ inflation.
-
-Summarizing, we have:
-\begin{lemma}
-The causal hypothesis $H_{G,S}$ is consistent with the observational data $\pdf{\subsim{\bm{O}}}$ if and only if the image of this causal hypothesis under a $G\to G'$ inflation, denoted $H_{G',S'}$, is consistent with the observational data that $\forall \bm{U} \in \SmallNamedFunction{PreInjectableSets}{\bm{O}}: \pdf{\bm{U}} = \pdf{\subsim{\bm{U}_1}}\pdf{\subsim{\bm{U}_2}} \dots \pdf{\subsim{\bm{U}_n}}$.
-\end{lemma}
-
-It follows that any consistency conditions that one can derive for the new causal inference problem immediately yield consistency conditions for the original causal inference problem.  Indeed, any standard tool of causal inference can be applied to the new problem and conditions derived therefrom provide novel conditions for the original problem.  Any causal inference tool, therefore, can potentially have its power augmented by combining it with inflation.
-%The new problem has a rather different form than the old, 
-
-
-
-\example{: \tred{Perfect correlation cannot arise from the Triangle scenario.}}\par\smallskip\nobreak
-
-Consider the following causal inference problem.  The observational data is a joint distribution over three binary-outcome variables, $P\parenths{A B C}$, where the marginal on each variable is uniform and the three are perfectly correlated,
-\begin{align}\label{eq:ghzdistribution1}
-p\parens{a b c}=\frac{[000]+[111]}{2}=\begin{cases}\tfrac{1}{2}&\text{if }\; a=b=c, \\ 0&\text{otherwise}.\end{cases}
-\end{align}
-The causal hypothesis is the set of causal models associated to the DAG of the triangle scenario, depicted in \cref{fig:Tri222}.  The problem is to decide whether the observational data is consistent with this causal hypothesis.
-
-To solve this problem, we consider the causal inference problem induced by the particular inflation of the triangle scenario depicted in Fig.~\ref{fig:TriDagSubA2B1C1}.  
-
-The sets $\brackets{A_2 C_1}$ and $\brackets{B_1 C_1}$ are injectable (hence trivially pre-injectable). The set $\brackets{A_2 B_1}$ is also pre-injectable because the singleton sets $\brackets{A_2}$ and $\brackets{ B_1}$ are each injectable and ancestrally independent.  Therefore, the observational data in our new causal inference problem includes
-\begin{align}
-\pdf{A_2 C_1}=\pdf{A C}\label{j1}\\
-\pdf{B_1 C_1}=\pdf{B C}\label{j2}\\
-\pdf{A_2 B_1}=\pdf{A}\pdf{B}\label{j3}.
-\end{align}
-The question is whether such constraints are consistent with the causal hypothesis that the DAG is that of \cref{fig:TriDagSubA2B1C1}, where the parameters supplementing the DAG are arbitrary, except for the constraint that the latent variables $Y_1$ and $Y_2$ are identically distributed. 
-
-It is not difficult to see that the answer to the question is negative.  And this verdict can be rendered without even appealing to the form of the inflation DAG (Note, however, that the inflation DAG has played a role in defining the new causal inference problem insofar as it has dictated the form that the observational data should take).  It suffices to make use of results concerning the marginals problem.   From Eq.~\eqref{eq:ghzdistribution1} one deduces that the marginal $\pdf{A C}$ described perfect correlation between $A$ and $C$ and similarly for the marginal $\pdf{B C}$.  But then, by Eqs.~\eqref{j1} and \eqref{j2}, one deduces that there is perfect correlation between $A_2$ and $C_1$ and perfect correlation between $B_1$ and $C_1$.  Meanwhile, Eq.~\eqref{j3} dictates that $A_2$ and $B_1$ should be uncorrelated.  But there is no joint distribution $P(A_2 B_1 C_1)$ having such marginals:  the only joint distribution that exhibits perfect correlation between $A_2$ and $C_1$ and between $B_1$ and $C_1$ also exhibits perfect correlation between $A_2$ and $B_1$.  
-
-We have therefore certified that perfect correlations among $A$, $B$ and $C$ is not consistent with the Triangle causal structure, recovering the seminal result of \citet{steudel2010ancestors}.
-
-\begin{comment}
 Let us ask, is it possible for the three original-scenario observable variables $\{A,B,C\}$ to be random but perfectly correlated? We call this the GHZ-type distribution, after an eponymous tripartite entangled quantum state \cite{greenberger1989going,3Qubits2Ways}. So $P_{\text{GHZ}}\parenths{A B C}$ is given by
 \begin{align}\label{eq:ghzdistribution1}
 p_{\text{GHZ}}\parens{a b c}=\frac{[000]+[111]}{2}=\begin{cases}\tfrac{1}{2}&\text{if }\; a=b=c, \\ 0&\text{otherwise}.\end{cases}
 \end{align}
-We assume uniform binary variables for the sake of concreteness, but the argument is general. Let's temporarily (falsely) assume $P_{\text{GHZ}}$ to be feasible for the triangle scenario. Since $\brackets{A_2 C_1}$ is an injectable set we have $\pdf{A_2 C_1}=\pdf{A C}$, and therefore $P_{\text{GHZ}}$ implies that $A_2$ and $C_1$ are perfectly correlated. Similarly, since $\brackets{B_1 C_1}$ is an injectable set we have $\pdf{B_1 C_1}=\pdf{A C}$, and therefore $B_1$ and $C_1$ must be perfectly correlated, and by extension $B_1$ and $A_2$ are perfectly correlated as well. On the other hand, $A_2$ and $B_1$ must be statistically independent, as they do not share any common ancestor. The only way for two variables to be \emph{both} perfectly correlated and independent is by being deterministic. This is not the case in $P_{\text{GHZ}}$, and thus we have certified that $P_{\text{GHZ}}$ is not realizable from the Triangle causal structure, recovering the seminal result of \citet{steudel2010ancestors}.
+We assume uniform binary variables for the sake of concreteness, but the argument is general. Let's temporarily (falsely) assume $P_{\text{GHZ}}$ to be realizable for the triangle scenario. Since $\brackets{A_2 C_1}$ is an injectable set we have $\pdf{A_2 C_1}=\pdf{A C}$, and therefore $P_{\text{GHZ}}$ implies that $A_2$ and $C_1$ are perfectly correlated. Similarly, since $\brackets{B_1 C_1}$ is an injectable set we have $\pdf{B_1 C_1}=\pdf{A C}$, and therefore $B_1$ and $C_1$ must be perfectly correlated, and by extension $B_1$ and $A_2$ are perfectly correlated as well. On the other hand, $A_2$ and $B_1$ must be statistically independent, as they do not share any common ancestor. The only way for two variables to be \emph{both} perfectly correlated and independent is by being deterministic. This is not the case in $P_{\text{GHZ}}$, and thus we have certified that $P_{\text{GHZ}}$ is not realizable from the Triangle causal structure, recovering the seminal result of \citet{steudel2010ancestors}.
+
+To be clear, one can employ \emph{any} kind of causal infeasibility criteria on the inflation DAGs to constrain the distributions on the original DAG. For example, here's a quantitative version of the same proof against perfect correlation in the Triangle scenario, this time using entropic arguments: Trivially $H(A_2|B_1)\leq H(A_2|C_1)+H(C_1|B_1)$, because the amount of information required to learn $A_2$ from $B_1$ is surely less than the amount of information required to learn  $A_2$ from $C_1$ and also to learn $C_1$ from $B_1$. On the other hand, the marginal independence of $A_2$ and $B_1$ implies $H(A_2|B_1)=H(A_2)$. $P_{\text{GHZ}}$ is ruled out, because it would yield $H(A_2|C_1)=H(C_1|B_1)=0$ while $H(A_2)=1$. The entropic conclusion is $H(A_2)\leq H(A_2|C_1)+H(C_1|B_1)$, or equivalently, $I(A_2:C_1)+I(B_1:C_1)\leq H(C_1)$. The injectability of sets per \cref{fig:TriDagSubA2B1C1} in turn yields
+\begin{align}\label{eq:monogomyofcorrelations}
+I(A:C)+I(B:C)\leq H(C),
+\end{align}
+\begin{comment}
+\begin{align}
+\hspace{-\mathindent}&I(A_2:B_1|C_1)=H(A_2 C_1)+H(B_1 C_1)-H(A_2 B_1 C_1)-H(C_1)\geq 0 
+\tag{positivity of conditional MI}\\
+\hspace{-\mathindent}\therefore  &H(A_2 C_1)+H(B_1 C_1)-H(A_2 B_1)-H(C_1)\geq 0 
+\tag{monotonicity of entropy, $H(A_2 B_1 C_1)\geq H(A_2 B_1)$}\\
+\hspace{-\mathindent}\therefore & H(A_2 C_1)+H(B_1 C_1)-H(A_2)-H(B_1)-H(C_1)\geq 0 
+\tag{$A_2\bot B_1\implies H(A_2 B_1)=H(A_2)+H(B_1)$}\\
+\hspace{-\mathindent}\therefore & H(A_2)+H(B_1)+2H(C_1)-H(A_2 C_1)-H(B_1 C_1)\leq H(C_1)
+\tag{rearranging terms}\\
+\hspace{-\mathindent}\therefore & I(A_2:C_1)+I(B_1:C_1)\leq H(C_1)
+\tag{definition of mutual information}\\
+\hspace{-\mathindent}\therefore & I(A:C)+I(B:C)\leq H(C)
+\tag{monogamy of correlations}
+%\tag{recognition of injectable sets}
+\label[]{eq:monogomyofcorrelations}
+\end{align}
 \end{comment}
+an inequality known as monogamy of correlations \cite{fritz2012bell}. It forbids perfect correlation of all three variables. Because \cref{eq:monogomyofcorrelations} is derivable from a non-broadcasting inflation DAG, it follows that monogamy of correlations holds even in the context of generalized probabilistic theories. This recovers a result of \citet[Cor. 24]{pusey2014gdag}. Indeed, Fig. 5 in Ref. \cite{pusey2014gdag} is essentially equivalent to \cref{fig:TriDagSubA2B1C1} here.
+
 
 \example{: \tred{The W-type distribution cannot arise from the Triangle scenario}}\par\smallskip\nobreak
-
-Consider another causal inference problem concerning the triangle scenario, namely, that of determining whether the triangle DAG can explain a joint distribution $P_{\text{W}}\parenths{A B C}$ of the form
+Another distribution inconsistent with the Triangle scenario is the W-type distribution, named after a quantum state appearing in Ref. \cite{3Qubits2Ways}. To our knowledge, the infeasibility of the Triangle causal structure to explain the W-type distribution is a novel result here. The distribution $P_{\text{W}}\parenths{A B C}$ is given by
 \begin{align}\label{eq:wdistribution1}
 p_{\text{W}}\parens{a b c}=\frac{[100]+[010]+[001]}{3}=\begin{cases}\tfrac{1}{3}&\text{if }\; a+b+c=1, \\ 0&\text{otherwise}.\end{cases}
 \end{align}
-We call this the W-type distribution\footnote{Because its correlations are reminiscent of those one obtains for the quantum state appearing in Ref. \cite{3Qubits2Ways}, and which is called the W state.}. To our knowledge, the fact that the Triangle causal structure is inconsistent with the W-type distribution has not been demonstrated previously.
-
-To prove the inconsistency of  $P_{\text{W}}$ with the Triangle causal structure, we consider the inflation DAG of \cref{fig:Tri222}. 
-The sets $\{A_2 C_1\}$, $\{B_2 A_1\}$, $\{A_2 B_1\}$ and $\{ A_1 B_1 C_1\}$ are injectable.  The set $\{ A_2 B_2 C_2\}$ is pre-injectable because the singleton sets $\{A_2\}$,  $\{B_2\}$ and $\{C_2\}$ are injectable and acenstrally independent. It follows that we must consider the feasability of the observational data
-\begin{align}
-\pdf{A_2 C_1}=\pdf{A C}\label{W1}\\
-\pdf{B_2 A_1}=\pdf{B A}\label{W2}\\
-\pdf{C_2 B_1}=\pdf{C B}\label{W3}\\
-\pdf{A_1 B_1 C_1}=\pdf{A B C}\label{W4}\\
-\pdf{A_2 B_2 C_2}=\pdf{A}\pdf{B}\pdf{C}\label{W5}.
-\end{align}
-Eq.~\eqref{W1} together with the form of $P_{\text{W}}$ implies that $C_1\eql 0$ whenever $A_2 \eql 1$. Similarly, $A_1\eql 0$ whenever $B_2\eql 1$ and $B_1\eql 0$ whenever $C_2\eql 1$. Eq.~\eqref{W5} and the form of $P_{\text{W}}$ implies that $A_2$,$B_2$, and $C_2$ are uncorrelated and uniformly distributed, which means that sometimes they all take the value 1. 
-%, that is, $A_2=1$ and $B_2=1$ and $C_2=1$.  
-Summarizing, we have
-\begin{align} 
-A_2 \eql 1 \implies C_1\eql 0\\
-B_2\eql 1 \implies A_1\eql 0\\
-C_2 \eql 1 \implies B_1 \eql 0\\
-\text{sometimes}
-%\footnote{In fact, this occurs with probability 1/8, though it is sufficient for the argument to note that it is nonzero.}
- \quad A_2=1, B_2=1, C_2=1.
-\end{align}
-But these constraints clearly imply that
-\begin{align}
-\text{sometimes} \quad A_1=0, B_1=0, C_1=0,
-\end{align}
-which contradicts Eq.~\eqref{W4} and the fact that $P_{\text{W}}$ has no weight on $[000]$.
-
-Again, we have reached our verdict here simply by noting that the distributions defined in Eqs.~\eqref{W1}-\eqref{W5} cannot arise as the marginals of a single distribution on $A_1, B_1, C_1, A_2, B_2, C_2$.  Specifically, we have leveraged an approach to the marginal problem inspired by Hardy's version of Bell's theorem [citation].
-
-%$\p{A_2\eql B_2\eql C_2\eql 1}=\nicefrac{1}{8}$ according to $P_{\text{W}}$. But that would imply $\p{A_1\eql B_1\eql C_1\eql 0}\geq\nicefrac{1}{8}$, which contradicts $P_{\text{W}}$, hence $P_{\text{W}}$ cannot arise from the Triangle scenario.
+To prove that  $P_{\text{W}}$ clashes with the Triangle causal structure, consider the inflation DAG of \cref{fig:Tri222}. The set $\{A_2 C_1\}$ is injectable, so $P_{\text{W}}$ implies that $C_1\eql 0$ whenever $A_2 \eql 1$. Similarly, $B_1\eql 0$ whenever $C_2\eql 1$, and $A_1\eql 0$ whenever $B_2\eql 1$. The independence of $A_2$,$B_2$, and $C_2$ means that $\p{A_2\eql B_2\eql C_2\eql 1}=\nicefrac{1}{8}$ according to $P_{\text{W}}$. But that would imply $\p{A_1\eql B_1\eql C_1\eql 0}\geq\nicefrac{1}{8}$, which contradicts $P_{\text{W}}$, hence $P_{\text{W}}$ cannot arise from the Triangle scenario.
 
 The W-type distribution is difficult to witness as unrealizable using conventional causal inference techniques.
 \begin{compactenum}
@@ -664,13 +579,12 @@ The W-type distribution is difficult to witness as unrealizable using convention
 \item Moreover, \emph{no} entropic inequality can witness the W-type distribution as unrealizable. \citet{weilenmann2016entropic} have constructed an inner approximation to the entropic cone of the Triangle causal structure, and the W-distribution lies inside this. In other words, a distribution with the same entropic profile as the W-type distribution \emph{can} arise from the Triangle scenario.
 \item The newly-developed method of covariance matrix causal inference due to \citet{kela2016covariance}, which gives tighter constraints than entropic inequalities for the Triangle scenario, also cannot detect inconsistency with the W-type distribution.
 \end{compactenum}
-\par\noindent But the inflation technique can, and does so very easily.
+\par\noindent But the inflation DAG approach can, and does so very easily.
+
 
 \example{: \tred{The PR-box cannot arise from the Bell scenario}}\par\smallskip\nobreak
 
-Consider the causal structure associated to the Bell \cite{bell1964einstein,Brunner2013Bell,bell1966lhvm,CHSHOriginal} scenario [\citealp{pusey2014gdag}~(Fig.~E\#2), \citealp{WoodSpekkens}~(Fig.~19), \citealp{chaves2014novel}~(Fig.~1), \citealp{BeyondBellII}~(Fig.~1), \citealp{wolfe2015nonconvexity}~(Fig.~2b), \citealp{steeg2011relaxation}~(Fig.~2)], depicted here in \cref{fig:NewBellDAG1}. The observable variables are $\brackets{A,B,X,Y}$, and $\Lambda$ is the latent common cause of $A$ and $B$. 
-
-\begin{figure}[ht]
+\begin{figure}[b]
 \centering
 \begin{minipage}[t]{0.45\linewidth}
 \centering
@@ -685,42 +599,73 @@ Consider the causal structure associated to the Bell \cite{bell1964einstein,Brun
 \end{minipage}
 \end{figure}
 
+Consider the causal structure associated to the Bell \cite{bell1964einstein,Brunner2013Bell,bell1966lhvm,CHSHOriginal} scenario [\citealp{pusey2014gdag}~(Fig.~E\#2), \citealp{WoodSpekkens}~(Fig.~19), \citealp{chaves2014novel}~(Fig.~1), \citealp{BeyondBellII}~(Fig.~1), \citealp{wolfe2015nonconvexity}~(Fig.~2b), \citealp{steeg2011relaxation}~(Fig.~2)], depicted here in \cref{fig:NewBellDAG1}. The observable variables are $\brackets{A,B,X,Y}$, and $\Lambda$ is the latent common cause of $A$ and $B$. An inflation of the Bell scenario is show in \cref{fig:BellDagCopy1}.
 
-We consider the distribution ${P_{\text{PR}}}\parenths{A B X Y} = P_{\text{PR}}\parenths{A B | X Y} P(X) P(Y)$, where $P(X)$ and $P(Y)$ are arbitrary full-support distributions\footnote{In the literature on the Bell scenario, these variables are known as ``settings''. Generally, We may think of endogenous observable variables as settings, coloring them light green in the DAG figures. Settings variables are natural candidates for conditioning on.} over the binary variables $X$ and $Y$, and
+The \citet{PROriginal} PR-box distribution is famously inconsistent with the Bell scenario \cite{PROriginal,PRUnit}. Here we prove its unrealizability using inflation DAG logic. The distribution  is given by ${P_{\text{PR}}}\parenths{A B X Y} = P_{\text{PR}}\parenths{A B | X Y} P(X) P(Y)$, where $P(X)$ and $P(Y)$ are arbitrary full-support distributions\footnote{In the literature on the Bell scenario, these variables are known as ``settings''. Generally, We may think of endogenous observable variables as settings, coloring them light green in the DAG figures. Settings variables are natural candidates for conditioning on.} over the binary variables $X$ and $Y$, and
 \begin{align}\begin{split}\label{eq:PRbox}
 % & p_{\text{PR}}\parens{a b |x y}=\frac{[00|00]+[11|00]+[00|10]+[11|10]+[00|01]+[11|01]+[01|11]+[10|11]}{8}\\
 p_{\text{PR}}\parens{a b |x y}=\begin{cases}\tfrac{1}{2}&\text{if }\; \SmallNamedFunction[2]{mod}{a+b}=x\cdot y, \\ 0&\text{otherwise}.\end{cases}
 \end{split}\end{align}
-The correlations described by this distribution are known as PR-box correlations after Popescu and Rohrlich, and they are well-known to be inconsistent with the the Bell scenario \cite{PROriginal,PRUnit}. Here we prove this inconsistency using the inflation technique. 
-
-We use the inflation of the Bell DAG shown in \cref{fig:BellDagCopy1}.
-
-We begin by recognizing that $\{A_1 B_1 X_1 Y_1\}$, $\{A_2 B_1 X_2 Y_1\}$, $\{A_1 B_2 X_1 Y_2\}$, and $\{A_2 B_2 X_2 Y_2\}$ are all injectable sets, and that $\{X_1 X_2 Y_1 Y_2\}$ is a pre-injectable set because the singleton sets $\{X_1\}$, $\{X_2\}$, $\{Y_1\}$, and $\{Y_2\}$ are all injectable and ancestrally independent of one another.  It follows that
-\begin{align}
-\pdf{A_1 B_1 X_1 Y_1}=\pdf{A B X Y}\label{PR1}\\
-\pdf{A_2 B_1 X_2 Y_1}=\pdf{A B X Y}\label{PR2}\\
-\pdf{A_1 B_2 X_1 Y_2}=\pdf{A B X Y}\label{PR3}\\
-\pdf{A_2 B_2 X_2 Y_2}=\pdf{A B X Y}\label{PR4}\\
-\pdf{X_1 X_2 Y_1 Y_2}=\pdf{X}\pdf{X}\pdf{Y}\pdf{Y}\label{PR5}.
-\end{align}
-These imply that 
-\begin{align}
-\pdf{A_1 B_1 |X_1 Y_1}=\pdf{A B |X Y}\label{PR1b}\\
-\pdf{A_2 B_1 |X_2 Y_1}=\pdf{A B |X Y}\label{PR2b}\\
-\pdf{A_1 B_2 |X_1 Y_2}=\pdf{A B |X Y}\label{PR3b}\\
-\pdf{A_2 B_2 |X_2 Y_2}=\pdf{A B |X Y}\label{PR4b}.
-\end{align}
-
-Given the assumption that the distributions $P(X)$ and $P(Y)$ are full support, it follows from Eq.~\eqref{PR5} that sometimes $\{X_1, X_2, Y_1, Y_2\}=\{0, 1, 0, 1\}$.  
-%$X_1$, $X_2$, $Y_1$, and $Y_2$ are all independent variables.
+We begin by recognizing that $\{A_1 B_1 X_1 Y_1\}$, $\{A_1 B_1 X_2 Y_1\}$, $\{A_1 B_2 X_1 Y_2\}$, and $\{A_2 B_2 X_2 Y_2\}$ are all injectable sets, and that $X_1$, $X_2$, $Y_1$, and $Y_2$ are all independent variables.
 % $P_{\text{PR}}$ is given as a conditional distribution because $X$ and $Y$ are settings variables.
-For these values, $P_{\text{PR}}$ and Eq.~\eqref{PR1b} specifies perfect correlation between $A_1$ and $B_1$.  Similarly, for these values we expect perfect correlation between $A_1$ and $B_2$, perfect correlation between $A_2$ and $B_1$, and perfect \emph{anti}correlation between $A_2$ and $B_2$. Those four requirements are not mutually compatible, however: since perfect correlation is transitive, the first three properties entail perfect correlation between $A_2$ and $B_2$. 
+No matter how biased the distributions $P(X)$ and $P(Y)$ are, however, surely the event $\{X_1, X_2, Y_1, Y_2\}=\{0, 1, 0, 1\}$ \fxnote{set notation for this?} occurs sometimes. Whenever it does, $P_{\text{PR}}$ specifies perfect correlation between $A_1$ and $B_1$, perfect correlation between $A_1$ and $B_2$, perfect correlation between $A_2$ and $B_1$, and perfect \emph{anti}correlation between $A_2$ and $B_2$. Those four requirements are not mutually compatible: since perfect correlation is transitive, the first three properties entail perfect correlation between $A_2$ and $B_2$. Hence the PR-box distribution is disallowed by the Bell scenario.
 
-The mathematical structure of this proof parallels that of standard proofs of the inconsistency of PR-box correlations with the Bell structure.  Standard proofs focus on a set of variables $A_0, A_1, B_0, B_1, C_0, C_1$ where $A_0$  is the value of $A$ when $X=0$, and similarly for the others.  The fact that there must be a joint distribution over these variables can be inferred from the structure of the Bell DAG and the fact that one can assume without loss of generality that the causal dependences are deterministic (a result known as Fine's theorem [citation]).  It is then sufficient to note that the marginals given by the PR-box correlations do not arise from any joint distribution.  Nonetheless, our proof is conceptually distinct insofar as the variables to which we apply the marginals problem are not conditioned on a setting value.  And we do not require Fine's theorem.  [Can we do something that couldn't be done in the standard approach?]
+%Indeed, this logic rules out much more than just the PR-box: If $\p{A\eql B|X\eql Y\eql 1}=0$ then we can quickly derive a Hardy-type argument.
+%\begin{align}\begin{split}
+%&\p{A_1\eql B_1|X_1\eql Y_1\eql 0}=\textstyle{\sum\nolimits_q} \p{A_1\eql B_1\eql q|X_1\eql Y_1\eql 0}\\
+%&=\textstyle{\sum\nolimits_q} \p{A_1\eql B_1\eql q|X_1\eql Y_1\eql 0,X_2\eql Y_2\eql 1}\qquad\left(\text{because }A_1 B_1 \bot X_2 Y_2 | X_1 Y_1\right)\\
+%&=\textstyle{\sum\nolimits_q} \p{A_1\eql B_1\eql A_2\eql q|X_1\eql Y_1\eql 0,X_2\eql Y_2\eql 1}+\p{A_1\eql B_1\eql q,A_2\cramp{\neq} q|X_1\eql Y_1\eql 0,X_2\eql Y_2\eql 1}\\
+%&=\textstyle{\sum\nolimits_q} \p{A_1\eql B_1\eql q, B_2\cramp{\neq} q|X_1\eql Y_1\eql 0,X_2\eql Y_2\eql 1}+\p{A_1\eql B_1\eql q,A_2\cramp{\neq} q|X_1\eql Y_1\eql 0,X_2\eql Y_2\eql 1}\\
+%&\qquad\left(\text{because }A_2\eql q |X_2\eql Y_2\eql 1 \Leftrightarrow B_2\cramp{\neq} q |X_2\eql Y_2\eql 1\right)\\
+%&\leq\textstyle{\sum\nolimits_q}\p{A_1\eql q, B_2\cramp{\neq} q|X_1\eql Y_1\eql 0,X_2\eql Y_2\eql 1}+\p{B_1\eql q,A_2\cramp{\neq} q|X_1\eql Y_1\eql 0,X_2\eql Y_2\eql 1}\\
+%&=\textstyle{\sum\nolimits_q} \p{A_1\eql q, B_2\cramp{\neq} q|X_1\eql 0, Y_2\eql 1}+\p{B_1\eql q,A_2\cramp{\neq} q| Y_1\eql 0,X_2\eql 1}\\
+%&= \p{A_1\cramp{\neq}B_2|X_1\eql 0, Y_2\eql 1}+\p{A_2\cramp{\neq}B_1| Y_1\eql 0,X_2\eql 1}\\
+%&\therefore \p{A=B|X\eql Y\eql 0}\leq \p{A\neq B|X\eql 1,Y\eql 0}+\p{A\neq B|X\eql 0,Y\eql 1}
+%\end{split}\end{align}
 
-Many causal inference techniques can be used to derive sufficient conditions for the inconsistency of the causal hypothesis $H_{G',S'}$ with the observational data $\forall \bm{U} \in \SmallNamedFunction{PreInjectableSets}{\bm{O}}: \pdf{\bm{U}} = \pdf{\subsim{\bm{U}_1}}\pdf{\subsim{\bm{U}_2}} \dots \pdf{\subsim{\bm{U}_n}}$. We will call sets of such conditions {\em inconsistency witnesses}.  
+\begin{comment}
+\example{: \tred{The center-break distribution cannot arise from the Instrumental scenario}}\par\smallskip\nobreak
+\begin{figure}[t]
+\centering
+\begin{minipage}[b]{0.375\linewidth}
+\centering
+\includegraphics[scale=1]{InstrumentalDAGpearl.pdf}
+\caption{The Instrumental scenario}\label{fig:instrumental}
+\end{minipage}\hspace{80pt}
+\begin{minipage}[b]{0.4\linewidth}
+\centering
+\includegraphics[scale=1]{InstrumentalInflation.pdf}
+\caption{An inflation of the Instrumental scenario.}\label{fig:instrumentalinflation}
+\end{minipage}\hfill
+\end{figure}
 
-\color{black}
+The (disallowed) center-break distribution for the Instrumental scenario is one in which $Y$ and $Z$ are perfectly correlated while $X$ is fixed as a point distribution, i.e. returning one outcome with 100\% probability.
+\begin{align}\begin{split}\label{eq:PRbox}
+&{P_{\text{CB}}}\parenths{X Y Z} \coloneqq\quad p_{\text{CB}}\parens{x y z} y}=\frac{[000]+[011]}{2}=\begin{cases}\tfrac{1}{2}&\text{if }\; y\eql z \land x\eql0 \\ 0&\text{otherwise}\end{cases}
+\end{split}\end{align}
+We prove its infeasibility by considering the inflation DAG in \cref{fig:instrumentalinflation}. 
+\end{comment}
+
+
+The following section discusses how to procedurally derive polynomial infeasibility criteria pertaining to original DAG from properties of an inflation DAG. 
+
+
+
+\begin{comment}\btob
+The basic idea of our method is disarmingly simple, so let us illustrate it first with an example before presenting the general case in more formal detail. Consider the W-type distribution on the Triangle scenario,
+\[	p(001) = p(010) = p(100) = \frac{1}{3}.\]
+So our question is, can this distribution over $A$, $B$ and $C$ be obtained through the causal structure of~\cref{fig:TriMainDAG}? For the sake of the argument, assume that this is the case; hence there are distributions over the hidden variables $p(X)$, $p(Y)$ and $p(Z)$ as well as conditional distributions $p(A|X,Y)$, $p(B|Y,Z)$ and $p(C|X,Z)$ such that $p(ABC)$ is reproduced. Intuitively, we may think of $X$ as a ``black box'' system that outputs random stuff, and likewise of $A$ as a black box which takes some inputs and outputs random signals. Now there are two things that we can do in order to 
+\begin{itemize}
+\item Of each outgoing variable we can produce an arbitrary number of further copies, resulting in new edges;
+\item Of each black box, we can likewise produce copies that behave independently, resulting in new nodes.
+\end{itemize}
+We can then rewire these gadgets into a new Bayesian network.~\cref{fig:TriFullDouble} presents an example of such a rewiring, or ``inflated'' DAG. Pearl's \emph{do calculus} uses rewirings of a similar nature, and also Henson, Lal and Pusey~\cite{pusey2014gdag} use this reasoning to show that the entropic inequality $I(A:B) + I(B:C)\leq H(B)$ holds in all GPTs, just without taking copies of variables but only rewiring the boxes.
+
+Since the outcome $B=1$ occurs sometimes, there must be hidden variables values $a_2$ and $c_3$ such that $B_4=1$ has positive probability; and similarly, we choose values for $X_1$ and $Y_1$ such that $A_1=1$ has positive probability, and for $X_2$ and $Z_1$ such that $C_2=1$ has positive probability. Since all the hidden variables in the inflated DAG are independent, these conditions do sometimes all occur jointly. Then by the form of the assumed distribution, it follows that for the assumed values of the hidden variables, one must necessarily have $A_2=0$, $B_3=0$ and $C_1=0$, which contradicts the assumption $p(000) = 0$.
+
+It is not difficult to transform this argument into a polynomial inequality for the Triangle scenario. However, it is more instructive to present the derivation of polynomial inequalities using our method in a slightly different manner, and we will do so later.
+\etob\end{comment}
+
 
 \section{A procedure for deriving polynomial inequalities}
 \label{sec:ineqs}
@@ -736,7 +681,7 @@ Our method is based on deriving inequalities for the so-called \tblue{marginal p
 
 \step{: \tred{Identifying the Pre-Injectable Sets}}\label{step:findpreinjectable}\par\smallskip\nobreak
 
-To identify the pre-injectable sets, we first identify the injectable sets. To this end, it is useful to construct an auxiliary graph from the inflation DAG. Let the nodes of these auxiliary graphs be the observable nodes in the inflation DAG. The \tblue{injection graph}, then, is the undirected graph in which a pair of nodes $A_i$ and $B_j$ are adjacent if  $\An{A_i B_j}$ is irredundant. The injectable sets are then precisely the cliques\footnote{A clique is a set of nodes such that every single node is connected to every other.} in this graph, per \cref{eq:definjectable}. 
+To identify the pre-injectable sets, we first identify the injectable sets. To this end, it is useful to construct an auxiliary graph from the inflation DAG. Let the nodes of these auxiliary graphs be the observable nodes in the inflation DAG. The \tblue{injection graph}, then, is the undirected graph in which a pair of nodes $A_i$ and $B_j$ are adjacent if  $\An{A_i B_j}$ is irredundant. The injectable sets are then precisely the cliques\footnote{A clique is a set of nodes such that every single node is connected to every other.} in this graph, per \cref{eq:definjectable2}. 
 
 Determining the pre-injectable sets from there can be done via constructing another graph that we call the \tblue{independence graph}. Its nodes are the injectable sets, and we connect two of these by an edge if their ancestral subgraphs are disjoint. Then by definition, the pre-injectable sets can be obtained as the cliques in this graph. Taking the union of all the injectable sets in such a clique results in a pre-injectable set. Since it is sufficient to only consider the maximal pre-injectable sets, one can eliminate all those pre-injectable sets that are contained in other ones, as a final step.
 
@@ -927,7 +872,6 @@ is found to be a constraint on the Triangle scenario through by summing the foll
 \end{align}
 Indeed, this example has been chosen because \cref{eq:tritrivial1} can be derived directly from the small ancestral subgraph of $\{A_2 B_1 C_1\}$, namely \cref{fig:TriDagSubA2B1C1}.
 
-\purp{add back monogomy of correlations?}
 It may be constructive to rewrite this inequality in correlator form using outcomes in $\{-1,+1\}$ as
 \[
 	\langle AC\rangle - \langle BC\rangle \leq 1 - \langle A\rangle\langle B\rangle,
@@ -1124,21 +1068,6 @@ Joint counterfactual probabilities are experimentally inaccessible, just the sam
 
 \section{Gedankenprobabilities and the Quantum No-Broadcasting Theorem}\label{sec:classicallity}
 
-It is worth noting that duplicating an outgoing edge in a causal structure means \tblue{broadcasting} the value of the random variable. For example in \cref{fig:simpleinflation}, the information about $X$ which was ``sent" to $A$ is effectively broadcast to both $A_1$ and $A_2$ in the inflation. This is quite intentional. Quantum theory is governed by a no-broadcasting theorem \cite{NoCloningQuantum1996,NoCloningGeneral2006}; by electing to embed broadcasting into an inflation DAG we can specifically construct a foil to quantum causal structures. Infeasibility constraints derived from \tblue{non-broadcasting inflations} on the other hand, such as \cref{fig:simplestinflation}, are valid even when relaxing the interpretation of latent nodes to allow for quantum or general probabilistic resources. This contrast is elaborated at length in \cref{sec:classicallity}.  
-
-So a non-broadcasting inflation DAG is one in which the set of children of every latent node in the inflation DAG $G'$ is irredundant, i.e.  
-\begin{align}\label{eq:nonbroadcastinginflationDAG}
-G'\in\SmallNamedFunction{NonBroadcastingInflations}{G} \quad\text{ iff }\quad \forall_{\text{latent }A_i\in G'}\; \Ch[G']{A_i} \text{ is an irredundant set.}
-\end{align}
-We also find it useful to define the notion of a non-broadcasting subset of nodes within some larger broadcasting inflation DAG.
-Let's define any pair of redundant nodes which share a latent parent to be a \tblue{fundamental broadcasting pair}. An inflation DAG is non-broadcasting if it does not contain any fundamental broadcasting pairs. Similarly, a set of nodes $\bm{U}$ is a \tblue{non-broadcasting set} iff $\An[G']{\bm{U}}$ is free of any fundamental broadcasting pairs.
-
-%A set of nodes $\bm{U}$ is a \tblue{non-broadcasting set} iff $\ansubgraph[G']{\bm{U}}$ is a non-broadcasting inflation DAG. Any inference about the original DAG which can be made by referencing exclusively to non-broadcasting sets hold in both the classical and quantum paradigms. Broadcasting inflation DAGs are therefore especially useful for deriving criteria which distinguish quantum and classical probability distributions, but we anticipate them to be valuable for broader causal inference tasks as well.
-
-In classical causal structures the latent nodes correspond to classical hidden variables. In quantum causal structures, however, the latent nodes are taken to be quantum systems. Some quantum causal structures are famously capable of realizing distributions that would not be possible classically, although the set of quantum distribution is superficially quite similar to the classical subset \cite{pusey2014gdag,fritz2012bell}. For example, classical and quantums distributions alike respect all conditional independence relations implied by the common underlying causal structure \cite{pusey2014gdag}. Recent work has found that quantum causal structure implies many of the entropic inequalities implied by their classical counterparts \cite{pusey2014gdag,Chaves2015infoquantum,ChavesNoSignalling}. To-date, no quantum distribution has been witnessed to violate a Shannon-type entropic inequality on observable variables derived from the Markov conditions on all nodes \cite{chaves2012entropic,fritz2012bell}. Fine-graining the scenario by conditioning on discrete settings leads to a different kind of entropic inequality, and these have proven somewhat quantum-sensitive \cite{braunstein1988entropic,SchumacherInequality,chaves2014novel}. Such \citet{braunstein1988entropic} type inequalities are still limited, however, in that they rely on root observable nodes\footnote{Rafael Chaves and E.W. are exploring the potential of entropic analysis based on fine-graining causal structures over non-root observable nodes. This generalizes the method of entropic inequalities, and might be capable of providing much stronger entropic infeasibility criteria.}, and they still fail to detect certain extremal non-classical distributions \cite{chaves2014novel,fritz2012bell}.  
-
-The insufficiency of entropic inequalities is a pressing concern in quantum information theory since they often fail to detect the infeasibility of quantum distributions, for instance in the Triangle scenario \citep[Prob. 2.17]{fritz2012bell}. The superficial similarity between quantum and classical distributions demands especially sensitive causal infeasibility criteria in order to distinguish them. We hope that polynomial inequalities derived from broadcasting inflation DAGs will be suitable tools for this purpose.
-
 It is worth emphasizing that broadcasting gedankenprobabilities %which are predicated on multiple counterfactual or heterofactual events 
 are strictly classical constructs. If the latent node in the Bell scenario in \cref{fig:NewBellDAG1} is allowed to be a quantum resource $\mathcal{H}^{d_A\otimes d_B}$, for example, then broadcasting gedankendistributions such as $\pdf{A|x , A|\n{x},...}$ or $\pdf{A_1,A_2,...}$ are \tblue{physically prohibited} if the quantum state is suitably entangled.
 
@@ -1311,7 +1240,7 @@ It is also possible to use a mixed strategy of linear and nonlinear quantifier e
 
 \clearpage\medskip\item[\tred{Coinciding Marginal Distributions}] \noindent
 \par\hspace{\parskip}
-By restricting our attention to inflation models, we see that sometimes the distributions of different injectable sets coincide, i.e. $\pdf{\bm{X}}=\pdf{\bm{Y}}$ whenever both $\bm{X}$ and $\bm{Y}$ are injectable, and $\subsim{\bm{X}}=\subsim{\bm{Y}}$. Sometimes sets of random variables which are \emph{not} injectable, however, can also be shown to have necessarily coinciding distributions. Coinciding (not necessarily injectable) marginal distributions among the inflation DAG variables is a consequence of \cref{eq:funcdependences}. For example, we can verify that $\pdf{A_1 A_2 B_1}=\pdf{A_1 A_2 B_2}$ follows from \cref{fig:Tri222}, even though $\brackets{A_1 A_2 B_1}$ and $\brackets{A_1 A_2 B_2}$ are not injectable sets. Here we formalize this type of constraint more generally.
+By restricting our attention to inflation models, we see that sometimes the distributions of different injectable sets coincide, i.e. $\pdf{\bm{X}}=\pdf{\bm{Y}}$ whenever both $\bm{X}$ and $\bm{Y}$ are injectable, and $\subsim{\bm{X}}=\subsim{\bm{Y}}$. Sometimes sets of random variables which are \emph{not} injectable, however, can also be shown to have necessarily coinciding distributions. Coinciding (not necessarily injectable) marginal distributions among the inflation DAG variables is a consequence of \cref{eq:funcdepends}. For example, we can verify that $\pdf{A_1 A_2 B_1}=\pdf{A_1 A_2 B_2}$ follows from \cref{fig:Tri222}, even though $\brackets{A_1 A_2 B_1}$ and $\brackets{A_1 A_2 B_2}$ are not injectable sets. Here we formalize this type of constraint more generally.
 
 We call two sets of observable nodes $\bm{X}$ and $\bm{Y}$ \tblue{inflationarily isomorphic} if there exists an isomorphism $\ansubgraph[G']{\bm{X}}\sim\ansubgraph[G']{\bm{Y}}$ which has the additional property that it takes $\bm{X}$ itself bijectively to $\bm{Y}$. For example in~\cref{fig:Tri222}, the sets $\bm{X}=\{A_1 A_2 B_1\}$ and $\bm{Y}=\{A_1 A_2 B_2\}$ are inflationarily isomorphic. Then 
 

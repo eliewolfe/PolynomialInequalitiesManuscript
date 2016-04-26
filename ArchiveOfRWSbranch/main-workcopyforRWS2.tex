@@ -599,6 +599,8 @@ The causal hypothesis $H_{G,S}$ is consistent with the observational data $\pdf{
 It follows that any consistency conditions that one can derive for the new causal inference problem immediately yield consistency conditions for the original causal inference problem.  Indeed, any standard tool of causal inference can be applied to the new problem and conditions derived therefrom provide novel conditions for the original problem.  Any causal inference tool, therefore, can potentially have its power augmented by combining it with inflation.
 %The new problem has a rather different form than the old, 
 
+
+
 \example{: \tred{Perfect correlation cannot arise from the Triangle scenario.}}\par\smallskip\nobreak
 
 Consider the following causal inference problem.  The observational data is a joint distribution over three binary-outcome variables, $P\parenths{A B C}$, where the marginal on each variable is uniform and the three are perfectly correlated,
@@ -727,6 +729,9 @@ Given the assumption that the distributions $P(X)$ and $P(Y)$ are full support, 
 For these values, $P_{\text{PR}}$ and Eq.~\eqref{PR1b} specifies perfect correlation between $A_1$ and $B_1$.  Similarly, for these values we expect perfect correlation between $A_1$ and $B_2$, perfect correlation between $A_2$ and $B_1$, and perfect \emph{anti}correlation between $A_2$ and $B_2$. Those four requirements are not mutually compatible, however: since perfect correlation is transitive, the first three properties entail perfect correlation between $A_2$ and $B_2$. 
 
 The mathematical structure of this proof parallels that of standard proofs of the inconsistency of PR-box correlations with the Bell structure.  Standard proofs focus on a set of variables $A_0, A_1, B_0, B_1, C_0, C_1$ where $A_0$  is the value of $A$ when $X=0$, and similarly for the others.  The fact that there must be a joint distribution over these variables can be inferred from the structure of the Bell DAG and the fact that one can assume without loss of generality that the causal dependences are deterministic (a result known as Fine's theorem [citation]).  It is then sufficient to note that the marginals given by the PR-box correlations do not arise from any joint distribution.  Nonetheless, our proof is conceptually distinct insofar as the variables to which we apply the marginals problem are not conditioned on a setting value.  And we do not require Fine's theorem.  [Can we do something that couldn't be done in the standard approach?]
+
+Many causal inference techniques can be used to derive sufficient conditions for the inconsistency of the causal hypothesis $H_{G',S'}$ with the observational data $\forall \bm{U} \in \SmallNamedFunction{PreInjectableSets}{\bm{O}}: \pdf{\bm{U}} = \pdf{\subsim{\bm{U}_1}}\pdf{\subsim{\bm{U}_2}} \dots \pdf{\subsim{\bm{U}_n}}$. We will call sets of such conditions {\em inconsistency witnesses}.  
+
 \color{black}
 
 
