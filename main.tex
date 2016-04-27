@@ -609,7 +609,7 @@ It follows that any consistency conditions that one can derive for the new causa
 
 Consider the following causal inference problem.  The observational data is a joint distribution over three binary-outcome variables, $\pdf[\text{obs}]{A B C}$, where the marginal on each variable is uniform and the three are perfectly correlated,
 \begin{align}\label{eq:ghzdistribution1}
-\pdf[\text{obs}]{A B C}=\frac{[000]+[111]}{2},\quad\text{i.e.}\quad\p[ABC]{a b c}=\begin{cases}\tfrac{1}{2}&\text{if }\; a\eql b\eql c, \\ 0&\text{otherwise}.\end{cases}
+P^{\text{obs}}_{A B C}=\frac{[000]+[111]}{2},\quad\text{i.e.}\quad P^{\text{obs}}_{A B C}(a b c)=\begin{cases}\tfrac{1}{2}&\text{if }\; a\eql b\eql c, \\ 0&\text{otherwise}.\end{cases}
 \end{align}
 The causal hypothesis is the set of causal models associated to the DAG of the triangle scenario, depicted in \cref{fig:Tri222}.  The problem is to decide whether the observational data is consistent with this causal hypothesis.
 
@@ -618,17 +618,20 @@ To solve this problem, we consider an inflated causal inference problem, namely 
 The sets $\brackets{A_2 C_1}$ and $\brackets{B_1 C_1}$ are injectable (hence trivially pre-injectable). The set $\brackets{A_2 B_1}$ is also pre-injectable because the singleton sets $\brackets{A_2}$ and $\brackets{B_1}$ are each injectable and $A_2 \aindep B_1$.
 %and they ancestrally independent.  
 Therefore, the inflated observational data for our new causal inference problem includes
-\begin{align}
+\begin{align}\begin{split}\label[eqs]{eq:GHZobsinf}
 %\p[A_2 C_1]{a c}=\p{A C}{a c} &= \frac{[00]+[11]}{2}\label{j1}\\
 %\p[B_1 C_1]{b c}=\p[B C]{b c} &= \frac{[00]+[11]}{2}\label{j2}\\
 %\p[A_2 B_1]{a b}=\p[A]{a}\p[B]{b} &= \frac{[0]+[1]}{2}\otimes\frac{[0]+[1]}{2} \label{j3}.
-&\pdf[\text{obs}]{A_2 C_1}=\pdf[\text{obs}]{A C} = \frac{[00]+[11]}{2}\label{j1}\\
-&\pdf[\text{obs}]{B_1 C_1}=\pdf[\text{obs}]{B C} = \frac{[00]+[11]}{2}\label{j2}\\
-&\pdf[\text{obs}]{A_2 B_1}=\pdf[\text{obs}]{A}\pdf[obs]{B} = \frac{[0]+[1]}{2}\otimes\frac{[0]+[1]}{2} \label{j3}.
-\end{align}
+&P^{\text{obs-inf}}_{A_2 C_1} = P^{\text{obs}}_{A C} = \frac{[00]+[11]}{2}\\
+&P^{\text{obs-inf}}_{B_1 C_1}=P^{\text{obs}}_{B C} = \frac{[00]+[11]}{2}\\
+&P^{\text{obs-inf}}_{A_2 B_1}=P^{\text{obs}}_A \otimes P^{\text{obs}}_B = \frac{[0]+[1]}{2}\otimes\frac{[0]+[1]}{2}.
+\end{split}\end{align}
 The question is whether such constraints are consistent with the causal hypothesis that the DAG is that of \cref{fig:TriDagSubA2B1C1}, where the parameters supplementing the DAG are unrestricted but for that the latent variables $Y_1$ and $Y_2$ are identically distributed. 
 
-It is not difficult to see that the answer to the question is negative.  And this verdict can be rendered without even appealing to the form of the inflation DAG (Note, however, that the inflation DAG has played a role in defining the new causal inference problem insofar as it has dictated the form that the observational data should take).  It suffices to make use of results concerning the marginals problem.   From Eq.~\eqref{eq:ghzdistribution1} one deduces that the marginal $\pdf{A C}$ described perfect correlation between $A$ and $C$ and similarly for the marginal $\pdf{B C}$.  But then, by Eqs.~\eqref{j1} and \eqref{j2}, one deduces that there is perfect correlation between $A_2$ and $C_1$ and perfect correlation between $B_1$ and $C_1$.  Meanwhile, Eq.~\eqref{j3} dictates that $A_2$ and $B_1$ should be uncorrelated.  But there is no joint distribution $P(A_2 B_1 C_1)$ having such marginals:  the only joint distribution that exhibits perfect correlation between $A_2$ and $C_1$ and between $B_1$ and $C_1$ also exhibits perfect correlation between $A_2$ and $B_1$.  
+It is not difficult to see that the answer to the question is negative.  And this verdict can be rendered without even appealing to the form of the inflation DAG (Note, however, that the inflation DAG has played a role in defining the new causal inference problem insofar as it has dictated the form that the inflated observational data should take).  It suffices to make use of results concerning the marginals problem.  
+%From Eq.~\eqref{eq:ghzdistribution1} one deduces that the marginal $\pdf{A C}$ described perfect correlation between $A$ and $C$ and similarly for the marginal $\pdf{B C}$.  But then, by Eqs.~\eqref{j1} and \eqref{j2}, one deduces that there is perfect correlation between $A_2$ and $C_1$ and perfect correlation between $B_1$ and $C_1$.  Meanwhile, Eq.~\eqref{j3} dictates that $A_2$ and $B_1$ should be uncorrelated.  But 
+
+There is no joint distribution $P_{A_2 B_1 C_1}$ having such marginal as given in \cref{eq:GHZobsinf}. The only joint distribution that exhibits perfect correlation between $A_2$ and $C_1$ and between $B_1$ and $C_1$ also exhibits perfect correlation between $A_2$ and $B_1$.  
 
 We have therefore certified that perfect correlations among $A$, $B$ and $C$ is not consistent with the Triangle causal structure, recovering the seminal result of \citet{steudel2010ancestors}.
 
@@ -923,12 +926,13 @@ C_2\aindep B_2
 such that the distributions on the pre-injectable sets relate to the original DAG distribution via
 \begin{align}\label{eq:preinjectableuses222}
 \begin{split}
-&\forall_{a b c}:\; \p[A_1 B_1 C_1]{a b c} = \p[A B C]{a b c} \\
-&\forall_{a b c}:\; \p[A_1 B_2 C_2]{a b c} = \p[C]{c}\p[A B]{a b}\\%\pdf{C}\pdf{A B}\\
-&\forall_{a b c}:\; \p[A_2 B_1 C_2]{a b c} = \p[A]{a}\p[B C]{b c}\\
-&\forall_{a b c}:\; \p[A_2 B_2 C_1]{a b c} = \p[B]{b}\p[A C]{a c}\\
-&\forall_{a b c}:\; \p[A_2 B_2 C_2]{a b c} = \p[A]{a}\p[B]{b}\p[C]{c}
-\end{split}
+&\forall_{a b c}:\; \begin{cases}
+\pdf[A_1 B_1 C_1]{a b c} = \pdf[A B C]{a b c} \\
+\pdf[A_1 B_2 C_2]{a b c} = \pdf[C]{c}\pdf[A B]{a b}\\%\pdf{C}\pdf{A B}\\
+\pdf[A_2 B_1 C_2]{a b c} = \pdf[A]{a}\pdf[B C]{b c}\\
+\pdf[A_2 B_2 C_1]{a b c} = \pdf[B]{b}\pdf[A C]{a c}\\
+\pdf[A_2 B_2 C_2]{a b c} = \pdf[A]{a}\pdf[B]{b}\pdf[C]{c}
+\end{cases}\end{split}
 \end{align}
 Having identified the pre-injectable sets (and how to use them), we next consider various ways to invoke constraints on the distributions over the pre-injectable sets.
 
@@ -975,16 +979,18 @@ The marginal problem asks about the existence of \emph{any} joint distribution w
 
 The most familiar causally-motivated constraints on a joint distribution are \tblue{conditional independence relations}, in particular, observable conditional independence relations. \purp{(Need citation?} Conditional independence relations are inferred by $d$-separation; if $\bm{X}$ and $\bm{Y}$ are $d$-separated in the (inflation) DAG by $\bm{Z}$, then we infer the conditional independence $\bm{X}\bot\bm{Y}|\bm{Z}$. The $d$-separation criterion is explained at length in~\cite{pearl2009causality,studeny2005probabilistic,WoodSpekkens,pusey2014gdag}, so we elect not to review it here.
 
-Every conditional independence relation can be translated into a nonlinear constraint on probabilities, as $\bm{X}\bot\bm{Y}|\bm{Z}$ implies $\p{\bm{x}\bm{y}|\bm{z}}=\p{\bm{x}|\bm{z}}\p{\bm{y}|\bm{z}}$ for all $\bm{x}$, $\bm{y}$, and $\bm{z}$. As we generally prefer to work with unconditional probabilities, we rewrite this as follows: If $\bm{X}$ and $\bm{Y}$ are $d$-separated by $\bm{Z}$, then $\p[\bm{X}\bm{Y}\bm{Z}]{\bm{x}\bm{y}\bm{z}}\p[\bm{Z}]{\bm{z}}=\p[\bm{X}\bm{Z}]{\bm{x}\bm{z}}\p[\bm{Y}\bm{Z}]{\bm{y}\bm{z}}$ for all $\bm{x}$, $\bm{y}$, and $\bm{z}$. Such nonlinear constraints can be incorporated as further restrictions on the sorts of joint distributions consistent with the inflation DAG, supplementing the basic nonnegativity of probability constraints of the marginal problem. Note that every semi-marginal probability introduced in some nonlinear condition independence equation should also be well defined by marginalization, i.e. as a sum of various joint probabilities.
-For example, in \cref{fig:Tri222} we find that $A_1$ and $C_2$ are $d$-separated by $\{A_2 B_2\}$, and so one might incorporate the family of nonlinear equalities $\p[A_1 A_2 B_2 C_2]{a_1 a_2 b_2 c_2}\p[A_2 B_2]{a_2 b_2}=\p[A_1 A_2 B_2]{a_1 a_2 b_2}\p[A_2 B_2 C_2]{a_2 b_2 c_2}$ for all $a_1$, $a_2$, $b_2$ and $c_2$. To relate this heretofore-unreferenced probabilities to the joint distribution of the marginal problem, however, one must also incorporate further equalities of the form
+Every conditional independence relation can be translated into a nonlinear constraint on probabilities, as $\bm{X}\bot\bm{Y}|\bm{Z}$ implies $\p{\bm{x}\bm{y}|\bm{z}}=\p{\bm{x}|\bm{z}}\p{\bm{y}|\bm{z}}$ for all $\bm{x}$, $\bm{y}$, and $\bm{z}$. As we generally prefer to work with unconditional probabilities, we rewrite this as follows: If $\bm{X}$ and $\bm{Y}$ are $d$-separated by $\bm{Z}$, then $\p[\bm{X}\bm{Y}\bm{Z}]{\bm{x}\bm{y}\bm{z}}\p[\bm{Z}]{\bm{z}}=\p[\bm{X}\bm{Z}]{\bm{x}\bm{z}}\p[\bm{Y}\bm{Z}]{\bm{y}\bm{z}}$ for all $\bm{x}$, $\bm{y}$, and $\bm{z}$. Such nonlinear constraints can be incorporated as further restrictions on the sorts of joint distributions consistent with the inflation DAG, supplementing the basic nonnegativity of probability constraints of the marginal problem. 
+
+For example, in \cref{fig:Tri222} we find that $A_1$ and $C_2$ are $d$-separated by $\{A_2 B_2\}$, and so one might incorporate the family of nonlinear equalities $\p[A_1 A_2 B_2 C_2]{a_1 a_2 b_2 c_2}\p[A_2 B_2]{a_2 b_2}=\p[A_1 A_2 B_2]{a_1 a_2 b_2}\p[A_2 B_2 C_2]{a_2 b_2 c_2}$ for all $a_1$, $a_2$, $b_2$ and $c_2$. Note that every semi-marginal probability introduced in some nonlinear condition independence equation should also be \emph{defined} by marginalization, i.e. as a sum of various joint probabilities, so that one need not eliminate further quantifiers. The relevant substitutions of this example would be
 \begin{align}
 \begin{split}
-&\forall_{a_2 b_2}:\;\p[A_2 B_2]{a_2 b_2} = \sum\nolimits_{a_1 b_1 c_1 c_2}\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
-&\forall_{a_1 a_2 b_2 c_2}:\;\p[A_1 A_2 B_2 C_2]{a_1 a_2 b_2 c_2} = \sum\nolimits_{b_1 c_1}\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
-&\forall_{a_1 a_2 b_2}:\;\p[A_1 A_2 B_2]{a_1 a_2 b_2} = \sum\nolimits_{b_1 c_1 c_2}\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}
+\forall_{a_2 b_2}:&\;\pdf[A_2 B_2]{a_2 b_2} \to \sum\nolimits_{a_1 b_1 c_1 c_2}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
+\forall_{a_1 a_2 b_2 c_2}:&\;\pdf[A_1 A_2 B_2 C_2]{a_1 a_2 b_2 c_2} \to \sum\nolimits_{b_1 c_1}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
+\forall_{a_1 a_2 b_2}:&\;\pdf[A_1 A_2 B_2]{a_1 a_2 b_2} \to \sum\nolimits_{b_1 c_1 c_2}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}
 \end{split}
 \end{align}
-etc. Note also that incorporating such constraints also increases the number of quantifier which must be eliminated, as additional non-injectable probabilities are now featured in the equalities corresponding to conditional independence which do not appear in the unconstrained marginal problem. 
+etc. 
+%Note also that incorporating such constraints also increases the number of quantifier which must be eliminated, as additional non-injectable probabilities are now featured in the equalities corresponding to conditional independence which do not appear in the unconstrained marginal problem. 
 
 Many modern computer algebra systems have functions capable of tackling nonlinear quantifier elimination symbolically\footnote{For example \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://reference.wolfram.com/language/ref/Resolve.html}{\texttt{Resolve}} command, \textit{Redlog}'s \href[pdfnewwindow]{http://www.redlog.eu/documentation/reals/rlqe.php}{\texttt{rlposqe}}, or \textit{Maple$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://maplesoft.com/support/help/Maple/view.aspx?path=RegularChains/SemiAlgebraicSetTools/RepresentingQuantifierFreeFormula}{\texttt{RepresentingQuantifierFreeFormula}}, etc.}. 
 %One might then hope to use such software systems to rid the hybrid inequalities of the gedankenprobabilities. 
@@ -1057,34 +1063,35 @@ In the Bell scenario DAG, one usually works with the conditional distribution $P
 &\brackets{A_2 B_1, X_1 X_2 Y_2 Y_2} \\
 &\brackets{A_2 B_2, X_1 X_2 Y_2 Y_2} ,
 \end{split}\end{align}
-where we have put commas in order to clarify that every maximal pre-injectable set contains \emph{all} ``settings'' variables. These pre-injectable sets are specified by the original observable distribution via \purp{abuse of notation, distribution in terms of definite outcomes, but makes sense. Let's maybe define this uptop and use more often? ~EW}
-\begin{align}\begin{split}
-	P_{A_1 B_1 X_1 X_2 Y_1 Y_2}(a b x_1 x_2 y_1 y_2) & = P_{A B X Y}(a b x_1 y_1) P_X(x_2) P_Y(y_2), \\
-	P_{A_1 B_2 X_1 X_2 Y_1 Y_2}(a b x_1 x_2 y_1 y_2) & = P_{A B X Y}(a b x_1 y_2) P_X(x_2) P_Y(y_1), \\
-	P_{A_2 B_1 X_1 X_2 Y_1 Y_2}(a b x_1 x_2 y_1 y_2) & = P_{A B X Y}(a b x_2 y_1) P_X(x_1) P_Y(y_2), \\
-	P_{A_2 B_2 X_1 X_2 Y_1 Y_2}(a b x_1 x_2 y_1 y_2) & = P_{A B X Y}(a b x_2 y_2) P_X(x_1) P_Y(y_1), \\
-		P_{X_1 X_2 Y_1 Y_2}(x_1 x_2 y_1 y_2) & = P_X(x_1) P_X(x_2) P_Y(y_1) P_Y(y_2).
-\end{split}\end{align}
+where we have put commas in order to clarify that every maximal pre-injectable set contains \emph{all} ``settings'' variables. These pre-injectable sets are specified by the original observable distribution via
+\begin{align}\begin{split}&\forall_{a b x_1 x_2 y_1 y_2}:\; \begin{cases}
+	P_{A_1 B_1 X_1 X_2 Y_1 Y_2}(a b x_1 x_2 y_1 y_2)  = P_{A B X Y}(a b x_1 y_1) P_X(x_2) P_Y(y_2), \\
+	P_{A_1 B_2 X_1 X_2 Y_1 Y_2}(a b x_1 x_2 y_1 y_2)  = P_{A B X Y}(a b x_1 y_2) P_X(x_2) P_Y(y_1), \\
+	P_{A_2 B_1 X_1 X_2 Y_1 Y_2}(a b x_1 x_2 y_1 y_2)  = P_{A B X Y}(a b x_2 y_1) P_X(x_1) P_Y(y_2), \\
+	P_{A_2 B_2 X_1 X_2 Y_1 Y_2}(a b x_1 x_2 y_1 y_2)  = P_{A B X Y}(a b x_2 y_2) P_X(x_1) P_Y(y_1), \\
+		P_{X_1 X_2 Y_1 Y_2}(x_1 x_2 y_1 y_2)  = P_X(x_1) P_X(x_2) P_Y(y_1) P_Y(y_2).
+\end{cases}\end{split}\end{align}
+%where it should be understood implicitly that the inequalities hold for all values of $\{a b x_1 x_2 y_1 y_2\}$.
 %The last equations follows from each of the others by making use of the Markov condition $P_{XY} = P_X P_Y$ for the original distribution, it nevertheless
 By dividing the first four inequalities by the latter we obtain
-\begin{align}\begin{split}
-	P_{A_1 B_1 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2) & = P_{A B | X Y}(a b | x_1 y_1) \\
-	P_{A_1 B_2 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2) & = P_{A B | X Y}(a b | x_1 y_2) \\
-	P_{A_2 B_1 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2) & = P_{A B | X Y}(a b | x_2 y_1) \\
-	P_{A_2 B_2 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2) & = P_{A B | X Y}(a b | x_2 y_2).
-\end{split}\end{align}
+\begin{align}\begin{split}\forall_{a b x_1 x_2 y_1 y_2}:\; \begin{cases}
+	P_{A_1 B_1 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2)  = P_{A B | X Y}(a b | x_1 y_1) \\
+	P_{A_1 B_2 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2)  = P_{A B | X Y}(a b | x_1 y_2) \\
+	P_{A_2 B_1 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2)  = P_{A B | X Y}(a b | x_2 y_1) \\
+	P_{A_2 B_2 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2)  = P_{A B | X Y}(a b | x_2 y_2).
+\end{cases}\end{split}\end{align}
 If we then impose marginal compatibility according the the marginal problem we find that the (minimal!) consequence of the inflation hypothesis is 
 \begin{align}
 	P_{A_1 B_1 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2)  =  \sum\nolimits_{a_2,b_2} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(a_1 a_2 b_1 b_2|x_1 x_2 y_1 y_2)
 \end{align}
 etc.
 For the inflated observation data to consistent with the inflation hypothesis, therefore, we would require
-\begin{align}\begin{split}\label{eq:finalBellstep}
+\begin{align}\begin{split}\label{eq:finalBellstep}\forall_{a b}:\; \begin{cases}
 	P_{A B | X Y}(a b | 0 0)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(a a' b b'|0101) \\
 	P_{A B | X Y}(a b | 1 0)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(a' a b b'|0101) \\
 	P_{A B | X Y}(a b | 0 1)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(a a' b' b|0101) \\
 	P_{A B | X Y}(a b | 1 1)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(a' a b' b|0101)
-\end{split}\end{align}
+\end{cases}\end{split}\end{align}
 The existence of an \emph{array} of distributions, i.e. \cref{eq:finalBellstep}, is equivalent to the existence of a \tblue{hidden variable model}, as noted in Fine's Theorem~\cite{FineTheorem}. Thus, an inflation model exists if and only if a hidden-variable model exists for the original observable variables.
 
 %The last equations turns out to be rather useful to write down explicitly: putting $x_1 = y_1 = 0$ and $x_2 = y_2 = 1$ and dividing the first equation by the last one results in
@@ -1391,7 +1398,8 @@ A generic convex hull problem takes a matrix of vertices $\hat{V}$, where each r
 \begin{align}
 \exists_{\vec{w}}:\;\SmallNamedFunction{And}{\vec{w}.\hat{V}=\vec{x} ,\;\; {{\sum_i}{w_i}}=1,\;\; \forall_i w_i\geq 0}.
 \end{align}
-It should be evident from Eqs. (\ref{eq:nonnegativity}-\ref{eq:marginalequalities222}) that the marginal problem is precisely of this form. The individual probabilities of the joint outcome correspond to the weights in the convex hull problem. Recasting the marginal problem as a convex hull problem means that optimized convex hull algorithms can be used to directly solve the marginal problem. 
+It should be evident from Eqs. (\ref{eq:nonnegativity}-\ref{eq:marginalequalities222}) that the marginal problem is precisely of this form. The individual probabilities of the joint outcome correspond to the weights in the convex hull problem. Recasting the marginal problem as a convex hull problem means that optimized convex hull algorithms can be used to directly solve the marginal problem. Fine's Theorem~\cite{FineTheorem} also follows along these lines. Fine's theorem states that the existence of a joint distribution is equivalent to having the observables marginal distribution lie inside the convex hull of all deterministic joint distributions. \purp{Tobias, can you say the previous sentence better perhaps?}
+
 
 Indeed, the authors found that the software \textit{lrs} [\href[pdfnewwindow]{http://cgm.cs.mcgill.ca/~avis/C/lrslib/USERGUIDE.html#Installation\%20Section}{\texttt{lrs}}] was capable of solving the marginal problem rather efficiently.
 
