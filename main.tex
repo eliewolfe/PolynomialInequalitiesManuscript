@@ -945,8 +945,9 @@ As an example, here's how the marginal problem would be phrased as a partial-exi
 
 In order for the five pre-injectable sets in \cref{eq:preinjectableuses222} to be marginally compatible there must exist 64 nonnegative joint probabilities, i.e. satisfying
 \begin{align}\label{eq:nonnegativity}
-\forall_{a_1 a_2 b_1 b_2 c_1 c_2}:\;0\leq \p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}
-\end{align}, constrained further by marginal distributions given by
+\forall_{a_1 a_2 b_1 b_2 c_1 c_2}:\;0\leq \p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},
+\end{align}
+constrained further by marginal distributions given by
 \begin{align}\label[eqs]{eq:marginalequalities222}
 \begin{split}
 &\forall_{a_1 b_1 c_1}:\;\p[A_1 B_1 C_1]{a_1 b_1 c_1} = \sum\nolimits_{a_2 b_2 b_2}\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
@@ -1384,7 +1385,20 @@ Linear quantifier elimination routines are available in many software tools\foot
 %\footnote{FM elimination algorithms make intermittent calls to a linear-programming subroutine for eliminating redundant inequalities. The authors found an efficient implementation of this subroutine in \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$}, see \cref{sec:redundancy} for further details.}.
 %Fourier-Motzkin elimination appreciable suboptimal, however, when the dimension of the final projection is much smaller than the initial space of the inequalities, i.e. when there are many gedankenprobabilities. See Refs. \cite{jones2004equality,JonesThesis2005,Jones2008} and \cref{sec:projalgorithms} for further detail.
 
-The generic task of polytope projection assumes that the initial polytope is given \emph{only} in halfspace representation. If, however, a \tblue{dual description} of the initial polytope is available, i.e. we are also given its extremal vertices, then the projection problem can be significantly optimized \cite{projectiondual}. The marginal problem is included among such special cases: the extremal vertices of the initial polytope are just the various distinct possible deterministic joint distributions! Indeed, the initial polytope of the marginal problem is a \tblue{probability simplex}, such that every non-negativity inequality is saturated by all one point.
+The generic task of polytope projection assumes that the initial polytope is given \emph{only} in halfspace representation. If, however, a \tblue{dual description} of the initial polytope is available, i.e. we are also given its extremal vertices, then the projection problem can be significantly optimized \cite{projectiondual,Avis2000lrs}. Such dual-description algorithms are used, for example, in modern convex hull algorithms. The marginal problem is a special convex hull algorithm, which can be seen as follows.
+
+A generic convex hull problem takes a matrix of vertices $\hat{V}$, where each row is a vertex, and asks what is the set of coordinates $\vec{x}$ such that $\vec{x}$ can be achieved as a convex combination of the vertices. Formally, it amounts to resolving a partial-existential-closure problem pertaining the existing of nonnegative weights, i.e. 
+\begin{align}
+\exists_{\vec{w}}:\;\SmallNamedFunction{And}{\vec{w}.\hat{V}=\vec{x} ,\;\; {{\sum_i}{w_i}}=1,\;\; \forall_i w_i\geq 0}.
+\end{align}
+It should be evident from Eqs. (\ref{eq:nonnegativity}-\ref{eq:marginalequalities222}) that the marginal problem is precisely of this form. The individual probabilities of the joint outcome correspond to the weights in the convex hull problem. Recasting the marginal problem as a convex hull problem means that optimized convex hull algorithms can be used to directly solve the marginal problem. 
+
+Indeed, the authors found that the software \textit{lrs} [\href[pdfnewwindow]{http://cgm.cs.mcgill.ca/~avis/C/lrslib/USERGUIDE.html#Installation\%20Section}{\texttt{lrs}}] was capable of solving the marginal problem rather efficiently.
+
+\begin{comment}
+
+
+The marginal problem is included among such special cases: the extremal vertices of the initial polytope are just the various distinct possible deterministic joint distributions! Indeed, the initial polytope of the marginal problem is a \tblue{probability simplex}, such that every non-negativity inequality is saturated by all one point.
 
 Here we present an explicit algorithm for polytope projection when a dual description in available. Without loss of generality we assume that the halfspace representation consists of only inequalities. This is generic, as any equality can either be solved-for as a preliminary step (substituting the solution into the system of inequalities) or converted to two inequalities (of the form $\vec{a}.\vec{x}\geq 0$ and $-\vec{a}\vec{x} \geq 0$). In this notation $\vec{x}$ represents a list of variables \emph{appended by 1}, and $\vec{a}$ indicate the coefficients of the variables, appended by some constant.
 
@@ -1404,7 +1418,7 @@ We construct the matrix $\hat{Q}^{\pm}$, which like $\hat{A}^{\pm}$ possesses $|
 Redundancy elimination is now rapidly accomplished by identifying indices of redundant rows in $\hat{Q}$ and then deleting those rows from both $\hat{Q}$ and $\hat{A}$. If (and only if) the set of extremal points which do not saturate $\vec{A_j}$ comprise a superset of the points which do not saturate $\vec{A_{j'}}$ then $\vec{A_j}$ is redundant. An equivalent but far more efficient criterion is that if $\vec{Q_{j'}}-\vec{Q_j}$ is entirely nonnegative then  $\vec{A_j}$ is redundant. This can be used to rapidly filter \emph{all} redundant inequalities.
 
 This algorithm can be thought of as an improvement to Fouerir-Chernikov elimination \cite{Shapot2012,Bastrakov2015}, which uses a similar $\hat{Q}$ to partially filter redundant inequalities.
-
+\end{comment}
 
 \begin{table*}[ht]\centering\caption{A comparison of different approaches for constraining the distributions on the pre-injectable sets. The primary divide is quantifier elimination, which is more difficult but produces inequalities, versus satisfiability which can witness the infeasibility of a specific distribution. The approaches subdivide further subdivided into nonlinear, linear, and possibilistic variants.}
 \begin{tabularx}{\linewidth}{ |l|L|c|L| } 
@@ -1417,7 +1431,7 @@ Nonlinear satisfiability & Nonlinear optimization & See \cite{BarFT-SMTLIB}, and
 \hline
 Linear quantifier elimination & Polytope projection & Fourier-Motzkin elimination, see \cite{fordan1999projection,DantzigEaves,Bastrakov2015,BalasProjectionCone,Jones2008} & Hard \\
 \hline
-Solve marginal problem & Simplex projection & Dual-description linear elimination, see \cite{projectiondual} & Moderate \\
+Solve marginal problem & Convex Hull & Dual-description linear elimination, see \cite{projectiondual,Avis2000lrs} & Moderate \\
 \hline
 Linear satisfiability & Linear programming & Simplex method, see \cite{Korovin2012ImplementingCRA,Bobot2012SimplexSAT} & Very easy \\
 \hline
