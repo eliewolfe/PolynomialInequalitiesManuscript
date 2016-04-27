@@ -745,10 +745,11 @@ Many causal inference techniques can be used to derive sufficient conditions for
 
 Here are some examples of causal infeasibility criteria for the Triangle scenario which we can derive by considering the inflation DAG of~\cref{fig:TriDagSubA2B1C1}.
 
-For technical convenience, let us assume that all observed variables take values in $\{-1,+1\}$. By virtue of the existence of a joint distribution of $A_2$, $B_1$ and $C_1$, we can conclude~\cite{pitowsky_boole_1994,kellerer_marginal_1964,leggett_garg_1985,araujo_cycle_2013},
-\[
+For technical convenience, let us assume that all observed variables take values in $\{-1,+1\}$. By virtue of the existence of a joint distribution of $A_2$, $B_1$ and $C_1$, we can conclude~\cite{pitowsky_boole_1994,Pitowsky1989,kellerer_marginal_1964,leggett_garg_1985,araujo_cycle_2013},
+\begin{equation}
+	\label{eq:polymonogamyraw}
 	\langle A_2 C_1\rangle + \langle B_2 C_1 \rangle - \langle A_2 B_1 \rangle \leq 1.
-\]
+\end{equation}
 Thanks to the relations~\cref{W1,W2,W3,W4,W5}, we can therefore conclude that if an observable distribution is compatible with the Triangle scenario DAG, then it must satisfy
 \begin{equation}
 	\label{eq:polymonogamy}
@@ -1211,29 +1212,50 @@ An analysis along these lines has already been carried out successfully by \cite
 
 A tight set of inequalities characterizing quantum distributions would provide the ultimate constraints on what quantum theory makes possible. Deriving additional inequalities that hold for quantum distributions is therefore a priority for future research.
 
-\section{Inequalities for the marginal problem via Hardy-type paradoxes and minimal transversals}\label{sec:TSEM}
+\section{Deriving Hardy-type constraints for the marginal problem}\label{sec:TSEM}
 
-In the literature on Bell inequalities, it has been noticed that the inconsistency with the Bell scenario DAG can sometimes be witnessed by only looking at which joint probabilities are zero and which ones are nonzero. In other words, instead of considering the probability of a joint outcome, some distributions can be witnesses as infeasible by only considering the \emph{possibility} or \emph{impossibility} of each joint outcome. This was originally noticed by~\citet{L.Hardy:PRL:1665}, and hence such possibilistic constraints are also known as \tblue{Hardy-type paradoxes}. The ``paradox'' occurs whenever the possibilistic constraint is violated. For a systematic account of Hardy-type paradoxes in Bell scenarios, see~\cite{Mansfield2012}. It has been noted previously that such possibilistic constraints also exist for other types of marginal problems~\cite[Section~III.C]{LSW}. In the following, we explain how to determine \emph{all} such constraints for \emph{any} marginal problem.
+In the literature on Bell inequalities, it has been noticed that the inconsistency with the Bell scenario DAG can sometimes be witnessed by only looking at which joint probabilities are zero and which ones are nonzero. In other words, instead of considering the probability of a joint outcome, some distributions can be witnesses as infeasible by only considering the \emph{possibility} or \emph{impossibility} of each joint outcome. This was originally noticed by~\citet{L.Hardy:PRL:1665}, and hence such \tblue{possibilistic constraints} are also known as \tblue{Hardy-type paradoxes}. For a systematic account of Hardy-type paradoxes in Bell scenarios, see~Ref. \cite{Mansfield2012}, although see also Refs. \cite{Garuccio95,CabelloHardyInequality,Braun08,Mancinska14,LSW}.
+
+The usual presentation of a Hardy-type paradox takes the following form: Even though events $E_1 .. E_N$ never occur (are not possible), nevertheless some other event $E_0$ \emph{does} occur sometimes (is possible). The impossibility of events $E_1 .. E_N$ \emph{should} prohibit the possibility of $E_0$, under the marginal distributions of all the variables in all the events are compatible.
+
+The following observational data illustrates a Hardy-type paradox. Suppose a plague has suddenly wiped out a population of rats. Three kinds of autopsies are performed on different samples of the dead rats. Autopsies checking for heart and brain disease find that rats always presented with one condition but never with \emph{both} conditions, i.e. the events $[Brain_{-},Heart_{-}]$ and $[Brain_{+},Heart_{+}]$ are taken to be \emph{not possible}. Suppose the autopsies checking for heart and lung diseases similarly find that all dead rats are afflicted by some disease but with no possibility of dual diagnoses, i.e. the events $[Heart{-},Lungs_{-}]$ and $[Heart_{+},Lungs_{+}]$ are not possible. Logic should then dictate lung disease ought to be perfectly correlated with brain disease, because both those conditions are perfectly anticorrelated with heart disease. If some medical examiner checking rats for brain and lung disease then finds that \emph{it is possible} for a rat to have brain disease this would be considered a violation of a Hardy-type paradox.
+
+Hardy-type paradoxes are predicated on assuming the existence of a solution to the marginal problem. Thus, ensuring the observational data avoids any Hardy-type paradoxes is a necessary condition for solving the marginal problem. \citet[Section~III.C]{LSW} discuss the use of possibilistic constraints to certify the incompatibility of marginal distributions in contexts of than Bell scenarios.
+
+The possibilistic constraint which is equivalent to a Hardy-type paradox is as follows,
+\begin{align}
+    \SmallNamedFunction{Never}{E_1} \bigwedge \SmallNamedFunction{Never}{E_2} \bigwedge ... \SmallNamedFunction{Never}{E_N} \implies \SmallNamedFunction{Never}{E_0}
+\end{align}
+although we prefer to express it in conjunctive normal form, i.e.
+\begin{align}
+    \SmallNamedFunction{NotNever}{E_0} \implies \SmallNamedFunction{NotNever}{E_1} \bigvee \SmallNamedFunction{NotNever}{E_2} \bigvee ... \SmallNamedFunction{NotNever}{E_N}.
+\end{align}
+Any possibilistic constraint can be immediately translated into a stronger probabilistic one, as noted by \citet{Mansfield2012}. The probabilistic variant states than \emph{whenever} the event $E_0$ occurs than at least one of the events $E_1 .. E_N$ should also occur. Applying the union bound to the probability of the right-hand side we obtain
+\begin{align}
+\p{E_0}\leq \sum\limits_{n=1}^N{\p{E_n}}.
+\end{align}
+
+In order to derive causal infeasibility criteria via marginal compatibility, therefore, we may consider the task of \tblue{enumerating} Hardy-type paradoxes, each of which we can then express as an inequalities in terms of probabilities. In the following, we explain how to determine \emph{all} such constraints for \emph{any} marginal problem.
+
 
 To start with a simple example, suppose that we are in a marginal scenario where the pairwise joint distributions of three variables $A$, $B$ and $C$ are given.%, and these two variables are binary with values in $\{0,1\}$. 
-Then we have the implication
-%\[
-%	(A=0,C=1) \Longrightarrow (A=0,B=0) \lor (B=1,C=1).
-%\]
+One Hardy-type possibilistic constraint which we would want to enumerate is
 \begin{align}
-    \namedand{A \eql a, C \eql c} \implies \namedand{A \eql a, B \eql b} \bigvee \namedand{B \eql \n{b}, C \eql c}
+    \namedand{\mgreen{A \eql a}, \mgreen{C \eql c}} \implies \namedand{\mgreen{A \eql a}, B \eql b} \bigvee \namedand{B \eql \n{b}, \mgreen{C \eql c}}
 \end{align}
-Assuming the existence of a solution to the marginal problem, we can apply the union bound to the probability of the right-hand side. This translates the implication into the inequality
-\[
-	\p{a c} \leq \p{a b} + \p{\n{b} c}
-\]
-which is therefore a necessary condition for the marginal problem to have a solution. Applying this together with the inflation technique to the Triangle scenario results in
-\[
-	\p[AC]{a c} \leq \p[A]{a}\p[B]{b} + \p[BC]{\n{b} c},
-\]
-which is equivalent to the inequality in~\cref{eq:polymonogamy}.
+corresponding to the probabilistic constraint
+\begin{align}\label{eq:trivmarginalconstraint}
+	\p{\mgreen{a c}} \leq \p{\mgreen{a} b} + \p{\n{b} \mgreen{c}}.
+\end{align}
+\cref{eq:trivmarginalconstraint} is a necessary condition for the marginal compatibility of $\pdf{A B}$, $\pdf{A C}$, and $\pdf{B C}$; it is equivalent to \cref{eq:polymonogamyraw}.
 
-\purp{I'm in the middle of switching the notation here to lowercase probabilities. ~EW}
+%Applying this constraint, together with the inflation technique to the Triangle scenario, results in
+%\[
+%	\p[AC]{a c} \leq \p[A]{a}\p[B]{b} + \p[BC]{\n{b} c},
+%\]
+%which is equivalent to~\cref{eq:polymonogamy}.
+%
+%\purp{I'm in the middle of switching the notation here to lowercase probabilities. ~EW}
 
 We outline the general procedure using a slightly more sophisticated example. Consider the marginal scenario of~\cref{fig:simplicialcomplex222}, where the contexts are
 \begin{align*}
@@ -1243,34 +1265,55 @@ We outline the general procedure using a slightly more sophisticated example. Co
 	\{A_2 B_2 C_1\},\\
 	\{A_2 B_2 C_2\}.
 \end{align*}
-Now a possibilistic constraint on this marginal problem consists of a logical implication with one joint outcome as the implicant and a disjunction of joint outcomes as the conclusion (implicate?). In the following, we explain how to generate \emph{all} such implications which are tight in the sense that their right-hand sides are minimal. So let us fix some joint outcome for the left-hand side for the sake of concreteness, taking
+Now a possibilistic constraint on this marginal problem consists of a logical implication with one joint outcome as the \tblue{antecedent} and a disjunction of joint outcomes as the \tblue{consequent}. In the following, we explain how to generate \emph{all} such implications which are tight in the sense that their right-hand sides are minimal.
+
+First we fix the antecedant by choosing some context and a composite outcome for it. In order to generate all possibilistic constraints, one will have to perform this procedure for %every choice of joint outcome in 
+\emph{every} context as the antecedent. For the sake of concreteness we take
 \begin{equation}
 	\label{eq:lhshardy}
-	\namedand{A_2 \eql a_2, B_2 \eql b_2, C_2 \eql c_2}
+	\namedand{\mgreen{A_2 \eql a_2}, \mgreen{B_2 \eql b_2}, \mgreen{C_2 \eql c_2}}
 \end{equation}
-to generate all possibilistic constraints, one will have to perform the following procedure for every choice of joint outcome in every context as the left-hand side. Assuming these concrete outcomes, the right-hand side of the implication needs to be a conjunction of joint outcomes which is such that for any deterministic assignment of outcomes to the variables which extends~\cref{eq:lhshardy}, also at least one of the joint outcomes on the right-hand side occurs. To determine what the possibilities for choosing this right-hand side are, it helps to draw the following hypergraph: take the set of nodes to be the disjoint union over all the contexts of all the joint outcomes which are compatible with~\eqref{eq:lhshardy}\footnote{In the left-hand side context there will thus be only one node, and one can also omit this one node without changing the result.}. Furthermore, let the hyperedges correspond to complete deterministic assignments of values to all variables extending~\cref{eq:lhshardy}, such that such a hyperedge contains precisely those nodes that are the marginal outcomes to which it restricts. In our example, the resulting hypergraph has $2^3 + 3\cdot 2^1 = 14$ nodes and $2^3 = 8$ hyperedges. Then the possible right-hand sides of the implications are precisely the \tblue{transversals} of this hypergraph, i.e.~the sets of nodes which have the property that they intersect every hyperedge in at least one node. In order to get implications which are as tight as possible, it is sufficient to enumerate only the \tblue{minimal transversals}. Doing so is a well-studied problem in computer science with various natural reformulations and for which manifold algorithms have been developed~\cite{eiter_dualization_2008}. We expect that this enumeration of minimal transversals will be computationally much more tractable than the linear quantifier elimination, even if one does it for every possible left-hand side of the implication.
+as the antecedant.
+
+The consequent will be a conjunction of composite outcomes restricted to marginal contexts, and further restricted so that all marginal composite outcomes in the consequent are compatible with that specified by the consequent. 
+For the implication to be valid, however, the consequent must further be such that \tred{for any \emph{joint} composite outcome which extends the antecentent's marginal composite outcome, also at least one of the marginal composite outcomes in the consequent must occur.}
+
+To formally determine all valid consequents, we first consider two hypergraphs: %Take the set of nodes to be the disjoint union over all the contexts of all the joint outcomes which are compatible with~\eqref{eq:lhshardy}\footnote{In the left-hand side context there will thus be only one node, and one can also omit this one node without changing the result.}. 
+The nodes in the first hypegraph correspond to every possible joint outcome for every possible marginal context.
+The hyperedges in the first hypergraph correspond to every possible joint outcome for the joint context over all variables. A hyperedge (joint compositive outcome) contains a node (marginal composite outcome) iff the hyperedge is an extension of the node.
+
+The second hypergraph is a sub-hypergraph of the first one. We delete from the first graph all nodes and hyperedges which contract the supposition of the composite event per our fixed antecedent. We also delete any node which is \emph{implied} by the fixed antecedent, such as the node corresponding the the antecedent, or any of its submarginal contexts. In our example, this final resulting hypergraph has $2^3 + 3\cdot 2^1 = 14$ nodes and $2^3 = 8$ hyperedges.
+
+All valid (minimal) consequents are (minimal) \tblue{transversals} of this latter hypergraph. A tranversal is the sets of nodes which have the property that they intersect every hyperedge in at least one node. In order to get implications which are as tight as possible, it is sufficient to enumerate only the minimal transversals. Doing so is a well-studied problem in computer science with various natural reformulations and for which manifold algorithms have been developed~\cite{eiter_dualization_2008}.
+
+
+
+%It is then possible right-hand sides of the implications are precisely the \tblue{transversals} of this hypergraph, i.e.~the sets of nodes which have the property that they intersect every hyperedge in at least one node. In order to get implications which are as tight as possible, it is sufficient to enumerate only the \tblue{minimal transversals}. Doing so is a well-studied problem in computer science with various natural reformulations and for which manifold algorithms have been developed~\cite{eiter_dualization_2008}. We expect that this enumeration of minimal transversals will be computationally much more tractable than the linear quantifier elimination, even if one does it for every possible left-hand side of the implication.
 
 In our example, it is not hard to check that the right-hand side of
-\begin{align}\begin{split}
-	\namedand{A_2 \eql a_2, B_2 \eql b_2, C_2 \eql c_2} \Longrightarrow &\namedand{A_1 = \n{a_1}, B_1 \eql \n{b_1}, C_1 \eql \n{c_1}} \bigvee \namedand{A_1 \eql a_1, B_2 \eql b_2, C_2 \eql c_2} \\
-		& \bigvee \namedand{A_2 \eql a_2, B_1 \eql b_1, C_2 \eql c_2} \bigvee \namedand{A_2 \eql a_2, B_2 \eql b_2, C_1 \eql c_1}
+\begin{align}\begin{split}\label{eq:F3implicationform}
+	\namedand{\mgreen{A_2 \eql a_2}, \mgreen{B_2 \eql b_2}, \mgreen{C_2 \eql c_2}} \Longrightarrow &\namedand{A_1 = \n{a_1}, B_1 \eql \n{b_1}, C_1 \eql \n{c_1}} \bigvee \namedand{A_1 \eql a_1, \mgreen{B_2 \eql b_2}, \mgreen{C_2 \eql c_2}} \\
+		& \bigvee \namedand{\mgreen{A_2 \eql a_2}, B_1 \eql b_1, \mgreen{C_2 \eql c_2}} \bigvee \namedand{\mgreen{A_2 \eql a_2}, \mgreen{B_2 \eql b_2}, C_1 \eql c_1}
 \end{split}\end{align}
-is such a minimal transversal: every assignment of values to all variables which extends the assignment on the left-hand side satisfies at least one of the terms on the right, but this ceases to hold as soon as one removes any one term on the right.
+is such a minimal transversal: every assignment of values to all variables which extends the assignment on the left-hand side satisfies at least one of the terms on the right, but this ceases to hold as soon as one removes any one term on the right. 
 
-Finally, we convert the implication into an inequality by replacing ``$\Rightarrow$'' by ``$\leq$'' at the level of probabilities and the disjunctions by sums,
-\begin{align}
-    \p{a_2 b_2 c_2} \leq \p{\n{a_1} \n{b_1} \n{c_1}}+\p{a_1 b_2 c_2}+\p{a_2 b_1 c_2}+\p{a_2 b_2 c_1}
+We convert the implications into inequalities in the usual way, by replacing ``$\Rightarrow$'' by ``$\leq$'' at the level of probabilities and the disjunctions by sums, so the possibilistic constraint {eq:F3implicationform} translates to the probabilistic constraint
+\begin{align}\label{eq:F3rawprobform}
+    \p{\mgreen{a_2} \mgreen{b_2} \mgreen{c_2}} \leq \p{\n{a_1} \n{b_1} \n{c_1}}+\p{a_1 \mgreen{b_2 c_2}}+\p{\mgreen{a_2} b_1 \mgreen{c_2}}+\p{\mgreen{a_2 b_2} c_1}
 \end{align}
 %\[
 %	P_{A_2 B_2 C_2}(111) \leq P_{A_1 B_1 C_1}(000) + P_{A_1 B_2 C_2}(111) + P_{A_2 B_1 C_2}(111) + P_{A_2 B_2 C_1}(111).
 %\]
-Applying this to our inflation DAG of~\cref{fig:Tri222} results again in one of our previous inequalities,~\cref{eq:FritzF3raw}.
+\cref{eq:F3rawprobform} is equivalent to \cref{eq:FritzF3raw}; therefore applying it the inflation depicted in~\cref{fig:Tri222} recovers \cref{eq:FritzF3}.
 
 Since also many Bell inequalities are of this form---such as the CHSH inequality which follows in this way from Hardy's original implication---we conclude that this method is still sufficiently powerful to generate plenty of interesting inequalities, and at the same time significantly easier to perform in practice than the full-fledged linear (let alone nonlinear) quantifier elimination.
 
-One can also come up with a \emph{satisfiability} version of a marginal problem at the possibilistic level. Possibilistic satisfiability is the following: for every joint marginal outcome with positive probability, one needs to find an assignment of values to all variables which extends the given marginal outcomes and such that the restriction to every context also has positive probability. This is very easy to do: one can simply enumerate all deterministic assignments of values to all observables, discard all those that have a marginal with zero probability, and then check whether the remaining assignments are enough to generate all the joint marginal outcomes with positive probability.
 
-We note that the connection between classical propositional logic and linear inequalities has been used previously in the task of causal inference. We reiterate that inequalities resulting from propositional logic, however, are a subset of the inequalities that result from linear quantifier elimination. Consequently, linear quantifier elimination is the preferable tool for deriving inequalities whenever the elimination is computationally tractable. Noteworthy examples of works deriving causal infeasibility criteria via classical logic are \citet{Pitowsky1989} and \citet{Ghirardi08}.%: \cref{eq:trisimplestunmapped} here corresponds to Eq. (2-4) in~\cite{Pitowsky1989}%, and \cref{eq:bellcondeq} here corresponds to Eq. (30) in Ref. \cite{Ghirardi08}
+%One can also come up with a \emph{satisfiability} version of a marginal problem at the possibilistic level. Possibilistic satisfiability is the following: for every joint marginal outcome with positive probability, one needs to find an assignment of values to all variables which extends the given marginal outcomes and such that the restriction to every context also has positive probability. This is very easy to do: one can simply enumerate all deterministic assignments of values to all observables, discard all those that have a marginal with zero probability, and then check whether the remaining assignments are enough to generate all the joint marginal outcomes with positive probability.
+
+We note that the connection between classical propositional logic and linear inequalities has been used previously in the task of causal inference. Noteworthy examples of works deriving causal infeasibility criteria via classical logic are \citet{Pitowsky1989} and \citet{Ghirardi08}, see also Refs. \cite{pitowsky_boole_1994,kellerer_marginal_1964,leggett_garg_1985,araujo_cycle_2013}. Novel this work, however, is the use of the hypergraph transversals problem to formally enumerate relevant logical implications. 
+
+We expect that this enumeration of minimal transversals will be computationally much more tractable than the linear quantifier elimination, even if one does it for every possible left-hand side of the implication. We reiterate that inequalities resulting from hypergraph transversals, however, are a subset of the inequalities that result from completely solving the marginal problem. Consequently, linear quantifier elimination is the preferable tool for deriving inequalities whenever the more general linear elimination strategy is computationally tractable. %: \cref{eq:trisimplestunmapped} here corresponds to Eq. (2-4) in~\cite{Pitowsky1989}%, and \cref{eq:bellcondeq} here corresponds to Eq. (30) in Ref. \cite{Ghirardi08}
 
 
 
