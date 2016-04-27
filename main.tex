@@ -1280,7 +1280,7 @@ For the implication to be valid, however, the consequent must further be such th
 
 To formally determine all valid consequents, we first consider two hypergraphs: %Take the set of nodes to be the disjoint union over all the contexts of all the joint outcomes which are compatible with~\eqref{eq:lhshardy}\footnote{In the left-hand side context there will thus be only one node, and one can also omit this one node without changing the result.}. 
 The nodes in the first hypegraph correspond to every possible joint outcome for every possible marginal context.
-The hyperedges in the first hypergraph correspond to every possible joint outcome for the joint context over all variables. A hyperedge (joint compositive outcome) contains a node (marginal composite outcome) iff the hyperedge is an extension of the node.
+The hyperedges in the first hypergraph correspond to every possible joint outcome for the joint context over all variables. A hyperedge (joint compositive outcome) contains a node (marginal composite outcome) iff the hyperedge is an extension of the node. In our example this initial hypergraph has 64 hyperedges and 40 nodes.
 
 The second hypergraph is a sub-hypergraph of the first one. We delete from the first graph all nodes and hyperedges which contract the supposition of the composite event per our fixed antecedent. We also delete any node which is \emph{implied} by the fixed antecedent, such as the node corresponding the the antecedent, or any of its submarginal contexts. In our example, this final resulting hypergraph has $2^3 + 3\cdot 2^1 = 14$ nodes and $2^3 = 8$ hyperedges.
 
@@ -1297,7 +1297,7 @@ In our example, it is not hard to check that the right-hand side of
 \end{split}\end{align}
 is such a minimal transversal: every assignment of values to all variables which extends the assignment on the left-hand side satisfies at least one of the terms on the right, but this ceases to hold as soon as one removes any one term on the right. 
 
-We convert the implications into inequalities in the usual way, by replacing ``$\Rightarrow$'' by ``$\leq$'' at the level of probabilities and the disjunctions by sums, so the possibilistic constraint {eq:F3implicationform} translates to the probabilistic constraint
+We convert the implications into inequalities in the usual way, by replacing ``$\Rightarrow$'' by ``$\leq$'' at the level of probabilities and the disjunctions by sums, so the possibilistic constraint \cref{eq:F3implicationform} translates to the probabilistic constraint
 \begin{align}\label{eq:F3rawprobform}
     \p{\mgreen{a_2} \mgreen{b_2} \mgreen{c_2}} \leq \p{\n{a_1} \n{b_1} \n{c_1}}+\p{a_1 \mgreen{b_2 c_2}}+\p{\mgreen{a_2} b_1 \mgreen{c_2}}+\p{\mgreen{a_2 b_2} c_1}
 \end{align}
