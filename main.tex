@@ -339,7 +339,7 @@ It consists of the nodes $\bm{V}$ and the edges between pairs of nodes in $\bm{V
 \tblue{ancestral subgraph} of $\bm{V}$, denoted $\ansubgraph[G]{\bm{V}}$, which is the minimal subgraph containing the full ancestry of $\bm{V}$, $\ansubgraph[G]{\bm{V}}\coloneqq\subgraph[G]{\An[G]{\bm{V}}}$. 
 
 
-In a causal model, the localized systems are random variables, and the parameters are conditional probabilities\footnote{This is the definitio of a {\em classical}  causal model, which will be the primary focus of this article. Nonetheless, there is a quantum generalization of the notion of a causal model that will feature in our discussions at the end of this article.  In a {\em quantum} causal model\cite{leifer2013conditionalstates}, the localized systems are types of quantum systems (specified by Hilbert space dimensionality), and the parameters are quantum operations.  Specifically, for each root node, the model specifies a unit-trace positive operator on the Hilbert space for that system and for each non-root node, the model specifies a trace-preserving completely-positive linear map from the operators on the Hilbert space of the parents of the system to the operators on the Hilbert space of the system.  Certain nodes in a quantum causal model may be considered classical, in which case all states and operations must be diagonal in some fixed basis on that system.  One can also generalize the notion of a causal model further still to the case of generalized probabilistic theories, as was done in Ref.~\cite{pusey2014gdag}.
+In a causal model, the localized systems are random variables, and the parameters are conditional probabilities\footnote{This is the definition of a {\em classical}  causal model, which will be the primary focus of this article. Nonetheless, there is a quantum generalization of the notion of a causal model that will feature in our discussions at the end of this article.  In a {\em quantum} causal model\cite{leifer2013conditionalstates}, the localized systems are types of quantum systems (specified by Hilbert space dimensionality), and the parameters are quantum operations.  Specifically, for each root node, the model specifies a unit-trace positive operator on the Hilbert space for that system and for each non-root node, the model specifies a trace-preserving completely-positive linear map from the operators on the Hilbert space of the parents of the system to the operators on the Hilbert space of the system.  Certain nodes in a quantum causal model may be considered classical, in which case all states and operations must be diagonal in some fixed basis on that system.  One can also generalize the notion of a causal model further still to the case of generalized probabilistic theories, as was done in Ref.~\cite{pusey2014gdag}.
 }.
  %probabilities and conditional probabilities on these random variables.  
 Specifically, for each node, the model specifies a conditional probability distribution over the values of the random variable associated to that node, given the values of the variables associated to its parents in the DAG.  (In the case of root nodes, the parents are the null set and the conditional probability distribution is simply a probability distribution.)
@@ -721,43 +721,31 @@ The mathematical structure of this proof parallels that of standard proofs of th
 Many causal inference techniques can be used to derive sufficient conditions for the inconsistency of the causal hypothesis $H_{G',S'}$ with the observational data $\forall \bm{U} \in \SmallNamedFunction{PreInjectableSets}{\bm{O}}: \pdf{\bm{U}} = \pdf{\subsim{\bm{U}_1}}\pdf{\subsim{\bm{U}_2}} \dots \pdf{\subsim{\bm{U}_n}}$. We will call sets of such conditions {\em inconsistency witnesses}.  
 
 \color{black}
-\section{Examples applications of the inflation technique}\label{sec:examplebaddistributions}
+\section{Example applications of the inflation technique}\label{sec:examplebaddistributions}
 
-Here are some examples of causal infeasibility criteria for the Triangle scenario which we can derive by considering inflation DAGs.
+Here are some examples of causal infeasibility criteria for the Triangle scenario which we can derive by considering the inflation DAG of~\cref{fig:TriDagSubA2B1C1}.
 
-The nontrivial polynomial inequality 
-\begin{align}\label{eq:tritrivial1}
-{\p{a} + \p{b} + \p{c}} \leq {1 + \p{a} \p{b} + \p{a c} + \p{b c}}
-\end{align}
-is found to be a constraint on the Triangle scenario through by summing the follow two nonnegativity inequalities
-\begin{align}\begin{split}\label{eq:trisimplestunmapped}
- &0\leq  1 -\p{a_2} - \p{b_1} - \p{c_1}+ \p{a_2 b_1} + \p{a_2 c_1} + \p{b_1 c_1}  -\p{a_2 b_1 c_1} \quad\left[=\p{\n{a}_2 \n{b}_1 \n{c}_1}\right]
-\\&0\leq \p{a_2 b_1 c_1}
-\end{split}\\
-\shortintertext{subject to the following transformations}
-&  \underbrace{\larray{\\\p{a_2 b_1} \to \p{a_2} \p{b_1}}}_{\text{via ancestral independence}} \quad \text{and}\qquad
- \underbrace{\begin{array}{c}
- \p{a_2}\to\p{a}\,, 
-\; \p{b_1}\to\p{b}\,, 
-\; \p{c_1}\to\p{c},
-\\ \p{a_2 c_1}\to \p{a c},
-\; \p{b_1 c_1}\to \p{b c}
-\end{array}}_{\text{via injectable set}}.
-\end{align}
-Indeed, this example has been chosen because \cref{eq:tritrivial1} can be derived directly from the small ancestral subgraph of $\{A_2 B_1 C_1\}$, namely \cref{fig:TriDagSubA2B1C1}.
-
-\purp{add back monogomy of correlations?}
-It may be constructive to rewrite this inequality in correlator form using outcomes in $\{-1,+1\}$ as
+For technical convenience, let us assume that all observed variables take values in $\{-1,+1\}$. By virtue of the existence of a joint distribution of $A_2$, $B_1$ and $C_1$, we can conclude~\cite{kellerer_marginal_1964,leggett_garg_1985,araujo_cycle_2013},
 \[
-	\langle AC\rangle - \langle BC\rangle \leq 1 - \langle A\rangle\langle B\rangle,
+	\langle A_2 C_1\rangle + \langle B_2 C_1 \rangle - \langle A_2 B_1 \rangle \leq 1.
 \]
-which indicates that like~\cref{eq:monogomyofcorrelations}, it is also a sort of monogamy inequality: it is impossible for $A$ and $C$ to be strongly correlated while $B$ and $C$ are strongly anticorrelated.
+Thanks to the relations~\cref{W1,W2,W3,W4,W5}, we can therefore conclude that if an observable distribution is compatible with the Triangle scenario DAG, then it must satisfy
+\begin{equation}
+	\label{eq:polymonogamy}
+	\langle A C\rangle + \langle B C\rangle \leq 1 + \langle A\rangle \langle B\rangle,
+\end{equation}
+which we think of as a sort of monogamy inequality: it is impossible for $C$ to be strongly correlated with both $A$ and $B$, unless $A$ and $B$ are both strongly biased.
 
-A consequence of \cref{eq:tritrivial1} is that the perfect correlation distribution per \cref{eq:ghzdistribution1} 
-%\begin{align}\label{eq:ghzdistribution}
-%{P_{\text{GHZ}}}\parenths{A B C} \coloneqq\quad p_{\text{GHZ}}\parens{a b c}=\frac{[000]+[111]}{2}=\begin{cases}\tfrac{1}{2}&\text{if }\; a=b=c \\ 0&\text{otherwise}\end{cases}
-%\end{align}
-is found to be unrealizable from the Triangle scenario. This conclusions follows by considering the special case of \cref{eq:tritrivial1} where $a\cramp{\to}1$, $b\cramp{\to}1$, $c\cramp{\to}0$.
+Alternatively, we could also start with the inequality~\cite{fritz2013marginal}
+\[
+	I(A_2 : C_1) + I(C_1 : B_1) - I(A_2 : B_1) \leq H(B_1),	
+\]
+which also simply follows from the existence of a joint distribution of all variables. Again applying~\cref{W1,W2,W3,W4,W5} shows in particular that the third term vanishes, and results in
+\[
+	I(A : C) + I(C : B) \leq H(B) ,
+\]
+which is the original entropic monogamy inequality derived for the Triangle scenario in~\cite{fritz2012bell}. Our rederivation in terms of inflation is essentially the proof of~\citet{pusey2014gdag}.
+
 %To see how this distribution is incompatible with \cref{eq:tritrivial1}, note that for three \emph{identically distributed} (but not independent) binary variables a further special case of \cref{eq:tritrivial1} is
 %\begin{align*}\begin{split}
 %&\hspace{-6ex}3\p{A\cramp{=}1}\leq 1+\p{A\cramp{=}1}^2+2\p{A\cramp{=}B\cramp{=}1}.
@@ -767,31 +755,47 @@ is found to be unrealizable from the Triangle scenario. This conclusions follows
 
 
 \bigskip
-Slightly more involved but otherwise analogous considerations give rise to the inequality
-\begin{align}\label{eq:trifancyunmapped}
-  &  \p{a_2 b_2 c_2}\leq {\p{\n{a}_1 \n{b}_1 \n{c}_1} + \p{a_1 b_2 c_2} + \p{a_2 b_1 c_2} + \p{a_2 b_2 c_1}} \\
-\shortintertext{which in turn yields}
-\label{eq:FritzF3}
-  & \p{a} \p{b} \p{c} \leq {\p{\n{a} \n{b} \n{c}} +\p{c}\p{a b}  + \p{b}\p{a c}  + \p{a} \p{b c}}\\
-\shortintertext{per}
-&\qquad
- \underbrace{\begin{array}{l}
- \p{a_1 b_2 c_2}\to \p{c_2} \p{a_1 b_2} \\
- \p{a_2 b_1 c_2}\to \p{a_2} \p{b_1 c_2} \\
- \p{a_2 b_2 c_1}\to \p{b_2} \p{a_2 c_1} \\
- \p{a_2 b_2 c_2}\to \p{a_2} \p{b_2} \p{c_2} \\
-\end{array}}_{\text{via ancestral independence}}   \quad \text{ and }\quad
-\underbrace{\begin{array}{l}
-\p{a_1 b_2} \to \p{a b} \\
-\p{a_2 c_1} \to \p{a c} \\
-\p{b_1 c_2} \to \p{b c} \\
-\p{\n{a}_1 \n{b}_1 \n{c}_1}\to \p{\n{a} \n{b} \n{c}}  \\
-\end{array}\,.}_{\text{via injectable sets}}
+
+Slightly more involved but otherwise analogous considerations can be applied to the inflation DAG of~\cref{fig:Tri222}, where in particular we have the pre-injectable sets $\{A_1 B_1 C_1\}$, $\{A_1 B_2 C_2\}$, $\{A_2 B_1 C_2\}$ and $\{A_2 B_2 C_1\}$, resulting in the factorization relations
+\begin{align}
+	\pdf{A_1 B_1 C_1} &= \pdf{A B C} \\
+	\pdf{A_1 B_2 C_2} &= \pdf{A B} \pdf{C} \\
+	\pdf{B_1 C_2 A_2} &= \pdf{B C} \pdf{A} \\
+	\pdf{C_1 A_2 B_2} &= \pdf{C A} \pdf{B}.
 \end{align}
-A consequence of \cref{eq:FritzF3} is that the W-type distribution per \cref{eq:wdistribution1}
+Now we can again use the existence of a joint distribution over all six observable variables, which implies e.g.~the Mermin inequality~\cite{mermin_ineq_1990},
+\[
+	\langle A_1 B_1 C_1 \rangle - \langle A_2 B_2 C_1 \rangle - \langle A_2 B_1 C_2 \rangle - \langle A_1 B_2 C_2 \rangle \leq 2.
+\]
+Applying the above factorization relations turns this into the polynomial inequality
+\begin{equation}
+	\label{polymermin}
+	\langle A B C\rangle \leq 2 + \langle A B\rangle \langle C\rangle + \langle B C \rangle \langle A\rangle + \langle C A\rangle \langle B\rangle,
+\end{equation}
+which is yet another necessary condition for compatibility with the Triangle scenario causal structure, and now takes genuine three-way correlations into account.
+
+
+%&\qquad
+% \underbrace{\begin{array}{l}
+% \p{a_1 b_2 c_2}\to \p{c_2} \p{a_1 b_2} \\
+% \p{a_2 b_1 c_2}\to \p{a_2} \p{b_1 c_2} \\
+% \p{a_2 b_2 c_1}\to \p{b_2} \p{a_2 c_1} \\
+% \p{a_2 b_2 c_2}\to \p{a_2} \p{b_2} \p{c_2} \\
+%\end{array}}_{\text{via ancestral independence}}   \quad \text{ and }\quad
+%\underbrace{\begin{array}{l}
+%\p{a_1 b_2} \to \p{a b} \\
+%\p{a_2 c_1} \to \p{a c} \\
+%\p{b_1 c_2} \to \p{b c} \\
+%\p{\n{a}_1 \n{b}_1 \n{c}_1}\to \p{\n{a} \n{b} \n{c}}  \\
+%\end{array}\,.}_{\text{via injectable sets}}
+%\end{align}
+
+A consequence of \cref{eq:polymermin} is that the W-type distribution per \cref{eq:wdistribution1}
+
 %\begin{align}\label{eq:wdistribution}
 %{P_{\text{W}}}\parenths{A B C} \coloneqq\quad p_{\text{W}}\parens{a b c}=\frac{[100]+[010]+[001]}{3}=\begin{cases}\tfrac{1}{3}&\text{if }\; a+b+c=1 \\ 0&\text{otherwise}\end{cases}
 %\end{align}
+
 is found to be unrealizable from the Triangle scenario, by considering the special case of \cref{eq:FritzF3} where $a\cramp{\to}1$, $b\cramp{\to}1$, $c\cramp{\to}1$. \cref{eq:FritzF3} requires the use of a broadcasting inflation, and therefore does not hold in the context of general probability theories.
 
 %, where $a,b,c\in\brackets{0,1}$.
