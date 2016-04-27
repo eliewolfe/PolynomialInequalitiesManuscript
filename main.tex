@@ -1033,26 +1033,52 @@ To further illustrate our inflation-DAG approach, we demonstrate how to recover 
 
 Consider the causal structure associated to the Bell/CHSH \cite{bell1964einstein,Brunner2013Bell,bell1966lhvm,CHSHOriginal} experiment [\citealp{pusey2014gdag}~(Fig.~E\#2), \citealp{WoodSpekkens}~(Fig.~19), \citealp{chaves2014novel}~(Fig.~1), \citealp{BeyondBellII}~(Fig.~1), \citealp{wolfe2015nonconvexity}~(Fig.~2b), \citealp{steeg2011relaxation}~(Fig.~2)], depicted here in \cref{fig:NewBellDAG1}. The observable variables are $A,B,X,Y$, and $\Lambda$ is the latent common cause of $A$ and $B$.
 
-In the Bell scenario DAG, one usually works with the conditional distribution $P(AB|XY)$, which is an array of distributions over $A$ and $B$ indexed by the possible values of $X$ and $Y$, instead of with the original distribution $P(ABXY)$. The maximal pre-injectable sets then are
-\begin{align*}
+In the Bell scenario DAG, one usually works with the conditional distribution $P(AB|XY)$ instead of with the original distribution $P(ABXY)$. The conditional distribution is an \emph{array} of distributions over $A$ and $B$, indexed by the possible values of $X$ and $Y$. The maximal pre-injectable sets then are
+\begin{align}\begin{split}
 &\brackets{A_1 B_1, X_1 X_2 Y_1 Y_2} \\
 &\brackets{A_1 B_2, X_1 X_2 Y_2 Y_2} \\
 &\brackets{A_2 B_1, X_1 X_2 Y_2 Y_2} \\
 &\brackets{A_2 B_2, X_1 X_2 Y_2 Y_2} ,
-\end{align*}
-where we have put commas in order to clarify that every maximal pre-injectable set contains \emph{all} ``settings'' variables. Using these pre-injectables result in the given marginal distributions to take on the form
-\begin{align*}
+\end{split}\end{align}
+where we have put commas in order to clarify that every maximal pre-injectable set contains \emph{all} ``settings'' variables. These pre-injectable sets are specified by the original observable distribution via \purp{abuse of notation, distribution in terms of definite outcomes, but makes sense. Let's maybe define this uptop and use more often? ~EW}
+\begin{align}\begin{split}
 	P_{A_1 B_1 X_1 X_2 Y_1 Y_2}(a b x_1 x_2 y_1 y_2) & = P_{A B X Y}(a b x_1 y_1) P_X(x_2) P_Y(y_2), \\
 	P_{A_1 B_2 X_1 X_2 Y_1 Y_2}(a b x_1 x_2 y_1 y_2) & = P_{A B X Y}(a b x_1 y_2) P_X(x_2) P_Y(y_1), \\
 	P_{A_2 B_1 X_1 X_2 Y_1 Y_2}(a b x_1 x_2 y_1 y_2) & = P_{A B X Y}(a b x_2 y_1) P_X(x_1) P_Y(y_2), \\
 	P_{A_2 B_2 X_1 X_2 Y_1 Y_2}(a b x_1 x_2 y_1 y_2) & = P_{A B X Y}(a b x_2 y_2) P_X(x_1) P_Y(y_1), \\
 		P_{X_1 X_2 Y_1 Y_2}(x_1 x_2 y_1 y_2) & = P_X(x_1) P_X(x_2) P_Y(y_1) P_Y(y_2).
-\end{align*}
-Although the last equations follows from each of the others together with the Markov condition $P_{XY} = P_X P_Y$ for the original distribution, it nevertheless turns out to be useful to write down explicitly: putting $x_1 = y_1 = 0$ and $x_2 = y_2 = 1$ and dividing the first equation by the last one results in
-\begin{align*}
-	P_{A B X Y}(a b | 0 0)  =  \sum_{a',b'} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(aa'bb'|0101),
-\end{align*}
-and similarly also $P_{A B X Y}(a b | 0 1)$, $P_{A B X Y}(a b | 1 0)$ and $P_{A B X Y}(a b | 1 1)$ can be written as marginals of a conditional distribution. By Fine's Theorem~\cite{FineTheorem}, this implies the existence of a hidden-variable model. Conversely, if a hidden-variable model exists, then the existence of the inflation model implies the existence of a solution to the marginal problem. In conclusion, we therefore find in the case of the inflation DAG~\cref{fig:BellDagCopy1}, our method provides a necessary and sufficient condition for feasibility with the Bell causal structure. In particular, the marginal problem on this inflation DAG reproduces \emph{all} Bell inequalities.
+\end{split}\end{align}
+%The last equations follows from each of the others by making use of the Markov condition $P_{XY} = P_X P_Y$ for the original distribution, it nevertheless
+By dividing the first four inequalities by the latter we obtain
+\begin{align}\begin{split}
+	P_{A_1 B_1 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2) & = P_{A B | X Y}(a b | x_1 y_1) \\
+	P_{A_1 B_2 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2) & = P_{A B | X Y}(a b | x_1 y_2) \\
+	P_{A_2 B_1 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2) & = P_{A B | X Y}(a b | x_2 y_1) \\
+	P_{A_2 B_2 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2) & = P_{A B | X Y}(a b | x_2 y_2).
+\end{split}\end{align}
+If we then impose marginal compatibility according the the marginal problem we find that the (minimal!) consequence of the inflation hypothesis is 
+\begin{align}
+	P_{A_1 B_1 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2)  =  \sum\nolimits_{a_2,b_2} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(a_1 a_2 b_1 b_2|x_1 x_2 y_1 y_2)
+\end{align}
+etc.
+For the inflated observation data to consistent with the inflation hypothesis, therefore, we would require
+\begin{align}\begin{split}\label{eq:finalBellstep}
+	P_{A B | X Y}(a b | 0 0)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(a a' b b'|0101) \\
+	P_{A B | X Y}(a b | 1 0)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(a' a b b'|0101) \\
+	P_{A B | X Y}(a b | 0 1)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(a a' b' b|0101) \\
+	P_{A B | X Y}(a b | 1 1)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(a' a b' b|0101)
+\end{split}\end{align}
+The existence of an \emph{array} of distributions, i.e. \cref{eq:finalBellstep}, is equivalent to the existence of a \tblue{hidden variable model}, as noted in Fine's Theorem~\cite{FineTheorem}. Thus, an inflation model exists if and only if a hidden-variable model exists for the original observable variables.
+
+%The last equations turns out to be rather useful to write down explicitly: putting $x_1 = y_1 = 0$ and $x_2 = y_2 = 1$ and dividing the first equation by the last one results in
+%\begin{align*}
+%	P_{A B X Y}(a b | 0 0)  =  \sum_{a',b'} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(aa'bb'|0101).
+%\end{align*}
+%Similarly, $P_{A B X Y}(a b | 0 1)$, $P_{A B X Y}(a b | 1 0)$ and $P_{A B X Y}(a b | 1 1)$ can also be written as marginals of a conditional distribution. 
+%By Fine's Theorem~\cite{FineTheorem}, this implies the existence of a hidden-variable model. Conversely, if a hidden-variable model exists, then the existence of the inflation model implies the existence of a solution to the marginal problem.
+
+In conclusion, we therefore find in the case of the inflation DAG~\cref{fig:BellDagCopy1}, the inflation method yields necessary and sufficient infeasibility criteria for the Bell causal structure, i.e. the Bell/CHSH inequalities, just by requiring marginal compatibility of the pre-injectable sets.
+More generally, we can use Fine's theorem to show that applying the marginal problem to suitable inflation DAGs can reproduce \emph{all} Bell inequalities, for any one-common-cause Bell scenario, no matter how many parties or settings or possible outcomes. \purp{Tobias, check me on that last sentance?}
 
 \begin{comment}
 Analysis of the inflated DAG in \cref{fig:BellDagCopy1} shows that 
@@ -1116,7 +1142,7 @@ Joint counterfactual probabilities are experimentally inaccessible, just the sam
 
 \section{Quantum Causal Inference and the No-Broadcasting Theorem}\label{sec:classicallity}
 
-\purp{term ``gedankenprobability" has been removed"}
+\purp{NOTE: term ``gedankenprobability" has been removed, cleanup required therefore. Also redundant/irredundant no longer defined. ~EW}
 
 It is worth noting that duplicating an outgoing edge in a causal structure means \tblue{broadcasting} the value of the random variable. For example in \cref{fig:simpleinflation}, the information about $X$ which was ``sent" to $A$ is effectively broadcast to both $A_1$ and $A_2$ in the inflation. This is quite intentional. Quantum theory is governed by a no-broadcasting theorem \cite{NoCloningQuantum1996,NoCloningGeneral2006}; by electing to embed broadcasting into an inflation DAG we can specifically construct a foil to quantum causal structures. Infeasibility constraints derived from \tblue{non-broadcasting inflations} on the other hand, such as \cref{fig:simplestinflation}, are valid even when relaxing the interpretation of latent nodes to allow for quantum or general probabilistic resources. This contrast is elaborated at length in \cref{sec:classicallity}.  
 
