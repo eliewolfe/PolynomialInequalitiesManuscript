@@ -756,7 +756,7 @@ For technical convenience, let us assume that all observed variables take values
 	\label{eq:polymonogamyraw}
 	\langle A_2 C_1\rangle + \langle B_2 C_1 \rangle - \langle A_2 B_1 \rangle \leq 1.
 \end{equation}
-Thanks to the relations~\cref{W1,W2,W3,W4,W5}, we can therefore conclude that if an observable distribution is compatible with the Triangle scenario DAG, then it must satisfy
+A consequence of the manner in which observational data is inflated per \cref{fig:TriDagSubA2B1C1}, i.e. the non-distribution-specific relations which appear as part of \cref{eq:GHZobsinf}, we can therefore conclude that if an observable distribution is compatible with the Triangle scenario DAG it must satisfy
 \begin{equation}
 	\label{eq:polymonogamy}
 	\langle A C\rangle + \langle B C\rangle \leq 1 + \langle A\rangle \langle B\rangle,
@@ -767,7 +767,7 @@ Alternatively, we could also assume variables with any number of outcomes and st
 \begin{align}
 	I(A_2 : C_1) + I(C_1 : B_1) - I(A_2 : B_1) \leq H(B_1),	
 \end{align}
-which also simply follows from the existence of a joint distribution of all variables. Again applying~\cref{W1,W2,W3,W4,W5} shows in particular that the third term vanishes, and results in
+which also simply follows from the existence of a joint distribution of all variables. Again, implicit per \cref{eq:GHZobsinf} is that that the third term vanishes regardless of what the observable distribution might be, purely as a consequence of $A_2 \aindep B_1$ in \cref{fig:TriDagSubA2B1C1}. We therefore derive
 \begin{align}\label{eq:monogomyofcorrelations}
 	I(A : C) + I(C : B) \leq H(B) ,
 \end{align}
@@ -784,21 +784,21 @@ which is the original entropic monogamy inequality derived for the Triangle scen
 \bigskip
 
 Slightly more involved but otherwise analogous considerations can be applied to the inflation DAG of~\cref{fig:Tri222}, where in particular we have the pre-injectable sets $\{A_1 B_1 C_1\}$, $\{A_1 B_2 C_2\}$, $\{A_2 B_1 C_2\}$, $\{A_2 B_2 C_1\}$ and $\{A_2 B_2 C_2\}$, resulting in the factorization relations
-\begin{align}
-	\pdf{A_1 B_1 C_1} &= \pdf{A B C}, \\
-	\pdf{A_1 B_2 C_2} &= \pdf{A B} \pdf{C}, \\
-	\pdf{B_1 C_2 A_2} &= \pdf{B C} \pdf{A}, \\
-	\pdf{C_1 A_2 B_2} &= \pdf{C A} \pdf{B}, \\
-	\pdf{A_2 B_2 C_2} &= \pdf{A} \pdf{B} \pdf{C} .
-\end{align}
+\begin{align}\begin{split}
+	P_{A_1 B_1 C_1} &= P_{A B C}, \\
+	P_{A_1 B_2 C_2} &= P_{A B} \otimes P_{C}, \\
+	P_{B_1 C_2 A_2} &= P_{B C} \otimes P_{A}, \\
+	P_{A_2 C_1 B_2} &= P_{A C} \otimes P_{B}, \\
+	P_{A_2 B_2 C_2} &= P_{A} \otimes P_{B} \otimes P_{C} .
+\end{split}\end{align}
 In this case, let us assume binary variables with values in $\{0,1\}$. Now we can again use the existence of a joint distribution over all six observable variables, which implies e.g.~the inequality
 \begin{align}\label{eq:FritzF3raw}
-	P_{A_2 B_2 C_2}(111) \leq P_{A_1 B_1 C_1}(000) + P_{A_1 B_2 C_2}(111) + P_{A_2 B_1 C_2}(111) + P_{A_2 B_2 C_1}(111),
+	P_{A_2 B_2 C_2}(111) \leq P_{A_1 B_1 C_1}(000) + P_{A_1 B_2 C_2}(111) + P_{B_1 C_2 A_2}(111) + P_{A_2  C_1 B_2}(111),
 	% Mermin: \langle A_1 B_1 C_1 \rangle - \langle A_2 B_2 C_1 \rangle - \langle A_2 B_1 C_2 \rangle - \langle A_1 B_2 C_2 \rangle \leq 2.
 \end{align}
 which one can show to be valid for every joint distribution of all six variables simply by checking that it holds on every deterministic assignments of values, from which the general case follows by linearity. Applying the above factorization relations turns this into the polynomial inequality
 \begin{equation}\label{eq:FritzF3}
-	P_{A}(1) P_{B}(1) P_{C}(1) \leq P_{ABC}(000) + P_{AB}(11) P_C(1) + P_{BC}(11) P_A(1) + P_{CA}(11) P_B(1),
+	P_{A}(1) P_{B}(1) P_{C}(1) \leq P_{ABC}(000) + P_{AB}(11) P_C(1) + P_{BC}(11) P_A(1) + P_{AC}(11) P_B(1),
 	% Mermin-poly: \langle A B C\rangle \leq 2 + \langle A B\rangle \langle C\rangle + \langle B C \rangle \langle A\rangle + \langle C A\rangle \langle B\rangle,
 \end{equation}
 which is yet another necessary condition for compatibility with the Triangle scenario causal structure, and now takes genuine three-way correlations into account. 
@@ -820,7 +820,7 @@ A consequence of this inequality is again that the W-type distribution per \cref
 %\begin{align}\label{eq:wdistribution}
 %{P_{\text{W}}}\parenths{A B C} \coloneqq\quad p_{\text{W}}\parens{a b c}=\frac{[100]+[010]+[001]}{3}=\begin{cases}\tfrac{1}{3}&\text{if }\; a+b+c=1 \\ 0&\text{otherwise}\end{cases}
 %\end{align}
-is found to be unrealizable from the Triangle scenario, since the right-hand side vanishes but the left-hand side does not.
+is found to be inconsistent with the Triangle scenario, since the right-hand side vanishes but the left-hand side does not.
 % \cref{eq:FritzF3} requires the use of a broadcasting inflation, and therefore does not hold in the context of general probability theories.
 %, where $a,b,c\in\brackets{0,1}$.
 %The W-distribution states that the in any event in which $A,B,C$ are observed, precisely one of them will be found to equal $1$ while the other two will equal $0$. The identity of the variable which takes the value $1$ is uniformly random. In informal but intuitive notation, the W-type distribution is ${\nicefrac{1}{3}[100]+\nicefrac{1}{3}[010]+\nicefrac{1}{3}[001]}$.
