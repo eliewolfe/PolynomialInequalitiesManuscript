@@ -1226,9 +1226,9 @@ The possibilistic constraint which is equivalent to a Hardy-type paradox is as f
 \begin{align}
     \SmallNamedFunction{Never}{E_1} \bigwedge \SmallNamedFunction{Never}{E_2} \bigwedge ... \SmallNamedFunction{Never}{E_N} \implies \SmallNamedFunction{Never}{E_0}
 \end{align}
-although we prefer to express it in conjunctive normal form, i.e.
+although it can be expressed more fundamental in conjuctive form, i.e.
 \begin{align}
-    \SmallNamedFunction{NotNever}{E_0} \implies \SmallNamedFunction{NotNever}{E_1} \bigvee \SmallNamedFunction{NotNever}{E_2} \bigvee ... \SmallNamedFunction{NotNever}{E_N}.
+    \SmallNamedFunction{}{E_0} \implies \SmallNamedFunction{}{E_1} \bigvee \SmallNamedFunction{}{E_2} \bigvee ... \SmallNamedFunction{}{E_N}.
 \end{align}
 Any possibilistic constraint can be immediately translated into a stronger probabilistic one, as noted by \citet{Mansfield2012}. The probabilistic variant states than \emph{whenever} the event $E_0$ occurs than at least one of the events $E_1 .. E_N$ should also occur. Applying the union bound to the probability of the right-hand side we obtain
 \begin{align}
@@ -1241,11 +1241,12 @@ In order to derive causal infeasibility criteria via marginal compatibility, the
 To start with a simple example, suppose that we are in a marginal scenario where the pairwise joint distributions of three variables $A$, $B$ and $C$ are given.%, and these two variables are binary with values in $\{0,1\}$. 
 One Hardy-type possibilistic constraint which we would want to enumerate is
 \begin{align}
-    \namedand{\mgreen{A \eql a}, \mgreen{C \eql c}} \implies \namedand{\mgreen{A \eql a}, B \eql b} \bigvee \namedand{B \eql \n{b}, \mgreen{C \eql c}}
+%    \bracks{\mgreen{A \eql a}, \mgreen{C \eql c}} \implies \bracks{\mgreen{A \eql a}, B \eql b} \bigvee \bracks{B \eql \n{b}, \mgreen{C \eql c}}
+   \bracks{\mgreen{A \eql 1}, \mgreen{C \eql 1}} \implies \bracks{\mgreen{A \eql 1}, B \eql 1} \bigvee \bracks{B \eql 0, \mgreen{C \eql 1}}
 \end{align}
 corresponding to the probabilistic constraint
 \begin{align}\label{eq:trivmarginalconstraint}
-	\p{\mgreen{a c}} \leq \p{\mgreen{a} b} + \p{\n{b} \mgreen{c}}.
+	P_{AC}(\mgreen{1 1}) \leq P_{AB}(\mgreen{1} 1) + P_{BC}(0 \mgreen{1}).
 \end{align}
 \cref{eq:trivmarginalconstraint} is a necessary condition for the marginal compatibility of $\pdf{A B}$, $\pdf{A C}$, and $\pdf{B C}$; it is equivalent to \cref{eq:polymonogamyraw}.
 
@@ -1267,22 +1268,17 @@ We outline the general procedure using a slightly more sophisticated example. Co
 \end{align*}
 Now a possibilistic constraint on this marginal problem consists of a logical implication with one joint outcome as the \tblue{antecedent} and a disjunction of joint outcomes as the \tblue{consequent}. In the following, we explain how to generate \emph{all} such implications which are tight in the sense that their right-hand sides are minimal.
 
-First we fix the antecedant by choosing some context and a composite outcome for it. In order to generate all possibilistic constraints, one will have to perform this procedure for %every choice of joint outcome in 
-\emph{every} context as the antecedent. For the sake of concreteness we take
-\begin{equation}
-	\label{eq:lhshardy}
-	\namedand{\mgreen{A_2 \eql a_2}, \mgreen{B_2 \eql b_2}, \mgreen{C_2 \eql c_2}}
-\end{equation}
-as the antecedant.
+First we fix the antecedant by choosing some context and a composite outcome for it. In order to generate all possibilistic constraints, one will have to perform this procedure for
+\emph{every} context as the antecedent, and every choice of joint outcome thereupon. For the sake of concreteness we take $\bracks{\mgreen{A_2 \eql 1}, \mgreen{B_2 \eql 1}, \mgreen{C_2 \eql 1}}$ to be the fixed antecedant.
 
 The consequent will be a conjunction of composite outcomes restricted to marginal contexts, and further restricted so that all marginal composite outcomes in the consequent are compatible with that specified by the consequent. 
 For the implication to be valid, however, the consequent must further be such that \tred{for any \emph{joint} composite outcome which extends the antecentent's marginal composite outcome, also at least one of the marginal composite outcomes in the consequent must occur.}
 
 To formally determine all valid consequents, we first consider two hypergraphs: %Take the set of nodes to be the disjoint union over all the contexts of all the joint outcomes which are compatible with~\eqref{eq:lhshardy}\footnote{In the left-hand side context there will thus be only one node, and one can also omit this one node without changing the result.}. 
 The nodes in the first hypegraph correspond to every possible joint outcome for every possible marginal context.
-The hyperedges in the first hypergraph correspond to every possible joint outcome for the joint context over all variables. A hyperedge (joint compositive outcome) contains a node (marginal composite outcome) iff the hyperedge is an extension of the node. In our example this initial hypergraph has 64 hyperedges and 40 nodes.
+The hyperedges in the first hypergraph correspond to every possible joint outcome for the joint context over all variables. A hyperedge (joint compositive outcome) contains a node (marginal composite outcome) iff the hyperedge is an extension of the node, for example the hyperedge $\bracks{A_1 \eql 0, \mgreen{A_2 \eql 1}, B_1 \eql 0, \mgreen{B_2 \eql 1}, C_1 \eql 1, \mgreen{C_2 \eql 1}}$ is an extension of the node $\bracks{A_1 \eql 0,  \mgreen{B_2 \eql 1}, \mgreen{C_2 \eql 1}}$. In our example following \cref{fig:simplicialcomplex222}, this initial hypergraph has $5\cdot 2^3 = 40$ nodes and $2^6 = 64$ hyperedges.
 
-The second hypergraph is a sub-hypergraph of the first one. We delete from the first graph all nodes and hyperedges which contract the supposition of the composite event per our fixed antecedent. We also delete any node which is \emph{implied} by the fixed antecedent, such as the node corresponding the the antecedent, or any of its submarginal contexts. In our example, this final resulting hypergraph has $2^3 + 3\cdot 2^1 = 14$ nodes and $2^3 = 8$ hyperedges.
+The second hypergraph is a sub-hypergraph of the first one. We delete from the first graph all nodes and hyperedges which contradict the supposition of the composite event per our fixed antecedent. For example, the node $\bracks{\mgreen{A_2 \eql 1}, \mred{B_2 \eql 0}, C_1 \eql 1}$ contradicts the antecedent $\bracks{\mgreen{A_2 \eql 1}, \mgreen{B_2 \eql 1}, \mgreen{C_2 \eql 1}}$. We also delete the node corresponding to the antecedent itself. In our example, this final resulting hypergraph has $2^3 + 3\cdot 2^1 = 14$ nodes and $2^3 = 8$ hyperedges.
 
 All valid (minimal) consequents are (minimal) \tblue{transversals} of this latter hypergraph. A tranversal is the sets of nodes which have the property that they intersect every hyperedge in at least one node. In order to get implications which are as tight as possible, it is sufficient to enumerate only the minimal transversals. Doing so is a well-studied problem in computer science with various natural reformulations and for which manifold algorithms have been developed~\cite{eiter_dualization_2008}.
 
@@ -1292,14 +1288,15 @@ All valid (minimal) consequents are (minimal) \tblue{transversals} of this latte
 
 In our example, it is not hard to check that the right-hand side of
 \begin{align}\begin{split}\label{eq:F3implicationform}
-	\namedand{\mgreen{A_2 \eql a_2}, \mgreen{B_2 \eql b_2}, \mgreen{C_2 \eql c_2}} \Longrightarrow &\namedand{A_1 = \n{a_1}, B_1 \eql \n{b_1}, C_1 \eql \n{c_1}} \bigvee \namedand{A_1 \eql a_1, \mgreen{B_2 \eql b_2}, \mgreen{C_2 \eql c_2}} \\
-		& \bigvee \namedand{\mgreen{A_2 \eql a_2}, B_1 \eql b_1, \mgreen{C_2 \eql c_2}} \bigvee \namedand{\mgreen{A_2 \eql a_2}, \mgreen{B_2 \eql b_2}, C_1 \eql c_1}
+	\bracks{\mgreen{A_2 \eql 1}, \mgreen{B_2 \eql 1}, \mgreen{C_2 \eql 1}} \Longrightarrow &\bracks{A_1 \eql 0, B_1 \eql 0, C_1 \eql 0} \bigvee \namedand{A_1 \eql 1, \mgreen{B_2 \eql 1}, \mgreen{C_2 \eql 1}} \\
+		& \bigvee \bracks{\mgreen{A_2 \eql 1}, B_1 \eql 1, \mgreen{C_2 \eql 1}} \bigvee \bracks{\mgreen{A_2 \eql 1}, \mgreen{B_2 \eql 1}, C_1 \eql 1}
 \end{split}\end{align}
 is such a minimal transversal: every assignment of values to all variables which extends the assignment on the left-hand side satisfies at least one of the terms on the right, but this ceases to hold as soon as one removes any one term on the right. 
 
 We convert the implications into inequalities in the usual way, by replacing ``$\Rightarrow$'' by ``$\leq$'' at the level of probabilities and the disjunctions by sums, so the possibilistic constraint \cref{eq:F3implicationform} translates to the probabilistic constraint
 \begin{align}\label{eq:F3rawprobform}
-    \p{\mgreen{a_2} \mgreen{b_2} \mgreen{c_2}} \leq \p{\n{a_1} \n{b_1} \n{c_1}}+\p{a_1 \mgreen{b_2 c_2}}+\p{\mgreen{a_2} b_1 \mgreen{c_2}}+\p{\mgreen{a_2 b_2} c_1}
+%    P_{A_2 B_2 C_2}\parens{\mgreen{a_2} \mgreen{b_2} \mgreen{c_2}} \leq \p{\n{a_1} \n{b_1} \n{c_1}}+\p{a_1 \mgreen{b_2 c_2}}+\p{\mgreen{a_2} b_1 \mgreen{c_2}}+\p{\mgreen{a_2 b_2} c_1}
+    P_{A_2 B_2 C_2}\parens{\mgreen{1} \mgreen{1} \mgreen{1}} \leq P_{A_1 B_1 C_1}\parens{1 1 1}+P_{A_1 B_2 C_2}\parens{a_1 \mgreen{1 1}}+P_{A_2 B_1 C_2}\parens{\mgreen{1} 1 \mgreen{1}}+P_{A_2 B_2 C_1}\parens{\mgreen{1 1} 1}
 \end{align}
 %\[
 %	P_{A_2 B_2 C_2}(111) \leq P_{A_1 B_1 C_1}(000) + P_{A_1 B_2 C_2}(111) + P_{A_2 B_1 C_2}(111) + P_{A_2 B_2 C_1}(111).
