@@ -917,7 +917,7 @@ such that the distributions on the pre-injectable sets relate to the original DA
 Having identified the pre-injectable sets (and how to use them), we next consider various ways to invoke constraints on the distributions over the pre-injectable sets.
 
 
-\topic{\tred{Constraining Possible Distribution over Pre-Injectable Sets via the Marginal Problem}}\label{step:marginalsproblem}
+\topic{\tred{Constraining Possible Distributions over Pre-Injectable Sets via the Marginal Problem}}\label{step:marginalsproblem}
 
 The most trivial constraint on possible marginal probabilities, regardless of causal structure,  
 %on the pre-injectable set
@@ -925,36 +925,12 @@ is simply the \emph{existence of some joint probability distribution} from which
 
 The necessary and sufficient conditions for marginal compatibility are easy enough to state. There must exist some joint distribution (a collection of nonnegative joint probabilities) such that the marginal distributions can be recovered (each marginal distribution is a sum over various joint probabilities). \tblue{Solving the marginal problem} means resolving these "exists" statements into quantifier-free inequalities such that satisfaction of all such inequalities is necessary and sufficient for marginal compatibility. An efficient algorithm to solve the marginal problem is given in \purp{appendix... ??}. The marginal problem comes up in a variety of applications, and has been studied extensively; see~\cite{fritz2013marginal} for further references.
 
-As an example, here's how the marginal problem would be phrased as a partial-existential-closure problem with respect to the five three-variable marginal distributions corresponding to the pre-injectable sets in \cref{eq:preinjectableuses222}.
+As an example, here's how the marginal problem would be phrased as a partial-existential-closure problem with respect to the five three-variable marginal distributions corresponding to the pre-injectable sets in \cref{eq:preinjectableuses222}. For simplicity, we assume that all observable variables are binary\footnote{If the observables are not binary, then the resulting  binary-outcome inequalities are necessary for marginal compatibility, in that they should hold for any course-graining of the observational data into two classes, but the binary-outcome inequalities are no longer sufficient.}.
 
-over all the observable variables in the inflation DAG. Each of the  is a different marginal distribution of the six-variable joint distribution $\pdf{A_1 A_2 B_1 B_2 C_1 C_2}$. Solving the marginal problem means finding inequalities on the marginal distributions such that the inequalities will satisfied only if there exists some joint distribution  
-
-From now on, one can apply \emph{any} method for dealing with the marginal problem. For example if one is given a particular distribution $P$ over the original scenario variables, then one can use~\cref{eq:preinjfactor} to compute the marginal distributions over the pre-injectable sets in an inflation DAG. Efficient linear programming can be used to to check whether there exists a joint distribution reproducing these marginals \cite{Korovin2012ImplementingCRA,Bobot2012SimplexSAT}. If such a joint distribution does not exist, then the given original-scenario distribution is witnessed as inconsistent with the original causal structure. If a joint distribution \emph{does} exist then the problem remains open, and one can try again using a different inflation.
-
-In order to derive inequalities that hold for \emph{all} distributions that are feasible on the original DAG, say for a given number of outcomes per variable, we can formally solve the marginal problem via linear quantifier elimination, as we review in the following. This consists of eliminating unknowns from a set of linear inequalities and equalities.
-
-The linear inequalities correspond to the nonnegativity of the joint distribution. Formally, the probability of any possible assignment of outcomes to to the observable variables is constrained to be nonnegative. For the six observable variables in \cref{fig:Tri222}, for example, the linear inequalities are given by 
+In order for the five pre-injectable sets in \cref{eq:preinjectableuses222} to be marginally compatible there must exist 64 nonnegative joint probabilities, i.e. satisfying
 \begin{align}\label{eq:nonnegativity}
 \forall_{a_1 a_2 b_1 b_2 c_1 c_2}:\;0\leq \p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}
-\end{align}
-
-$0\leq \pdf{A_1 A_2 B_1 B_2 C_1 C_2}$. Note than a single inequality (or equality) pertaining to a probability \emph{distribution} is actually shorthand for a whole set of inequalities (or equalities) pertaining to the probabilities of individual events. Taking the observable variables to be binary, for example, would mean that \cref{eq:nonnegativity} would be shorthand for 64 distinct nonnegativity inequalities.
-%, namely
-%\begin{align}\label[eqs]{eq:nonnegativities}
-%\begin{split}
-% & 0\leq \p{a_1 a_2 b_1 b_2 c_1 c_2} ,\quad
-% 0\leq \p{\n{a}_1 a_2 b_1 b_2 c_1 c_2} ,\quad
-% 0\leq \p{a_1 \n{a}_2 b_1 b_2 c_1 c_2} ,\quad...\quad,\\
-% &
-% 0\leq \p{\n{a}_1 \n{a}_2 b_1 b_2 c_1 c_2} ,\quad
-% 0\leq \p{\n{a}_1 a_2 \n{b}_1 b_2 c_1 c_2}, \quad ...
-%\end{split}
-%\end{align}
-%etc. 
-For a marginals problem based on the joint existence of $n$ observable variables, each ranging over $r$ possible outcomes, one would initialize the problem with $r^n$ linear nonnegativity inequalities. Unlike probabilities pertaining to injectable sets, these joint probabilities are \emph{not} fully specified by probabilities which are observed in the original scenario. We coin the term \tblue{gedankenprobability} to denote a probability pertaining to a not-pre-injectable set of inflation-DAG variables. The gedankenprobabilities evoke thought experiments, because knowing the original-scenario causal model determines the gedankenprobabilities. % \emph{in-principle}.
-
-The linear equations in the marginal problem are those equations which express each of the marginal probabilities as a sum over various different gedankenprobabilities, namely marginalization. %Again using distribution shorthand, 
-The five marginal distributions in \cref{eq:preinjectableuses222} would correspond to the equations
+\end{align}, constrained further by marginal distributions given by
 \begin{align}\label[eqs]{eq:marginalequalities222}
 \begin{split}
 &\forall_{a_1 b_1 c_1}:\;\p[A_1 B_1 C_1]{a_1 b_1 c_1} = \sum\nolimits_{a_2 b_2 b_2}\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
@@ -964,27 +940,54 @@ The five marginal distributions in \cref{eq:preinjectableuses222} would correspo
 &\forall_{a_2 b_2 c_2}:\;\p[A_2 B_2 C_2]{a_2 b_2 c_2} = \sum\nolimits_{a_1 b_1 c_1}\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}.
 \end{split}
 \end{align}
-To be clear, taking the observable variables to be binary would mean that each equality in \cref{eq:marginalequalities222} is shorthand for 8 distinct marginalization equations. 
-
-Solving the marginal problem means eliminating all the gedankenprobabilities such as $\p[A_1 A_2 B_1 B_2 C_1 C_2]{\_\_\_\_\_\_}$ from the system of inequalities and equalities. Practically, this is accomplished by linear quantifier elimination. As an equivalent description of the same problem, but could likewise consider the problem of determining the facets of the marginal polytope, the vertices of which are known to be given by the deterministic points (compare Fine's theorem~\cite{FineTheorem} in the Bell scenario case).
-
-Geometrically, linear quantifier elimination is equivalent to projecting a high-dimensional polytope in halfspace representation (inequalities and equalities) into a lower-dimensional quotient space.
-
-Polytope projection is a well-understood problem in computational optimization, and a surprising variety of algorithms are available for the task \cite{jones2004equality,JonesThesis2005,Jones2008}. The oldest-known method for polytope projection, i.e. linear quantifier elimination, is an algorithm known as Fourier-Motzkin (FM) elimination \cite{fordan1999projection,DantzigEaves}, although Fourier-Cernikov elimination variant \cite{Shapot2012,Bastrakov2015}, as well as Block Elimination and Vertex Enumeration \cite{Avis2000lrs}, are also fairly popular. More advanced polytope projection algorithms, such as Equality Set Projection (ESP) and Parametric Linear Programming, have also recently become available \cite{jones2004equality,JonesThesis2005,Jones2008}. 
-
-Linear quantifier elimination routines are available in many software tools\footnote{For example \textit{MATLAB$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://people.ee.ethz.ch/~mpt/2/docs/refguide/mpt/@polytope/projection.html}{\texttt{MPT2}}/\href[pdfnewwindow]{http://ellipsoids.googlecode.com/svn-history/r2740/branches/issue_119_vrozova/tbxmanager/toolboxes/mpt/3.0.14/all/mpt3-3_0_14/mpt/modules/geometry/sets/@Polyhedron/projection.m}{\texttt{MPT3}}, \textit{Maxima}'s \href[pdfnewwindow]{http://maxima.sourceforge.net/docs/manual/de/maxima_75.html}{\texttt{fourier\_elim}}, \textit{lrs}'s \href[pdfnewwindow]{http://cgm.cs.mcgill.ca/~avis/C/lrslib/USERGUIDE.html\#fourier}{\texttt{fourier}}, or \textit{Maple$^{_{\textit{\tiny\texttrademark}}}$}'s (v17+) \href[pdfnewwindow]{http://www.maplesoft.com/support/help/maple/view.aspx?path=RegularChains/SemiAlgebraicSetTools/LinearSolve}{\texttt{LinearSolve}} and \href[pdfnewwindow]{http://www.maplesoft.com/support/help/Maple/view.aspx?path=RegularChains/SemiAlgebraicSetTools/Projection}{\texttt{Projection}}. The efficiency of most of these software tools, however, drops off markedly when the dimension of the final projection is much smaller than the initial space of the inequalities. FM elimination aided by Cernikov rules \cite{Shapot2012,Bastrakov2015} is implemented in \href[pdfnewwindow]{http://sbastrakov.github.io/qskeleton/}{\textit{qskeleton}} \cite{qskeleton}. ESP  \cite{jones2004equality,JonesThesis2005,Jones2008} is supported by \href[pdfnewwindow]{http://people.ee.ethz.ch/~mpt/2/docs/refguide/mpt/@polytope/projection.html}{\texttt{MPT2}} but not \href[pdfnewwindow]{http://people.ee.ethz.ch/~mpt/3/}{\texttt{MPT3}}, and by the (undocumented) option of \href[pdfnewwindow]{https://github.com/tulip-control/polytope/blob/master/polytope/polytope.py\#L1406}{projection} in the \href[pdfnewwindow]{https://pypi.python.org/pypi/polytope}{\textit{polytope}} (v0.1.1 2015-10-26) python module.}. We have found custom-coding an linear elimination routine in \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$} to be most efficient, see \cref{sec:projalgorithms} for further detail.
-%\footnote{FM elimination algorithms make intermittent calls to a linear-programming subroutine for eliminating redundant inequalities. The authors found an efficient implementation of this subroutine in \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$}, see \cref{sec:redundancy} for further details.}.
-%Fourier-Motzkin elimination appreciable suboptimal, however, when the dimension of the final projection is much smaller than the initial space of the inequalities, i.e. when there are many gedankenprobabilities. See Refs. \cite{jones2004equality,JonesThesis2005,Jones2008} and \cref{sec:projalgorithms} for further detail.
+The marginal compatibility constraints in this case are, therefore, 64 inequalities and 40 equalities. Solving the marginal problem means eliminating 64 terms from those inequalities and equalities, namely any $\p[A_1 A_2 B_1 B_2 C_1 C_2]{\_\_\_\_\_\_}$. 
+%We coin the term gedankenprobability to denote any probability pertaining to a \emph{not}-pre-injectable set of inflation-DAG variables. The gedankenprobabilities evoke thought experiments, because any \purp{black box implementation of the original causal structure % \emph{in-principle}.
 
 
-Linear quantifier elimination is already widely used in causal inference to derive entropic inequalities \cite{fritz2013marginal,chaves2014novel,chaves2014informationinference}. In that task, however, the quantifiers being eliminated are those entropies which refer to hidden variables. By contrast, the probabilities we consider here are exclusively in terms of observable variables right from the very start. The quantifiers we eliminate are the gedankenprobabilities, which are quite different from probabilities involving hidden variables.
+Linear quantifier elimination is already widely used in causal inference to derive entropic inequalities \cite{fritz2013marginal,chaves2014novel,chaves2014informationinference}. In that task, however, the quantifiers being eliminated are those entropies which refer to hidden variables. By contrast, the probabilities we consider here are exclusively in terms of observable variables right from the very start. The quantifiers we eliminate are the not-pre-injectable joint probabilities, which are quite different from probabilities involving hidden variables.
 
-One may include further linear constraints beyond the usual marginals problem. For example, we know that sometimes the distributions of different injectable sets coincide, i.e. 
-$\pdf{\bm{X}}=\pdf{\bm{Y}}$ whenever both $\bm{X}$ and $\bm{Y}$ are injectable, and $\subsim{\bm{X}}=\subsim{\bm{Y}}$, because injectability implies $\pdf{\bm{X}}=\pdf{\subsim{\bm{X}}}$ etc. Such equations relating coinciding marginal distributions can be used to further constrain the gedankenprobabilities; they can even be used to pre-eliminate some gedankenprobabilities through Gaussian elimination, slightly reducing the need for linear quantifier elimination. These linear constraints are not part of the usual marginal problem, however; see \cref{sec:nonlinearelimination} for further discussion.
+When solving the marginal problem is too difficult, one may consider solving a relaxation of it, instead. One extremely computationally amenable relaxation of the marginal problem is to enumerate probabilistic Hardy-type paradoxed. This is discussed later on in  \cref{sec:TSEM}.
 
-One may also substitute numeric values for all the pre-injectable probabilities appearing in the marginals problem. Upon doing so, the quantifier elimination problem is converted to a quantifier existence problem: Do there exist gedankenprobabilities that satisfy the resulting system of inequalities? Such \emph{satisfiability} questions can be resolved quite rapidly, especially when the quantifiers are linear \cite{Korovin2012ImplementingCRA,Bobot2012SimplexSAT}. Note that real-world data with uncertainties can also be incorporated into these satisfiability questions. Instead of asserting that a particular probability is equal to a given \emph{value}, one can incorporate new inequalities which constrain the experimentally-known probabilities to lie in given \emph{intervals}. Assigning probabilities to intervals as opposed to numeric values results in further free parameters in the system, but the problem nevertheless remains one of \emph{universal} existential closure, and can be resolved with extreme efficiency.
+%\topic{\tred{Constraining Possible Distributions over Pre-Injectable Sets via Hardy Paradoxes}}
 
-Although linear quantifier elimination can be highly optimized, it can still prove computationally difficult. It is therefore sometimes useful to consider relaxations of the marginals problem. The \emph{full} marginals problem is to find inequalities on the marginal distributions such that the inequalities are satisfied \emph{if and only if} the given marginal distributions can be extended. It is much easier to generate necessary-but-insufficient inequalities, i.e. satisfied by all compatible marginal distributions but such that no-violation does not certify marginal compatibility. We have identified a technique for rapidly generating such quantifier-free inequalities by restricting the search to inequalities of a very particular form. We found this alternative technique — trading generality for speed — to be extraordinarily practical. The type of inequalities that we consider are given by a certain class of tautologies in classical propositional logic, see \cref{sec:TSEM} for further details.
+%Although solving the marginal problem can be highly optimized, it can still prove computationally difficult. It is therefore sometimes useful to consider relaxations of the marginals problem. The \emph{full} marginals problem is to find inequalities on the marginal distributions such that the inequalities are satisfied \emph{if and only if} the given marginal distributions can be extended. It is much easier to generate necessary-but-insufficient inequalities, i.e. satisfied by all compatible marginal distributions but such that no-violation does not certify marginal compatibility. We have identified a technique for rapidly generating such quantifier-free inequalities by restricting the search to inequalities of a very particular form. We found this alternative technique — trading generality for speed — to be extraordinarily practical. The type of inequalities that we consider are given by a certain class of tautologies in classical propositional logic, see \cref{sec:TSEM} for further details.
+
+\topic{\tred{Constraining Possible Distributions over Pre-Injectable Sets via Conditional Independence Relations}}
+
+The marginal problem asks about the existence of \emph{any} joint distribution which recovers the marginal distributions. In causal inference, however, there are plenty of other constraints on the sorts of joint distributions which are consistent with some causal hypothesis. The minimal constraint embedded in any causal hypothesis is the idea of causal structure. Thus it is natural to supplement the marginal problem with additional constraints, motivated by causal structure, on the hypothetical inflation-DAG observable joint distribution.
+
+The most familiar causally-motivated constraints on a joint distribution are \tblue{conditional independence relations}, in particular, observable conditional independence relations. \purp{(Need citation?} Conditional independence relations are inferred by $d$-separation; if $\bm{X}$ and $\bm{Y}$ are $d$-separated in the (inflation) DAG by $\bm{Z}$, then we infer the conditional independence $\bm{X}\bot\bm{Y}|\bm{Z}$. The $d$-separation criterion is explained at length in~\cite{pearl2009causality,studeny2005probabilistic,WoodSpekkens,pusey2014gdag}, so we elect not to review it here.
+
+Every conditional independence relation can be translated into a nonlinear constraint on probabilities, as $\bm{X}\bot\bm{Y}|\bm{Z}$ implies $\p{\bm{x}\bm{y}|\bm{z}}=\p{\bm{x}|\bm{z}}\p{\bm{y}|\bm{z}}$ for all $\bm{x}$, $\bm{y}$, and $\bm{z}$. As we generally prefer to work with unconditional probabilities, we rewrite this as follows: If $\bm{X}$ and $\bm{Y}$ are $d$-separated by $\bm{Z}$, then $\p[\bm{X}\bm{Y}\bm{Z}]{\bm{x}\bm{y}\bm{z}}\p[\bm{Z}]{\bm{z}}=\p[\bm{X}\bm{Z}]{\bm{x}\bm{z}}\p[\bm{Y}\bm{Z}]{\bm{y}\bm{z}}$ for all $\bm{x}$, $\bm{y}$, and $\bm{z}$. Such nonlinear constraints can be incorporated as further restrictions on the sorts of joint distributions consistent with the inflation DAG, supplementing the basic nonnegativity of probability constraints of the marginal problem. Note that every semi-marginal probability introduced in some nonlinear condition independence equation should also be well defined by marginalization, i.e. as a sum of various joint probabilities.
+For example, in \cref{fig:Tri222} we find that $A_1$ and $C_2$ are $d$-separated by $\{A_2 B_2\}$, and so one might incorporate the family of nonlinear equalities $\p[A_1 A_2 B_2 C_2]{a_1 a_2 b_2 c_2}\p[A_2 B_2]{a_2 b_2}=\p[A_1 A_2 B_2]{a_1 a_2 b_2}\p[A_2 B_2 C_2]{a_2 b_2 c_2}$ for all $a_1$, $a_2$, $b_2$ and $c_2$. To relate this heretofore-unreferenced probabilities to the joint distribution of the marginal problem, however, one must also incorporate further equalities of the form
+\begin{align}
+\begin{split}
+&\forall_{a_2 b_2}:\;\p[A_2 B_2]{a_2 b_2} = \sum\nolimits_{a_1 b_1 c_1 c_2}\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
+&\forall_{a_1 a_2 b_2 c_2}:\;\p[A_1 A_2 B_2 C_2]{a_1 a_2 b_2 c_2} = \sum\nolimits_{b_1 c_1}\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
+&\forall_{a_1 a_2 b_2}:\;\p[A_1 A_2 B_2]{a_1 a_2 b_2} = \sum\nolimits_{b_1 c_1 c_2}\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}
+\end{split}
+\end{align}
+etc. Note also that incorporating such constraints also increases the number of quantifier which must be eliminated, as additional non-injectable probabilities are now featured in the equalities corresponding to conditional independence which do not appear in the unconstrained marginal problem. 
+
+Many modern computer algebra systems have functions capable of tackling nonlinear quantifier elimination symbolically\footnote{For example \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://reference.wolfram.com/language/ref/Resolve.html}{\texttt{Resolve}} command, \textit{Redlog}'s \href[pdfnewwindow]{http://www.redlog.eu/documentation/reals/rlqe.php}{\texttt{rlposqe}}, or \textit{Maple$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://maplesoft.com/support/help/Maple/view.aspx?path=RegularChains/SemiAlgebraicSetTools/RepresentingQuantifierFreeFormula}{\texttt{RepresentingQuantifierFreeFormula}}, etc.}. 
+%One might then hope to use such software systems to rid the hybrid inequalities of the gedankenprobabilities. 
+Currently, however, it is not practical to perform nonlinear quantifier elimination on large polynomial systems with many quantifiers. Nevertheless, the nonlinear constraints can be easily accounted for numerically. Upon substituting numerical values for all the injectable probabilities, the former quantifier elimination problem is converted to a universal quantifier existence problem: Do there exist quantifier that satisfy the full set of linear and nonlinear numeric (as opposed to symbolic) constraints? Most computer algebra systems can resolve such \emph{satisfiability} questions quite rapidly\footnote{For example \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$} \href[pdfnewwindow]{http://reference.wolfram.com/language/Experimental/ref/ExistsRealQ.html}{\texttt{Reduce\`{}ExistsRealQ}} function. Specialized satisfiability software such as SMT-LIB's \href[pdfnewwindow]{http://smtlib.cs.uiowa.edu/solvers.shtml}{\texttt{check-sat}} \cite{BarFT-SMTLIB} are particularly apt for this purpose.
+%One can also exploit the fact than any nonlinear optimizer will return an error when a set of constraints cannot be satisfied. Nonlinear optimizers include \textit{Maple$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://www.maplesoft.com/support/help/Maple/view.aspx?path=Optimization/NLPSolveMatrixForm}{\texttt{NLPSolve}}, \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://reference.wolfram.com/language/ref/message/NMinimize/nsol.html}{\texttt{NMinimize}}, and dozens of free and commercial optimizers for \href[pdfnewwindow]{http://ampl.com/products/solvers/all-solvers-for-ampl}{\textit{AMPL}} and/or \href[pdfnewwindow]{https://neos-server.org/neos/solvers/index.html\#nco}{\textit{GAMS}}
+}.
+
+
+It is also possible to use a mixed strategy of linear and nonlinear quantifier elimination, such as \citet{ChavesPolynomial} advocates. The explicit results of Ref. \cite{ChavesPolynomial} are therefore consequences of any inflation DAG, achieved by applying a mixed quantifier elimination strategy.\purp{T: rewrite this in light of new narrative!}
+
+\topic{\tred{Constraining Possible Distributions over Pre-Injectable Sets via Coinciding Marginals}}
+
+The inflation hypothesis is more than just causal structure, however, even if the original hypothesis did not constrain possible causal models beyond the original DAG.  By restricting to exclusively \emph{inflation} models, however, we require $\pdf{A_i| \Pa[G']{A_i}}=\pdf{A_j|\Pa[G']{A_j}}$, per \cref{eq:funcdependences}. Consequently, the distributions over different injectable sets must occasionally coincide, i.e. $\pdf{\bm{X}}=\pdf{\bm{Y}}$ whenever both $\bm{X}$ and $\bm{Y}$ are injectable, and $\subsim{\bm{X}}=\subsim{\bm{Y}}$. Sometimes sets of random variables which are \emph{not} injectable, however, can also be shown to have necessarily coinciding distributions. For example, we can verify that $\pdf{A_1 A_2 B_1}=\pdf{A_1 A_2 B_2}$ follows from \cref{fig:Tri222}, even though $\brackets{A_1 A_2 B_1}$ and $\brackets{A_1 A_2 B_2}$ are not injectable sets.
+
+Equations such as $\forall_{a_1 a_2 b}:\;\p[A_1 A_2 B_1]{a_1 a_2 b} = \p[A_1 A_2 B_2]{a_1 a_2 b}$ are also intrinsic parts of the inflation hypothesis, and may incorporated into either linear or nonlinear quantifier eliminations in order to derive stronger infeasibility criteria. The details of how to recognize coinciding distributions beyond the obvious coincidences implied by injectable or pre-injectable sets are discuss in \cref{sec:coincidingdetails}.
+
+
+
+%One may also substitute numeric values for all the pre-injectable probabilities appearing in the marginals problem. Upon doing so, the quantifier elimination problem is converted to a quantifier existence problem: Do there exist gedankenprobabilities that satisfy the resulting system of inequalities? Such \emph{satisfiability} questions can be resolved quite rapidly, especially when the quantifiers are linear \cite{Korovin2012ImplementingCRA,Bobot2012SimplexSAT}. Note that real-world data with uncertainties can also be incorporated into these satisfiability questions. Instead of asserting that a particular probability is equal to a given \emph{value}, one can incorporate new inequalities which constrain the experimentally-known probabilities to lie in given \emph{intervals}. Assigning probabilities to intervals as opposed to numeric values results in further free parameters in the system, but the problem nevertheless remains one of \emph{universal} existential closure, and can be resolved with extreme efficiency.
+
 
 %One useful alternative to linear quantifier elimination is to identify representative probability distributions which are incompatible with the (unprojected) constraints; \citet{ChavesNoSignalling} use this technique, for example. %That technique essentially translates the elimination problem to a satisfiability problem, and moreover an ultra-efficient \emph{linear} quantifier existence problem at that! In the context of polytope projection, these representative probability distributions correspond to extreme rays of the so-called ``projection cone" \cite{jones2004equality,Jones2008,BalasProjectionCone}.
 
@@ -997,7 +1000,7 @@ Although linear quantifier elimination can be highly optimized, it can still pro
 
 %We note that our polynomial inequalities are related to those introduced recently by \citet{ChavesPolynomial}, in that our inequalities subsume the explicit results of Ref. \cite{ChavesPolynomial}. \purp{NEEDS CONFIRMATION!} \citet{ChavesPolynomial} exploits conditional independence at the observable level only, whereas our technique is applicable to scenarios even without any observable CI relations, such as the Triangle scenario.
 
-
+\purp{Move this paragraph up, Tobias? ~EW}
 As far as we can tell, our inequalities are not related to the nonlinear infeasibility criteria which have been derived specifically to constrain classical networks \cite{TavakoliStarNetworks,RossetNetworks,TavakoliNoncyclicNetworks}, nor to the nonlinear inequalities which account for interventions to a given causal structure \cite{kang2007polynomialconstraints,steeg2011relaxation}.
 
 
@@ -1110,7 +1113,9 @@ Conditional-structure gedankenprobabilities are somewhat different from the infl
 Joint counterfactual probabilities are experimentally inaccessible, just the same as joint heterofactual probabilities are. Suppose one could establish both Alice's propensity for going to the museum when it rains and her propensity for going to the beach when it's sunny. Even so, neither the joint counterfactual probability nor the joint heterofactual probability can be established from that limited data. For example, the value of the hidden variable ${\Lambda\cramp{=}\lambda}$ may influence Alice's willingness to get out of bed at all, or determine if she is on-call as a volunteer EMT on a particular day, or $\lambda$ might encode if Alice is travelling out-of-state. If we could measure $\p{a|x , \n{a}|\n{x}},...\}$ we might learn that Alice's likelihood of visiting the museum if it rains in Maryland is highly correlated with her likelihood of visiting the beach when it's sunny in Maryland. Or we might learn that those two counterfactual probabilities are relatively statistically independent. The ``hidden-ness" of the classical variable corresponding to the latent node shields the gedankenprobabilities from being determined. 
 \end{comment}
 
-\section{Gedankenprobabilities and the Quantum No-Broadcasting Theorem}\label{sec:classicallity}
+\section{Quantum Causal Inference and the No-Broadcasting Theorem}\label{sec:classicallity}
+
+\purp{term ``gedankenprobability" has been removed"}
 
 It is worth noting that duplicating an outgoing edge in a causal structure means \tblue{broadcasting} the value of the random variable. For example in \cref{fig:simpleinflation}, the information about $X$ which was ``sent" to $A$ is effectively broadcast to both $A_1$ and $A_2$ in the inflation. This is quite intentional. Quantum theory is governed by a no-broadcasting theorem \cite{NoCloningQuantum1996,NoCloningGeneral2006}; by electing to embed broadcasting into an inflation DAG we can specifically construct a foil to quantum causal structures. Infeasibility constraints derived from \tblue{non-broadcasting inflations} on the other hand, such as \cref{fig:simplestinflation}, are valid even when relaxing the interpretation of latent nodes to allow for quantum or general probabilistic resources. This contrast is elaborated at length in \cref{sec:classicallity}.  
 
@@ -1246,34 +1251,28 @@ Research at Perimeter Institute is supported by the Government of Canada through
 \renewcommand{\theequation}{A-\arabic{equation}}
 \setcounter{equation}{0}
 
-\section{Nonlinear Quantifier Elimination Approach}\label{sec:nonlinearelimination}
 
-In the main text we considered deriving constraints on the marginal distributions on pre-injectable sets via the marginal problem. There are further constraints in the inflation DAG, however, which can be leveraged to further constrain the marginal distributions consisted with the inflation DAG.
 
-\begin{asparadesc}
-\medskip\item[\tred{Conditional Independence Relations}] \noindent
-\par\hspace{\parskip} 
-The most familiar such further constraints are the conditional independence relations relating observable variables in the inflation DAG. Conditional independence relations are inferred by $d$-separation; if $\bm{X}$ and $\bm{Y}$ are $d$-separated in the (inflation) DAG by $\bm{Z}$, then we infer the conditional independence $\bm{X}\bot\bm{Y}|\bm{Z}$. The $d$-separation criterion is explained at length in~\cite{pearl2009causality,studeny2005probabilistic,WoodSpekkens,pusey2014gdag}, and therefore we present it only very briefly here.
 
-% We first define the notion of \tblue{exclusive ancestors}, because the usual notion of ancestors is inclusive, i.e. $\An{\bm{Z}}$ contains $\bm{Z}$. Let the exclusive ancestors of $\bm{Z}$ be given by $\An{\setminus\bm{Z}}\coloneqq\An{\bm{Z}}\setminus\bm{Z}$.
-Next we define 
-% \tblue{conditioning a DAG} over $\bm{Z}$, i.e. $G_{\setminus\bm{Z}}$, which is formed by deleting any outgoing edges from $\bm{Z}$ in $G$. Conditional DAGs enable the definition of
-the notion of \tblue{conditional ancestors} for a set of nodes $\bm{X}$ relative to a set $\bm{Z}$ which is disjoint from $X$ as
-\begin{align}
-    \An[G]{\bm{X}|\bm{Z}}\coloneqq \begin{cases}
-	    \An[G\setminus\bm{Z}]{\bm{X}}& \text{if } \An[G\setminus\bm{Z}]{\bm{X}}\text{ and }\An[G]{\bm{Z}}\setminus\bm{Z}\text{ are disjoint},\\
-	    \An[G\setminus\bm{Z}]{\bm{X}} \bigcup \An[G]{\bm{Z}}\setminus\bm{Z} & \text{if } \An[G\setminus\bm{Z}]{\bm{X}}\text{ and } \An[G]{\bm{Z}}\setminus\bm{Z}\text{ overlap.}
-    \end{cases}
-\end{align}
-Then $\bm{X}$ and $\bm{Y}$ are $d$-separated by $\bm{Z}$ iff $\An[G]{\bm{X}|\bm{Z}}$ and $\An[G]{\bm{Y}|\bm{Z}}$ are disjoint.
 
-Every conditional independence relation can be translated into a nonlinear constraint on probabilities, as $\bm{X}\bot\bm{Y}|\bm{Z}$ implies $\p{\bm{x}\bm{y}|\bm{z}}=\p{\bm{x}|\bm{z}}\p{\bm{y}|\bm{z}}$ for all $\bm{x}$, $\bm{y}$, and $\bm{z}$. As we generally prefer to work with unconditional probabilities, we rewrite this as follows: If $\bm{X}$ and $\bm{Y}$ are $d$-separated by $\bm{Z}$, then $\p{\bm{x}\bm{y}\bm{z}}\p{\bm{z}}=\p{\bm{x}\bm{z}}\p{\bm{y}\bm{z}}$ for all $\bm{x}$, $\bm{y}$, and $\bm{z}$. Such nonlinear constraints can be incorporated as restrictions on distributions consistent with the inflation DAG, supplementing the basic nonnegativity of probability constraints as we used them in~\cref{sec:ineqs}. Hence this additional constraints may impose further constrains on the distributions over the pre-injectable sets. Nonlinear quantifier elimination can then be used to determine the constraints at the level of the distribution on the original DAG, again by constraining the distributions on pre-injectables on the inflation DAG and applying~\cref{eq:preinjfactor}.
 
-Many modern computer algebra systems have functions capable of tackling nonlinear quantifier elimination symbolically\footnote{For example \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://reference.wolfram.com/language/ref/Resolve.html}{\texttt{Resolve}} command, \textit{Redlog}'s \href[pdfnewwindow]{http://www.redlog.eu/documentation/reals/rlqe.php}{\texttt{rlposqe}}, or \textit{Maple$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://maplesoft.com/support/help/Maple/view.aspx?path=RegularChains/SemiAlgebraicSetTools/RepresentingQuantifierFreeFormula}{\texttt{RepresentingQuantifierFreeFormula}}, etc.}. 
-%One might then hope to use such software systems to rid the hybrid inequalities of the gedankenprobabilities. 
-Currently, however, it is not practical to perform nonlinear quantifier elimination on large polynomial systems with many quantifiers. Nevertheless, the nonlinear constraints can be easily accounted for numerically. Upon substituting numerical values for all the injectable probabilities, the former quantifier elimination problem is converted to a universal quantifier existence problem: Do there exist gedankenprobabilities that satisfy the full set of linear and nonlinear constraints? Most computer algebra systems can resolve such \emph{satisfiability} questions quite rapidly\footnote{For example \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$} \href[pdfnewwindow]{http://reference.wolfram.com/language/Experimental/ref/ExistsRealQ.html}{\texttt{Reduce\`{}ExistsRealQ}} function. Specialized satisfiability software such as SMT-LIB's \href[pdfnewwindow]{http://smtlib.cs.uiowa.edu/solvers.shtml}{\texttt{check-sat}} \cite{BarFT-SMTLIB} are particularly apt for this purpose.
-%One can also exploit the fact than any nonlinear optimizer will return an error when a set of constraints cannot be satisfied. Nonlinear optimizers include \textit{Maple$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://www.maplesoft.com/support/help/Maple/view.aspx?path=Optimization/NLPSolveMatrixForm}{\texttt{NLPSolve}}, \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://reference.wolfram.com/language/ref/message/NMinimize/nsol.html}{\texttt{NMinimize}}, and dozens of free and commercial optimizers for \href[pdfnewwindow]{http://ampl.com/products/solvers/all-solvers-for-ampl}{\textit{AMPL}} and/or \href[pdfnewwindow]{https://neos-server.org/neos/solvers/index.html\#nco}{\textit{GAMS}}
-}.
+
+
+
+
+
+\section{An Efficient Algorithm for Solving the Marginal Problem}\label{sec:projalgorithms}
+
+
+Geometrically, linear quantifier elimination is equivalent to projecting a high-dimensional polytope in halfspace representation (inequalities and equalities) into a lower-dimensional quotient space.
+
+Polytope projection is a well-understood problem in computational optimization, and a surprising variety of algorithms are available for the task \cite{jones2004equality,JonesThesis2005,Jones2008}. The oldest-known method for polytope projection, i.e. linear quantifier elimination, is an algorithm known as Fourier-Motzkin (FM) elimination \cite{fordan1999projection,DantzigEaves}, although Fourier-Cernikov elimination variant \cite{Shapot2012,Bastrakov2015}, as well as Block Elimination and Vertex Enumeration \cite{Avis2000lrs}, are also fairly popular. More advanced polytope projection algorithms, such as Equality Set Projection (ESP) and Parametric Linear Programming, have also recently become available \cite{jones2004equality,JonesThesis2005,Jones2008}. 
+
+Linear quantifier elimination routines are available in many software tools\footnote{For example \textit{MATLAB$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://people.ee.ethz.ch/~mpt/2/docs/refguide/mpt/@polytope/projection.html}{\texttt{MPT2}}/\href[pdfnewwindow]{http://ellipsoids.googlecode.com/svn-history/r2740/branches/issue_119_vrozova/tbxmanager/toolboxes/mpt/3.0.14/all/mpt3-3_0_14/mpt/modules/geometry/sets/@Polyhedron/projection.m}{\texttt{MPT3}}, \textit{Maxima}'s \href[pdfnewwindow]{http://maxima.sourceforge.net/docs/manual/de/maxima_75.html}{\texttt{fourier\_elim}}, \textit{lrs}'s \href[pdfnewwindow]{http://cgm.cs.mcgill.ca/~avis/C/lrslib/USERGUIDE.html\#fourier}{\texttt{fourier}}, or \textit{Maple$^{_{\textit{\tiny\texttrademark}}}$}'s (v17+) \href[pdfnewwindow]{http://www.maplesoft.com/support/help/maple/view.aspx?path=RegularChains/SemiAlgebraicSetTools/LinearSolve}{\texttt{LinearSolve}} and \href[pdfnewwindow]{http://www.maplesoft.com/support/help/Maple/view.aspx?path=RegularChains/SemiAlgebraicSetTools/Projection}{\texttt{Projection}}. The efficiency of most of these software tools, however, drops off markedly when the dimension of the final projection is much smaller than the initial space of the inequalities. FM elimination aided by Cernikov rules \cite{Shapot2012,Bastrakov2015} is implemented in \href[pdfnewwindow]{http://sbastrakov.github.io/qskeleton/}{\textit{qskeleton}} \cite{qskeleton}. ESP  \cite{jones2004equality,JonesThesis2005,Jones2008} is supported by \href[pdfnewwindow]{http://people.ee.ethz.ch/~mpt/2/docs/refguide/mpt/@polytope/projection.html}{\texttt{MPT2}} but not \href[pdfnewwindow]{http://people.ee.ethz.ch/~mpt/3/}{\texttt{MPT3}}, and by the (undocumented) option of \href[pdfnewwindow]{https://github.com/tulip-control/polytope/blob/master/polytope/polytope.py\#L1406}{projection} in the \href[pdfnewwindow]{https://pypi.python.org/pypi/polytope}{\textit{polytope}} (v0.1.1 2015-10-26) python module.}. We have found custom-coding an linear elimination routine in \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$} to be most efficient, see \cref{sec:projalgorithms} for further detail.
+%\footnote{FM elimination algorithms make intermittent calls to a linear-programming subroutine for eliminating redundant inequalities. The authors found an efficient implementation of this subroutine in \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$}, see \cref{sec:redundancy} for further details.}.
+%Fourier-Motzkin elimination appreciable suboptimal, however, when the dimension of the final projection is much smaller than the initial space of the inequalities, i.e. when there are many gedankenprobabilities. See Refs. \cite{jones2004equality,JonesThesis2005,Jones2008} and \cref{sec:projalgorithms} for further detail.
+
+Redundant inequalities can be filtered out using Chernikov rules \cite{Shapot2012,Bastrakov2015}. 
 
 \begin{table*}[ht]\centering\caption{A comparison of different approaches for constraining the distributions on the pre-injectable sets. The primary divide is quantifier elimination, which is more difficult but produces inequalities, versus satisfiability which can witness the infeasibility of a specific distribution. The approaches subdivide further subdivided into nonlinear, linear, and possibilistic variants.}
 \begin{tabularx}{\linewidth}{ |l|L|c|L| } 
@@ -1294,60 +1293,6 @@ Possibilistic satisfiability & --- & --- & Super easy
 \\\toprule
 \end{tabularx}
 \end{table*}
-
-It is also possible to use a mixed strategy of linear and nonlinear quantifier elimination, such as \citet{ChavesPolynomial} advocates. The explicit results of Ref. \cite{ChavesPolynomial} are therefore consequences of any inflation DAG, achieved by applying a mixed quantifier elimination strategy.\purp{T: rewrite this in light of new narrative!}
-
-\clearpage\medskip\item[\tred{Coinciding Marginal Distributions}] \noindent
-\par\hspace{\parskip}
-By restricting our attention to inflation models, we see that sometimes the distributions of different injectable sets coincide, i.e. $\pdf{\bm{X}}=\pdf{\bm{Y}}$ whenever both $\bm{X}$ and $\bm{Y}$ are injectable, and $\subsim{\bm{X}}=\subsim{\bm{Y}}$. Sometimes sets of random variables which are \emph{not} injectable, however, can also be shown to have necessarily coinciding distributions. Coinciding (not necessarily injectable) marginal distributions among the inflation DAG variables is a consequence of \cref{eq:funcdependences}. For example, we can verify that $\pdf{A_1 A_2 B_1}=\pdf{A_1 A_2 B_2}$ follows from \cref{fig:Tri222}, even though $\brackets{A_1 A_2 B_1}$ and $\brackets{A_1 A_2 B_2}$ are not injectable sets. Here we formalize this type of constraint more generally.
-
-We call two sets of observable nodes $\bm{X}$ and $\bm{Y}$ \tblue{inflationarily isomorphic} if there exists an isomorphism $\ansubgraph[G']{\bm{X}}\sim\ansubgraph[G']{\bm{Y}}$ which has the additional property that it takes $\bm{X}$ itself bijectively to $\bm{Y}$. For example in~\cref{fig:Tri222}, the sets $\bm{X}=\{A_1 A_2 B_1\}$ and $\bm{Y}=\{A_1 A_2 B_2\}$ are inflationarily isomorphic. Then 
-
-In general there may exist multiple inflationary isomorphisms, for example the sets $\brackets{A_1 A_2 B_1}$ and $\brackets{A_1 A_2 B_2}$ can be related by either 
-\begin{align}
-    \begin{pmatrix}
-     A_1 \leftrightarrow A_1 \\
-     A_2 \leftrightarrow A_2 \\
-     B_1 \leftrightarrow B_2 \\
-    \end{pmatrix}
-    \qquad\text{or}\qquad
-    \begin{pmatrix}
-     A_1 \leftrightarrow A_2 \\
-     A_2 \leftrightarrow A_1 \\
-     B_1 \leftrightarrow B_2 \\
-    \end{pmatrix}
-\end{align}
-% Two inflation DAGs $G'_1$ and $G'_2$ are said to be inflationarily isomorphic if there exists a graph isomorphism between them which is itself also an inflationary isomorphism. This occurs iff $G'_1\sim G'_2$.
-% We say that one isomorphim \tblue{contains} another if the rule-set of the latter is a subset of the rule-set of the former.
-
-Now, consider an inflation DAG $G'$ and two sets of nodes $\bm{X}$ and $\bm{Y}$ such that not only $\bm{X}\sim\bm{Y}$ but also $\ansubgraph[G']{\bm{X}}\sim\ansubgraph[G']{\bm{Y}}$. If an inflationary isomorphism between $\ansubgraph[G']{\bm{X}}$ and $\ansubgraph[G']{\bm{Y}}$ \emph{contains} an inflationary isomorphism between $\bm{X}$ and $\bm{Y}$, then $\pdf{\bm{X}}=\pdf{\bm{Y}}$. In other words, $\pdf{\bm{X}}=\pdf{\bm{Y}}$ if and only if an inflationary graph isomorphism exists between $\ansubgraph[G']{\bm{X}}$ and $\ansubgraph[G']{\bm{Y}}$ which preserves the inflationary isomorphism between $\bm{X}$ and $\bm{Y}$. Then we can conclude that $P(\bm{X}) = P(\bm{Y})$ in any inflation model.
-
-Coinciding ancestral subgraphs is not, by itself, a strong enough condition to justify coinciding distributions; rather the variables in question must play similar \emph{roles} in their coinciding ancestral subgraphs. To illustrate this, consider the inflation DAG in \cref{fig:ancestralsubgraphnotenough}. We have $\ansubgraph[(\textrm{\cref{fig:ancestralsubgraphnotenough}})]{X_1 Y_2 Z_1}\sim\ansubgraph[(\textrm{\cref{fig:ancestralsubgraphnotenough}})]{X_1 Y_2 Z_2}$, since both of these ancestral subgraphs are the entire DAG. But there is no isomorphism which in addition takes $\{X_1 Y_1 Z_1\}$ to $\{X_1 Y_2 Z_2\}$, since the induced subgraphs on these two nodes are different, and therefore $\{X_1 Y_1 Z_1\}\not\sim\{X_1 Y_2 Z_2\}$.
-
-\begin{figure}[H]
-    \centering
-    \begin{minipage}[t]{0.6\linewidth}      \centering
-    \includegraphics[scale=1]{instrumentalvariant.pdf}
-    \caption{An inflation DAG which illustrates why coinciding ancestral subgraphs don't necessarily imply coinciding distributions.}
-    \label{fig:ancestralsubgraphnotenough}
-    \end{minipage}
-\end{figure}
-
-Constraints of the above form be used to supplement the marginal problem, and may be of practical use for reducing the dimensionality of the problem (number of gedankenprobabilities that need to be eliminated by quantifier elimination). However, we are not aware of any case in which this would actually result in tighter exclusions for the distributions on the original DAG. In many cases, this can be explained by the following argument. Suppose that there is an automorphism of the inflation DAG which takes copies of nodes to copies\footnote{Note the similarity to \emph{deck transformations} in covering space theory.} and restricts to an inflationary isomorphism $\ansubgraph[G']{\bm{X}}\sim\ansubgraph[G']{\bm{Y}}$ as above. If $\hat{P}$ solves the unsupplemented marginal problem, then switching the variables in $\hat{P}$ according to the automorphism still solves the unsupplemented marginal problem, since the given marginal distributions are preserved by the automorphism. Now taking the uniform mixture of this new distribution with $\hat{P}$ results in a distribution that still solves the marginal problem, and in addition satisfies the supplemented constraint $P_{\bm{X}} = P_{\bm{Y}}$.
-
-Note that the argument does not apply if there is no automorphism which restricts to $\ansubgraph[G']{\bm{X}}\sim\ansubgraph[G']{\bm{Y}}$, and it also does not apply if one uses the conditional independence relations on the inflation DAG as well, since this destroys linearity. We do not know what happens in either of these cases.
-
-\end{asparadesc}\clearpage
-
-
-
-
-
-
-
-\section{Further Polytope Projection Algorithms}\label{sec:projalgorithms}
-
-Redundant inequalities can be filtered out using Chernikov rules \cite{Shapot2012,Bastrakov2015}. 
 
 % We find the strategy of employing linear programming in concert with the second Cernikov rule to be extremely efficient.
 
@@ -1431,6 +1376,64 @@ Note that a \texttt{True} response from \texttt{RedundantRowQ} indicates that th
 
 %Obtaining a redundancy-free collection of (convex) polyhedral-cone inequalities is therefore related to obtaining a non-negative factorization of a matrix. \purp{Need citation. Also, give explicit connection between NN factorization and redundancy elimination. Does this connection appears elsewhere in the literature?}
 \end{comment}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{On Identifying All Coinciding Marginal Distributions}\label{sec:coincidingdetails}
+
+
+
+
+%By restricting our attention to inflation models, we see that sometimes the distributions of different injectable sets coincide, i.e. $\pdf{\bm{X}}=\pdf{\bm{Y}}$ whenever both $\bm{X}$ and $\bm{Y}$ are injectable, and $\subsim{\bm{X}}=\subsim{\bm{Y}}$. Sometimes sets of random variables which are \emph{not} injectable, however, can also be shown to have necessarily coinciding distributions. Coinciding (not necessarily injectable) marginal distributions among the inflation DAG variables is a consequence of \cref{eq:funcdependences}. For example, we can verify that $\pdf{A_1 A_2 B_1}=\pdf{A_1 A_2 B_2}$ follows from \cref{fig:Tri222}, even though $\brackets{A_1 A_2 B_1}$ and $\brackets{A_1 A_2 B_2}$ are not injectable sets. Here we formalize this type of constraint more generally.
+
+We call two sets of observable nodes $\bm{X}$ and $\bm{Y}$ \tblue{inflationarily isomorphic} if there exists an isomorphism $\ansubgraph[G']{\bm{X}}\sim\ansubgraph[G']{\bm{Y}}$ which has the additional property that it takes $\bm{X}$ itself bijectively to $\bm{Y}$. For example in~\cref{fig:Tri222}, the sets $\bm{X}=\{A_1 A_2 B_1\}$ and $\bm{Y}=\{A_1 A_2 B_2\}$ are inflationarily isomorphic. Then 
+
+In general there may exist multiple inflationary isomorphisms, for example the sets $\brackets{A_1 A_2 B_1}$ and $\brackets{A_1 A_2 B_2}$ can be related by either 
+\begin{align}
+    \begin{pmatrix}
+     A_1 \leftrightarrow A_1 \\
+     A_2 \leftrightarrow A_2 \\
+     B_1 \leftrightarrow B_2 \\
+    \end{pmatrix}
+    \qquad\text{or}\qquad
+    \begin{pmatrix}
+     A_1 \leftrightarrow A_2 \\
+     A_2 \leftrightarrow A_1 \\
+     B_1 \leftrightarrow B_2 \\
+    \end{pmatrix}
+\end{align}
+% Two inflation DAGs $G'_1$ and $G'_2$ are said to be inflationarily isomorphic if there exists a graph isomorphism between them which is itself also an inflationary isomorphism. This occurs iff $G'_1\sim G'_2$.
+% We say that one isomorphim \tblue{contains} another if the rule-set of the latter is a subset of the rule-set of the former.
+
+Now, consider an inflation DAG $G'$ and two sets of nodes $\bm{X}$ and $\bm{Y}$ such that not only $\bm{X}\sim\bm{Y}$ but also $\ansubgraph[G']{\bm{X}}\sim\ansubgraph[G']{\bm{Y}}$. If an inflationary isomorphism between $\ansubgraph[G']{\bm{X}}$ and $\ansubgraph[G']{\bm{Y}}$ \emph{contains} an inflationary isomorphism between $\bm{X}$ and $\bm{Y}$, then $\pdf{\bm{X}}=\pdf{\bm{Y}}$. In other words, $\pdf{\bm{X}}=\pdf{\bm{Y}}$ if and only if an inflationary graph isomorphism exists between $\ansubgraph[G']{\bm{X}}$ and $\ansubgraph[G']{\bm{Y}}$ which preserves the inflationary isomorphism between $\bm{X}$ and $\bm{Y}$. Then we can conclude that $P(\bm{X}) = P(\bm{Y})$ in any inflation model.
+
+Coinciding ancestral subgraphs is not, by itself, a strong enough condition to justify coinciding distributions; rather the variables in question must play similar \emph{roles} in their coinciding ancestral subgraphs. To illustrate this, consider the inflation DAG in \cref{fig:ancestralsubgraphnotenough}. We have $\ansubgraph[(\textrm{\cref{fig:ancestralsubgraphnotenough}})]{X_1 Y_2 Z_1}\sim\ansubgraph[(\textrm{\cref{fig:ancestralsubgraphnotenough}})]{X_1 Y_2 Z_2}$, since both of these ancestral subgraphs are the entire DAG. But there is no isomorphism which in addition takes $\{X_1 Y_1 Z_1\}$ to $\{X_1 Y_2 Z_2\}$, since the induced subgraphs on these two nodes are different, and therefore $\{X_1 Y_1 Z_1\}\not\sim\{X_1 Y_2 Z_2\}$.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}[t]{0.6\linewidth}      \centering
+    \includegraphics[scale=1]{instrumentalvariant.pdf}
+    \caption{An inflation DAG which illustrates why coinciding ancestral subgraphs don't necessarily imply coinciding distributions.}
+    \label{fig:ancestralsubgraphnotenough}
+    \end{minipage}
+\end{figure}
+
+Constraints of the above form be used to supplement the marginal problem, and may be of practical use for reducing the dimensionality of the problem (number of gedankenprobabilities that need to be eliminated by quantifier elimination). However, we are not aware of any case in which this would actually result in tighter exclusions for the distributions on the original DAG. In many cases, this can be explained by the following argument. Suppose that there is an automorphism of the inflation DAG which takes copies of nodes to copies\footnote{Note the similarity to \emph{deck transformations} in covering space theory.} and restricts to an inflationary isomorphism $\ansubgraph[G']{\bm{X}}\sim\ansubgraph[G']{\bm{Y}}$ as above. If $\hat{P}$ solves the unsupplemented marginal problem, then switching the variables in $\hat{P}$ according to the automorphism still solves the unsupplemented marginal problem, since the given marginal distributions are preserved by the automorphism. Now taking the uniform mixture of this new distribution with $\hat{P}$ results in a distribution that still solves the marginal problem, and in addition satisfies the supplemented constraint $P_{\bm{X}} = P_{\bm{Y}}$.
+
+Note that the argument does not apply if there is no automorphism which restricts to $\ansubgraph[G']{\bm{X}}\sim\ansubgraph[G']{\bm{Y}}$, and it also does not apply if one uses the conditional independence relations on the inflation DAG as well, since this destroys linearity. We do not know what happens in either of these cases.
+
+
+
+
 
 %%% T: I've commented this out since we're not concerned here with observational equivalence, and I have the feeling that it would still require a major clean-up operation. The example of 6 observationally equivalent DAGs is not very good since they are all equivalent to A <-- S --> B, which doesn't contain any latent nodes
 \begin{comment}
