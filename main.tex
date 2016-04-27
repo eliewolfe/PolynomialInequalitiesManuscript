@@ -841,9 +841,16 @@ We have defined causal inference as a decision problem, namely testing the consi
 
 The ``big" problem, therefore, is rather straightforward: We seek to derive causal infeasibility criteria from the inflation hypothesis on the injectable sets. This task, however, is just a special instance of generic causal inference: Given some causal hypothesis, what can we say about how it constrains possible observable marginal distribution? Any technique for deriving causal infeasibility criteria is therefore relevant when using the inflation technique. Interestingly, weak constraints from the inflation hypothesis translate into strong constraints pursuant to the original hypothesis.
 
-In the discussion that follows we continue to assume that the original hypothesis is nothing more than supposing the causal structure to be given by the original DAG. Furthermore we presume that the joint distribution over all original observable variables is accessible. Moreover, we limit our attention to deriving polynomial inequalities in terms of probabilities. The potential of using inflation as tool for deriving entropic inequalities is considered separately in \purp{Appendix? Separate work?}
+In the discussion that follows we continue to assume that the original hypothesis is nothing more than supposing the causal structure to be given by the original DAG. Furthermore we presume that the joint distribution over all original observable variables is accessible. Moreover, we limit our attention to deriving polynomial inequalities in terms of probabilities. The potential of using inflation as tool for deriving entropic inequalities is considered separately in \cref{sec:NonShannon}.
 
-In what follows \purp{the appendices?} we consider three different strategies for constraining possible marginal distributions from the inflation hypothesis. The first strategy attempts to leverage many different kinds of constraints which are implicit in the inflation hypothesis. This strategy yields the strongest infeasibility criteria, but relies on computationally-difficult nonlinear quantifier elimination. The second strategy asks only if the various marginal distributions are compatible with \emph{any} joint distribution, without regard to the specific causal structure of the inflation DAG whatsoever. Solving the marginal problem amounts to a special linear quantifier elimination computation, one which can be  computed efficiently using Fourier-Cernikov elimination. The resulting infeasibility criteria are nevertheless still polynomial inequalities. The third strategy is based on probabilistic Hardy-type paradoxes, which we connect to the hypergraph transversal problem. This strategy requires the least computational effort, but is limited in that in only yields polynomial inequalities of a very particular form.
+In what follows we consider three different strategies for constraining possible marginal distributions from the inflation hypothesis. 
+\begin{compactitem}
+\item The full nonlinear strategy attempts to leverage many different kinds of constraints which are implicit in the inflation hypothesis. This strategy yields the strongest infeasibility criteria, but relies on computationally-difficult nonlinear quantifier elimination.
+\item An intermediate strategy asks only if the various marginal distributions are compatible with \emph{any} joint distribution, without regard to the specific causal structure of the inflation DAG whatsoever. Solving the marginal problem amounts to a special linear quantifier elimination computation, one which can be computed efficiently using convex hull algorithms. The resulting infeasibility criteria are nevertheless still polynomial inequalities.
+\item Another strategy is based on probabilistic Hardy-type paradoxes, which we connect to the hypergraph transversal problem. This strategy requires the least computational effort, but is limited in that it only yields polynomial inequalities of a very particular form.
+\end{compactitem}
+
+In the narrative below the marginal problem is discussed first; the nonlinear strategy is presented as supplementing the marginal problem with additional constraints. The most computationally efficient strategy is presented as a relaxation of the marginal problem, and is discussed separate from the other two strategies, namely in \cref{sec:TSEM}.
 
 Preliminary to every strategy, however, is the identification of the pre-injectable sets.
 
@@ -854,27 +861,28 @@ To identify the pre-injectable sets, we first identify the injectable sets. To t
 
 Determining the pre-injectable sets from there can be done via constructing another graph that we call the \tblue{independence graph}. Its nodes are the injectable sets, and we connect two of these by an edge if their ancestral subgraphs are disjoint. Then by definition, the pre-injectable sets can be obtained as the cliques in this graph. Taking the union of all the injectable sets in such a clique results in a pre-injectable set. Since it is sufficient to only consider the maximal pre-injectable sets, one can eliminate all those pre-injectable sets that are contained in other ones, as a final step.
 
-Let us also define the \tblue{ancestral dependence graph}, in which two nodes are adjacent if they share a common ancestor, and its complement the \tblue{ancestral independence graph}, in the ancestrally independent nodes are adjacent. To ascertain the factorization of a node set $\bm{U}$ into ancestrally-independent partitions one considers the subgraph on  $\bm{U}$ of the ancestral dependence graph: the ancestrally-independent partitions are identically the distinct connected components of that subgraph. By examining the injection graph and the ancestral dependence graph, therefore, one is able to quickly determine all injectable sets and all ancestral independence relations.
+%Let us also define the \tblue{ancestral dependence graph}, in which two nodes are adjacent if they share a common ancestor, and its complement the \tblue{ancestral independence graph}, in the ancestrally independent nodes are adjacent. To ascertain the factorization of a node set $\bm{U}$ into ancestrally-independent partitions one considers the subgraph on  $\bm{U}$ of the ancestral dependence graph: the ancestrally-independent partitions are identically the distinct connected components of that subgraph. By examining the injection graph and the ancestral dependence graph, therefore, one is able to quickly determine all injectable sets and all ancestral independence relations.
 
 %It is also useful to define another auxiliary graph, the \tblue{pre-injection graph} in which a pair of nodes $A_i$ and $B_j$ are connected if either $\An{A_i B_j}$ or if $A_i\aindep B_j$. The pre-injection graph is identically the union of the injection graph with the ancestral independence graph. Any clique in the pre-injection graph is \emph{not} necessarily a pre-injectable set, but every pre-injectable set must correspond to a clique in the pre-injection graph, per \cref{eq:defpreinjectable}. Moreover, maximal-size pre-injectable sets must correspond to maximal cliques in the pre-injection graph. This makes the pre-injection graph a handy tool for determining the pre-injectable sets. We start by enumerating all maximal cliques in the pre-injection graph to obtain candidate pre-injectable sets. Each candidate set is then factored into ancestrally-independent partitions by means of the ancestral dependence graph. A candidate set is a legitimately pre-injectable if and only if all of its ancestrally-independent partitions are themselves injectable. Isolating the genuine pre-injectable sets from the candidates is therefore quite easy, especially since the complete set of injectable sets is already known.
 
 \begin{figure}[t]
 \centering
-\begin{minipage}[b]{0.3\linewidth}
+\begin{minipage}[b]{0.4\linewidth}
 \centering
 \includegraphics[scale=1]{injectiongraph222.pdf}
 \caption{The auxiliary injection graph corresponding to the inflation DAG in \cref{fig:Tri222}, wherein a pair of nodes are adjacent iff they are pairwise injectable.}\label{fig:injection222}
 \end{minipage}
+%\hfill
+%\begin{minipage}[b]{0.3\linewidth}
+%\centering
+%\includegraphics[scale=1]{ancestraldependancegraph222.pdf}
+%\caption{An auxiliary ancestral dependance graph corresponding to the inflation DAG in \cref{fig:Tri222}, wherein a pair of nodes are adjacent iff they share a common ancestor.}\label{fig:dependances222}
+%\end{minipage}
+%\hfill
 \hfill
-\begin{minipage}[b]{0.3\linewidth}
+\begin{minipage}[b]{0.5\linewidth}
 \centering
-\includegraphics[scale=1]{ancestraldependancegraph222.pdf}
-\caption{An auxiliary ancestral dependance graph corresponding to the inflation DAG in \cref{fig:Tri222}, wherein a pair of nodes are adjacent iff they share a common ancestor.}\label{fig:dependances222}
-\end{minipage}
-\hfill
-\begin{minipage}[b]{0.3\linewidth}
-\centering
-\includegraphics[scale=0.2]{simplicialcomplex.pdf}
+\includegraphics[scale=0.25]{simplicialcomplex.pdf}
 \caption{The simplicial complex... \purp{Tobias - you please caption this?}The 5 faces in this figure correspond to the pre-injectable sets.}\label{fig:simplicialcomplex222}
 \end{minipage}
 \end{figure}
@@ -1187,7 +1195,7 @@ Some inflations, such as the one of~\cref{fig:TriDagSubA2B1C1}, do not require s
 
 It follows that every quantum causal model can be inflated to a non-broadcasting DAG, so that one obtains a quantum and general probabilistic analogue of Lemma~\ref{mainlemma} in the non-broadcasting case. Constraints derived from non-broadcasting inflations are therefore valid also for quantum and even general probabilistic distributions. In the specific case of the entropic monogamy inequality for the Triangle scenario~\cref{eq:monogomyofcorrelations}, this was originally noticed in~\cite{pusey2014gdag}. Another example is \cref{eq:polymonogamy}, which was derived from the non-broadcasting inflation of \cref{fig:TriDagSubA2B1C1}, which therefore also is a causal infeasibility criterion which holds for the Triangle scenario even when the latent nodes are allowed to carry quantum or general probabilistic systems.
 % This confirms our numerical computations, which indicated that~\eqref{eq:polymonogamy} does not have any quantum violations. The same is true for monogamy of correlations, per \cref{eq:monogomyofcorrelations}.
-Since the GHZ-type distribution~\cref{eq:ghzdistribution1} violates both of these inequalities, it cannot even be generated with in the Triangle scenario with quantum or general probabilistic states on the hidden nodes, as was also pointed out in~\cite{pusey2014gdag}.
+Since the GHZ-type distribution~\cref{eq:ghzdistribution1} violates both of these inequalities, it cannot even be generated within the Triangle scenario with quantum or general probabilistic states on the hidden nodes, as was also pointed out in~\cite{pusey2014gdag}.
 
 %\begin{align}\label{eq:nonbroadcastinginflationDAG}
 %G'\in\SmallNamedFunction{NonBroadcastingInflations}{G} \quad\text{ iff }\quad \forall_{\text{latent }A_i\in G'}\; \Ch[G']{A_i} \text{ is an irredundant set.}
@@ -1659,7 +1667,7 @@ Naturally, two causal structures are observationally equivalent if one can be tr
 
 
 
-\section{The copy lemma and non-Shannon type entropic inequalities}
+\section{The Copy Lemma and Non-Shannon type Entropic Inequalities}\label{sec:NonShannon}
 
 As it turns out, the inflation DAG technique is also useful outside of the problem of causal inference. As we argue in the following, inflation is secretly what underlies the \tblue{copy lemma} in the derivation of non-Shannon type entropic inequalities~\cite[Chapter~15]{yeung_network_2008}. The following formulation of the copy lemma is the one of Kaced~\cite{kaced_equivalence_2013}.
 
