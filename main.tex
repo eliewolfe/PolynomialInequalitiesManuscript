@@ -593,21 +593,26 @@ It follows that any consistency conditions that one can derive for the new causa
 
 \example{: \tred{Perfect correlation cannot arise from the Triangle scenario.}}\par\smallskip\nobreak
 
-Consider the following causal inference problem.  The observational data is a joint distribution over three binary-outcome variables, $P\parenths{A B C}$, where the marginal on each variable is uniform and the three are perfectly correlated,
+Consider the following causal inference problem.  The observational data is a joint distribution over three binary-outcome variables, $\pdf[\text{obs}]{A B C}$, where the marginal on each variable is uniform and the three are perfectly correlated,
 \begin{align}\label{eq:ghzdistribution1}
-p\parens{a b c}=\frac{[000]+[111]}{2}=\begin{cases}\tfrac{1}{2}&\text{if }\; a=b=c, \\ 0&\text{otherwise}.\end{cases}
+\pdf[\text{obs}]{A B C}=\frac{[000]+[111]}{2},\quad\text{i.e.}\quad\p[ABC]{a b c}=\begin{cases}\tfrac{1}{2}&\text{if }\; A\eql B\eql C, \\ 0&\text{otherwise}.\end{cases}
 \end{align}
 The causal hypothesis is the set of causal models associated to the DAG of the triangle scenario, depicted in \cref{fig:Tri222}.  The problem is to decide whether the observational data is consistent with this causal hypothesis.
 
-To solve this problem, we consider the causal inference problem induced by the particular inflation of the triangle scenario depicted in Fig.~\ref{fig:TriDagSubA2B1C1}.  
+To solve this problem, we consider an inflated causal inference problem, namely the problem induced by the particular inflation depicted in Fig.~\ref{fig:TriDagSubA2B1C1}.  
 
-The sets $\brackets{A_2 C_1}$ and $\brackets{B_1 C_1}$ are injectable (hence trivially pre-injectable). The set $\brackets{A_2 B_1}$ is also pre-injectable because the singleton sets $\brackets{A_2}$ and $\brackets{ B_1}$ are each injectable and ancestrally independent.  Therefore, the observational data in our new causal inference problem includes
+The sets $\brackets{A_2 C_1}$ and $\brackets{B_1 C_1}$ are injectable (hence trivially pre-injectable). The set $\brackets{A_2 B_1}$ is also pre-injectable because the singleton sets $\brackets{A_2}$ and $\brackets{B_1}$ are each injectable and $A_2 \aindep B_1$.
+%and they ancestrally independent.  
+Therefore, the inflated observational data for our new causal inference problem includes
 \begin{align}
-\pdf{A_2 C_1}=\pdf{A C}\label{j1}\\
-\pdf{B_1 C_1}=\pdf{B C}\label{j2}\\
-\pdf{A_2 B_1}=\pdf{A}\pdf{B}\label{j3}.
+%\p[A_2 C_1]{a c}=\p{A C}{a c} &= \frac{[00]+[11]}{2}\label{j1}\\
+%\p[B_1 C_1]{b c}=\p[B C]{b c} &= \frac{[00]+[11]}{2}\label{j2}\\
+%\p[A_2 B_1]{a b}=\p[A]{a}\p[B]{b} &= \frac{[0]+[1]}{2}\otimes\frac{[0]+[1]}{2} \label{j3}.
+&\pdf[\text{obs}]{A_2 C_1}=\pdf[\text{obs}]{A C} = \frac{[00]+[11]}{2}\label{j1}\\
+&\pdf[\text{obs}]{B_1 C_1}=\pdf[\text{obs}]{B C} = \frac{[00]+[11]}{2}\label{j2}\\
+&\pdf[\text{obs}]{A_2 B_1}=\pdf[\text{obs}]{A}\pdf[obs]{B} = \frac{[0]+[1]}{2}\otimes\frac{[0]+[1]}{2} \label{j3}.
 \end{align}
-The question is whether such constraints are consistent with the causal hypothesis that the DAG is that of \cref{fig:TriDagSubA2B1C1}, where the parameters supplementing the DAG are arbitrary, except for the constraint that the latent variables $Y_1$ and $Y_2$ are identically distributed. 
+The question is whether such constraints are consistent with the causal hypothesis that the DAG is that of \cref{fig:TriDagSubA2B1C1}, where the parameters supplementing the DAG are unrestricted but for that the latent variables $Y_1$ and $Y_2$ are identically distributed. 
 
 It is not difficult to see that the answer to the question is negative.  And this verdict can be rendered without even appealing to the form of the inflation DAG (Note, however, that the inflation DAG has played a role in defining the new causal inference problem insofar as it has dictated the form that the observational data should take).  It suffices to make use of results concerning the marginals problem.   From Eq.~\eqref{eq:ghzdistribution1} one deduces that the marginal $\pdf{A C}$ described perfect correlation between $A$ and $C$ and similarly for the marginal $\pdf{B C}$.  But then, by Eqs.~\eqref{j1} and \eqref{j2}, one deduces that there is perfect correlation between $A_2$ and $C_1$ and perfect correlation between $B_1$ and $C_1$.  Meanwhile, Eq.~\eqref{j3} dictates that $A_2$ and $B_1$ should be uncorrelated.  But there is no joint distribution $P(A_2 B_1 C_1)$ having such marginals:  the only joint distribution that exhibits perfect correlation between $A_2$ and $C_1$ and between $B_1$ and $C_1$ also exhibits perfect correlation between $A_2$ and $B_1$.  
 
@@ -625,35 +630,36 @@ We assume uniform binary variables for the sake of concreteness, but the argumen
 
 Consider another causal inference problem concerning the triangle scenario, namely, that of determining whether the triangle DAG can explain a joint distribution $P_{\text{W}}\parenths{A B C}$ of the form
 \begin{align}\label{eq:wdistribution1}
-p_{\text{W}}\parens{a b c}=\frac{[100]+[010]+[001]}{3}=\begin{cases}\tfrac{1}{3}&\text{if }\; a+b+c=1, \\ 0&\text{otherwise}.\end{cases}
+\pdf[\text{W}]{A B C}=\frac{[100]+[010]+[001]}{3},\quad\text{i.e.}\quad\p[ABC]{a b c}=\begin{cases}\tfrac{1}{3}&\text{if }\; A\cramp{+}B\cramp{+}C\eql 1, \\ 0&\text{otherwise}.\end{cases}
 \end{align}
 We call this the W-type distribution\footnote{Because its correlations are reminiscent of those one obtains for the quantum state appearing in Ref. \cite{3Qubits2Ways}, and which is called the W state.}. To our knowledge, the fact that the Triangle causal structure is inconsistent with the W-type distribution has not been demonstrated previously.
 
 To prove the inconsistency of  $P_{\text{W}}$ with the Triangle causal structure, we consider the inflation DAG of \cref{fig:Tri222}. 
-The sets $\{A_2 C_1\}$, $\{B_2 A_1\}$, $\{A_2 B_1\}$ and $\{ A_1 B_1 C_1\}$ are injectable.  The set $\{ A_2 B_2 C_2\}$ is pre-injectable because the singleton sets $\{A_2\}$,  $\{B_2\}$ and $\{C_2\}$ are injectable and acenstrally independent. It follows that we must consider the feasability of the observational data
+The sets $\{A_2 C_1\}$, $\{B_2 A_1\}$, $\{A_2 B_1\}$ and $\{ A_1 B_1 C_1\}$ are injectable.  The set $\{ A_2 B_2 C_2\}$ is pre-injectable because the singleton sets $\{A_2\}$,  $\{B_2\}$ and $\{C_2\}$ are injectable and \emph{all} ancestrally independent. It follows that we must consider the inflated observational data
 \begin{align}
-\pdf{A_2 C_1}=\pdf{A C}\label{W1}\\
-\pdf{B_2 A_1}=\pdf{B A}\label{W2}\\
-\pdf{C_2 B_1}=\pdf{C B}\label{W3}\\
-\pdf{A_1 B_1 C_1}=\pdf{A B C}\label{W4}\\
-\pdf{A_2 B_2 C_2}=\pdf{A}\pdf{B}\pdf{C}\label{W5}.
+&\pdf[\text{obs}]{A_2 C_1}=\pdf[\text{obs}]{A C} = \frac{[10]+[01]+[00]}{3} \label{W1}\\
+&\pdf[\text{obs}]{B_2 A_1}=\pdf[\text{obs}]{B A} = \frac{[10]+[01]+[00]}{3} \label{W2}\\
+&\pdf[\text{obs}]{C_2 B_1}=\pdf[\text{obs}]{C B} = \frac{[10]+[01]+[00]}{3} \label{W3}\\
+&\pdf[\text{obs}]{A_1 B_1 C_1}=\pdf[\text{obs}]{A B C}  = \frac{[100]+[010]+[001]}{3} \label{W4}\\
+&\pdf[\text{obs}]{A_2 B_2 C_2}=\pdf[\text{obs}]{A}\pdf{B}\pdf{C} = \frac{[1]+2\times[0]}{3}\otimes\frac{[1]+2\times[0]}{3}\otimes\frac{[1]+2\times[0]}{3} \label{W5}.
 \end{align}
-Eq.~\eqref{W1} together with the form of $P_{\text{W}}$ implies that $C_1\eql 0$ whenever $A_2 \eql 1$. Similarly, $A_1\eql 0$ whenever $B_2\eql 1$ and $B_1\eql 0$ whenever $C_2\eql 1$. Eq.~\eqref{W5} and the form of $P_{\text{W}}$ implies that $A_2$,$B_2$, and $C_2$ are uncorrelated and uniformly distributed, which means that sometimes they all take the value 1. 
+Eq.~\eqref{W1} %together with the form of $P_{\text{W}}$ 
+implies that $C_1\eql 0$ whenever $A_2 \eql 1$. Similarly, $A_1\eql 0$ whenever $B_2\eql 1$ and $B_1\eql 0$ whenever $C_2\eql 1$. Eq.~\eqref{W5} %and the form of $P_{\text{W}}$ 
+implies that $A_2$,$B_2$, and $C_2$ are uncorrelated and uniformly distributed, which means that sometimes they all take the value 1. 
 %, that is, $A_2=1$ and $B_2=1$ and $C_2=1$.  
 Summarizing, we have
-\begin{align} 
-A_2 \eql 1 \implies C_1\eql 0\\
-B_2\eql 1 \implies A_1\eql 0\\
-C_2 \eql 1 \implies B_1 \eql 0\\
-\text{sometimes}
+\begin{align*} 
+&A_2 \eql 1 \implies C_1\eql 0\\
+&B_2\eql 1 \implies A_1\eql 0\\
+&C_2 \eql 1 \implies B_1 \eql 0\\
+\text{and sometimes}
 %\footnote{In fact, this occurs with probability 1/8, though it is sufficient for the argument to note that it is nonzero.}
- \quad A_2=1, B_2=1, C_2=1.
-\end{align}
-But these constraints clearly imply that
-\begin{align}
-\text{sometimes} \quad A_1=0, B_1=0, C_1=0,
-\end{align}
-which contradicts Eq.~\eqref{W4} and the fact that $P_{\text{W}}$ has no weight on $[000]$.
+ \quad &A_2=1, B_2=1, C_2=1.
+\\
+\shortintertext{But these constraints clearly imply that}
+\text{sometimes} \quad &A_1=0, B_1=0, C_1=0,
+\end{align*}
+which contradicts Eq.~\eqref{W4}.% and the fact that $P_{\text{W}}$ has no weight on $[000]$.
 
 Again, we have reached our verdict here simply by noting that the distributions defined in Eqs.~\eqref{W1}-\eqref{W5} cannot arise as the marginals of a single distribution on $A_1, B_1, C_1, A_2, B_2, C_2$.  Specifically, we have leveraged an approach to the marginal problem inspired by Hardy's version of Bell's theorem [citation].
 
@@ -1247,7 +1253,7 @@ Research at Perimeter Institute is supported by the Government of Canada through
 \appendix
 \renewcommand{\theequation}{A-\arabic{equation}}
 \setcounter{equation}{0}
-
+\renewcommand\section{\clearpage\stdsection}
 
 
 
