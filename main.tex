@@ -166,6 +166,8 @@ anchorcolor=OliveGreen}
 %\crefrangelabelformat{ineqs}{(#3#1#4-#5#2#6)}
 %\Crefmultiformat{ineqs}{Ineqs.~(#2#1#3}{,#2#1#3)}{,#2#1#3}{,#2#1#3)}
 
+\newenvironment{topic}[1][]{\par\medskip\noindent\textbf{\rmfamily#1}}{\par\medskip\par}
+
 \newcounter{step}[section]
 \newenvironment{step}[1][]{\refstepcounter{step}\par\medskip
    \noindent \textbf{Step~\thestep}\rmfamily#1}{\par\medskip\par}
@@ -736,7 +738,7 @@ In what follows \purp{the appendices?} we consider three different strategies fo
 Preliminary to every strategy, however, is the identification of the pre-injectable sets.
 
 
-\step{: \tred{Identifying the Pre-Injectable Sets}}\label{step:findpreinjectable}\par\smallskip\nobreak
+\topic{\tred{Identifying the Pre-Injectable Sets}}\label{step:findpreinjectable}
 
 To identify the pre-injectable sets, we first identify the injectable sets. To this end, it is useful to construct an auxiliary graph from the inflation DAG. Let the nodes of these auxiliary graphs be the observable nodes in the inflation DAG. The \tblue{injection graph}, then, is the undirected graph in which a pair of nodes $A_i$ and $B_j$ are adjacent if  $\An{A_i B_j}$ is irredundant. The injectable sets are then precisely the cliques\footnote{A clique is a set of nodes such that every single node is connected to every other.} in this graph, per \cref{eq:definjectable}. 
 
@@ -817,58 +819,66 @@ C_2\aindep B_2
 such that the distributions on the pre-injectable sets relate to the original DAG distribution via
 \begin{align}\label{eq:preinjectableuses222}
 \begin{split}
-&\pdf{A_1 B_1 C_1} = \pdf{A B C} \\
-&\pdf{A_1 B_2 C_2} = \pdf{C}\pdf{A B}\\
-&\pdf{A_2 B_1 C_2} = \pdf{A}\pdf{B C}\\
-&\pdf{A_2 B_2 C_1} = \pdf{B}\pdf{A C}\\
-&\pdf{A_2 B_2 C_2} = \pdf{A}\pdf{B}\pdf{C}
+&\forall_{a b c}:\; \p[A_1 B_1 C_1]{a b c} = \p[A B C]{a b c} \\
+&\forall_{a b c}:\; \p[A_1 B_2 C_2]{a b c} = \p[C]{c}\p[A B]{a b}\\%\pdf{C}\pdf{A B}\\
+&\forall_{a b c}:\; \p[A_2 B_1 C_2]{a b c} = \p[A]{a}\p[B C]{b c}\\
+&\forall_{a b c}:\; \p[A_2 B_2 C_1]{a b c} = \p[B]{b}\p[A C]{a c}\\
+&\forall_{a b c}:\; \p[A_2 B_2 C_2]{a b c} = \p[A]{a}\p[B]{b}\p[C]{c}
 \end{split}
 \end{align}
-Having identified the pre-injectable sets (and how to use them), we next turn to deriving constraints on the distributions over the pre-injectable sets.
+Having identified the pre-injectable sets (and how to use them), we next consider various ways to invoke constraints on the distributions over the pre-injectable sets.
 
 
-\step{: \tred{Constraining the Distribution over Pre-Injectable Sets via the Marginal Problem}}\label{step:marginalsproblem}\par\smallskip\nobreak
+\topic{\tred{Constraining Possible Distribution over Pre-Injectable Sets via the Marginal Problem}}\label{step:marginalsproblem}
 
-The most trivial constraint possible 
+The most trivial constraint on possible marginal probabilities, regardless of causal structure,  
 %on the pre-injectable set
-is the \emph{existence of a joint probability distribution} over all the observable variables in the inflation DAG. Each of the five three-variable distributions in \cref{eq:preinjectableuses222} is a different marginal distribution of the six-variable joint distribution $\pdf{A_1 A_2 B_1 B_2 C_1 C_2}$. Solving the marginal problem means finding inequalities on the marginal distributions such that the inequalities will satisfied only if there exists some joint distribution from which the distributions on the marginal sets can be recovered through marginalization, i.e. if the distributions are \tblue{marginally compatible}. The marginal problem comes up in a variety of applications, and has been studied extensively; see~\cite{fritz2013marginal} for further references.\purp{Tobias, say better? And add citations please!} \purp{T: Ok, I'll get back to this on my second iteration} 
+is simply the \emph{existence of some joint probability distribution} from which the marginal distributions can be recovered through marginalization, i.e. the possible marginal distributions must be \tblue{marginally compatible}. This isn't really causal inference -- as no hypothesis is considered -- but rather more of a preliminary sanity check. If the marginal distributions are not marginally compatible, then the answer to ``Can these marginal distributions be explained by this particular causal hypothesis?" is automatically ``No". 
 
-\purp{Comment about how solving marginals problem still gives polynomial inequalities.}
+The necessary and sufficient conditions for marginal compatibility are easy enough to state. There must exist some joint distribution (a collection of nonnegative joint probabilities) such that the marginal distributions can be recovered (each marginal distribution is a sum over various joint probabilities). \tblue{Solving the marginal problem} means resolving these "exists" statements into quantifier-free inequalities such that satisfaction of all such inequalities is necessary and sufficient for marginal compatibility. An efficient algorithm to solve the marginal problem is given in \purp{appendix... ??}. The marginal problem comes up in a variety of applications, and has been studied extensively; see~\cite{fritz2013marginal} for further references.
+
+As an example, here's how the marginal problem would be phrased as a partial-existential-closure problem with respect to the five three-variable marginal distributions corresponding to the pre-injectable sets in \cref{eq:preinjectableuses222}.
+
+over all the observable variables in the inflation DAG. Each of the  is a different marginal distribution of the six-variable joint distribution $\pdf{A_1 A_2 B_1 B_2 C_1 C_2}$. Solving the marginal problem means finding inequalities on the marginal distributions such that the inequalities will satisfied only if there exists some joint distribution  
 
 From now on, one can apply \emph{any} method for dealing with the marginal problem. For example if one is given a particular distribution $P$ over the original scenario variables, then one can use~\cref{eq:preinjfactor} to compute the marginal distributions over the pre-injectable sets in an inflation DAG. Efficient linear programming can be used to to check whether there exists a joint distribution reproducing these marginals \cite{Korovin2012ImplementingCRA,Bobot2012SimplexSAT}. If such a joint distribution does not exist, then the given original-scenario distribution is witnessed as inconsistent with the original causal structure. If a joint distribution \emph{does} exist then the problem remains open, and one can try again using a different inflation.
 
 In order to derive inequalities that hold for \emph{all} distributions that are feasible on the original DAG, say for a given number of outcomes per variable, we can formally solve the marginal problem via linear quantifier elimination, as we review in the following. This consists of eliminating unknowns from a set of linear inequalities and equalities.
 
-The linear inequalities correspond to the nonnegativity of the joint distribution. Formally, the probability of any possible assignment of outcomes to to the observable variables is constrained to be nonnegative. For the six observable variables in \cref{fig:Tri222}, for example, the linear inequalities are given by $0\leq \pdf{A_1 A_2 B_1 B_2 C_1 C_2}$. Note than a single inequality (or equality) pertaining to a probability \emph{distribution} is actually shorthand for a whole set of inequalities (or equalities) pertaining to the probabilities of individual events. Taking the observable variables to be binary, for example, would mean that $0\leq \pdf{A_1 A_2 B_1 B_2 C_1 C_2}$ would be shorthand for 64 distinct nonnegativity inequalities, namely
-\begin{align}\label[eqs]{eq:nonnegativities}
-\begin{split}
- & 0\leq \p{a_1 a_2 b_1 b_2 c_1 c_2} ,\quad
- 0\leq \p{\n{a}_1 a_2 b_1 b_2 c_1 c_2} ,\quad
- 0\leq \p{a_1 \n{a}_2 b_1 b_2 c_1 c_2} ,\quad...\quad,\\
- &
- 0\leq \p{\n{a}_1 \n{a}_2 b_1 b_2 c_1 c_2} ,\quad
- 0\leq \p{\n{a}_1 a_2 \n{b}_1 b_2 c_1 c_2}, \quad ...
-\end{split}
+The linear inequalities correspond to the nonnegativity of the joint distribution. Formally, the probability of any possible assignment of outcomes to to the observable variables is constrained to be nonnegative. For the six observable variables in \cref{fig:Tri222}, for example, the linear inequalities are given by 
+\begin{align}\label{eq:nonnegativity}
+\forall_{a_1 a_2 b_1 b_2 c_1 c_2}:\;0\leq \p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}
 \end{align}
-etc. For a marginals problem based on the joint existence of $n$ observable variables, each ranging over $r$ possible outcomes, one would initialize the problem with $r^n$ linear nonnegativity inequalities. Unlike probabilities pertaining to injectable sets, these joint probabilities are \emph{not} fully specified by probabilities which are observed in the original scenario. We coin the term \tblue{gedankenprobability} to denote a probability pertaining to a not-pre-injectable set of inflation-DAG variables. The gedankenprobabilities evoke thought experiments, because knowing the original-scenario causal model determines the gedankenprobabilities. % \emph{in-principle}.
 
-The linear equations in the marginal problem are those equations which express each of the marginal probabilities as a sum over various different gedankenprobabilities, namely marginalization. Again using distribution shorthand, the five marginal distributions in \cref{eq:preinjectableuses222} would correspond to the equations
+$0\leq \pdf{A_1 A_2 B_1 B_2 C_1 C_2}$. Note than a single inequality (or equality) pertaining to a probability \emph{distribution} is actually shorthand for a whole set of inequalities (or equalities) pertaining to the probabilities of individual events. Taking the observable variables to be binary, for example, would mean that \cref{eq:nonnegativity} would be shorthand for 64 distinct nonnegativity inequalities.
+%, namely
+%\begin{align}\label[eqs]{eq:nonnegativities}
+%\begin{split}
+% & 0\leq \p{a_1 a_2 b_1 b_2 c_1 c_2} ,\quad
+% 0\leq \p{\n{a}_1 a_2 b_1 b_2 c_1 c_2} ,\quad
+% 0\leq \p{a_1 \n{a}_2 b_1 b_2 c_1 c_2} ,\quad...\quad,\\
+% &
+% 0\leq \p{\n{a}_1 \n{a}_2 b_1 b_2 c_1 c_2} ,\quad
+% 0\leq \p{\n{a}_1 a_2 \n{b}_1 b_2 c_1 c_2}, \quad ...
+%\end{split}
+%\end{align}
+%etc. 
+For a marginals problem based on the joint existence of $n$ observable variables, each ranging over $r$ possible outcomes, one would initialize the problem with $r^n$ linear nonnegativity inequalities. Unlike probabilities pertaining to injectable sets, these joint probabilities are \emph{not} fully specified by probabilities which are observed in the original scenario. We coin the term \tblue{gedankenprobability} to denote a probability pertaining to a not-pre-injectable set of inflation-DAG variables. The gedankenprobabilities evoke thought experiments, because knowing the original-scenario causal model determines the gedankenprobabilities. % \emph{in-principle}.
+
+The linear equations in the marginal problem are those equations which express each of the marginal probabilities as a sum over various different gedankenprobabilities, namely marginalization. %Again using distribution shorthand, 
+The five marginal distributions in \cref{eq:preinjectableuses222} would correspond to the equations
 \begin{align}\label[eqs]{eq:marginalequalities222}
 \begin{split}
-&\pdf{A_1 B_1 C_1} = \sum\nolimits_{A_2 B_2 C_2}\pdf{A_1 A_2 B_1 B_2 C_1 C_2},\\
-&\pdf{A_1 B_2 C_2} = \sum\nolimits_{A_2 B_1 C_1}\pdf{A_1 A_2 B_1 B_2 C_1 C_2},\\
-&\pdf{A_2 B_1 C_2} = \sum\nolimits_{A_1 B_2 C_1}\pdf{A_1 A_2 B_1 B_2 C_1 C_2},\\
-&\pdf{A_2 B_2 C_1} = \sum\nolimits_{A_1 B_1 C_2}\pdf{A_1 A_2 B_1 B_2 C_1 C_2},\\
-&\pdf{A_2 B_2 C_2} = \sum\nolimits_{A_1 B_1 C_1}\pdf{A_1 A_2 B_1 B_2 C_1 C_2}.
+&\forall_{a_1 b_1 c_1}:\;\p[A_1 B_1 C_1]{a_1 b_1 c_1} = \sum\nolimits_{a_2 b_2 b_2}\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
+&\forall_{a_1 b_2 c_2}:\;\p[A_2 B_2 C_2]{a_1 b_2 c_2} = \sum\nolimits_{a_2 b_1 c_1}\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
+&\forall_{a_2 b_1 c_2}:\;\p[A_2 B_1 C_2]{a_2 b_1 c_2} = \sum\nolimits_{a_1 b_2 c_1}\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
+&\forall_{a_2 b_2 c_1}:\;\p[A_2 B_2 C_1]{a_2 b_2 c_1} = \sum\nolimits_{a_1 b_1 c_2}\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
+&\forall_{a_2 b_2 c_2}:\;\p[A_2 B_2 C_2]{a_2 b_2 c_2} = \sum\nolimits_{a_1 b_1 c_1}\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}.
 \end{split}
 \end{align}
-To be clear, taking the observable variables to be binary would mean that each equality in \cref{eq:marginalequalities222} is shorthand for 8 distinct marginalization equations. For example the equality $\pdf{A_1 B_1 C_1} = \sum\limits_{A_2 B_2 C_2}\pdf{A_1 A_2 B_1 B_2 C_1 C_2}$ is shorthand for 8 equations of the form
-\begin{align}
-\p{A_1\eql a,  B_1\eql b, C_2\eql c} = \sum\limits_{a' b' c'}\p{a_1 {a'}_2 {b}_1 {b'}_2 {c}_1 {c'}_2}
-\end{align}
-for each of the 8 possible values of the tuple $\{a b c\}$.
+To be clear, taking the observable variables to be binary would mean that each equality in \cref{eq:marginalequalities222} is shorthand for 8 distinct marginalization equations. 
 
-Solving the marginal problem means eliminating all the gedankenprobabilities such as $\p{a_1 {a'}_2 {b}_1 {b'}_2 {c}_1 {c'}_2}$ from the system of inequalities and equalities. Practically, this is accomplished by linear quantifier elimination. As an equivalent description of the same problem, but could likewise consider the problem of determining the facets of the marginal polytope, the vertices of which are known to be given by the deterministic points (compare Fine's theorem~\cite{FineTheorem} in the Bell scenario case).
+Solving the marginal problem means eliminating all the gedankenprobabilities such as $\p[A_1 A_2 B_1 B_2 C_1 C_2]{\_\_\_\_\_\_}$ from the system of inequalities and equalities. Practically, this is accomplished by linear quantifier elimination. As an equivalent description of the same problem, but could likewise consider the problem of determining the facets of the marginal polytope, the vertices of which are known to be given by the deterministic points (compare Fine's theorem~\cite{FineTheorem} in the Bell scenario case).
 
 Geometrically, linear quantifier elimination is equivalent to projecting a high-dimensional polytope in halfspace representation (inequalities and equalities) into a lower-dimensional quotient space.
 
