@@ -321,7 +321,7 @@ In the simplest setting, a causal structure hypothesis consists of a directed ac
 
 A significantly more difficult case is when one considers a causal structure hypothesis which consists of a DAG with \tblue{latent} or \tblue{hidden} nodes, so that the set of observable variables is only a subset of the nodes of the DAG. This case occurs e.g.~in situations where one needs to deal with the possible presence of unobserved \tblue{confounders}, as in experiment design. While the conditional independence relations implied by the causal structure on the observable nodes are still necessary conditions for compatibility of a distribution with the causal structure hypothesis, these equations are generally no longer sufficient. Finding necessary and sufficient conditions is a difficult open problem. Determining plausible candidate causal structures from the given distribution is even more difficult, but this can be reduced to the previous problem e.g.~by enumerating all DAGs (say with a fixed number of latent nodes) and checking one at a time for compatibility with the distribution. Due to the possibility of making this reduction, and because the compatibility problem is already difficult enough, we will focus on the case when a DAG (with latent nodes) is given as a description of the causal structure. We then consider both the problem of deciding whether a given distribution can arise from this causal structure, as well as that of describing the entire set of these distributions for a fixed number of values per variable.
 
-Historically, the insufficiency of the causal independence relations for causal inference in the presence of latent variables has first been observed by Bell in the context of the hidden variable problem of quantum physics~\cite{bell1964einstein}. Roughly speaking, Bell derived an inequality that any distribution compatible with the spacetime causal structure must satisfy, and found this inequality to be violated by distributions generated from suitably entangled quantum states\footnote{This incompatibility has subsequently become known as \emph{quantum nonlocality}~\cite{Brunner2013Bell}. Although the term suggests the existence of nonlocal interactions, in the sense that the actual causal structure may be different from the hypothesized one, this interpretation is at odds with the fact that no nonlocal interactions have been observed in nature, implying that their presence would require fine-tuning~\cite{WoodSpekkens}. A less problematic interpretation of Bell's theorem concludes instead the impossibility to model quantum physics in terms of the usual notions of ``classical'' probability theory.}. Subsequently, Pearl has derived another inequality, the \tblue{instrumental inequality}~\cite{pearl1995instrumental}, which witnesses the impossibility to model certain three-variable distribution by the \emph{instrumental scenario} causal structure hypothesis. More recently, Steudel and Ay have derived inequalities which formalize an extended version of Reichenbach's principle by witnessing the impossibility to model a given distribution on $n$ variables in terms of a causal structure without a common (hidden) ancestor for any subset of at least $c$ nodes, for any $n,c\in\mathbb{N}$. Motivated by Bell's inequality, many other Bell-type inequalities have been used in quantum physics~\cite{Brunner2013Bell}, but the foundational role of causal structure has only recently been appreciated~\cite{WoodSpekkens,fritz2012bell,pusey2014gdag,BeyondBellII}.
+Historically, the insufficiency of the causal independence relations for causal inference in the presence of latent variables has first been observed by Bell in the context of the hidden variable problem of quantum physics~\cite{bell1964einstein}. Roughly speaking, Bell derived an inequality that any distribution compatible with the spacetime causal structure must satisfy, and found this inequality to be violated by distributions generated from suitably entangled quantum states\footnote{This incompatibility has subsequently become known as \emph{quantum nonlocality}~\cite{Brunner2013Bell}. Although the term suggests the existence of nonlocal interactions, in the sense that the actual causal structure may be different from the hypothesized one, this interpretation is at odds with the fact that no nonlocal interactions have been observed in nature, implying that their presence would require fine-tuning~\cite{WoodSpekkens}. A less problematic interpretation of Bell's theorem concludes instead the impossibility to model quantum physics in terms of the usual notions of ``classical'' probability theory.}. Subsequently, Pearl has derived another inequality, the \tblue{instrumental inequality}~\cite{pearl1995instrumental}, which witnesses the impossibility to model certain three-variable distribution by the \emph{instrumental scenario} causal structure hypothesis. More recently, \citet{steudel2010ancestors} have derived inequalities which formalize an extended version of Reichenbach's principle by witnessing the impossibility to model a given distribution on $n$ variables in terms of a causal structure without a common (hidden) ancestor for any subset of at least $c$ nodes, for any $n,c\in\mathbb{N}$. Motivated by Bell's inequality, many other Bell-type inequalities have been used in quantum physics~\cite{Brunner2013Bell}, but the foundational role of causal structure has only recently been appreciated~\cite{WoodSpekkens,fritz2012bell,pusey2014gdag,BeyondBellII}.
 
 \begin{comment}
 In contexts other than quantum theory, the latent nodes in causal structures are generally taken to represent hidden variables. This is not fully general, however, so we apply the retronym\footnote{Retronym (noun): a modification of an original term to distinguish it from a later development \cite{retronym}.} ``classical", as in classical causal structure and classical causal inference. The classical distributions of a given causal structure are defined as those which arise from it while restricting the latent nodes to be arbitrary (classical) random variables. Quantum distributions, by contrast, are those which are realizable if the latent nodes in the causal structure are allowed to be quantum systems. We hereafter take all causal structures and probability distributions to be classical, except where explicitly stated otherwise.
@@ -607,7 +607,7 @@ It follows that any consistency conditions that one can derive for the new causa
 
 \example{: \tred{Perfect correlation cannot arise from the Triangle scenario.}}\par\smallskip\nobreak
 
-Consider the following causal inference problem.  The observational data is a joint distribution over three binary-outcome variables, $\pdf[\text{obs}]{A B C}$, where the marginal on each variable is uniform and the three are perfectly correlated,
+Consider the following causal inference problem.  The observational data is a joint distribution over three binary-outcome variables, $P^{\text{obs}}_{A B C}$, where the marginal on each variable is uniform and the three are perfectly correlated,
 \begin{align}\label{eq:ghzdistribution1}
 P^{\text{obs}}_{A B C}=\frac{[000]+[111]}{2},\quad\text{i.e.}\quad P^{\text{obs}}_{A B C}(a b c)=\begin{cases}\tfrac{1}{2}&\text{if }\; a\eql b\eql c, \\ 0&\text{otherwise}.\end{cases}
 \end{align}
@@ -622,9 +622,9 @@ Therefore, the inflated observational data for our new causal inference problem 
 %\p[A_2 C_1]{a c}=\p{A C}{a c} &= \frac{[00]+[11]}{2}\label{j1}\\
 %\p[B_1 C_1]{b c}=\p[B C]{b c} &= \frac{[00]+[11]}{2}\label{j2}\\
 %\p[A_2 B_1]{a b}=\p[A]{a}\p[B]{b} &= \frac{[0]+[1]}{2}\otimes\frac{[0]+[1]}{2} \label{j3}.
-&P^{\text{obs-inf}}_{A_2 C_1} = P^{\text{obs}}_{A C} = \frac{[00]+[11]}{2}\\
-&P^{\text{obs-inf}}_{B_1 C_1}=P^{\text{obs}}_{B C} = \frac{[00]+[11]}{2}\\
-&P^{\text{obs-inf}}_{A_2 B_1}=P^{\text{obs}}_A \otimes P^{\text{obs}}_B = \frac{[0]+[1]}{2}\otimes\frac{[0]+[1]}{2}.
+&P^{\text{obs-inf}}_{A_2 C_1} =P^{\text{obs}}_{A C}= \frac{[00]+[11]}{2}\\
+&P^{\text{obs-inf}}_{B_1 C_1} =P^{\text{obs}}_{B C}= \frac{[00]+[11]}{2}\\
+&P^{\text{obs-inf}}_{A_2 B_1} =P^{\text{obs}}_A \otimes P^{\text{obs}}_B= \frac{[0]+[1]}{2}\otimes\frac{[0]+[1]}{2}. 
 \end{split}\end{align}
 The question is whether such constraints are consistent with the causal hypothesis that the DAG is that of \cref{fig:TriDagSubA2B1C1}, where the parameters supplementing the DAG are unrestricted but for that the latent variables $Y_1$ and $Y_2$ are identically distributed. 
 
@@ -645,20 +645,20 @@ We assume uniform binary variables for the sake of concreteness, but the argumen
 
 \example{: \tred{The W-type distribution cannot arise from the Triangle scenario}}\par\smallskip\nobreak
 
-Consider another causal inference problem concerning the triangle scenario, namely, that of determining whether the triangle DAG can explain a joint distribution $P_{\text{W}}\parenths{A B C}$ of the form
+Consider another causal inference problem concerning the triangle scenario, namely, that of determining whether the triangle DAG can explain a joint distribution $P^{\text{W}}_{A B C}$ of the form
 \begin{align}\label{eq:wdistribution1}
-\pdf[\text{W}]{A B C}=\frac{[100]+[010]+[001]}{3},\quad\text{i.e.}\quad\p[ABC]{a b c}=\begin{cases}\tfrac{1}{3}&\text{if }\; a\cramp{+}b\cramp{+}c\eql 1, \\ 0&\text{otherwise}.\end{cases}
+P^{\text{W}}_{A B C}=\frac{[100]+[010]+[001]}{3},\quad\text{i.e.}\quad P^{\text{obs}}_{A B C}(a b c)=\begin{cases}\tfrac{1}{3}&\text{if }\; a\cramp{+}b\cramp{+}c\eql 1, \\ 0&\text{otherwise}.\end{cases}
 \end{align}
 We call this the W-type distribution\footnote{Because its correlations are reminiscent of those one obtains for the quantum state appearing in Ref. \cite{3Qubits2Ways}, and which is called the W state.}. To our knowledge, the fact that the Triangle causal structure is inconsistent with the W-type distribution has not been demonstrated previously.
 
-To prove the inconsistency of  $P_{\text{W}}$ with the Triangle causal structure, we consider the inflation DAG of \cref{fig:Tri222}. 
+To prove the inconsistency of  $P^{\text{W}}$ with the Triangle causal structure, we consider the inflation DAG of \cref{fig:Tri222}. 
 The sets $\{A_2 C_1\}$, $\{B_2 A_1\}$, $\{A_2 B_1\}$ and $\{ A_1 B_1 C_1\}$ are injectable.  The set $\{ A_2 B_2 C_2\}$ is pre-injectable because the singleton sets $\{A_2\}$,  $\{B_2\}$ and $\{C_2\}$ are injectable and \emph{all} ancestrally independent. It follows that we must consider the inflated observational data
 \begin{align}
-&\pdf[\text{obs}]{A_2 C_1}=\pdf[\text{obs}]{A C} = \frac{[10]+[01]+[00]}{3} \label{W1}\\
-&\pdf[\text{obs}]{B_2 A_1}=\pdf[\text{obs}]{B A} = \frac{[10]+[01]+[00]}{3} \label{W2}\\
-&\pdf[\text{obs}]{C_2 B_1}=\pdf[\text{obs}]{C B} = \frac{[10]+[01]+[00]}{3} \label{W3}\\
-&\pdf[\text{obs}]{A_1 B_1 C_1}=\pdf[\text{obs}]{A B C}  = \frac{[100]+[010]+[001]}{3} \label{W4}\\
-&\pdf[\text{obs}]{A_2 B_2 C_2}=\pdf[\text{obs}]{A}\pdf{B}\pdf{C} = \frac{[1]+2\times[0]}{3}\otimes\frac{[1]+2\times[0]}{3}\otimes\frac{[1]+2\times[0]}{3} \label{W5}.
+&P^{\text{W-inf}}_{A_2 C_1}&&=P^{\text{W}}_{A C} &&= \frac{[10]+[01]+[00]}{3} &&&&&&&&\label{W1}\\
+&P^{\text{W-inf}}_{B_2 A_1}&&=P^{\text{W}}_{B A} &&= \frac{[10]+[01]+[00]}{3} &&&&&&&&\label{W2}\\
+&P^{\text{W-inf}}_{C_2 B_1}&&=P^{\text{W}}_{C B} &&= \frac{[10]+[01]+[00]}{3} &&&&&&&&\label{W3}\\
+&P^{\text{W-inf}}_{A_1 B_1 C_1}&&=P^{\text{W}}_{A B C}  &&= \frac{[100]+[010]+[001]}{3} &&&&&&&&\label{W4}\\
+&P^{\text{W-inf}}_{A_2 B_2 C_2}&&=P^{\text{W}}_{A}\otimes P^{\text{W}}_{B}\otimes P^{\text{W}}_{C} &&= \frac{[1]+2\cdot[0]}{3}\otimes\frac{[1]+2\cdot[0]}{3}\otimes\frac{[1]+2\cdot[0]}{3} &&&&&&&&\label{W5}.
 \end{align}
 Eq.~\eqref{W1} %together with the form of $P_{\text{W}}$ 
 implies that $C_1\eql 0$ whenever $A_2 \eql 1$. Similarly, $A_1\eql 0$ whenever $B_2\eql 1$ and $B_1\eql 0$ whenever $C_2\eql 1$. Eq.~\eqref{W5} %and the form of $P_{\text{W}}$ 
@@ -671,14 +671,16 @@ Summarizing, we have
 &C_2 \eql 1 \implies B_1 \eql 0\\
 \text{and sometimes}
 %\footnote{In fact, this occurs with probability 1/8, though it is sufficient for the argument to note that it is nonzero.}
- \quad &A_2=1, B_2=1, C_2=1.
+ \quad &A_2 \eql 1, B_2 \eql 1, C_2 \eql 1.
 \\
 \shortintertext{But these constraints clearly imply that}
-\text{sometimes} \quad &A_1=0, B_1=0, C_1=0,
+\text{sometimes} \quad &A_1 \eql 0, B_1 \eql 0, C_1 \eql 0,
 \end{align*}
 which contradicts Eq.~\eqref{W4}.% and the fact that $P_{\text{W}}$ has no weight on $[000]$.
 
-Again, we have reached our verdict here simply by noting that the distributions defined in Eqs.~\eqref{W1}-\eqref{W5} cannot arise as the marginals of a single distribution on $A_1, B_1, C_1, A_2, B_2, C_2$.  Specifically, we have leveraged an approach to the marginal problem inspired by Hardy's version of Bell's theorem [citation].
+Again, we have reached our verdict here simply by noting that the distributions defined in Eqs.~\eqref{W1}-\eqref{W5} cannot arise as the marginals of a single distribution on $A_1, B_1, C_1, A_2, B_2, C_2$.  Specifically, we have leveraged an approach to the marginal problem inspired by Hardy's version of Bell's theorem \cite{L.Hardy:PRL:1665,Mansfield2012}, see \cref{sec:TSEM} for further discussion of Hardy-type paradoxes and their applications.
+
+
 
 %$\p{A_2\eql B_2\eql C_2\eql 1}=\nicefrac{1}{8}$ according to $P_{\text{W}}$. But that would imply $\p{A_1\eql B_1\eql C_1\eql 0}\geq\nicefrac{1}{8}$, which contradicts $P_{\text{W}}$, hence $P_{\text{W}}$ cannot arise from the Triangle scenario.
 
@@ -710,11 +712,12 @@ Consider the causal structure associated to the Bell \cite{bell1964einstein,Brun
 \end{minipage}
 \end{figure}
 
+%P^{\text{obs-inf}}_{A_2 C_1}
 
-We consider the distribution ${P_{\text{PR}}}\parenths{A B X Y} = P_{\text{PR}}\parenths{A B | X Y} P(X) P(Y)$, where $P(X)$ and $P(Y)$ are arbitrary full-support distributions\footnote{In the literature on the Bell scenario, these variables are known as ``settings''. Generally, we may think of endogenous observable variables as settings, coloring them light green in the DAG figures. Settings variables are natural candidates for conditioning on.} over the binary variables $X$ and $Y$, and
+We consider the distribution ${P^{\text{obs}}_{A B X Y} = P^{\text{PR}}_{A B | X Y} \otimes P^{\text{free}}_{X} \otimes P^{\text{free}}_{Y}}$, where $P^{\text{free}}_{X}$ and $P^{\text{free}}_{Y}$ are arbitrary full-support distributions\footnote{In the literature on the Bell scenario, these variables are known as ``settings''. Generally, we may think of endogenous observable variables as settings, coloring them light green in the DAG figures. Settings variables are natural candidates for conditioning on.} over the binary variables $X$ and $Y$, and
 \begin{align}\begin{split}\label{eq:PRbox}
 % & p_{\text{PR}}\parens{a b |x y}=\frac{[00|00]+[11|00]+[00|10]+[11|10]+[00|01]+[11|01]+[01|11]+[10|11]}{8}\\
-p_{\text{PR}}\parens{a b |x y}=\begin{cases}\tfrac{1}{2}&\text{if }\; \SmallNamedFunction[2]{mod}{a\cramp{+}b}\eql x\cramp{\cdot} y, \\ 0&\text{otherwise}.\end{cases}
+P^{\text{PR}}_{A B | X Y}\parens{a b |x y}=\begin{cases}\tfrac{1}{2}&\text{if }\; \SmallNamedFunction[2]{mod}{a\cramp{+}b}\eql x\cramp{\cdot} y, \\ 0&\text{otherwise}.\end{cases}
 \end{split}\end{align}
 The correlations described by this distribution are known as PR-box correlations after Popescu and Rohrlich, and they are well-known to be inconsistent with the the Bell scenario \cite{PROriginal,PRUnit}. Here we prove this inconsistency using the inflation technique. 
 
@@ -722,26 +725,26 @@ We use the inflation of the Bell DAG shown in \cref{fig:BellDagCopy1}.
 
 We begin by recognizing that $\{A_1 B_1 X_1 Y_1\}$, $\{A_2 B_1 X_2 Y_1\}$, $\{A_1 B_2 X_1 Y_2\}$, and $\{A_2 B_2 X_2 Y_2\}$ are all injectable sets, and that $\{X_1 X_2 Y_1 Y_2\}$ is a pre-injectable set because the singleton sets $\{X_1\}$, $\{X_2\}$, $\{Y_1\}$, and $\{Y_2\}$ are all injectable and ancestrally independent of one another.  It follows that the observable data inflates according to
 \begin{align}\begin{split}\label[eqs]{eq:PRinflated}\begin{array}{l}
-\pdf[\text{obs}]{A_1 B_1 X_1 Y_1}=\pdf[\text{obs}]{A B X Y}\\%\label{PR1}\\
-\pdf[\text{obs}]{A_2 B_1 X_2 Y_1}=\pdf[\text{obs}]{A B X Y}\\%\label{PR2}\\
-\pdf[\text{obs}]{A_1 B_2 X_1 Y_2}=\pdf[\text{obs}]{A B X Y}\\%\label{PR3}\\
-\pdf[\text{obs}]{A_2 B_2 X_2 Y_2}=\pdf[\text{obs}]{A B X Y}\\%\label{PR4}\\
-\pdf[\text{obs}]{X_1 X_2 Y_1 Y_2}=\pdf[\text{obs}]{X}\pdf[\text{obs}]{X}\pdf[\text{obs}]{Y}\pdf[\text{obs}]{Y}.%\label{PR5}.
+P^{\text{obs-inf}}_{A_1 B_1 X_1 Y_1}=P^{\text{obs}}_{A B X Y}\\%\label{PR1}\\
+P^{\text{obs-inf}}_{A_2 B_1 X_2 Y_1}=P^{\text{obs}}_{A B X Y}\\%\label{PR2}\\
+P^{\text{obs-inf}}_{A_1 B_2 X_1 Y_2}=P^{\text{obs}}_{A B X Y}\\%\label{PR3}\\
+P^{\text{obs-inf}}_{A_2 B_2 X_2 Y_2}=P^{\text{obs}}_{A B X Y}\\%\label{PR4}\\
+P^{\text{obs-inf}}_{X_1 X_2 Y_1 Y_2}=P^{\text{free}}_X \otimes P^{\text{free}}_X \otimes P^{\text{free}}_Y \otimes P^{\text{free}}_Y%\label{PR5}.
 \end{array}\quad\text{and hence}\quad\begin{matrix}
-&\pdf{A_1 B_1 |X_1 Y_1}=\pdf{A B |X Y}\\%\label{PR1b}\\
-&\pdf{A_2 B_1 |X_2 Y_1}=\pdf{A B |X Y}\\%\label{PR2b}\\
-&\pdf{A_1 B_2 |X_1 Y_2}=\pdf{A B |X Y}\\%\label{PR3b}\\
-&\pdf{A_2 B_2 |X_2 Y_2}=\pdf{A B |X Y}.%\label{PR4b}.
-\end{matrix}\end{split}\end{align}
+&P^{\text{obs-inf}}_{A_1 B_1 |X_1 Y_1}=P^{\text{PR}}_{A B |X Y}\\%\label{PR1b}\\
+&P^{\text{obs-inf}}_{A_2 B_1 |X_2 Y_1}=P^{\text{PR}}_{A B |X Y}\\%\label{PR2b}\\
+&P^{\text{obs-inf}}_{A_1 B_2 |X_1 Y_2}=P^{\text{PR}}_{A B |X Y}\\%\label{PR3b}\\
+&P^{\text{obs-inf}}_{A_2 B_2 |X_2 Y_2}=P^{\text{PR}}_{A B |X Y}%\label{PR4b}.
+\end{matrix}.\end{split}\end{align}
 
-Given the assumption that the distributions $P(X)$ and $P(Y)$ are full support, it follows from \cref{eq:PRinflated} that sometimes $\{X_1, X_2, Y_1, Y_2\}=\{0, 1, 0, 1\}$.  
+Given the assumption that the distributions $P^{\text{free}}_{X}$ and $P^{\text{free}}_{Y}$ are full support, it follows from \cref{eq:PRinflated} that sometimes $\{X_1, X_2, Y_1, Y_2\}=\{0, 1, 0, 1\}$.  
 %$X_1$, $X_2$, $Y_1$, and $Y_2$ are all independent variables.
 % $P_{\text{PR}}$ is given as a conditional distribution because $X$ and $Y$ are settings variables.
 For these values, \cref{eq:PRinflated} specifies perfect correlation between $A_1$ and $B_1$.  Similarly, it the inflated observational data also specified perfect correlation between $A_1$ and $B_2$, perfect correlation between $A_2$ and $B_1$, and perfect \emph{anti}correlation between $A_2$ and $B_2$. Those four requirements are not mutually compatible, however: since perfect correlation is transitive, the first three properties entail perfect correlation between $A_2$ and $B_2$. 
 
-The mathematical structure of this proof parallels that of standard proofs of the inconsistency of PR-box correlations with the Bell structure.  Standard proofs focus on a set of variables $A_0, A_1, B_0, B_1, C_0, C_1$ where $A_0$  is the value of $A$ when $X=0$, and similarly for the others.  The fact that there must be a joint distribution over these variables can be inferred from the structure of the Bell DAG and the fact that one can assume without loss of generality that the causal dependencies are deterministic (a result known as Fine's theorem \cite{FineTheorem}).  It is then sufficient to note that the marginals given by the PR-box correlations do not arise from any joint distribution.  Nonetheless, our proof is conceptually distinct insofar as the variables to which we apply the marginals problem are not conditioned on a setting value.  And we do not require Fine's theorem.  [Can we do something that couldn't be done in the standard approach?]
+The mathematical structure of this proof parallels that of standard proofs of the inconsistency of PR-box correlations with the Bell structure.  Standard proofs focus on a set of variables $A_0, A_1, B_0, B_1, C_0, C_1$ where $A_0$  is the value of $A$ when $X=0$, and similarly for the others.  The fact that there must be a joint distribution over these variables can be inferred from the structure of the Bell DAG and the fact that one can assume without loss of generality that the causal dependencies are deterministic (a result known as Fine's theorem \cite{FineTheorem}).  It is then sufficient to note that the marginals given by the PR-box correlations do not arise from any joint distribution.  Nonetheless, our proof is conceptually distinct insofar as the variables to which we apply the marginals problem are not conditioned on a setting value.  And we do not require Fine's theorem.  
 
-Many causal inference techniques can be used to derive sufficient conditions for the inconsistency of the causal hypothesis $H_{G',S'}$ with the observational data $\forall \bm{U} \in \SmallNamedFunction{PreInjectableSets}{\bm{O}}: \pdf{\bm{U}} = \pdf{\subsim{\bm{U}_1}}\pdf{\subsim{\bm{U}_2}} \dots \pdf{\subsim{\bm{U}_n}}$. We will call sets of such conditions {\em inconsistency witnesses}.  
+Many causal inference techniques can be used to derive sufficient conditions for the inconsistency of the causal hypothesis $H_{G',S'}$ with the observational data $\forall \bm{U} \in \SmallNamedFunction{PreInjectableSets}{\bm{O}}: \pdf{\bm{U}} = \pdf{\subsim{\bm{U}_1}}\pdf{\subsim{\bm{U}_2}} \dots \pdf{\subsim{\bm{U}_n}}$. We will call sets of such conditions \purp{\sout{inconsistency witnesses}} \tblue{infeasibility criteria}. \purp{I like the name inconsistency witness. Shall we switch everything over to that?}  
 
 \color{black}
 \section{Example applications of the inflation technique}\label{sec:examplebaddistributions}
@@ -1381,7 +1384,7 @@ TF would like to thank Guido Mont\'ufar for discussion and references. Research 
 
 
 
-\section{An Efficient Algorithm for Solving the Marginal Problem}\label{sec:projalgorithms}
+\section{Algorithms for Solving the Marginal Problem}\label{sec:projalgorithms}
 
 
 Geometrically, linear quantifier elimination is equivalent to projecting a high-dimensional polytope in halfspace representation (inequalities and equalities) into a lower-dimensional quotient space.
