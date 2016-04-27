@@ -244,6 +244,9 @@ anchorcolor=OliveGreen}
 \newcommand{\ansubgraph}[2][]{{\operatorname{\mathsf{AnSubDAG}}_{#1}}\bracks{#2}}
 \newcommand{\pasubgraph}[2][]{{\operatorname{\mathsf{PaSubDAG}}_{#1}}\bracks{#2}}
 \newcommand{\nodes}[1]{\SmallNamedFunction{Nodes}{#1}}
+\newcommand{\edges}[1]{\SmallNamedFunction{Edges}{#1}}
+\newcommand{\namedand}[1]{\SmallNamedFunction{And}{#1}}
+\newcommand{\namedor}[1]{\SmallNamedFunction{Or}{#1}}
 \newcommand{\aindep}{\ensuremath{\mathrel{\mathopen{\Lsh}{\scriptstyle\emptyset}\mathclose{\Rsh}}}}
 
 
@@ -332,14 +335,9 @@ These criteria are generally based on the \emph{broadcasting} of the values of a
 
 %A causal inference problem is one whose input is some feature of observed statistical data---a sample of the probability distribution over the observed variables or some coarse-grained properties thereof, such as a list of conditional independence relations---and whose output is a verdict on (or probabilistic inference about) whether a given causal hypothesis can explain the observed data.   
 
-A causal model consists of a pair of objects: a causal structure and a set of parameters.  The causal structure is a directed acyclic graph (DAG).  Recall that a DAG $G$ consists of a set of nodes and directed edges (i.e., ordered pairs of nodes), which we denote by $\SmallNamedFunction{Nodes}{G}$ and $\SmallNamedFunction{Edges}{G}$ respectively.  Physically, each node in the DAG corresponds to a localized system and a directed edge between two nodes corresponds to there being a direct causal influence from one system to the other.  The parameters specify, for each root node, how the system corresponding to that node is prepared, and for each node that has parents in the DAG, the precise manner in which it causally depends on its parents.  If a DAG is denoted $G$ and the parameter values thereon are denoted $\mathcal{P}(G)$, then the corresponding causal model is the pair $C = (G,\mathcal{P}(G))$.  We shall also make use of the notation $\SmallNamedFunction{DAG}{C}$ for $G$ and $\SmallNamedFunction{ParamVals}{C}$ for $\mathcal{P}(G)$.
+A \tblue{causal model} consists of a pair of objects: a \tblue{causal structure} and a set of \tblue{functional parameters}. The causal structure is a directed acyclic graph (DAG).  Recall that a DAG $G$ consists of a set of nodes and directed edges (i.e., ordered pairs of nodes), which we denote by $\nodes{G}$ and $\edges{G}$ respectively. Physically, each node in the DAG corresponds to a localized system and a directed edge between two nodes corresponds to there being a direct causal influence from one system to the other.  The functional parameters specify, for each root node, how the system corresponding to that node is prepared, and for each node that has parents in the DAG, the precise manner in which it causally depends on its parents.  If a DAG is denoted $G$ and the parameter values thereon are denoted $\mathcal{P}(G)$, then the corresponding causal model is the pair $C = (G,\mathcal{P}(G))$.  We shall also make use of the notation $\SmallNamedFunction{DAG}{C}$ for $G$ and $\SmallNamedFunction{ParamVals}{C}$ for $\mathcal{P}(G)$. \purp{I want to switch notation: A model should be indicated by $\mathcal{M}$, a DAG by $\mathcal{G}$, and a parameters as $\mathcal{F}$. I then want to talk about sets of parameters as  $\bm{\mathcal{F}}$ and sets of models as $\bm{\mathcal{M}}$. Thus a model is a pair $(\mathcal{G},\bm{\mathcal{F}})$, and a hypothesis $\mathcal{H}$ is a pair $(\mathcal{G},\bm{\mathcal{M}})$.}
 
 Our terminology for the causal relations between the nodes in a DAG is the standard one. The parents of a node $X$ in a given graph $G$ are defined as those nodes which have directed edges originating at them and terminating at $X$, i.e. $\Pa[G]{X} = \{\:Y\:|\:Y\to X\:\}$.  Similarly the children of a node $X$ in a given graph $G$ are defined as those nodes which have have directed edges originating at $X$ and terminating at them, i.e. $\Ch[G]{X} = \{\:Y\:|\: X\to Y\:\}$. If $\bm{U}$ is a set of nodes, then we put $\Pa[G]{\bm{U}} := \bigcup_{X\in\bm{U}} \Pa[G]{X}$ and $\Ch[G]{\bm{U}} := \bigcup_{X\in\bm{U}} \Ch[G]{X}$.  The \tblue{ancestors} of a set of nodes $\bm{U}$, denoted $\An[G]{\bm{U}}$, are defined as those nodes which have a directed \emph{path} to some node in $\bm{U}$, including the nodes in $\bm{U}$ themselves. Equivalently (dropping the $G$ subscript), $\An{\bm{U}} := \bigcup_{n\in\mathbb{N}} \mathsf{Pa}^n(\bm{U})$, where $\mathsf{Pa}^n(\bm{U})$ is inductively defined via $\mathsf{Pa}^0(\bm{U}) := \bm{U}$ and $\mathsf{Pa}^{n+1}(\bm{U}) := \mathsf{Pa}(\mathsf{Pa}^n(\bm{U}))$. 
-
-The subgraph of $G$ induced by restricting attention to the set of nodes $\bm{V}$ will be denoted $\subgraph[G]{\bm{V}}$.
-It consists of the nodes $\bm{V}$ and the edges between pairs of nodes in $\bm{V}$ per the original graph. Of special importance to us is the 
-\tblue{ancestral subgraph} of $\bm{V}$, denoted $\ansubgraph[G]{\bm{V}}$, which is the minimal subgraph containing the full ancestry of $\bm{V}$, $\ansubgraph[G]{\bm{V}}\coloneqq\subgraph[G]{\An[G]{\bm{V}}}$. 
-
 
 In a causal model, the localized systems are random variables, and the parameters are conditional probabilities\footnote{This is the definition of a {\em classical}  causal model, which will be the primary focus of this article. Nonetheless, there is a quantum generalization of the notion of a causal model that will feature in our discussions at the end of this article.  In a {\em quantum} causal model\cite{leifer2013conditionalstates}, the localized systems are types of quantum systems (specified by Hilbert space dimensionality), and the parameters are quantum operations.  Specifically, for each root node, the model specifies a unit-trace positive operator on the Hilbert space for that system and for each non-root node, the model specifies a trace-preserving completely-positive linear map from the operators on the Hilbert space of the parents of the system to the operators on the Hilbert space of the system.  Certain nodes in a quantum causal model may be considered classical, in which case all states and operations must be diagonal in some fixed basis on that system.  One can also generalize the notion of a causal model further still to the case of generalized probabilistic theories, as was done in Ref.~\cite{pusey2014gdag}.
 }.
@@ -354,7 +352,7 @@ Denoting the conditional probability distribution associated to a node $A$ in th
 As is standard, we assume that the joint distribution defined by the causal model is $\pdf[C]{\SmallNamedFunction{Nodes}{G}} = \Pi_{A\in \SmallNamedFunction{Nodes}{G}} \pdf[C]{A|\Pa[G]{A}}$ (this is called the Markov condition).  The subset of nodes of $G$ that are observed is denoted $\SmallNamedFunction{ObservedNodes}{G}$ and the rest are denoted $\SmallNamedFunction{LatentNodes}{G}$. 
 The joint distribution over the observed variables is obtained from the joint distribution over all variables by marginalization over the latent variables $\pdf[C]{\SmallNamedFunction{ObservedNodes}{G}} =  \sum_{\{X :X \in\SmallNamedFunction{LatentNodes}{G}\}} \pdf[C]{\SmallNamedFunction{Nodes}{G}}$.
 
-In addition to the notion of a causal model, we define the notion of a causal hypothesis, which is a set of causal models consistent with a single DAG. Specifically, if $G$ is a DAG and $S$ is a set of parameter values  consistent with $G$ (i.e. a set of possibilities for the conditional probability distributions at each node of $G$), then $G$ and $S$ define a causal hypothesis, which we denote by $H_{G,S}$, and which we define formally as the following set of causal models:
+In addition to the notion of a causal model, we define the notion of a \tblue{causal hypothesis}, which is a set of causal models consistent with a single DAG. Specifically, if $G$ is a DAG and $S$ is a set of parameter values consistent with $G$ (i.e. a set of possibilities for the conditional probability distributions at each node of $G$),\purp{Wait, are the defining a hypothesis positively or negatively? This seems mixed up to me.} then $G$ and $S$ define a causal hypothesis, which we denote by $H_{G,S}$, and which we define formally as the following set of causal models:
 \begin{align}
 H_{G,S} \equiv \{ C \mid \SmallNamedFunction{DAG}{C}=G, \SmallNamedFunction{ParamVals}{C} \in S\}.
 \end{align}
@@ -362,9 +360,9 @@ H_{G,S} \equiv \{ C \mid \SmallNamedFunction{DAG}{C}=G, \SmallNamedFunction{Para
 We denote  the set of {\em all} parameter values consistent with $G$ by $S_{\textsf{full}}$, so that $H_{G,{S_{\textsf{full}}}}$ is simply the causal hypothesis that the DAG is $G$, that is, the hypothesis that there exists {\em some} parameter values supplementing $G$ such that the observed data can be explained by the resulting causal model. 
 
 
-With these notions in hand, we can give a broad definition of causal inference.  An algorithm for causal inference is one that takes two inputs:
+With these notions in hand, we can give a broad definition of \tblue{causal inference}.  An algorithm for causal inference is one that takes two inputs:
 \begin{itemize}
-\item a specificaton of {\em observational data}
+\item a specification of {\em observational data}
 %, which is a specification of some feature of observed statistical data
 %---a sample of the probability distribution over the observed variables or some coarse-grained properties thereof, such as a list of conditional independence relations
 \item a specification of a {\em causal hypothesis}
@@ -372,21 +370,21 @@ With these notions in hand, we can give a broad definition of causal inference. 
 \end{itemize}
 and that outputs a verdict about their compatibility.
 
-The most informative sort of observational data is a specification of the joint distributions over all of the observed variables.  The observational data in real-world applications necessarily falls short of this ideal because one only ever obtains a {\em finite sample} of the joint distribution.  Moreover, even if one sets aside finite-sample concerns and imagines the data as infinite-run statistics, there are other ways in which the observational data for a causal inference problem might be less informative than a specification of the joint distribution.  For instance, one might merely have a description of the conditional independence relations that hold among the observed variables.  Or one might merely have a specification of the marginals of the joint distribution for certain subsets of the observed variables, in which case the causal inference problem corresponds to a version of the marginals problem, but where the joint distribution is constrained by the causal hypothesis.  Indeed, this latter sort of causally-constrained marginals problem 
+The most informative sort of observational data is a specification of the joint distributions over all of the observed variables.  The observational data in real-world applications necessarily falls short of this ideal because one only ever obtains a {\em finite sample} \purp{[replace by interval of distributions]} of the joint distribution.  Moreover, even if one sets aside finite-sample concerns and imagines the data as infinite-run statistics, there are other ways in which the observational data for a causal inference problem might be less informative than a specification of the joint distribution.  For instance, one might merely have a description of the conditional independence relations that hold among the observed variables.  Or one might merely have a specification of the marginals of the joint distribution for certain subsets of the observed variables, in which case the causal inference problem corresponds to a version of the marginals problem, but where the joint distribution is constrained by the causal hypothesis.  Indeed, this latter sort of causally-constrained marginals problem 
 %restricted observational data
  will be relevant for our inflation DAG technique.  
  %Note that causal inference in this case corresponds to a version of the marginals problem, but where the joint distribution is constrained by the causal hypothesis. 
 
-The most fine-grained sort of causal hypothesis is one that specifies not only a DAG but all of the parameters supplementing the DAG.  The causal inference problem that is perhaps most widely studied is one wherein the causal hypothesis just specifies a DAG.  Between these two cases are causal inference problems that explore more refined causal hypotheses, incorporating constraints on how  certain nodes in the DAG functionally depend on their parents.  An example is the assumption of an additive noise model for certain causal influences: if an observed variable $Y$ has an observed variable $X$ as a parent and also a latent variable $U$, then the noise is deemed additive if $Y=\alpha X + \beta U$ for some scalars $\alpha$ and $\beta$ [provide references].  More general constraints on the causal dependences in the model have also been explored [provide references].  (Note that constraints on the probability distributions over the latent variables can be understood as a kind of constraint on the causal dependences.)
+The most fine-grained sort of causal hypothesis is one that specifies not only a DAG but all of the parameters supplementing the DAG.  The causal inference problem that is perhaps most widely studied is one wherein the causal hypothesis just specifies a DAG.  Between these two cases are causal inference problems that explore more refined causal hypotheses, incorporating constraints on how  certain nodes in the DAG functionally depend on their parents.  An example is the assumption of an additive noise model for certain causal influences: if an observed variable $Y$ has an observed variable $X$ as a parent and also a latent variable $U$, then the noise is deemed additive if $Y=\alpha X + \beta U$ for some scalars $\alpha$ and $\beta$ [provide references].  More general constraints on the causal dependencies in the model have also been explored [provide references].  (Note that constraints on the probability distributions over the latent variables can be understood as a kind of constraint on the causal dependencies.)
 %Another conceivable constraint on the parameters is a constraint on the form of the probabilities distributions over the latent variables.  
-Our inflation DAG technique will require consideration of a novel and unusual sort of constraint on the causal dependences of the model. 
+Our inflation DAG technique will require consideration of a novel and unusual sort of constraint on the causal dependencies of the model. \purp{What is difference between causal dependencies and parameters?}
 
-Finally, the verdict about the compatibility of the observational input and the causal hypothesis could come in different forms.  The simplest possibility is a specification of whether the observational input is consistent with the causal hypothesis.  However, the notion of compatibility at play might be more refined than this, for instance, the algorithm might specify a confidence level with which one can reject the given causal hypothesis as an explanation of the observational input.
+\sout{Finally, the verdict about the compatibility of the observational input and the causal hypothesis could come in different forms.  The simplest possibility is a specification of whether the observational input is consistent with the causal hypothesis.  However, the notion of compatibility at play might be more refined than this, for instance, the algorithm might specify a confidence level with which one can reject the given causal hypothesis as an explanation of the observational input.}\purp{Replace with ``we consider causal inference to be about deciding consistency only..."}
 %output is a verdict on (or probabilistic inference about) whether a given causal hypothesis can explain the observed data.   
 
 %The most informative sort of observational input is a specification of the joint distributions over all of the observed variables.  Nonetheless, causal inference problems often proceed with a less informative sort of observational input.  For instance, one might merely have a description of the conditional independence relations that hold among the obeerved variables.  Another example of how the observational input might be less informative is if it merely specifies the marginals of the joint distribution for certain subsets of the observed variables.  (Indeed, the latter sort of observational input will be relevant for our inflation DAG technique.)   The observational input might also be less informative in another sense, namely, that it is merely a {\em finite sample} of some joint distribution.
 
-The inflation DAG technique is a way of mapping a given causal inference problem onto a new causal inference problem where the observational and causal inputs of the latter problem are determined by the observational and causal inputs of the original problem.   In particular, under the inflation map, the observational input becomes less informative while the causal hypothesis becomes more fine-grained, in a manner that we shall now make explicit.
+The inflation DAG technique is a way of mapping a given causal inference problem onto a new causal inference problem where the observational and causal inputs of the latter problem are determined by the observational and causal inputs of the original problem.   In particular, under the inflation map, the observational input becomes less informative \purp{say more precisely?} while the causal hypothesis becomes more fine-grained, in a manner that we shall now make explicit.
 
 \section{Inflation: a tool for causal inference}
 
@@ -395,9 +393,11 @@ We now introduce the notion of \tblue{an inflation of a causal model}.  Let $C_G
 % $\mathcal{P'}(G')$ are fixed uniquely by $\mathcal{P}(G)$.  We call the parameters $\mathcal{P'}(G')$ the inflationary image of the parameters $\mathcal{P}(G)$, and write $\mathcal{P'}(G') = \SmallNamedFunction{Inflation}{\mathcal{P}(G)}$.  Let $C=(G,\mathcal{P}(G))$ denote the original causal model and $C'=(G',\mathcal{P'}(G'))$ an inflation thereof.   We say that the DAG $G'$ is an inflation of the DAG $G$.  There are many possible choices of $G'$ for a given $G$, hence many possible inflations of a given causal model.  We denote this set by $\SmallNamedFunction{Inflations}{G}$.   Once an element $G'\in \SmallNamedFunction{Inflations}{G}$ is specified, however, the parameters $\mathcal{P'}(G')$ are fixed uniquely by $\mathcal{P}(G)$.  We call the parameters $\mathcal{P'}(G')$ the inflationary image of the parameters $\mathcal{P}(G)$, and write $\mathcal{P'}(G') = \SmallNamedFunction{Inflation}{\mathcal{P}(G)}$.
  %We now describe concretely what an inflation is for the DAG and for the parameters in turn.  
 
-We begin by defining the condition under which a DAG $G'$  is an inflation of a DAG $G$.
+We begin by defining the condition under which a DAG $G'$  is an inflation of a DAG $G$, which requires some further preliminary definitions. The \tblue{subgraph} of $G$ induced by restricting attention to the set of nodes $\bm{V}$ will be denoted $\subgraph[G]{\bm{V}}$.
+It consists of the nodes $\bm{V}$ and the edges between pairs of nodes in $\bm{V}$ per the original graph. Of special importance to us is the 
+\tblue{ancestral subgraph} of $\bm{V}$, denoted $\ansubgraph[G]{\bm{V}}$, which is the minimal subgraph containing the full ancestry of $\bm{V}$, $\ansubgraph[G]{\bm{V}}\coloneqq\subgraph[G]{\An[G]{\bm{V}}}$. 
 
-Every node of $G'$ is a copy of a node of $G$. If $A$ denotes a node in the DAG $G$ that has copies in $G'$, then we denote these copies by $A_1,\ldots, A_k$.  The variable that indexes the copies is termed the {\em copy-index}.
+Every node of $G'$ is a copy of a node of $G$. If $A$ denotes a node in the DAG $G$ that has copies in $G'$, then we denote these copies by $A_1,\ldots, A_k$.  The variable that indexes the copies is termed the \tblue{copy-index}.
 %, and a set of variables in $G'$ that differ only by copy-index are called a {\em copy set}.  
 The necessary condition on $G'$ for being an inflation of $G$ is that the ancestral subgraph in $G'$ of a node $A_i$ is equivalent, under removal of the copy-index, to the ancestral subgraph in $G$ of the node $A$.  
 When two objects (e.g.~nodes, sets of nodes, DAGs, etc\ldots) are the same up to copy-indices, then we use $\sim$ to indicate this.  For instance, we have $A_i\sim A_j\sim A$.  Given this notational convention, we can formalize the condition for $G'$ to be an inflation of $G$ as follows:
@@ -452,10 +452,11 @@ Different inflations of the Triangle scenario are depicted in \cref{fig:TriFullD
 \end{minipage}
 \end{figure}
 
-
+\purp{One we've said how DAG inflated, then we need TWO things: How models (and hypothesis) inflate, and also how observational data inflates. Best to word intro to subject in a way that suggests we'll be getting around to both topics sequentially?}
 Next, we turn to specifying how the parameters in the inflation of a causal model are determined from those in the original model.
 %condition under which a set of parameters $\mathcal{P'}(G')$ are the inflationary image of the set of parameters $\mathcal{P}(G)$. 
 
+\purp{PHYSICS needed here. Why mathematical abstraction? Explain that due to physical construct-ability, therefore we expect that models on the original DAG can be used to build a model on the inflation DAG...}
 The condition is simply that for every node $A_i$ in the inflation DAG $G'$, the manner in which $A_i$ depends causally on its parents within $G'$ must be the same as the manner in which $A$ depends causally on its parents within the original DAG $G$.   Formally, 
 \begin{align}\label{eq:funcdependences}
 %\text{If} \quad G' \in\SmallNamedFunction{Inflations}{G}\quad \text{and} \quad \mathcal{P'}(G') = \SmallNamedFunction{Inflation}{\mathcal{P}(G)} \quad \text{then}\quad \forall A_i \in \SmallNamedFunction{Nodes}{G'}:\; \pdf{A_i| \Pa[G']{A_i}}=\pdf{A|\Pa[G]{A}},
@@ -467,7 +468,7 @@ C' \in \SmallNamedFunction{Inflations}{C} \quad \text{iff}\quad G' \in\SmallName
 where Eq.~\eqref{eq:definflationDAG} guarantees that $A_i \sim A$ and $\Pa[G']{A_i} \sim \Pa[G]{A}$.  
 
 %A causal model specifies the causal structure and the autonomous causal mechanisms.  
-To sum up then, inflation is a mapping to a new causal model wherein each given variable in the original DAG may have counterparts in the inflation DAG and where the causal dependences in the inflation DAG are given by the corresponding causal dependences in the original DAG.   Note that the operation of modifying a DAG and equipping the modified version with causal dependences that mirror those of the original also appears in the \emph{do calculus} of~\citet{pearl2009causality}. \fxnote{adhesivity and non-Shannon-type ineqs}
+To sum up then, inflation is a mapping to a new causal model wherein each given variable in the original DAG may have counterparts in the inflation DAG and where the causal dependencies in the inflation DAG are given by the corresponding causal dependencies in the original DAG.   Note that the operation of modifying a DAG and equipping the modified version with causal dependencies that mirror those of the original also appears in the \emph{do calculus} of~\citet{pearl2009causality}. \fxnote{adhesivity and non-Shannon-type ineqs}
 %The copying of variables under inflation implies that causal mechanisms in the inflation DAG are not necessarily autonomous, but rather often coincide with one another.
 
 
@@ -554,7 +555,7 @@ Furthermore, because each injectable set of variables $\bm{U}_i$ satisfies Eq.~\
 %\forall \bm{U}\in\SmallNamedFunction{PreInjectableSets}{G'}:	
 \pdf[C']{\bm{U}} = \pdf[C]{\subsim{\bm{U}}_1} \pdf[C]{\subsim{\bm{U}}_2}  \cdots \pdf[C]{\subsim{\bm{U}}_n}.
 \end{align}
-This latter property implies that the probability distribution over any pre-injectable set in the inflation model is fully determined by the parameters in the original causal model.  Indeed, this relation is what motivates us to consider the pre-injectable sets.
+This latter property implies that the observable probability distribution over any pre-injectable set in the inflation model is fully specified by the \sout{parameters} \purp{observable probability distribution} \sout{in the original causal model} \purp{per the original observable data}.  Indeed, this relation is what motivates us to consider the pre-injectable sets.
 
 Consider a causal inference problem where the observational input is a probability distribution over a set $\bm{O}$ of observed variables, denoted $\pdf{\bm{O}}$ and the causal hypothesis is $H_{G,S}$ where $\SmallNamedFunction{ObservedNodes}{G}=\bm{O}$.  Suppose that one seeks only to determine whether the causal hypothesis is consistent with the observational input.  
 %Then the following condition is necessary and sufficient for such consistency
@@ -722,7 +723,7 @@ Given the assumption that the distributions $P(X)$ and $P(Y)$ are full support, 
 % $P_{\text{PR}}$ is given as a conditional distribution because $X$ and $Y$ are settings variables.
 For these values, \cref{eq:PRinflated} specifies perfect correlation between $A_1$ and $B_1$.  Similarly, it the inflated observational data also specified perfect correlation between $A_1$ and $B_2$, perfect correlation between $A_2$ and $B_1$, and perfect \emph{anti}correlation between $A_2$ and $B_2$. Those four requirements are not mutually compatible, however: since perfect correlation is transitive, the first three properties entail perfect correlation between $A_2$ and $B_2$. 
 
-The mathematical structure of this proof parallels that of standard proofs of the inconsistency of PR-box correlations with the Bell structure.  Standard proofs focus on a set of variables $A_0, A_1, B_0, B_1, C_0, C_1$ where $A_0$  is the value of $A$ when $X=0$, and similarly for the others.  The fact that there must be a joint distribution over these variables can be inferred from the structure of the Bell DAG and the fact that one can assume without loss of generality that the causal dependences are deterministic (a result known as Fine's theorem \cite{FineTheorem}).  It is then sufficient to note that the marginals given by the PR-box correlations do not arise from any joint distribution.  Nonetheless, our proof is conceptually distinct insofar as the variables to which we apply the marginals problem are not conditioned on a setting value.  And we do not require Fine's theorem.  [Can we do something that couldn't be done in the standard approach?]
+The mathematical structure of this proof parallels that of standard proofs of the inconsistency of PR-box correlations with the Bell structure.  Standard proofs focus on a set of variables $A_0, A_1, B_0, B_1, C_0, C_1$ where $A_0$  is the value of $A$ when $X=0$, and similarly for the others.  The fact that there must be a joint distribution over these variables can be inferred from the structure of the Bell DAG and the fact that one can assume without loss of generality that the causal dependencies are deterministic (a result known as Fine's theorem \cite{FineTheorem}).  It is then sufficient to note that the marginals given by the PR-box correlations do not arise from any joint distribution.  Nonetheless, our proof is conceptually distinct insofar as the variables to which we apply the marginals problem are not conditioned on a setting value.  And we do not require Fine's theorem.  [Can we do something that couldn't be done in the standard approach?]
 
 Many causal inference techniques can be used to derive sufficient conditions for the inconsistency of the causal hypothesis $H_{G',S'}$ with the observational data $\forall \bm{U} \in \SmallNamedFunction{PreInjectableSets}{\bm{O}}: \pdf{\bm{U}} = \pdf{\subsim{\bm{U}_1}}\pdf{\subsim{\bm{U}_2}} \dots \pdf{\subsim{\bm{U}_n}}$. We will call sets of such conditions {\em inconsistency witnesses}.  
 
@@ -743,13 +744,13 @@ Thanks to the relations~\cref{W1,W2,W3,W4,W5}, we can therefore conclude that if
 which we think of as a sort of monogamy inequality: it is impossible for $C$ to be strongly correlated with both $A$ and $B$, unless $A$ and $B$ are both strongly biased.
 
 Alternatively, we could also start with the inequality~\cite{fritz2013marginal}
-\[
+\begin{align}
 	I(A_2 : C_1) + I(C_1 : B_1) - I(A_2 : B_1) \leq H(B_1),	
-\]
+\end{align}
 which also simply follows from the existence of a joint distribution of all variables. Again applying~\cref{W1,W2,W3,W4,W5} shows in particular that the third term vanishes, and results in
-\[
+\begin{align}\label{eq:monogomyofcorrelations}
 	I(A : C) + I(C : B) \leq H(B) ,
-\]
+\end{align}
 which is the original entropic monogamy inequality derived for the Triangle scenario in~\cite{fritz2012bell}. Our rederivation in terms of inflation is essentially the proof of~\citet{pusey2014gdag}.
 
 %To see how this distribution is incompatible with \cref{eq:tritrivial1}, note that for three \emph{identically distributed} (but not independent) binary variables a further special case of \cref{eq:tritrivial1} is
@@ -771,12 +772,12 @@ Slightly more involved but otherwise analogous considerations can be applied to 
 	\pdf{A_2 B_2 C_2} &= \pdf{A} \pdf{B} \pdf{C} .
 \end{align}
 Now we can again use the existence of a joint distribution over all six observable variables, which implies e.g.~the inequality
-\[
+\begin{align}\label{eq:FritzF3raw}
 	P_{A_2 B_2 C_2}(111) \leq P_{A_1 B_1 C_1}(000) + P_{A_1 B_2 C_2}(111) + P_{A_2 B_1 C_2}(111) + P_{A_2 B_2 C_1}(111),
 	% Mermin: \langle A_1 B_1 C_1 \rangle - \langle A_2 B_2 C_1 \rangle - \langle A_2 B_1 C_2 \rangle - \langle A_1 B_2 C_2 \rangle \leq 2.
-\]
+\end{align}
 which one can show to be valid for every joint distribution of all six variables simply by checking that it holds on every deterministic assignments of values, from which the general case follows by linearity. Applying the above factorization relations turns this into the polynomial inequality
-\begin{equation}
+\begin{equation}\label{eq:FritzF3}
 	P_{A}(1) P_{B}(1) P_{C}(1) \leq P_{ABC}(000) + P_{AB}(11) P_C(1) + P_{BC}(11) P_A(1) + P_{CA}(11) P_B(1),
 	% Mermin-poly: \langle A B C\rangle \leq 2 + \langle A B\rangle \langle C\rangle + \langle B C \rangle \langle A\rangle + \langle C A\rangle \langle B\rangle,
 \end{equation}
@@ -859,7 +860,7 @@ Let us also define the \tblue{ancestral dependence graph}, in which two nodes ar
 \end{figure}
 
 Applying these prescriptions to the inflation DAG in \cref{fig:Tri222} identifies the following 
- ancestral independences 
+ ancestral independencies 
 maximal injectable and maximal pre-injectable sets as follows:
 \begin{align}\label{eq:basicsetup222}
 {\underbrace{\begin{matrix}
@@ -869,7 +870,7 @@ B_2\aindep A_2\\
 B_2\aindep C_1\\
 C_2\aindep A_1\\
 C_2\aindep B_2
-\end{matrix}}_{\substack{\text{pairwise}\\\text{ancestral}\\\text{independences}}}}
+\end{matrix}}_{\substack{\text{pairwise}\\\text{ancestral}\\\text{independencies}}}}
 \qquad\quad
 {\underbrace{\begin{matrix}
 \\ \\
@@ -877,7 +878,7 @@ C_2\aindep B_2
 \brackets{B_2}\aindep \brackets{A_2 C_1 C_2}\\
 \brackets{C_2}\aindep \brackets{A_1 A_2 B_2}\\
 \brackets{A_2}\aindep \brackets{B_2}\aindep \brackets{C_2}
-\end{matrix}}_{\substack{\text{maximal}\\\text{ancestral}\\\text{independences}}}}
+\end{matrix}}_{\substack{\text{maximal}\\\text{ancestral}\\\text{independencies}}}}
 \qquad\quad
 {\underbrace{\begin{matrix}
 \brackets{ A_1 B_1 }\\
@@ -924,7 +925,7 @@ The most trivial constraint on possible marginal probabilities, regardless of ca
 %on the pre-injectable set
 is simply the \emph{existence of some joint probability distribution} from which the marginal distributions can be recovered through marginalization, i.e. the possible marginal distributions must be \tblue{marginally compatible}. This isn't really causal inference -- as no hypothesis is considered -- but rather more of a preliminary sanity check. If the marginal distributions are not marginally compatible, then the answer to ``Can these marginal distributions be explained by this particular causal hypothesis?" is automatically ``No". 
 
-The necessary and sufficient conditions for marginal compatibility are easy enough to state. There must exist some joint distribution (a collection of nonnegative joint probabilities) such that the marginal distributions can be recovered (each marginal distribution is a sum over various joint probabilities). \tblue{Solving the marginal problem} means resolving these "exists" statements into quantifier-free inequalities such that satisfaction of all such inequalities is necessary and sufficient for marginal compatibility. An efficient algorithm to solve the marginal problem is given in \purp{appendix... ??}. The marginal problem comes up in a variety of applications, and has been studied extensively; see~\cite{fritz2013marginal} for further references.
+The necessary and sufficient conditions for marginal compatibility are easy enough to state. There must exist some joint distribution (a collection of nonnegative joint probabilities) such that the marginal distributions can be recovered (each marginal distribution is a sum over various joint probabilities). \tblue{Solving the marginal problem} means resolving these "exists" statements into quantifier-free inequalities such that satisfaction of all such inequalities is necessary and sufficient for marginal compatibility. An efficient algorithm to solve the marginal problem is given in \cref{sec:projalgorithms}. The marginal problem comes up in a variety of applications, and has been studied extensively; see~\cite{fritz2013marginal} for further references.
 
 As an example, here's how the marginal problem would be phrased as a partial-existential-closure problem with respect to the five three-variable marginal distributions corresponding to the pre-injectable sets in \cref{eq:preinjectableuses222}. For simplicity, we assume that all observable variables are binary\footnote{If the observables are not binary, then the resulting  binary-outcome inequalities are necessary for marginal compatibility, in that they should hold for any course-graining of the observational data into two classes, but the binary-outcome inequalities are no longer sufficient.}.
 
@@ -947,7 +948,7 @@ The marginal compatibility constraints in this case are, therefore, 64 inequalit
 
 Linear quantifier elimination is already widely used in causal inference to derive entropic inequalities \cite{fritz2013marginal,chaves2014novel,chaves2014informationinference}. In that task, however, the quantifiers being eliminated are those entropies which refer to hidden variables. By contrast, the probabilities we consider here are exclusively in terms of observable variables right from the very start. The quantifiers we eliminate are the not-pre-injectable joint probabilities, which are quite different from probabilities involving hidden variables.
 
-When solving the marginal problem is too difficult, one may consider solving a relaxation of it, instead. One extremely computationally amenable relaxation of the marginal problem is to enumerate probabilistic Hardy-type paradoxed. This is discussed later on in  \cref{sec:TSEM}.
+When solving the marginal problem is too difficult, one may consider solving a relaxation of it, instead. One extremely computationally amenable relaxation of the marginal problem is to enumerate probabilistic Hardy-type paradoxes. This is discussed later on in  \cref{sec:TSEM}.
 
 %\topic{\tred{Constraining Possible Distributions over Pre-Injectable Sets via Hardy Paradoxes}}
 
@@ -1171,7 +1172,7 @@ This means that considerations on inflation DAGs cannot be used to derive quantu
 Not every inflation requires broadcasting, however, and hence not every gedankenprobability is physically prohibited by quantum theory. 
 %An inflation DAG is a \tblue{non-broadcasting inflation} whenever the children of every individual node in the inflation DAG $G'$ map injectively to the corresponding children of the mapped node in the original DAG $G$, i.e. $dmap\parenths*{\Ch[G']{X}}\subseteq\Ch[G]{dmap\parenths*{X}}$ for all $X\in\nodes{G'}$. 
 \cref{fig:TriDagSubA2B1C1} is an example of a non-broadcasting inflation.
-Constraints derived from non-broadcasting inflations are valid even in the GPT paradigm. Consequently the inequality in \cref{eq:tritrivial1}, which was derived from \cref{fig:TriDagSubA2B1C1}, is therefore a causal infeasibility criterion which holds for the Triangle scenario even when the latent nodes are allowed to be quantum states. This confirms our numerical computations, which indicated that~\eqref{eq:tritrivial1} does not have any quantum violations. The same is true for monogamy of correlations, per \cref{eq:monogomyofcorrelations}. Since the GHZ-type distribution~\cref{eq:ghzdistribution1} violates both of these inequalities, it is forbidden even per the relaxed GPT Triangle scenario, as was pointed out earlier. 
+Constraints derived from non-broadcasting inflations are valid even in the GPT paradigm. Consequently the inequality in \cref{eq:polymonogamy}, which was derived from \cref{fig:TriDagSubA2B1C1}, is therefore a causal infeasibility criterion which holds for the Triangle scenario even when the latent nodes are allowed to be quantum states. This confirms our numerical computations, which indicated that~\eqref{eq:polymonogamy} does not have any quantum violations. The same is true for monogamy of correlations, per \cref{eq:monogomyofcorrelations}. Since the GHZ-type distribution~\cref{eq:ghzdistribution1} violates both of these inequalities, it is forbidden even per the relaxed GPT Triangle scenario, as was pointed out earlier. 
 
 It might also be possible to derive quantum causal infeasibility criteria if one appropriately modifies \cref{sec:ineqs} to generate a different initial set of nonnegativity inequalities. This new set should capture the nonnegativity of only quantum-physically-meaningful marginal probability distributions. From this perspective, a broadcasting inflation DAG is an abstract logical concept, as opposed to a hypothetical physical construct. Indeed, the distributions in a quantum broadcasting inflation DAG can be characterized in terms of the logical broadcasting maps of \citet{Coecke2011}. Note that $\p{a_1,a_2}$ and other broadcasting-implicit gedankenprobabilities can be \emph{negative} pursuant to a logical broadcasting map, and hence the marginal problem should be reformulated as to the questioning the existence of non-broadcastings sets rather than the existence of a full joint distribution from which the marginal distributions might be recovered.
 
@@ -1181,17 +1182,27 @@ Our current inflation DAG method can be employed to derive causal infeasibility 
 
 \section{Inequalities for the marginal problem via Hardy-type paradoxes and minimal transversals}\label{sec:TSEM}
 
-In the literature on Bell inequalities, it has been noticed that the infeasibility with the Bell scenario DAG can sometimes be witnessed by only looking at which joint probabilities are zero and which ones are nonzero. In other words, instead of considering the probability of a joint outcome, some distributions can be witnesses as infeasible by only considering the \emph{possibility} or \emph{impossibility} of each joint outcome. This has been originally noticed by~\citet{L.Hardy:PRL:1665}, and hence such possibilistic constraints are also known as \tblue{Hardy-type paradoxes}. The ``paradox'' occurs whenever the possibilistic constraint is violated. For a systematic account of Hardy-type paradoxes in Bell scenarios, see~\cite{Mansfield2012}. It has been noted previously that such possibilistic constraints also exist for other types of marginal problems~\cite[Section~III.C]{LSW}. In the following, we explain how to determine \emph{all} such constraints for \emph{any} marginal problem.
+In the literature on Bell inequalities, it has been noticed that the inconsistency with the Bell scenario DAG can sometimes be witnessed by only looking at which joint probabilities are zero and which ones are nonzero. In other words, instead of considering the probability of a joint outcome, some distributions can be witnesses as infeasible by only considering the \emph{possibility} or \emph{impossibility} of each joint outcome. This was originally noticed by~\citet{L.Hardy:PRL:1665}, and hence such possibilistic constraints are also known as \tblue{Hardy-type paradoxes}. The ``paradox'' occurs whenever the possibilistic constraint is violated. For a systematic account of Hardy-type paradoxes in Bell scenarios, see~\cite{Mansfield2012}. It has been noted previously that such possibilistic constraints also exist for other types of marginal problems~\cite[Section~III.C]{LSW}. In the following, we explain how to determine \emph{all} such constraints for \emph{any} marginal problem.
 
-To start with a simple example, suppose that we are in a marginal scenario where the pairwise joint distributions of three variables $A$, $B$ and $C$ are given, and these two variables are binary with values in $\{0,1\}$. Then we have the implication
-\[
-	(A=0,C=1) \Longrightarrow (A=0,B=0) \lor (B=1,C=1).
-\]
+To start with a simple example, suppose that we are in a marginal scenario where the pairwise joint distributions of three variables $A$, $B$ and $C$ are given.%, and these two variables are binary with values in $\{0,1\}$. 
+Then we have the implication
+%\[
+%	(A=0,C=1) \Longrightarrow (A=0,B=0) \lor (B=1,C=1).
+%\]
+\begin{align}
+    \namedand{A \eql a, C \eql c} \implies \namedand{A \eql a, B \eql b} \bigvee \namedand{B \eql \n{b}, C \eql c}
+\end{align}
 Assuming the existence of a solution to the marginal problem, we can apply the union bound to the probability of the right-hand side. This translates the implication into the inequality
 \[
-	P_{AC}(01) \leq P_{AB}(00) + P_{BC}(11),
+	\p{a c} \leq \p{a b} + \p{\n{b} c}
 \]
-which is therefore a necessary condition for the marginal problem to have a solution. Applying this together with the inflation technique to the Triangle scenario results precisely in our earlier inequality~\cref{eq:tritrivial1}.
+which is therefore a necessary condition for the marginal problem to have a solution. Applying this together with the inflation technique to the Triangle scenario results in
+\[
+	\p[AC]{a c} \leq \p[A]{a}\p[B]{b} + \p[BC]{\n{b} c},
+\]
+which is equivalent to the inequality in~\cref{eq:polymonogamy}.
+
+\purp{I'm in the middle of switching the notation here to lowercase probabilities. ~EW}
 
 We outline the general procedure using a slightly more sophisticated example. Consider the marginal scenario of~\cref{fig:simplicialcomplex222}, where the contexts are
 \begin{align*}
@@ -1204,29 +1215,32 @@ We outline the general procedure using a slightly more sophisticated example. Co
 Now a possibilistic constraint on this marginal problem consists of a logical implication with one joint outcome as the implicant and a disjunction of joint outcomes as the conclusion (implicate?). In the following, we explain how to generate \emph{all} such implications which are tight in the sense that their right-hand sides are minimal. So let us fix some joint outcome for the left-hand side for the sake of concreteness, taking
 \begin{equation}
 	\label{eq:lhshardy}
-	(A_2 = 1, B_2 = 1, C_2 = 1).
+	\namedand{A_2 \eql a_2, B_2 \eql b_2, C_2 \eql c_2}
 \end{equation}
-To generate all possibilistic constraints, one will have to perform the following procedure for every choice of joint outcome in every context as the left-hand side. Assuming these concrete outcomes, the right-hand side of the implication needs to be a conjunction of joint outcomes which is such that for any deterministic assignment of outcomes to the variables which extends~\cref{eq:lhshardy}, also at least one of the joint outcomes on the right-hand side occurs. To determine what the possibilities for choosing this right-hand side are, it helps to draw the following hypergraph: take the set of nodes to be the disjoint union over all the contexts of all the joint outcomes which are compatible with~\eqref{eq:lhshardy}\footnote{In the left-hand side context there will thus be only one node, and one can also omit this one node without changing the result.}. Furthermore, let the hyperedges correspond to complete deterministic assignments of values to all variables extending~\cref{eq:lhshardy}, such that such a hyperedge contains precisely those nodes that are the marginal outcomes to which it restricts. In our example, the resulting hypergraph has $2^3 + 3\cdot 2^1 = 14$ nodes and $2^3 = 8$ hyperedges. Then the possible right-hand sides of the implications are precisely the \tblue{transversals} of this hypergraph, i.e.~the sets of nodes which have the property that they intersect every hyperedge in at least one node. In order to get implications which are as tight as possible, it is sufficient to enumerate only the \tblue{minimal transversals}. Doing so is a well-studied problem in computer science with various natural reformulations and for which manifold algorithms have been developed~\cite{eiter_dualization_2008}. We expect that this enumeration of minimal transversals will be computationally much more tractable than the linear quantifier elimination, even if one does it for every possible left-hand side of the implication.
+to generate all possibilistic constraints, one will have to perform the following procedure for every choice of joint outcome in every context as the left-hand side. Assuming these concrete outcomes, the right-hand side of the implication needs to be a conjunction of joint outcomes which is such that for any deterministic assignment of outcomes to the variables which extends~\cref{eq:lhshardy}, also at least one of the joint outcomes on the right-hand side occurs. To determine what the possibilities for choosing this right-hand side are, it helps to draw the following hypergraph: take the set of nodes to be the disjoint union over all the contexts of all the joint outcomes which are compatible with~\eqref{eq:lhshardy}\footnote{In the left-hand side context there will thus be only one node, and one can also omit this one node without changing the result.}. Furthermore, let the hyperedges correspond to complete deterministic assignments of values to all variables extending~\cref{eq:lhshardy}, such that such a hyperedge contains precisely those nodes that are the marginal outcomes to which it restricts. In our example, the resulting hypergraph has $2^3 + 3\cdot 2^1 = 14$ nodes and $2^3 = 8$ hyperedges. Then the possible right-hand sides of the implications are precisely the \tblue{transversals} of this hypergraph, i.e.~the sets of nodes which have the property that they intersect every hyperedge in at least one node. In order to get implications which are as tight as possible, it is sufficient to enumerate only the \tblue{minimal transversals}. Doing so is a well-studied problem in computer science with various natural reformulations and for which manifold algorithms have been developed~\cite{eiter_dualization_2008}. We expect that this enumeration of minimal transversals will be computationally much more tractable than the linear quantifier elimination, even if one does it for every possible left-hand side of the implication.
 
 In our example, it is not hard to check that the right-hand side of
-\begin{align*}
-	(A_2 = 1, B_2 = 1, C_2 = 1) \Longrightarrow (A_1 = 0, B_1 & = 0, A_1 = 0) \lor (A_1 = 1, B_2 = 1, C_2 = 1) \\
-		& \lor (A_2 = 1, B_1 = 1, C_2 = 1) \lor (A_2 = 1, B_2 = 1, C_1 = 1)
-\end{align*}
+\begin{align}\begin{split}
+	\namedand{A_2 \eql a_2, B_2 \eql b_2, C_2 \eql c_2} \Longrightarrow &\namedand{A_1 = \n{a_1}, B_1 \eql \n{b_1}, C_1 \eql \n{c_1}} \bigvee \namedand{A_1 \eql a_1, B_2 \eql b_2, C_2 \eql c_2} \\
+		& \bigvee \namedand{A_2 \eql a_2, B_1 \eql b_1, C_2 \eql c_2} \bigvee \namedand{A_2 \eql a_2, B_2 \eql b_2, C_1 \eql c_1}
+\end{split}\end{align}
 is such a minimal transversal: every assignment of values to all variables which extends the assignment on the left-hand side satisfies at least one of the terms on the right, but this ceases to hold as soon as one removes any one term on the right.
 
 Finally, we convert the implication into an inequality by replacing ``$\Rightarrow$'' by ``$\leq$'' at the level of probabilities and the disjunctions by sums,
-\[
-	P_{A_2 B_2 C_2}(111) \leq P_{A_1 B_1 C_1}(000) + P_{A_1 B_2 C_2}(111) + P_{A_2 B_1 C_2}(111) + P_{A_2 B_2 C_1}(111).
-\]
-Applying this to our inflation DAG of~\cref{fig:Tri222} results again in one of our previous inequalities,~\cref{eq:FritzF3}.
+\begin{align}
+    \p{a_2 b_2 c_2} \leq \p{\n{a_1} \n{b_1} \n{c_1}}+\p{a_1 b_2 c_2}+\p{a_2 b_1 c_2}+\p{a_2 b_2 c_1}
+\end{align}
+%\[
+%	P_{A_2 B_2 C_2}(111) \leq P_{A_1 B_1 C_1}(000) + P_{A_1 B_2 C_2}(111) + P_{A_2 B_1 C_2}(111) + P_{A_2 B_2 C_1}(111).
+%\]
+Applying this to our inflation DAG of~\cref{fig:Tri222} results again in one of our previous inequalities,~\cref{eq:FritzF3raw}.
 
 Since also many Bell inequalities are of this form---such as the CHSH inequality which follows in this way from Hardy's original implication---we conclude that this method is still sufficiently powerful to generate plenty of interesting inequalities, and at the same time significantly easier to perform in practice than the full-fledged linear (let alone nonlinear) quantifier elimination.
 
 One can also come up with a \emph{satisfiability} version of a marginal problem at the possibilistic level. Possibilistic satisfiability is the following: for every joint marginal outcome with positive probability, one needs to find an assignment of values to all variables which extends the given marginal outcomes and such that the restriction to every context also has positive probability. This is very easy to do: one can simply enumerate all deterministic assignments of values to all observables, discard all those that have a marginal with zero probability, and then check whether the remaining assignments are enough to generate all the joint marginal outcomes with positive probability.
 
-We note that the connection between classical propositional logic and linear inequalities has been used previously in the task of causal inference. We reiterate that inequalities resulting from propositional logic, however, are a subset of the inequalities that result from linear quantifier elimination. Consequently, linear quantifier elimination is the preferable tool for deriving inequalities whenever the elimination is computationally tractable. Noteworthy examples of works deriving causal infeasibility criteria via classical logic are \citet{Pitowsky1989} and \citet{Ghirardi08}: \cref{eq:trisimplestunmapped} here corresponds to Eq. (2-4) in~\cite{Pitowsky1989}%, and \cref{eq:bellcondeq} here corresponds to Eq. (30) in Ref. \cite{Ghirardi08}
-.
+We note that the connection between classical propositional logic and linear inequalities has been used previously in the task of causal inference. We reiterate that inequalities resulting from propositional logic, however, are a subset of the inequalities that result from linear quantifier elimination. Consequently, linear quantifier elimination is the preferable tool for deriving inequalities whenever the elimination is computationally tractable. Noteworthy examples of works deriving causal infeasibility criteria via classical logic are \citet{Pitowsky1989} and \citet{Ghirardi08}.%: \cref{eq:trisimplestunmapped} here corresponds to Eq. (2-4) in~\cite{Pitowsky1989}%, and \cref{eq:bellcondeq} here corresponds to Eq. (30) in Ref. \cite{Ghirardi08}
+
 
 
 
