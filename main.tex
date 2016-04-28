@@ -321,15 +321,15 @@ Furthermore, given both a causal structure and a specific probability distributi
 
 \section{Introduction}
 
-Given a probability distribution over some random variables, the problem of \tblue{causal inference} is to determine a plausible set of causal relations between these variables that could have generated the given distribution. This type of problem comes up in a wide variety of statistics applications, from sussing out biological pathways to enabling machine learning \cite{pearl2009causality,spirtes2011causation,studeny2005probabilistic,koller2009probabilistic}. A related problem is to start with a given set of causal relations, and then to determine the set of all probability distribution that these relations can generate on random variables that live on the nodes of this causal structure. Taking both of these starting points together, one can also start with \emph{both} a given distribution and a candidate causal structure and ask whether the two are compatible, in the sense that the causal structure could in principle have generated the given distribution.
+Given a probability distribution over some random variables, the problem of \tblue{causal inference} is to determine a plausible set of causal relations between these variables that could have generated the given distribution. This type of problem comes up in a wide variety of statistics applications, from sussing out biological pathways to enabling machine learning \cite{pearl2009causality,spirtes2011causation,studeny2005probabilistic,koller2009probabilistic}. A related problem is to start with a given set of causal relations, and then to determine the set of all probability distributions that these relations can generate on random variables that live on the nodes of the causal structure. Taking both of these starting points together, one can also start with \emph{both} a given distribution and a candidate causal structure and ask whether the two are compatible, in the sense that the causal structure could in principle have generated the given distribution.
 
 %\tblue{infeasibility criteria}, i.e., observable constraints such that the their violation implies the invalidity of the hypothesis as an explanation for observational data. 
 
-In the simplest setting, a causal structure hypothesis consists of a directed acyclic graph (DAG) which only contains the observed variables as nodes. In this case, obtaining a verdict on the compatibility of a given distribution with the causal structure is simple: the compatibility holds if and only if the distribution is Markov with respect to the DAG. There exist techniques to determine the compatible causal structures from the distribution only, i.e.~without having an \emph{a priori} hypothesis~\cite{pearl2009causality}.
+In the simplest setting, a causal structure hypothesis consists of a directed acyclic graph (DAG) which only contains the observed variables as nodes. In this case, obtaining a verdict on the compatibility of a given distribution with the causal structure is simple: the compatibility holds if and only if the distribution is Markov with respect to the DAG. There exist algorithmalgorithm  to determine the compatible causal structures from the distribution only, i.e.~without having an \emph{a priori} hypothesis~\cite{pearl2009causality}.
 
-A significantly more difficult case is when one considers a causal structure hypothesis which consists of a DAG with \tblue{latent} or \tblue{hidden} nodes, so that the set of observable variables is only a subset of the nodes of the DAG. This case occurs e.g.~in situations where one needs to deal with the possible presence of unobserved \tblue{confounders}, as in experiment design. While the conditional independence relations implied by the causal structure on the observable nodes are still necessary conditions for compatibility of a distribution with the causal structure hypothesis, these equations are generally no longer sufficient. Finding necessary and sufficient conditions is a difficult open problem. Determining plausible candidate causal structures from the given distribution is even more difficult, but this can be reduced to the previous problem e.g.~by enumerating all DAGs (say with a fixed number of latent nodes) and checking one at a time for compatibility with the distribution. Due to the possibility of making this reduction, and because the compatibility problem is already difficult enough, we will focus on the case when a DAG (with latent nodes) is given as a description of the causal structure. We then consider both the problem of deciding whether a given distribution can arise from this causal structure, as well as that of describing the entire set of these distributions for a fixed number of values per variable.
+A significantly more difficult case is when one considers a causal structure hypothesis which consists of a DAG with \tblue{latent} or \tblue{hidden} nodes, so that the set of observable variables is only a subset of the nodes of the DAG. This case occurs e.g.~in situations where one needs to deal with the possible presence of unobserved \tblue{confounders}, as in experiment design. While the conditional independence relations implied by the causal structure on the observable nodes are still necessary conditions for compatibility of a distribution with the causal structure hypothesis, these equations are generally no longer sufficient. Finding necessary and sufficient conditions is a difficult open problem. Determining plausible candidate causal structures from the given distribution is even more difficult, but this can be reduced to the previous problem e.g.~by enumerating all DAGs (say with a fixed number of latent nodes) and checking one at a time for compatibility with the distribution. Due to the possibility of making this reduction, and because the compatibility problem is already difficult enough, we will focus on the case when a DAG (with latent nodes) is given as a description of the causal structure. We then consider the problem of deciding whether a given distribution can arise from this causal structure, as well as that of describing the entire set of these distributions for a fixed number of values per variable.
 
-Historically, the insufficiency of the causal independence relations for causal inference in the presence of latent variables has first been observed by Bell in the context of the hidden variable problem of quantum physics~\cite{bell1964einstein}. Roughly speaking, Bell derived an inequality that any distribution consistent with the spacetime causal structure must satisfy, and found this inequality to be violated by distributions generated from suitably entangled quantum states\footnote{This inconsistency has subsequently become known as \emph{quantum nonlocality}~\cite{Brunner2013Bell}. Although the term suggests the existence of nonlocal interactions, in the sense that the actual causal structure may be different from the hypothesized one, this interpretation is at odds with the fact that no nonlocal interactions have been observed in nature, implying that their presence would require fine-tuning~\cite{WoodSpekkens}. A less problematic alternative conclusion from Bell's theorem is the impossibility to model quantum physics in terms of the usual notions of ``classical'' probability theory.}. Subsequently, Pearl has derived another inequality, the \tblue{instrumental inequality}~\cite{pearl1995instrumental}, which witnesses the impossibility to model certain three-variable distribution by the \emph{instrumental scenario} causal structure hypothesis. More recently, \citet{steudel2010ancestors} have derived inequalities which formalize an extended version of Reichenbach's principle by witnessing the impossibility to model a given distribution on $n$ variables in terms of a causal structure without a common (hidden) ancestor for any subset of at least $c$ nodes, for any $n,c\in\mathbb{N}$. Motivated by Bell's inequality, many other Bell-type inequalities have been used in quantum physics~\cite{Brunner2013Bell}, but the foundational role of causal structure has only recently been appreciated~\cite{WoodSpekkens,fritz2012bell,pusey2014gdag,BeyondBellII}.
+Historically, the insufficiency of the conditional independence relations for causal inference in the presence of latent variables has first been observed by Bell in the context of the hidden variable problem of quantum physics~\cite{bell1964einstein}. Roughly speaking, Bell derived an inequality that any distribution compatible with the spacetime causal structure must satisfy, and found this inequality to be violated by distributions generated from suitably entangled quantum states\footnote{This incompatibility has subsequently become known as \emph{quantum nonlocality}~\cite{Brunner2013Bell}. Although the term suggests the existence of nonlocal interactions, in the sense that the actual causal structure may be different from the hypothesized one, this interpretation is at odds with the fact that no nonlocal interactions have been observed in nature, implying that their presence would require fine-tuning~\cite{WoodSpekkens}. A less problematic alternative conclusion from Bell's theorem is the impossibility to model quantum physics in terms of the usual notions of ``classical'' probability theory.}. Later on, Pearl derived another inequality, the \tblue{instrumental inequality}~\cite{pearl1995instrumental}, which witnesses the impossibility to model certain three-variable distribution by the \emph{instrumental scenario} causal structure hypothesis, with applications to experiment design. More recently, \citet{steudel2010ancestors} have derived inequalities which formalize an extended version of Reichenbach's principle by witnessing the impossibility to model a given distribution on $n$ variables in terms of a causal structure without a common (hidden) ancestor for any subset of at least $c$ nodes, for any $n,c\in\mathbb{N}$. Also, motivated by Bell's inequality, many other Bell-type inequalities have been used in quantum physics~\cite{Brunner2013Bell}, but the foundational role of causal structure has only recently been appreciated~\cite{WoodSpekkens,fritz2012bell,pusey2014gdag,BeyondBellII}.
 
 \begin{comment}
 In contexts other than quantum theory, the latent nodes in causal structures are generally taken to represent hidden variables. This is not fully general, however, so we apply the retronym\footnote{Retronym (noun): a modification of an original term to distinguish it from a later development \cite{retronym}.} ``classical", as in classical causal structure and classical causal inference. The classical distributions of a given causal structure are defined as those which arise from it while restricting the latent nodes to be arbitrary (classical) random variables. Quantum distributions, by contrast, are those which are realizable if the latent nodes in the causal structure are allowed to be quantum systems. We hereafter take all causal structures and probability distributions to be classical, except where explicitly stated otherwise.
@@ -343,7 +343,7 @@ Entirely new techniques, therefore, are required to derive quantum-sensitive inf
 We here introduce a new technique, applicable to any causal structure, for deriving infeasibility criteria. This technique allows for, but is not limited to, the derivation of polynomial inequalities. As far as we know, our method is the first systematic tool for doing causal inference with latent variables that goes beyond observable conditional independence relations and does not assume any bounds on the number of values of each latent variable. While our method can be used to systematically generate necessary conditions for compatibility with a given causal structure hypothesis, we do not know whether these inequalities are also sufficient, and we currently have conflicting evidence on this question. On the one hand, our method rederives all Bell-type inequalities (\cref{sec:Bellscenarios}), but on the other hand we have not yet been able to obtain Pearl's instrumental inequality from our method.
 
 % We show how the no-broadcasting theorem governing quantum theory \cite{NoCloningQuantum1996,NoCloningGeneral2006} can be exploited in order to derive specifically quantum-sensitive infeasibility criteria.
-Our criteria are generally based on the \emph{broadcasting} of the values of a hidden variable, i.e.~the assumption that its value can be copied and broadcast at will. The no-broadcasting theorem from quantum theory shows that this is not valid in the non-classical case, and from our perspective this is the reason for the existence of quantum violations of Bell inequalities. Moreover, our technique can also be applied in order to derive criteria that must be satisfied for all distributions that can be generated with latent nodes that are states in quantum theory or any other general probabilistic theory, simply by not assuming the possibility of broadcasting.
+Our criteria are generally based on the \emph{broadcasting} of the values of a hidden variable, i.e.~the assumption that its value can be copied and broadcast at will. The no-broadcasting theorem from quantum theory shows that this is not valid in the non-classical case, and from our perspective this is the reason for the existence of quantum violations of Bell inequalities. Moreover, our technique can also be applied in order to derive criteria that must be satisfied by all distributions that can be generated with latent nodes that are states in quantum theory or any other general probabilistic theory, simply by not assuming the possibility of broadcasting.
 % like Tsirelson inequalities \cite{Tsirelson1980,Brunner2013Bell}, i.e. constraints which are satisfied by all distributions realizable from a given quantum causal structure. 
 
 %\section{Notation}
@@ -675,7 +675,7 @@ p_{\text{GHZ}}\parens{a b c}=\frac{[000]+[111]}{2}=\begin{cases}\tfrac{1}{2}&\te
 We assume uniform binary variables for the sake of concreteness, but the argument is general. Let's temporarily (falsely) assume $P_{\text{GHZ}}$ to be feasible for the triangle scenario. Since $\brackets{A_2 C_1}$ is an injectable set we have $\pdf{A_2 C_1}=\pdf{A C}$, and therefore $P_{\text{GHZ}}$ implies that $A_2$ and $C_1$ are perfectly correlated. Similarly, since $\brackets{B_1 C_1}$ is an injectable set we have $\pdf{B_1 C_1}=\pdf{A C}$, and therefore $B_1$ and $C_1$ must be perfectly correlated, and by extension $B_1$ and $A_2$ are perfectly correlated as well. On the other hand, $A_2$ and $B_1$ must be statistically independent, as they do not share any common ancestor. The only way for two variables to be \emph{both} perfectly correlated and independent is by being deterministic. This is not the case in $P_{\text{GHZ}}$, and thus we have certified that $P_{\text{GHZ}}$ is not realizable from the Triangle causal structure, recovering the seminal result of \citet{steudel2010ancestors}.
 \end{comment}
 
-\example{: \tred{The W-type distribution cannot arise from the Triangle scenario}}\par\smallskip\nobreak
+\example{: \tred{The W-type distribution cannot arise from the Triangle scenario.}}\par\smallskip\nobreak
 
 Consider another causal inference problem concerning the triangle scenario, namely, that of determining whether the triangle DAG can explain a joint distribution $P^{\text{W}}_{A B C}$ of the form
 \begin{align}\label{eq:wdistribution1}
@@ -725,7 +725,7 @@ The W-type distribution is difficult to witness as unrealizable using convention
 \end{compactenum}
 \par\noindent But the inflation technique can, and does so very easily.
 
-\example{: \tred{The PR-box cannot arise from the Bell scenario}}\par\smallskip\nobreak
+\example{: \tred{The PR-box cannot arise from the Bell scenario.}}\par\smallskip\nobreak
 
 Consider the causal structure associated to the Bell \cite{bell1964einstein,Brunner2013Bell,bell1966lhvm,CHSHOriginal} scenario [\citealp{pusey2014gdag}~(Fig.~E\#2), \citealp{WoodSpekkens}~(Fig.~19), \citealp{chaves2014novel}~(Fig.~1), \citealp{BeyondBellII}~(Fig.~1), \citealp{wolfe2015nonconvexity}~(Fig.~2b), \citealp{steeg2011relaxation}~(Fig.~2)], depicted here in \cref{fig:NewBellDAG1}. The observable variables are $\brackets{A,B,X,Y}$, and $\Lambda$ is the latent common cause of $A$ and $B$. 
 
@@ -968,7 +968,7 @@ C_2\aindep B_2
 such that the distributions on the pre-injectable sets relate to the original DAG distribution via
 \begin{align}\label{eq:preinjectableuses222}
 \begin{split}
-&\forall_{a b c}:\; \begin{cases}
+&\forall{a b c}:\; \begin{cases}
 \pdf[A_1 B_1 C_1]{a b c} = \pdf[A B C]{a b c} \\
 \pdf[A_1 B_2 C_2]{a b c} = \pdf[C]{c}\pdf[A B]{a b}\\%\pdf{C}\pdf{A B}\\
 \pdf[A_2 B_1 C_2]{a b c} = \pdf[A]{a}\pdf[B C]{b c}\\
@@ -991,16 +991,16 @@ As an example, here's how the marginal problem would be phrased as a partial-exi
 
 In order for the five pre-injectable sets in \cref{eq:preinjectableuses222} to be marginally compatible there must exist 64 nonnegative joint probabilities, i.e. satisfying
 \begin{align}\label{eq:nonnegativity}
-\forall_{a_1 a_2 b_1 b_2 c_1 c_2}:\;0\leq \pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},
+\forall{a_1 a_2 b_1 b_2 c_1 c_2}:\;0\leq \pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},
 \end{align}
 constrained further by marginal distributions given by
 \begin{align}\label[eqs]{eq:marginalequalities222}
 \begin{split}
-&\forall_{a_1 b_1 c_1}:\;\pdf[A_1 B_1 C_1]{a_1 b_1 c_1} = \sum\nolimits_{a_2 b_2 b_2}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
-&\forall_{a_1 b_2 c_2}:\;\pdf[A_2 B_2 C_2]{a_1 b_2 c_2} = \sum\nolimits_{a_2 b_1 c_1}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
-&\forall_{a_2 b_1 c_2}:\;\pdf[A_2 B_1 C_2]{a_2 b_1 c_2} = \sum\nolimits_{a_1 b_2 c_1}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
-&\forall_{a_2 b_2 c_1}:\;\pdf[A_2 B_2 C_1]{a_2 b_2 c_1} = \sum\nolimits_{a_1 b_1 c_2}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
-&\forall_{a_2 b_2 c_2}:\;\pdf[A_2 B_2 C_2]{a_2 b_2 c_2} = \sum\nolimits_{a_1 b_1 c_1}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}.
+&\forall{a_1 b_1 c_1}:\;\pdf[A_1 B_1 C_1]{a_1 b_1 c_1} = \sum\nolimits_{a_2 b_2 b_2}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
+&\forall{a_1 b_2 c_2}:\;\pdf[A_2 B_2 C_2]{a_1 b_2 c_2} = \sum\nolimits_{a_2 b_1 c_1}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
+&\forall{a_2 b_1 c_2}:\;\pdf[A_2 B_1 C_2]{a_2 b_1 c_2} = \sum\nolimits_{a_1 b_2 c_1}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
+&\forall{a_2 b_2 c_1}:\;\pdf[A_2 B_2 C_1]{a_2 b_2 c_1} = \sum\nolimits_{a_1 b_1 c_2}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
+&\forall{a_2 b_2 c_2}:\;\pdf[A_2 B_2 C_2]{a_2 b_2 c_2} = \sum\nolimits_{a_1 b_1 c_1}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}.
 \end{split}
 \end{align}
 The marginal compatibility constraints in this case are, therefore, 64 inequalities and 40 equalities. Solving the marginal problem means eliminating 64 terms from those inequalities and equalities, namely any $\p[A_1 A_2 B_1 B_2 C_1 C_2]{\_\_\_\_\_\_}$. 
@@ -1026,9 +1026,9 @@ Every conditional independence relation can be translated into a nonlinear const
 For example, in \cref{fig:Tri222} we find that $A_1$ and $C_2$ are $d$-separated by $\{A_2 B_2\}$, and so one might incorporate the family of nonlinear equalities $\p[A_1 A_2 B_2 C_2]{a_1 a_2 b_2 c_2}\p[A_2 B_2]{a_2 b_2}=\p[A_1 A_2 B_2]{a_1 a_2 b_2}\p[A_2 B_2 C_2]{a_2 b_2 c_2}$ for all $a_1$, $a_2$, $b_2$ and $c_2$. Note that every semi-marginal probability introduced in some nonlinear condition independence equation should also be \emph{defined} by marginalization, i.e. as a sum of various joint probabilities, so that one need not eliminate further quantifiers. The relevant substitutions of this example would be
 \begin{align}
 \begin{array}{lll}
-\forall_{a_2 b_2}:&\;\pdf[A_2 B_2]{a_2 b_2} \to& \sum\nolimits_{a_1 b_1 c_1 c_2}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
-\forall_{a_1 a_2 b_2 c_2}:&\;\pdf[A_1 A_2 B_2 C_2]{a_1 a_2 b_2 c_2} \to& \sum\nolimits_{b_1 c_1}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
-\forall_{a_1 a_2 b_2}:&\;\pdf[A_1 A_2 B_2]{a_1 a_2 b_2} \to\quad& \sum\nolimits_{b_1 c_1 c_2}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}
+\forall{a_2 b_2}:&\;\pdf[A_2 B_2]{a_2 b_2} \to& \sum\nolimits_{a_1 b_1 c_1 c_2}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
+\forall{a_1 a_2 b_2 c_2}:&\;\pdf[A_1 A_2 B_2 C_2]{a_1 a_2 b_2 c_2} \to& \sum\nolimits_{b_1 c_1}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
+\forall{a_1 a_2 b_2}:&\;\pdf[A_1 A_2 B_2]{a_1 a_2 b_2} \to\quad& \sum\nolimits_{b_1 c_1 c_2}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}
 \end{array}
 \end{align}
 etc. 
@@ -1047,7 +1047,7 @@ It is also possible to use a mixed strategy of linear and nonlinear quantifier e
 
 The inflation hypothesis is more than just causal structure, however, even if the original hypothesis did not constrain possible causal models beyond the original DAG.  By restricting to exclusively \emph{inflation} models, however, we require $\pdf{A_i| \Pa[G']{A_i}}=\pdf{A_j|\Pa[G']{A_j}}$, per \cref{eq:funcdependences}. Consequently, the distributions over different injectable sets must occasionally coincide, i.e. $\pdf{\bm{X}}=\pdf{\bm{Y}}$ whenever both $\bm{X}$ and $\bm{Y}$ are injectable, and $\subsim{\bm{X}}=\subsim{\bm{Y}}$. Sometimes sets of random variables which are \emph{not} injectable, however, can also be shown to have necessarily coinciding distributions. For example, we can verify that $\pdf{A_1 A_2 B_1}=\pdf{A_1 A_2 B_2}$ follows from \cref{fig:Tri222}, even though $\brackets{A_1 A_2 B_1}$ and $\brackets{A_1 A_2 B_2}$ are not injectable sets.
 
-Equations such as $\forall_{a_1 a_2 b}:\;\p[A_1 A_2 B_1]{a_1 a_2 b} = \p[A_1 A_2 B_2]{a_1 a_2 b}$ are also intrinsic parts of the inflation hypothesis, and may incorporated into either linear or nonlinear quantifier eliminations in order to derive stronger infeasibility criteria. The details of how to recognize coinciding distributions beyond the obvious coincidences implied by injectable or pre-injectable sets are discuss in \cref{sec:coincidingdetails}.
+Equations such as $\forall{a_1 a_2 b}:\;\p[A_1 A_2 B_1]{a_1 a_2 b} = \p[A_1 A_2 B_2]{a_1 a_2 b}$ are also intrinsic parts of the inflation hypothesis, and may incorporated into either linear or nonlinear quantifier eliminations in order to derive stronger infeasibility criteria. The details of how to recognize coinciding distributions beyond the obvious coincidences implied by injectable or pre-injectable sets are discuss in \cref{sec:coincidingdetails}.
 
 
 
@@ -1093,48 +1093,49 @@ As far as we can tell, our inequalities are not related to the nonlinear infeasi
 \end{figure}
 \end{comment}
 
-To further illustrate our inflation-DAG approach, we demonstrate how to recover all Bell inequalities \cite{Brunner2013Bell,bell1966lhvm,CHSHOriginal} via our method. To keep things simple we only discuss the case of a bipartite Bell scenario with two possible ``settings'' here, but the cases of more settings and/or more parties are totally analogous.
+To further illustrate the power of our inflation DAG approach, we now demonstrate how to recover all Bell inequalities~\cite{Brunner2013Bell,bell1966lhvm,CHSHOriginal} via our method. To keep things simple we only discuss the case of a bipartite Bell scenario with two possible ``settings'' here, but the case of more settings and/or more parties is totally analogous.
 %It is critical that our method should be able to derive these seminal criteria, as Bell inequalities have been a foundational component of quantum information theory for the last half century \cite{scarani2012device,BancalDIApproach}.
 
-Consider the causal structure associated to the Bell/CHSH \cite{bell1964einstein,Brunner2013Bell,bell1966lhvm,CHSHOriginal} experiment [\citealp{pusey2014gdag}~(Fig.~E\#2), \citealp{WoodSpekkens}~(Fig.~19), \citealp{chaves2014novel}~(Fig.~1), \citealp{BeyondBellII}~(Fig.~1), \citealp{wolfe2015nonconvexity}~(Fig.~2b), \citealp{steeg2011relaxation}~(Fig.~2)], depicted here in \cref{fig:NewBellDAG1}. The observable variables are $A,B,X,Y$, and $\Lambda$ is the latent common cause of $A$ and $B$.
+The causal structure associated to the Bell \cite{bell1964einstein,Brunner2013Bell,bell1966lhvm,CHSHOriginal} experiment [\citealp{pusey2014gdag}~(Fig.~E\#2), \citealp{WoodSpekkens}~(Fig.~19), \citealp{chaves2014novel}~(Fig.~1), \citealp{BeyondBellII}~(Fig.~1), \citealp{wolfe2015nonconvexity}~(Fig.~2b), \citealp{steeg2011relaxation}~(Fig.~2)] is depicted here in \cref{fig:NewBellDAG1}. The observable variables are $A,B,X,Y$, and $\Lambda$ is the latent common cause of $A$ and $B$. In a Bell scenario, one traditionally works with the conditional distribution $P_{AB|XY}$, to be understood as an array of distributions indexed by the possible values of $X$ and $Y$, instead of with the original distribution $P_{ABXY}$, which is what we do.
 
-In the Bell scenario DAG, one usually works with the conditional distribution $P(AB|XY)$ instead of with the original distribution $P(ABXY)$. The conditional distribution is an \emph{array} of distributions over $A$ and $B$, indexed by the possible values of $X$ and $Y$. The maximal pre-injectable sets then are
+In the Bell scenario DAG, the maximal pre-injectable sets are
 \begin{align}\begin{split}
-&\brackets{A_1 B_1, X_1 X_2 Y_1 Y_2} \\
-&\brackets{A_1 B_2, X_1 X_2 Y_2 Y_2} \\
-&\brackets{A_2 B_1, X_1 X_2 Y_2 Y_2} \\
-&\brackets{A_2 B_2, X_1 X_2 Y_2 Y_2} ,
+	\label{eq:bellcontexts}
+&\brackets{A_1 B_1 X_1 X_2 Y_1 Y_2} \\
+&\brackets{A_1 B_2 X_1 X_2 Y_2 Y_2} \\
+&\brackets{A_2 B_1 X_1 X_2 Y_2 Y_2} \\
+&\brackets{A_2 B_2 X_1 X_2 Y_2 Y_2} ,
 \end{split}\end{align}
-where we have put commas in order to clarify that every maximal pre-injectable set contains \emph{all} ``settings'' variables. These pre-injectable sets are specified by the original observable distribution via
-\begin{align}\begin{split}&\forall_{a b x_1 x_2 y_1 y_2}:\; \begin{cases}
+where notably every maximal pre-injectable set contains all ``settings'' variables $X_1$ to $Y_2$. The marginal distributions on these pre-injectable sets are then specified by the original observable distribution via
+\begin{align}\begin{split}&\forall{a b x_1 x_2 y_1 y_2}:\; \begin{cases}
 	P_{A_1 B_1 X_1 X_2 Y_1 Y_2}(a b x_1 x_2 y_1 y_2)  = P_{A B X Y}(a b x_1 y_1) P_X(x_2) P_Y(y_2), \\
 	P_{A_1 B_2 X_1 X_2 Y_1 Y_2}(a b x_1 x_2 y_1 y_2)  = P_{A B X Y}(a b x_1 y_2) P_X(x_2) P_Y(y_1), \\
 	P_{A_2 B_1 X_1 X_2 Y_1 Y_2}(a b x_1 x_2 y_1 y_2)  = P_{A B X Y}(a b x_2 y_1) P_X(x_1) P_Y(y_2), \\
 	P_{A_2 B_2 X_1 X_2 Y_1 Y_2}(a b x_1 x_2 y_1 y_2)  = P_{A B X Y}(a b x_2 y_2) P_X(x_1) P_Y(y_1), \\
-		P_{X_1 X_2 Y_1 Y_2}(x_1 x_2 y_1 y_2)  = P_X(x_1) P_X(x_2) P_Y(y_1) P_Y(y_2).
+\hspace{2.5pc}	P_{X_1 X_2 Y_1 Y_2}(x_1 x_2 y_1 y_2)  = P_X(x_1) P_X(x_2) P_Y(y_1) P_Y(y_2).
 \end{cases}\end{split}\end{align}
 %where it should be understood implicitly that the inequalities hold for all values of $\{a b x_1 x_2 y_1 y_2\}$.
 %The last equations follows from each of the others by making use of the Markov condition $P_{XY} = P_X P_Y$ for the original distribution, it nevertheless
-By dividing the first four inequalities by the latter we obtain
-\begin{align}\begin{split}\forall_{a b x_1 x_2 y_1 y_2}:\; \begin{cases}
-	P_{A_1 B_1 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2)  = P_{A B | X Y}(a b | x_1 y_1) \\
-	P_{A_1 B_2 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2)  = P_{A B | X Y}(a b | x_1 y_2) \\
-	P_{A_2 B_1 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2)  = P_{A B | X Y}(a b | x_2 y_1) \\
+By dividing each of the first four equations by the fifth, we obtain
+\begin{align}\begin{split}\forall{a b x_1 x_2 y_1 y_2}:\; \begin{cases}
+	P_{A_1 B_1 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2)  = P_{A B | X Y}(a b | x_1 y_1), \\
+	P_{A_1 B_2 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2)  = P_{A B | X Y}(a b | x_1 y_2), \\
+	P_{A_2 B_1 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2)  = P_{A B | X Y}(a b | x_2 y_1), \\
 	P_{A_2 B_2 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2)  = P_{A B | X Y}(a b | x_2 y_2).
 \end{cases}\end{split}\end{align}
-If we then impose marginal compatibility according the the marginal problem we find that the (minimal!) consequence of the inflation hypothesis is 
+The existence of a joint distribution over all six variables---i.e.~the existence of a solution to the marginal problem---implies in particular
+%If we then impose marginal compatibility according the the marginal problem we find that the (minimal!) consequence of the inflation hypothesis is 
 \begin{align}
-	P_{A_1 B_1 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2)  =  \sum\nolimits_{a_2,b_2} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(a_1 a_2 b_1 b_2|x_1 x_2 y_1 y_2)
+	\forall{a b x_1 x_2 y_1 y_2}: \quad P_{A_1 B_1 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(a a' b b'|x_1 x_2 y_1 y_2),
 \end{align}
-etc.
-For the inflated observation data to consistent with the inflation hypothesis, therefore, we would require
-\begin{align}\begin{split}\label{eq:finalBellstep}\forall_{a b}:\; \begin{cases}
+and similarly for the other three conditional distributions under consideration. For consistency with the causal hypothesis, therefore, the original distribution must satisfy in particular
+\begin{align}\begin{split}\label{eq:finalBellstep}\forall{a b}:\; \begin{cases}
 	P_{A B | X Y}(a b | 0 0)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(a a' b b'|0101) \\
 	P_{A B | X Y}(a b | 1 0)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(a' a b b'|0101) \\
 	P_{A B | X Y}(a b | 0 1)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(a a' b' b|0101) \\
 	P_{A B | X Y}(a b | 1 1)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(a' a b' b|0101)
 \end{cases}\end{split}\end{align}
-The existence of an \emph{array} of distributions, i.e. \cref{eq:finalBellstep}, is equivalent to the existence of a \tblue{hidden variable model}, as noted in Fine's Theorem~\cite{FineTheorem}. Thus, an inflation model exists if and only if a hidden-variable model exists for the original observable variables.
+The possibility to write the conditional probabilities in the Bell scenario in this form is equivalent to the existence of a latent variable model, as noted in Fine's Theorem~\cite{FineTheorem}. Thus, if an inflation model exists with the required marginals, then a latent variable model of the original distribution exists as well (and conversely, trivially). Hence the inflation DAG of~\cref{fig:BellDagCopy1} provides necessary and sufficient conditions for the consistency of the original observed distribution with the Bell scenario causal structure.
 
 %The last equations turns out to be rather useful to write down explicitly: putting $x_1 = y_1 = 0$ and $x_2 = y_2 = 1$ and dividing the first equation by the last one results in
 %\begin{align*}
@@ -1143,11 +1144,33 @@ The existence of an \emph{array} of distributions, i.e. \cref{eq:finalBellstep},
 %Similarly, $P_{A B X Y}(a b | 0 1)$, $P_{A B X Y}(a b | 1 0)$ and $P_{A B X Y}(a b | 1 1)$ can also be written as marginals of a conditional distribution. 
 %By Fine's Theorem~\cite{FineTheorem}, this implies the existence of a hidden-variable model. Conversely, if a hidden-variable model exists, then the existence of the inflation model implies the existence of a solution to the marginal problem.
 
-In conclusion, we therefore find in the case of the inflation DAG~\cref{fig:BellDagCopy1}, the inflation method yields necessary and sufficient infeasibility criteria for the Bell causal structure, i.e. the Bell/CHSH inequalities, just by requiring marginal compatibility of the pre-injectable sets.
-More generally, we can use Fine's theorem to show that applying the marginal problem to suitable inflation DAGs can reproduce \emph{all} Bell inequalities, for any standard Bell scenario, no matter how many parties or settings or possible outcomes. 
+% In conclusion, we therefore find in the case of the inflation DAG~\cref{fig:BellDagCopy1}, the inflation method yields necessary and sufficient infeasibility criteria for the Bell causal structure, i.e. the Bell/CHSH inequalities, just by requiring marginal compatibility of the pre-injectable sets.
+% More generally, we can use Fine's theorem to show that applying the marginal problem to suitable inflation DAGs can reproduce \emph{all} Bell inequalities, for any standard Bell scenario, no matter how many parties or settings or possible outcomes. 
+
+Moreover, it is not hard to describe the marginal polytope over the pre-injectable sets of~\cref{eq:bellcontexts}, due to the fact that the ``settings'' variables $X_1$ to $Y_4$ occur in all four contexts. This description is easier to state for the marginal \emph{cone}, by which we mean the convex cone spanned by the marginal polytope, i.e.~the convex cone consisting of all nonnegative linear combinations of deterministic assignments of values, or equivalently the convex cone of all measures on the set of joint outcomes. This cone lives in $\oplus_{i=1}^4 \mathbb{R}^{2^6} = \oplus_{i=1}^4 (\mathbb{R}^2)^{\otimes 6}$, where each tensor factor has basis vectors corresponding to the two possible outcomes of each variable. Now the marginal cone is precisely the set of all nonnegative linear combinations of the points, and the direct sum enumerates the four contexts. The cone is then generated by the points
+\begin{align*}
+	(e_{A_1} & \otimes e_{B_1} \otimes e_{X_1} \otimes e_{X_2} \otimes e_{Y_1} \otimes e_{Y_2}) \\
+	\oplus\: (e_{A_1} & \otimes e_{B_2} \otimes e_{X_1} \otimes e_{X_2} \otimes e_{Y_1} \otimes e_{Y_2}) \\
+	\oplus\: (e_{A_2} & \otimes e_{B_1} \otimes e_{X_1} \otimes e_{X_2} \otimes e_{Y_1} \otimes e_{Y_2}) \\
+	\oplus\: (e_{A_2} & \otimes e_{B_2} \otimes e_{X_1} \otimes e_{X_2} \otimes e_{Y_1} \otimes e_{Y_2}),
+\end{align*}
+where all six variables range over their deterministic outcomes. Since the tensor factors $e_{X_1}$ to $e_{Y_2}$ occur in every direct summand, the resulting marginal cone is linearly isomorphic to the cone generated by all vectors of the form
+\[
+	\left[ (e_{A_1} \otimes e_{B_1}) \oplus (e_{A_1} \otimes e_{B_2}) \oplus (e_{A_2} \otimes e_{B_1}) \oplus (e_{A_2} \otimes e_{B_2})\right] \otimes \left[ e_{X_1} \otimes e_{X_2} \otimes e_{Y_1} \otimes e_{Y_2})\right]
+\]
+in $\mathbb{R}^{2^2}\otimes \mathbb{R}^{2^4}$. Now since the first four variables in the first tensor factor vary completely independently of the latter four variables in the second tensor factor, the resulting cone will be precisely the tensor product~\cite{namioka_tensor_1969} of two cones: first, the cone generated by all vectors of the form
+\[
+	(e_{A_1} \otimes e_{B_1}) \oplus (e_{A_1} \otimes e_{B_2}) \oplus (e_{A_2} \otimes e_{B_1}) \oplus (e_{A_2} \otimes e_{B_2}),
+\]
+and second the one spanned by all $e_{X_1} \otimes e_{X_2} \otimes e_{Y_1} \otimes e_{Y_2})$. While the latter cone is simply the standard positive cone of $\mathbb{R}^8$, the former cone is the cone generated by ``local polytope'' that is traditionally used in the context of Bell scenarios~\cite[Sec.~II.B]{Brunner2013Bell}. Standard results on tensor products of cones and polytopes~\cite{bogart_hom_2013} therefore imply that our marginal polytope is the tensor product of the local polytope, corresponding to the $A_1$ to $B_2$ part, with a simplex corresponding to the ``settings'' $X_1$ to $Y_2$ part. Moreover, the facts of our marginal come in two kinds:
+\begin{itemize}
+	\item facets of the local polytope,
+	\item facets of the simplex.
+\end{itemize}
+While the latter are only the nonnegativity of probability inequalities for the ``settings'' variables, the former similarly are the nonnegativity of probability inequalities \emph{plus} all tight Bell inequalities. In this way, the inflation DAG technique also recovers all Bell inequalities.
 
 \begin{comment}
-Analysis of the inflated DAG in \cref{fig:BellDagCopy1} shows that 
+Analysis of the inflated DAG in \cref{fig:BellDagCopy1} shows that  
 \begin{align}\label{eq:bellypolymapped}
  \p{a b x y}\p{\n{x}} \p{\n{y}}
 &\leq
@@ -1229,7 +1252,7 @@ It follows that every quantum causal model can be inflated to a non-broadcasting
 Since the perfect-correlation distribution considered in~\cref{eq:ghzdistribution1} violates both of these inequalities, it evidently cannot be generated within the Triangle scenario even with quantum or general probabilistic states on the hidden nodes. This was also pointed out in Ref.~\cite{pusey2014gdag}.
 
 %\begin{align}\label{eq:nonbroadcastinginflationDAG}
-%G'\in\SmallNamedFunction{NonBroadcastingInflations}{G} \quad\text{ iff }\quad \forall_{\text{latent }A_i\in G'}\; \Ch[G']{A_i} \text{ is an irredundant set.}
+%G'\in\SmallNamedFunction{NonBroadcastingInflations}{G} \quad\text{ iff }\quad \forall{\text{latent }A_i\in G'}\; \Ch[G']{A_i} \text{ is an irredundant set.}
 %\end{align}
 
 On the other hand, by intentionally using broadcasting in an inflation DAG, we can specifically try to witness certain quantum or general probabilistic distributions as non-classical. This is exactly what happens in Bell's theorem.
@@ -1438,7 +1461,7 @@ The generic task of polytope projection assumes that the initial polytope is giv
 
 A generic convex hull problem takes a matrix of vertices $\hat{V}$, where each row is a vertex, and asks what is the set of coordinates $\vec{x}$ such that $\vec{x}$ can be achieved as a convex combination of the vertices. Formally, it amounts to resolving a partial-existential-closure problem pertaining the existing of nonnegative weights, i.e. 
 \begin{align}
-\exists_{\vec{w}}:\;\SmallNamedFunction{And}{\vec{w}.\hat{V}=\vec{x} ,\;\; {{\sum_i}{w_i}}=1,\;\; \forall_i w_i\geq 0}.
+\exists_{\vec{w}}:\;\SmallNamedFunction{And}{\vec{w}.\hat{V}=\vec{x} ,\;\; {{\sum_i}{w_i}}=1,\;\; \forall i:\: w_i\geq 0}.
 \end{align}
 It should be evident from Eqs. (\ref{eq:nonnegativity}-\ref{eq:marginalequalities222}) that the marginal problem is precisely of this form. The individual probabilities of the joint outcome correspond to the weights in the convex hull problem. Recasting the marginal problem as a convex hull problem means that optimized convex hull algorithms can be used to directly solve the marginal problem. Fine's Theorem~\cite{FineTheorem} also follows along these lines. Fine's theorem states that the existence of a joint distribution is equivalent to having the observables marginal distribution lie inside the convex hull of all deterministic joint distributions. \purp{Tobias, can you say the previous sentence better perhaps?}
 
@@ -1689,7 +1712,7 @@ We can formalize this notion in the language of sufficient statistics. To do so,
 if and only if all inferences about $X$ which can be made given knowledge of $A$ are also inferable \emph{without} knowing $A$ but with knowing $\bm{Z}$ instead. In other words, learning $A$ can never teach anything new about $X$ if $\bm{Z}$ is already known. If $X=A$, then the \emph{only way} $\bm{Z}$ can stand in for $A$ when making inferences about $A$ is if $A$ is perfectly predicable given $\bm{Z}$, i.e. ${\bm{Z}\vdash A|A\iff \bm{Z}\vDash A}$. If $A\neq B$ then there are four \purp{and only four?)} ways that $\bm{Z}\vdash A|X$ can be implied by a DAG: If $\bm{Z}\vDash A$, if $\bm{Z}\vDash X$, if $\NamedFunction{MB}{\!\bm{V}\!}\subseteq \bm{Z}$ and $A\in \bm{V}$ while $X\not\in \bm{V}$, or if $\NamedFunction{MB}{\!\bm{V}\!}\subseteq \bm{Z}$ and $X\in \bm{V}$ while $A\not\in \bm{V}$. \purp{Alternatively:} If $A\neq B$ then there are THREE ways that $\bm{Z}\vdash A|X$ can be implied by a DAG: If $\bm{Z}\vDash A$, if $\bm{Z}\vDash X$, and if ${A\cramp{\dashv}\bm{Z}\cramp{\vdash}X}$.
 
 \begin{theorem}\label{theo:edgeadding}
-An edge $A\to B$ can be added to $G$ without observational impact if $\NamedFunction{pa}{\!B\!}$ are a sufficient statistic for $A$ relative to all observable nodes, i.e. $\forall_{\text{observable }X}:\NamedFunction{pa}{\!B\!}\vdash A|X$.\\
+An edge $A\to B$ can be added to $G$ without observational impact if $\NamedFunction{pa}{\!B\!}$ are a sufficient statistic for $A$ relative to all observable nodes, i.e. $\forall{\text{observable }X}:\NamedFunction{pa}{\!B\!}\vdash A|X$.\\
 In particular, the edge $A\to B$ can always be added whenever $\NamedFunction{pa}{\!B\!}\vDash A$, including, but not limited to, the instance  $\NamedFunction{pa}{\!A\!}\subseteq \NamedFunction{pa}{\!B\!}$.\\
 Furthermore, the edge $\Lambda\to B$ can be also always be added whenever $\Lambda$ is latent and $\NamedFunction{MB}{\!\Lambda\!}\subseteq\NamedFunction{pa}{\!B\!}$.
 \end{theorem}
@@ -1763,7 +1786,7 @@ As it turns out, the inflation DAG technique is also useful outside of the probl
 \end{figure}
 
 \begin{proof}
-	Consider the original DAG of~\cref{fig:beforecopy} and the associated inflation DAG of~\cref{fig:aftercopy}. If the original distribution $P_{ABC}$ is compatible with~\cref{fig:beforecopy}, then the associated inflation model marginalizes to a distribution $P_{AA'BC}$ which has the required properties. Hence it remains to be shown that every $P_{ABC}$ is compatible with~\cref{fig:beforecopy}. But this is easy: take $\lambda$ to be any sufficient statistic for the joint variable $(A,B)$ given $C$, such as $\lambda := (A,B,C)$.
+	Consider the original DAG of~\cref{fig:beforecopy} and the associated inflation DAG of~\cref{fig:aftercopy}. If the original distribution $P_{ABC}$ is compatible with~\cref{fig:beforecopy}, then the associated inflation model marginalizes to a distribution $P_{AA'BC}$ which has the required properties. Hence it remains to be shown that every $P_{ABC}$ is compatible with~\cref{fig:beforecopy}. But this is easy: take $X$ to be any sufficient statistic for the joint variable $(A,B)$ given $C$, such as $X := (A,B,C)$.
 \end{proof}
 
 While it is also not hard to write down a distribution with the desired properties explicitly~\cite[Lemma~15.8]{yeung_network_2008}, our purpose of rederiving the lemma via inflation is our hope that more sophisticated applications of the inflation technique will result in \emph{new} non-Shannon type entropic inequalities.
@@ -1774,12 +1797,10 @@ While it is also not hard to write down a distribution with the desired properti
 
 The following polynomial inequalities for the Triangle scenario have been derived via the linear quantifier elimination method of~\cref{sec:ineqs} using the inflation DAG of~\cref{fig:Tri222}. Initially this has resulted in 64 symmetry classes of inequalities, where the symmetries are given by permuting the variables and inverting the outcomes. For the resulting 64 inequalities, numerical checks have found violations of only 38 of them: although they are all facets of the marginal polytope over the distributions on pre-injectable sets, there is no guarantee that they are also nontrivial inequalities at the level of the original DAG, and this has indeed turned out not to be the case for 26 of these symmetry classes of inequalities. Moreover, it is still likely to be the case that some of these inequalities are redundant; we have not yet checked whether for every inequality there is a distribution which violates the inequality but satisfies all others.
 
-In the following table, the inequalities are listed in expectation-value form, where we assume the two possible outcomes of each variables to be $\{-1,+1\}$.
+In the following table, the inequalities are listed in expectation-value form, where we assume the two possible outcomes of each variables to be $\{-1,+1\}$. Each row in the table gives the coefficients with one inequality, which is then $\geq 0$.
 
-\purp{T: it may be better to list this as a table of coefficients, as e.g.~in \href{http://arxiv.org/abs/1101.2477}{arXiv:1101.2477}, p.14/15?}
-
-\begin{table*}[ht]\centering\caption{List of coefficients}
-\begin{tabularx}{\linewidth}{ccccccccccccccc} 
+\begin{table*}[ht]\centering\caption{List of inequalities as table of coefficients.}
+\begin{tabular}{c@{\hspace{1em}}ccc@{\hspace{1em}}ccc@{\hspace{1em}}c@{\hspace{1em}}ccc@{\hspace{1em}}ccc@{\hspace{1em}}c} 
 %\begin{array}{rrrrrrrrrrrrrrrr}
   constant & \(\expec{A}\) & \(\expec{B}\) & \(\expec{C}\) & \(\expec{A B}\) & \(\expec{A C}\) & \(\expec{B C}\) & \(\expec{A B C}\) & \(\expec{A}\expec{B}\) & \(\expec{A}\expec{C}\) & \(\expec{B}\expec{C}\) & \(\expec{C}\expec{A B}\) & \(\expec{B}\expec{A C}\) &
    {\(\expec{A}\expec{B C}\)} & {\(\expec{A}\expec{B}\expec{C}\)}   \\\bottomrule
@@ -1821,7 +1842,7 @@ In the following table, the inequalities are listed in expectation-value form, w
  8 & 2 & 0 & 0 & 6 & 1 & -2 & 1 & 0 & 1 & 2 & -1 & -2 & -3 & 3 \\
  8 & 0 & -2 & -2 & 0 & -6 & 1 & 1 & 2 & 0 & -1 & 3 & 1 & -2 & -3 \\
  8 & 0 & 0 & 2 & 2 & 1 & -6 & 1 & -2 & 1 & 0 & 3 & 2 & -1 & -3 
-\end{tabularx}
+\end{tabular}
 \end{table*}
 
 \clearpage
