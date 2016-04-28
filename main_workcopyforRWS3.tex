@@ -578,18 +578,19 @@ Because causal hypotheses are sets of causal models, and the inflation map acts 
 
 To see how inflation is relevant for causal inference, we must explain how the distributions that can be achieved in the inflation model are constrained by those in the original model.  In what follows, we assume that $G' \in \SmallNamedFunction{Inflations}{G}$ and that $C' = \SmallNamedFunction{Inflation}{C}$.
 
-Note, first of all, that for any sets of nodes $\bm{U}\in \SmallNamedFunction{Nodes}{G'}$ and   $\subsim{\bm{U}}\in \SmallNamedFunction{Nodes}{G}$,
+Note, first of all, that for any sets of nodes $\bm{U}\subseteq \SmallNamedFunction{Nodes}{G'}$ and   $\subsim{\bm{U}}\subseteq \SmallNamedFunction{Nodes}{G}$,
 \begin{align}\label{eq:coincidingdistrodef}
 \text{if }\quad \ansubgraph[G']{\bm{U}}\sim\ansubgraph[G]{\subsim{\bm{U}}}\quad\text{then}\quad \pdf[C']{\bm{U}}=\pdf[C]{\subsim{\bm{U}}}.
 \end{align}
 This follows from the fact that the probability distributions over $\bm{U}$ and $\subsim{\bm{U}}$ depend only on their ancestral subgraphs and the parameters defined thereon, which by the definition of inflation are the same for $\bm{U}$ and for $\subsim{\bm{U}}$.
 
-It is useful to have a name for a set of nodes in the inflation DAG, $\bm{U} \subseteq \SmallNamedFunction{Nodes}{G'}$, such that one can find a corresponding set in the original DAG, $\subsim{\bm{U}} \subseteq \SmallNamedFunction{Nodes}{G}$, which has an equivalent ancestral subgraph.   We say that such subsets of the nodes of $G'$ are injectable into $G$ and we call them the \tblue{injectable sets},
+We will be interested in the question of injectability for observed variable. 
+It is therefore useful to have a name for a set of observed nodes in the inflation DAG, $\bm{U} \subseteq \SmallNamedFunction{ObservedNodes}{G'}$, such that one can find a corresponding set in the original DAG, $\subsim{\bm{U}} \subseteq \SmallNamedFunction{ObservedNodes}{G}$, which has an equivalent ancestral subgraph.   We say that such subsets of the observed nodes of $G'$ are injectable into $G$ and we call them the \tblue{injectable sets},
 % into $\SmallNamedFunction{Nodes}{G}$,
 \begin{align}\label{eq:definjectable}
-\bm{U}\in\SmallNamedFunction{InjectableSets}{G'} \quad\text{ iff }\quad \exists \subsim{\bm{U}}\subseteq \SmallNamedFunction{Nodes}{G}: \ansubgraph[G']{\bm{U}}\sim\ansubgraph[G]{\subsim{\bm{U}}}.
+\bm{U}\in\SmallNamedFunction{InjectableSets}{G'} \quad\text{ iff }\quad \exists \subsim{\bm{U}}\subseteq \SmallNamedFunction{ObservedNodes}{G}: \ansubgraph[G']{\bm{U}}\sim\ansubgraph[G]{\subsim{\bm{U}}}.
 \end{align}
-In \cref{fig:Tri222}, for example, the set $\brackets{A_1 B_1 C_1}$ is injectable because its ancestral subgraph is equivalent up to copy-indices to the ancestral subgraph of $\brackets{A B C}$ in the original DAG (which is just the full DAG), and the set $\brackets{A_2 C_1}$ is injectable because its ancestral subgraph is equivalent to that of $\brackets{ A C}$ in the original DAG. 
+In \cref{fig:Tri222}, for example, the set of observed nodes $\brackets{A_1 B_1 C_1}$ is injectable because its ancestral subgraph is equivalent up to copy-indices to the ancestral subgraph of $\brackets{A B C}$ in the original DAG (which is just the full DAG), and the set $\brackets{A_2 C_1}$ is injectable because its ancestral subgraph is equivalent to that of $\brackets{ A C}$ in the original DAG. 
 
 Note that it is clear that a set of nodes in the inflation DAG can only be injectable if it contains at most one copy of any node from the original DAG.  Similarly, it can only be injectable if its ancestral subgraph also contains at most one copy of any node from the original DAG.  
 Thus, in \cref{fig:Tri222}, $\brackets{A_1 A_2 C_1}$ is not injectable because it contains two copies of $A$, and $\brackets{A_2 B_1 C_1}$ is not injectable because its ancestral subgraph contains two copies of $Y$. 
@@ -658,7 +659,7 @@ Therefore the observational input to the new causal inference problem is not the
 
 Summarizing, we have:
 \begin{lemma}
-The causal hypothesis $H_{G,S}$ is consistent with the observational data $\pdf{\subsim{\bm{O}}}$ if and only if the image of this causal hypothesis under a $G\to G'$ inflation, denoted $H_{G',S'}$, is consistent with the observational data that $\forall \bm{U} \in \SmallNamedFunction{PreInjectableSets}{\bm{O}}: \pdf{\bm{U}} = \pdf{\subsim{\bm{U}_1}}\pdf{\subsim{\bm{U}_2}} \dots \pdf{\subsim{\bm{U}_n}}$.
+If a causal hypothesis $H_{G}$ is consistent with observational data $\pdf{\subsim{\bm{O}}}$ then the image of this causal hypothesis under a $G\to G'$ inflation, denoted $H_{G'}$, is consistent with the inflationary image of the observational data, namely, that $\forall \bm{U} \in \SmallNamedFunction{PreInjectableSets}{\bm{O}}: \pdf{\bm{U}} = \pdf{\subsim{\bm{U}_1}}\pdf{\subsim{\bm{U}_2}} \dots \pdf{\subsim{\bm{U}_n}}$.
 \label{mainlemma}
 \end{lemma}
 
