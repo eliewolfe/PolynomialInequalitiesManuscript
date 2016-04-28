@@ -321,7 +321,7 @@ In the simplest setting, a causal structure hypothesis consists of a directed ac
 
 A significantly more difficult case is when one considers a causal structure hypothesis which consists of a DAG with \tblue{latent} or \tblue{hidden} nodes, so that the set of observable variables is only a subset of the nodes of the DAG. This case occurs e.g.~in situations where one needs to deal with the possible presence of unobserved \tblue{confounders}, as in experiment design. While the conditional independence relations implied by the causal structure on the observable nodes are still necessary conditions for compatibility of a distribution with the causal structure hypothesis, these equations are generally no longer sufficient. Finding necessary and sufficient conditions is a difficult open problem. Determining plausible candidate causal structures from the given distribution is even more difficult, but this can be reduced to the previous problem e.g.~by enumerating all DAGs (say with a fixed number of latent nodes) and checking one at a time for compatibility with the distribution. Due to the possibility of making this reduction, and because the compatibility problem is already difficult enough, we will focus on the case when a DAG (with latent nodes) is given as a description of the causal structure. We then consider both the problem of deciding whether a given distribution can arise from this causal structure, as well as that of describing the entire set of these distributions for a fixed number of values per variable.
 
-Historically, the insufficiency of the causal independence relations for causal inference in the presence of latent variables has first been observed by Bell in the context of the hidden variable problem of quantum physics~\cite{bell1964einstein}. Roughly speaking, Bell derived an inequality that any distribution compatible with the spacetime causal structure must satisfy, and found this inequality to be violated by distributions generated from suitably entangled quantum states\footnote{This incompatibility has subsequently become known as \emph{quantum nonlocality}~\cite{Brunner2013Bell}. Although the term suggests the existence of nonlocal interactions, in the sense that the actual causal structure may be different from the hypothesized one, this interpretation is at odds with the fact that no nonlocal interactions have been observed in nature, implying that their presence would require fine-tuning~\cite{WoodSpekkens}. A less problematic interpretation of Bell's theorem concludes instead the impossibility to model quantum physics in terms of the usual notions of ``classical'' probability theory.}. Subsequently, Pearl has derived another inequality, the \tblue{instrumental inequality}~\cite{pearl1995instrumental}, which witnesses the impossibility to model certain three-variable distribution by the \emph{instrumental scenario} causal structure hypothesis. More recently, \citet{steudel2010ancestors} have derived inequalities which formalize an extended version of Reichenbach's principle by witnessing the impossibility to model a given distribution on $n$ variables in terms of a causal structure without a common (hidden) ancestor for any subset of at least $c$ nodes, for any $n,c\in\mathbb{N}$. Motivated by Bell's inequality, many other Bell-type inequalities have been used in quantum physics~\cite{Brunner2013Bell}, but the foundational role of causal structure has only recently been appreciated~\cite{WoodSpekkens,fritz2012bell,pusey2014gdag,BeyondBellII}.
+Historically, the insufficiency of the causal independence relations for causal inference in the presence of latent variables has first been observed by Bell in the context of the hidden variable problem of quantum physics~\cite{bell1964einstein}. Roughly speaking, Bell derived an inequality that any distribution consistent with the spacetime causal structure must satisfy, and found this inequality to be violated by distributions generated from suitably entangled quantum states\footnote{This inconsistency has subsequently become known as \emph{quantum nonlocality}~\cite{Brunner2013Bell}. Although the term suggests the existence of nonlocal interactions, in the sense that the actual causal structure may be different from the hypothesized one, this interpretation is at odds with the fact that no nonlocal interactions have been observed in nature, implying that their presence would require fine-tuning~\cite{WoodSpekkens}. A less problematic alternative conclusion from Bell's theorem is the impossibility to model quantum physics in terms of the usual notions of ``classical'' probability theory.}. Subsequently, Pearl has derived another inequality, the \tblue{instrumental inequality}~\cite{pearl1995instrumental}, which witnesses the impossibility to model certain three-variable distribution by the \emph{instrumental scenario} causal structure hypothesis. More recently, \citet{steudel2010ancestors} have derived inequalities which formalize an extended version of Reichenbach's principle by witnessing the impossibility to model a given distribution on $n$ variables in terms of a causal structure without a common (hidden) ancestor for any subset of at least $c$ nodes, for any $n,c\in\mathbb{N}$. Motivated by Bell's inequality, many other Bell-type inequalities have been used in quantum physics~\cite{Brunner2013Bell}, but the foundational role of causal structure has only recently been appreciated~\cite{WoodSpekkens,fritz2012bell,pusey2014gdag,BeyondBellII}.
 
 \begin{comment}
 In contexts other than quantum theory, the latent nodes in causal structures are generally taken to represent hidden variables. This is not fully general, however, so we apply the retronym\footnote{Retronym (noun): a modification of an original term to distinguish it from a later development \cite{retronym}.} ``classical", as in classical causal structure and classical causal inference. The classical distributions of a given causal structure are defined as those which arise from it while restricting the latent nodes to be arbitrary (classical) random variables. Quantum distributions, by contrast, are those which are realizable if the latent nodes in the causal structure are allowed to be quantum systems. We hereafter take all causal structures and probability distributions to be classical, except where explicitly stated otherwise.
@@ -742,7 +742,7 @@ Given the assumption that the distributions $P^{\text{free}}_{X}$ and $P^{\text{
 % $P_{\text{PR}}$ is given as a conditional distribution because $X$ and $Y$ are settings variables.
 For these values, \cref{eq:PRinflated} specifies perfect correlation between $A_1$ and $B_1$.  Similarly, it the inflated observational data also specified perfect correlation between $A_1$ and $B_2$, perfect correlation between $A_2$ and $B_1$, and perfect \emph{anti}correlation between $A_2$ and $B_2$. Those four requirements are not mutually compatible, however: since perfect correlation is transitive, the first three properties entail perfect correlation between $A_2$ and $B_2$. 
 
-The mathematical structure of this proof parallels that of standard proofs of the inconsistency of PR-box correlations with the Bell structure.  Standard proofs focus on a set of variables $A_0, A_1, B_0, B_1, C_0, C_1$ where $A_0$  is the value of $A$ when $X=0$, and similarly for the others.  The fact that there must be a joint distribution over these variables can be inferred from the structure of the Bell DAG and the fact that one can assume without loss of generality that the causal dependencies are deterministic (a result known as Fine's theorem \cite{FineTheorem}).  It is then sufficient to note that the marginals given by the PR-box correlations do not arise from any joint distribution.  Nonetheless, our proof is conceptually distinct insofar as the variables to which we apply the marginals problem are not conditioned on a setting value.  And we do not require Fine's theorem.  
+The mathematical structure of this proof parallels that of standard proofs of the inconsistency of PR-box correlations with the Bell structure.  Standard proofs focus on a set of variables $\{A_0, A_1, B_0, B_1\}$ where $A_0$  is the value of $A$ when $X=0$, and similarly for the others.  The fact that there must be a joint distribution over these variables can be inferred from the structure of the Bell DAG and the fact that one can assume without loss of generality that the causal dependencies are deterministic (a result known as Fine's theorem \cite{FineTheorem}).  It is then sufficient to note that the marginals given by the PR-box correlations do not arise from any joint distribution.  Nonetheless, our proof is conceptually distinct insofar as the variables to which we apply the marginals problem are not conditioned on a setting value.  And we do not require Fine's theorem.  
 
 Many causal inference techniques can be used to derive sufficient conditions for the inconsistency of the causal hypothesis $H_{G',S'}$ with the observational data $\forall \bm{U} \in \SmallNamedFunction{PreInjectableSets}{\bm{O}}: \pdf{\bm{U}} = \pdf{\subsim{\bm{U}_1}}\pdf{\subsim{\bm{U}_2}} \dots \pdf{\subsim{\bm{U}_n}}$. We will call sets of such conditions \purp{\sout{inconsistency witnesses}} \tblue{infeasibility criteria}. \purp{I like the name inconsistency witness. Shall we switch everything over to that?}  
 
@@ -767,7 +767,7 @@ Alternatively, we could also assume variables with any number of outcomes and st
 \begin{align}
 	I(A_2 : C_1) + I(C_1 : B_1) - I(A_2 : B_1) \leq H(B_1),	
 \end{align}
-which also simply follows from the existence of a joint distribution of all variables. Again, implicit per \cref{eq:GHZobsinf} is that that the third term vanishes regardless of what the observable distribution might be, purely as a consequence of $A_2 \aindep B_1$ in \cref{fig:TriDagSubA2B1C1}. We therefore derive
+which also simply follows from the existence of a joint distribution of all variables. Again, implicit per \cref{eq:GHZobsinf} is that that the third term vanishes regardless of what the observable distribution might be, purely as a consequence of \emph{how} observable distributions are inflated pursuant to \cref{fig:TriDagSubA2B1C1}. We therefore derive
 \begin{align}\label{eq:monogomyofcorrelations}
 	I(A : C) + I(C : B) \leq H(B) ,
 \end{align}
@@ -784,7 +784,7 @@ which is the original entropic monogamy inequality derived for the Triangle scen
 \bigskip
 
 Slightly more involved but otherwise analogous considerations can be applied to the inflation DAG of~\cref{fig:Tri222}, where in particular we have the pre-injectable sets $\{A_1 B_1 C_1\}$, $\{A_1 B_2 C_2\}$, $\{A_2 B_1 C_2\}$, $\{A_2 B_2 C_1\}$ and $\{A_2 B_2 C_2\}$, resulting in the factorization relations
-\begin{align}\begin{split}
+\begin{align}\begin{split}\label{eq:tri222fac}
 	P_{A_1 B_1 C_1} &= P_{A B C}, \\
 	P_{A_1 B_2 C_2} &= P_{A B} \otimes P_{C}, \\
 	P_{B_1 C_2 A_2} &= P_{B C} \otimes P_{A}, \\
@@ -857,7 +857,7 @@ Preliminary to every strategy, however, is the identification of the pre-injecta
 
 \topic{\tred{Identifying the Pre-Injectable Sets}}\label{step:findpreinjectable}
 
-To identify the pre-injectable sets, we first identify the injectable sets. To this end, it is useful to construct an auxiliary graph from the inflation DAG. Let the nodes of these auxiliary graphs be the observable nodes in the inflation DAG. The \tblue{injection graph}, then, is the undirected graph in which a pair of nodes $A_i$ and $B_j$ are adjacent if  $\An{A_i B_j}$ is irredundant. The injectable sets are then precisely the cliques\footnote{A clique is a set of nodes such that every single node is connected to every other.} in this graph, per \cref{eq:definjectable}. 
+To identify the pre-injectable sets, we first identify the injectable sets. To this end, it is useful to construct an auxiliary graph from the inflation DAG. Let the nodes of these auxiliary graphs be the observable nodes in the inflation DAG. The \tblue{injection graph}, then, is the undirected graph in which a pair of nodes $A_i$ and $B_j$ are adjacent if  $\An{A_i B_j}$ is irredundant. The injectable sets are then precisely the cliques\footnote{A clique is a subset of nodes such that every node in the subset is connected to every other node in the subset.} in this graph, per \cref{eq:definjectable}. 
 
 Determining the pre-injectable sets from there can be done via constructing another graph that we call the \tblue{independence graph}. Its nodes are the injectable sets, and we connect two of these by an edge if their ancestral subgraphs are disjoint. Then by definition, the pre-injectable sets can be obtained as the cliques in this graph. Taking the union of all the injectable sets in such a clique results in a pre-injectable set. Since it is sufficient to only consider the maximal pre-injectable sets, one can eliminate all those pre-injectable sets that are contained in other ones, as a final step.
 
@@ -883,13 +883,12 @@ Determining the pre-injectable sets from there can be done via constructing anot
 \begin{minipage}[b]{0.5\linewidth}
 \centering
 \includegraphics[scale=0.25]{simplicialcomplex.pdf}
-\caption{The simplicial complex... \purp{Tobias - you please caption this?}The 5 faces in this figure correspond to the pre-injectable sets.}\label{fig:simplicialcomplex222}
+\caption{The simplicial complex... \purp{Tobias - you please caption this?}The 5 faces in this figure correspond to the 5 maximal pre-injectable sets per \cref{fig:Tri222}, namely $\{A_1 B_1 C_1\}$, $\{A_1 B_2 C_2\}$, $\{A_2 B_1 C_2\}$, $\{A_2 B_2 C_1\}$ and $\{A_2 B_2 C_2\}$.}\label{fig:simplicialcomplex222}
 \end{minipage}
 \end{figure}
 
-Applying these prescriptions to the inflation DAG in \cref{fig:Tri222} identifies the following 
- ancestral independencies 
-maximal injectable and maximal pre-injectable sets as follows:
+Applying these prescriptions to the inflation DAG in \cref{fig:Tri222} identifies 
+ ancestral independencies and (pre-)injectable sets as follows:
 \begin{align}\label{eq:basicsetup222}
 {\underbrace{\begin{matrix}
 A_2\aindep B_1\\
@@ -917,7 +916,7 @@ C_2\aindep B_2
 \brackets{ C_2 B_1 }\\
 \end{matrix}}_{\substack{\text{pairwise}\\\text{injectable}\\\text{sets}}}}
 \qquad\quad
-{\underbrace{\begin{array}{l}
+{\underbrace{\begin{array}{c}
 \\ \\
 \brackets{A_1 B_2}\\
 \brackets{B_1 C_2}\\
@@ -945,7 +944,7 @@ such that the distributions on the pre-injectable sets relate to the original DA
 \pdf[A_2 B_2 C_2]{a b c} = \pdf[A]{a}\pdf[B]{b}\pdf[C]{c}
 \end{cases}\end{split}
 \end{align}
-Having identified the pre-injectable sets (and how to use them), we next consider various ways to invoke constraints on the distributions over the pre-injectable sets.
+\cref{eq:preinjectableuses222} is an equivalent restatement of \cref{eq:tri222fac}. Having identified the pre-injectable sets (and how to use them), we next consider various ways to invoke constraints on the distributions over the pre-injectable sets.
 
 
 \topic{\tred{Constraining Possible Distributions over Pre-Injectable Sets via the Marginal Problem}}\label{step:marginalsproblem}
@@ -960,16 +959,16 @@ As an example, here's how the marginal problem would be phrased as a partial-exi
 
 In order for the five pre-injectable sets in \cref{eq:preinjectableuses222} to be marginally compatible there must exist 64 nonnegative joint probabilities, i.e. satisfying
 \begin{align}\label{eq:nonnegativity}
-\forall_{a_1 a_2 b_1 b_2 c_1 c_2}:\;0\leq \p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},
+\forall_{a_1 a_2 b_1 b_2 c_1 c_2}:\;0\leq \pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},
 \end{align}
 constrained further by marginal distributions given by
 \begin{align}\label[eqs]{eq:marginalequalities222}
 \begin{split}
-&\forall_{a_1 b_1 c_1}:\;\p[A_1 B_1 C_1]{a_1 b_1 c_1} = \sum\nolimits_{a_2 b_2 b_2}\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
-&\forall_{a_1 b_2 c_2}:\;\p[A_2 B_2 C_2]{a_1 b_2 c_2} = \sum\nolimits_{a_2 b_1 c_1}\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
-&\forall_{a_2 b_1 c_2}:\;\p[A_2 B_1 C_2]{a_2 b_1 c_2} = \sum\nolimits_{a_1 b_2 c_1}\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
-&\forall_{a_2 b_2 c_1}:\;\p[A_2 B_2 C_1]{a_2 b_2 c_1} = \sum\nolimits_{a_1 b_1 c_2}\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
-&\forall_{a_2 b_2 c_2}:\;\p[A_2 B_2 C_2]{a_2 b_2 c_2} = \sum\nolimits_{a_1 b_1 c_1}\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}.
+&\forall_{a_1 b_1 c_1}:\;\pdf[A_1 B_1 C_1]{a_1 b_1 c_1} = \sum\nolimits_{a_2 b_2 b_2}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
+&\forall_{a_1 b_2 c_2}:\;\pdf[A_2 B_2 C_2]{a_1 b_2 c_2} = \sum\nolimits_{a_2 b_1 c_1}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
+&\forall_{a_2 b_1 c_2}:\;\pdf[A_2 B_1 C_2]{a_2 b_1 c_2} = \sum\nolimits_{a_1 b_2 c_1}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
+&\forall_{a_2 b_2 c_1}:\;\pdf[A_2 B_2 C_1]{a_2 b_2 c_1} = \sum\nolimits_{a_1 b_1 c_2}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
+&\forall_{a_2 b_2 c_2}:\;\pdf[A_2 B_2 C_2]{a_2 b_2 c_2} = \sum\nolimits_{a_1 b_1 c_1}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}.
 \end{split}
 \end{align}
 The marginal compatibility constraints in this case are, therefore, 64 inequalities and 40 equalities. Solving the marginal problem means eliminating 64 terms from those inequalities and equalities, namely any $\p[A_1 A_2 B_1 B_2 C_1 C_2]{\_\_\_\_\_\_}$. 
@@ -988,17 +987,17 @@ When solving the marginal problem is too difficult, one may consider solving a r
 
 The marginal problem asks about the existence of \emph{any} joint distribution which recovers the marginal distributions. In causal inference, however, there are plenty of other constraints on the sorts of joint distributions which are consistent with some causal hypothesis. The minimal constraint embedded in any causal hypothesis is the idea of causal structure. Thus it is natural to supplement the marginal problem with additional constraints, motivated by causal structure, on the hypothetical inflation-DAG observable joint distribution.
 
-The most familiar causally-motivated constraints on a joint distribution are \tblue{conditional independence relations}, in particular, observable conditional independence relations. \purp{(Need citation?} Conditional independence relations are inferred by $d$-separation; if $\bm{X}$ and $\bm{Y}$ are $d$-separated in the (inflation) DAG by $\bm{Z}$, then we infer the conditional independence $\bm{X}\bot\bm{Y}|\bm{Z}$. The $d$-separation criterion is explained at length in~\cite{pearl2009causality,studeny2005probabilistic,WoodSpekkens,pusey2014gdag}, so we elect not to review it here.
+The most familiar causally-motivated constraints on a joint distribution are \tblue{conditional independence relations}, in particular, observable conditional independence relations. Conditional independence relations are inferred by $d$-separation; if $\bm{X}$ and $\bm{Y}$ are $d$-separated in the (inflation) DAG by $\bm{Z}$, then we infer the conditional independence $\bm{X}\bot\bm{Y}|\bm{Z}$. The $d$-separation criterion is explained at length in~\cite{pearl2009causality,studeny2005probabilistic,WoodSpekkens,pusey2014gdag}, so we elect not to review it here.
 
 Every conditional independence relation can be translated into a nonlinear constraint on probabilities, as $\bm{X}\bot\bm{Y}|\bm{Z}$ implies $\p{\bm{x}\bm{y}|\bm{z}}=\p{\bm{x}|\bm{z}}\p{\bm{y}|\bm{z}}$ for all $\bm{x}$, $\bm{y}$, and $\bm{z}$. As we generally prefer to work with unconditional probabilities, we rewrite this as follows: If $\bm{X}$ and $\bm{Y}$ are $d$-separated by $\bm{Z}$, then $\p[\bm{X}\bm{Y}\bm{Z}]{\bm{x}\bm{y}\bm{z}}\p[\bm{Z}]{\bm{z}}=\p[\bm{X}\bm{Z}]{\bm{x}\bm{z}}\p[\bm{Y}\bm{Z}]{\bm{y}\bm{z}}$ for all $\bm{x}$, $\bm{y}$, and $\bm{z}$. Such nonlinear constraints can be incorporated as further restrictions on the sorts of joint distributions consistent with the inflation DAG, supplementing the basic nonnegativity of probability constraints of the marginal problem. 
 
 For example, in \cref{fig:Tri222} we find that $A_1$ and $C_2$ are $d$-separated by $\{A_2 B_2\}$, and so one might incorporate the family of nonlinear equalities $\p[A_1 A_2 B_2 C_2]{a_1 a_2 b_2 c_2}\p[A_2 B_2]{a_2 b_2}=\p[A_1 A_2 B_2]{a_1 a_2 b_2}\p[A_2 B_2 C_2]{a_2 b_2 c_2}$ for all $a_1$, $a_2$, $b_2$ and $c_2$. Note that every semi-marginal probability introduced in some nonlinear condition independence equation should also be \emph{defined} by marginalization, i.e. as a sum of various joint probabilities, so that one need not eliminate further quantifiers. The relevant substitutions of this example would be
 \begin{align}
-\begin{split}
-\forall_{a_2 b_2}:&\;\pdf[A_2 B_2]{a_2 b_2} \to \sum\nolimits_{a_1 b_1 c_1 c_2}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
-\forall_{a_1 a_2 b_2 c_2}:&\;\pdf[A_1 A_2 B_2 C_2]{a_1 a_2 b_2 c_2} \to \sum\nolimits_{b_1 c_1}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
-\forall_{a_1 a_2 b_2}:&\;\pdf[A_1 A_2 B_2]{a_1 a_2 b_2} \to \sum\nolimits_{b_1 c_1 c_2}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}
-\end{split}
+\begin{array}{lll}
+\forall_{a_2 b_2}:&\;\pdf[A_2 B_2]{a_2 b_2} \to& \sum\nolimits_{a_1 b_1 c_1 c_2}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
+\forall_{a_1 a_2 b_2 c_2}:&\;\pdf[A_1 A_2 B_2 C_2]{a_1 a_2 b_2 c_2} \to& \sum\nolimits_{b_1 c_1}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
+\forall_{a_1 a_2 b_2}:&\;\pdf[A_1 A_2 B_2]{a_1 a_2 b_2} \to\quad& \sum\nolimits_{b_1 c_1 c_2}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}
+\end{array}
 \end{align}
 etc. 
 %Note also that incorporating such constraints also increases the number of quantifier which must be eliminated, as additional non-injectable probabilities are now featured in the equalities corresponding to conditional independence which do not appear in the unconstrained marginal problem. 
@@ -1185,7 +1184,7 @@ However, this is by no means an easy task. For example, recent work has found th
 
 We hope that polynomial inequalities derived from broadcasting inflation DAGs will provide an additional tool for witnessing certain quantum distributions as non-classical. For example due to the results of~\cref{sec:Bellscenarios}, it seems conceivable that these inequalities will be much stronger and provide much tighter constraints than entropic criteria.
 
-It is worth pondering how it is possible that some of the inequalities that can be derived via inflation---such as Bell inequalities---have quantum violations, i.e.~why one cannot expect them to be valid for all quantum distributions as well. The reason for this is that duplicating an outgoing edge in a DAG during inflation amounts to \tblue{broadcasting} the value of the random variable. For example while the information about $X$ in~\cref{fig:TriMainDAG} was ``sent'' to $A$ and $C$, in the inflation \cref{fig:simpleinflation} the information about $X_1$ is sent to $A_1, A_2$ and $B$. Since quantum theory satisfies a no-broadcasting theorem~\cite{NoCloningQuantum1996,NoCloningGeneral2006}, one cannot expect such broadcasting to be possible quantumly. More generally, there is an analogous no-broadcasting theorem in the regime of epistemically restricted general probabilistic theories (GPTs) \cite{SpekkensToyTheory,NoCloningGeneral2006,Barnum2012GPT,Janotta2014GPT}, so that the same statement applies in many theories other than quantum theory. As a consequence,  a quantum or general probabilistic causal model on the original DAG does generally not inflate to a ``quantum inflation model'' or ``general probabilistic inflation model'' on the inflation DAG. 
+It is worth pondering how it is possible that some of the inequalities that can be derived via inflation---such as Bell inequalities---have quantum violations, i.e.~why one cannot expect them to be valid for all quantum distributions as well. The reason for this is that duplicating an outgoing edge in a DAG during inflation amounts to \tblue{broadcasting} the value of the random variable. For example while the information about $X$ in~\cref{fig:TriMainDAG} was ``sent'' to $A$ and $C$, the information about $X_1$ is sent to $A_1$ \emph{and} $A_2$ and $C$ in the inflation \cref{fig:simpleinflation}. Since quantum theory satisfies a no-broadcasting theorem~\cite{NoCloningQuantum1996,NoCloningGeneral2006}, one cannot expect such broadcasting to be possible quantumly. More generally, there is an analogous no-broadcasting theorem in the regime of epistemically restricted general probabilistic theories (GPTs) \cite{SpekkensToyTheory,NoCloningGeneral2006,Barnum2012GPT,Janotta2014GPT}, so that the same statement applies in many theories other than quantum theory. As a consequence, a quantum or general probabilistic causal model on the original DAG does generally not inflate to a ``quantum inflation model'' or ``general probabilistic inflation model'' on the inflation DAG. 
 
 Some inflations, such as the one of~\cref{fig:TriDagSubA2B1C1}, do not require such broadcasting.
 
@@ -1193,9 +1192,9 @@ Some inflations, such as the one of~\cref{fig:TriDagSubA2B1C1}, do not require s
 	$G'\in\SmallNamedFunction{Inflations}{G}$ is \tblue{non-broadcasting} if every latent node in $G'$ has at most one copy of each $A\in\SmallNamedFunction{Nodes}{G}$ among its children.
 \end{definition}
 
-It follows that every quantum causal model can be inflated to a non-broadcasting DAG, so that one obtains a quantum and general probabilistic analogue of Lemma~\ref{mainlemma} in the non-broadcasting case. Constraints derived from non-broadcasting inflations are therefore valid also for quantum and even general probabilistic distributions. In the specific case of the entropic monogamy inequality for the Triangle scenario~\cref{eq:monogomyofcorrelations}, this was originally noticed in~\cite{pusey2014gdag}. Another example is \cref{eq:polymonogamy}, which was derived from the non-broadcasting inflation of \cref{fig:TriDagSubA2B1C1}, which therefore also is a causal infeasibility criterion which holds for the Triangle scenario even when the latent nodes are allowed to carry quantum or general probabilistic systems.
+It follows that every quantum causal model can be inflated to a non-broadcasting DAG, so that one obtains a quantum and general probabilistic analogue of Lemma~\ref{mainlemma} in the non-broadcasting case. Constraints derived from non-broadcasting inflations are therefore valid also for quantum and even general probabilistic distributions. In the specific case of the entropic monogamy inequality for the Triangle scenario, i.e. \cref{eq:monogomyofcorrelations} here, this was originally noticed in Ref.~\cite{pusey2014gdag}. Another example is \cref{eq:polymonogamy}, which was derived from the non-broadcasting inflation of \cref{fig:TriDagSubA2B1C1}. \cref{eq:polymonogamy} too, therefore, is also a causal infeasibility criterion which holds for the Triangle scenario even when the latent nodes are allowed to carry quantum or general probabilistic systems.
 % This confirms our numerical computations, which indicated that~\eqref{eq:polymonogamy} does not have any quantum violations. The same is true for monogamy of correlations, per \cref{eq:monogomyofcorrelations}.
-Since the GHZ-type distribution~\cref{eq:ghzdistribution1} violates both of these inequalities, it cannot even be generated within the Triangle scenario with quantum or general probabilistic states on the hidden nodes, as was also pointed out in~\cite{pusey2014gdag}.
+Since the perfect-correlation distribution considered in~\cref{eq:ghzdistribution1} violates both of these inequalities, it evidently cannot be generated within the Triangle scenario even with quantum or general probabilistic states on the hidden nodes. This was also pointed out in Ref.~\cite{pusey2014gdag}.
 
 %\begin{align}\label{eq:nonbroadcastinginflationDAG}
 %G'\in\SmallNamedFunction{NonBroadcastingInflations}{G} \quad\text{ iff }\quad \forall_{\text{latent }A_i\in G'}\; \Ch[G']{A_i} \text{ is an irredundant set.}
@@ -1221,9 +1220,11 @@ On the other hand, by intentionally using broadcasting in an inflation DAG, we c
 %An inflation DAG is a \tblue{non-broadcasting inflation} whenever the children of every individual node in the inflation DAG $G'$ map injectively to the corresponding children of the mapped node in the original DAG $G$, i.e. $dmap\parenths*{\Ch[G']{X}}\subseteq\Ch[G]{dmap\parenths*{X}}$ for all $X\in\nodes{G'}$. 
 % \cref{fig:TriDagSubA2B1C1} is an example of a non-broadcasting inflation.
 
-\bigskip
+\purp{Next 3 paragraphs require background definition of non-broadcasting sets etc.}
 
-Even when using broadcasting inflation DAGs, it may still be possible to derive inequalities valid for quantum distributions if one appropriately modifies \cref{sec:ineqs} to generate a different initial set of nonnegativity inequalities. This new set should capture the nonnegativity of only quantum-physically-meaningful marginal probability distributions. From this perspective, a broadcasting inflation DAG is an abstract logical concept, as opposed to a feasible physical construct. Indeed, a quantum causal model in original DAG can potentially be inflated to a quantum inflation model in terms of the logical broadcasting maps of \citet{Coecke2011}. However, this would result in a joint distribution over all observable variables that may have some negative probabilities, and one cannot expect~\cref{eq:nonnegativity} to hold in general. But one can still try to reformulate the marginal problem so as to refer only to the existence of joint distributions on non-broadcastings sets rather than the existence of a full joint distribution from which the marginal distributions might be recovered.
+Even when using broadcasting inflation DAGs, it may still be possible to derive inequalities valid for quantum distributions if one appropriately the nonnegativity inequalities in the marginal problem, e.g. such as \cref{eq:nonnegativity}. The modification would replace demanding nonnegativity of the full joint distribution with instead demanding the nonnegativity of only quantum-physically-meaningful marginal probability distributions. 
+
+From this perspective, a broadcasting inflation DAG is an abstract logical concept, as opposed to a feasible physical construct. Indeed, a quantum causal model in original DAG can potentially be inflated to a quantum inflation model in terms of the logical broadcasting maps of \citet{Coecke2011}. However, this would result in a joint distribution over all observable variables that may have some negative probabilities, and one cannot expect~\cref{eq:nonnegativity} to hold in general. But one can still try to reformulate the marginal problem so as to refer only to the existence of joint distributions on non-broadcastings sets rather than the existence of a full joint distribution from which the marginal distributions might be recovered.
 
 An analysis along these lines has already been carried out successfully by \citet{Chaves2015infoquantum} in the derivation of entropic inequalities for that are valid for all quantum distributions. Although \citet{Chaves2015infoquantum} do not invoke inflation DAGs, they do employ conditional structure, which also gives rise to broadcasting sets. \citet{Chaves2015infoquantum} take pains to avoid including full joint probability distributions in any of their initial entropic inequalities, precisely as we would want to do in constructing our initial probability inequalities, and they successfully derive quantumly valid entropic inequalities. But now inequalities polynomial in the probabilities have yet been derived using this method.
 
@@ -1237,7 +1238,7 @@ In the literature on Bell inequalities, it has been noticed that the inconsisten
 
 The usual presentation of a Hardy-type paradox takes the following form: Even though events $E_1 .. E_N$ never occur (are not possible), nevertheless some other event $E_0$ \emph{does} occur sometimes (is possible). The impossibility of events $E_1 .. E_N$ \emph{should} prohibit the possibility of $E_0$, under the marginal distributions of all the variables in all the events are compatible.
 
-The following observational data illustrates a Hardy-type paradox. Suppose a plague has suddenly wiped out a population of rats. Three kinds of autopsies are performed on different samples of the dead rats. Autopsies checking for heart and brain disease find that rats always presented with one condition but never with \emph{both} conditions, i.e. the events $[Brain_{-},Heart_{-}]$ and $[Brain_{+},Heart_{+}]$ are taken to be \emph{not possible}. Suppose the autopsies checking for heart and lung diseases similarly find that all dead rats are afflicted by some disease but with no possibility of dual diagnoses, i.e. the events $[Heart{-},Lungs_{-}]$ and $[Heart_{+},Lungs_{+}]$ are not possible. Logic should then dictate lung disease ought to be perfectly correlated with brain disease, because both those conditions are perfectly anticorrelated with heart disease. If some medical examiner checking rats for brain and lung disease then finds that \emph{it is possible} for a rat to have brain disease this would be considered a violation of a Hardy-type paradox.
+The following observational data illustrates a Hardy-type paradox. Suppose a plague has suddenly wiped out a population of rats. Three kinds of autopsies are performed on different samples of the dead rats. Autopsies checking for heart and brain disease find that rats always presented with one condition but never with \emph{both} conditions, i.e. the events $[Brain_{-},Heart_{-}]$ and $[Brain_{+},Heart_{+}]$ are taken to be \emph{not possible}. Suppose the autopsies checking for heart and lung diseases similarly find that all dead rats are afflicted by some disease but with no possibility of dual diagnoses, i.e. the events $[Heart{-},Lungs_{-}]$ and $[Heart_{+},Lungs_{+}]$ are not possible. Logic should then dictate lung disease ought to be perfectly correlated with brain disease, because both those conditions are perfectly anticorrelated with heart disease. If some medical examiner checking rats for brain and lung disease then finds that \emph{it is possible} for a rat to have brain disease without heart disease, this would be considered a violation of a Hardy-type paradox.
 
 Hardy-type paradoxes are predicated on assuming the existence of a solution to the marginal problem. Thus, ensuring the observational data avoids any Hardy-type paradoxes is a necessary condition for solving the marginal problem. \citet[Section~III.C]{LSW} discuss the use of possibilistic constraints to certify the incompatibility of marginal distributions in contexts of than Bell scenarios.
 
@@ -1245,7 +1246,7 @@ The possibilistic constraint which is equivalent to a Hardy-type paradox is as f
 \begin{align}
     \SmallNamedFunction{Never}{E_1} \bigwedge \SmallNamedFunction{Never}{E_2} \bigwedge ... \SmallNamedFunction{Never}{E_N} \implies \SmallNamedFunction{Never}{E_0}
 \end{align}
-although it can be expressed more fundamental in conjuctive form, i.e.
+although it can be expressed more fundamentally in conjuctive form, i.e.
 \begin{align}
     \SmallNamedFunction{}{E_0} \implies \SmallNamedFunction{}{E_1} \bigvee \SmallNamedFunction{}{E_2} \bigvee ... \SmallNamedFunction{}{E_N}.
 \end{align}
@@ -1277,14 +1278,14 @@ corresponding to the probabilistic constraint
 %
 %\purp{I'm in the middle of switching the notation here to lowercase probabilities. ~EW}
 
-We outline the general procedure using a slightly more sophisticated example. Consider the marginal scenario of~\cref{fig:simplicialcomplex222}, where the contexts are
-\begin{align*}
-	\{A_1 B_1 C_1\},\\
-	\{A_1 B_2 C_2\},\\
-	\{A_2 B_1 C_2\},\\
-	\{A_2 B_2 C_1\},\\
-	\{A_2 B_2 C_2\}.
-\end{align*}
+We outline the general procedure using a slightly more sophisticated example. Consider the marginal scenario of~\cref{fig:simplicialcomplex222}, where the contexts are $\{A_1 B_1 C_1\}$, $\{A_1 B_2 C_2\}$, $\{A_2 B_1 C_2\}$, $\{A_2 B_2 C_1\}$ and $\{A_2 B_2 C_2\}$, pursuant to \cref{eq:basicsetup222}.
+%\begin{align*}
+%	\{A_1 B_1 C_1\},\\
+%	\{A_1 B_2 C_2\},\\
+%	\{A_2 B_1 C_2\},\\
+%	\{A_2 B_2 C_1\},\\
+%	\{A_2 B_2 C_2\}.
+%\end{align*}
 Now a possibilistic constraint on this marginal problem consists of a logical implication with one joint outcome as the \tblue{antecedent} and a disjunction of joint outcomes as the \tblue{consequent}. In the following, we explain how to generate \emph{all} such implications which are tight in the sense that their right-hand sides are minimal.
 
 First we fix the antecedant by choosing some context and a composite outcome for it. In order to generate all possibilistic constraints, one will have to perform this procedure for
@@ -1403,7 +1404,7 @@ Linear quantifier elimination routines are available in many software tools\foot
 %\footnote{FM elimination algorithms make intermittent calls to a linear-programming subroutine for eliminating redundant inequalities. The authors found an efficient implementation of this subroutine in \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$}, see \cref{sec:redundancy} for further details.}.
 %Fourier-Motzkin elimination appreciable suboptimal, however, when the dimension of the final projection is much smaller than the initial space of the inequalities, i.e. when there are many gedankenprobabilities. See Refs. \cite{jones2004equality,JonesThesis2005,Jones2008} and \cref{sec:projalgorithms} for further detail.
 
-The generic task of polytope projection assumes that the initial polytope is given \emph{only} in halfspace representation. If, however, a \tblue{dual description} of the initial polytope is available, i.e. we are also given its extremal vertices, then the projection problem can be significantly optimized \cite{projectiondual,Avis2000lrs}. Such dual-description algorithms are used, for example, in modern convex hull algorithms. The marginal problem is a special convex hull algorithm, which can be seen as follows.
+The generic task of polytope projection assumes that the initial polytope is given \emph{only} in halfspace representation. If, however, a \tblue{dual description} of the initial polytope is available, i.e. we are also given its extremal vertices, then the projection problem can be significantly optimized \cite{projectiondual,Avis2000lrs}. Such dual-description algorithms are used, for example, by modern convex hull solvers. The marginal problem can be explicitly recast as a a special convex hull problem, which can be seen as follows.
 
 A generic convex hull problem takes a matrix of vertices $\hat{V}$, where each row is a vertex, and asks what is the set of coordinates $\vec{x}$ such that $\vec{x}$ can be achieved as a convex combination of the vertices. Formally, it amounts to resolving a partial-existential-closure problem pertaining the existing of nonnegative weights, i.e. 
 \begin{align}
@@ -1413,6 +1414,28 @@ It should be evident from Eqs. (\ref{eq:nonnegativity}-\ref{eq:marginalequalitie
 
 
 Indeed, the authors found that the software \textit{lrs} [\href[pdfnewwindow]{http://cgm.cs.mcgill.ca/~avis/C/lrslib/USERGUIDE.html#Installation\%20Section}{\texttt{lrs}}] was capable of solving the marginal problem rather efficiently.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \begin{comment}
 
