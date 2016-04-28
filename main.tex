@@ -1637,17 +1637,19 @@ Note that a \texttt{True} response from \texttt{RedundantRowQ} indicates that th
 
 
 
-
 \section{On Identifying All Coinciding Marginal Distributions}\label{sec:coincidingdetails}
-
-
-
 
 %By restricting our attention to inflation models, we see that sometimes the distributions of different injectable sets coincide, i.e. $\pdf{\bm{X}}=\pdf{\bm{Y}}$ whenever both $\bm{X}$ and $\bm{Y}$ are injectable, and $\subsim{\bm{X}}=\subsim{\bm{Y}}$. Sometimes sets of random variables which are \emph{not} injectable, however, can also be shown to have necessarily coinciding distributions. Coinciding (not necessarily injectable) marginal distributions among the inflation DAG variables is a consequence of \cref{eq:funcdependences}. For example, we can verify that $\pdf{A_1 A_2 B_1}=\pdf{A_1 A_2 B_2}$ follows from \cref{fig:Tri222}, even though $\brackets{A_1 A_2 B_1}$ and $\brackets{A_1 A_2 B_2}$ are not injectable sets. Here we formalize this type of constraint more generally.
 
-A \tblue{bijection} between two sets of elements is a bijective map ($\leftrightarrow$) from one set of elements to another. Let use define a \tblue{copy bijection} ($\subsim{\leftrightarrow}$) to be a bijective map such that every pair of elements which are mapped to eachother are equivalent under dropping the copy index. We've informally been using the notion of a copy bijection previously, in that sets of nodes $\bm{X}\sim\bm{Y}$ iff
+A \tblue{bijection} between two sets of elements is a bijective invertible map ($\leftrightarrow$) from one set of elements to another. Let use define a \tblue{copy bijection} ($\subsim{\leftrightarrow}$) to be a bijective map such that every pair of elements which are mapped to eachother are equivalent under dropping the copy index. We've informally been using the notion of a copy bijection previously, in that (ordered) sets of nodes $\bm{X}\sim\bm{Y}$ iff there exists some $\subsim{\leftrightarrow}$ which takes $\bm{X}$ to $\bm{Y}$.
+A special case of a bijection is a graph isomorphism, which is a bijection between the nodes of one graph and the nodes and another such that the action of the bijection is to reversibly transform the first graph into the second one. A copy isomorphism, therefore, is defined as a graph isomorphism that is also a copy bijection. The same specialization apply to graph automorphism: an inflation DAG can posses many symmetries, i.e. permutations of the nodes such that the permutation leaves the DAG invariant. Generally, however, only a subset of the possible automorphisms are also copy bijections, i.e. copy automorphisms are a subset of graph isomorphism.
 
-We call two sets of observable nodes $\bm{X}$ and $\bm{Y}$ \tblue{inflationarily isomorphic} (relative to some inflation DAG $G'$) if there exists an isomorphism $\ansubgraph[G']{\bm{X}}\leftrightarrow\ansubgraph[G']{\bm{Y}}$ which has the additional two properties that, when restricting to $\bm{X}$, the morphism bijectively maps $\bm{X}\leftrightarrow\bm{Y}$, and that furthermore the isomorphism maps \emph{copies to copies}, i.e. the morphism is a permutation of indices when restricted to any original-scenario node-type. For example in~\cref{fig:Tri222}, the sets $\bm{X}=\{A_1 A_2 B_1\}$ and $\bm{Y}=\{A_1 A_2 B_2\}$ are inflationarily isomorphic.
+We define two ordered sets of observable nodes $\bm{X}$ and $\bm{Y}$ to be \tblue{inflationarily isomorphic} (relative to some inflation DAG $G'$) if and only if there exists one copy bijection $\An[G']{\bm{X}}\subsim{\leftrightarrow}\An[G']{\bm{Y}}$ which satisfies two conditions simultaneously: 1) the copy bijection is a graph isomorphism relating $\ansubgraph[G']{\bm{X}}$ to $\ansubgraph[G']{\bm{Y}}$, and 2) the copy bijection takes $\bm{X}$ to $\bm{Y}$. 
+
+As an example, in~\cref{fig:Tri222}, the sets $\bm{X}=\{A_1 A_2 B_1\}$ and $\bm{Y}=\{A_1 A_2 B_2\}$ are inflationarily isomorphic. Indeed, there is only one copy isomorphism between the two ancestral subgraphs, namely the bijections which leaves all nodes invariant except for $\{B_1,B_2,Z_1,Z_2\}\leftrightarrow\{B_2,B_1,Z_2,Z_1\}$. This bijection clearly takes $B_1$ to $B_2$, and hence both the requisite conditions are met.
+
+\purp{Recast this as a lemma?} If two sets $\bm{X}$ and $\bm{Y}$ are inflationarily isomorphic then $P(\bm{X}) = P(\bm{Y})$ in any inflation model. 
+Equality constraint expressing coinciding distributions can be used to supplement the marginal problem, and may be of practical use for reducing the dimensionality of the problem (number of quantifiers which need to be eliminated). 
 
 %In general there may exist multiple inflationary isomorphisms, for example the sets $\brackets{A_1 A_2 B_1}$ and $\brackets{A_1 A_2 B_2}$ can be related by either 
 %\begin{align}
@@ -1666,14 +1668,11 @@ We call two sets of observable nodes $\bm{X}$ and $\bm{Y}$ \tblue{inflationarily
 % Two inflation DAGs $G'_1$ and $G'_2$ are said to be inflationarily isomorphic if there exists a graph isomorphism between them which is itself also an inflationary isomorphism. This occurs iff $G'_1\sim G'_2$.
 % We say that one isomorphim \tblue{contains} another if the rule-set of the latter is a subset of the rule-set of the former.
 
-%Now, consider an inflation DAG $G'$ and two sets of nodes $\bm{X}$ and $\bm{Y}$ such that not only $\bm{X}\sim\bm{Y}$ but also $\ansubgraph[G']{\bm{X}}\sim\ansubgraph[G']{\bm{Y}}$. If an inflationary isomorphism between $\ansubgraph[G']{\bm{X}}$ and $\ansubgraph[G']{\bm{Y}}$ \emph{contains} an inflationary isomorphism between $\bm{X}$ and $\bm{Y}$, then $\pdf{\bm{X}}=\pdf{\bm{Y}}$.
+If two sets $\bm{X}$ and $\bm{Y}$ are inflationarily isomorphic, then $P(\bm{X}) = P(\bm{Y})$ in any inflation model.
 
 %In other words, $\pdf{\bm{X}}=\pdf{\bm{Y}}$ if and only if an inflationary graph isomorphism exists between $\ansubgraph[G']{\bm{X}}$ and $\ansubgraph[G']{\bm{Y}}$ which preserves the inflationary isomorphism between $\bm{X}$ and $\bm{Y}$. 
-If two sets $\bm{X}$ and $\bm{Y}$ are inflationarily isomorphic then we can conclude that $P(\bm{X}) = P(\bm{Y})$ in any inflation model.
 
-Coinciding ancestral subgraphs is not, by itself, a strong enough condition to justify coinciding distributions; rather the variables in question must play similar \emph{roles} in their coinciding ancestral subgraphs, hence the precise definition of inflationary isomorphism. To illustrate this, consider the inflation DAG in \cref{fig:ancestralsubgraphnotenough}. We have $\ansubgraph[(\textrm{\cref{fig:ancestralsubgraphnotenough}})]{X_2 Y_2 Z_1}\sim\ansubgraph[(\textrm{\cref{fig:ancestralsubgraphnotenough}})]{X_1 Y_2 Z_2}$, since both of these ancestral subgraphs are the entire DAG. Nevertheless ${X_2 Y_2 Z_1}$ is \emph{not} inflationarily isomorphic to ${X_1 Y_2 Z_2}$, because any copy-to-copy isomorphism between $\ansubgraph[(\textrm{\cref{fig:ancestralsubgraphnotenough}})]{X_2 Y_2 Z_1}$ and $\ansubgraph[(\textrm{\cref{fig:ancestralsubgraphnotenough}})]{X_1 Y_2 Z_2}$ fails to map ${X_2 Y_2 Z_1}$ to ${X_1 Y_2 Z_2}$ when restricted to the domain ${X_2 Y_2 Z_1}$.
-
-%$But there is no isomorphism which in addition takes $\{X_1 Y_1 Z_1\}$ to $\{X_1 Y_2 Z_2\}$, since the induced subgraphs on these two nodes are different, and therefore $\{X_1 Y_1 Z_1\}\not\sim\{X_1 Y_2 Z_2\}$.
+Copy isomorphic ancestral subgraphs is \emph{not}, by itself, a strong enough condition to justify coinciding distributions; rather the variables in question must play similar \emph{roles} in their coinciding ancestral subgraphs, hence the precise definition of inflationary isomorphism. To illustrate this, consider the inflation DAG in \cref{fig:ancestralsubgraphnotenough}. We have $\ansubgraph[(\textrm{\cref{fig:ancestralsubgraphnotenough}})]{X_2 Y_2 Z_1}\sim\ansubgraph[(\textrm{\cref{fig:ancestralsubgraphnotenough}})]{X_1 Y_2 Z_2}$, since both of these ancestral subgraphs are the entire DAG. Nevertheless ${X_2 Y_2 Z_1}$ and ${X_1 Y_2 Z_2}$ are \emph{not} inflationarily isomorphic, as is straightforward to demonstrate. Because the ancestral subgraphs in question are identical, there is only one copy isomorphism between them, namely the identity map. The identity map is a perfectly valid copy bijection, but it fails to take ${X_2 Y_2 Z_1}$ to ${X_1 Y_2 Z_2}$, and hence does not satisfy both the requisate properties for inflationary isomorphism. 
 
 \begin{figure}[H]
     \centering
@@ -1684,19 +1683,19 @@ Coinciding ancestral subgraphs is not, by itself, a strong enough condition to j
     \end{minipage}
 \end{figure}
 
-Equality constraint expressing coinciding distributions can be used to supplement the marginal problem, and may be of practical use for reducing the dimensionality of the problem (number of quantifiers which need to be eliminated). 
 
-However, we are not aware of any case in which this would actually result in tighter exclusions for the distributions on the original DAG. In many cases, this can be explained by the following argument. 
+Interestingly, we are not aware of any case in which imposing coinciding marginal distributions of inflationarily isomorphic sets actually result in tighter exclusions for the distributions on the original DAG. In many cases, this lack of impact can be explained by the following argument.
 
-Suppose two sets $\bm{X}$ and $\bm{Y}$ are inflationarily isomorphic, such that a a copy-to-copy isomorphism exists which takes $\ansubgraph[G']{\bm{X}}\leftrightarrow\ansubgraph[G']{\bm{Y}}$. If the copy-to-copy isomorphism can be extended to some copy-to-copy automorphism of the entire inflation DAG $G'$ then the constraint $P_{\bm{X}} = P_{\bm{Y}}$ is not relevant for the distributions on the original DAG. The proof is as follows.
+We define two ordered sets of observable nodes $\bm{X}$ and $\bm{Y}$ to be \tblue{irrelevant to the marginal problem} (relative to some inflation DAG $G'$) if and only if there exists one copy bijection $\An[G']{\bm{X}}\subsim{\leftrightarrow}\An[G']{\bm{Y}}$ which satisfies \emph{three}\footnote{The second condition is automatically satisfied by the first and third; we list it only for narrative clarity.} conditions simultaneously: 1) the copy bijection is a graph isomorphism relating $\ansubgraph[G']{\bm{X}}$ to $\ansubgraph[G']{\bm{Y}}$, and 2) the copy bijection takes $\bm{X}$ to $\bm{Y}$, 3) the copy bijection is a graph automorphism which tranforms the inflation DAG into itself.
+
+The irrelevance of the constraint $P(\bm{X}) = P(\bm{Y})$ to the marginal problem when the aforementioned conditions are satsifed can be seen by the following argument.
 
 %Suppose that there is an automorphism of the inflation DAG which takes copies of nodes to copies\footnote{Note the similarity to \emph{deck transformations} in covering space theory.} and restricts to an inflationary isomorphism $\ansubgraph[G']{\bm{X}}\sim\ansubgraph[G']{\bm{Y}}$ as above. 
-If $\hat{P}$ solves the unsupplemented marginal problem, then switching the variables in $\hat{P}$ according to the automorphism still solves the unsupplemented marginal problem, since the given marginal distributions are preserved by the automorphism. Now taking the uniform mixture of this new distribution with $\hat{P}$ results in a distribution that still solves the marginal problem, and in addition satisfies the supplemented constraint $P_{\bm{X}} = P_{\bm{Y}}$.
 
-Note that the argument does not apply if there is no copy-to-copy automorphism which restricts to $\ansubgraph[G']{\bm{X}}\sim\ansubgraph[G']{\bm{Y}}$, and it also does not apply if one uses the conditional independence relations on the inflation DAG as well, since this destroys linearity. We do not know what happens in either of these cases.
-
+Imagine that some joint distribution $\hat{P}$ solves the unconstrained marginal problem, i.e. without requiring $P(\bm{X}) = P(\bm{Y})$, and that a copy bijection exists which satisfies all the requisate conditions. Apply that copy bijection to the variables in the joint distribution, switching the variables around, to generate a new distribution $\hat{P'}$. Because the set of accessible marginal distributions is invariant under application of the an automorphism, we have that $\hat{P'}$ is also a solution to the unconstrained marginal problem. \purp{Doesn't this mean than any bijections which leaves the marginal sets invariant is sufficient???} Taking the uniform mixture of $\hat{P}$ and $\hat{P'}$ is therefore also a solution of the unconstrained marginal problem, but the uniform mixture also satisfies the supplementary constraint $P_{\bm{X}} = P_{\bm{Y}}$. Therefore the supplementary constrained is satisfyable automatically whenever the unconstrained marginal problem is solvable, and adding the constraint is irrelevant.
 
 
+Note that the argument does not apply if the bijection which justifies $P(\bm{X}) = P(\bm{Y})$ cannot be extended to a copy automorphism for the entire inflation DAG. It also does not apply if one uses the conditional independence relations on the inflation DAG as well, since this destroys linearity. We do not know what happens in either of these cases.
 
 
 %%% T: I've commented this out since we're not concerned here with observational equivalence, and I have the feeling that it would still require a major clean-up operation. The example of 6 observationally equivalent DAGs is not very good since they are all equivalent to A <-- S --> B, which doesn't contain any latent nodes
