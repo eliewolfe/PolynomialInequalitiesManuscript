@@ -401,37 +401,67 @@ In addition to the notion of a causal model, it is useful to have a notion of a 
 %H_{G,S} \equiv \{ C \mid \SmallNamedFunction{DAG}{C}=G, \SmallNamedFunction{ParamVals}{C} \in S\}.
 %\end{align}
 % (is this standard usage of the term "model"?  In physics, a model typically does not include a specification of the boundary conditions, or does it?)
+The most simple sort of causal hypothesis is one that includes the full set of causal models associated to a DAG $G$, which we denote by $H_G^{\rm full}$.  This is simply the hypothesis of a particular DAG, with no restriction on the set of parameters that supplement it.   Examples of more refined hypotheses are provided below.
 
-The most simple sort of causal hypothesis is one that includes the full set of causal models associated to a DAG $G$, which we denote by $H_G^{\rm full}$.  Our results will primarily concern this sort of hypothesis.
 %We denote  the set of {\em all} parameter values consistent with $G$ by $S_{\textsf{full}}$, so that $H_{G,{S_{\textsf{full}}}}$ is simply the causal hypothesis that the DAG is $G$, that is, This is the hypothesis that there exists {\em some} set of parameter values supplementing $G$ such that the observed data can be explained by the resulting causal model. 
 
 
-With these notions in hand, we can finally specify the sort of causal inference problem for which one can usefully apply our technique: a decision problem takes two inputs, namely, a specification of observational data and a specification of a causal hypothesis, and outputs whether or not they are consistent with one another. 
+With these notions in hand, we can finally specify the sort of causal inference problem for which one can usefully apply our technique, namely, those that come in the form of a decision problem, taking as input (i) a specification of observational data and (ii) a specification of a causal hypothesis, and outputing whether or not they are consistent with one another.   In broad strokes, the inflation DAG technique is a way of mapping such a causal inference problem onto a new one where the observational and causal inputs of the new problem are determined by the observational and causal inputs of the original problem in such that if there is consistency between the observational and causal inputs of the original problem, then there is consistency between the observational and causal inputs of the new problem.  The technique is useful because, as we show, simple witneesses of inconsistency in the new problem yield nontrivial witnesses of inconsistency in the original problem. 
+
 %\begin{itemize}
 %\item a specification of {\em observational data}
 %\item a specification of a {\em causal hypothesis}
 %\end{itemize}
 %and that outputs a verdict about their compatibility.
 
-The most informative sort of observational data is a specification of the joint distributions over all of the observed variables.  However, one can imagine that the observational data specifies merely an interval in the space of possible joint distributions.  And there are other ways in which the observational data may be  less informative than a specification of the joint distribution.
-%The observational data in real-world applications necessarily falls short of this ideal because one only ever obtains a {\em finite sample} \purp{[replace by interval of distributions]} of the joint distribution.  Moreover, even if one sets aside finite-sample concerns and imagines the data as infinite-run statistics, there are other ways in which the observational data for a causal inference problem might be less informative than a specification of the joint distribution.  
-For instance, one might merely have a description of the conditional independence relations that hold among the observed variables.  Or one might merely have a specification of the marginals of the joint distribution for certain subsets of the observed variables\footnote{In this last case, the causal inference problem corresponds to a version of the marginals problem, but where the joint distribution is constrained by the causal hypothesis.  Such a causally-constrained version of the marginals problem will be central to our inflation DAG technique.} 
- %Note that causal inference in this case corresponds to a version of the marginals problem, but where the joint distribution is constrained by the causal hypothesis. 
+The inflation DAG technique can accommodate many different forms for the observational data and the causal hypothesis appearing in the original problem.  It also imposes a restriction on the forms for the observational data and the causal hypothesis appearing in the new problem.  It is therefore useful to pause and consider the range of possibilities for the two inputs of a causal decision problem. 
 
-%The most fine-grained sort of causal hypothesis is one that specifies all of the parameters supplementing the DAG.  
-On the side of the causal hypothesis, it is most common to consider the hypothesis of a particular DAG, with no restriction on the set of parameters that supplement it.  One can also, however, consider causal hypotheses that are more fine-grained, 
-%One could, however, consider a completely fine-grained hypothesis, consisting of a single choice of the set of parameters supplementing the DAG.  Between these two cases are causal hypotheses of intermediate specificity, 
-for instance, by incorporating constraints on how certain nodes in the DAG functionally depend on their parents.  An example is the assumption of an additive noise model for certain causal influences: if an observed variable $Y$ has an observed variable $X$ as a parent and also a latent variable $U$, then the noise is deemed additive if $Y=\alpha X + \beta U$ for some scalars $\alpha$ and $\beta$ [provide references].  Clearly, the conditional probability distribution $\pfunc{Y|XU}$ that can be achieved in such an additive noise model are a subset of valid conditional distributions.  More general constraints on the conditional distributions have also been explored [provide references].  
+The possibilities for the form of the observational data includes:
+\begin{enumerate}
+\item a specification of the joint distributions over all of the observed variables.
+\item a specification of a region in the space of possible joint distributions over all of the observed variables
+\item a specification of the conditional independence relations that hold among the observed variables
+\item a specification of the marginals of the joint distribution for certain subsets of the observed variables
+\end{enumerate}
+In addition to this sort of variety, one can imagine that the statistical dependences among a set of variables may be specified not by a joint distribution but by covariance matrices or the values of entropic quantities such as mutual information.  Combinations of these possibilities are also possible.
+
+The specification of the joint distribution, (1), is the most informative form the observational data can take.  Specifying a region, (2), provides a means of expressing uncertainty about the joint distribution.  Specifying conditional independences, (3), is the form of observational data that has been most thoroughly exploited in the development of tools for causal inference.   If one specifies marginals, as in (4), then the causal inference problem becomes a version of the marginals problem (described in the introduction), but where the space of joint distributions from which the marginals may arise is constrained by the causal hypothesis.  
+%We refer to this as a causally-constrained marginals problem. 
+
+The inflation DAG technique can be applied for {\em any} of these types of observational data.   Nonetheless. the particular concrete applications of the inflation DAG technique that we will describe in detail in this article will consider causal inference problems wherein the joint distribution is specified, i.e., data of type (1).  The new causal inference problem to which this original problem is mapped by inflation, however, is one where the data concerns marginals, i.e., data of type (4).
+
+%The most informative sort of observational data is a specification of the joint distributions over all of the observed variables.  There are many possibilities for the data being less informative.  It may merely specify an interval in the space of possible joint distributions, reflecting uncertainty about the joint distribution for instance.   Alternatively, one might merely have a description of the conditional independence relations that hold among the observed variables.  Or one might merely have a specification of the marginals of the joint distribution for certain subsets of the observed variables.  In this last case, the causal inference problem corresponds to a version of the marginals problem, but where the joint distribution is constrained by the causal hypothesis.  Such a causally-constrained version of the marginals problem will be central to our inflation DAG technique. 
+
+It is also useful to list a variety of possibilities for the form that the causal hypothesis may take:
+\begin{enumerate}
+\item the full set of causal models for a particular DAG $G$
+\item the full set of causal models for a particular DAG $G$ excluding those that yield conditional independence relations beyond those implies by d-separation in $G$
+\item the set of causal models for a particular DAG $G$ wherein there are constraints on the manner in which particular nodes causally depend on their parents 
+\item the set of causal models for a particular DAG $G$ wherein the manner in which a particular node causally depends on its parents is constrained to be equivalent, under some mapping between nodes, to the manner in which another node causally depends on its parents. 
+\end{enumerate}
+In all cases, we have left implicit the trivial constraint that the causal hypothesis must include only those DAGs for which the set of observed nodes coincides with the set of variables described in the observational data. 
+
+The motivation for considering hypotheses of the form of (2) rather than (1) is the principle that a causal explanation should not be fine-tuned [reference].  If, for some observational data, a causal hypothesis of type (1) is consistent but one of type (2) is not, then it means that the conditional independences in the observational data are not a consequence of the causal structure, but rather are a consequence of the choice of parameters.  Such an explanation can be criticized on the grounds that it is fine-tuned.  Finding a causal hypothesis of type (2) that is consistent with the observational data implies that one has a non-fine-tuned explanatio of that data.  The fine-tuning issue will come up in Sec. ? where we discuss quantum causal models. 
+
+
+%On the side of the causal hypothesis, it is most common to consider the hypothesis of a particular DAG, with no restriction on the set of parameters that supplement it.  This is just the full set of causal models associated to a DAG $G$, which we denote by $H_G^{\rm full}$.  Our results will primarily concern this sort of hypothesis.    
+%Nonetheless, our technique is also applicable to  causal hypotheses that are more fine-grained.One example is to exclude from the causal models consistent with a DAG all of those which generate conditional independence relations that do not follow from d-separation criteria applied to the DAG.  If such a causal hypothesis  is found to be consistent with some observational data, then this consistency is not a result of fine-tuning. 
+
+%Another example of a fine-graining relative to the causal hypothesis of a DAG is to incorporate constraints on how certain nodes in the DAG functionally depend on their parents.  
+An example of a causal hypothesis of type (3) is the hypothesis of an additive noise model: if an observed variable $Y$ has an observed variable $X$ and a latent variable $U$ as parents, then the noise is deemed additive if $Y=\alpha X + \beta U$ for some scalars $\alpha$ and $\beta$ [provide references].  Clearly, the conditional probability distributions $\pfunc{Y|XU}$ that can be achieved in such an additive noise model are a subset of the valid conditional distributions.  More general constraints on the conditional distributions have also been explored [provide references].  
 %(Note that constraints on the probability distributions over the latent variables can be understood as a kind of constraint on the causal dependences.)
 %Another conceivable constraint on the parameters is a constraint on the form of the probabilities distributions over the latent variables.  
-Our inflation DAG technique will require consideration of a novel and unusual sort of causal hypothesis, wherein the conditional probability distributions associated to distinct nodes are sometimes required to be equivalent. 
+
+A causal hypothesis of type (4) involves a novel and unusual sort of constraint, which has not, to our knowledge been studied previously.  We include it on our list because it is the sort of causal hypothesis that appears in the new causal problem that is defined by our inflation DAG technique.  Insofar as it is usually assumed that the manner in which one node in a DAG causally depends on its parents should be completely independent of the manner in which another depens on its parents---sometimes described as the assumption of {\em autonomy} of different causal mechanisms [Pearl]---it is quite conceivable that hypotheses of type (4) have {\em no} significance besides the role that they play in the inflation DAG technique.\footnote{\color{red} We could say something here about how this suggests that one does better to think of the inflation DAG in terms of counterfactuals and twin diagrams. \color{black}.}
+
+%Our inflation DAG technique will require consideration of a novel and unusual sort of causal hypothesis, wherein the conditional probability distributions associated to distinct nodes are sometimes required to be equivalent. 
 %constraint on the sets of parameters of the model. \purp{What is difference between causal dependencies and parameters?}
 
 %\sout{Finally, the verdict about the compatibility of the observational input and the causal hypothesis could come in different forms.  The simplest possibility is a specification of whether the observational input is consistent with the causal hypothesis.  However, the notion of compatibility at play might be more refined than this, for instance, the algorithm might specify a confidence level with which one can reject the given causal hypothesis as an explanation of the observational input.}\purp{Replace with ``we consider causal inference to be about deciding consistency only..."}
 
 %The most informative sort of observational input is a specification of the joint distributions over all of the observed variables.  Nonetheless, causal inference problems often proceed with a less informative sort of observational input.  For instance, one might merely have a description of the conditional independence relations that hold among the obeerved variables.  Another example of how the observational input might be less informative is if it merely specifies the marginals of the joint distribution for certain subsets of the observed variables.  (Indeed, the latter sort of observational input will be relevant for our inflation DAG technique.)   The observational input might also be less informative in another sense, namely, that it is merely a {\em finite sample} of some joint distribution.
 
-In broad strokes, the inflation DAG technique is a way of mapping a given causal inference problem onto a new causal inference problem where the observational and causal inputs of the latter problem are determined by the observational and causal inputs of the original problem.   
+%In broad strokes, the inflation DAG technique is a way of mapping a given causal inference problem onto a new causal inference problem where the observational and causal inputs of the latter problem are determined by the observational and causal inputs of the original problem.   
 %In particular, under the inflation map, the observational data becomes less informative \purp{say more precisely?} while the causal hypothesis becomes more fine-grained, in a manner that we shall now make explicit.
 
 \section{Inflation: a tool for causal inference}
@@ -510,7 +540,7 @@ Different inflations of the Triangle scenario are depicted in \cref{fig:TriFullD
 \end{minipage}
 \end{figure}
 
-We now turn to specifying the function $\SmallNamedFunction{Inflation}\;_{G\to G'}$, that is to specifying how the set of parameters of a causal model transform under inflation. 
+We now turn to specifying the function $\SmallNamedFunction{Inflation}\;_{G\to G'}$, that is, to specifying how the set of parameters of a causal model transform under inflation. 
 \purp{One we've said how DAG inflated, then we need TWO things: How models (and hypothesis) inflate, and also how observational data inflates. Best to word intro to subject in a way that suggests we'll be getting around to both topics sequentially?}
 %Next, we turn to specifying how the parameters in the inflation of a causal model are determined from those in the original model.
 %condition under which a set of parameters $\mathcal{P'}(G')$ are the inflationary image of the set of parameters $\mathcal{P}(G)$. 
@@ -525,7 +555,7 @@ Consider causal models $M$ and $M'$ where $\SmallNamedFunction{DAG}{M}=G$ and $\
 \end{definition}
 
 %A causal model specifies the causal structure and the autonomous causal mechanisms.  
-To sum up then, inflation is a mapping to a new causal model wherein each given variable in the original DAG may have counterparts in the inflation DAG and where the causal dependencies in the inflation DAG are given by the corresponding causal dependencies in the original DAG.   Note that the operation of modifying a DAG and equipping the modified version with causal dependencies that mirror those of the original also appears in the \emph{do calculus} of~\citet{pearl2009causality}. \fxnote{adhesivity and non-Shannon-type ineqs}
+To sum up then, inflation is a mapping to a new causal model wherein each given variable in the original DAG may have counterparts in the inflation DAG and where the manner in which variables depend causally on their parents in the inflation DAG is given by the manner in which their counterparts depend causally on their parents in the original DAG.   Note that the operation of modifying a DAG and equipping the modified version with conditional probability distributions that mirror those of the original also appears in the \emph{do calculus} of~\citet{pearl2009causality}. \fxnote{adhesivity and non-Shannon-type ineqs}
 %The copying of variables under inflation implies that causal mechanisms in the inflation DAG are not necessarily autonomous, but rather often coincide with one another.
 
 
@@ -534,7 +564,7 @@ To sum up then, inflation is a mapping to a new causal model wherein each given 
 %The inflation DAG technique that we introduce allows questions about the viability of one causal hypothesis for certain observed data to be turned into questions about the viability of a different sort of causal hypothesis for an inflation of the observed data.
 
 %Because we have defined inflation as a map on causal models, 
-Because causal hypotheses are sets of causal models, and the inflation map acts on causal models, it has an induced action on causal hypotheses.   Note that $\SmallNamedFunction{Inflation}{H_G^{\textsf{full}}} \ne H_{G'}^{\textsf{full}}$ because even if there is no restriction on the set of parameters supplementing $G$, inflation imposes a restriction on the set of parameter supplementing $G'$.  Specifically,   if nodes $A_i$ and $A_j$ on $G'$ are copies of a single node $A$ on $G$,then the set of parameters on $G'$ are constrained to satisfy $\pfunc{A_i| \Pa[G']{A_i}}=\pfunc{A_j|\Pa[G']{A_j}}$.
+Because causal hypotheses are sets of causal models, and the inflation map acts on causal models, it has an induced action on causal hypotheses.   Let $H_G^{\textsf{full}}$ denote the causal hypothesis of a DAG $G$, that is, the set of all models consistent with that DAG.  The induced action of the inflation map has the notable feature that $\SmallNamedFunction{Inflation}{H_G^{\textsf{full}}} \ne H_{G'}^{\textsf{full}}$ because even if there is no restriction on the set of parameters supplementing $G$, inflation imposes a restriction on the set of parameter supplementing $G'$.  Specifically,   if nodes $A_i$ and $A_j$ on $G'$ are copies of a single node $A$ on $G$,then the set of parameters on $G'$ are constrained to satisfy $\pfunc{A_i| \Pa[G']{A_i}}=\pfunc{A_j|\Pa[G']{A_j}}$.  This is the sense in which the inflation map takes a causal hypothesis of type (1) and maps it to a causal hypothesis of type (4).
 
 %Note that even if $S=S_{\textsf{full}}$, so that the original causal hypothesis puts no constraints on the parameter values, one generally has $S'\ne S'_{\textsf{full}}$, that is, the inflationary image of the full set of parameter values on $G$ is not the full set of parameter values on $G'$. Rather, $S'$ incorporates a nontrivial restriction on the parameters consistent with $G'$, namely, that if nodes $A_i$ and $A_j$ on $G'$ are copies of a single node $A$ on $G$,then the parameter values on $G'$ are constrained to satisfy $\pdf{A_i| \Pa[G']{A_i}}=\pdf{A_j|\Pa[G']{A_j}}$.
 
@@ -1630,15 +1660,19 @@ Note that a \texttt{True} response from \texttt{RedundantRowQ} indicates that th
 
 
 
-
 \section{On Identifying All Coinciding Marginal Distributions}\label{sec:coincidingdetails}
-
-
-
 
 %By restricting our attention to inflation models, we see that sometimes the distributions of different injectable sets coincide, i.e. $\pdf{\bm{X}}=\pdf{\bm{Y}}$ whenever both $\bm{X}$ and $\bm{Y}$ are injectable, and $\subsim{\bm{X}}=\subsim{\bm{Y}}$. Sometimes sets of random variables which are \emph{not} injectable, however, can also be shown to have necessarily coinciding distributions. Coinciding (not necessarily injectable) marginal distributions among the inflation DAG variables is a consequence of \cref{eq:funcdependences}. For example, we can verify that $\pdf{A_1 A_2 B_1}=\pdf{A_1 A_2 B_2}$ follows from \cref{fig:Tri222}, even though $\brackets{A_1 A_2 B_1}$ and $\brackets{A_1 A_2 B_2}$ are not injectable sets. Here we formalize this type of constraint more generally.
 
-We call two sets of observable nodes $\bm{X}$ and $\bm{Y}$ \tblue{inflationarily isomorphic} (relative to some inflation DAG $G'$) if there exists an isomorphism $\ansubgraph[G']{\bm{X}}\leftrightarrow\ansubgraph[G']{\bm{Y}}$ which has the additional two properties that, when restricting to $\bm{X}$, the morphism bijectively maps $\bm{X}\leftrightarrow\bm{Y}$, and that furthermore the isomorphism maps \emph{copies to copies}, i.e. the morphism is a permutation of indices when restricted to any original-scenario node-type. For example in~\cref{fig:Tri222}, the sets $\bm{X}=\{A_1 A_2 B_1\}$ and $\bm{Y}=\{A_1 A_2 B_2\}$ are inflationarily isomorphic.
+A \tblue{bijection} between two sets of elements is a bijective invertible map ($\leftrightarrow$) from one set of elements to another. Let use define a \tblue{copy bijection} ($\subsim{\leftrightarrow}$) to be a bijective map such that every pair of elements which are mapped to eachother are equivalent under dropping the copy index. We've informally been using the notion of a copy bijection previously, in that (ordered) sets of nodes $\bm{X}\sim\bm{Y}$ iff there exists some $\subsim{\leftrightarrow}$ which takes $\bm{X}$ to $\bm{Y}$.
+A special case of a bijection is a graph isomorphism, which is a bijection between the nodes of one graph and the nodes and another such that the action of the bijection is to reversibly transform the first graph into the second one. A copy isomorphism, therefore, is defined as a graph isomorphism that is also a copy bijection. The same specialization apply to graph automorphism: an inflation DAG can posses many symmetries, i.e. permutations of the nodes such that the permutation leaves the DAG invariant. Generally, however, only a subset of the possible automorphisms are also copy bijections, i.e. copy automorphisms are a subset of graph isomorphism.
+
+We define two ordered sets of observable nodes $\bm{X}$ and $\bm{Y}$ to be \tblue{inflationarily isomorphic} (relative to some inflation DAG $G'$) if and only if there exists one copy bijection $\An[G']{\bm{X}}\subsim{\leftrightarrow}\An[G']{\bm{Y}}$ which satisfies two conditions simultaneously: 1) the copy bijection is a graph isomorphism relating $\ansubgraph[G']{\bm{X}}$ to $\ansubgraph[G']{\bm{Y}}$, and 2) the copy bijection takes $\bm{X}$ to $\bm{Y}$. 
+
+As an example, in~\cref{fig:Tri222}, the sets $\bm{X}=\{A_1 A_2 B_1\}$ and $\bm{Y}=\{A_1 A_2 B_2\}$ are inflationarily isomorphic. Indeed, there is only one copy isomorphism between the two ancestral subgraphs, namely the bijections which leaves all nodes invariant except for $\{B_1,B_2,Z_1,Z_2\}\leftrightarrow\{B_2,B_1,Z_2,Z_1\}$. This bijection clearly takes $B_1$ to $B_2$, and hence both the requisite conditions are met.
+
+\purp{Recast this as a lemma?} If two sets $\bm{X}$ and $\bm{Y}$ are inflationarily isomorphic then $P(\bm{X}) = P(\bm{Y})$ in any inflation model. 
+Equality constraint expressing coinciding distributions can be used to supplement the marginal problem, and may be of practical use for reducing the dimensionality of the problem (number of quantifiers which need to be eliminated). 
 
 %In general there may exist multiple inflationary isomorphisms, for example the sets $\brackets{A_1 A_2 B_1}$ and $\brackets{A_1 A_2 B_2}$ can be related by either 
 %\begin{align}
@@ -1657,14 +1691,11 @@ We call two sets of observable nodes $\bm{X}$ and $\bm{Y}$ \tblue{inflationarily
 % Two inflation DAGs $G'_1$ and $G'_2$ are said to be inflationarily isomorphic if there exists a graph isomorphism between them which is itself also an inflationary isomorphism. This occurs iff $G'_1\sim G'_2$.
 % We say that one isomorphim \tblue{contains} another if the rule-set of the latter is a subset of the rule-set of the former.
 
-%Now, consider an inflation DAG $G'$ and two sets of nodes $\bm{X}$ and $\bm{Y}$ such that not only $\bm{X}\sim\bm{Y}$ but also $\ansubgraph[G']{\bm{X}}\sim\ansubgraph[G']{\bm{Y}}$. If an inflationary isomorphism between $\ansubgraph[G']{\bm{X}}$ and $\ansubgraph[G']{\bm{Y}}$ \emph{contains} an inflationary isomorphism between $\bm{X}$ and $\bm{Y}$, then $\pdf{\bm{X}}=\pdf{\bm{Y}}$.
+If two sets $\bm{X}$ and $\bm{Y}$ are inflationarily isomorphic, then $P(\bm{X}) = P(\bm{Y})$ in any inflation model.
 
 %In other words, $\pdf{\bm{X}}=\pdf{\bm{Y}}$ if and only if an inflationary graph isomorphism exists between $\ansubgraph[G']{\bm{X}}$ and $\ansubgraph[G']{\bm{Y}}$ which preserves the inflationary isomorphism between $\bm{X}$ and $\bm{Y}$. 
-If two sets $\bm{X}$ and $\bm{Y}$ are inflationarily isomorphic then we can conclude that $P(\bm{X}) = P(\bm{Y})$ in any inflation model.
 
-Coinciding ancestral subgraphs is not, by itself, a strong enough condition to justify coinciding distributions; rather the variables in question must play similar \emph{roles} in their coinciding ancestral subgraphs, hence the precise definition of inflationary isomorphism. To illustrate this, consider the inflation DAG in \cref{fig:ancestralsubgraphnotenough}. We have $\ansubgraph[(\textrm{\cref{fig:ancestralsubgraphnotenough}})]{X_2 Y_2 Z_1}\sim\ansubgraph[(\textrm{\cref{fig:ancestralsubgraphnotenough}})]{X_1 Y_2 Z_2}$, since both of these ancestral subgraphs are the entire DAG. Nevertheless ${X_2 Y_2 Z_1}$ is \emph{not} inflationarily isomorphic to ${X_1 Y_2 Z_2}$, because any copy-to-copy isomorphism between $\ansubgraph[(\textrm{\cref{fig:ancestralsubgraphnotenough}})]{X_2 Y_2 Z_1}$ and $\ansubgraph[(\textrm{\cref{fig:ancestralsubgraphnotenough}})]{X_1 Y_2 Z_2}$ fails to map ${X_2 Y_2 Z_1}$ to ${X_1 Y_2 Z_2}$ when restricted to the domain ${X_2 Y_2 Z_1}$.
-
-%$But there is no isomorphism which in addition takes $\{X_1 Y_1 Z_1\}$ to $\{X_1 Y_2 Z_2\}$, since the induced subgraphs on these two nodes are different, and therefore $\{X_1 Y_1 Z_1\}\not\sim\{X_1 Y_2 Z_2\}$.
+Copy isomorphic ancestral subgraphs is \emph{not}, by itself, a strong enough condition to justify coinciding distributions; rather the variables in question must play similar \emph{roles} in their coinciding ancestral subgraphs, hence the precise definition of inflationary isomorphism. To illustrate this, consider the inflation DAG in \cref{fig:ancestralsubgraphnotenough}. We have $\ansubgraph[(\textrm{\cref{fig:ancestralsubgraphnotenough}})]{X_2 Y_2 Z_1}\sim\ansubgraph[(\textrm{\cref{fig:ancestralsubgraphnotenough}})]{X_1 Y_2 Z_2}$, since both of these ancestral subgraphs are the entire DAG. Nevertheless ${X_2 Y_2 Z_1}$ and ${X_1 Y_2 Z_2}$ are \emph{not} inflationarily isomorphic, as is straightforward to demonstrate. Because the ancestral subgraphs in question are identical, there is only one copy isomorphism between them, namely the identity map. The identity map is a perfectly valid copy bijection, but it fails to take ${X_2 Y_2 Z_1}$ to ${X_1 Y_2 Z_2}$, and hence does not satisfy both the requisate properties for inflationary isomorphism. 
 
 \begin{figure}[H]
     \centering
@@ -1675,19 +1706,19 @@ Coinciding ancestral subgraphs is not, by itself, a strong enough condition to j
     \end{minipage}
 \end{figure}
 
-Equality constraint expressing coinciding distributions can be used to supplement the marginal problem, and may be of practical use for reducing the dimensionality of the problem (number of quantifiers which need to be eliminated). 
 
-However, we are not aware of any case in which this would actually result in tighter exclusions for the distributions on the original DAG. In many cases, this can be explained by the following argument. 
+Interestingly, we are not aware of any case in which imposing coinciding marginal distributions of inflationarily isomorphic sets actually result in tighter exclusions for the distributions on the original DAG. In many cases, this lack of impact can be explained by the following argument.
 
-Suppose two sets $\bm{X}$ and $\bm{Y}$ are inflationarily isomorphic, such that a a copy-to-copy isomorphism exists which takes $\ansubgraph[G']{\bm{X}}\leftrightarrow\ansubgraph[G']{\bm{Y}}$. If the copy-to-copy isomorphism can be extended to some copy-to-copy automorphism of the entire inflation DAG $G'$ then the constraint $P_{\bm{X}} = P_{\bm{Y}}$ is not relevant for the distributions on the original DAG. The proof is as follows.
+We define two ordered sets of observable nodes $\bm{X}$ and $\bm{Y}$ to be \tblue{irrelevant to the marginal problem} (relative to some inflation DAG $G'$) if and only if there exists one copy bijection $\nodes{G'}\subsim{\leftrightarrow}\nodes{G'}$ which satisfies \emph{three}\footnote{The second condition is automatically satisfied by the first and third; we list it only for narrative clarity.} conditions simultaneously: 1) the copy bijection is a graph isomorphism relating $\ansubgraph[G']{\bm{X}}$ to $\ansubgraph[G']{\bm{Y}}$, and 2) the copy bijection takes $\bm{X}$ to $\bm{Y}$, 3) the copy bijection is a graph automorphism which tranforms the inflation DAG into itself.
+
+The irrelevance of the constraint $P(\bm{X}) = P(\bm{Y})$ to the marginal problem when the aforementioned conditions are satsifed can be seen by the following argument.
 
 %Suppose that there is an automorphism of the inflation DAG which takes copies of nodes to copies\footnote{Note the similarity to \emph{deck transformations} in covering space theory.} and restricts to an inflationary isomorphism $\ansubgraph[G']{\bm{X}}\sim\ansubgraph[G']{\bm{Y}}$ as above. 
-If $\hat{P}$ solves the unsupplemented marginal problem, then switching the variables in $\hat{P}$ according to the automorphism still solves the unsupplemented marginal problem, since the given marginal distributions are preserved by the automorphism. Now taking the uniform mixture of this new distribution with $\hat{P}$ results in a distribution that still solves the marginal problem, and in addition satisfies the supplemented constraint $P_{\bm{X}} = P_{\bm{Y}}$.
 
-Note that the argument does not apply if there is no copy-to-copy automorphism which restricts to $\ansubgraph[G']{\bm{X}}\sim\ansubgraph[G']{\bm{Y}}$, and it also does not apply if one uses the conditional independence relations on the inflation DAG as well, since this destroys linearity. We do not know what happens in either of these cases.
-
+Imagine that some joint distribution $\hat{P}$ solves the unconstrained marginal problem, i.e. without requiring $P(\bm{X}) = P(\bm{Y})$, and that a copy bijection exists which satisfies all the requisate conditions. Apply that copy bijection to the variables in the joint distribution, switching the variables around, to generate a new distribution $\hat{P'}$. Because the set of accessible marginal distributions is invariant under application of the an automorphism, we have that $\hat{P'}$ is also a solution to the unconstrained marginal problem. \purp{Doesn't this mean than any bijections which leaves the marginal sets invariant is sufficient???} Taking the uniform mixture of $\hat{P}$ and $\hat{P'}$ is therefore also a solution of the unconstrained marginal problem, but the uniform mixture also satisfies the supplementary constraint $P_{\bm{X}} = P_{\bm{Y}}$. Therefore the supplementary constrained is satisfyable automatically whenever the unconstrained marginal problem is solvable, and adding the constraint is irrelevant.
 
 
+Note that the argument does not apply if the bijection which justifies $P(\bm{X}) = P(\bm{Y})$ cannot be extended to a copy automorphism for the entire inflation DAG. It also does not apply if one uses the conditional independence relations on the inflation DAG as well, since this destroys linearity. We do not know what happens in either of these cases.
 
 
 %%% T: I've commented this out since we're not concerned here with observational equivalence, and I have the feeling that it would still require a major clean-up operation. The example of 6 observationally equivalent DAGs is not very good since they are all equivalent to A <-- S --> B, which doesn't contain any latent nodes
