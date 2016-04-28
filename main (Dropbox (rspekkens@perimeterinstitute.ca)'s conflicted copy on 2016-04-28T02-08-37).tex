@@ -1210,7 +1210,7 @@ Since the perfect-correlation distribution considered in~\cref{eq:ghzdistributio
 
 On the other hand, by intentionally using broadcasting in an inflation DAG, we can specifically try to witness certain quantum or general probabilistic distributions as non-classical. This is exactly what happens in Bell's theorem.
 
-%  We also find it useful to define the notion of a non-broadcasting subset of nodes within some larger broadcasting inflation DAG.
+% We also find it useful to define the notion of a non-broadcasting subset of nodes within some larger broadcasting inflation DAG.
 % Let's define any pair of redundant nodes which share a latent parent to be a \tblue{fundamental broadcasting pair}. An inflation DAG is non-broadcasting if it does not contain any fundamental broadcasting pairs. Similarly, a set of nodes $\bm{U}$ is a \tblue{non-broadcasting set} iff $\An[G']{\bm{U}}$ is free of any fundamental broadcasting pairs.
 
 %A set of nodes $\bm{U}$ is a \tblue{non-broadcasting set} iff $\ansubgraph[G']{\bm{U}}$ is a non-broadcasting inflation DAG. Any inference about the original DAG which can be made by referencing exclusively to non-broadcasting sets hold in both the classical and quantum paradigms. Broadcasting inflation DAGs are therefore especially useful for deriving criteria which distinguish quantum and classical probability distributions, but we anticipate them to be valuable for broader causal inference tasks as well.
@@ -1228,15 +1228,17 @@ On the other hand, by intentionally using broadcasting in an inflation DAG, we c
 %An inflation DAG is a \tblue{non-broadcasting inflation} whenever the children of every individual node in the inflation DAG $G'$ map injectively to the corresponding children of the mapped node in the original DAG $G$, i.e. $dmap\parenths*{\Ch[G']{X}}\subseteq\Ch[G]{dmap\parenths*{X}}$ for all $X\in\nodes{G'}$. 
 % \cref{fig:TriDagSubA2B1C1} is an example of a non-broadcasting inflation.
 
+\purp{Next 3 paragraphs require background definition of non-broadcasting sets etc.}
+
 Even when using broadcasting inflation DAGs, it may still be possible to derive inequalities valid for quantum distributions if one appropriately the nonnegativity inequalities in the marginal problem, e.g. such as \cref{eq:nonnegativity}. The modification would replace demanding nonnegativity of the full joint distribution with instead demanding the nonnegativity of only quantum-physically-meaningful marginal probability distributions. 
 
-Even when using broadcasting inflation DAGs, it may still be possible to derive inequalities valid for quantum distributions if one appropriately modifies \cref{sec:ineqs} to generate a different initial set of nonnegativity inequalities. This new set should capture the nonnegativity of only quantum-physically-meaningful marginal probability distributions. Indeed, a quantum causal model on the original DAG can potentially be inflated to a quantum inflation model on the inflation DAG in terms of the logical broadcasting maps of \citet{Coecke2011}. From this perspective, a broadcasting inflation DAG is an abstract logical concept, as opposed to a feasible physical construct. However, this would result in a joint distribution over all observable variables that may have some negative probabilities, and one cannot expect~\cref{eq:nonnegativity} to hold in general. But one can still try to reformulate the marginal problem so as to refer only to the existence of joint distributions on non-broadcastings sets rather than the existence of a full joint distribution from which the marginal distributions might be recovered. Here, a set $\bm{U}$ of observable nodes is non-broadcasting if $\An{\bm{U}}$ does not two distinct copies of a node which have a parent in common.
+From this perspective, a broadcasting inflation DAG is an abstract logical concept, as opposed to a feasible physical construct. Indeed, a quantum causal model in original DAG can potentially be inflated to a quantum inflation model in terms of the logical broadcasting maps of \citet{Coecke2011}. However, this would result in a joint distribution over all observable variables that may have some negative probabilities, and one cannot expect~\cref{eq:nonnegativity} to hold in general. But one can still try to reformulate the marginal problem so as to refer only to the existence of joint distributions on non-broadcastings sets rather than the existence of a full joint distribution from which the marginal distributions might be recovered.
 
-An analysis along these lines has already been carried out successfully by \citet{Chaves2015infoquantum} in the derivation of entropic inequalities that are valid for all quantum distributions. Although \citet{Chaves2015infoquantum} do not invoke inflation DAGs, they do seem to employ a similar type of structure to model the conditioning of a variable on a ``setting'' variable, and this also gives rise to non-broadcasting sets. \citet{Chaves2015infoquantum} take pains to avoid including full joint probability distributions in any of their initial entropic inequalities, precisely as we would want to do in constructing our initial probability inequalities, and they successfully derive quantumly valid entropic inequalities. But so far, no inequalities polynomial in the probabilities have been derived using this method.
+An analysis along these lines has already been carried out successfully by \citet{Chaves2015infoquantum} in the derivation of entropic inequalities for that are valid for all quantum distributions. Although \citet{Chaves2015infoquantum} do not invoke inflation DAGs, they do employ conditional structure, which also gives rise to broadcasting sets. \citet{Chaves2015infoquantum} take pains to avoid including full joint probability distributions in any of their initial entropic inequalities, precisely as we would want to do in constructing our initial probability inequalities, and they successfully derive quantumly valid entropic inequalities. But now inequalities polynomial in the probabilities have yet been derived using this method.
 
 % Our current inflation DAG method can be employed to derive causal infeasibility criteria for general causal structures, thus generalizing Bell inequalities somewhat. From a quantum foundations perspective, however, generalizing Tsirelson inequalities \cite{Tsirelson1980,Brunner2013Bell}---the ultimate constraints on what quantum theory makes possible---is even more desirable. 
 
-A tight set of inequalities characterizing quantum distributions would provide the ultimate constraints on what quantum theory allows. Deriving additional inequalities that hold for quantum distributions is therefore a priority for future research.
+A tight set of inequalities characterizing quantum distributions would provide the ultimate constraints on what quantum theory makes possible. Deriving additional inequalities that hold for quantum distributions is therefore a priority for future research.
 
 \section{Deriving Hardy-type constraints for the marginal problem}\label{sec:TSEM}
 
@@ -1740,9 +1742,8 @@ In the following table, the inequalities are listed in expectation-value form, w
 
 \purp{T: it may be better to list this as a table of coefficients, as e.g.~in \href{http://arxiv.org/abs/1101.2477}{arXiv:1101.2477}, p.14/15?}
 
-\begin{table*}[ht]\centering\caption{List of coefficients}
-\begin{tabularx}{\linewidth}{ccccccccccccccc} 
-%\begin{array}{rrrrrrrrrrrrrrrr}
+\begin{table*}[ht]\centering\caption{List of coefficients...}
+\begin{tabularx}{\linewidth}{ ccccccccccccccc } 
   constant & \(\expec{A}\) & \(\expec{B}\) & \(\expec{C}\) & \(\expec{A B}\) & \(\expec{A C}\) & \(\expec{B C}\) & \(\expec{A B C}\) & \(\expec{A}\expec{B}\) & \(\expec{A}\expec{C}\) & \(\expec{B}\expec{C}\) & \(\expec{C}\expec{A B}\) & \(\expec{B}\expec{A C}\) &
    {\(\expec{A}\expec{B C}\)} & {\(\expec{A}\expec{B}\expec{C}\)}   \\\bottomrule
  1 & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\
