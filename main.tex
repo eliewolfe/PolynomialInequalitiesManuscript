@@ -487,7 +487,7 @@ Inflation involves a sort of copying operation on nodes of the DAG.  Specificall
 %, and a set of variables in $G'$ that differ only by copy-index are called a {\em copy set}.  
 \begin{definition}
 %The necessary condition on $G'$ for being an inflation of $G$ is that
-The DAG $G'$ is said to be an inflation of the DAG $G$ if and only if  for every node $A_i$ in $G'$, the ancestral subgraph of $A_i$ in $G'$ is equivalent, under removal of the copy-index, to the ancestral subgraph of $A$ in $G$,
+The DAG $G'$ is said to be an inflation of the DAG $G$ if and only if  for every node $A_i$ in $G'$, the ancestral subgraph of $A_i$ in $G'$ is equivalent, under removal of the copy index, to the ancestral subgraph of $A$ in $G$,
 \begin{align}\label{eq:definflationDAG}
 G' \in\SmallNamedFunction{Inflations}{G} \quad\text{ iff }\quad \forall A_i\in \SmallNamedFunction{Nodes}{G'}:\; \ansubgraph[G']{A_i}\sim\ansubgraph[G]{A}.
 \end{align}
@@ -1489,50 +1489,23 @@ By solving the marginal problem, what we mean is to determine all the facets of 
 
 A generic facet enumeration problem takes a matrix of vertices $V\in\mathbb{R}^{n\times d}$, where each row is a vertex, and asks what is the set of points $x\in\mathbb{R}^d$ that can be written as a convex combination of the vertices using weights $w\in\mathbb{R}^n$ that are nonnegative and normalized,
 \begin{align}
+	\label{projsimplex}
 	\left\{\: x\in\mathbb{R}^d \quad\bigg|\quad \exists w\in\mathbb{R}^n:\; x = w V ,\;\; w\geq 0,\;\; {{\sum_i}{w_i}}=1 \:\right\}.
 \end{align}
 % It should be evident from Eqs. (\ref{eq:nonnegativity}-\ref{eq:marginalequalities222}) that the marginal problem is precisely of this form. The individual probabilities of the joint outcome correspond to the weights in the convex hull problem. Recasting the marginal problem as a convex hull problem means that optimized convex hull algorithms can be used to directly solve the marginal problem. Fine's Theorem~\cite{FineTheorem} also follows along these lines. Fine's theorem states that the existence of a joint distribution is equivalent to having the observables marginal distribution lie inside the convex hull of all deterministic joint distributions. \purp{Tobias, can you say the previous sentence better perhaps?}
 % Geometrically, linear quantifier elimination is equivalent to projecting a high-dimensional polytope in halfspace representation (inequalities and equalities) into a lower-dimensional quotient space.
 % Polytope projection is a well-understood problem in combinatorial optimization,
-The oldest-known method for facet enumeration relies on \tblue{linear quantifier elimination} in the form of Fourier-Motzkin (FM) elimination~\cite{fordan1999projection,DantzigEaves}. This refers to the fact that one starts with the system $x=wV$, $w\geq 0$ and $\sum_i w_i = 1$, which is the half-space representation of a convex polytope (a simplex), and then one needs to project onto $x$-space by \emph{eliminating} the variables $w$ to which the existential \emph{quantifier} $\exists w$ refers. The Fourier-Motzkin algorithm is a particular method for performing this quantifier elimination one variable at a time.
+The oldest-known method for facet enumeration relies on \tblue{linear quantifier elimination} in the form of Fourier-Motzkin (FM) elimination~\cite{fordan1999projection,DantzigEaves}. This refers to the fact that one starts with the system $x=wV$, $w\geq 0$ and $\sum_i w_i = 1$, which is the half-space representation of a convex polytope (a simplex), and then one needs to project onto $x$-space by \emph{eliminating} the variables $w$ to which the existential \emph{quantifier} $\exists w$ refers. The Fourier-Motzkin algorithm is a particular method for performing this quantifier elimination one variable at a time; when applied to~\cref{projsimplex}, it is equivalent to the \emph{double description method}~\cite{motzkin_double_1953}. Linear quantifier elimination routines are available in many software tools\footnote{For example \textit{MATLAB$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://people.ee.ethz.ch/~mpt/2/docs/refguide/mpt/@polytope/projection.html}{\texttt{MPT2}}/\href[pdfnewwindow]{http://ellipsoids.googlecode.com/svn-history/r2740/branches/issue_119_vrozova/tbxmanager/toolboxes/mpt/3.0.14/all/mpt3-3_0_14/mpt/modules/geometry/sets/@Polyhedron/projection.m}{\texttt{MPT3}}, \textit{Maxima}'s \href[pdfnewwindow]{http://maxima.sourceforge.net/docs/manual/de/maxima_75.html}{\texttt{fourier\_elim}}, \textit{lrs}'s \href[pdfnewwindow]{http://cgm.cs.mcgill.ca/~avis/C/lrslib/USERGUIDE.html\#fourier}{\texttt{fourier}}, or \textit{Maple$^{_{\textit{\tiny\texttrademark}}}$}'s (v17+) \href[pdfnewwindow]{http://www.maplesoft.com/support/help/maple/view.aspx?path=RegularChains/SemiAlgebraicSetTools/LinearSolve}{\texttt{LinearSolve}} and \href[pdfnewwindow]{http://www.maplesoft.com/support/help/Maple/view.aspx?path=RegularChains/SemiAlgebraicSetTools/Projection}{\texttt{Projection}}. The efficiency of most of these software tools, however, drops off markedly when the dimension of the final projection is much smaller than the initial space of the inequalities. FM elimination aided by Chernikov rules \cite{Shapot2012,Bastrakov2015} is implemented in \href[pdfnewwindow]{http://sbastrakov.github.io/qskeleton/}{\textit{qskeleton}} \cite{qskeleton}. ESP  \cite{jones2004equality,JonesThesis2005,Jones2008} is supported by \href[pdfnewwindow]{http://people.ee.ethz.ch/~mpt/2/docs/refguide/mpt/@polytope/projection.html}{\texttt{MPT2}} but not \href[pdfnewwindow]{http://people.ee.ethz.ch/~mpt/3/}{\texttt{MPT3}}, and by the (undocumented) option of \href[pdfnewwindow]{https://github.com/tulip-control/polytope/blob/master/polytope/polytope.py\#L1406}{projection} in the \href[pdfnewwindow]{https://pypi.python.org/pypi/polytope}{\textit{polytope}} (v0.1.1 2015-10-26) python module.}. We have found custom-coding an linear elimination routine in \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$} to be most efficient.
+% Other possible algorithms for facet enumeration come in two kinds: first, algorithms that are---like Fourier-Motzkin---also based on linear quantifier elimination, or equivalently on computing the half-space representation of a polytope given in half-space representation; second, algorithms that solve the facet enumeration problem in a different manner. Other projection methods than FM include 
 
-Linear quantifier elimination routines are available in many software tools\footnote{For example \textit{MATLAB$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://people.ee.ethz.ch/~mpt/2/docs/refguide/mpt/@polytope/projection.html}{\texttt{MPT2}}/\href[pdfnewwindow]{http://ellipsoids.googlecode.com/svn-history/r2740/branches/issue_119_vrozova/tbxmanager/toolboxes/mpt/3.0.14/all/mpt3-3_0_14/mpt/modules/geometry/sets/@Polyhedron/projection.m}{\texttt{MPT3}}, \textit{Maxima}'s \href[pdfnewwindow]{http://maxima.sourceforge.net/docs/manual/de/maxima_75.html}{\texttt{fourier\_elim}}, \textit{lrs}'s \href[pdfnewwindow]{http://cgm.cs.mcgill.ca/~avis/C/lrslib/USERGUIDE.html\#fourier}{\texttt{fourier}}, or \textit{Maple$^{_{\textit{\tiny\texttrademark}}}$}'s (v17+) \href[pdfnewwindow]{http://www.maplesoft.com/support/help/maple/view.aspx?path=RegularChains/SemiAlgebraicSetTools/LinearSolve}{\texttt{LinearSolve}} and \href[pdfnewwindow]{http://www.maplesoft.com/support/help/Maple/view.aspx?path=RegularChains/SemiAlgebraicSetTools/Projection}{\texttt{Projection}}. The efficiency of most of these software tools, however, drops off markedly when the dimension of the final projection is much smaller than the initial space of the inequalities. FM elimination aided by Cernikov rules \cite{Shapot2012,Bastrakov2015} is implemented in \href[pdfnewwindow]{http://sbastrakov.github.io/qskeleton/}{\textit{qskeleton}} \cite{qskeleton}. ESP  \cite{jones2004equality,JonesThesis2005,Jones2008} is supported by \href[pdfnewwindow]{http://people.ee.ethz.ch/~mpt/2/docs/refguide/mpt/@polytope/projection.html}{\texttt{MPT2}} but not \href[pdfnewwindow]{http://people.ee.ethz.ch/~mpt/3/}{\texttt{MPT3}}, and by the (undocumented) option of \href[pdfnewwindow]{https://github.com/tulip-control/polytope/blob/master/polytope/polytope.py\#L1406}{projection} in the \href[pdfnewwindow]{https://pypi.python.org/pypi/polytope}{\textit{polytope}} (v0.1.1 2015-10-26) python module.}. We have found custom-coding an linear elimination routine in \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$} to be most efficient.
-
-Other fairly popular variants for facet enumeration are Block Elimination and Vertex Enumeration \cite{Avis2000lrs}. More advanced polytope projection algorithms, such as Equality Set Projection (ESP) and Parametric Linear Programming, have also recently become available \cite{jones2004equality,JonesThesis2005,Jones2008}. ESP could be an interesting algorithm to use in practice, because each internal iteration of ESP churns out a new facet; by contrast, FM algorithms only generate the entire list of facets after their final internal iteration, after all the quantifiers have been eliminated one by one.
+ Other algorithms for facet enumeration that are not based on linear quantifier elimination include the following. \emph{Lexicographic reverse search}~\cite{Avis2000lrs}, which explores the entire polytope by repeatedly pivoting from one facet to an adjacent one, and is implemented in~\href[pdfnewwindow]{http://cgm.cs.mcgill.ca/~avis/C/lrslib/USERGUIDE.html#Installation\%20Section}{\texttt{lrs}}. Equality Set Projection~\cite{jones2004equality,JonesThesis2005} is also based on pivoting from facet to facet. These algorithms could be interesting to use in practice, since each pivoting step churns out a new facet; by contrast, Fourier-Motzkin type algorithms only generate the entire list of facets at once, after all the quantifiers have been eliminated one by one.
 
 %\footnote{FM elimination algorithms make intermittent calls to a linear-programming subroutine for eliminating redundant inequalities. The authors found an efficient implementation of this subroutine in \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$}, see \cref{sec:redundancy} for further details.}.
 %Fourier-Motzkin elimination appreciable suboptimal, however, when the dimension of the final projection is much smaller than the initial space of the inequalities, i.e. when there are many gedankenprobabilities. See Refs. \cite{jones2004equality,JonesThesis2005,Jones2008} and \cref{sec:projalgorithms} for further detail.
 
-The generic task of polytope projection assumes that the initial polytope is given \emph{only} in halfspace representation. If, however, a \tblue{dual description} of the initial polytope is available, i.e. we are also given its extremal vertices, then the projection problem can be significantly optimized \cite{projectiondual,Avis2000lrs}. Such dual-description algorithms are used, for example, by modern convex hull solvers. The marginal problem can be explicitly recast as a a special convex hull problem, which can be seen as follows.
-
-
-Indeed, the authors found that the software \textit{lrs} [\href[pdfnewwindow]{http://cgm.cs.mcgill.ca/~avis/C/lrslib/USERGUIDE.html#Installation\%20Section}{\texttt{lrs}}] was capable of solving the marginal problem rather efficiently.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+% The generic task of polytope projection assumes that the initial polytope is given \emph{only} in halfspace representation. If, however, a \tblue{dual description} of the initial polytope is available, i.e. we are also given its extremal vertices, then the projection problem can be significantly optimized \cite{projectiondual,Avis2000lrs}. Such dual-description algorithms are used, for example, by modern convex hull solvers. The marginal problem can be explicitly recast as a a special convex hull problem, which can be seen as follows.
 
 \begin{comment}
-
-
 The marginal problem is included among such special cases: the extremal vertices of the initial polytope are just the various distinct possible deterministic joint distributions! Indeed, the initial polytope of the marginal problem is a \tblue{probability simplex}, such that every non-negativity inequality is saturated by all one point.
 
 Here we present an explicit algorithm for polytope projection when a dual description in available. Without loss of generality we assume that the halfspace representation consists of only inequalities. This is generic, as any equality can either be solved-for as a preliminary step (substituting the solution into the system of inequalities) or converted to two inequalities (of the form $\vec{a}.\vec{x}\geq 0$ and $-\vec{a}\vec{x} \geq 0$). In this notation $\vec{x}$ represents a list of variables \emph{appended by 1}, and $\vec{a}$ indicate the coefficients of the variables, appended by some constant.
@@ -1555,8 +1528,8 @@ Redundancy elimination is now rapidly accomplished by identifying indices of red
 This algorithm can be thought of as an improvement to Fouerir-Chernikov elimination \cite{Shapot2012,Bastrakov2015}, which uses a similar $\hat{Q}$ to partially filter redundant inequalities.
 \end{comment}
 
-\begin{table*}[ht]\centering\caption{A comparison of different approaches for constraining the distributions on the pre-injectable sets. The primary divide is quantifier elimination, which is more difficult but produces inequalities, versus satisfiability which can witness the infeasibility of a specific distribution. The approaches subdivide further subdivided into nonlinear, linear, and possibilistic variants.}
-\begin{tabularx}{\linewidth}{ |l|L|c|L| } 
+\begin{table*}[ht]\centering\caption{A comparison of different approaches for constraining the distributions on the pre-injectable sets. The primary divide is quantifier elimination, which is more difficult but produces inequalities, versus satisfiability which can witness the infeasibility of a specific distribution. The approaches subdivide further into nonlinear, linear, and possibilistic variants.}
+\begin{tabularx}{\linewidth}{ |C|C|C|C| } 
 \hline
 Approach & General problem & Standard algorithm(s) & Difficulty \\
 \bottomrule
@@ -1564,9 +1537,7 @@ Nonlinear quantifier elimination & Real quantifier elimination & Cylindrical alg
 \hline
 Nonlinear satisfiability & Nonlinear optimization & See \cite{BarFT-SMTLIB}, and semidefinite relaxations~\cite{laurent_polynomial_2012} & Easy \\
 \hline
-Linear quantifier elimination & Polytope projection & Fourier-Motzkin elimination, see \cite{fordan1999projection,DantzigEaves,Bastrakov2015,BalasProjectionCone,Jones2008} & Hard \\
-\hline
-Solve marginal problem & Convex Hull & Dual-description linear elimination, see \cite{projectiondual,Avis2000lrs} & Moderate \\
+Solve marginal problem & Facet enumeration & Fourier-Motzkin~\cite{fordan1999projection,DantzigEaves,Bastrakov2015,BalasProjectionCone,Jones2008}, lexicographic reverse search~\cite{Avis2000lrs} & Hard \\
 \hline
 Linear satisfiability & Linear programming & Simplex method, see \cite{Korovin2012ImplementingCRA,Bobot2012SimplexSAT} & Very easy \\
 \hline
@@ -1577,7 +1548,7 @@ Enumerate Hardy paradoxes & Hypergraph transversals & See~\citet{eiter_dualizati
 \end{tabularx}
 \end{table*}
 
-% We find the strategy of employing linear programming in concert with the second Cernikov rule to be extremely efficient.
+% We find the strategy of employing linear programming in concert with the second Chernikov rule to be extremely efficient.
 
 %There are plenty of other algorithms for computing the facets of a polytope from its vertices. The Equality Set Projection (ESP) algorithm~\cite{jones2004equality,JonesThesis2005} could be an interesting algorithm to use in practice, as it starts churning out facets one by one from the very beginning, whereas Fourier-Motzkin only has the ability to generate the entire list of facets all in one, which quickly becomes computationally intractable. So ESP may provide a useful tool for deriving an incomplete list of inequalities on inflation DAGs that are too large for the Fourier-Motzkin elimination to work.
 % ideal for handling inflation DAGs, because its computational complexity scales only according to the facet count of the final projection. Our use of larger-and-larger inflation DAGs to obtain causal infeasibility criteria on the same underlying original DAG means that while the complexity of the starting polytope is unbounded, the complexity of the projection is finite. Practically, this suggests that the ESP algorithm could parse the implications due to very large inflation DAGs efficiently. Formally, ESP should require minimal computational overhead to consider a larger inflation DAG relative to considering a much smaller inflation DAG, when the \emph{implications} of the small and large inflations are similar. By contrast, the computation complexity of Fourier-Motzkin (FM) elimination algorithm scales with the number of quantifiers being eliminated. The number of gedankenprobabilities requiring elimination is exponentially related to the number of variables in the inflation DAG. The FM algorithm, therefore, is utterly impractical very for large inflation DAGs.
@@ -1674,14 +1645,25 @@ Note that a \texttt{True} response from \texttt{RedundantRowQ} indicates that th
 
 %By restricting our attention to inflation models, we see that sometimes the distributions of different injectable sets coincide, i.e. $\pdf{\bm{X}}=\pdf{\bm{Y}}$ whenever both $\bm{X}$ and $\bm{Y}$ are injectable, and $\subsim{\bm{X}}=\subsim{\bm{Y}}$. Sometimes sets of random variables which are \emph{not} injectable, however, can also be shown to have necessarily coinciding distributions. Coinciding (not necessarily injectable) marginal distributions among the inflation DAG variables is a consequence of \cref{eq:funcdependences}. For example, we can verify that $\pdf{A_1 A_2 B_1}=\pdf{A_1 A_2 B_2}$ follows from \cref{fig:Tri222}, even though $\brackets{A_1 A_2 B_1}$ and $\brackets{A_1 A_2 B_2}$ are not injectable sets. Here we formalize this type of constraint more generally.
 
-A \tblue{bijection} between two sets of elements is a bijective invertible map ($\leftrightarrow$) from one set of elements to another. Let use define a \tblue{copy bijection} ($\subsim{\leftrightarrow}$) to be a bijective map such that every pair of elements which are mapped to eachother are equivalent under dropping the copy index. We've informally been using the notion of a copy bijection previously, in that (ordered) sets of nodes $\bm{X}\sim\bm{Y}$ iff there exists some $\subsim{\leftrightarrow}$ which takes $\bm{X}$ to $\bm{Y}$.
-A special case of a bijection is a graph isomorphism, which is a bijection between the nodes of one graph and the nodes and another such that the action of the bijection is to reversibly transform the first graph into the second one. A copy isomorphism, therefore, is defined as a graph isomorphism that is also a copy bijection. The same specialization apply to graph automorphism: an inflation DAG can posses many symmetries, i.e. permutations of the nodes such that the permutation leaves the DAG invariant. Generally, however, only a subset of the possible automorphisms are also copy bijections, i.e. copy automorphisms are a subset of graph isomorphism.
+Given sets of nodes $\bm{X}$ and $\bm{Y}$ in an inflation DAG $G'$, let use define a \tblue{copy bijection} to be a map $\varphi : \bm{X}\to\bm{Y}$ that is bijective and such that $\varphi$ maps every node in $\bm{X}$ to a node (in $\bm{Y}$) which is equivalent to the original node under dropping the copy index. We have informally been using the notion of a copy bijection previously, in that sets of nodes $\bm{X}\sim\bm{Y}$ iff there exists $\varphi$ which takes $\bm{X}$ to $\bm{Y}$.
 
-We define two ordered sets of observable nodes $\bm{X}$ and $\bm{Y}$ to be \tblue{inflationarily isomorphic} (relative to some inflation DAG $G'$) if and only if there exists one copy bijection $\An[G']{\bm{X}}\subsim{\leftrightarrow}\An[G']{\bm{Y}}$ which satisfies two conditions simultaneously: 1) the copy bijection is a graph isomorphism relating $\ansubgraph[G']{\bm{X}}$ to $\ansubgraph[G']{\bm{Y}}$, and 2) the copy bijection takes $\bm{X}$ to $\bm{Y}$. 
+% A special case of a bijection is a graph isomorphism, which is a bijection between the nodes of one graph and the nodes and another such that the action of the bijection is to reversibly transform the first graph into the second one.
+% A copy isomorphism, therefore, is defined as a graph isomorphism that is also a copy bijection. The same specialization apply to graph automorphism: an inflation DAG can posses many symmetries, i.e. permutations of the nodes such that the permutation leaves the DAG invariant. Generally, however, only a subset of the possible automorphisms are also copy bijections, i.e. copy automorphisms are a subset of graph isomorphism.
 
-As an example, in~\cref{fig:Tri222}, the sets $\bm{X}=\{A_1 A_2 B_1\}$ and $\bm{Y}=\{A_1 A_2 B_2\}$ are inflationarily isomorphic. Indeed, there is only one copy isomorphism between the two ancestral subgraphs, namely the bijections which leaves all nodes invariant except for $\{B_1,B_2,Z_1,Z_2\}\leftrightarrow\{B_2,B_1,Z_2,Z_1\}$. This bijection clearly takes $B_1$ to $B_2$, and hence both the requisite conditions are met.
+We say that $\varphi : \bm{X}\to\bm{Y}$ is an \tblue{inflationary isomorphism} whenever there exists one copy bijection $\An[G']{\bm{X}}\subsim{\leftrightarrow}\An[G']{\bm{Y}}$ which satisfies two conditions simultaneously: 1) the copy bijection is a graph isomorphism relating $\ansubgraph[G']{\bm{X}}$ to $\ansubgraph[G']{\bm{Y}}$, and 2) the copy bijection takes $\bm{X}$ to $\bm{Y}$.
 
-\purp{Recast this as a lemma?} If two sets $\bm{X}$ and $\bm{Y}$ are inflationarily isomorphic then $P(\bm{X}) = P(\bm{Y})$ in any inflation model. 
+As an example, in~\cref{fig:Tri222}, the map
+\[
+	\varphi \: : \: A_1 \mapsto A_1,\qquad A_2\mapsto A_2,\qquad B_1\mapsto B_2
+\]
+sets $\bm{X}=\{A_1 A_2 B_1\}$ and $\bm{Y}=\{A_1 A_2 B_2\}$ are inflationarily isomorphic. Indeed, there is only one copy isomorphism between the two ancestral subgraphs, namely the bijections which leaves all nodes invariant except for $\{B_1,B_2,Z_1,Z_2\}\leftrightarrow\{B_2,B_1,Z_2,Z_1\}$. This bijection clearly takes $B_1$ to $B_2$, and hence both the requisite conditions are met.
+
+\begin{lemma}
+	If $\varphi:\bm{X}\to\bm{Y}$ is an inflationary isomorphism, then $P_{\bm{X}} = P_{\bm{Y}}$ in any inflation model, where the variables are identified according to $\varphi$.
+\end{lemma}
+
+Note that this may result in a nontrivial equation even if $\bm{Y}=\bm{X}$: in this case, one can conclude that $P_{\bm{X}}$ must be invariant under permuting some of the variables.
+
 Equality constraint expressing coinciding distributions can be used to supplement the marginal problem, and may be of practical use for reducing the dimensionality of the problem (number of quantifiers which need to be eliminated). 
 
 %In general there may exist multiple inflationary isomorphisms, for example the sets $\brackets{A_1 A_2 B_1}$ and $\brackets{A_1 A_2 B_2}$ can be related by either 
@@ -1719,7 +1701,13 @@ Copy isomorphic ancestral subgraphs is \emph{not}, by itself, a strong enough co
 
 Interestingly, we are not aware of any case in which imposing coinciding marginal distributions of inflationarily isomorphic sets actually result in tighter exclusions for the distributions on the original DAG. In many cases, this lack of impact can be explained by the following argument.
 
-We define two ordered sets of observable nodes $\bm{X}$ and $\bm{Y}$ to be \tblue{irrelevant to the marginal problem} (relative to some inflation DAG $G'$) if and only if there exists one copy bijection $\nodes{G'}\subsim{\leftrightarrow}\nodes{G'}$ which satisfies \emph{three}\footnote{The second condition is automatically satisfied by the first and third; we list it only for narrative clarity.} conditions simultaneously: 1) the copy bijection is a graph isomorphism relating $\ansubgraph[G']{\bm{X}}$ to $\ansubgraph[G']{\bm{Y}}$, and 2) the copy bijection takes $\bm{X}$ to $\bm{Y}$, 3) the copy bijection is a graph automorphism which tranforms the inflation DAG into itself.
+We define two ordered sets of observable nodes $\bm{X}$ and $\bm{Y}$ in some inflation DAG $G'$ to be \tblue{irrelevant to the marginal problem} if there exists a copy bijection $\varphi:\nodes{G'}\to\nodes{G'}$ which satisfies two conditions:
+\begin{enumerate}
+	\item $\varphi$ is a graph isomorphism,
+	\item $\varphi$ maps $\bm{X}$ onto $\bm{Y}$.
+\end{enumerate}
+
+In particular, these assumptions imply that $\varphi$ restricts to a graph isomorphism $\ansubgraph[G']{\bm{X}}\sim\ansubgraph[G']{\bm{Y}}$, and therefore $\bm{X}$ and $\bm{Y}$ become inflationarily isomorphic. 
 
 The irrelevance of the constraint $P(\bm{X}) = P(\bm{Y})$ to the marginal problem when the aforementioned conditions are satsifed can be seen by the following argument.
 
