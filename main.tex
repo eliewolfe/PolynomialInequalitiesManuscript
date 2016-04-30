@@ -1500,6 +1500,8 @@ The oldest-known method for facet enumeration relies on \tblue{linear quantifier
 
  Other algorithms for facet enumeration that are not based on linear quantifier elimination include the following. \emph{Lexicographic reverse search}~\cite{Avis2000lrs}, which explores the entire polytope by repeatedly pivoting from one facet to an adjacent one, and is implemented in~\href[pdfnewwindow]{http://cgm.cs.mcgill.ca/~avis/C/lrslib/USERGUIDE.html#Installation\%20Section}{\texttt{lrs}}. Equality Set Projection~\cite{jones2004equality,JonesThesis2005} is also based on pivoting from facet to facet. These algorithms could be interesting to use in practice, since each pivoting step churns out a new facet; by contrast, Fourier-Motzkin type algorithms only generate the entire list of facets at once, after all the quantifiers have been eliminated one by one.
 
+	 It may also be possible to exploit special features of marginal polytopes in order to facilitate their facet enumeration, such as their high degree of symmetry: permuting the outcomes of each variable maps the polytope to itself, which already generates a sizeable symmetry group, and oftentimes there are additional symmetries given by permuting some of the variables. This simplifies the problem of facet enumeration~\cite{bremner_symmetries_2009}, and it may be interesting to apply the dedicated software to the facet enumeration problem of marginal polytopes~\cite{rehn_sympol_2012,dutour_polyhedral_2013}.
+
 %\footnote{FM elimination algorithms make intermittent calls to a linear-programming subroutine for eliminating redundant inequalities. The authors found an efficient implementation of this subroutine in \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$}, see \cref{sec:redundancy} for further details.}.
 %Fourier-Motzkin elimination appreciable suboptimal, however, when the dimension of the final projection is much smaller than the initial space of the inequalities, i.e. when there are many gedankenprobabilities. See Refs. \cite{jones2004equality,JonesThesis2005,Jones2008} and \cref{sec:projalgorithms} for further detail.
 
@@ -1528,23 +1530,23 @@ Redundancy elimination is now rapidly accomplished by identifying indices of red
 This algorithm can be thought of as an improvement to Fouerir-Chernikov elimination \cite{Shapot2012,Bastrakov2015}, which uses a similar $\hat{Q}$ to partially filter redundant inequalities.
 \end{comment}
 
-\begin{table*}[ht]\centering\caption{A comparison of different approaches for constraining the distributions on the pre-injectable sets. The primary divide is quantifier elimination, which is more difficult but produces inequalities, versus satisfiability which can witness the infeasibility of a specific distribution. The approaches subdivide further into nonlinear, linear, and possibilistic variants.}
+\begin{table*}[ht]\centering\caption{A comparison of different approaches for constraining the distributions on the pre-injectable sets. The primary divide is producing inequalities, as in the more difficult first three approaches, versus satisfiability which can witness the infeasibility of specific distributions. The approaches subdivide further into nonlinear, linear, and possibilistic variants.}
 \begin{tabularx}{\linewidth}{ |C|C|C|C| } 
-\hline
+\toprule
 Approach & General problem & Standard algorithm(s) & Difficulty \\
-\bottomrule
+\midrule
 Nonlinear quantifier elimination & Real quantifier elimination & Cylindrical algebraic decomposition, see \cite{ChavesPolynomial} & Very hard \\
-\hline
-Nonlinear satisfiability & Nonlinear optimization & See \cite{BarFT-SMTLIB}, and semidefinite relaxations~\cite{laurent_polynomial_2012} & Easy \\
 \hline
 Solve marginal problem & Facet enumeration & Fourier-Motzkin~\cite{fordan1999projection,DantzigEaves,Bastrakov2015,BalasProjectionCone,Jones2008}, lexicographic reverse search~\cite{Avis2000lrs} & Hard \\
 \hline
-Linear satisfiability & Linear programming & Simplex method, see \cite{Korovin2012ImplementingCRA,Bobot2012SimplexSAT} & Very easy \\
+Enumerate Hardy-type paradoxes & Hypergraph transversals & See~\citet{eiter_dualization_2008} & Very easy \\
+\midrule
+Nonlinear satisfiability & Nonlinear optimization & See \cite{BarFT-SMTLIB}, and semidefinite relaxations~\cite{laurent_polynomial_2012} & Easy \\
 \hline
-Enumerate Hardy paradoxes & Hypergraph transversals & See~\citet{eiter_dualization_2008} & Very easy \\
+Linear satisfiability & Linear programming & Simplex method \cite{Korovin2012ImplementingCRA,Bobot2012SimplexSAT} & Very easy \\
 %\hline 
 %Possibilistic satisfiability & --- & --- & Super easy
-\toprule
+\bottomrule
 \end{tabularx}
 \end{table*}
 
@@ -1650,7 +1652,9 @@ Given sets of nodes $\bm{X}$ and $\bm{Y}$ in an inflation DAG $G'$, let use defi
 % A special case of a bijection is a graph isomorphism, which is a bijection between the nodes of one graph and the nodes and another such that the action of the bijection is to reversibly transform the first graph into the second one.
 % A copy isomorphism, therefore, is defined as a graph isomorphism that is also a copy bijection. The same specialization apply to graph automorphism: an inflation DAG can posses many symmetries, i.e. permutations of the nodes such that the permutation leaves the DAG invariant. Generally, however, only a subset of the possible automorphisms are also copy bijections, i.e. copy automorphisms are a subset of graph isomorphism.
 
-We say that $\varphi : \bm{X}\to\bm{Y}$ is an \tblue{inflationary isomorphism} whenever there exists one copy bijection $\An[G']{\bm{X}}\subsim{\leftrightarrow}\An[G']{\bm{Y}}$ which satisfies two conditions simultaneously: 1) the copy bijection is a graph isomorphism relating $\ansubgraph[G']{\bm{X}}$ to $\ansubgraph[G']{\bm{Y}}$, and 2) the copy bijection takes $\bm{X}$ to $\bm{Y}$.
+We say that $\varphi : \bm{X}\to\bm{Y}$ is an \tblue{inflationary isomorphism} whenever $\varphi$ can be extended to a graph isomorphism $\hat{\varphi} : \An{\bm{X}}\to\An{\bm{Y}}$.
+
+%which satisfies two conditions simultaneously: 1) the copy bijection is a graph isomorphism relating $\ansubgraph[G']{\bm{X}}$ to $\ansubgraph[G']{\bm{Y}}$, and 2) the copy bijection takes $\bm{X}$ to $\bm{Y}$.
 
 As an example, in~\cref{fig:Tri222}, the map
 \[
