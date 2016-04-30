@@ -899,17 +899,21 @@ is found to be inconsistent with the Triangle scenario, since the right-hand sid
 \section{Deriving polynomial inequalities systematically}
 \label{sec:ineqs}
 
-We have defined causal inference as a decision problem, namely testing the consistency of some observational data with some some causal hypothesis. We've shown that this decision can be negatively answered by proxy, namely by demonstrating inconsistency of \emph{inflated} data with an \emph{inflated} hypothesis. The inflation technique can also be used to derive infeasibility criteria, however, by \tblue{deriving constraints on the pre-injectable sets}. Any such constraint is also an implicit consequence of the original hypothesis, and hence a relevant infeasibility criterion.
+\purp{T: A lot of the things in this section \emph{also} need to be done when checking for satisfiability only, such as identifying the pre-injectable sets and writing down all the constraints.}
 
-The ``big" problem, therefore, is rather straightforward: We seek to derive causal infeasibility criteria from the inflation hypothesis on the injectable sets. This task, however, is just a special instance of generic causal inference: Given some causal hypothesis, what can we say about how it constrains possible observable marginal distribution? Any technique for deriving causal infeasibility criteria is therefore relevant when using the inflation technique. Interestingly, weak constraints from the inflation hypothesis translate into strong constraints pursuant to the original hypothesis.
+We have defined causal inference as a decision problem, namely testing the consistency of some observational data with some some causal hypothesis. We have shown that this decision can sometimes be negatively answered by proxy, namely by demonstrating inconsistency of \emph{inflated} data with an \emph{inflated} hypothesis. But the inflation technique is more useful than that: we can also derive explicit \emph{inequalities} that a distribution on observable nodes needs to satisfy in order to be compatible with the causal structure. % Any such constraint is also an implicit consequence of the original hypothesis, and hence a relevant infeasibility criterion.
 
-In the discussion that follows we continue to assume that the original hypothesis is nothing more than supposing the causal structure to be given by the original DAG. Furthermore we presume that the joint distribution over all original observable variables is accessible. Moreover, we limit our attention to deriving polynomial inequalities in terms of probabilities. The potential of using inflation as tool for deriving entropic inequalities is considered separately in \cref{sec:NonShannon}.
+The ``big'' problem, therefore, is rather straightforward: We seek to derive inequalities which from the inflation hypothesis and translate them back into inequalities constraining the original distribution. Deriving inequalities for inflation models, however, is just a special instance of generic causal inference: Given some causal hypothesis, what can we say about how it constrains possible observable marginal distributions? Any technique for deriving causal infeasibility criteria is therefore relevant when using the inflation technique. Interestingly, weak constraints from the inflation hypothesis often translate into stronger constraints pursuant to the original hypothesis.
+
+In the discussion that follows, we continue to assume that the original hypothesis is nothing more than supposing the causal structure to be given by the original DAG. Furthermore we presume that the joint distribution over all original observable variables is accessible. Moreover, we limit our attention to deriving polynomial inequalities in terms of probabilities, although inflation could also be used to derive entropic inequalities (in particular non-Shannon-type inequalities, as in~\cref{sec:NonShannon}).
+
+% The potential of using inflation as tool for deriving entropic inequalities is considered separately in \cref{sec:NonShannon}.
 
 In what follows we consider three different strategies for constraining possible marginal distributions from the inflation hypothesis. 
 \begin{compactitem}
-\item The full nonlinear strategy attempts to leverage many different kinds of constraints which are implicit in the inflation hypothesis. This strategy yields the strongest infeasibility criteria, but relies on computationally-difficult nonlinear quantifier elimination.
-\item An intermediate strategy asks only if the various marginal distributions are compatible with \emph{any} joint distribution, without regard to the specific causal structure of the inflation DAG whatsoever. Solving the marginal problem amounts to a special linear quantifier elimination computation, one which can be computed efficiently using convex hull algorithms. The resulting infeasibility criteria are nevertheless still polynomial inequalities.
-\item Another strategy is based on probabilistic Hardy-type paradoxes, which we connect to the hypergraph transversal problem. This strategy requires the least computational effort, but is limited in that it only yields polynomial inequalities of a very particular form.
+\item The full nonlinear strategy attempts to leverage different kinds of constraints which follow from the inflation hypothesis. This strategy yields the strongest infeasibility criteria, but relies on computationally-difficult nonlinear quantifier elimination.
+\item An intermediate strategy asks only if the various marginal distributions are compatible with \emph{any} joint distribution, without regard to the specific causal structure of the inflation DAG whatsoever. Solving the marginal problem amounts to determining all the facets of the \tblue{marginal polytope}, for which we discuss algorithms in~\cref{sec:projalgorithms}. The resulting infeasibility criteria are nevertheless still polynomial inequalities at the level of the original distribution.
+\item Since computing all facets of the marginal polytope is computationally costly, one can try to derive instead only a collection of linear inequalities which bound it. One strategy for doing so is based on possibilistic Hardy-type paradoxes, which we connect to the hypergraph transversal problem. This strategy requires the least computational effort, but is limited in that it only yields polynomial inequalities of a very particular form.
 \end{compactitem}
 
 In the narrative below the marginal problem is discussed first; the nonlinear strategy is presented as supplementing the marginal problem with additional constraints. The most computationally efficient strategy is presented as a relaxation of the marginal problem, and is discussed separate from the other two strategies, namely in \cref{sec:TSEM}.
@@ -919,9 +923,9 @@ Preliminary to every strategy, however, is the identification of the pre-injecta
 
 \topic{\tred{Identifying the Pre-Injectable Sets}}\label{step:findpreinjectable}
 
-To identify the pre-injectable sets, we first identify the injectable sets. To this end, it is useful to construct an auxiliary graph from the inflation DAG. Let the nodes of these auxiliary graphs be the observable nodes in the inflation DAG. The \tblue{injection graph}, then, is the undirected graph in which a pair of nodes $A_i$ and $B_j$ are adjacent if  $\An{A_i B_j}$ is irredundant. The injectable sets are then precisely the cliques\footnote{A clique is a subset of nodes such that every node in the subset is connected to every other node in the subset.} in this graph, per \cref{eq:definjectable}. 
+To identify the pre-injectable sets, we first identify the \emph{injectable} sets. To this end, it is useful to construct an auxiliary undirected graph from the inflation DAG which we call the \tblue{injection graph}. Let the nodes of the injection graph be the observable nodes in the inflation DAG. Two nodes $A_i$ and $B_j$ are adjacent if  $\An{A_i B_j}$ does not contain two distinct nodes that are equivalent up to copy index. The injectable sets are then precisely the cliques\footnote{A clique is a subset of nodes such that every node in the subset is adjacent to every other node in the subset.} in this graph, per \cref{eq:definjectable}. Note that it is usually necessary to enumerate \emph{all} the nonempty cliques, i.e.~not only the maximal ones.
 
-Determining the pre-injectable sets from there can be done via constructing another graph that we call the \tblue{independence graph}. Its nodes are the injectable sets, and we connect two of these by an edge if their ancestral subgraphs are disjoint. Then by definition, the pre-injectable sets can be obtained as the cliques in this graph. Taking the union of all the injectable sets in such a clique results in a pre-injectable set. Since it is sufficient to only consider the maximal pre-injectable sets, one can eliminate all those pre-injectable sets that are contained in other ones, as a final step.
+Determining the pre-injectable sets from there can be done via constructing another graph that we call the \tblue{independence graph}. Its nodes are the injectable sets, and we connect two of these by an edge if their ancestral subgraphs are disjoint. Then by definition, the pre-injectable are precisely the cliques in this graph. Taking the union of all the injectable sets represented by such a clique results in a pre-injectable set. Since it is sufficient to only consider the maximal pre-injectable sets, one can eliminate all those pre-injectable sets that are contained in other ones, as a final step.
 
 %Let us also define the \tblue{ancestral dependence graph}, in which two nodes are adjacent if they share a common ancestor, and its complement the \tblue{ancestral independence graph}, in the ancestrally independent nodes are adjacent. To ascertain the factorization of a node set $\bm{U}$ into ancestrally-independent partitions one considers the subgraph on  $\bm{U}$ of the ancestral dependence graph: the ancestrally-independent partitions are identically the distinct connected components of that subgraph. By examining the injection graph and the ancestral dependence graph, therefore, one is able to quickly determine all injectable sets and all ancestral independence relations.
 
@@ -949,8 +953,7 @@ Determining the pre-injectable sets from there can be done via constructing anot
 \end{minipage}
 \end{figure}
 
-Applying these prescriptions to the inflation DAG in \cref{fig:Tri222} identifies 
- ancestral independencies and (pre-)injectable sets as follows:
+For example, applying these prescriptions to the inflation DAG in \cref{fig:Tri222} results in the injection graph of~\cref{fig:injection222} and maximal pre-injectable sets as follows:
 \begin{align}\label{eq:basicsetup222}
 {\underbrace{\begin{matrix}
 A_2\aindep B_1\\
@@ -959,43 +962,44 @@ B_2\aindep A_2\\
 B_2\aindep C_1\\
 C_2\aindep A_1\\
 C_2\aindep B_2
-\end{matrix}}_{\substack{\text{pairwise}\\\text{ancestral}\\\text{independencies}}}}
-\qquad\quad
+\end{matrix}}_{\substack{\text{adjacent nodes in}\\\text{the injection graph}}}}
+\qquad\qquad
 {\underbrace{\begin{matrix}
 \\ \\
-\brackets{A_2}\aindep \brackets{B_1 B_2 C_2}\\
-\brackets{B_2}\aindep \brackets{A_2 C_1 C_2}\\
-\brackets{C_2}\aindep \brackets{A_1 A_2 B_2}\\
-\brackets{A_2}\aindep \brackets{B_2}\aindep \brackets{C_2}
-\end{matrix}}_{\substack{\text{maximal}\\\text{ancestral}\\\text{independencies}}}}
-\qquad\quad
-{\underbrace{\begin{matrix}
-\brackets{ A_1 B_1 }\\
-\brackets{ B_1 C_1 }\\
-\brackets{ A_1 C_1 }\\
-\brackets{ A_2 C_1 }\\
-\brackets{ B_2 A_1 }\\
-\brackets{ C_2 B_1 }\\
-\end{matrix}}_{\substack{\text{pairwise}\\\text{injectable}\\\text{sets}}}}
-\qquad\quad
-{\underbrace{\begin{array}{c}
-\\ \\
-\brackets{A_1 B_2}\\
-\brackets{B_1 C_2}\\
-\brackets{A_2 C_1}\\
+\brackets{A_1},\:\brackets{B_1},\:\brackets{C_1},\\
+\brackets{A_2},\:\brackets{B_2},\:\brackets{C_2},\\
+\brackets{A_1 B_1},\:\brackets{A_1 C_1},\:\brackets{B_1 C_1},\\
+\brackets{A_1 B_2}.\:\brackets{A_2 C_1},\:\brackets{B_1 C_2},\\
 \brackets{A_1 B_1 C_1}
-\end{array}}_{\substack{\text{maximal}\\\text{injectable}\\\text{sets}}}}
-\qquad\quad
+\end{matrix}}_{\substack{\text{injectable sets}}}}
+%\qquad\quad
+%{\underbrace{\begin{matrix}
+%\\ \\
+%\brackets{A_2}\aindep \brackets{B_1 B_2 C_2}\\
+%\brackets{B_2}\aindep \brackets{A_2 C_1 C_2}\\
+%\brackets{C_2}\aindep \brackets{A_1 A_2 B_2}\\
+%\brackets{A_2}\aindep \brackets{B_2}\aindep \brackets{C_2}
+%\end{matrix}}_{\substack{\text{maximal}\\\text{ancestral}\\\text{independencies}}}}
+%\qquad\quad
+%{\underbrace{\begin{matrix}
+%\brackets{ A_1 B_1 }\\
+%\brackets{ B_1 C_1 }\\
+%\brackets{ A_1 C_1 }\\
+%\brackets{ A_2 C_1 }\\
+%\brackets{ B_2 A_1 }\\
+%\brackets{ C_2 B_1 }\\
+%\end{matrix}}_{\substack{\text{pairwise}\\\text{injectable}\\\text{sets}}}}
+\qquad\qquad
 {\underbrace{\begin{matrix}
 \\
 \brackets{A_1 B_1 C_1} \\
-\brackets{A_1 B_2 C_2} \\
-\brackets{A_2 B_1 C_2} \\
-\brackets{A_2 B_2 C_1} \\
-\brackets{A_2 B_2 C_2}
+\brackets{A_1 B_2,\, C_2} \\
+\brackets{B_1 C_2,\, A_2} \\
+\brackets{C_1 A_2,\, B_2} \\
+\brackets{A_2,\, B_2,\, C_2}
 \end{matrix}}_{\substack{\text{maximal}\\\text{pre-injectable}\\\text{sets}}}}
 \end{align}
-such that the distributions on the pre-injectable sets relate to the original DAG distribution via
+where we have placed commas in the maximal pre-injectable sets in order to indicate how each of these arises as a disjoint union of injectable sets with disjoint ancestry, which one can read off from the corresponding clique in the independence graph. This results in the distributions on the pre-injectable sets being given in terms of distribution on the original DAG via
 \begin{align}\label{eq:preinjectableuses222}
 \begin{split}
 &\forall{a b c}:\; \begin{cases}
@@ -1013,9 +1017,11 @@ such that the distributions on the pre-injectable sets relate to the original DA
 
 The most trivial constraint on possible marginal probabilities, regardless of causal structure,  
 %on the pre-injectable set
-is simply the \emph{existence of some joint probability distribution} from which the marginal distributions can be recovered through marginalization, i.e. the possible marginal distributions must be \tblue{marginally compatible}. This isn't really causal inference -- as no hypothesis is considered -- but rather more of a preliminary sanity check. If the marginal distributions are not marginally compatible, then the answer to ``Can these marginal distributions be explained by this particular causal hypothesis?" is automatically ``No". 
+is simply the \emph{existence of some joint probability distribution} from which the marginal distributions can be recovered through marginalization. This isn't really causal inference---as no nontrivial causal hypothesis is considered---but rather more of a preliminary sanity check. If the marginal distributions are not marginally compatible, then the answer to ``Can these marginal distributions be explained by this particular causal hypothesis?'' is automatically ``No''. This type of problem is known as a \tblue{marginal problem}. For some of the long history of marginal problems and further references, see~\cite{fritz2013marginal}; for a more recent account using the language of presheaves, see~\cite{abramsky_contextuality_2011}.
 
-The necessary and sufficient conditions for marginal compatibility are easy enough to state. There must exist some joint distribution (a collection of nonnegative joint probabilities) such that the marginal distributions can be recovered (each marginal distribution is a sum over various joint probabilities). \tblue{Solving the marginal problem} means resolving these "exists" statements into quantifier-free inequalities such that satisfaction of all such inequalities is necessary and sufficient for marginal compatibility. An efficient algorithm to solve the marginal problem is given in \cref{sec:projalgorithms}. The marginal problem comes up in a variety of applications, and has been studied extensively; see~\cite{fritz2013marginal} for further references.
+\tblue{Solving the marginal problem} means reformulating the existentially quantified statement ``there exists a joint distribution reproducing the given marginals'' purely in terms of conditions on the given marginals. A simple 
+
+quantifier-free form in terms of inequalities such that satisfaction of all such inequalities is necessary and sufficient for marginal compatibility. An efficient algorithm to solve the marginal problem is given in \cref{sec:projalgorithms}. The marginal problem comes up in a variety of applications, and has been studied extensively; see~\cite{fritz2013marginal} for further references.
 
 As an example, here's how the marginal problem would be phrased as a partial-existential-closure problem with respect to the five three-variable marginal distributions corresponding to the pre-injectable sets in \cref{eq:preinjectableuses222}. For simplicity, we assume that all observable variables are binary\footnote{If the observables are not binary, then the resulting  binary-outcome inequalities are necessary for marginal compatibility, in that they should hold for any course-graining of the observational data into two classes, but the binary-outcome inequalities are no longer sufficient.}.
 
