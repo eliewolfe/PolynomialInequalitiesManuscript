@@ -1371,7 +1371,7 @@ In the causal inference problems with latent nodes that we have considered so fa
 
 The set of quantumly realizable distributions is superficially quite similar to the classical subset \cite{pusey2014gdag,fritz2012bell}. For example, classical and quantum distributions alike respect all conditional independence relations implied by the common underlying causal structure \cite{pusey2014gdag}. It is an interesting problem to find quantum distributions that are not realizable classically, or to show that there are no such distributions on a given DAG.
 
-However, this is by no means an easy task. For example, recent work has found that quantum causal structure also implies many of the entropic inequalities that hold classically~\cite{pusey2014gdag,Chaves2015infoquantum,ChavesNoSignalling}. To date, no quantum distribution has been found to violate a Shannon-type entropic inequality on observable variables derived from the Markov conditions on all nodes \cite{chaves2012entropic,fritz2012bell}. Fine-graining the scenario by conditioning on root variables (``settings'') leads to a different kind of entropic inequality, and these have proven somewhat quantum-sensitive \cite{braunstein1988entropic,SchumacherInequality,chaves2014novel}. Such inequalities are still limited, however, in that they only apply in the presence of observable root nodes\footnote{Rafael Chaves and E.W. are exploring the potential of entropic analysis based on conditioning on non-root observable nodes. This generalizes the method of entropic inequalities, and might be capable of providing much stronger entropic infeasibility criteria.}, and they still fail to witness certain distributions as classically infeasible~\cite{chaves2014novel,fritz2012bell}.
+However, this is by no means an easy task. For example, recent work has found that quantum causal structure also implies many of the entropic inequalities that hold classically~\cite{pusey2014gdag,Chaves2015infoquantum,ChavesNoSignalling}. To date, no quantum distribution has been found to violate a Shannon-type entropic inequality on observable variables derived from the Markov conditions on all nodes \cite{chaves2012entropic,fritz2012bell}. Fine-graining the scenario by conditioning on root variables (``settings'') leads to a different kind of entropic inequality, and these have proven somewhat quantum-sensitive \cite{braunstein1988entropic,SchumacherInequality,chaves2014novel}. Such inequalities are still limited, however, in that they only apply in the presence of observable root nodes\footnote{Rafael Chaves and E.W.~are exploring the potential of entropic analysis based on conditioning on non-root observable nodes. This generalizes the method of entropic inequalities, and might be capable of providing much stronger entropic infeasibility criteria.}, and they still fail to witness certain distributions as classically infeasible~\cite{chaves2014novel,fritz2012bell}.
 
 We hope that polynomial inequalities derived from broadcasting inflation DAGs will provide an additional tool for witnessing certain quantum distributions as non-classical. For example due to the results of~\cref{sec:Bellscenarios}, it seems conceivable that these inequalities will be much stronger and provide much tighter constraints than entropic criteria.
 
@@ -1439,22 +1439,20 @@ A tight set of inequalities characterizing quantum distributions would provide t
 %\end{compactitem}
 %}
 
-%\begin{spacing}{2.0}
-Our main contribution is a new way of deriving causal infeasibility criteria, namely the inflation DAG approach. An inflation DAG naturally carries inflation models, and the existence of an inflation model implies inequalities, containing gedankenprobabilities, which implicitly constrain the set of distribution consistent with the original causal structure. If desirable, one can further eliminate the gedankenprobabilities via quantifier elimination. Polynomial inequalities can be obtained through \emph{linear} elimination techniques, or through further relaxation to purely \emph{possibilistic} constraints.
+Our main contribution is a new way of deriving causal incompatibility witnesses, namely the inflation DAG approach. An inflation DAG naturally carries inflation models, and the existence of an inflation model implies inequalities which constrain the set of distributions on observable nodes compatible with the original causal structure. Polynomial inequalities can be obtained through \emph{linear} inequalities which are necessary conditions for a collection of given marginal distributions to arise from a joint distribution (marginal problem). For deriving such inequalities in turn, we have considered the methods of computing all facets of the marginal polytope via facet enumeration, and deriving looser constraints more efficiently by enumerating hypergraph transversals.
 
-These inequalities are necessary conditions on a joint distribution to be explained by the causal structure. We currently do not know to what extent they can also be considered sufficient, and there is somewhat conflicting evidence: as we have seen, the inflation DAG approach reproduces all Bell inequalities; but on the other hand, we have not been able to use it to rederive Pearl's instrumental inequality, although the instrumental scenario also contains only one latent node. By excluding the W-type distribution on the Triangle scenario, we have seen that our polynomial inequalities are stronger than entropic inequalities in at least some cases.
+The resulting polynomial inequalities are necessary conditions on a joint distribution to be explained by the causal structure. We currently do not know to what extent they can also be considered sufficient, and there is somewhat conflicting evidence: as we have seen, the inflation DAG approach reproduces all Bell inequalities; but on the other hand, we have not been able to use it to rederive Pearl's instrumental inequality, although the instrumental scenario also contains only one latent node. By excluding the W-type distribution on the Triangle scenario, we have seen that our polynomial inequalities are stronger than entropic inequalities in at least some cases.
 % yet just how strong they are is still unclear. A distribution might satisfy all our polynomial inequalities and yet not be realizable from the causal structure. %What would such superficially-feasible distributions look like? Are inflation DAG inequalities ever tight? 
 % Our methods yields tight causal infeasibility criteria for Bell scenarios, but those scenarios are exceptional in that the sets of realizable distributions form a convex polytope.
 
-The most elementary of all causal infeasibility criteria are the conditional independence (CI) relations. Our method explicitly incorporates all marginal independence relations implied by a causal structure. We have found that some CI relations also appear to be implied by our polynomial inequalities. In future research we hope to clarify the process through which CI relations are manifested as properties of the inflation DAG.
+% The most elementary of all causal infeasibility criteria are the conditional independence (CI) relations. Our method explicitly incorporates all marginal independence relations implied by a causal structure. We have found that some CI relations also appear to be implied by our polynomial inequalities. In future research we hope to clarify the process through which CI relations are manifested as properties of the inflation DAG.
 
-A single causal structure has unlimited potential inflations. Selecting a good inflation from which strong polynomial inequalities can be derived is an interesting challenge. To this end, it would be desirable to understand how particular features of the original causal structure are exposed when different nodes in the DAG are duplicated. By isolating which features are exposed in each inflation, we could conceivably quantify the causal inference strength of each inflation. In so doing, we might find that inflated DAGs beyond a certain level of variable duplication need not be considered. The multiplicity beyond which further inflation is irrelevant may be related to the maximum degree of those polynomials which tightly characterize a causal scenario. Presently, however, it is not clear how to upper bound either number.
+A single causal structure has unlimited potential inflations. Selecting a good inflation from which strong polynomial inequalities can be derived is an interesting challenge. To this end, it would be desirable to understand how particular features of the original causal structure are exposed when different nodes in the DAG are duplicated. By isolating which features are exposed in each inflation, we could conceivably quantify the causal inference strength of each inflation. In so doing, we might find that inflated DAGs beyond a certain level of variable duplication need not be considered. The multiplicity beyond which further inflation is irrelevant may be related to the maximum degree of those polynomials which tightly characterize a causal scenario. Presently, however, it is not clear how to upper bound either number, or whether finite upper bounds can even be expected.
+
+Concerning the relation to quantum theory, Our method turns the quantum no-broadcasting theorem \cite{NoCloningQuantum1996,NoCloningGeneral2006} on its head by crucially relying on the fact that classical hidden variables \emph{can} be cloned. The possibility of classical cloning motivates the inflation DAG method, and is often critical for deriving strong incompatibility witnesses. We have found that in the case of non-broadcasting inflations, our method also yields causal incompatibility witnesses that constitute necessary constraints even for \emph{quantum} or \emph{general probabilistic} causal scenarios, a common desideratum in recent works \cite{fritz2012bell,pusey2014gdag,Chaves2015infoquantum,ChavesNoSignalling,BeyondBellII}. It would be enlightening to understand the extent to which our (classical) polynomial inequalities are violated in quantum theory. A variety of techniques exist for estimating the amount by which a Bell inequality \cite{NPA2008Long,I3322NPA1} is violated in quantum theory, but even finding a quantum violation of one of our \emph{polynomial} inequalities presents a new task for which we currently lack a systematic approach. Nevertheless, we know that there exists a difference between classical and quantum also beyond Bell scenarios~\cite[Theorem~2.16]{fritz2012bell}, and we hope that our polynomial inequalities will perform better in witnessing this difference than entropic inequalities do~\cite{pusey2014gdag,Chaves2015infoquantum}.
 
 %that one inflation DAG is or is not ``stronger" than another? Can we upper bound the maximum dimension of those polynomials which in-principle tightly characterize a given causal structure? A ``yes" answer to any of the aformentioned questions means that that perhaps inflation DAGs beyond a certain level of complexity need not be considered. These remain open questions, however.
 
-Our method turns the quantum no-broadcasting theorem \cite{NoCloningQuantum1996,NoCloningGeneral2006} on its head by crucially relying on the fact that classical hidden variables \emph{can} be cloned. The possibility of classical cloning motivates the inflation DAG method, and underpins the implied causal infeasibility criteria. We have speculated about generalizing our method to obtain causal infeasibility criteria that constitute necessary constraints even for \emph{quantum} causal scenarios, a common desideratum in recent works \cite{fritz2012bell,pusey2014gdag,Chaves2015infoquantum,ChavesNoSignalling,BeyondBellII}. It would be enlightening to understand the extent to which our (classical) polynomial inequalities are violated in quantum theory. A variety of techniques exist for estimating the amount by which a Bell inequality \cite{NPA2008Long,I3322NPA1} is violated in quantum theory, but even finding a quantum violation of one of our \emph{polynomial} inequalities presents a new task for which we currently lack a systematic approach.
-
-The difference between classical ontic-state duplication and quantum no-broadcasting makes the inequalities that result from our consideration to be especially suited for distinguishing the set of quantum-realizable distributions from its subset of classically-realizable distributions. Causal infeasibility criteria that are sensitive to the classical-quantum distinction are precisely the sort of generalizations of the Bell inequalities which are sought after, in order to study the quantum features of generalized causal scenarios. Entropic inequalities have been lacking in this regard \cite{fritz2012bell,pusey2014gdag,Chaves2015infoquantum}, and the inflation DAG considerations proposed here constitute an alternative strategy that holds some promise.
 %\end{spacing}
 
 
@@ -1463,7 +1461,7 @@ The difference between classical ontic-state duplication and quantum no-broadcas
 
 \begin{acknowledgments}
 %\bigskip\noindent\textbf{Acknowledgments}
-TF would like to thank Guido Mont\'ufar for discussion and references. Research at Perimeter Institute is supported by the Government of Canada through Industry Canada and by the Province of Ontario through the Ministry of Economic Development and Innovation.
+T.F.~would like to thank Guido Mont\'ufar for discussion and references. Research at Perimeter Institute is supported by the Government of Canada through Industry Canada and by the Province of Ontario through the Ministry of Economic Development and Innovation.
 \end{acknowledgments}
 
 
@@ -1645,30 +1643,32 @@ Note that a \texttt{True} response from \texttt{RedundantRowQ} indicates that th
 
 \section{On Identifying All Coinciding Marginal Distributions}\label{sec:coincidingdetails}
 
+\purp{T: All the copy bijections that we ever use are also graph isomorphisms, so there's no point in introducing the notion of copy bijection separately}
+
 %By restricting our attention to inflation models, we see that sometimes the distributions of different injectable sets coincide, i.e. $\pdf{\bm{X}}=\pdf{\bm{Y}}$ whenever both $\bm{X}$ and $\bm{Y}$ are injectable, and $\subsim{\bm{X}}=\subsim{\bm{Y}}$. Sometimes sets of random variables which are \emph{not} injectable, however, can also be shown to have necessarily coinciding distributions. Coinciding (not necessarily injectable) marginal distributions among the inflation DAG variables is a consequence of \cref{eq:funcdependences}. For example, we can verify that $\pdf{A_1 A_2 B_1}=\pdf{A_1 A_2 B_2}$ follows from \cref{fig:Tri222}, even though $\brackets{A_1 A_2 B_1}$ and $\brackets{A_1 A_2 B_2}$ are not injectable sets. Here we formalize this type of constraint more generally.
 
-Given sets of nodes $\bm{X}$ and $\bm{Y}$ in an inflation DAG $G'$, let use define a \tblue{copy bijection} to be a map $\varphi : \bm{X}\to\bm{Y}$ that is bijective and such that $\varphi$ maps every node in $\bm{X}$ to a node (in $\bm{Y}$) which is equivalent to the original node under dropping the copy index. We have informally been using the notion of a copy bijection previously, in that sets of nodes $\bm{X}\sim\bm{Y}$ iff there exists $\varphi$ which takes $\bm{X}$ to $\bm{Y}$.
+Given sets of nodes $\bm{U}$ and $\bm{Y}$ in an inflation DAG $G'$, let us say that a map $\varphi:\bm{U}\to\bm{V}$ is a \tblue{copy isomorphism} if it is a graph isomorphism, and such that $\varphi$ maps every $X\in\bm{U}$ to a node $\varphi(X)\in\bm{Y}$ that is equivalent to $X$ under dropping the copy index. We have been using the notion of a copy bijection previously by writing $\bm{U}\sim\bm{V}$ whenever there exists a copy isomorphism $\varphi:\bm{U}\to\bm{V}$.
 
 % A special case of a bijection is a graph isomorphism, which is a bijection between the nodes of one graph and the nodes and another such that the action of the bijection is to reversibly transform the first graph into the second one.
 % A copy isomorphism, therefore, is defined as a graph isomorphism that is also a copy bijection. The same specialization apply to graph automorphism: an inflation DAG can posses many symmetries, i.e. permutations of the nodes such that the permutation leaves the DAG invariant. Generally, however, only a subset of the possible automorphisms are also copy bijections, i.e. copy automorphisms are a subset of graph isomorphism.
 
-We say that $\varphi : \bm{X}\to\bm{Y}$ is an \tblue{inflationary isomorphism} whenever $\varphi$ can be extended to a graph isomorphism $\hat{\varphi} : \An{\bm{X}}\to\An{\bm{Y}}$.
-
+Furthermore, we say that a copy isomorphism $\varphi : \bm{U}\to\bm{V}$ is an \tblue{inflationary isomorphism} whenever it can be extended to a copy isomorphism $\hat{\varphi} : \ansubgraph{\bm{U}}\to\ansubgraph{\bm{V}}$. If such a $\hat{\varphi}$ exists, then it is sufficient for $\varphi$ to be bijective, since it automatically follows that it must be a copy isomorphism as well.
 %which satisfies two conditions simultaneously: 1) the copy bijection is a graph isomorphism relating $\ansubgraph[G']{\bm{X}}$ to $\ansubgraph[G']{\bm{Y}}$, and 2) the copy bijection takes $\bm{X}$ to $\bm{Y}$.
 
-As an example, in~\cref{fig:Tri222}, the map
+% re is only one copy isomorphism between the two ancestral subgraphs, namely the bijections which leaves all nodes invariant except for $\{B_1,B_2,Z_1,Z_2\}\leftrightarrow\{B_2,B_1,Z_2,Z_1\}$. This bijection clearly takes $B_1$ to $B_2$, and hence both the requisite conditions are met.
+
+By the very definition of inflation model, we have:
+
+\begin{lemma}
+	\label{lem:coincide}
+	If $\varphi:\bm{U}\to\bm{V}$ is an inflationary isomorphism, then $P_{\bm{U}} = P_{\bm{V}}$ in any inflation model, where the variables are identified according to $\varphi$.
+\end{lemma}
+
+For example in~\cref{fig:Tri222}, the map
 \[
 	\varphi \: : \: A_1 \mapsto A_1,\qquad A_2\mapsto A_2,\qquad B_1\mapsto B_2
 \]
-sets $\bm{X}=\{A_1 A_2 B_1\}$ and $\bm{Y}=\{A_1 A_2 B_2\}$ are inflationarily isomorphic. Indeed, there is only one copy isomorphism between the two ancestral subgraphs, namely the bijections which leaves all nodes invariant except for $\{B_1,B_2,Z_1,Z_2\}\leftrightarrow\{B_2,B_1,Z_2,Z_1\}$. This bijection clearly takes $B_1$ to $B_2$, and hence both the requisite conditions are met.
-
-\begin{lemma}
-	If $\varphi:\bm{X}\to\bm{Y}$ is an inflationary isomorphism, then $P_{\bm{X}} = P_{\bm{Y}}$ in any inflation model, where the variables are identified according to $\varphi$.
-\end{lemma}
-
-Note that this may result in a nontrivial equation even if $\bm{Y}=\bm{X}$: in this case, one can conclude that $P_{\bm{X}}$ must be invariant under permuting some of the variables.
-
-Equality constraint expressing coinciding distributions can be used to supplement the marginal problem, and may be of practical use for reducing the dimensionality of the problem (number of quantifiers which need to be eliminated). 
+implements an inflationary isomorphism between $\bm{U}=\{A_1 A_2 B_1\}$ and $\bm{V}=\{A_1 A_2 B_2\}$. From this we conclude that any inflation model satisfies $P_{A_1 A_2 B_1} = P_{A_1 A_2 B_2}$. For a non-example, consider the inflation DAG in \cref{fig:ancestralsubgraphnotenough}. The identity map implements a copy isomorphism $\ansubgraph{X_2 Y_2 Z_1}\sim\ansubgraph{X_1 Y_2 Z_2}$, since both of these ancestral subgraphs are the entire DAG. Nevertheless there is no inflationary isomorphism between ${X_2 Y_2 Z_1}$ and ${X_1 Y_2 Z_2}$, i.e.~$\{X_2Y_2 Z_1\}\not\sim\{X_1 Y_2 Z_2\}$, since the sub-DAGs on these two sets of nodes are not even isomorphic.
 
 %In general there may exist multiple inflationary isomorphisms, for example the sets $\brackets{A_1 A_2 B_1}$ and $\brackets{A_1 A_2 B_2}$ can be related by either 
 %\begin{align}
@@ -1687,40 +1687,34 @@ Equality constraint expressing coinciding distributions can be used to supplemen
 % Two inflation DAGs $G'_1$ and $G'_2$ are said to be inflationarily isomorphic if there exists a graph isomorphism between them which is itself also an inflationary isomorphism. This occurs iff $G'_1\sim G'_2$.
 % We say that one isomorphim \tblue{contains} another if the rule-set of the latter is a subset of the rule-set of the former.
 
-If two sets $\bm{X}$ and $\bm{Y}$ are inflationarily isomorphic, then $P(\bm{X}) = P(\bm{Y})$ in any inflation model.
+% If two sets $\bm{X}$ and $\bm{Y}$ are inflationarily isomorphic, then $P(\bm{X}) = P(\bm{Y})$ in any inflation model.
 
 %In other words, $\pdf{\bm{X}}=\pdf{\bm{Y}}$ if and only if an inflationary graph isomorphism exists between $\ansubgraph[G']{\bm{X}}$ and $\ansubgraph[G']{\bm{Y}}$ which preserves the inflationary isomorphism between $\bm{X}$ and $\bm{Y}$. 
 
-Copy isomorphic ancestral subgraphs is \emph{not}, by itself, a strong enough condition to justify coinciding distributions; rather the variables in question must play similar \emph{roles} in their coinciding ancestral subgraphs, hence the precise definition of inflationary isomorphism. To illustrate this, consider the inflation DAG in \cref{fig:ancestralsubgraphnotenough}. We have $\ansubgraph[(\textrm{\cref{fig:ancestralsubgraphnotenough}})]{X_2 Y_2 Z_1}\sim\ansubgraph[(\textrm{\cref{fig:ancestralsubgraphnotenough}})]{X_1 Y_2 Z_2}$, since both of these ancestral subgraphs are the entire DAG. Nevertheless ${X_2 Y_2 Z_1}$ and ${X_1 Y_2 Z_2}$ are \emph{not} inflationarily isomorphic, as is straightforward to demonstrate. Because the ancestral subgraphs in question are identical, there is only one copy isomorphism between them, namely the identity map. The identity map is a perfectly valid copy bijection, but it fails to take ${X_2 Y_2 Z_1}$ to ${X_1 Y_2 Z_2}$, and hence does not satisfy both the requisate properties for inflationary isomorphism. 
+Note that $P_{\bm{U}} = P_{\bm{V}}$ may be a nontrivial equation even if $\bm{U}=\bm{V}$: in this case, it means that $P_{\bm{U}}$ must be invariant under permuting the variables according to $\varphi$.
 
 \begin{figure}[H]
     \centering
     \begin{minipage}[t]{0.6\linewidth}      \centering
     \includegraphics[scale=1]{instrumentalvariant.pdf}
-    \caption{An inflation DAG which illustrates why coinciding ancestral subgraphs don't necessarily imply coinciding distributions.}
+    \caption{An inflation DAG which illustrates why coinciding ancestral subgraphs doesn't necessarily imply the existence of an inflationary isomorphism.}
     \label{fig:ancestralsubgraphnotenough}
     \end{minipage}
 \end{figure}
 
+One can try to make use of Lemma~\ref{lem:coincide} when deriving polynomial inequalities with inflation via solving the marginal problem, by imposing $P_{\bm{U}} = P_{\bm{V}}$ as an additional constraint for every inflationary isomorphism $\varphi : \bm{U}\to\bm{V}$ between sets of observable nodes. This is advantageous to speed up to the linear quantifier elimination, since one can solve each of the resulting equations for one of the unknown joint probabilities and thereby eliminate that probability directly without Fourier-Motzkin elimination. Moreover, one could also hope that these additional equations would result in tighter constraints on the marginal problem, which then result in better polynomial inequalities.
 
-Interestingly, we are not aware of any case in which imposing coinciding marginal distributions of inflationarily isomorphic sets actually result in tighter exclusions for the distributions on the original DAG. In many cases, this lack of impact can be explained by the following argument.
+However, our computations have so far not revealed any example of such a tightening. In some cases, this lack of impact can be explained by the following argument.
+% We define two ordered sets of observable nodes $\bm{X}$ and $\bm{Y}$ in some inflation DAG $G'$ to be \tblue{irrelevant to the marginal problem} if there exists a copy bijection $\varphi:\nodes{G'}\to\nodes{G'}$ which satisfies two conditions:
+%\begin{enumerate}
+%	\item $\varphi$ is a graph isomorphism,
+%	\item $\varphi$ maps $\bm{X}$ onto $\bm{Y}$.
+%\end{enumerate}
+Suppose that $\varphi:\bm{U}\to\bm{V}$ is an inflationary isomorphism which is not just the restriction of a copy isomorphism between the ancestral subgraphs, but even the restriction of a copy isomorphism $\tilde{\varphi}:G'\to G'$ of the entire inflation DAG onto itself. (In particular, this assumption implies that $\tilde{\varphi}$ also restricts to a copy isomorphism $\ansubgraph{\bm{U}}\to\ansubgraph{\bm{V}}$.) Then the irrelevance of the additional constraint $P_{\bm{U}} = P_{\bm{V}}$ to the marginal problem for inflation models can be seen by the following argument. Suppose that some joint distribution $\tilde{P}$ solves the unconstrained marginal problem, i.e.~without requiring $P(\bm{U}) = P(\bm{V})$. Now apply $\tilde{\varphi}$ to the variables in $\tilde{P}$, switching the variables around, to generate a new distribution $\tilde{P'}$. Because the set of marginal distributions that arise from inflation models is invariant under this switching of variables, we conclude that $\tilde{P'}$ is also a solution to the unconstrained marginal problem. Taking the uniform mixture of $\tilde{P}$ and $\tilde{P'}$ is therefore also a solution of the unconstrained marginal problem. But this uniform mixture also satisfies the supplementary constraint $P_{\bm{U}} = P_{\bm{V}}$. Therefore the supplementary constrained is satisfiable automatically whenever the unconstrained marginal problem is solvable, and adding the constraint is irrelevant.
 
-We define two ordered sets of observable nodes $\bm{X}$ and $\bm{Y}$ in some inflation DAG $G'$ to be \tblue{irrelevant to the marginal problem} if there exists a copy bijection $\varphi:\nodes{G'}\to\nodes{G'}$ which satisfies two conditions:
-\begin{enumerate}
-	\item $\varphi$ is a graph isomorphism,
-	\item $\varphi$ maps $\bm{X}$ onto $\bm{Y}$.
-\end{enumerate}
+Note that the argument does not apply if the inflationary isomorphism $\varphi:\bm{U}\to\bm{V}$ cannot be extended to a copy isomorphism of the entire inflation DAG. It also does not apply if one uses the conditional independence relations on the inflation DAG as well, since this destroys linearity. We do not know what happens in either of these cases.
 
-In particular, these assumptions imply that $\varphi$ restricts to a graph isomorphism $\ansubgraph[G']{\bm{X}}\sim\ansubgraph[G']{\bm{Y}}$, and therefore $\bm{X}$ and $\bm{Y}$ become inflationarily isomorphic. 
-
-The irrelevance of the constraint $P(\bm{X}) = P(\bm{Y})$ to the marginal problem when the aforementioned conditions are satsifed can be seen by the following argument.
-
-%Suppose that there is an automorphism of the inflation DAG which takes copies of nodes to copies\footnote{Note the similarity to \emph{deck transformations} in covering space theory.} and restricts to an inflationary isomorphism $\ansubgraph[G']{\bm{X}}\sim\ansubgraph[G']{\bm{Y}}$ as above. 
-
-Imagine that some joint distribution $\hat{P}$ solves the unconstrained marginal problem, i.e. without requiring $P(\bm{X}) = P(\bm{Y})$, and that a copy bijection exists which satisfies all the requisate conditions. Apply that copy bijection to the variables in the joint distribution, switching the variables around, to generate a new distribution $\hat{P'}$. Because the set of accessible marginal distributions is invariant under application of the an automorphism, we have that $\hat{P'}$ is also a solution to the unconstrained marginal problem. \purp{Doesn't this mean than any bijections which leaves the marginal sets invariant is sufficient???} Taking the uniform mixture of $\hat{P}$ and $\hat{P'}$ is therefore also a solution of the unconstrained marginal problem, but the uniform mixture also satisfies the supplementary constraint $P_{\bm{X}} = P_{\bm{Y}}$. Therefore the supplementary constrained is satisfyable automatically whenever the unconstrained marginal problem is solvable, and adding the constraint is irrelevant.
-
-
-Note that the argument does not apply if the bijection which justifies $P(\bm{X}) = P(\bm{Y})$ cannot be extended to a copy automorphism for the entire inflation DAG. It also does not apply if one uses the conditional independence relations on the inflation DAG as well, since this destroys linearity. We do not know what happens in either of these cases.
+% These equations can be used to supplement the marginal problem, and may be of practical use for reducing the dimensionality of the problem (number of quantifiers which need to be eliminated). 
 
 
 %%% T: I've commented this out since we're not concerned here with observational equivalence, and I have the feeling that it would still require a major clean-up operation. The example of 6 observationally equivalent DAGs is not very good since they are all equivalent to A <-- S --> B, which doesn't contain any latent nodes
