@@ -492,8 +492,7 @@ We now introduce the notion of \tblue{an inflation of a causal model}.  %Let $C_
 If the original causal model is associated to a DAG $G$, then a nontrivial inflation of this model is associated to a different DAG, $G'$.  
 %Below, we define a particular map from a DAG $G$ to a DAG $G'$ 
 %An inflation of this model is another causal model, denoted $C_{G'}$ and associated to a different DAG, $G'$.  
-We refer to $G'$ as an inflation of $G$.  There are many possible choices of $G'$ for a given $G$ (specified below), hence many possible inflations of a given DAG.  We denote the set of these by $\SmallNamedFunction{Inflations}{G}$.   The choice of an element $G'\in \SmallNamedFunction{Inflations}{G}$ is the only freedom in the inflation of a causal model.  Once a choice is made, the set of parameters of the inflation model $M'$ is fixed uniquely by the set of parameters of the original model $M$ by a function $\SmallNamedFunction{Inflation}{G\to G'}$ (specified below), such that $M' = \SmallNamedFunction{Inflation}{G\to G'}{M}$.
-%Once a choice is made, the set of parameters of the inflation model is fixed uniquely by the set of parameters of the original model.  We denote the function on models associated with such an inflation by $\SmallNamedFunction{Inflation}{G\to G'}{M}$ (specified below).
+We refer to $G'$ as an inflation of $G$.  There are many possible choices of $G'$ for a given $G$ (specified below), hence many possible inflations of a given DAG.  We denote the set of these by $\SmallNamedFunction{Inflations}{G}$.   The choice of an element $G'\in \SmallNamedFunction{Inflations}{G}$ is the only freedom in the inflation of a causal model.  Once a choice is made, the set of parameters of the inflation model is fixed uniquely by the the set of parameters of the original model.  We denote the function on models associated with such an inflation by $\SmallNamedFunction{Inflation}{G\to G'}{M}$ (specified below).
 
 %Once an element $G'\in \SmallNamedFunction{Inflations}{G}$ is specified, however, the parameters of the causal model $C_{G'}$ are fixed by the parameters of the causal model $C_{G}$.  We denote this function by $C_(G') = \SmallNamedFunction{Inflation}{C_(G)}$.
 
@@ -587,7 +586,7 @@ To sum up then, the inflation of a causal model is a new causal model wherein ea
 %The inflation DAG technique that we introduce allows questions about the viability of one causal hypothesis for certain observed data to be turned into questions about the viability of a different sort of causal hypothesis for an inflation of the observed data.
 
 %Because we have defined inflation as a map on causal models, 
-Because causal hypotheses are sets of causal models, and the inflation map acts on causal models, it has an induced action on causal hypotheses.   Let $H_G^{\textsf{full}}$ denote the causal hypothesis that the DAG is $G$ (the hypothesis consisting of the set of {\em all} causal models consistent with the DAG $G$).  The induced action of the inflation map has the notable feature that $\SmallNamedFunction{Inflation}{H_G^{\textsf{full}}} \ne H_{G'}^{\textsf{full}}$ because even if there is no restriction on the set of parameters supplementing $G$, inflation imposes a restriction on the set of parameter supplementing $G'$.  Specifically,   if nodes $A_i$ and $A_j$ on $G'$ are copies of a single node $A$ on $G$,then the set of parameters on $G'$ are constrained to satisfy $\pfunc{A_i| \Pa[G']{A_i}}=\pfunc{A_j|\Pa[G']{A_j}}$.  This explains our earlier claim that the inflation map takes a causal hypothesis of type H1 and maps it to a causal hypothesis of type H4.
+Because causal hypotheses are sets of causal models, and the inflation map acts on causal models, it has an induced action on causal hypotheses.   Let $H_G^{\textsf{full}}$ denote the causal hypothesis of a DAG $G$, that is, the set of all models consistent with that DAG.  The induced action of the inflation map has the notable feature that $\SmallNamedFunction{Inflation}{H_G^{\textsf{full}}} \ne H_{G'}^{\textsf{full}}$ because even if there is no restriction on the set of parameters supplementing $G$, inflation imposes a restriction on the set of parameter supplementing $G'$.  Specifically,   if nodes $A_i$ and $A_j$ on $G'$ are copies of a single node $A$ on $G$,then the set of parameters on $G'$ are constrained to satisfy $\pfunc{A_i| \Pa[G']{A_i}}=\pfunc{A_j|\Pa[G']{A_j}}$.  This is the sense in which the inflation map takes a causal hypothesis of type (1) and maps it to a causal hypothesis of type (4).
 
 %Note that even if $S=S_{\textsf{full}}$, so that the original causal hypothesis puts no constraints on the parameter values, one generally has $S'\ne S'_{\textsf{full}}$, that is, the inflationary image of the full set of parameter values on $G$ is not the full set of parameter values on $G'$. Rather, $S'$ incorporates a nontrivial restriction on the parameters consistent with $G'$, namely, that if nodes $A_i$ and $A_j$ on $G'$ are copies of a single node $A$ on $G$,then the parameter values on $G'$ are constrained to satisfy $\pdf{A_i| \Pa[G']{A_i}}=\pdf{A_j|\Pa[G']{A_j}}$.
 
@@ -598,7 +597,7 @@ Because causal hypotheses are sets of causal models, and the inflation map acts 
 
 %[Note that the distinction between observed nodes and latent nodes in the DAG $G$ is inherited by the DAG $G'$.]
 
-It remains to explain how a $G \to G'$ inflation acts on the observational data and to prove that compatibility in the original causal decision problem implies compatibility in the image of this problem under inflation.  Both purposes are served by contemplating what inflation means for the joint distribution over observed variables induced by a causal model.  Because inflation is a map on causal models, it has an induced action on the joint distributions over observed variables that are consistent with those models. 
+It remains to explain how a $G \to G'$ inflation acts on the observational data and to prove that consistency in the original causal decision problem implies consistency in the image of this problem under inflation.  Both purposes are served by contemplating what inflation means for the joint distribution over observed variables induced by a causal model.  Because inflation is a map on causal models, it has an induced action on the joint distributions over observed variables that are consistent with those models. 
 %induces a map on the distributions over observed variables implied by those models. 
 %Every causal model specifies a joint distribution over the observed variables.  Therefore, an inflation map has an induced action on joint distributions.  
 We begin by describing this action.  In what follows, we assume that $G$ and $G'$ are DAGs with $G' \in \SmallNamedFunction{Inflations}{G}$ and that $M$ and $M'$ are causal models with $M' = \SmallNamedFunction{Inflation}{M} _{G\to G'}$.  Finally, distributions that arise from $M$ are denoted by $P$, and those arising from $M'$ are denoted by $P'$.
@@ -659,51 +658,15 @@ This relation specifies precisely how the marginal distribution over any pre-inj
 
 %This latter property implies that the observable probability distribution over any pre-injectable set in the inflation model is fully specified by the \sout{parameters} \purp{observable probability distribution} \sout{in the original causal model} \purp{per the original observable data}.  Indeed, this relation is what motivates us to consider the pre-injectable sets.
 
-Because this relation involves only {\em observed variables} of the original and inflated causal models, one can use it to determine observational constraints for the inflated causal inference problem from observational constraints for the original problem. 
-% define the consequences of the inflation map on the observational constraints.   
-
-In the original causal inference problem, whatever form the observational constraint takes, one can deduce its consequences for the marginals on subsets of variables that correspond to injectable sets with copy-indices dropped, that is, the marginals on subsets $\subsim{\bm{U}}\subseteq \SmallNamedFunction{ObservedNodes}{G}$ satisfying $\subsim{\bm{U}} \sim \bm{U}$ where $\bm{U} \in  \SmallNamedFunction{InjectableSets}{G'}$.  Marginalization onto $\subsim{\bm{U}}$ is a map on probability distributions, but given that the observational constraint $D^{\rm obs}$ is a set of probability distributions, such marginalization has an induced action on $D^{\rm obs}$.  We denote the marginalization onto $\subsim{\bm{U}}$ of $D^{\rm obs}$ by $D_{\subsim{\bm{U}}}^{\rm obs}$.   The set $D_{\subsim{\bm{U}}}^{\rm obs}$ captures the consequences of the observational constraints for the marginal distribution on $\subsim{\bm{U}}$.
-
-
-%over the observed variables.  Consider a set of observed variables $\subsim{\bm{U}}\subseteq \SmallNamedFunction{ObservedNodes}{G}$ satisfying $\subsim{\bm{U}} \sim \bm{U}$ where $\bm{U} \in  \SmallNamedFunction{InjectableSets}{G'}$.  For each joint distribution over the observed variables, $P^{\rm obs}(\SmallNamedFunction{ObservedNodes}{G})$, marginalization on $\subsim{\bm{U}}$ defines a distribution $P^{\rm obs}(\subsim{\bm{U}})$.  The observational constraint $D^{\rm obs}$ specifies a set of possibilities for the joint distribution.  The image of this set under marginalization on $\subsim{\bm{U}}$ we denote by $D_{\subsim{\bm{U}}}^{\rm obs}$.
-
-%Similarly, in the inflated causal inference problem, if we consider a set of observed variables $\bm{U} \in  \SmallNamedFunction{PreInjectableSets}{G'}$ and we consider .  For each joint distribution over the observed variables, $P^{\rm obs}(\SmallNamedFunction{ObservedNodes}{G})$, marginalization on $\subsim{\bm{U}}$ defines a distribution $P^{\rm obs}(\subsim{\bm{U}})$.  
-In the inflated causal inference problem, suppose the observational constraint $D'^{\rm obs}$ specifies a set of possibilities for the joint distribution on $\SmallNamedFunction{ObservedNodes}{G'}$.  For every pre-injectable set $\bm{U} \in  \SmallNamedFunction{PreInjectableSets}{G'}$, let the image of $D'^{\rm obs}$ under marginalization on $\subsim{\bm{U}}$ be denoted by $D_{\subsim{\bm{U}}}^{\prime \rm obs}$.  It is then clear from Eq.~\eqref{eq:preinjfactor} that if $\bm{U}_1,\bm{U}_2,\ldots,\bm{U}_n$ are the ancestrally independent components of $\bm{U}$, as in Eq.~\eqref{eq:defpreinj}, then
-\begin{align}\label{eq:preinjfactor}
-\forall \bm{U} \in  \SmallNamedFunction{PreInjectableSets}{G'}:  D_{\subsim{\bm{U}}}^{\prime \rm obs} \equiv \{ \pdfp{\bm{U}} = \prod_i \pdf{\subsim{\bm{U}}_i}: \pdf{\subsim{\bm{U}}_i} \in D_{\subsim{\bm{U}_i}}^{\rm obs}\quad \forall i \}.
-\end{align}
-
-
-
-
-%we denote the subset of distributions $\pdf{\subsim{\bm{U}}}$ that can arise by marginalization from the subset of joint distributions defined by $D^{\rm obs}$ as $D_0^{\rm obs}$.  
-
-%We denote the the observational constraints by $D_0^{\rm obs}$.  They are:
-%\begin{align}
-%D_0^{\rm obs} \equiv \{ \pdf{\subsim{\bm{U}}} : \subsim{\bm{U}} \sim \bm{U} \in  \SmallNamedFunction{InjectableSets}{G'}, \text{marginals of}\quad\pdf{\SmallNamedFunction{ObservedNodes}{G}}  \in D^{\rm obs} \}
-%\end{align}
-The key is this: if a given specification of marginals on deflated injectables is compatible with the original causal hypothesis, then the corresponding products of marginals on the pre-injectable sets is compatible with the inflated causal hypothesis.  If a joint distribution is compatible with the original causal hypothesis, then its marginals on deflated injectables are as well, and we get the corresponding inference on the inflated problem.  An observational constraint provides a bunch of joint distribution candidates for compatibility with the causal hypothesis and inflation turns these into a bunch of marginals candidates for compatibility with the inflated causal hypothesis. 
-
-If the observational constraint $D^{\rm obs}$ and the causal hypothesis $H_G$ are compatible, then the observational constraint $\{  D_{\subsim{\bm{U}}}^{\prime \rm obs} : \bm{U} \in  \SmallNamedFunction{PreInjectableSets}{G'}\}$ and the causal hypothesis $H_{G'} = \SmallNamedFunction{Inflation}{H_G}$ are compatible.  
-
-We need to define the notion of observational constraints on a set of marginal distributions.  Let $\SmallNamedFunction{Subsets}{G}$ be the subsets of the nodes of $G$ on which we impose our observational constraints.  Let $( P(\bm{U}): U \in \SmallNamedFunction{Subsets}{G} )$ be a collection of marginals associated to these subsets.  Then the observational constraint on marginals is a set of such collections, denoted $D^{\rm obs}_{\rm marg}$.
-%\begin{align}
-%D^{\rm obs}_{\rm marg} \equiv  \{ ( P(\bm{U}): U \in \SmallNamedFunction{Subsets}{G} ) 
-%\end{align}
-
-Let the function $\SmallNamedFunction{JointDistObserved}{M}$ return the joint distribution over the observed nodes implied by causal model $M$, via Eqs. ???.
-
-Compatibility in the original causal inference problem implies that 
+Because this relation involves only observed variables of the original and inflated causal models, one can use it to define the action of the inflation map over the observational data.   
+Whatever form the observational data takes in the original causal inference problem, it implies a constraint on the marginals of the joint distribution, which we will denote as
 \begin{align}
-\exists M \in H_G : \SmallNamedFunction{JointDistObserved}{M} \in D^{\rm obs}
+D_0^{\rm obs} \equiv \{ \pdf{\subsim{\bm{U}}} : \subsim{\bm{U}} \sim \bm{U} \in  \SmallNamedFunction{InjectableSets}{G'}, \text{marginals of}\quad
+\pdf{\SmallNamedFunction{ObservedNodes}{G}}  \in D^{\rm obs} \}
+% \implies 
+%\{ \pdf{\subsim{\bm{U}}} : \subsim{\bm{U}} \sim \bm{U} \in  \SmallNamedFunction{InjectableSets}{G'} \in D_0^{\rm obs}
 \end{align}
-  
-
-
-%So to witness the incompatibility of $D^{\rm obs}$ and $H_G$, it is sufficient to witness the incompatibility 
-
-\color{red}
-We can now describe the image of the observational constraint $D^{\rm obs}$ under the $G\to G'$ inflation map, $D'^{\rm obs}=\SmallNamedFunction{Inflation}{D^{\rm obs}} _{G\to G'}$, as follows:
+We define the image of the observational data $D^{\rm obs}$ under the $G\to G'$ inflation map to be
 \begin{align}
 D'^{\rm obs} \equiv \{ \pdf{all} : \text{marginals}  \pdf{\subsim{\bm{U}}} : \subsim{\bm{U}} \sim \bm{U} \in  \SmallNamedFunction{InjectableSets}{G'} \text{are built from } D_0^{\rm obs} \text{via Eq.~\eqref{eq:preinjfactor}}\}.  
 \end{align}
@@ -712,9 +675,6 @@ D'^{\rm obs} \equiv \{ \pdf{all} : \text{marginals}  \pdf{\subsim{\bm{U}}} : \su
 
 \color{red}
 ???
-If some distribution were consistent with the causal hypothesis in the original causal inference problem, then the counterpart of this distribution on the pre-injectable sets would be consistent with the inflated causal hypothesis. 
-If some observational constraint were consistent with the causal hypothesis in the original causal inference problem, then the counterpart of this constraint on the pre-injectable sets would be consistent with the inflated causal hypothesis. 
-
 
 %Consider a causal inference problem where the observational input is a probability distribution over a set $\bm{O}$ of observed variables, denoted $\pdf{\bm{O}}$ and the causal hypothesis is $H_{G,S}$ where $\SmallNamedFunction{ObservedNodes}{G}=\bm{O}$.  Suppose that one seeks only to determine whether the causal hypothesis is consistent with the observational input.  
 %Then the following condition is necessary and sufficient for such consistency
@@ -771,11 +731,10 @@ Consider the following causal inference problem.  The observational data is a jo
 \begin{align}\label{eq:ghzdistribution1}
 P^{\text{obs}}_{A B C}=\frac{[000]+[111]}{2},\quad\text{i.e.}\quad P^{\text{obs}}_{A B C}(a b c)=\begin{cases}\tfrac{1}{2}&\text{if }\; a\eql b\eql c, \\ 0&\text{otherwise}.\end{cases}
 \end{align}
-%The causal hypothesis is the set of causal models associated to the DAG
-The causal hypothesis is that the DAG corresponds to the triangle scenario, depicted in \cref{fig:Tri222}.  The problem is to decide whether the observational data is consistent with this causal hypothesis.
+The causal hypothesis is the set of causal models associated to the DAG of the triangle scenario, depicted in \cref{fig:Tri222}.  The problem is to decide whether the observational data is consistent with this causal hypothesis.
 
-To solve this problem, we consider its image under the inflation of the triangle scenario to the DAG depicted in Fig.~\ref{fig:TriDagSubA2B1C1}.  
-%an inflated causal inference problem, namely the problem induced by the particular inflation depicted in Fig.~\ref{fig:TriDagSubA2B1C1}.  
+To solve this problem, we consider an inflated causal inference problem, namely the problem induced by the particular inflation depicted in Fig.~\ref{fig:TriDagSubA2B1C1}.  
+
 The sets $\brackets{A_2 C_1}$ and $\brackets{B_1 C_1}$ are injectable (hence trivially pre-injectable). The set $\brackets{A_2 B_1}$ is also pre-injectable because the singleton sets $\brackets{A_2}$ and $\brackets{B_1}$ are each injectable and $A_2 \aindep B_1$.
 %and they ancestrally independent.  
 Therefore, the inflated observational data for our new causal inference problem includes
@@ -787,14 +746,14 @@ Therefore, the inflated observational data for our new causal inference problem 
 &P^{\text{obs-inf}}_{B_1 C_1} =P^{\text{obs}}_{B C}= \frac{[00]+[11]}{2}\\
 &P^{\text{obs-inf}}_{A_2 B_1} =P^{\text{obs}}_A \otimes P^{\text{obs}}_B= \frac{[0]+[1]}{2}\otimes\frac{[0]+[1]}{2}. 
 \end{split}\end{align}
-The question is whether such constraints are consistent with the causal hypothesis that the DAG is that of \cref{fig:TriDagSubA2B1C1}, where the parameters supplementing the DAG are unrestricted but for the constraint that the latent variables $Y_1$ and $Y_2$ are identically distributed. 
+The question is whether such constraints are consistent with the causal hypothesis that the DAG is that of \cref{fig:TriDagSubA2B1C1}, where the parameters supplementing the DAG are unrestricted but for that the latent variables $Y_1$ and $Y_2$ are identically distributed. 
 
-It is not difficult to see that the answer to the question is negative, and that this verdict can be rendered without even appealing to the form of the inflation DAG %(Note, however, that the inflation DAG has played a role in defining the new causal inference problem insofar as it has dictated the form that the inflated observational data should take).  
-It suffices to make use of results concerning the marginals problem,  
+It is not difficult to see that the answer to the question is negative.  And this verdict can be rendered without even appealing to the form of the inflation DAG (Note, however, that the inflation DAG has played a role in defining the new causal inference problem insofar as it has dictated the form that the inflated observational data should take).  It suffices to make use of results concerning the marginals problem.  
 %From Eq.~\eqref{eq:ghzdistribution1} one deduces that the marginal $\pdf{A C}$ described perfect correlation between $A$ and $C$ and similarly for the marginal $\pdf{B C}$.  But then, by Eqs.~\eqref{j1} and \eqref{j2}, one deduces that there is perfect correlation between $A_2$ and $C_1$ and perfect correlation between $B_1$ and $C_1$.  Meanwhile, Eq.~\eqref{j3} dictates that $A_2$ and $B_1$ should be uncorrelated.  But 
-namely, that there is no joint distribution $P_{A_2 B_1 C_1}$ having marginals of the form given in \cref{eq:GHZobsinf}. To see this, it suffices to note that the only joint distribution that exhibits perfect correlation between $A_2$ and $C_1$ and between $B_1$ and $C_1$ also exhibits perfect correlation between $A_2$ and $B_1$.  
 
-We have therefore certified that the joint distribution $P^{\text{obs}}_{A B C}$ of Eq.~\eqref{eq:ghzdistribution1} is not consistent with the Triangle causal structure, recovering the seminal result of \citet{steudel2010ancestors}.
+There is no joint distribution $P_{A_2 B_1 C_1}$ having such marginal as given in \cref{eq:GHZobsinf}. The only joint distribution that exhibits perfect correlation between $A_2$ and $C_1$ and between $B_1$ and $C_1$ also exhibits perfect correlation between $A_2$ and $B_1$.  
+
+We have therefore certified that perfect correlations among $A$, $B$ and $C$ is not consistent with the Triangle causal structure, recovering the seminal result of \citet{steudel2010ancestors}.
 
 \begin{comment}
 Let us ask, is it possible for the three original-scenario observable variables $\{A,B,C\}$ to be random but perfectly correlated? We call this the GHZ-type distribution, after an eponymous tripartite entangled quantum state \cite{greenberger1989going,3Qubits2Ways}. So $P_{\text{GHZ}}\parenths{A B C}$ is given by
@@ -806,12 +765,11 @@ We assume uniform binary variables for the sake of concreteness, but the argumen
 
 \example{: \tred{The W-type distribution cannot arise from the Triangle scenario}}\par\smallskip\nobreak
 
-Consider another causal inference problem concerning the triangle scenario, namely, that of determining whether the hypothesis of the triangle DAG is compatible with a joint distribution $P^{\text{W}}_{A B C}$ of the form
+Consider another causal inference problem concerning the triangle scenario, namely, that of determining whether the triangle DAG can explain a joint distribution $P^{\text{W}}_{A B C}$ of the form
 \begin{align}\label{eq:wdistribution1}
 P^{\text{W}}_{A B C}=\frac{[100]+[010]+[001]}{3},\quad\text{i.e.}\quad P^{\text{obs}}_{A B C}(a b c)=\begin{cases}\tfrac{1}{3}&\text{if }\; a\cramp{+}b\cramp{+}c\eql 1, \\ 0&\text{otherwise}.\end{cases}
 \end{align}
-We call this the W-type distribution\footnote{Because its correlations are reminiscent of those one obtains for the quantum state appearing in Ref. \cite{3Qubits2Ways}, and which is called the W state.}. 
-%To our knowledge, the fact that the Triangle causal structure is inconsistent with the W-type distribution has not been demonstrated previously.
+We call this the W-type distribution\footnote{Because its correlations are reminiscent of those one obtains for the quantum state appearing in Ref. \cite{3Qubits2Ways}, and which is called the W state.}. To our knowledge, the fact that the Triangle causal structure is inconsistent with the W-type distribution has not been demonstrated previously.
 
 To prove the inconsistency of  $P^{\text{W}}$ with the Triangle causal structure, we consider the inflation DAG of \cref{fig:Tri222}. 
 The sets $\{A_2 C_1\}$, $\{B_2 A_1\}$, $\{A_2 B_1\}$ and $\{ A_1 B_1 C_1\}$ are injectable.  The set $\{ A_2 B_2 C_2\}$ is pre-injectable because the singleton sets $\{A_2\}$,  $\{B_2\}$ and $\{C_2\}$ are injectable and \emph{all} ancestrally independent. It follows that we must consider the inflated observational data
@@ -842,21 +800,18 @@ which contradicts Eq.~\eqref{W4}.% and the fact that $P_{\text{W}}$ has no weigh
 
 Again, we have reached our verdict here simply by noting that the distributions defined in Eqs.~\eqref{W1}-\eqref{W5} cannot arise as the marginals of a single distribution on $A_1, B_1, C_1, A_2, B_2, C_2$.  Specifically, we have leveraged an approach to the marginal problem inspired by Hardy's version of Bell's theorem \cite{L.Hardy:PRL:1665,Mansfield2012}, see \cref{sec:TSEM} for further discussion of Hardy-type paradoxes and their applications.
 
-We have thus established that the distribution $P^{\text{W}}_{A B C}$ of Eq.~\eqref{eq:wdistribution1} is incompatible with the triangle DAG.  To our knowledge, thi fact 
- %the fact that the Triangle causal structure is inconsistent with the W-type distribution
-  has not been demonstrated previously.
+
 
 %$\p{A_2\eql B_2\eql C_2\eql 1}=\nicefrac{1}{8}$ according to $P_{\text{W}}$. But that would imply $\p{A_1\eql B_1\eql C_1\eql 0}\geq\nicefrac{1}{8}$, which contradicts $P_{\text{W}}$, hence $P_{\text{W}}$ cannot arise from the Triangle scenario.
 
-The incompatibility of the triangle DAG with the W-type distribution is difficult to infer from conventional causal inference techniques.
+The W-type distribution is difficult to witness as unrealizable using conventional causal inference techniques.
 \begin{compactenum}
 \item There are no conditional independence relations between the observable nodes of the Triangle scenario. %, so the distribution is observationally Markov with respect to the DAG. 
 \item Shannon-type entropic inequalities cannot detect this distribution as not allowed by the Triangle scenario~\cite{fritz2013marginal,chaves2014novel,chaves2014informationinference}. 
 \item Moreover, \emph{no} entropic inequality can witness the W-type distribution as unrealizable. \citet{weilenmann2016entropic} have constructed an inner approximation to the entropic cone of the Triangle causal structure, and the W-distribution lies inside this. In other words, a distribution with the same entropic profile as the W-type distribution \emph{can} arise from the Triangle scenario.
 \item The newly-developed method of covariance matrix causal inference due to \citet{kela2016covariance}, which gives tighter constraints than entropic inequalities for the Triangle scenario, also cannot detect inconsistency with the W-type distribution.
 \end{compactenum}
-%\par\noindent But the inflation technique can, and does so very easily.
-Therefore, for this problem at least, the inflation technique appears to be more powerful.
+\par\noindent But the inflation technique can, and does so very easily.
 
 \example{: \tred{The PR-box cannot arise from the Bell scenario}}\par\smallskip\nobreak
 
