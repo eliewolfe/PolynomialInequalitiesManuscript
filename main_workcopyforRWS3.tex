@@ -304,12 +304,15 @@ anchorcolor=OliveGreen}
 
 
 \begin{abstract}
-The fundamental problem of causal inference is to infer from a given probability distribution over observed variables, what causal structures, possibly incorporating hidden variables, could have given rise to that distribution. Given some candidate causal structure, it is therefore valuable to derive infeasibility criteria, such that %any distribution violating an infeasibility criterion cannot be realized from the given causal structure.
-the hypothesis is not a feasible causal explanation whenever the observed distribution violates an infeasibility criterion.
-The problem of causal inference via infeasibility criteria comes up in many fields. Special infeasibility criteria are Bell inequalities (which distinguish non-classical from classical distributions) and Tsirelson inequalities (which distinguish quantum from post-quantum distributions), and Pearl's instrumental inequality. All of these are limited to very specific causal structures. Analogues of such inequalities for more-general causal structures, i.e., necessary criteria for either classical or quantum distributions to be realizable from the structure, are highly sought after. 
+\sout{The fundamental problem of causal inference is to infer from a given probability distribution over observed variables, what causal structures, possibly incorporating hidden variables, could have given rise to that distribution.}
 
-We here introduce a technique for deriving such infeasibility criteria, applicable to any causal structure. It consists of first \textit{inflating} the causal structure and then translating weak constraints on the inflated structure into stronger constraints on the original structure. Moreover, we show how our technique can be tuned to yield either classical criteria (i.e., that may have quantum violations), or post-classical criteria (i.e., that hold even in the context of general probability theories), depending on whether or not the inflation implicitly broadcasts the value of a hidden variable. Concretely, we derive polynomial inequalities for the so-called Triangle scenario, and we show how all Bell inequalities also follow from our method. %analyze Pearl's instrumental inequality from our perspective. 
-Furthermore, given both a causal structure and a specific probability distribution, our technique can be used to efficiently witness their inconsistency, even absent explicit inequalities. The inflation technique is therefore both relevant and practical for general causal inference tasks with hidden variables.
+
+The fundamental problem of causal inference is to infer if an observed probability distribution is compatible with some causal structure hypothesis, possibly incorporating hidden variables.
+Given a particular causal structure, it is therefore valuable to derive incompatibility witnesses, i.e. criteria whose violation certifies the incompatibility of the violating distribution with the given causal structure.
+The problem of causal inference via incompatibility witnesses comes up in many fields. Special incompatibility witnesses are Bell inequalities (which distinguish non-classical from classical distributions) and Tsirelson inequalities (which distinguish quantum from post-quantum distributions), and Pearl's instrumental inequality. All of these are limited to very specific causal structures. Analogues of such inequalities for more-general causal structures, i.e., necessary criteria for either classical or quantum distributions to be realizable from the structure, are highly sought after. 
+
+We here introduce a technique for deriving such incompatibility witnesses, applicable to any causal structure. It consists of first \textit{inflating} the causal structure and then translating weak constraints on the inflated structure into stronger constraints on the original structure. Moreover, we show how our technique can be tuned to yield either classical criteria (i.e., that may have quantum violations), or post-classical criteria (i.e., that hold even in the context of general probability theories), depending on whether or not the inflation implicitly broadcasts the value of a hidden variable. Concretely, we derive polynomial inequalities for the so-called Triangle scenario, and we show how all Bell inequalities also follow from our method. %analyze Pearl's instrumental inequality from our perspective. 
+Furthermore, given both a causal structure and a specific probability distribution, our technique can be used to efficiently witness their incompatibility, without requiring explicit inequalities. The inflation technique is therefore both relevant and practical for general causal inference tasks with hidden variables.
 
 %We introduce a technique for deriving such inequalities which apply to any causal structure (with hidden variables). This class contains all Bell inequalities as special cases. Our technique consists of ``inflating'' the causal structure. We then translate weak constraints on the inflated structure into much stronger constraints on the original structure through ``deflation" and quantifier elimination. One can derive either classical causal infeasibility criteria (i.e. that have quantum violations), or criteria which hold even in the context of general probability theories, depending on whether the inflation relies on cloning the values of the hidden variables. Concretely, we derive polynomial inequalities for the so-called Triangle scenario, and we show how the well-known Bell inequalities also follow from our method.%analyze Pearl's instrumental inequality from our perspective. 
 %Furthermore, our method can efficiently witness the incompatibility of a probability distribution with a given causal structure even absent explicit quantifier-free inequalities.
@@ -341,10 +344,10 @@ Distinguishing quantum from classical correlations has historically been achieve
 Entirely new techniques, therefore, are required to derive quantum-sensitive infeasibility criteria for more general causal scenarios \cite{fritz2012bell,pusey2014gdag,BeyondBellII}. 
 \end{comment}
 
-We here introduce a new technique, applicable to any causal structure, for deriving infeasibility criteria. This technique allows for, but is not limited to, the derivation of polynomial inequalities. As far as we know, our method is the first systematic tool for doing causal inference with latent variables that goes beyond observable conditional independence relations and does not assume any bounds on the number of values of each latent variable. While our method can be used to systematically generate necessary conditions for compatibility with a given causal structure hypothesis, we do not know whether these inequalities are also sufficient, and we currently have conflicting evidence on this question. On the one hand, our method rederives all Bell-type inequalities (\cref{sec:Bellscenarios}), but on the other hand we have not yet been able to obtain Pearl's instrumental inequality from our method.
+We here introduce a new technique, applicable to any causal structure, for deriving incompatibility witnesses. This technique allows for, but is not limited to, the derivation of polynomial inequalities. As far as we know, our method is the first systematic tool for doing causal inference with latent variables that goes beyond observable conditional independence relations and does not assume any bounds on the number of values of each latent variable. While our method can be used to systematically generate necessary conditions for compatibility with a given causal structure hypothesis, we do not know whether these inequalities are also sufficient, and we currently have conflicting evidence on this question. On the one hand, our method rederives all Bell-type inequalities (\cref{sec:Bellscenarios}), but on the other hand we have not yet been able to obtain Pearl's instrumental inequality from our method.
 
 % We show how the no-broadcasting theorem governing quantum theory \cite{NoCloningQuantum1996,NoCloningGeneral2006} can be exploited in order to derive specifically quantum-sensitive infeasibility criteria.
-Our criteria are generally based on the \emph{broadcasting} of the values of a hidden variable, i.e.~the assumption that its value can be copied and broadcast at will. The no-broadcasting theorem from quantum theory shows that this is not valid in the non-classical case, and from our perspective this is the reason for the existence of quantum violations of Bell inequalities. Moreover, our technique can also be applied in order to derive criteria that must be satisfied for all distributions that can be generated with latent nodes that are states in quantum theory or any other general probabilistic theory, simply by not assuming the possibility of broadcasting.
+Our witnesses are generally based on the \emph{broadcasting} of the values of a hidden variable, i.e.~the assumption that its value can be copied and broadcast at will. The no-broadcasting theorem from quantum theory shows that this is not valid in the non-classical case, and from our perspective this is the reason for the existence of quantum violations of Bell inequalities. Moreover, our technique can also be applied in order to derive criteria that must be satisfied for all distributions that can be generated with latent nodes that are states in quantum theory or any other general probabilistic theory, simply by not assuming the possibility of broadcasting.
 % like Tsirelson inequalities \cite{Tsirelson1980,Brunner2013Bell}, i.e. constraints which are satisfied by all distributions realizable from a given quantum causal structure. 
 
 %\section{Notation}
@@ -401,33 +404,24 @@ and the joint distribution over the observed variables is obtained from the join
 \end{align}
 
 In addition to the notion of a causal model, it is useful to have a notion of a \tblue{causal hypothesis}, which we define to be a set of causal models.  We shall consider only causal hypotheses for which the models in the set share the same DAG, and we denote such a causal hypothesis by $H_G$ where $G$ is the associated DAG.
-% consistent with a single DAG. Specifically, if $G$ is a DAG and $S$ is a set of parameter values consistent with $G$ (i.e. a set of possibilities for the conditional probability distributions at each node of $G$),\purp{Wait, are the defining a hypothesis positively or negatively? This seems mixed up to me.} then $G$ and $S$ define a causal hypothesis, which we denote by $H_{G,S}$, and which we define formally as the following set of causal models:
-%\begin{align}
-%H_{G,S} \equiv \{ C \mid \SmallNamedFunction{DAG}{C}=G, \SmallNamedFunction{ParamVals}{C} \in S\}.
-%\end{align}
-% (is this standard usage of the term "model"?  In physics, a model typically does not include a specification of the boundary conditions, or does it?)
-The most simple sort of causal hypothesis is one that includes the full set of causal models associated to a DAG $G$, which we denote by $H_G^{\rm full}$.  This is simply the hypothesis of a particular DAG, with no restriction on the set of parameters that supplement it.   Examples of more refined hypotheses are provided below.
+The most simple sort of causal hypothesis is one that includes the full set of causal models associated to a DAG $G$, which we denote by $H_G^{\textrm{full}}$.  This is simply the hypothesis of a particular DAG, with no restriction on the set of parameters that supplement it.   Examples of more refined hypotheses are provided below.
 
-Causal hypotheses are judged on the basis of \tblue{observational constraints}. 
-%The other ingredient of a causal inference problem, besides a causal hypothesis, is \tblue{observational constraints}. 
-%A causal inference problem aims to determine the compatibility of a causal hypothesis with \tblue{observational constraints}.  
-These are a restriction on the joint distribution over the observed variables, 
-% but generally it may be less informative than this.  We define a general specification of observational data to be a specification of 
-specified as a subset of the set of all possible joint distributions over the observed variables, which we denote by $D^{\rm obs}$\footnote{Note that despite the terminology, such constraints might derive from experiments that include interventions.}.
+Causal hypotheses are judged on the basis of \tblue{observational constraints}. These are a restriction on the joint distribution over the observed variables, 
+specified as a subset of the set of all possible joint distributions over the observed variables, which we denote by $D^{\textrm{obs}}$\footnote{Note that despite the terminology, such constraints might derive from experiments that include interventions.}.
 
 %We denote  the set of {\em all} parameter values consistent with $G$ by $S_{\textsf{full}}$, so that $H_{G,{S_{\textsf{full}}}}$ is simply the causal hypothesis that the DAG is $G$, that is, This is the hypothesis that there exists {\em some} set of parameter values supplementing $G$ such that the observed data can be explained by the resulting causal model. 
 
 Causal inference is about judging the plausibility of different causal hypotheses given certain observational constraints.  In this article, we will be concerned with a particular sort of causal inference problem, namely, a decision problem which takes as its input (i) a specification of observational constraints and (ii) a specification of a causal hypothesis, and which outputs whether or not the two are compatible with one another.  
-%The sort of compatibilty relation with which we will be concerned here is consistency. 
+
  A causal hypothesis is deemed \tblue{compatible} with observational constraints if there is some causal model in the set defined by the causal hypothesis which yields a joint distribution in the set defined by the observational constraints, 
 \begin{align}
-H_{G} \quad \text{is consistent with}\quad D^{\rm obs} \quad \text{iff} \quad \exists M \in H_{G} : \pdf{\SmallNamedFunction{ObservedNodes}{G}} \in D^{\rm obs},
+H_{G} \quad \text{is compatible with}\quad D^{\textrm{obs}} \quad \text{iff} \quad \exists M \in H_{G} : \pdf{\SmallNamedFunction{ObservedNodes}{G}} \in D^{\textrm{obs}},
 \end{align}
 where $\pdf{\SmallNamedFunction{ObservedNodes}{G}}$ is fixed by the causal model $M$ through Eqs. \eqref{Markov} and \eqref{MarkovObserved}.
 
-%Summarizing, the sorts of causal inference problems for which one can usefully apply our inflation DAG technique are decision problems which take as their input (i) a specification of observational constraints and (ii) a specification of a causal hypothesis, and that output whether or not the two are consistent with one another.  
+ 
 
-In broad strokes, the inflation DAG technique is a way of mapping a causal inference problem of this sort to a new such problem where the observational and causal inputs of the new problem are determined by the observational and causal inputs of the original problem and where compatibility between the observational and causal inputs of the original problem implies compatibility between the observational and causal inputs of the new problem.  The technique is useful because, as we show, simple witneesses of incompatibility in the new problem yield nontrivial witnesses of incompatibility in the original problem. 
+In broad strokes, the inflation DAG technique is a way of mapping a causal inference problem of this sort to a new such problem where the observational and causal inputs of the new problem are determined by the observational and causal inputs of the original problem and where compatibility between the observational and causal inputs of the original problem implies compatibility between the observational and causal inputs of the new problem.  The technique is useful because, as we show, simple witnesses of incompatibility in the new problem yield nontrivial witnesses of incompatibility in the original problem. 
 
 %\begin{itemize}
 %\item a specification of {\em observational data}
@@ -463,13 +457,9 @@ It is also useful to exhibit some of the possibilities for the form that the cau
 \end{enumerate}
 In all cases, we have left implicit the trivial constraint that the causal hypothesis must include only those DAGs for which the set of observed nodes coincides with the set of variables described in the observational data. 
 
-The motivation for considering hypotheses of the form of H2 rather than H1 is the principle that a causal explanation should not be fine-tuned [reference].  If, for some observational data, a causal hypothesis of type H1 is consistent but one of type H2 is not, then it means that the conditional independences in the observational data are not a consequence of the causal structure, but rather are a consequence of the choice of parameters.  Such an explanation can be criticized on the grounds that it is fine-tuned.  Finding a causal hypothesis of type H2 that is consistent with the observational data implies that one has a non-fine-tuned explanation of that data.  The fine-tuning issue will come up in Sec. ? where we discuss quantum causal models. 
+The motivation for considering hypotheses of the form of H2 rather than H1 is the principle that a causal explanation should not be fine-tuned [reference]\cite{WoodSpekkens}.  If, for some observational data, a causal hypothesis of type H1 is compatible but one of type H2 is not, then it means that the conditional independences in the observational data are not a consequence of the causal structure, but rather are a consequence of the choice of parameters.  Such an explanation can be criticized on the grounds that it is fine-tuned.  Finding a causal hypothesis of type H2 that is compatible with the observational data implies that one has a non-fine-tuned explanation of that data.  The fine-tuning issue will come up in \cref{sec:classicallity} where we discuss quantum causal models. \purp{Note, not there yet...}
 
 
-%On the side of the causal hypothesis, it is most common to consider the hypothesis of a particular DAG, with no restriction on the set of parameters that supplement it.  This is just the full set of causal models associated to a DAG $G$, which we denote by $H_G^{\rm full}$.  Our results will primarily concern this sort of hypothesis.    
-%Nonetheless, our technique is also applicable to  causal hypotheses that are more fine-grained.One example is to exclude from the causal models consistent with a DAG all of those which generate conditional independence relations that do not follow from d-separation criteria applied to the DAG.  If such a causal hypothesis  is found to be consistent with some observational data, then this consistency is not a result of fine-tuning. 
-
-%Another example of a fine-graining relative to the causal hypothesis of a DAG is to incorporate constraints on how certain nodes in the DAG functionally depend on their parents.  
 An example of a causal hypothesis of type H3 is that of an additive noise model: if an observed variable $Y$ has an observed variable $X$ and a latent variable $U$ as parents, then the noise is deemed additive if $Y=\alpha X + \beta U$ for some scalars $\alpha$ and $\beta$ [provide references].  Clearly, the conditional probability distributions $\pfunc{Y|XU}$ that can be achieved in such an additive noise model are a subset of the valid conditional distributions.  More general constraints on the conditional distributions have also been explored [provide references].  
 %(Note that constraints on the probability distributions over the latent variables can be understood as a kind of constraint on the causal dependences.)
 %Another conceivable constraint on the parameters is a constraint on the form of the probabilities distributions over the latent variables.  
@@ -479,7 +469,6 @@ A causal hypothesis of type H4 involves a novel and unusual sort of constraint, 
 %Our inflation DAG technique will require consideration of a novel and unusual sort of causal hypothesis, wherein the conditional probability distributions associated to distinct nodes are sometimes required to be equivalent. 
 %constraint on the sets of parameters of the model. \purp{What is difference between causal dependencies and parameters?}
 
-%\sout{Finally, the verdict about the compatibility of the observational input and the causal hypothesis could come in different forms.  The simplest possibility is a specification of whether the observational input is consistent with the causal hypothesis.  However, the notion of compatibility at play might be more refined than this, for instance, the algorithm might specify a confidence level with which one can reject the given causal hypothesis as an explanation of the observational input.}\purp{Replace with ``we consider causal inference to be about deciding consistency only..."}
 
 %The most informative sort of observational input is a specification of the joint distributions over all of the observed variables.  Nonetheless, causal inference problems often proceed with a less informative sort of observational input.  For instance, one might merely have a description of the conditional independence relations that hold among the obeerved variables.  Another example of how the observational input might be less informative is if it merely specifies the marginals of the joint distribution for certain subsets of the observed variables.  (Indeed, the latter sort of observational input will be relevant for our inflation DAG technique.)   The observational input might also be less informative in another sense, namely, that it is merely a {\em finite sample} of some joint distribution.
 
@@ -587,7 +576,7 @@ To sum up then, the inflation of a causal model is a new causal model wherein ea
 %The inflation DAG technique that we introduce allows questions about the viability of one causal hypothesis for certain observed data to be turned into questions about the viability of a different sort of causal hypothesis for an inflation of the observed data.
 
 %Because we have defined inflation as a map on causal models, 
-Because causal hypotheses are sets of causal models, and the inflation map acts on causal models, it has an induced action on causal hypotheses.   Let $H_G^{\textsf{full}}$ denote the causal hypothesis that the DAG is $G$ (the hypothesis consisting of the set of {\em all} causal models consistent with the DAG $G$).  The induced action of the inflation map has the notable feature that $\SmallNamedFunction{Inflation}{H_G^{\textsf{full}}} \ne H_{G'}^{\textsf{full}}$ because even if there is no restriction on the set of parameters supplementing $G$, inflation imposes a restriction on the set of parameter supplementing $G'$.  Specifically,   if nodes $A_i$ and $A_j$ on $G'$ are copies of a single node $A$ on $G$,then the set of parameters on $G'$ are constrained to satisfy $\pfunc{A_i| \Pa[G']{A_i}}=\pfunc{A_j|\Pa[G']{A_j}}$.  This explains our earlier claim that the inflation map takes a causal hypothesis of type H1 and maps it to a causal hypothesis of type H4.
+Because causal hypotheses are sets of causal models, and the inflation map acts on causal models, it has an induced action on causal hypotheses.   Let $H_G^{\textsf{full}}$ denote the causal hypothesis that the DAG is $G$ (the hypothesis consisting of the set of {\em all} causal models compatible with the DAG $G$).  The induced action of the inflation map has the notable feature that $\SmallNamedFunction{Inflation}{H_G^{\textsf{full}}} \ne H_{G'}^{\textsf{full}}$ because even if there is no restriction on the set of parameters supplementing $G$, inflation imposes a restriction on the set of parameter supplementing $G'$.  Specifically,   if nodes $A_i$ and $A_j$ on $G'$ are copies of a single node $A$ on $G$,then the set of parameters on $G'$ are constrained to satisfy $\pfunc{A_i| \Pa[G']{A_i}}=\pfunc{A_j|\Pa[G']{A_j}}$.  This explains our earlier claim that the inflation map takes a causal hypothesis of type H1 and maps it to a causal hypothesis of type H4.
 
 %Note that even if $S=S_{\textsf{full}}$, so that the original causal hypothesis puts no constraints on the parameter values, one generally has $S'\ne S'_{\textsf{full}}$, that is, the inflationary image of the full set of parameter values on $G$ is not the full set of parameter values on $G'$. Rather, $S'$ incorporates a nontrivial restriction on the parameters consistent with $G'$, namely, that if nodes $A_i$ and $A_j$ on $G'$ are copies of a single node $A$ on $G$,then the parameter values on $G'$ are constrained to satisfy $\pdf{A_i| \Pa[G']{A_i}}=\pdf{A_j|\Pa[G']{A_j}}$.
 
@@ -598,7 +587,7 @@ Because causal hypotheses are sets of causal models, and the inflation map acts 
 
 %[Note that the distinction between observed nodes and latent nodes in the DAG $G$ is inherited by the DAG $G'$.]
 
-It remains to explain how a $G \to G'$ inflation acts on the observational data and to prove that compatibility in the original causal decision problem implies compatibility in the image of this problem under inflation.  Both purposes are served by contemplating what inflation means for the joint distribution over observed variables induced by a causal model.  Because inflation is a map on causal models, it has an induced action on the joint distributions over observed variables that are consistent with those models. 
+It remains to explain how a $G \to G'$ inflation acts on the observational data and to prove that compatibility in the original causal decision problem implies compatibility in the image of this problem under inflation.  Both purposes are served by contemplating what inflation means for the joint distribution over observed variables induced by a causal model.  Because inflation is a map on causal models, it has an induced action on the joint distributions over observed variables that are compatible with those models. \purp{genenerated by? Model to distro is 1-to-1...}
 %induces a map on the distributions over observed variables implied by those models. 
 %Every causal model specifies a joint distribution over the observed variables.  Therefore, an inflation map has an induced action on joint distributions.  
 We begin by describing this action.  In what follows, we assume that $G$ and $G'$ are DAGs with $G' \in \SmallNamedFunction{Inflations}{G}$ and that $M$ and $M'$ are causal models with $M' = \SmallNamedFunction{Inflation}{M} _{G\to G'}$.  Finally, distributions that arise from $M$ are denoted by $P$, and those arising from $M'$ are denoted by $P'$.
@@ -644,7 +633,7 @@ A set of nodes $\bm{U}$ in the inflation DAG $G'$ will be called \tblue{pre-inje
 %Equivalently, a set of nodes is pre-injectable if and only if its (weakly) connected components are injectable. 
 Note that every injectable set is a trivial example of a pre-injectable set.
 
-Because ancestral independence in the DAG implies statistical independence for any probability distribution consistent with the DAG, it follows that  if 
+Because ancestral independence in the DAG implies statistical independence for any probability distribution compatible with the DAG, it follows that  if 
 $\bm{U}$ is a pre-injectable set and $\bm{U}_1,\bm{U}_2,\ldots,\bm{U}_n$ are the ancestrally independent components of $\bm{U}$, then 
 \begin{align}%\label{eq:preinjfactor}
 %\forall \bm{U}\in\SmallNamedFunction{PreInjectableSets}{G'}:	
@@ -662,15 +651,15 @@ This relation specifies precisely how the marginal distribution over any pre-inj
 Because this relation involves only {\em observed variables} of the original and inflated causal models, one can use it to determine observational constraints for the inflated causal inference problem from observational constraints for the original problem. 
 % define the consequences of the inflation map on the observational constraints.   
 
-In the original causal inference problem, whatever form the observational constraint takes, one can deduce its consequences for the marginals on subsets of variables that correspond to injectable sets with copy-indices dropped, that is, the marginals on subsets $\subsim{\bm{U}}\subseteq \SmallNamedFunction{ObservedNodes}{G}$ satisfying $\subsim{\bm{U}} \sim \bm{U}$ where $\bm{U} \in  \SmallNamedFunction{InjectableSets}{G'}$.  Marginalization onto $\subsim{\bm{U}}$ is a map on probability distributions, but given that the observational constraint $D^{\rm obs}$ is a set of probability distributions, such marginalization has an induced action on $D^{\rm obs}$.  We denote the marginalization onto $\subsim{\bm{U}}$ of $D^{\rm obs}$ by $D_{\subsim{\bm{U}}}^{\rm obs}$.   The set $D_{\subsim{\bm{U}}}^{\rm obs}$ captures the consequences of the observational constraints for the marginal distribution on $\subsim{\bm{U}}$.
+In the original causal inference problem, whatever form the observational constraint takes, one can deduce its consequences for the marginals on subsets of variables that correspond to injectable sets with copy-indices dropped, that is, the marginals on subsets $\subsim{\bm{U}}\subseteq \SmallNamedFunction{ObservedNodes}{G}$ satisfying $\subsim{\bm{U}} \sim \bm{U}$ where $\bm{U} \in  \SmallNamedFunction{InjectableSets}{G'}$.  Marginalization onto $\subsim{\bm{U}}$ is a map on probability distributions, but given that the observational constraint $D^{\textrm{obs}}$ is a set of probability distributions, such marginalization has an induced action on $D^{\textrm{obs}}$.  We denote the marginalization onto $\subsim{\bm{U}}$ of $D^{\textrm{obs}}$ by $D_{\subsim{\bm{U}}}^{\textrm{obs}}$.   The set $D_{\subsim{\bm{U}}}^{\textrm{obs}}$ captures the consequences of the observational constraints for the marginal distribution on $\subsim{\bm{U}}$.
 
 
 %over the observed variables.  Consider a set of observed variables $\subsim{\bm{U}}\subseteq \SmallNamedFunction{ObservedNodes}{G}$ satisfying $\subsim{\bm{U}} \sim \bm{U}$ where $\bm{U} \in  \SmallNamedFunction{InjectableSets}{G'}$.  For each joint distribution over the observed variables, $P^{\rm obs}(\SmallNamedFunction{ObservedNodes}{G})$, marginalization on $\subsim{\bm{U}}$ defines a distribution $P^{\rm obs}(\subsim{\bm{U}})$.  The observational constraint $D^{\rm obs}$ specifies a set of possibilities for the joint distribution.  The image of this set under marginalization on $\subsim{\bm{U}}$ we denote by $D_{\subsim{\bm{U}}}^{\rm obs}$.
 
 %Similarly, in the inflated causal inference problem, if we consider a set of observed variables $\bm{U} \in  \SmallNamedFunction{PreInjectableSets}{G'}$ and we consider .  For each joint distribution over the observed variables, $P^{\rm obs}(\SmallNamedFunction{ObservedNodes}{G})$, marginalization on $\subsim{\bm{U}}$ defines a distribution $P^{\rm obs}(\subsim{\bm{U}})$.  
-In the inflated causal inference problem, suppose the observational constraint $D'^{\rm obs}$ specifies a set of possibilities for the joint distribution on $\SmallNamedFunction{ObservedNodes}{G'}$.  For every pre-injectable set $\bm{U} \in  \SmallNamedFunction{PreInjectableSets}{G'}$, let the image of $D'^{\rm obs}$ under marginalization on $\subsim{\bm{U}}$ be denoted by $D_{\subsim{\bm{U}}}^{\prime \rm obs}$.  It is then clear from Eq.~\eqref{eq:preinjfactor} that if $\bm{U}_1,\bm{U}_2,\ldots,\bm{U}_n$ are the ancestrally independent components of $\bm{U}$, as in Eq.~\eqref{eq:defpreinj}, then
-\begin{align}\label{eq:preinjfactor}
-\forall \bm{U} \in  \SmallNamedFunction{PreInjectableSets}{G'}:  D_{\subsim{\bm{U}}}^{\prime \rm obs} \equiv \{ \pdfp{\bm{U}} = \prod_i \pdf{\subsim{\bm{U}}_i}: \pdf{\subsim{\bm{U}}_i} \in D_{\subsim{\bm{U}_i}}^{\rm obs}\quad \forall i \}.
+In the inflated causal inference problem, suppose the observational constraint $D'^{\textrm{obs}}$ specifies a set of possibilities for the joint distribution on $\SmallNamedFunction{ObservedNodes}{G'}$.  For every pre-injectable set $\bm{U} \in  \SmallNamedFunction{PreInjectableSets}{G'}$, let the image of $D'^{\textrm{obs}}$ under marginalization on $\subsim{\bm{U}}$ be denoted by $D_{\subsim{\bm{U}}}^{\prime \textrm{obs}}$.  It is then clear from Eq.~\eqref{eq:preinjfactor} that if $\bm{U}_1,\bm{U}_2,\ldots,\bm{U}_n$ are the ancestrally independent components of $\bm{U}$, as in Eq.~\eqref{eq:defpreinj}, then
+\begin{align}%\label{eq:preinjfactor}
+\forall \bm{U} \in  \SmallNamedFunction{PreInjectableSets}{G'}:  D_{\subsim{\bm{U}}}^{\prime \textrm{obs}} \equiv \{ \pdfp{\bm{U}} = \prod_i \pdf{\subsim{\bm{U}}_i}: \pdf{\subsim{\bm{U}}_i} \in D_{\subsim{\bm{U}_i}}^{\textrm{obs}}\quad \forall i \}.
 \end{align}
 
 
@@ -684,9 +673,9 @@ In the inflated causal inference problem, suppose the observational constraint $
 %\end{align}
 The key is this: if a given specification of marginals on deflated injectables is compatible with the original causal hypothesis, then the corresponding products of marginals on the pre-injectable sets is compatible with the inflated causal hypothesis.  If a joint distribution is compatible with the original causal hypothesis, then its marginals on deflated injectables are as well, and we get the corresponding inference on the inflated problem.  An observational constraint provides a bunch of joint distribution candidates for compatibility with the causal hypothesis and inflation turns these into a bunch of marginals candidates for compatibility with the inflated causal hypothesis. 
 
-If the observational constraint $D^{\rm obs}$ and the causal hypothesis $H_G$ are compatible, then the observational constraint $\{  D_{\subsim{\bm{U}}}^{\prime \rm obs} : \bm{U} \in  \SmallNamedFunction{PreInjectableSets}{G'}\}$ and the causal hypothesis $H_{G'} = \SmallNamedFunction{Inflation}{H_G}$ are compatible.  
+If the observational constraint $D^{\textrm{obs}}$ and the causal hypothesis $H_G$ are compatible, then the observational constraint $\{  D_{\subsim{\bm{U}}}^{\prime \textrm{obs}} : \bm{U} \in  \SmallNamedFunction{PreInjectableSets}{G'}\}$ and the causal hypothesis $H_{G'} = \SmallNamedFunction{Inflation}{H_G}$ are compatible.  
 
-We need to define the notion of observational constraints on a set of marginal distributions.  Let $\SmallNamedFunction{Subsets}{G}$ be the subsets of the nodes of $G$ on which we impose our observational constraints.  Let $( P(\bm{U}): U \in \SmallNamedFunction{Subsets}{G} )$ be a collection of marginals associated to these subsets.  Then the observational constraint on marginals is a set of such collections, denoted $D^{\rm obs}_{\rm marg}$.
+We need to define the notion of observational constraints on a set of marginal distributions.  Let $\SmallNamedFunction{Subsets}{G}$ be the subsets of the nodes of $G$ on which we impose our observational constraints.  Let $( P(\bm{U}): U \in \SmallNamedFunction{Subsets}{G} )$ be a collection of marginals associated to these subsets.  Then the observational constraint on marginals is a set of such collections, denoted $D^{\textrm{obs}}_{\textrm{marg}}$.
 %\begin{align}
 %D^{\rm obs}_{\rm marg} \equiv  \{ ( P(\bm{U}): U \in \SmallNamedFunction{Subsets}{G} ) 
 %\end{align}
@@ -695,7 +684,7 @@ Let the function $\SmallNamedFunction{JointDistObserved}{M}$ return the joint di
 
 Compatibility in the original causal inference problem implies that 
 \begin{align}
-\exists M \in H_G : \SmallNamedFunction{JointDistObserved}{M} \in D^{\rm obs}
+\exists M \in H_G : \SmallNamedFunction{JointDistObserved}{M} \in D^{\textrm{obs}}
 \end{align}
   
 
@@ -703,37 +692,34 @@ Compatibility in the original causal inference problem implies that
 %So to witness the incompatibility of $D^{\rm obs}$ and $H_G$, it is sufficient to witness the incompatibility 
 
 \color{red}
-We can now describe the image of the observational constraint $D^{\rm obs}$ under the $G\to G'$ inflation map, $D'^{\rm obs}=\SmallNamedFunction{Inflation}{D^{\rm obs}} _{G\to G'}$, as follows:
+We can now describe the image of the observational constraint $D^{\textrm{obs}}$ under the $G\to G'$ inflation map, $D'^{\textrm{ obs}}=\SmallNamedFunction{Inflation}{D^{\textrm{obs}}} _{G\to G'}$, as follows:
 \begin{align}
-D'^{\rm obs} \equiv \{ \pdf{all} : \text{marginals}  \pdf{\subsim{\bm{U}}} : \subsim{\bm{U}} \sim \bm{U} \in  \SmallNamedFunction{InjectableSets}{G'} \text{are built from } D_0^{\rm obs} \text{via Eq.~\eqref{eq:preinjfactor}}\}.  
+D'^{\textrm{obs}} \equiv \{ \pdf{all} : \text{marginals}  \pdf{\subsim{\bm{U}}} : \subsim{\bm{U}} \sim \bm{U} \in  \SmallNamedFunction{InjectableSets}{G'} \text{are built from } D_0^{\textrm{obs}} \text{via Eq.~\eqref{eq:preinjfactor}}\}.  
 \end{align}
 
 %The observational data in the original problem comes in the form of a specification of the joint distribution over all observed variables and therefore a specification of constraints on the marginals $\{ \pdf{\subsim{\bm{U}}} : \subsim{\bm{U}} \sim \bm{U} \in  \SmallNamedFunction{InjectableSets}{G'} \}$.  This in turn implies a constraint on the marginals $\{ \pdfp{\bm{U}} : \bm{U} \in  \SmallNamedFunction{PreInjectableSets}{G'} \}$ through Eq.~\eqref{eq:preinjfactor}.
 
 \color{red}
 ???
-If some distribution were consistent with the causal hypothesis in the original causal inference problem, then the counterpart of this distribution on the pre-injectable sets would be consistent with the inflated causal hypothesis. 
-If some observational constraint were consistent with the causal hypothesis in the original causal inference problem, then the counterpart of this constraint on the pre-injectable sets would be consistent with the inflated causal hypothesis. 
+If some distribution were compatible with the causal hypothesis in the original causal inference problem, then the counterpart of this distribution on the pre-injectable sets would be compatible with the inflated causal hypothesis. 
+If some observational constraint were compatible with the causal hypothesis in the original causal inference problem, then the counterpart of this constraint on the pre-injectable sets would be compatible with the inflated causal hypothesis. 
 
-
-%Consider a causal inference problem where the observational input is a probability distribution over a set $\bm{O}$ of observed variables, denoted $\pdf{\bm{O}}$ and the causal hypothesis is $H_{G,S}$ where $\SmallNamedFunction{ObservedNodes}{G}=\bm{O}$.  Suppose that one seeks only to determine whether the causal hypothesis is consistent with the observational input.  
-%Then the following condition is necessary and sufficient for such consistency
 This holds if and only if
 \begin{align}
 \exists C \in H_{G,S} : \pdf[C]{\SmallNamedFunction{ObservedNodes}{G}}= \pdf{\bm{O}}.
 \end{align}
 
-%Consider a causal inference problem where the input data is a joint distribution over a set of observed variables.  A causal model is only a candidate for a causal explanation of this joint distribution if it posits a DAG $G$ for which $\SmallNamedFunction{ObservedNodes}{G}$ corresponds to the set of observed variables, so we assume this henceforth. The causal hypothesis $H_{G,S}$ is consistent with data $\pdf{\SmallNamedFunction{ObservedNodes}{G}}$ if and only if there exists a causal model satisfying the constraints of the hypothesis, $C \in H_{G,S}$, such that $\pdf[C]{\SmallNamedFunction{ObservedNodes}{G}} = \pdf{\SmallNamedFunction{ObservedNodes}{G}}$. 
+%Consider a causal inference problem where the input data is a joint distribution over a set of observed variables.  A causal model is only a candidate for a causal explanation of this joint distribution if it posits a DAG $G$ for which $\SmallNamedFunction{ObservedNodes}{G}$ corresponds to the set of observed variables, so we assume this henceforth. The causal hypothesis $H_{G,S}$ is compatible with data $\pdf{\SmallNamedFunction{ObservedNodes}{G}}$ if and only if there exists a causal model satisfying the constraints of the hypothesis, $C \in H_{G,S}$, such that $\pdf[C]{\SmallNamedFunction{ObservedNodes}{G}} = \pdf{\SmallNamedFunction{ObservedNodes}{G}}$. 
 
 
 
-%Suppose the original causal inference problem takes as its inputs  a probability distribution over a set $\bm{O}$ of observed variables, denoted $\pdf{\bm{O}}$, and a causal hypothesis, denoted $H_{G,S}$, and seeks to determine whether these are consistent.  
+%Suppose the original causal inference problem takes as its inputs  a probability distribution over a set $\bm{O}$ of observed variables, denoted $\pdf{\bm{O}}$, and a causal hypothesis, denoted $H_{G,S}$, and seeks to determine whether these are compatible.  
 
 Every inflation $G\to G'$
 %DAG $G' \in \SmallNamedFunction{Inflations}{G}$
- defines a new causal inference problem for which the decision regarding consistency is the same as for the original problem.  
+ defines a new causal inference problem for which the decision regarding compatibility is the same as for the original problem.  
 
-The causal hypothesis of the new causal inference problem is simply the image under a $G\to G'$ inflation of the causal hypothesis of the original causal inference problem, and one seeks to evaluate its consistency with observational data that is determined by the observational data of the original in the following way.
+The causal hypothesis of the new causal inference problem is simply the image under a $G\to G'$ inflation of the causal hypothesis of the original causal inference problem, and one seeks to evaluate its compatibility with observational data that is determined by the observational data of the original in the following way.
 %: for all pre-injectable sets on $G'$ consisting entirely of observed nodes on $G'$, the distribution over the set is given by the observed distribution over the corresponding nodes on $G$. 
 
 %We can formalize this as follows. 
@@ -745,11 +731,11 @@ Therefore the observational input to the new causal inference problem is not the
 
 Summarizing, we have:
 \begin{lemma}
-If a causal hypothesis $H_{G}$ is consistent with the observational data $D^{\rm obs}$
+If a causal hypothesis $H_{G}$ is compatible with the observational data $D^{\textrm{obs}}$
  %that the joint distribution over the set $\bm{O}$ of observed variables is $\pdf{\subsim{\bm{O}}}$ 
 then the image of this causal hypothesis under a $G\to G'$ inflation
 %, denoted $H_{G'}$, 
-is consistent with the image of this observational data under a $G\to G'$ inflation.
+is compatible with the image of this observational data under a $G\to G'$ inflation.
 %, denoted $D^{\rm obs}$.
 \label{mainlemma}
 \end{lemma}
@@ -758,7 +744,7 @@ For the specific sorts of causal inference problems we consider in this article,
 %$D^{\rm obs}$ 
 is a specification of a joint distribution over the set $\bm{O}$ of observed variables, $\pdf{\subsim{\bm{O}}}$, and its image under inflation is a specification of certain marginals of the joint distribution over the inflation of $\bm{O}$, namely, $\forall \bm{U} \in \SmallNamedFunction{PreInjectableSets}{\bm{O}}: \pdf{\bm{U}} = \pdf{\subsim{\bm{U}_1}}\pdf{\subsim{\bm{U}_2}} \dots \pdf{\subsim{\bm{U}_n}}$.
 
-It follows that any witnesses of inconsistency that one can derive for the new causal inference problem immediately yield witnesses of inconsistency for the original causal inference problem.  Indeed, any manner of witnessing inconsistency from the standard toolkit of causal inference can be applied to the new problem and generally yield novel ways of witnessing inconsistency for the original problem. 
+It follows that any incompatibility witnesses that one can derive for the new causal inference problem immediately yield incompatibility witnesses for the original causal inference problem.  Indeed, any manner of incompatibility witnesses from the standard toolkit of causal inference can be applied to the new problem to yield generally novel incompatibility witnesses for the original problem. 
 %conditions derived therefrom provide novel conditions for the original problem.  
 Any causal inference tool, therefore, can potentially have its power augmented by combining it with the inflation technique.
 %The new problem has a rather different form than the old, 
@@ -772,7 +758,7 @@ Consider the following causal inference problem.  The observational data is a jo
 P^{\text{obs}}_{A B C}=\frac{[000]+[111]}{2},\quad\text{i.e.}\quad P^{\text{obs}}_{A B C}(a b c)=\begin{cases}\tfrac{1}{2}&\text{if }\; a\eql b\eql c, \\ 0&\text{otherwise}.\end{cases}
 \end{align}
 %The causal hypothesis is the set of causal models associated to the DAG
-The causal hypothesis is that the DAG corresponds to the triangle scenario, depicted in \cref{fig:Tri222}.  The problem is to decide whether the observational data is consistent with this causal hypothesis.
+The causal hypothesis is that the DAG corresponds to the triangle scenario, depicted in \cref{fig:Tri222}.  The problem is to decide whether the observational data is compatible with this causal hypothesis.
 
 To solve this problem, we consider its image under the inflation of the triangle scenario to the DAG depicted in Fig.~\ref{fig:TriDagSubA2B1C1}.  
 %an inflated causal inference problem, namely the problem induced by the particular inflation depicted in Fig.~\ref{fig:TriDagSubA2B1C1}.  
@@ -787,21 +773,21 @@ Therefore, the inflated observational data for our new causal inference problem 
 &P^{\text{obs-inf}}_{B_1 C_1} =P^{\text{obs}}_{B C}= \frac{[00]+[11]}{2}\\
 &P^{\text{obs-inf}}_{A_2 B_1} =P^{\text{obs}}_A \otimes P^{\text{obs}}_B= \frac{[0]+[1]}{2}\otimes\frac{[0]+[1]}{2}. 
 \end{split}\end{align}
-The question is whether such constraints are consistent with the causal hypothesis that the DAG is that of \cref{fig:TriDagSubA2B1C1}, where the parameters supplementing the DAG are unrestricted but for the constraint that the latent variables $Y_1$ and $Y_2$ are identically distributed. 
+The question is whether such constraints are compatible with the causal hypothesis that the DAG is that of \cref{fig:TriDagSubA2B1C1}, where the parameters supplementing the DAG are unrestricted but for the constraint that the latent variables $Y_1$ and $Y_2$ are identically distributed. 
 
 It is not difficult to see that the answer to the question is negative, and that this verdict can be rendered without even appealing to the form of the inflation DAG %(Note, however, that the inflation DAG has played a role in defining the new causal inference problem insofar as it has dictated the form that the inflated observational data should take).  
 It suffices to make use of results concerning the marginals problem,  
 %From Eq.~\eqref{eq:ghzdistribution1} one deduces that the marginal $\pdf{A C}$ described perfect correlation between $A$ and $C$ and similarly for the marginal $\pdf{B C}$.  But then, by Eqs.~\eqref{j1} and \eqref{j2}, one deduces that there is perfect correlation between $A_2$ and $C_1$ and perfect correlation between $B_1$ and $C_1$.  Meanwhile, Eq.~\eqref{j3} dictates that $A_2$ and $B_1$ should be uncorrelated.  But 
 namely, that there is no joint distribution $P_{A_2 B_1 C_1}$ having marginals of the form given in \cref{eq:GHZobsinf}. To see this, it suffices to note that the only joint distribution that exhibits perfect correlation between $A_2$ and $C_1$ and between $B_1$ and $C_1$ also exhibits perfect correlation between $A_2$ and $B_1$.  
 
-We have therefore certified that the joint distribution $P^{\text{obs}}_{A B C}$ of Eq.~\eqref{eq:ghzdistribution1} is not consistent with the Triangle causal structure, recovering the seminal result of \citet{steudel2010ancestors}.
+We have therefore certified that the joint distribution $P^{\text{obs}}_{A B C}$ of Eq.~\eqref{eq:ghzdistribution1} is not compatible with the Triangle causal structure, recovering the seminal result of \citet{steudel2010ancestors}.
 
 \begin{comment}
 Let us ask, is it possible for the three original-scenario observable variables $\{A,B,C\}$ to be random but perfectly correlated? We call this the GHZ-type distribution, after an eponymous tripartite entangled quantum state \cite{greenberger1989going,3Qubits2Ways}. So $P_{\text{GHZ}}\parenths{A B C}$ is given by
 \begin{align}\label{eq:ghzdistribution1}
 p_{\text{GHZ}}\parens{a b c}=\frac{[000]+[111]}{2}=\begin{cases}\tfrac{1}{2}&\text{if }\; a=b=c, \\ 0&\text{otherwise}.\end{cases}
 \end{align}
-We assume uniform binary variables for the sake of concreteness, but the argument is general. Let's temporarily (falsely) assume $P_{\text{GHZ}}$ to be feasible for the triangle scenario. Since $\brackets{A_2 C_1}$ is an injectable set we have $\pdf{A_2 C_1}=\pdf{A C}$, and therefore $P_{\text{GHZ}}$ implies that $A_2$ and $C_1$ are perfectly correlated. Similarly, since $\brackets{B_1 C_1}$ is an injectable set we have $\pdf{B_1 C_1}=\pdf{A C}$, and therefore $B_1$ and $C_1$ must be perfectly correlated, and by extension $B_1$ and $A_2$ are perfectly correlated as well. On the other hand, $A_2$ and $B_1$ must be statistically independent, as they do not share any common ancestor. The only way for two variables to be \emph{both} perfectly correlated and independent is by being deterministic. This is not the case in $P_{\text{GHZ}}$, and thus we have certified that $P_{\text{GHZ}}$ is not realizable from the Triangle causal structure, recovering the seminal result of \citet{steudel2010ancestors}.
+We assume uniform binary variables for the sake of concreteness, but the argument is general. Let's temporarily (falsely) assume $P_{\text{GHZ}}$ to be compatible with the triangle scenario. Since $\brackets{A_2 C_1}$ is an injectable set we have $\pdf{A_2 C_1}=\pdf{A C}$, and therefore $P_{\text{GHZ}}$ implies that $A_2$ and $C_1$ are perfectly correlated. Similarly, since $\brackets{B_1 C_1}$ is an injectable set we have $\pdf{B_1 C_1}=\pdf{A C}$, and therefore $B_1$ and $C_1$ must be perfectly correlated, and by extension $B_1$ and $A_2$ are perfectly correlated as well. On the other hand, $A_2$ and $B_1$ must be statistically independent, as they do not share any common ancestor. The only way for two variables to be \emph{both} perfectly correlated and independent is by being deterministic. This is not the case in $P_{\text{GHZ}}$, and thus we have certified that $P_{\text{GHZ}}$ is not realizable from the Triangle causal structure, recovering the seminal result of \citet{steudel2010ancestors}.
 \end{comment}
 
 \example{: \tred{The W-type distribution cannot arise from the Triangle scenario}}\par\smallskip\nobreak
@@ -813,7 +799,7 @@ P^{\text{W}}_{A B C}=\frac{[100]+[010]+[001]}{3},\quad\text{i.e.}\quad P^{\text{
 We call this the W-type distribution\footnote{Because its correlations are reminiscent of those one obtains for the quantum state appearing in Ref. \cite{3Qubits2Ways}, and which is called the W state.}. 
 %To our knowledge, the fact that the Triangle causal structure is inconsistent with the W-type distribution has not been demonstrated previously.
 
-To prove the inconsistency of  $P^{\text{W}}$ with the Triangle causal structure, we consider the inflation DAG of \cref{fig:Tri222}. 
+To prove the incompatibility of  $P^{\text{W}}$ with the Triangle causal structure, we consider the inflation DAG of \cref{fig:Tri222}. 
 The sets $\{A_2 C_1\}$, $\{B_2 A_1\}$, $\{A_2 B_1\}$ and $\{ A_1 B_1 C_1\}$ are injectable.  The set $\{ A_2 B_2 C_2\}$ is pre-injectable because the singleton sets $\{A_2\}$,  $\{B_2\}$ and $\{C_2\}$ are injectable and \emph{all} ancestrally independent. It follows that we must consider the inflated observational data
 \begin{align}
 &P^{\text{W-inf}}_{A_2 C_1}&&=P^{\text{W}}_{A C} &&= \frac{[10]+[01]+[00]}{3} &&&&&&&&\label{W1}\\
@@ -842,9 +828,7 @@ which contradicts Eq.~\eqref{W4}.% and the fact that $P_{\text{W}}$ has no weigh
 
 Again, we have reached our verdict here simply by noting that the distributions defined in Eqs.~\eqref{W1}-\eqref{W5} cannot arise as the marginals of a single distribution on $A_1, B_1, C_1, A_2, B_2, C_2$.  Specifically, we have leveraged an approach to the marginal problem inspired by Hardy's version of Bell's theorem \cite{L.Hardy:PRL:1665,Mansfield2012}, see \cref{sec:TSEM} for further discussion of Hardy-type paradoxes and their applications.
 
-We have thus established that the distribution $P^{\text{W}}_{A B C}$ of Eq.~\eqref{eq:wdistribution1} is incompatible with the triangle DAG.  To our knowledge, thi fact 
- %the fact that the Triangle causal structure is inconsistent with the W-type distribution
-  has not been demonstrated previously.
+We have thus established that the distribution $P^{\text{W}}_{A B C}$ of Eq.~\eqref{eq:wdistribution1} is incompatible with the triangle DAG.  To our knowledge, this fact has not been demonstrated previously.
 
 %$\p{A_2\eql B_2\eql C_2\eql 1}=\nicefrac{1}{8}$ according to $P_{\text{W}}$. But that would imply $\p{A_1\eql B_1\eql C_1\eql 0}\geq\nicefrac{1}{8}$, which contradicts $P_{\text{W}}$, hence $P_{\text{W}}$ cannot arise from the Triangle scenario.
 
@@ -853,7 +837,7 @@ The incompatibility of the triangle DAG with the W-type distribution is difficul
 \item There are no conditional independence relations between the observable nodes of the Triangle scenario. %, so the distribution is observationally Markov with respect to the DAG. 
 \item Shannon-type entropic inequalities cannot detect this distribution as not allowed by the Triangle scenario~\cite{fritz2013marginal,chaves2014novel,chaves2014informationinference}. 
 \item Moreover, \emph{no} entropic inequality can witness the W-type distribution as unrealizable. \citet{weilenmann2016entropic} have constructed an inner approximation to the entropic cone of the Triangle causal structure, and the W-distribution lies inside this. In other words, a distribution with the same entropic profile as the W-type distribution \emph{can} arise from the Triangle scenario.
-\item The newly-developed method of covariance matrix causal inference due to \citet{kela2016covariance}, which gives tighter constraints than entropic inequalities for the Triangle scenario, also cannot detect inconsistency with the W-type distribution.
+\item The newly-developed method of covariance matrix causal inference due to \citet{kela2016covariance}, which gives tighter constraints than entropic inequalities for the Triangle scenario, also cannot detect incompatibility with the W-type distribution.
 \end{compactenum}
 %\par\noindent But the inflation technique can, and does so very easily.
 Therefore, for this problem at least, the inflation technique appears to be more powerful.
@@ -884,7 +868,7 @@ We consider the distribution ${P^{\text{obs}}_{A B X Y} = P^{\text{PR}}_{A B | X
 % & p_{\text{PR}}\parens{a b |x y}=\frac{[00|00]+[11|00]+[00|10]+[11|10]+[00|01]+[11|01]+[01|11]+[10|11]}{8}\\
 P^{\text{PR}}_{A B | X Y}\parens{a b |x y}=\begin{cases}\tfrac{1}{2}&\text{if }\; \SmallNamedFunction[2]{mod}{a\cramp{+}b}\eql x\cramp{\cdot} y, \\ 0&\text{otherwise}.\end{cases}
 \end{split}\end{align}
-The correlations described by this distribution are known as PR-box correlations after Popescu and Rohrlich, and they are well-known to be inconsistent with the the Bell scenario \cite{PROriginal,PRUnit}. Here we prove this inconsistency using the inflation technique. 
+The correlations described by this distribution are known as PR-box correlations after Popescu and Rohrlich, and they are well-known to be incompatible with the the Bell scenario \cite{PROriginal,PRUnit}. Here we prove this incompatibility using the inflation technique. 
 
 We use the inflation of the Bell DAG shown in \cref{fig:BellDagCopy1}.
 
@@ -907,14 +891,14 @@ Given the assumption that the distributions $P^{\text{free}}_{X}$ and $P^{\text{
 % $P_{\text{PR}}$ is given as a conditional distribution because $X$ and $Y$ are settings variables.
 For these values, \cref{eq:PRinflated} specifies perfect correlation between $A_1$ and $B_1$.  Similarly, it the inflated observational data also specified perfect correlation between $A_1$ and $B_2$, perfect correlation between $A_2$ and $B_1$, and perfect \emph{anti}correlation between $A_2$ and $B_2$. Those four requirements are not mutually compatible, however: since perfect correlation is transitive, the first three properties entail perfect correlation between $A_2$ and $B_2$. 
 
-The mathematical structure of this proof parallels that of standard proofs of the inconsistency of PR-box correlations with the Bell structure.  Standard proofs focus on a set of variables $\{A_0, A_1, B_0, B_1\}$ where $A_0$  is the value of $A$ when $X=0$, and similarly for the others.  The fact that there must be a joint distribution over these variables can be inferred from the structure of the Bell DAG and the fact that one can assume without loss of generality that the causal dependencies are deterministic (a result known as Fine's theorem \cite{FineTheorem}).  It is then sufficient to note that the marginals given by the PR-box correlations do not arise from any joint distribution.  Nonetheless, our proof is conceptually distinct insofar as the variables to which we apply the marginals problem are not conditioned on a setting value.  And we do not require Fine's theorem.  
+The mathematical structure of this proof parallels that of standard proofs of the incompatibility of PR-box correlations with the Bell structure.  Standard proofs focus on a set of variables $\{A_0, A_1, B_0, B_1\}$ where $A_0$  is the value of $A$ when $X=0$, and similarly for the others.  The fact that there must be a joint distribution over these variables can be inferred from the structure of the Bell DAG and the fact that one can assume without loss of generality that the causal dependencies are deterministic (a result known as Fine's theorem \cite{FineTheorem}).  It is then sufficient to note that the marginals given by the PR-box correlations do not arise from any joint distribution.  Nonetheless, our proof is conceptually distinct insofar as the variables to which we apply the marginals problem are not conditioned on a setting value.  And we do not require Fine's theorem.  
 
-Many causal inference techniques can be used to derive sufficient conditions for the inconsistency of the causal hypothesis $H_{G',S'}$ with the observational data $\forall \bm{U} \in \SmallNamedFunction{PreInjectableSets}{\bm{O}}: \pdf{\bm{U}} = \pdf{\subsim{\bm{U}_1}}\pdf{\subsim{\bm{U}_2}} \dots \pdf{\subsim{\bm{U}_n}}$. We will call sets of such conditions \purp{\sout{inconsistency witnesses}} \tblue{infeasibility criteria}. \purp{I like the name inconsistency witness. Shall we switch everything over to that?}  
+Many causal inference techniques can be used to derive sufficient conditions for the incompatibility of the causal hypothesis $H_{G',S'}$ with the observational data $\forall \bm{U} \in \SmallNamedFunction{PreInjectableSets}{\bm{O}}: \pdf{\bm{U}} = \pdf{\subsim{\bm{U}_1}}\pdf{\subsim{\bm{U}_2}} \dots \pdf{\subsim{\bm{U}_n}}$. We will call sets of such conditions \tblue{incompatibility witnesses}.   
 
 \color{black}
 \section{Example applications of the inflation technique}\label{sec:examplebaddistributions}
 
-Here are some examples of causal infeasibility criteria for the Triangle scenario which we can derive by considering the inflation DAG of~\cref{fig:TriDagSubA2B1C1}.
+Here are some examples of causal incompatability witnesses for the Triangle scenario which we can derive by considering the inflation DAG of~\cref{fig:TriDagSubA2B1C1}.
 
 For technical convenience, let us assume that all observed variables take values in $\{-1,+1\}$. By virtue of the existence of a joint distribution of $A_2$, $B_1$ and $C_1$, we can conclude~\cite{pitowsky_boole_1994,Pitowsky1989,kellerer_marginal_1964,leggett_garg_1985,araujo_cycle_2013},
 \begin{equation}
@@ -985,7 +969,7 @@ A consequence of this inequality is again that the W-type distribution per \cref
 %\begin{align}\label{eq:wdistribution}
 %{P_{\text{W}}}\parenths{A B C} \coloneqq\quad p_{\text{W}}\parens{a b c}=\frac{[100]+[010]+[001]}{3}=\begin{cases}\tfrac{1}{3}&\text{if }\; a+b+c=1 \\ 0&\text{otherwise}\end{cases}
 %\end{align}
-is found to be inconsistent with the Triangle scenario, since the right-hand side vanishes but the left-hand side does not.
+is found to be incompatible with the Triangle scenario, since the right-hand side vanishes but the left-hand side does not.
 % \cref{eq:FritzF3} requires the use of a broadcasting inflation, and therefore does not hold in the context of general probability theories.
 %, where $a,b,c\in\brackets{0,1}$.
 %The W-distribution states that the in any event in which $A,B,C$ are observed, precisely one of them will be found to equal $1$ while the other two will equal $0$. The identity of the variable which takes the value $1$ is uniformly random. In informal but intuitive notation, the W-type distribution is ${\nicefrac{1}{3}[100]+\nicefrac{1}{3}[010]+\nicefrac{1}{3}[001]}$.
@@ -1002,16 +986,16 @@ is found to be inconsistent with the Triangle scenario, since the right-hand sid
 \section{Deriving polynomial inequalities systematically}
 \label{sec:ineqs}
 
-We have defined causal inference as a decision problem, namely testing the consistency of some observational data with some some causal hypothesis. We've shown that this decision can be negatively answered by proxy, namely by demonstrating inconsistency of \emph{inflated} data with an \emph{inflated} hypothesis. The inflation technique can also be used to derive infeasibility criteria, however, by \tblue{deriving constraints on the pre-injectable sets}. Any such constraint is also an implicit consequence of the original hypothesis, and hence a relevant infeasibility criterion.
+We have defined causal inference as a decision problem, namely testing the compatibility of some observational data with some some causal hypothesis. We've shown that this decision can be negatively answered by proxy, namely by demonstrating incompatibility of \emph{inflated} data with an \emph{inflated} hypothesis. The inflation technique can also be used to derive incompatibility witnesses, however, by \tblue{deriving constraints on the pre-injectable sets}. Any such constraint is also an implicit consequence of the original hypothesis, and hence a relevant criterion for compatability.
 
-The ``big" problem, therefore, is rather straightforward: We seek to derive causal infeasibility criteria from the inflation hypothesis on the injectable sets. This task, however, is just a special instance of generic causal inference: Given some causal hypothesis, what can we say about how it constrains possible observable marginal distribution? Any technique for deriving causal infeasibility criteria is therefore relevant when using the inflation technique. Interestingly, weak constraints from the inflation hypothesis translate into strong constraints pursuant to the original hypothesis.
+The ``big" problem, therefore, is rather straightforward: We seek to derive compatibility witnesses from the inflation hypothesis on the injectable sets. This task, however, is just a special instance of generic causal inference: Given some causal hypothesis, what can we say about how it constrains possible observable marginal distribution? Any technique for deriving incompatibility witnesses is therefore relevant when using the inflation technique. Interestingly, weak constraints from the inflation hypothesis translate into strong constraints pursuant to the original hypothesis.
 
 In the discussion that follows we continue to assume that the original hypothesis is nothing more than supposing the causal structure to be given by the original DAG. Furthermore we presume that the joint distribution over all original observable variables is accessible. Moreover, we limit our attention to deriving polynomial inequalities in terms of probabilities. The potential of using inflation as tool for deriving entropic inequalities is considered separately in \cref{sec:NonShannon}.
 
 In what follows we consider three different strategies for constraining possible marginal distributions from the inflation hypothesis. 
 \begin{compactitem}
-\item The full nonlinear strategy attempts to leverage many different kinds of constraints which are implicit in the inflation hypothesis. This strategy yields the strongest infeasibility criteria, but relies on computationally-difficult nonlinear quantifier elimination.
-\item An intermediate strategy asks only if the various marginal distributions are compatible with \emph{any} joint distribution, without regard to the specific causal structure of the inflation DAG whatsoever. Solving the marginal problem amounts to a special linear quantifier elimination computation, one which can be computed efficiently using convex hull algorithms. The resulting infeasibility criteria are nevertheless still polynomial inequalities.
+\item The full nonlinear strategy attempts to leverage many different kinds of constraints which are implicit in the inflation hypothesis. This strategy yields the strongest incompatibility witnesses, but relies on computationally-difficult nonlinear quantifier elimination.
+\item An intermediate strategy asks only if the various marginal distributions are compatible with \emph{any} joint distribution, without regard to the specific causal structure of the inflation DAG whatsoever. Solving the marginal problem amounts to a special linear quantifier elimination computation, one which can be computed efficiently using convex hull algorithms. The resulting incompatibility witnesses are nevertheless still polynomial inequalities.
 \item Another strategy is based on probabilistic Hardy-type paradoxes, which we connect to the hypergraph transversal problem. This strategy requires the least computational effort, but is limited in that it only yields polynomial inequalities of a very particular form.
 \end{compactitem}
 
@@ -1150,11 +1134,11 @@ When solving the marginal problem is too difficult, one may consider solving a r
 
 \topic{\tred{Constraining Possible Distributions over Pre-Injectable Sets via Conditional Independence Relations}}
 
-The marginal problem asks about the existence of \emph{any} joint distribution which recovers the marginal distributions. In causal inference, however, there are plenty of other constraints on the sorts of joint distributions which are consistent with some causal hypothesis. The minimal constraint embedded in any causal hypothesis is the idea of causal structure. Thus it is natural to supplement the marginal problem with additional constraints, motivated by causal structure, on the hypothetical inflation-DAG observable joint distribution.
+The marginal problem asks about the existence of \emph{any} joint distribution which recovers the marginal distributions. In causal inference, however, there are plenty of other constraints on the sorts of joint distributions which are compatible with some causal hypothesis. The minimal constraint embedded in any causal hypothesis is the idea of causal structure. Thus it is natural to supplement the marginal problem with additional constraints, motivated by causal structure, on the hypothetical inflation-DAG observable joint distribution.
 
 The most familiar causally-motivated constraints on a joint distribution are \tblue{conditional independence relations}, in particular, observable conditional independence relations. Conditional independence relations are inferred by $d$-separation; if $\bm{X}$ and $\bm{Y}$ are $d$-separated in the (inflation) DAG by $\bm{Z}$, then we infer the conditional independence $\bm{X}\bot\bm{Y}|\bm{Z}$. The $d$-separation criterion is explained at length in~\cite{pearl2009causality,studeny2005probabilistic,WoodSpekkens,pusey2014gdag}, so we elect not to review it here.
 
-Every conditional independence relation can be translated into a nonlinear constraint on probabilities, as $\bm{X}\bot\bm{Y}|\bm{Z}$ implies $\p{\bm{x}\bm{y}|\bm{z}}=\p{\bm{x}|\bm{z}}\p{\bm{y}|\bm{z}}$ for all $\bm{x}$, $\bm{y}$, and $\bm{z}$. As we generally prefer to work with unconditional probabilities, we rewrite this as follows: If $\bm{X}$ and $\bm{Y}$ are $d$-separated by $\bm{Z}$, then $\p[\bm{X}\bm{Y}\bm{Z}]{\bm{x}\bm{y}\bm{z}}\p[\bm{Z}]{\bm{z}}=\p[\bm{X}\bm{Z}]{\bm{x}\bm{z}}\p[\bm{Y}\bm{Z}]{\bm{y}\bm{z}}$ for all $\bm{x}$, $\bm{y}$, and $\bm{z}$. Such nonlinear constraints can be incorporated as further restrictions on the sorts of joint distributions consistent with the inflation DAG, supplementing the basic nonnegativity of probability constraints of the marginal problem. 
+Every conditional independence relation can be translated into a nonlinear constraint on probabilities, as $\bm{X}\bot\bm{Y}|\bm{Z}$ implies $\p{\bm{x}\bm{y}|\bm{z}}=\p{\bm{x}|\bm{z}}\p{\bm{y}|\bm{z}}$ for all $\bm{x}$, $\bm{y}$, and $\bm{z}$. As we generally prefer to work with unconditional probabilities, we rewrite this as follows: If $\bm{X}$ and $\bm{Y}$ are $d$-separated by $\bm{Z}$, then $\p[\bm{X}\bm{Y}\bm{Z}]{\bm{x}\bm{y}\bm{z}}\p[\bm{Z}]{\bm{z}}=\p[\bm{X}\bm{Z}]{\bm{x}\bm{z}}\p[\bm{Y}\bm{Z}]{\bm{y}\bm{z}}$ for all $\bm{x}$, $\bm{y}$, and $\bm{z}$. Such nonlinear constraints can be incorporated as further restrictions on the sorts of joint distributions compatible with the inflation DAG, supplementing the basic nonnegativity of probability constraints of the marginal problem. 
 
 For example, in \cref{fig:Tri222} we find that $A_1$ and $C_2$ are $d$-separated by $\{A_2 B_2\}$, and so one might incorporate the family of nonlinear equalities $\p[A_1 A_2 B_2 C_2]{a_1 a_2 b_2 c_2}\p[A_2 B_2]{a_2 b_2}=\p[A_1 A_2 B_2]{a_1 a_2 b_2}\p[A_2 B_2 C_2]{a_2 b_2 c_2}$ for all $a_1$, $a_2$, $b_2$ and $c_2$. Note that every semi-marginal probability introduced in some nonlinear condition independence equation should also be \emph{defined} by marginalization, i.e. as a sum of various joint probabilities, so that one need not eliminate further quantifiers. The relevant substitutions of this example would be
 \begin{align}
@@ -1180,7 +1164,7 @@ It is also possible to use a mixed strategy of linear and nonlinear quantifier e
 
 The inflation hypothesis is more than just causal structure, however, even if the original hypothesis did not constrain possible causal models beyond the original DAG.  By restricting to exclusively \emph{inflation} models, however, we require $\pdf{A_i| \Pa[G']{A_i}}=\pdf{A_j|\Pa[G']{A_j}}$, per \cref{eq:funcdependences}. Consequently, the distributions over different injectable sets must occasionally coincide, i.e. $\pdf{\bm{X}}=\pdf{\bm{Y}}$ whenever both $\bm{X}$ and $\bm{Y}$ are injectable, and $\subsim{\bm{X}}=\subsim{\bm{Y}}$. Sometimes sets of random variables which are \emph{not} injectable, however, can also be shown to have necessarily coinciding distributions. For example, we can verify that $\pdf{A_1 A_2 B_1}=\pdf{A_1 A_2 B_2}$ follows from \cref{fig:Tri222}, even though $\brackets{A_1 A_2 B_1}$ and $\brackets{A_1 A_2 B_2}$ are not injectable sets.
 
-Equations such as $\forall_{a_1 a_2 b}:\;\p[A_1 A_2 B_1]{a_1 a_2 b} = \p[A_1 A_2 B_2]{a_1 a_2 b}$ are also intrinsic parts of the inflation hypothesis, and may incorporated into either linear or nonlinear quantifier eliminations in order to derive stronger infeasibility criteria. The details of how to recognize coinciding distributions beyond the obvious coincidences implied by injectable or pre-injectable sets are discuss in \cref{sec:coincidingdetails}.
+Equations such as $\forall_{a_1 a_2 b}:\;\p[A_1 A_2 B_1]{a_1 a_2 b} = \p[A_1 A_2 B_2]{a_1 a_2 b}$ are also intrinsic parts of the inflation hypothesis, and may incorporated into either linear or nonlinear quantifier eliminations in order to derive stronger incompatability witnesses. The details of how to recognize coinciding distributions beyond the obvious coincidences implied by injectable or pre-injectable sets are discuss in \cref{sec:coincidingdetails}.
 
 
 
@@ -1199,7 +1183,7 @@ Equations such as $\forall_{a_1 a_2 b}:\;\p[A_1 A_2 B_1]{a_1 a_2 b} = \p[A_1 A_2
 %We note that our polynomial inequalities are related to those introduced recently by \citet{ChavesPolynomial}, in that our inequalities subsume the explicit results of Ref. \cite{ChavesPolynomial}. \purp{NEEDS CONFIRMATION!} \citet{ChavesPolynomial} exploits conditional independence at the observable level only, whereas our technique is applicable to scenarios even without any observable CI relations, such as the Triangle scenario.
 
 \purp{Move this paragraph up, Tobias? ~EW}
-As far as we can tell, our inequalities are not related to the nonlinear infeasibility criteria which have been derived specifically to constrain classical networks \cite{TavakoliStarNetworks,RossetNetworks,TavakoliNoncyclicNetworks}, nor to the nonlinear inequalities which account for interventions to a given causal structure \cite{kang2007polynomialconstraints,steeg2011relaxation}.
+As far as we can tell, our inequalities are not related to the nonlinear incompatability witnesses which have been derived specifically to constrain classical networks \cite{TavakoliStarNetworks,RossetNetworks,TavakoliNoncyclicNetworks}, nor to the nonlinear inequalities which account for interventions to a given causal structure \cite{kang2007polynomialconstraints,steeg2011relaxation}.
 
 
 
@@ -1260,7 +1244,7 @@ If we then impose marginal compatibility according the the marginal problem we f
 	P_{A_1 B_1 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2)  =  \sum\nolimits_{a_2,b_2} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(a_1 a_2 b_1 b_2|x_1 x_2 y_1 y_2)
 \end{align}
 etc.
-For the inflated observation data to consistent with the inflation hypothesis, therefore, we would require
+For the inflated observation data to compatible with the inflation hypothesis, therefore, we would require
 \begin{align}\begin{split}\label{eq:finalBellstep}\forall_{a b}:\; \begin{cases}
 	P_{A B | X Y}(a b | 0 0)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(a a' b b'|0101) \\
 	P_{A B | X Y}(a b | 1 0)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(a' a b b'|0101) \\
@@ -1276,7 +1260,7 @@ The existence of an \emph{array} of distributions, i.e. \cref{eq:finalBellstep},
 %Similarly, $P_{A B X Y}(a b | 0 1)$, $P_{A B X Y}(a b | 1 0)$ and $P_{A B X Y}(a b | 1 1)$ can also be written as marginals of a conditional distribution. 
 %By Fine's Theorem~\cite{FineTheorem}, this implies the existence of a hidden-variable model. Conversely, if a hidden-variable model exists, then the existence of the inflation model implies the existence of a solution to the marginal problem.
 
-In conclusion, we therefore find in the case of the inflation DAG~\cref{fig:BellDagCopy1}, the inflation method yields necessary and sufficient infeasibility criteria for the Bell causal structure, i.e. the Bell/CHSH inequalities, just by requiring marginal compatibility of the pre-injectable sets.
+In conclusion, we therefore find in the case of the inflation DAG~\cref{fig:BellDagCopy1}, the inflation method yields \emph{tight} incompatability witnesses for the Bell causal structure, i.e. the Bell/CHSH inequalities, just by requiring marginal compatibility of the pre-injectable sets.
 More generally, we can use Fine's theorem to show that applying the marginal problem to suitable inflation DAGs can reproduce \emph{all} Bell inequalities, for any standard Bell scenario, no matter how many parties or settings or possible outcomes. 
 
 \begin{comment}
@@ -1345,9 +1329,9 @@ In the causal inference problems with latent nodes that we have considered so fa
 
 The set of quantumly realizable distributions is superficially quite similar to the classical subset \cite{pusey2014gdag,fritz2012bell}. For example, classical and quantum distributions alike respect all conditional independence relations implied by the common underlying causal structure \cite{pusey2014gdag}. It is an interesting problem to find quantum distributions that are not realizable classically, or to show that there are no such distributions on a given DAG.
 
-However, this is by no means an easy task. For example, recent work has found that quantum causal structure also implies many of the entropic inequalities that hold classically~\cite{pusey2014gdag,Chaves2015infoquantum,ChavesNoSignalling}. To date, no quantum distribution has been found to violate a Shannon-type entropic inequality on observable variables derived from the Markov conditions on all nodes \cite{chaves2012entropic,fritz2012bell}. Fine-graining the scenario by conditioning on root variables (``settings'') leads to a different kind of entropic inequality, and these have proven somewhat quantum-sensitive \cite{braunstein1988entropic,SchumacherInequality,chaves2014novel}. Such inequalities are still limited, however, in that they only apply in the presence of observable root nodes\footnote{Rafael Chaves and E.W. are exploring the potential of entropic analysis based on conditioning on non-root observable nodes. This generalizes the method of entropic inequalities, and might be capable of providing much stronger entropic infeasibility criteria.}, and they still fail to witness certain distributions as classically infeasible~\cite{chaves2014novel,fritz2012bell}.
+However, this is by no means an easy task. For example, recent work has found that quantum causal structure also implies many of the entropic inequalities that hold classically~\cite{pusey2014gdag,Chaves2015infoquantum,ChavesNoSignalling}. To date, no quantum distribution has been found to violate a Shannon-type entropic inequality on observable variables derived from the Markov conditions on all nodes \cite{chaves2012entropic,fritz2012bell}. Fine-graining the scenario by conditioning on root variables (``settings'') leads to a different kind of entropic inequality, and these have proven somewhat quantum-sensitive \cite{braunstein1988entropic,SchumacherInequality,chaves2014novel}. Such inequalities are still limited, however, in that they only apply in the presence of observable root nodes\footnote{Rafael Chaves and E.W. are exploring the potential of entropic analysis based on conditioning on non-root observable nodes. This generalizes the method of entropic inequalities, and might be capable of providing much stronger entropic witnesses.}, and they still fail to witness certain distributions as classically infeasible~\cite{chaves2014novel,fritz2012bell}.
 
-We hope that polynomial inequalities derived from broadcasting inflation DAGs will provide an additional tool for witnessing certain quantum distributions as non-classical. For example due to the results of~\cref{sec:Bellscenarios}, it seems conceivable that these inequalities will be much stronger and provide much tighter constraints than entropic criteria.
+We hope that polynomial inequalities derived from broadcasting inflation DAGs will provide an additional tool for witnessing certain quantum distributions as non-classical. For example due to the results of~\cref{sec:Bellscenarios}, it seems conceivable that these inequalities will be much stronger and provide much tighter constraints than entropic inequalities.
 
 It is worth pondering how it is possible that some of the inequalities that can be derived via inflation---such as Bell inequalities---have quantum violations, i.e.~why one cannot expect them to be valid for all quantum distributions as well. The reason for this is that duplicating an outgoing edge in a DAG during inflation amounts to \tblue{broadcasting} the value of the random variable. For example while the information about $X$ in~\cref{fig:TriMainDAG} was ``sent'' to $A$ and $C$, the information about $X_1$ is sent to $A_1$ \emph{and} $A_2$ and $C$ in the inflation \cref{fig:simpleinflation}. Since quantum theory satisfies a no-broadcasting theorem~\cite{NoCloningQuantum1996,NoCloningGeneral2006}, one cannot expect such broadcasting to be possible quantumly. More generally, there is an analogous no-broadcasting theorem in the regime of epistemically restricted general probabilistic theories (GPTs) \cite{SpekkensToyTheory,NoCloningGeneral2006,Barnum2012GPT,Janotta2014GPT}, so that the same statement applies in many theories other than quantum theory. As a consequence, a quantum or general probabilistic causal model on the original DAG does generally not inflate to a ``quantum inflation model'' or ``general probabilistic inflation model'' on the inflation DAG. 
 
@@ -1357,7 +1341,7 @@ Some inflations, such as the one of~\cref{fig:TriDagSubA2B1C1}, do not require s
 	$G'\in\SmallNamedFunction{Inflations}{G}$ is \tblue{non-broadcasting} if every latent node in $G'$ has at most one copy of each $A\in\SmallNamedFunction{Nodes}{G}$ among its children.
 \end{definition}
 
-It follows that every quantum causal model can be inflated to a non-broadcasting DAG, so that one obtains a quantum and general probabilistic analogue of Lemma~\ref{mainlemma} in the non-broadcasting case. Constraints derived from non-broadcasting inflations are therefore valid also for quantum and even general probabilistic distributions. In the specific case of the entropic monogamy inequality for the Triangle scenario, i.e. \cref{eq:monogomyofcorrelations} here, this was originally noticed in Ref.~\cite{pusey2014gdag}. Another example is \cref{eq:polymonogamy}, which was derived from the non-broadcasting inflation of \cref{fig:TriDagSubA2B1C1}. \cref{eq:polymonogamy} too, therefore, is also a causal infeasibility criterion which holds for the Triangle scenario even when the latent nodes are allowed to carry quantum or general probabilistic systems.
+It follows that every quantum causal model can be inflated to a non-broadcasting DAG, so that one obtains a quantum and general probabilistic analogue of Lemma~\ref{mainlemma} in the non-broadcasting case. Constraints derived from non-broadcasting inflations are therefore valid also for quantum and even general probabilistic distributions. In the specific case of the entropic monogamy inequality for the Triangle scenario, i.e. \cref{eq:monogomyofcorrelations} here, this was originally noticed in Ref.~\cite{pusey2014gdag}. Another example is \cref{eq:polymonogamy}, which was derived from the non-broadcasting inflation of \cref{fig:TriDagSubA2B1C1}. \cref{eq:polymonogamy} too, therefore, is a necessary criterion for compatibility with the Triangle scenario even when the latent nodes are allowed to carry quantum or general probabilistic systems.
 % This confirms our numerical computations, which indicated that~\eqref{eq:polymonogamy} does not have any quantum violations. The same is true for monogamy of correlations, per \cref{eq:monogomyofcorrelations}.
 Since the perfect-correlation distribution considered in~\cref{eq:ghzdistribution1} violates both of these inequalities, it evidently cannot be generated within the Triangle scenario even with quantum or general probabilistic states on the hidden nodes. This was also pointed out in Ref.~\cite{pusey2014gdag}.
 
@@ -1397,7 +1381,7 @@ A tight set of inequalities characterizing quantum distributions would provide t
 
 \section{Deriving Hardy-type constraints for the marginal problem}\label{sec:TSEM}
 
-In the literature on Bell inequalities, it has been noticed that the inconsistency with the Bell scenario DAG can sometimes be witnessed by only looking at which joint probabilities are zero and which ones are nonzero. In other words, instead of considering the probability of a joint outcome, some distributions can be witnesses as infeasible by only considering the \emph{possibility} or \emph{impossibility} of each joint outcome. This was originally noticed by~\citet{L.Hardy:PRL:1665}, and hence such \tblue{possibilistic constraints} are also known as \tblue{Hardy-type paradoxes}. For a systematic account of Hardy-type paradoxes in Bell scenarios, see~Ref. \cite{Mansfield2012}, although see also Refs. \cite{Garuccio95,CabelloHardyInequality,Braun08,Mancinska14,LSW}.
+In the literature on Bell inequalities, it has been noticed that the incompatability with the Bell scenario DAG can sometimes be witnessed by only looking at which joint probabilities are zero and which ones are nonzero. In other words, instead of considering the probability of a joint outcome, some distributions can be witnesses as infeasible by only considering the \emph{possibility} or \emph{impossibility} of each joint outcome. This was originally noticed by~\citet{L.Hardy:PRL:1665}, and hence such \tblue{possibilistic constraints} are also known as \tblue{Hardy-type paradoxes}. For a systematic account of Hardy-type paradoxes in Bell scenarios, see~Ref. \cite{Mansfield2012}, although see also Refs. \cite{Garuccio95,CabelloHardyInequality,Braun08,Mancinska14,LSW}.
 
 The usual presentation of a Hardy-type paradox takes the following form: Even though events $E_1 .. E_N$ never occur (are not possible), nevertheless some other event $E_0$ \emph{does} occur sometimes (is possible). The impossibility of events $E_1 .. E_N$ \emph{should} prohibit the possibility of $E_0$, under the marginal distributions of all the variables in all the events are compatible.
 
@@ -1418,7 +1402,7 @@ Any possibilistic constraint can be immediately translated into a stronger proba
 \p{E_0}\leq \sum\limits_{n=1}^N{\p{E_n}}.
 \end{align}
 
-In order to derive causal infeasibility criteria via marginal compatibility, therefore, we may consider the task of \tblue{enumerating} Hardy-type paradoxes, each of which we can then express as an inequalities in terms of probabilities. In the following, we explain how to determine \emph{all} such constraints for \emph{any} marginal problem.
+In order to derive causal incompatibility witnesses via marginal compatibility, therefore, we may consider the task of \tblue{enumerating} Hardy-type paradoxes, each of which we can then express as an inequalities in terms of probabilities. In the following, we explain how to determine \emph{all} such constraints for \emph{any} marginal problem.
 
 
 To start with a simple example, suppose that we are in a marginal scenario where the pairwise joint distributions of three variables $A$, $B$ and $C$ are given.%, and these two variables are binary with values in $\{0,1\}$. 
@@ -1513,7 +1497,7 @@ We expect that this enumeration of minimal transversals will be computationally 
 %}
 
 %\begin{spacing}{2.0}
-Our main contribution is a new way of deriving causal infeasibility criteria, namely the inflation DAG approach. An inflation DAG naturally carries inflation models, and the existence of an inflation model implies inequalities, containing gedankenprobabilities, which implicitly constrain the set of distribution consistent with the original causal structure. If desirable, one can further eliminate the gedankenprobabilities via quantifier elimination. Polynomial inequalities can be obtained through \emph{linear} elimination techniques, or through further relaxation to purely \emph{possibilistic} constraints.
+Our main contribution is a new way of deriving causal infeasibility criteria, namely the inflation DAG approach. An inflation DAG naturally carries inflation models, and the existence of an inflation model implies inequalities, containing gedankenprobabilities, which implicitly constrains the set of distribution compatible with the original causal structure. If desirable, one can further eliminate the gedankenprobabilities via quantifier elimination. Polynomial inequalities can be obtained through \emph{linear} elimination techniques, or through further relaxation to purely \emph{possibilistic} constraints.
 
 These inequalities are necessary conditions on a joint distribution to be explained by the causal structure. We currently do not know to what extent they can also be considered sufficient, and there is somewhat conflicting evidence: as we have seen, the inflation DAG approach reproduces all Bell inequalities; but on the other hand, we have not been able to use it to rederive Pearl's instrumental inequality, although the instrumental scenario also contains only one latent node. By excluding the W-type distribution on the Triangle scenario, we have seen that our polynomial inequalities are stronger than entropic inequalities in at least some cases.
 % yet just how strong they are is still unclear. A distribution might satisfy all our polynomial inequalities and yet not be realizable from the causal structure. %What would such superficially-feasible distributions look like? Are inflation DAG inequalities ever tight? 
