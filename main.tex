@@ -1649,29 +1649,39 @@ Note that a \texttt{True} response from \texttt{RedundantRowQ} indicates that th
 %\purp{T: All the copy bijections that we ever use are also graph isomorphisms, so there's no point in introducing the notion of copy bijection separately}
 
 %By restricting our attention to inflation models, we see that sometimes the distributions of different injectable sets coincide, i.e. $\pdf{\bm{X}}=\pdf{\bm{Y}}$ whenever both $\bm{X}$ and $\bm{Y}$ are injectable, and $\subsim{\bm{X}}=\subsim{\bm{Y}}$. Sometimes sets of random variables which are \emph{not} injectable, however, can also be shown to have necessarily coinciding distributions. Coinciding (not necessarily injectable) marginal distributions among the inflation DAG variables is a consequence of \cref{eq:funcdependences}. For example, we can verify that $\pdf{A_1 A_2 B_1}=\pdf{A_1 A_2 B_2}$ follows from \cref{fig:Tri222}, even though $\brackets{A_1 A_2 B_1}$ and $\brackets{A_1 A_2 B_2}$ are not injectable sets. Here we formalize this type of constraint more generally.
+Whenever some causal structure is inflated, the corresponding inflated causal hypothesis includes the embedded constraints that every copy of a node in the inflation DAG has the same functional dependence on its parents, i.e. \cref{eq:funcdependences}. At minimum, the coinciding functional dependencies implies that the single-variate marginal probability distribution of every individual copy is identical,
+\begin{align}
+     \forall i,j \in \mathbb{N}:\; \pfunc{A_i}=\pfunc{A_j}.
+\end{align}
+Coinciding functional dependencies of individual nodes on their parents also implies that various \emph{multivariate} marginal probability distribution are also identical.
 
-Given sets of nodes $\bm{U}$ and $\bm{Y}$ in an inflation DAG $G'$, let us say that a map $\varphi:\bm{U}\to\bm{V}$ is a \tblue{copy isomorphism} if it is a graph isomorphism, and such that $\varphi$ maps every $X\in\bm{U}$ to a node $\varphi(X)\in\bm{Y}$ that is equivalent to $X$ under dropping the copy index. We have been using the notion of a copy bijection previously by writing $\bm{U}\sim\bm{V}$ whenever there exists a copy isomorphism $\varphi:\bm{U}\to\bm{V}$.
+In order to discuss when two multivariate marginal distributions have coinciding distributions we first need notation to distinguish \tblue{ordered lists} from orderless sets. We continue to use bold symbols when referring to a collection of variables, however we now wrap the bold symbol in curly braces $\{\}$ when explicitly referring to an orderless set, and in square brackets $[]$ when explicitly referring to an ordered list.
 
-% A special case of a bijection is a graph isomorphism, which is a bijection between the nodes of one graph and the nodes and another such that the action of the bijection is to reversibly transform the first graph into the second one.
-% A copy isomorphism, therefore, is defined as a graph isomorphism that is also a copy bijection. The same specialization apply to graph automorphism: an inflation DAG can posses many symmetries, i.e. permutations of the nodes such that the permutation leaves the DAG invariant. Generally, however, only a subset of the possible automorphisms are also copy bijections, i.e. copy automorphisms are a subset of graph isomorphism.
+Given two lists of nodes $[\bm{U}]$ and $[\bm{V}]$ in an inflation DAG $G'$, let us say that a bijective map $\varphi:[\bm{U}]\bm{\to}[\bm{V}]$ is a \tblue{copy isomorphism} between them if $\varphi$ maps the elements of $[\bm{U}]$ to elements of $[\bm{V}]$ \emph{in order}, \tred{and} $\varphi$ a graph isomorphism of $G'$, \tred{and} such that every pair of corresponding elements in $[\bm{U}]$ and $[\bm{V}]$ are equivalent to eachother under dropping the copy index. It should be clear that the existence of a copy isomorphism between $[\bm{U}]$ and $[\bm{V}]$ is a necessary but insufficient precondition for $P_{[\bm{U}]} = P_{[\bm{V}]}$ in any inflation model.
 
-Furthermore, we say that a copy isomorphism $\varphi : \bm{U}\to\bm{V}$ is an \tblue{inflationary isomorphism} whenever it can be extended to a copy isomorphism $\hat{\varphi} : \ansubgraph{\bm{U}}\to\ansubgraph{\bm{V}}$. If such a $\hat{\varphi}$ exists, then it is sufficient for $\varphi$ to be bijective, since it automatically follows that it must be a copy isomorphism as well.
+In order to justify coinciding distribution we require a stronger notion than copy isomorphism. We therefore say that a copy isomorphism $\varphi:[\bm{U}]\bm{\to}[\bm{V}]$ is an \tblue{inflationary isomorphism} if and only if there exists a second graph isomorphism $\Psi : \ansubgraph{\{\bm{U}\}}\bm{\to}\ansubgraph{\{\bm{V}\}}$ such that every element $X\in\An{\{\bm{U}\}}$ is mapped by $\Psi$ to an equivalent-up-to-copy-index element $Y\in\An{\{\bm{V}\}}$, \tred{and} $\Psi$ \tblue{extends} $\varphi$, i.e. $\Psi$ reduces to $\varphi$ when restricted to the domain $\{\bm{U}\}$.
+
+
+%Furthermore, we say that a copy isomorphism $\varphi : \bm{U}\to\bm{V}$ is an \tblue{inflationary isomorphism} whenever it can be extended to a copy isomorphism $\hat{\varphi} : \ansubgraph{\bm{U}}\to\ansubgraph{\bm{V}}$. If such a $\hat{\varphi}$ exists, then it is sufficient for $\varphi$ to be bijective, since it automatically follows that it must be a copy isomorphism as well.
+
 %which satisfies two conditions simultaneously: 1) the copy bijection is a graph isomorphism relating $\ansubgraph[G']{\bm{X}}$ to $\ansubgraph[G']{\bm{Y}}$, and 2) the copy bijection takes $\bm{X}$ to $\bm{Y}$.
-
 % re is only one copy isomorphism between the two ancestral subgraphs, namely the bijections which leaves all nodes invariant except for $\{B_1,B_2,Z_1,Z_2\}\leftrightarrow\{B_2,B_1,Z_2,Z_1\}$. This bijection clearly takes $B_1$ to $B_2$, and hence both the requisite conditions are met.
 
 By the very definition of inflation model, we have:
-
 \begin{lemma}
 	\label{lem:coincide}
-	If $\varphi:\bm{U}\to\bm{V}$ is an inflationary isomorphism, then $P_{\bm{U}} = P_{\bm{V}}$ in any inflation model, where the variables are identified according to $\varphi$.
+	If $\varphi:[\bm{U}]\to[\bm{V}]$ is an inflationary isomorphism, then $P_{[\bm{U}]} = P_{[\bm{V}]}$ in any inflation model.%, where the variables are identified according to $\varphi$.
 \end{lemma}
 
 For example in~\cref{fig:Tri222}, the map
 \[
-	\varphi \: : \: A_1 \mapsto A_1,\qquad A_2\mapsto A_2,\qquad B_1\mapsto B_2
+	\varphi \: : \: \left[A_1,A_2,B_1\right] \to \left[A_1,A_2,B_2\right]
 \]
-implements an inflationary isomorphism between $\bm{U}=\{A_1 A_2 B_1\}$ and $\bm{V}=\{A_1 A_2 B_2\}$. From this we conclude that any inflation model satisfies $P_{A_1 A_2 B_1} = P_{A_1 A_2 B_2}$. For a non-example, consider the inflation DAG in \cref{fig:ancestralsubgraphnotenough}. The identity map implements a copy isomorphism $\ansubgraph{X_2 Y_2 Z_1}\sim\ansubgraph{X_1 Y_2 Z_2}$, since both of these ancestral subgraphs are the entire DAG. Nevertheless there is no inflationary isomorphism between ${X_2 Y_2 Z_1}$ and ${X_1 Y_2 Z_2}$, i.e.~$\{X_2Y_2 Z_1\}\not\sim\{X_1 Y_2 Z_2\}$, since the sub-DAGs on these two sets of nodes are not even isomorphic.
+implements an inflationary isomorphism between $[\bm{U}]=\left[A_1 A_2 B_1\right]$ and $[\bm{V}]=\left[A_1 A_2 B_2\right]$. From this we conclude that any inflation model satisfies $P_{A_1 A_2 B_1} = P_{A_1 A_2 B_2}$. 
+
+It is educational to contrast a genuine inflationary isomorphism with a non-example. Consider the inflation DAG in \cref{fig:ancestralsubgraphnotenough}. The orderless node sets $\{X_2 Y_2 Z_1\}$ and $\{X_1 Y_2 Z_2\}$ have \emph{exactly the same} ancestral subgraphs in \cref{fig:ancestralsubgraphnotenough}; indeed, the common ancestral subgraph in this example is the \emph{entire} inflation DAG. 
+%The identity map implements a copy isomorphism $\ansubgraph{X_2 Y_2 Z_1}\sim\ansubgraph{X_1 Y_2 Z_2}$, since both of these ancestral subgraphs are the entire DAG.
+Nevertheless, there is no inflationary isomorphism between $\left[X_2, Y_2, Z_1\right]$ and $\left[X_1 Y_2 Z_2\right]$, because the ordered map between the two lists cannot be extended into a graph isomorphism of \cref{fig:ancestralsubgraphnotenough} while only mapping copies to copies -- only the only such graph isomorphism of \cref{fig:ancestralsubgraphnotenough} is the identity map. For that matter, there isn't even any \emph{copy} isomorphism between  $\left[X_2, Y_2, Z_1\right]$ and $\left[X_1 Y_2 Z_2\right]$, because $\subgraph[\text{\cref{fig:ancestralsubgraphnotenough}}]{\{X_2 Y_2 Z_1\}}$ is not graphically isomorphic to $\subgraph[\text{\cref{fig:ancestralsubgraphnotenough}}]{\{X_1 Y_2 Z_2\}}$.
 
 %In general there may exist multiple inflationary isomorphisms, for example the sets $\brackets{A_1 A_2 B_1}$ and $\brackets{A_1 A_2 B_2}$ can be related by either 
 %\begin{align}
@@ -1694,7 +1704,7 @@ implements an inflationary isomorphism between $\bm{U}=\{A_1 A_2 B_1\}$ and $\bm
 
 %In other words, $\pdf{\bm{X}}=\pdf{\bm{Y}}$ if and only if an inflationary graph isomorphism exists between $\ansubgraph[G']{\bm{X}}$ and $\ansubgraph[G']{\bm{Y}}$ which preserves the inflationary isomorphism between $\bm{X}$ and $\bm{Y}$. 
 
-Note that $P_{\bm{U}} = P_{\bm{V}}$ may be a nontrivial equation even if $\bm{U}=\bm{V}$: in this case, it means that $P_{\bm{U}}$ must be invariant under permuting the variables according to $\varphi$.
+Note that $P_{[\bm{U}]} = P_{[\bm{V}]}$ may be a nontrivial equation even if $\{\bm{U}\}=\{\bm{V}\}$: in this case, it means that $P_{[\bm{U}]}$ must be invariant under permuting the variables according to $\varphi:[\bm{U}]\to[\bm{V}]$.
 
 \begin{figure}[H]
     \centering
@@ -1704,6 +1714,8 @@ Note that $P_{\bm{U}} = P_{\bm{V}}$ may be a nontrivial equation even if $\bm{U}
     \label{fig:ancestralsubgraphnotenough}
     \end{minipage}
 \end{figure}
+
+\purp{EDITING...}
 
 One can try to make use of Lemma~\ref{lem:coincide} when deriving polynomial inequalities with inflation via solving the marginal problem, by imposing $P_{\bm{U}} = P_{\bm{V}}$ as an additional constraint for every inflationary isomorphism $\varphi : \bm{U}\to\bm{V}$ between sets of observable nodes. This is advantageous to speed up to the linear quantifier elimination, since one can solve each of the resulting equations for one of the unknown joint probabilities and thereby eliminate that probability directly without Fourier-Motzkin elimination. Moreover, one could also hope that these additional equations would result in tighter constraints on the marginal problem, which then result in better polynomial inequalities.
 
