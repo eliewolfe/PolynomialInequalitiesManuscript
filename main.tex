@@ -1715,19 +1715,27 @@ Note that $P_{[\bm{U}]} = P_{[\bm{V}]}$ may be a nontrivial equation even if $\{
     \end{minipage}
 \end{figure}
 
-\purp{EDITING...}
 
-One can try to make use of Lemma~\ref{lem:coincide} when deriving polynomial inequalities with inflation via solving the marginal problem, by imposing $P_{\bm{U}} = P_{\bm{V}}$ as an additional constraint for every inflationary isomorphism $\varphi : \bm{U}\to\bm{V}$ between sets of observable nodes. This is advantageous to speed up to the linear quantifier elimination, since one can solve each of the resulting equations for one of the unknown joint probabilities and thereby eliminate that probability directly without Fourier-Motzkin elimination. Moreover, one could also hope that these additional equations would result in tighter constraints on the marginal problem, which then result in better polynomial inequalities.
+One can try to make use of Lemma~\ref{lem:coincide} when deriving polynomial inequalities with inflation via solving the marginal problem, by imposing $P_{[\bm{U}]} = P_{[\bm{V}]}$ as an additional constraint whenever so justified by Lemma~\ref{lem:coincide}.
+%for every inflationary isomorphism $\varphi : \bm{U}\to\bm{V}$ between sets of observable nodes. 
+This is advantageous to speed up to the linear quantifier elimination, since one can solve each of the resulting equations for one of the unknown joint probabilities and thereby eliminate that probability directly without Fourier-Motzkin elimination. Moreover, one could also hope that these additional equations would result in tighter constraints on the marginal problem, which then result in better polynomial inequalities.
 
 However, our computations have so far not revealed any example of such a tightening. In some cases, this lack of impact can be explained as follows.
+
 % We define two ordered sets of observable nodes $\bm{X}$ and $\bm{Y}$ in some inflation DAG $G'$ to be \tblue{irrelevant to the marginal problem} if there exists a copy bijection $\varphi:\nodes{G'}\to\nodes{G'}$ which satisfies two conditions:
 %\begin{enumerate}
 %	\item $\varphi$ is a graph isomorphism,
 %	\item $\varphi$ maps $\bm{X}$ onto $\bm{Y}$.
 %\end{enumerate}
-Suppose that $\varphi:\bm{U}\to\bm{V}$ is an inflationary isomorphism which is not just the restriction of a copy isomorphism between the ancestral subgraphs, but even the restriction of a copy isomorphism $\tilde{\varphi}:G'\to G'$ of the entire inflation DAG onto itself. (In particular, this assumption implies that $\tilde{\varphi}$ also restricts to a copy isomorphism $\ansubgraph{\bm{U}}\to\ansubgraph{\bm{V}}$.) Then the irrelevance of the additional constraint $P_{\bm{U}} = P_{\bm{V}}$ to the marginal problem for inflation models can be explained by the following argument. Suppose that some joint distribution $\tilde{P}$ solves the unconstrained marginal problem, i.e.~without requiring $P_{\bm{U}} = P_{\bm{V}}$. Now apply $\tilde{\varphi}$ to the variables in $\tilde{P}$, switching the variables around, to generate a new distribution $\tilde{P'}$. Because the set of marginal distributions that arise from inflation models is invariant under this switching of variables, we conclude that $\tilde{P'}$ is also a solution to the unconstrained marginal problem. Taking the uniform mixture of $\tilde{P}$ and $\tilde{P'}$ is therefore also a solution of the unconstrained marginal problem. But this uniform mixture also satisfies the supplementary constraint $P_{\bm{U}} = P_{\bm{V}}$. Therefore the supplementary constrained is satisfiable automatically whenever the unconstrained marginal problem is solvable, and adding the constraint is irrelevant.
+Suppose that when $\Phi:[\bm{U}]\to[\bm{V}]$ is not only an inflationary isomorphism, but such that there exists some automorphism $\Phi:G'\to G'$ which takes the entire inflation DAG to itself in a manner so that nodes are permuted only up to copy indices, \tred{and} $\Phi$ extends $\varphi$. 
 
-Note that the argument does not apply if the inflationary isomorphism $\varphi:\bm{U}\to\bm{V}$ cannot be extended to a copy isomorphism of the entire inflation DAG. It also does not apply if one uses the conditional independence relations on the inflation DAG as well, since this destroys linearity. We do not know what happens in either of these cases.
+%which is not just the restriction of a copy isomorphism between the ancestral subgraphs, but even the restriction of a copy isomorphism $\tilde{\varphi}:G'\to G'$ of the entire inflation DAG onto itself. (In particular, this assumption implies that $\tilde{\varphi}$ also restricts to a copy isomorphism $\ansubgraph{\bm{U}}\to\ansubgraph{\bm{V}}$.) 
+
+Then the irrelevance of the additional constraint $P_{[\bm{U}]} = P_{[\bm{V}]}$ to the marginal problem for inflation models can be explained by the following argument. Suppose that some joint distribution $\tilde{P}$ solves the unconstrained marginal problem, i.e.~without requiring $P_{[\bm{U}]} = P_{[\bm{V}]}$. Now apply $\Phi$ to the variables in $\tilde{P}$, permuting the variables up to copy indices, to generate a new distribution $\tilde{P'}$. 
+
+Because the set of marginal distributions that arise from inflation models is invariant under this permutation of variables, we conclude that $\tilde{P'}$ is also a solution to the unconstrained marginal problem. Taking the uniform mixture of $\tilde{P}$ and $\tilde{P'}$ is therefore also a solution of the unconstrained marginal problem. But this uniform mixture also satisfies the supplementary constraint $P_{[\bm{U}]} = P_{[\bm{V}]}$. Therefore the supplementary constrained is satisfiable automatically whenever the unconstrained marginal problem is solvable, and adding the constraint is irrelevant.
+
+Note that the argument does not apply if the inflationary isomorphism $\varphi:[\bm{U}]\to[\bm{V}]$ cannot be extended to a copy-preserving automorphism of the entire inflation DAG $\Phi$. It also does not apply if one uses the conditional independence relations on the inflation DAG as well, since this destroys linearity. We do not know what happens in either of these cases.
 
 % These equations can be used to supplement the marginal problem, and may be of practical use for reducing the dimensionality of the problem (number of quantifiers which need to be eliminated). 
 
