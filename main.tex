@@ -1657,9 +1657,13 @@ Coinciding functional dependencies of individual nodes on their parents also imp
 
 In order to discuss when two multivariate marginal distributions have coinciding distributions we first need notation to distinguish \tblue{ordered lists} from orderless sets. We continue to use bold symbols when referring to a collection of variables, however we now wrap the bold symbol in curly braces $\{\}$ when explicitly referring to an orderless set, and in square brackets $[]$ when explicitly referring to an ordered list.
 
-Given two lists of nodes $[\bm{U}]$ and $[\bm{V}]$ in an inflation DAG $G'$, let us say that a bijective map $\varphi:[\bm{U}]\bm{\to}[\bm{V}]$ is a \tblue{copy isomorphism} between them if $\varphi$ maps the elements of $[\bm{U}]$ to elements of $[\bm{V}]$ \emph{in order}, \tred{and} $\varphi$ a graph isomorphism of $G'$, \tred{and} such that every pair of corresponding elements in $[\bm{U}]$ and $[\bm{V}]$ are equivalent to eachother under dropping the copy index. It should be clear that the existence of a copy isomorphism between $[\bm{U}]$ and $[\bm{V}]$ is a necessary but insufficient precondition for $P_{[\bm{U}]} = P_{[\bm{V}]}$ in any inflation model.
+We refer to any map whose domain and range are both sets of nodes of an inflation DAG as \tblue{copy-preserving} if every element $X_i$ in the domain gets mapped to some $X_j$, with $i$ not necessarily distinct from $j$, such that the action of the map on any node effectively leaves the node invariant under dropping the copy index. 
 
-In order to justify coinciding distribution we require a stronger notion than copy isomorphism. We therefore say that a copy isomorphism $\varphi:[\bm{U}]\bm{\to}[\bm{V}]$ is an \tblue{inflationary isomorphism} if and only if there exists a second graph isomorphism $\Psi : \ansubgraph{\{\bm{U}\}}\bm{\to}\ansubgraph{\{\bm{V}\}}$ such that every element $X\in\An{\{\bm{U}\}}$ is mapped by $\Psi$ to an equivalent-up-to-copy-index element $Y\in\An{\{\bm{V}\}}$, \tred{and} $\Psi$ \tblue{extends} $\varphi$, i.e. $\Psi$ reduces to $\varphi$ when restricted to the domain $\{\bm{U}\}$.
+Given two lists of nodes $[\bm{U}]$ and $[\bm{V}]$ in an inflation DAG $G'$, let us say that a bijective map $\varphi:[\bm{U}]\bm{\to}[\bm{V}]$ is an \tblue{ordered copy-preserving isomorphism} between them if $\varphi$ maps the elements of $[\bm{U}]$ to elements of $[\bm{V}]$ \emph{in order}, \tred{and} $\varphi$ a graph isomorphism which takes $\subgraph[G']{\{\bm{U}\}}$ to $\subgraph[G']{\{\bm{V}\}}$, \tred{and} $\varphi$ is copy preserving.  It should be clear that the existence of an ordered copy-preserving copy isomorphism between $[\bm{U}]$ and $[\bm{V}]$ is a necessary but insufficient precondition for $P_{[\bm{U}]} = P_{[\bm{V}]}$ in any inflation model.
+
+$\subgraph[\text{\cref{fig:ancestralsubgraphnotenough}}]{\{X_2 Y_2 Z_1\}}$ is not graphically isomorphic to $\subgraph[\text{\cref{fig:ancestralsubgraphnotenough}}]{\{X_1 Y_2 Z_2\}}$
+
+In order to justify coinciding distribution we require a stronger notion than copy isomorphism. We therefore say that an ordered isomorphism $\varphi:[\bm{U}]\bm{\to}[\bm{V}]$ is further an \tblue{ordered inflationary isomorphism} if and only if there exists some copy-preserving graph isomorphism $\Psi : \ansubgraph{\{\bm{U}\}}\bm{\to}\ansubgraph{\{\bm{V}\}}$ such that $\Psi$ \tblue{extends} $\varphi$, i.e. $\Psi$ reduces to $\varphi$ when restricted to the domain $\{\bm{U}\}$.
 
 
 %Furthermore, we say that a copy isomorphism $\varphi : \bm{U}\to\bm{V}$ is an \tblue{inflationary isomorphism} whenever it can be extended to a copy isomorphism $\hat{\varphi} : \ansubgraph{\bm{U}}\to\ansubgraph{\bm{V}}$. If such a $\hat{\varphi}$ exists, then it is sufficient for $\varphi$ to be bijective, since it automatically follows that it must be a copy isomorphism as well.
@@ -1670,18 +1674,18 @@ In order to justify coinciding distribution we require a stronger notion than co
 By the very definition of inflation model, we have:
 \begin{lemma}
 	\label{lem:coincide}
-	If $\varphi:[\bm{U}]\to[\bm{V}]$ is an inflationary isomorphism, then $P_{[\bm{U}]} = P_{[\bm{V}]}$ in any inflation model.%, where the variables are identified according to $\varphi$.
+	If $\varphi:[\bm{U}]\to[\bm{V}]$ is an ordered inflationary isomorphism, then $P_{[\bm{U}]} = P_{[\bm{V}]}$ in any inflation model.%, where the variables are identified according to $\varphi$.
 \end{lemma}
 
 For example in~\cref{fig:Tri222}, the map
 \[
 	\varphi \: : \: \left[A_1,A_2,B_1\right] \to \left[A_1,A_2,B_2\right]
 \]
-implements an inflationary isomorphism between $[\bm{U}]=\left[A_1 A_2 B_1\right]$ and $[\bm{V}]=\left[A_1 A_2 B_2\right]$. From this we conclude that any inflation model satisfies $P_{A_1 A_2 B_1} = P_{A_1 A_2 B_2}$. 
+implements an ordered inflationary isomorphism between $[\bm{U}]=\left[A_1 A_2 B_1\right]$ and $[\bm{V}]=\left[A_1 A_2 B_2\right]$. From this we conclude that any inflation model satisfies $P_{A_1 A_2 B_1} = P_{A_1 A_2 B_2}$. 
 
-It is educational to contrast a genuine inflationary isomorphism with a non-example. Consider the inflation DAG in \cref{fig:ancestralsubgraphnotenough}. The orderless node sets $\{X_2 Y_2 Z_1\}$ and $\{X_1 Y_2 Z_2\}$ have \emph{exactly the same} ancestral subgraphs in \cref{fig:ancestralsubgraphnotenough}; indeed, the common ancestral subgraph in this example is the \emph{entire} inflation DAG. 
+It is educational to contrast a genuine ordered inflationary isomorphism with a non-example. Consider the inflation DAG in \cref{fig:ancestralsubgraphnotenough}. The orderless node sets $\{X_2 Y_2 Z_1\}$ and $\{X_1 Y_2 Z_2\}$ have \emph{exactly the same} ancestral subgraphs in \cref{fig:ancestralsubgraphnotenough}; indeed, the common ancestral subgraph in this example is the \emph{entire} inflation DAG. 
 %The identity map implements a copy isomorphism $\ansubgraph{X_2 Y_2 Z_1}\sim\ansubgraph{X_1 Y_2 Z_2}$, since both of these ancestral subgraphs are the entire DAG.
-Nevertheless, there is no inflationary isomorphism between $\left[X_2 Y_2 Z_1\right]$ and $\left[X_1 Y_2 Z_2\right]$, because the ordered map between the two lists cannot be extended into a graph isomorphism of \cref{fig:ancestralsubgraphnotenough} while only mapping copies to copies -- only the only such graph isomorphism of \cref{fig:ancestralsubgraphnotenough} is the identity map. For that matter, there isn't even any \emph{copy} isomorphism between  $\left[X_2, Y_2, Z_1\right]$ and $\left[X_1 Y_2 Z_2\right]$, because $\subgraph[\text{\cref{fig:ancestralsubgraphnotenough}}]{\{X_2 Y_2 Z_1\}}$ is not graphically isomorphic to $\subgraph[\text{\cref{fig:ancestralsubgraphnotenough}}]{\{X_1 Y_2 Z_2\}}$.
+Nevertheless, there is no ordered inflationary isomorphism between $\left[X_2 Y_2 Z_1\right]$ and $\left[X_1 Y_2 Z_2\right]$, because the ordered map between the two lists cannot be extended into a copy-preserving graph isomorphism between the two (identical) ancestral subgraphs of \cref{fig:ancestralsubgraphnotenough}. Indeed, the only copy-preserving automorphism of \cref{fig:ancestralsubgraphnotenough} is the identity map, which does not reduce to $\varphi: \left[A_1,A_2,B_1\right] \to \left[A_1,A_2,B_2\right]$. For that matter, there isn't even any plain \emph{copy-preserving} isomorphism between  $\{X_2, Y_2, Z_1\}$ and $\{[X_1 Y_2 Z_2\}$, because $\subgraph[\text{\cref{fig:ancestralsubgraphnotenough}}]{\{X_2 Y_2 Z_1\}}$ is not graphically isomorphic to $\subgraph[\text{\cref{fig:ancestralsubgraphnotenough}}]{\{X_1 Y_2 Z_2\}}$.
 
 %In general there may exist multiple inflationary isomorphisms, for example the sets $\brackets{A_1 A_2 B_1}$ and $\brackets{A_1 A_2 B_2}$ can be related by either 
 %\begin{align}
@@ -1704,7 +1708,7 @@ Nevertheless, there is no inflationary isomorphism between $\left[X_2 Y_2 Z_1\ri
 
 %In other words, $\pdf{\bm{X}}=\pdf{\bm{Y}}$ if and only if an inflationary graph isomorphism exists between $\ansubgraph[G']{\bm{X}}$ and $\ansubgraph[G']{\bm{Y}}$ which preserves the inflationary isomorphism between $\bm{X}$ and $\bm{Y}$. 
 
-Note that $P_{[\bm{U}]} = P_{[\bm{V}]}$ may be a nontrivial equation even if $\{\bm{U}\}=\{\bm{V}\}$: in this case, it means that $P_{[\bm{U}]}$ must be invariant under permuting the variables according to $\varphi:[\bm{U}]\to[\bm{V}]$.
+Note that $P_{[\bm{U}]} = P_{[\bm{V}]}$ may be a nontrivial equation even if $\{\bm{U}\}=\{\bm{V}\}$: in this case, equality means that $P_{[\bm{U}]}$ is invariant under permuting the variables according to $\varphi:[\bm{U}]\to[\bm{V}]$.
 
 \begin{figure}[H]
     \centering
@@ -1729,9 +1733,11 @@ However, our computations have so far not revealed any example of such a tighten
 %\end{enumerate}
 If the marginals are consistent, i.e. if the marginal problem has a solution, then there exists some \emph{ordered} set of variables $[\bm{J}]$ and a probability distribution $P_{[\bm{J}]}$ such that $\{\bm{J}\}$ contains all the observed marginal sets, and the various marginalizations of $P_{[\bm{J}]}$ recover the given marginal distributions.
 
-We have seen that Lemma~\ref{lem:coincide} can sometimes imply coinciding distributions over two different \emph{orderings} of the same set of variables. Suppose that there exists an ordering of all observable variables $[\bm{J'}]$ which is distinct from $[\bm{J}]$, but  $\{\bm{J'}\}=\{\bm{J}\}=\SmallNamedFunction{ObservedNodes}{G'}$ where this other ordering $[\bm{J'}]$ can be used to construct an inflationary isomorphism $\Phi:[\bm{J}]\to[\bm{J'}]$. Accordingly, if $P_{[\bm{J}]}$ is a solution to the marginal problem, then so is $P_{[\bm{J'}]}$, because  $P_{[\bm{J}]}=P_{[\bm{J'}]}$ for all inflation models. Moreover, the uniform mixture of $P_{[\bm{J}]}$ and $P_{[\bm{J'}]}$ is also a solution to the marginal problem due to linearity.
+We have seen that Lemma~\ref{lem:coincide} can sometimes imply coinciding distributions over two different \emph{orderings} of the same set of variables. Suppose that there exists an ordering of all observable variables $[\bm{J'}]$ which is distinct from $[\bm{J}]$, but  $\{\bm{J'}\}=\{\bm{J}\}=\SmallNamedFunction{ObservedNodes}{G'}$ where this other ordering $[\bm{J'}]$ can be used to construct an ordered inflationary isomorphism $\Phi:[\bm{J}]\to[\bm{J'}]$. Accordingly, if $P_{[\bm{J}]}$ is a solution to the marginal problem, then so is $P_{[\bm{J'}]}$, because  $P_{[\bm{J}]}=P_{[\bm{J'}]}$ for all inflation models. Moreover, the uniform mixture of $P_{[\bm{J}]}$ and $P_{[\bm{J'}]}$ is also a solution to the marginal problem, due to linearity.
 
-If $\Phi$ is an extension of some $\varphi:[\bm{U}]\to[\bm{V}]$, i.e. $\Phi$ reduces to $\varphi$ when restricted to the domain $\{\bm{U}\}$, then the uniform mixture of $P_{[\bm{J}]}$ and $P_{[\bm{J'}]}$ automatically obeys the non-marginal-problem constraint $P_{[\bm{U}]} = P_{[\bm{V}]}$. In other words, imposing the additional constraint $P_{[\bm{U}]} = P_{[\bm{V}]}$ does not impact the yes/no determination of the consistency of the given marginal distributions whenever $\varphi$ can be extended to an inflationary isomorphism $\Phi$ pertaining to \emph{all} the observable variables in the inflation DAG. If the marginal problem is solvable in the absence of $P_{[\bm{U}]} = P_{[\bm{V}]}$, then without loss of generality the marginal problem is also solvable when further accounting for  $P_{[\bm{U}]} = P_{[\bm{V}]}$.
+If $\Phi$ is an extension of some $\varphi:[\bm{U}]\to[\bm{V}]$, i.e. $\Phi$ reduces to $\varphi$ when restricted to the domain $\{\bm{U}\}$, then the uniform mixture of $P_{[\bm{J}]}$ and $P_{[\bm{J'}]}$ automatically obeys the non-marginal-problem constraint $P_{[\bm{U}]} = P_{[\bm{V}]}$. In other words, imposing the additional constraint $P_{[\bm{U}]} = P_{[\bm{V}]}$ does not impact the yes/no determination of the consistency of the given marginal distributions whenever $\varphi$ can be extended to an inflationary isomorphism $\Phi$ pertaining to \emph{all} the observable variables in the inflation DAG. If the marginal problem is solvable in the absence of $P_{[\bm{U}]} = P_{[\bm{V}]}$, then without loss of generality the marginal problem is also solvable when supplementarily constrained by $P_{[\bm{U}]} = P_{[\bm{V}]}$.
+
+By definition, any inflationary isomorphism $\Phi:[\bm{J}]\to[\bm{J'}]$ can be extended to some copy-preserving automorphism of the entire inflation DAG. In practice, therefore, one needs to only check against the few copy-preserving automorphisms of the inflation DAG in order to assess whether a given ordered inflationary isomorphism $\varphi:[\bm{U}]\to[\bm{V}]$ is subsumed by some $\Phi$.
 
 %Suppose that when $\Phi:[\bm{U}]\to[\bm{V}]$ is not only an inflationary isomorphism, but such that there exists some automorphism $\Phi:G'\to G'$ which takes the entire inflation DAG to itself in a manner so that nodes are permuted only up to copy indices, \tred{and} $\Phi$ extends $\varphi$. 
 
@@ -1746,6 +1752,24 @@ Note that the argument does not apply if the inflationary isomorphism $\varphi:[
 It also does not apply if one uses the conditional independence relations on the inflation DAG as well, since this destroys linearity. We do not know what happens in either of these cases.
 
 % These equations can be used to supplement the marginal problem, and may be of practical use for reducing the dimensionality of the problem (number of quantifiers which need to be eliminated). 
+
+
+
+
+
+\section{Using Inflation to Certify a DAG as ``interesting"}
+
+By considering all possible $d$-separation triples implied by a given DAG one can infer that certain conditional independence (CI) relations must hold in an observable joint distribution compatible with the given DAG. In the presence of nontrivial latent nodes, the set of \emph{observable} CI relations is a strict subset of the set of all possible CI relations. Part of Ref. \cite{pusey2014gdag} is concerned with identifying DAGs for which satisfying all observable CI relations is \emph{not} a sufficient criterion for compatibility of any observable distribution with a given DAG. \citet{pusey2014gdag} use the term \tblue{interesting} to refer to any DAG which exhibits a discrepancy between the set of observable distributions genuinely compatible with it and the set of observable distributions compatible with merely its observable CI relations.
+
+
+
+
+
+
+
+
+
+
 
 
 %\purp{T: I've commented this out since we're not concerned here with observational equivalence, and I have the feeling that it would still require a major clean-up operation. The example of 6 observationally equivalent DAGs is not very good since they are all equivalent to A <-- S --> B, which doesn't contain any latent nodes}
