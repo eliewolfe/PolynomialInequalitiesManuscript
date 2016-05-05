@@ -709,7 +709,7 @@ We have therefore certified that perfect correlations among $A$, $B$ and $C$ is 
 
 Consider another causal inference problem concerning the triangle scenario, namely, that of determining whether the triangle DAG can explain a joint distribution $P^{\text{W}}_{A B C}$ of the form
 \begin{align}\label{eq:wdistribution1}
-P^{\text{W}}_{A B C}=\frac{[100]+[010]+[001]}{3},\quad\text{i.e.}\quad P^{\text{obs}}_{A B C}(a b c)=\begin{cases}\tfrac{1}{3}&\text{if }\; a\cramp{+}b\cramp{+}c\eql 1, \\ 0&\text{otherwise}.\end{cases}
+P^{\text{W}}_{A B C}=\frac{[100]+[010]+[001]}{3},\quad\text{i.e.}\quad P^{\text{W}}_{A B C}(a b c)=\begin{cases}\tfrac{1}{3}&\text{if }\; a\cramp{+}b\cramp{+}c\eql 1, \\ 0&\text{otherwise}.\end{cases}
 \end{align}
 We call this the W-type distribution\footnote{Because its correlations are reminiscent of those one obtains for the quantum state appearing in Ref. \cite{3Qubits2Ways}, and which is called the W state.}. To our knowledge, the fact that the Triangle causal structure is inconsistent with the W-type distribution has not been demonstrated previously.
 
@@ -1476,7 +1476,8 @@ T.F.~would like to thank Guido Mont\'ufar for discussion and references. Researc
 \onecolumngrid
 \newpage
 \appendix
-\renewcommand{\theequation}{A-\arabic{equation}}
+\numberwithin{equation}{section}
+%\renewcommand{\theequation}{A-\arabic{equation}}
 \setcounter{equation}{0}
 \renewcommand\section{\clearpage\stdsection}
 
@@ -1799,13 +1800,32 @@ We here demonstrate how the inflation DAG technique can be used for this purpose
 \end{minipage}
 \end{figure}
 
+The following representative polynomial inequalities follow from Hardy-type derivations, per \cref{sec:TSEM}. 
 
-One Hardy-type probabilistic inequality that follows is 
 \begin{align}
-     \pdf[A_1 A_2 D F_1]{1100} \leq \pdf[A_1 A_2 D E_2]{1101}+ \pdf[A_1 A_2 E_2 F_1]{1100}
+ 0
+\leq
+{\p{\n{a} e} \p{\n{a} f} -\p{\n{a}} \p{\n{a} \n{d} e} + \p{\n{a}} \p{\n{a} \n{d} \n{f}}} \\
+ 0
+\leq
+{\p{a \n{f}} \p{\n{a} \n{e}} - \p{\n{a}}\p{a \n{d} \n{f}} + \p{a} \p{\n{a} \n{d} e}} \label{eq:DAG15ineqs}
 \end{align}
-which is violated by
-$f=ad,e=a+d$.
+
+A distribution incompatible with \cref{fig:GDAG15} proposed by \citet{piannaar2016interesting} is as follows.
+
+\begin{align}\label{eq:pienaardistro}
+P^{\text{JP}}_{A D E F}=\frac{[1101]+[0110]+[1000]+[0000}{4},\quad\text{i.e.}\quad P^{\text{JP}}_{A D E F}(a d e f)=\begin{cases}\tfrac{1}{4}&\text{if }\;  e\eql \SmallNamedFunction[2]{mod}{a\cramp{\cdot} d\cramp{+}d} \land f\eql a\cramp{\cdot} d , \\ 0&\text{otherwise}.\end{cases}
+\end{align}
+
+This distribution is rejected \cref{eq:DAG15ineqs}, which may be explicitly derived as follows. One Hardy-type probabilistic inequality required for consistency of marginal distributions is
+\begin{align}\label{eq:hardyforpienaar}
+     \pdf[A_1 A_2 D F_1]{1000} \leq \pdf[A_1 A_2 D E_2]{1101}+ \pdf[A_1 A_2 E_2 F_1]{1100}.
+\end{align}
+Applying factorization consistent with the inflation DAG in we obtain the polynomial inequality
+\begin{align}
+ \p[A_2]{0} \p[A_1 D F_1]{100} \leq \p[A_1 F_1]{10} \p[A_2 E_2]{00} + \p[A_1]{1} \p[A_2 D E_2]{001}    
+\end{align}
+which is equivalent to \cref{eq:DAG15ineqs}.
 
 
 %\purp{T: I've commented this out since we're not concerned here with observational equivalence, and I have the feeling that it would still require a major clean-up operation. The example of 6 observationally equivalent DAGs is not very good since they are all equivalent to A <-- S --> B, which doesn't contain any latent nodes}
@@ -1875,7 +1895,7 @@ Naturally, two causal structures are observationally equivalent if one can be tr
 
 \section{The Copy Lemma and Non-Shannon type Entropic Inequalities}\label{sec:NonShannon}
 
-As it turns out, the inflation DAG technique is also useful outside of the problem of causal inference. As we argue in the following, inflation is secretly what underlies the \tblue{copy lemma} in the derivation of non-Shannon type entropic inequalities~\cite[Chapter~15]{yeung_network_2008}. The following formulation of the copy lemma is the one of Kaced~\cite{kaced_equivalence_2013}.
+As it turns out, the inflation DAG technique is also useful outside of the problem of causal inference. As we argue in the following, inflation is secretly what underlies the \tblue{Copy Lemma} in the derivation of non-Shannon type entropic inequalities~\cite[Chapter~15]{yeung_network_2008}. The following formulation of the Copy Lemma is the one of \citet{kaced_equivalence_2013}.
 
 \begin{lemma}
 	Let $A$, $B$ and $C$ be random variables with distribution $P_{ABC}$. Then there exists a fourth random variable $A'$ and joint distribution $P_{AA'BC}$ such that:
@@ -1888,27 +1908,31 @@ As it turns out, the inflation DAG technique is also useful outside of the probl
 
 \begin{figure}[t]
 \centering
-\hspace{40pt}
-\begin{minipage}[t]{0.23\linewidth}
+\begin{minipage}[t]{0.25\linewidth}
 \centering
-\includegraphics[scale=1]{shannonnocopy.pdf}
+\includegraphics[scale=1]{shannonNOcopyV2.pdf}
 \caption{A causal structure that is compatible with any distribution $P_{ABC}$.}\label{fig:beforecopy}
 \end{minipage}
 \hfill
-\begin{minipage}[t]{0.38\linewidth}
+\begin{minipage}[t]{0.3\linewidth}
 \centering
-\includegraphics[scale=1]{shannonyescopy}
-\caption{An inflation.}\label{fig:aftercopy}
+\includegraphics[scale=1]{shannonYEScopyV2.pdf}
+\caption{An inflation of \cref{fig:beforecopy}.}\label{fig:aftercopy}
 \end{minipage}
-\hspace{40pt}
+\hfill
+\begin{minipage}[t]{0.3\linewidth}
+\centering
+\includegraphics[scale=1]{shannonYEScopyKaced.pdf}
+\caption{An equivalent representation of inflation of \cref{fig:aftercopy} so as to match the terminology of \citet{kaced_equivalence_2013}.}
+\end{minipage}
 \end{figure}
 
 \begin{proof}
-	Consider the original DAG of~\cref{fig:beforecopy} and the associated inflation DAG of~\cref{fig:aftercopy}. If the original distribution $P_{ABC}$ is compatible with~\cref{fig:beforecopy}, then the associated inflation model marginalizes to a distribution $P_{A_1 A_2 B C}$ which has the required properties. Hence it only remains to be shown that every $P_{ABC}$ is compatible with~\cref{fig:beforecopy}. But this is easy: take $X$ to be any \tblue{sufficient statistic} for $B$, such as $X := (B,Y)$ where $Y$ is an exogenous hidden random variable corresponding to the private randomness which is introduced in $X$ to supplement $B$.  
+	Consider the original DAG of~\cref{fig:beforecopy} and the associated inflation DAG of~\cref{fig:aftercopy}. If the original distribution $P_{ABC}$ is compatible with~\cref{fig:beforecopy}, then the associated inflation model marginalizes to a distribution $P_{A_1 A_2 B C}$ which has the required properties. It should also be self-evident that every $P_{ABC}$ is compatible with~\cref{fig:beforecopy}. %But this is easy: take $X$ to be any \tblue{sufficient statistic} for $B$, such as $X := (B,Y)$ where $Y$ is an exogenous hidden random variable corresponding to the private randomness which is introduced in $X$ to supplement $B$.  
 	%$B$for the joint variable $(A,B)$ given $C$, such as $X := (A,B,C)$.
 \end{proof}
 
-While it is also not hard to write down a distribution with the desired properties explicitly~\cite[Lemma~15.8]{yeung_network_2008}, our purpose of rederiving the lemma via inflation is our hope that more sophisticated applications of the inflation technique will result in \emph{new} non-Shannon type entropic inequalities.
+While it is also not hard to write down a distribution with the desired properties explicitly~\cite[Lemma~15.8]{yeung_network_2008}, our purpose of rederiving the lemma via inflation is our hope that more sophisticated applications of the inflation technique will result in \emph{new} non-Shannon type entropic inequalities. For example, all the non-Shannon type inequalities derived by \citet{zeger_2011_nonshannon} are applications of the Copy Lemma, and each proof therein can be recast in terms of some Shannon type inequalities appied to a suitable inflation.
 
 
 \section{Classifying polynomial inequalities for the Triangle scenario}
