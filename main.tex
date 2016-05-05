@@ -1677,10 +1677,10 @@ By the very definition of inflation model, we have:
 	If $\varphi:[\bm{U}]\to[\bm{V}]$ is an ordered inflationary isomorphism, then $P_{[\bm{U}]} = P_{[\bm{V}]}$ in any inflation model.%, where the variables are identified according to $\varphi$.
 \end{lemma}
 
-For example in~\cref{fig:Tri222}, the map
-\[
-	\varphi \: : \: \left[A_1,A_2,B_1\right] \to \left[A_1,A_2,B_2\right]
-\]
+For example in~\cref{fig:Tri222}, the map $\varphi:\left[A_1,A_2,B_1\right] \to \left[A_1,A_2,B_2\right]$ 
+%\[
+%	\varphi \: : \: \left[A_1,A_2,B_1\right] \to \left[A_1,A_2,B_2\right]
+%\]
 implements an ordered inflationary isomorphism between $[\bm{U}]=\left[A_1 A_2 B_1\right]$ and $[\bm{V}]=\left[A_1 A_2 B_2\right]$. From this we conclude that any inflation model satisfies $P_{A_1 A_2 B_1} = P_{A_1 A_2 B_2}$. 
 
 It is educational to contrast a genuine ordered inflationary isomorphism with a non-example. Consider the inflation DAG in \cref{fig:ancestralsubgraphnotenough}. The orderless node sets $\{X_2 Y_2 Z_1\}$ and $\{X_1 Y_2 Z_2\}$ have \emph{exactly the same} ancestral subgraphs in \cref{fig:ancestralsubgraphnotenough}; indeed, the common ancestral subgraph in this example is the \emph{entire} inflation DAG. 
@@ -1712,12 +1712,25 @@ Note that $P_{[\bm{U}]} = P_{[\bm{V}]}$ may be a nontrivial equation even if $\{
 
 \begin{figure}[H]
     \centering
-    \begin{minipage}[t]{0.6\linewidth}      \centering
-    \includegraphics[scale=1]{instrumentalvariant.pdf}
-    \caption{An inflation DAG which illustrates why coinciding ancestral subgraphs doesn't necessarily imply the existence of an inflationary isomorphism.}
+    \begin{minipage}[t]{0.2\linewidth}      \centering
+    \includegraphics[scale=1]{ISorigDAG.pdf}
+    \caption{The instrumental scenario. \purp{cite}.}
+    \label{fig:ISorigDAG}
+    \end{minipage}\hfill
+    \begin{minipage}[t]{0.3\linewidth}      \centering
+    \includegraphics[scale=1]{IScopyDAG.pdf}
+    \caption{An inflation DAG of the instrumental scenario which illustrates why coinciding ancestral subgraphs doesn't necessarily imply the coinciding marginal distributions.}
+    \label{fig:IScopyDAG}
+    \end{minipage}\hfill    
+    \begin{minipage}[t]{0.3\linewidth}      \centering
+    \includegraphics[scale=1]{ISancestorDAG.pdf}
+    \caption{The ancestral subgraph of }
     \label{fig:ancestralsubgraphnotenough}
     \end{minipage}
 \end{figure}
+
+
+
 
 
 One can try to make use of Lemma~\ref{lem:coincide} when deriving polynomial inequalities with inflation via solving the marginal problem, by imposing $P_{[\bm{U}]} = P_{[\bm{V}]}$ as an additional constraint whenever so justified by Lemma~\ref{lem:coincide}.
@@ -1761,15 +1774,38 @@ It also does not apply if one uses the conditional independence relations on the
 
 By considering all possible $d$-separation triples implied by a given DAG one can infer that certain conditional independence (CI) relations must hold in an observable joint distribution compatible with the given DAG. In the presence of nontrivial latent nodes, the set of \emph{observable} CI relations is a strict subset of the set of all possible CI relations. Part of Ref. \cite{pusey2014gdag} is concerned with identifying DAGs for which satisfying all observable CI relations is \emph{not} a sufficient criterion for compatibility of any observable distribution with a given DAG. \citet{pusey2014gdag} use the term \tblue{interesting} to refer to any DAG which exhibits a discrepancy between the set of observable distributions genuinely compatible with it and the set of observable distributions compatible with merely its observable CI relations.
 
+\citet{pusey2014gdag} derived novel necessary criteria on the structure of a DAG in order for it to be interesting, and they conjectured that their criteria may, in fact, be necessary and sufficient. As evidence, they enumerated all possible DAGs with no more than six nodes satisfying their criteria for further testing. They found only 21 unique classes of potentially interesting DAGs after accounting for symmetry. Of those 21, \citet{pusey2014gdag} further proved that 18 were unambiguously interesting. For each DAG class they certified as interesting, they generated an explicit incompatible distribution which nevertheless satisfied the DAGs observable CI relations. Incompatibility of the constructed distribution was certified by means of entropic inequalities. 
+
+That left three classes of DAGs which \emph{likely} interesting. For each such class \citet{pusey2014gdag} derived all Shannon-type entropic inequalities in two different ways, once by accounting for non-observable CI relations and once without. The existence of \emph{novel} Shannon-type inequalities upon accounting for non-observable CI relations is evidence that the DAG is likely interesting. The only loophole is that perhaps those novel Shannon-type inequalities are actually non-novel non-Shannon-type inequalities implied by the observable CI relations alone.
+
+One way to close the loophole would be to show that the novel Shannon-type inequalities imply constraints beyond some inner approximation to the genuine entropy cone absent non-observable CI relations, perhaps along the lines of Ref.~\cite{weilenmann2016entropic}. Another is to use incompatibility witnesses beyond entropic inequalities to identify some CI-respecting incompatible observable distribution. \citet{piannaar2016interesting} accomplished precisely this, and should be credited with the original insight to explicitly consider the different values that an observable root variable might take. 
+
+We here demonstrate how the inflation DAG technique can be used for this purpose. 
 
 
 
+\begin{figure}[t]
+\centering
+\begin{minipage}[b]{0.4\linewidth}
+\centering
+\includegraphics[scale=1]{scen15DAG.pdf}
+\caption{DAG \#15 in Ref. \cite{pusey2014gdag}.}\label{fig:GDAG15}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+\includegraphics[scale=1]{scen15InflationDAG.pdf}
+\caption{A useful inflation.}\label{fig:Inflated15}
+\end{minipage}
+\end{figure}
 
 
-
-
-
-
+One Hardy-type probabilistic inequality that follows is 
+\begin{align}
+     \pdf[A_1 A_2 D F_1]{1100} \leq \pdf[A_1 A_2 D E_2]{1101}+ \pdf[A_1 A_2 E_2 F_1]{1100}
+\end{align}
+which is violated by
+$f=ad,e=a+d$.
 
 
 %\purp{T: I've commented this out since we're not concerned here with observational equivalence, and I have the feeling that it would still require a major clean-up operation. The example of 6 observationally equivalent DAGs is not very good since they are all equivalent to A <-- S --> B, which doesn't contain any latent nodes}
