@@ -1684,9 +1684,28 @@ For example in~\cref{fig:Tri222}, the map $\varphi:\left[A_1,A_2,B_1\right] \to 
 %\]
 implements an ordered inflationary isomorphism between $[\bm{U}]=\left[A_1 A_2 B_1\right]$ and $[\bm{V}]=\left[A_1 A_2 B_2\right]$. From this we conclude that any inflation model satisfies $P_{A_1 A_2 B_1} = P_{A_1 A_2 B_2}$. 
 
-It is educational to contrast a genuine ordered inflationary isomorphism with a non-example. Consider the inflation DAG in \cref{fig:ancestralsubgraphnotenough}. The orderless node sets $\{X_2 Y_2 Z_1\}$ and $\{X_1 Y_2 Z_2\}$ have \emph{exactly the same} ancestral subgraphs in \cref{fig:ancestralsubgraphnotenough}; indeed, the common ancestral subgraph in this example is the \emph{entire} inflation DAG. 
+\begin{figure}[b]
+    \centering
+    \begin{minipage}[t]{0.2\linewidth}      \centering
+    \includegraphics[scale=1]{ISorigDAG.pdf}
+    \caption{The instrumental scenario of \citet{pearl1995instrumental}.}
+    \label{fig:ISorigDAG}
+    \end{minipage}\hfill
+    \begin{minipage}[t]{0.3\linewidth}      \centering
+    \includegraphics[scale=1]{IScopyDAG.pdf}
+    \caption{An inflation DAG of the instrumental scenario which illustrates why coinciding ancestral subgraphs doesn't necessarily imply the coinciding marginal distributions.}
+    \label{fig:IScopyDAG}
+    \end{minipage}\hfill    
+    \begin{minipage}[t]{0.3\linewidth}      \centering
+    \includegraphics[scale=1]{ISancestorDAG.pdf}
+    \caption{The ancestral subgraph of \cref{fig:IScopyDAG} for either $\{X_2 Y_2 Z_1\}$ or $\{X_1 Y_2 Z_2\}$.}
+    \label{fig:ancestralsubgraphnotenough}
+    \end{minipage}
+\end{figure}
+
+It is educational to contrast a genuine ordered inflationary isomorphism with a non-example. Consider the inflation DAG in \cref{fig:ancestralsubgraphnotenough}. The orderless node sets $\{X_2 Y_2 Z_1\}$ and $\{X_1 Y_2 Z_2\}$ have \emph{exactly the same} ancestral subgraphs in \cref{fig:IScopyDAG}; the common ancestral subgraph is depicted in \cref{fig:ancestralsubgraphnotenough}. 
 %The identity map implements a copy isomorphism $\ansubgraph{X_2 Y_2 Z_1}\sim\ansubgraph{X_1 Y_2 Z_2}$, since both of these ancestral subgraphs are the entire DAG.
-Nevertheless, there is no ordered inflationary isomorphism between $\left[X_2 Y_2 Z_1\right]$ and $\left[X_1 Y_2 Z_2\right]$, because the ordered map between the two lists cannot be extended into a copy-preserving graph isomorphism between the two (identical) ancestral subgraphs of \cref{fig:ancestralsubgraphnotenough}. Indeed, the only copy-preserving automorphism of \cref{fig:ancestralsubgraphnotenough} is the identity map, which does not reduce to $\varphi: \left[A_1,A_2,B_1\right] \to \left[A_1,A_2,B_2\right]$. For that matter, there isn't even any plain \emph{copy-preserving} isomorphism between  $\{X_2, Y_2, Z_1\}$ and $\{[X_1 Y_2 Z_2\}$, because $\subgraph[\text{\cref{fig:ancestralsubgraphnotenough}}]{\{X_2 Y_2 Z_1\}}$ is not graphically isomorphic to $\subgraph[\text{\cref{fig:ancestralsubgraphnotenough}}]{\{X_1 Y_2 Z_2\}}$.
+Nevertheless, there is no ordered inflationary isomorphism between $\left[X_2 Y_2 Z_1\right]$ and $\left[X_1 Y_2 Z_2\right]$, because the ordered map between the two lists cannot be extended into a copy-preserving graph isomorphism between the two (identical) ancestral subgraphs of \cref{fig:IScopyDAG}. Indeed, the only copy-preserving automorphism of \cref{fig:ancestralsubgraphnotenough} is the identity map, which does not reduce to $\varphi: \left[A_1,A_2,B_1\right] \to \left[A_1,A_2,B_2\right]$. For that matter, there isn't even any plain \emph{copy-preserving} isomorphism between  $\{X_2, Y_2, Z_1\}$ and $\{[X_1 Y_2 Z_2\}$, because $\subgraph[\text{\cref{fig:IScopyDAG}}]{\{X_2 Y_2 Z_1\}}$ is not graphically isomorphic to $\subgraph[\text{\cref{fig:IScopyDAG}}]{\{X_1 Y_2 Z_2\}}$.
 
 %In general there may exist multiple inflationary isomorphisms, for example the sets $\brackets{A_1 A_2 B_1}$ and $\brackets{A_1 A_2 B_2}$ can be related by either 
 %\begin{align}
@@ -1711,24 +1730,7 @@ Nevertheless, there is no ordered inflationary isomorphism between $\left[X_2 Y_
 
 Note that $P_{[\bm{U}]} = P_{[\bm{V}]}$ may be a nontrivial equation even if $\{\bm{U}\}=\{\bm{V}\}$: in this case, equality means that $P_{[\bm{U}]}$ is invariant under permuting the variables according to $\varphi:[\bm{U}]\to[\bm{V}]$.
 
-\begin{figure}[H]
-    \centering
-    \begin{minipage}[t]{0.2\linewidth}      \centering
-    \includegraphics[scale=1]{ISorigDAG.pdf}
-    \caption{The instrumental scenario. \purp{cite}.}
-    \label{fig:ISorigDAG}
-    \end{minipage}\hfill
-    \begin{minipage}[t]{0.3\linewidth}      \centering
-    \includegraphics[scale=1]{IScopyDAG.pdf}
-    \caption{An inflation DAG of the instrumental scenario which illustrates why coinciding ancestral subgraphs doesn't necessarily imply the coinciding marginal distributions.}
-    \label{fig:IScopyDAG}
-    \end{minipage}\hfill    
-    \begin{minipage}[t]{0.3\linewidth}      \centering
-    \includegraphics[scale=1]{ISancestorDAG.pdf}
-    \caption{The ancestral subgraph of }
-    \label{fig:ancestralsubgraphnotenough}
-    \end{minipage}
-\end{figure}
+
 
 
 
@@ -1771,8 +1773,7 @@ It also does not apply if one uses the conditional independence relations on the
 
 
 
-\section{Using Inflation to Certify a DAG as ``interesting"}
-
+\section{Using Inflation to Certify a DAG as ``Interesting"}
 By considering all possible $d$-separation triples implied by a given DAG one can infer that certain conditional independence (CI) relations must hold in an observable joint distribution compatible with the given DAG. In the presence of nontrivial latent nodes, the set of \emph{observable} CI relations is a strict subset of the set of all possible CI relations. Part of Ref. \cite{pusey2014gdag} is concerned with identifying DAGs for which satisfying all observable CI relations is \emph{not} a sufficient criterion for compatibility of any observable distribution with a given DAG. \citet{pusey2014gdag} use the term \tblue{interesting} to refer to any DAG which exhibits a discrepancy between the set of observable distributions genuinely compatible with it and the set of observable distributions compatible with merely its observable CI relations.
 
 \citet{pusey2014gdag} derived novel necessary criteria on the structure of a DAG in order for it to be interesting, and they conjectured that their criteria may, in fact, be necessary and sufficient. As evidence, they enumerated all possible DAGs with no more than six nodes satisfying their criteria for further testing. They found only 21 unique classes of potentially interesting DAGs after accounting for symmetry. Of those 21, \citet{pusey2014gdag} further proved that 18 were unambiguously interesting. For each DAG class they certified as interesting, they generated an explicit incompatible distribution which nevertheless satisfied the DAGs observable CI relations. Incompatibility of the constructed distribution was certified by means of entropic inequalities. 
@@ -1782,10 +1783,7 @@ That left three classes of DAGs which \emph{likely} interesting. For each such c
 One way to close the loophole would be to show that the novel Shannon-type inequalities imply constraints beyond some inner approximation to the genuine entropy cone absent non-observable CI relations, perhaps along the lines of Ref.~\cite{weilenmann2016entropic}. Another is to use incompatibility witnesses beyond entropic inequalities to identify some CI-respecting incompatible observable distribution. \citet{piannaar2016interesting} accomplished precisely this, and should be credited with the original insight to explicitly consider the different values that an observable root variable might take. 
 
 We here demonstrate how the inflation DAG technique can be used for this purpose. 
-
-
-
-\begin{figure}[t]
+\begin{figure}[b]
 \centering
 \begin{minipage}[b]{0.4\linewidth}
 \centering
@@ -1801,14 +1799,13 @@ We here demonstrate how the inflation DAG technique can be used for this purpose
 \end{figure}
 
 The following representative polynomial inequalities follow from Hardy-type derivations, per \cref{sec:TSEM}. 
-
 \begin{align}
  0
 \leq
-{\p{\n{a} e} \p{\n{a} f} -\p{\n{a}} \p{\n{a} \n{d} e} + \p{\n{a}} \p{\n{a} \n{d} \n{f}}} \\
+{\p[A E]{0 1} \p[A F]{0 1} -\p[A]{0} \p[A D E]{0 0 1} + \p[A]{0} \p[A D F]{0 0 0}} \\
  0
 \leq
-{\p{a \n{f}} \p{\n{a} \n{e}} - \p{\n{a}}\p{a \n{d} \n{f}} + \p{a} \p{\n{a} \n{d} e}} \label{eq:DAG15ineqs}
+{\p[A F]{1 0} \p[A E]{0 0} - \p[A]{0}\p[A D F]{1 0 0} + \p[A]{1} \p[A D E]{0 0 1}} \label{eq:DAG15ineqs}
 \end{align}
 
 A distribution incompatible with \cref{fig:GDAG15} proposed by \citet{piannaar2016interesting} is as follows.
@@ -1821,11 +1818,11 @@ This distribution is rejected \cref{eq:DAG15ineqs}, which may be explicitly deri
 \begin{align}\label{eq:hardyforpienaar}
      \pdf[A_1 A_2 D F_1]{1000} \leq \pdf[A_1 A_2 D E_2]{1101}+ \pdf[A_1 A_2 E_2 F_1]{1100}.
 \end{align}
-Applying factorization consistent with the inflation DAG in we obtain the polynomial inequality
+Applying factorization consistent with the inflation DAG in we obtain the precursor to \cref{eq:DAG15ineqs}, namely
 \begin{align}
- \p[A_2]{0} \p[A_1 D F_1]{100} \leq \p[A_1 F_1]{10} \p[A_2 E_2]{00} + \p[A_1]{1} \p[A_2 D E_2]{001}    
+ \p[A_2]{0} \p[A_1 D F_1]{100} \leq \p[A_1 F_1]{10} \p[A_2 E_2]{00} + \p[A_1]{1} \p[A_2 D E_2]{001}.    
 \end{align}
-which is equivalent to \cref{eq:DAG15ineqs}.
+%which is equivalent to \cref{eq:DAG15ineqs}.
 
 
 %\purp{T: I've commented this out since we're not concerned here with observational equivalence, and I have the feeling that it would still require a major clean-up operation. The example of 6 observationally equivalent DAGs is not very good since they are all equivalent to A <-- S --> B, which doesn't contain any latent nodes}
@@ -1906,7 +1903,16 @@ As it turns out, the inflation DAG technique is also useful outside of the probl
 	\end{enumerate}
 \end{lemma}
 
-\begin{figure}[t]
+
+
+\begin{proof}
+	Consider the original DAG of~\cref{fig:beforecopy} and the associated inflation DAG of~\cref{fig:aftercopy}. If the original distribution $P_{ABC}$ is compatible with~\cref{fig:beforecopy}, then the associated inflation model marginalizes to a distribution $P_{A_1 A_2 B C}$ which has the required properties. It should also be self-evident that every $P_{ABC}$ is compatible with~\cref{fig:beforecopy}. %But this is easy: take $X$ to be any \tblue{sufficient statistic} for $B$, such as $X := (B,Y)$ where $Y$ is an exogenous hidden random variable corresponding to the private randomness which is introduced in $X$ to supplement $B$.  
+	%$B$for the joint variable $(A,B)$ given $C$, such as $X := (A,B,C)$.
+\end{proof}
+
+While it is also not hard to write down a distribution with the desired properties explicitly~\cite[Lemma~15.8]{yeung_network_2008}, our purpose of rederiving the lemma via inflation is our hope that more sophisticated applications of the inflation technique will result in \emph{new} non-Shannon type entropic inequalities. For example, all the non-Shannon type inequalities derived by \citet{zeger_2011_nonshannon} are applications of the Copy Lemma, and each proof therein can be recast in terms of some Shannon type inequalities appied to a suitable inflation.
+
+\begin{figure}[H]
 \centering
 \begin{minipage}[t]{0.25\linewidth}
 \centering
@@ -1917,7 +1923,7 @@ As it turns out, the inflation DAG technique is also useful outside of the probl
 \begin{minipage}[t]{0.3\linewidth}
 \centering
 \includegraphics[scale=1]{shannonYEScopyV2.pdf}
-\caption{An inflation of \cref{fig:beforecopy}.}\label{fig:aftercopy}
+\caption{An inflation of \cref{fig:beforecopy}. Not that this inflation is non-broadcasting. The Copy Lemma is therefore valid even in the paradigm of quantum mechanics or any generalized probability theory, as we would expect.}\label{fig:aftercopy}
 \end{minipage}
 \hfill
 \begin{minipage}[t]{0.3\linewidth}
@@ -1926,14 +1932,6 @@ As it turns out, the inflation DAG technique is also useful outside of the probl
 \caption{An equivalent representation of inflation of \cref{fig:aftercopy} so as to match the terminology of \citet{kaced_equivalence_2013}.}
 \end{minipage}
 \end{figure}
-
-\begin{proof}
-	Consider the original DAG of~\cref{fig:beforecopy} and the associated inflation DAG of~\cref{fig:aftercopy}. If the original distribution $P_{ABC}$ is compatible with~\cref{fig:beforecopy}, then the associated inflation model marginalizes to a distribution $P_{A_1 A_2 B C}$ which has the required properties. It should also be self-evident that every $P_{ABC}$ is compatible with~\cref{fig:beforecopy}. %But this is easy: take $X$ to be any \tblue{sufficient statistic} for $B$, such as $X := (B,Y)$ where $Y$ is an exogenous hidden random variable corresponding to the private randomness which is introduced in $X$ to supplement $B$.  
-	%$B$for the joint variable $(A,B)$ given $C$, such as $X := (A,B,C)$.
-\end{proof}
-
-While it is also not hard to write down a distribution with the desired properties explicitly~\cite[Lemma~15.8]{yeung_network_2008}, our purpose of rederiving the lemma via inflation is our hope that more sophisticated applications of the inflation technique will result in \emph{new} non-Shannon type entropic inequalities. For example, all the non-Shannon type inequalities derived by \citet{zeger_2011_nonshannon} are applications of the Copy Lemma, and each proof therein can be recast in terms of some Shannon type inequalities appied to a suitable inflation.
-
 
 \section{Classifying polynomial inequalities for the Triangle scenario}
 \label{sec:38ineqs}
