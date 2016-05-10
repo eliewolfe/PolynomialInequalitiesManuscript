@@ -1645,7 +1645,7 @@ Note that a \texttt{True} response from \texttt{RedundantRowQ} indicates that th
 
 
 
-\section{On Identifying All Coinciding Marginal Distributions}\label{sec:coincidingdetails}
+\section{On Identifying Coinciding Marginal Distributions}\label{sec:coincidingdetails}
 
 %\purp{T: All the copy bijections that we ever use are also graph isomorphisms, so there's no point in introducing the notion of copy bijection separately}
 
@@ -1778,10 +1778,10 @@ For example, the second inequality may be explicitly derived as follows. One Har
 \end{align}
 Applying factorization as per the independence relations of the inflation DAG, we obtain the precursor to \cref{eq:DAG15ineqs}, namely
 \begin{align}
- \p[A_2]{0} \p[A_1 D F_1]{100} \leq \p[A_1 F_1]{10} \p[A_2 E_2]{00} + \p[A_1]{1} \p[A_2 D E_2]{001}.    
+ \p[A_1]{0} \p[A_2 D E_2]{100} \leq \p[A_1 F_1]{01} \p[A_2 E_2]{00} + \p[A_2]{1} \p[A_1 D F_1]{001}.    
 \end{align}
 %which is equivalent to \cref{eq:DAG15ineqs}.
-A distribution incompatible with \cref{fig:GDAG15} proposed by \citet{piannaar2016interesting} is given by
+A distribution incompatible with \cref{fig:GDAG15} discovered by \citet{piannaar2016interesting} is given by
 \begin{align}\label{eq:pienaardistro}
 P^{\text{JP}}_{A D E F}=\frac{[0000]+[0101]+[1000]+[1110]}{4},\quad\text{i.e.}\quad P^{\text{JP}}_{A D E F}(a d e f)=\begin{cases}\tfrac{1}{4}&\text{if }  e\eql a\cramp{\cdot} d \text{ and } f\eql  (a\cramp{\oplus} 1)\cramp{\cdot} d , \\ 0&\text{otherwise}.\end{cases}
 \end{align}
