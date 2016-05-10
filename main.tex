@@ -115,6 +115,7 @@ urlcolor=panblue,
 anchorcolor=OliveGreen}
 %\usepackage{url}
 \usepackage{pdfpages}
+\newcounter{includepdfpage}
 
 \definecolor{purple}{RGB}{128,0,128}
 \definecolor{PURPLE}{RGB}{128,0,128}
@@ -1907,7 +1908,7 @@ The following polynomial inequalities for the Triangle scenario have been derive
 
 In the following table, the inequalities are listed in expectation-value form, where we assume the two possible outcomes of each variables to be $\{-1,+1\}$. Each row in the table gives the coefficients with one inequality, which is then $\geq 0$.
 
-\begin{table*}[ht]\centering\caption{List of inequalities as table of coefficients. This is a machine-readable version of the table on \cref{page:nontrivlist}.}\label{tab:machinereadable}
+\begin{table*}[ht]\centering\caption{List of inequalities as table of coefficients. This is a machine-readable version of the table on \cpageref{nontriv.1}.}\label{tab:machinereadable}
 \resizebox{\textwidth}{!}{
 \begin{tabular}{lc@{\hspace{1em}}ccc@{\hspace{1em}}ccc@{\hspace{1em}}c@{\hspace{1em}}ccc@{\hspace{1em}}ccc@{\hspace{1em}}c} 
 %\begin{array}{rrrrrrrrrrrrrrrr}
@@ -1954,16 +1955,18 @@ In the following table, the inequalities are listed in expectation-value form, w
 \end{tabular}}
 \end{table*}
 
-\clearpage\label{page:nontrivlist}
-\includepdf[pages=-,scale=0.90]{nontrivlist.pdf}
+\clearpage
+%\label{page:nontrivlist}
+\includepdf[pages=1,scale=0.90,link,linkname=nontriv,pagecommand={\refstepcounter{includepdfpage}\label{nontriv.\theincludepdfpage}}]{nontrivlist.pdf}
 
 %\section*{References}
 %\nocite{*}
 %\setlength{\bibsep}{\smallskipamount}
 %\clearpage
+\renewcommand\section{\stdsection}
+\let\cleardoublepage\clearpage
 \setlength{\bibsep}{3pt plus 3pt minus 2pt}
 \bibliographystyle{apsrev4-1}
 \nocite{apsrev41Control}
 \bibliography{hardyinference}
-
 \end{document}
