@@ -1692,7 +1692,7 @@ is a copy isomorphism between $\bm{U}=\{A_1 A_2 B_1\}$ and $\bm{V}=\{A_1 A_2 B_2
     \end{minipage}\hfill
     \begin{minipage}[t]{0.3\linewidth}      \centering
     \includegraphics[scale=1]{IScopyDAG.pdf}
-    \caption{An inflation DAG of the instrumental scenario which illustrates why coinciding ancestral subgraphs doesn't necessarily imply the coinciding marginal distributions.}
+    \caption{An inflation DAG of the instrumental scenario which illustrates why coinciding ancestral subgraphs doesn't necessarily imply coinciding marginal distributions.}
     \label{fig:IScopyDAG}
     \end{minipage}\hfill    
     \begin{minipage}[t]{0.3\linewidth}      \centering
@@ -1742,15 +1742,15 @@ Note that the argument does not apply if the inflationary isomorphism $\varphi:\
 
 
 \section{Using Inflation to Certify a DAG as ``Interesting"}
+
 By considering all possible $d$-separation triples implied by a given DAG one can infer that certain conditional independence (CI) relations must hold in an observable joint distribution compatible with the given DAG. In the presence of nontrivial latent nodes, the set of \emph{observable} CI relations is a strict subset of the set of all possible CI relations. Part of Ref. \cite{pusey2014gdag} is concerned with identifying DAGs for which satisfying all observable CI relations is \emph{not} a sufficient criterion for compatibility of any observable distribution with a given DAG. \citet{pusey2014gdag} use the term \tblue{interesting} to refer to any DAG which exhibits a discrepancy between the set of observable distributions genuinely compatible with it and the set of observable distributions compatible with merely its observable CI relations.
 
-\citet{pusey2014gdag} derived novel necessary criteria on the structure of a DAG in order for it to be interesting, and they conjectured that their criteria may, in fact, be necessary and sufficient. As evidence, they enumerated all possible DAGs with no more than six nodes satisfying their criteria for further testing. They found only 21 unique classes of potentially interesting DAGs after accounting for symmetry. Of those 21, \citet{pusey2014gdag} further proved that 18 were unambiguously interesting. For each DAG class they certified as interesting, they generated an explicit incompatible distribution which nevertheless satisfied the DAGs observable CI relations. Incompatibility of the constructed distribution was certified by means of entropic inequalities. 
+\citet{pusey2014gdag} derived novel necessary criteria on the structure of a DAG in order for it to be interesting, and they conjectured that their criteria may, in fact, be necessary and sufficient. As evidence in favour of this conjecture, they enumerated all possible DAGs with no more than six nodes satisfying their criteria for further testing. They found only 21 classes of potentially interesting DAGs after accounting for symmetry. Of those 21, \citet{pusey2014gdag} further proved that 18 were unambiguously interesting by writing down an explicit incompatible distribution which nevertheless satisfied the DAGs observable CI relations. Incompatibility of the constructed distribution was certified by means of entropic inequalities. 
 
-That left three classes of DAGs which \emph{likely} interesting. For each such class \citet{pusey2014gdag} derived all Shannon-type entropic inequalities in two different ways, once by accounting for non-observable CI relations and once without. The existence of \emph{novel} Shannon-type inequalities upon accounting for non-observable CI relations is evidence that the DAG is likely interesting. The only loophole is that perhaps those novel Shannon-type inequalities are actually non-novel non-Shannon-type inequalities implied by the observable CI relations alone.
+That left three classes of DAGs as \emph{potentially} interesting. For each of these, \citet{pusey2014gdag} derived all Shannon-type entropic inequalities in two different ways, once by accounting for non-observable CI relations and once without. The existence of \emph{novel} Shannon-type inequalities upon accounting for non-observable CI relations is evidence for the DAG being interesting. The only loophole is that perhaps those novel Shannon-type inequalities are actually non-novel non-Shannon-type inequalities implied by the observable CI relations alone.
 
-One way to close the loophole would be to show that the novel Shannon-type inequalities imply constraints beyond some inner approximation to the genuine entropy cone absent non-observable CI relations, perhaps along the lines of Ref.~\cite{weilenmann2016entropic}. Another is to use incompatibility witnesses beyond entropic inequalities to identify some CI-respecting incompatible observable distribution. \citet{piannaar2016interesting} accomplished precisely this, and should be credited with the original insight to explicitly consider the different values that an observable root variable might take. 
+One way to close this loophole would be to show that the novel Shannon-type inequalities imply constraints beyond some inner approximation to the genuine entropy cone absent non-observable CI relations, perhaps along the lines of Ref.~\cite{weilenmann2016entropic}. Another is to use incompatibility witnesses beyond entropic inequalities to identify some CI-respecting incompatible observable distribution. \citet{piannaar2016interesting} accomplished precisely this, and should be credited with the original insight to explicitly consider the different values that an observable root variable might take. In the following, we demonstrate how the inflation DAG technique can be used for this purpose. 
 
-We here demonstrate how the inflation DAG technique can be used for this purpose. 
 \begin{figure}[b]
 \centering
 \begin{minipage}[b]{0.4\linewidth}
@@ -1768,29 +1768,26 @@ We here demonstrate how the inflation DAG technique can be used for this purpose
 
 The following representative polynomial inequalities follow from Hardy-type derivations, per \cref{sec:TSEM}. 
 \begin{align}
- 0
-\leq
-{\p[A E]{0 1} \p[A F]{0 1} -\p[A]{0} \p[A D E]{0 0 1} + \p[A]{0} \p[A D F]{0 0 0}} \\
- 0
-\leq
-{\p[A F]{1 0} \p[A E]{0 0} - \p[A]{0}\p[A D F]{1 0 0} + \p[A]{1} \p[A D E]{0 0 1}} \label{eq:DAG15ineqs}
+\p[A]{0} \p[A D E]{0 0 0} \leq {\p[A E]{0 0} \p[A F]{0 0}  + \p[A]{0} \p[A D F]{0 0 1}} \\
+\p[A]{0}\p[A D E]{1 0 0} \leq {\p[A E]{1 0} \p[A F]{0 0} + \p[A]{1} \p[A D F]{0 0 1}}
+\label{eq:DAG15ineqs}
 \end{align}
-
-A distribution incompatible with \cref{fig:GDAG15} proposed by \citet{piannaar2016interesting} is as follows.
-
-\begin{align}\label{eq:pienaardistro}
-P^{\text{JP}}_{A D E F}=\frac{[1101]+[0110]+[1000]+[0000}{4},\quad\text{i.e.}\quad P^{\text{JP}}_{A D E F}(a d e f)=\begin{cases}\tfrac{1}{4}&\text{if }\;  e\eql \SmallNamedFunction[2]{mod}{a\cramp{\cdot} d\cramp{+}d} \land f\eql a\cramp{\cdot} d , \\ 0&\text{otherwise}.\end{cases}
-\end{align}
-
-This distribution is rejected \cref{eq:DAG15ineqs}, which may be explicitly derived as follows. One Hardy-type probabilistic inequality required for consistency of marginal distributions is
+For example, the second inequality may be explicitly derived as follows. One Hardy-type probabilistic inequality required for consistency of marginal distributions is
 \begin{align}\label{eq:hardyforpienaar}
-     \pdf[A_1 A_2 D F_1]{1000} \leq \pdf[A_1 A_2 D E_2]{1101}+ \pdf[A_1 A_2 E_2 F_1]{1100}.
+     \pdf[A_1 A_2 D E_2]{0100} \leq \pdf[A_1 A_2 F_1 E_2]{0100} + \pdf[A_1 A_2 D F_1]{0101} .
 \end{align}
-Applying factorization consistent with the inflation DAG in we obtain the precursor to \cref{eq:DAG15ineqs}, namely
+Applying factorization as per the independence relations of the inflation DAG, we obtain the precursor to \cref{eq:DAG15ineqs}, namely
 \begin{align}
  \p[A_2]{0} \p[A_1 D F_1]{100} \leq \p[A_1 F_1]{10} \p[A_2 E_2]{00} + \p[A_1]{1} \p[A_2 D E_2]{001}.    
 \end{align}
 %which is equivalent to \cref{eq:DAG15ineqs}.
+A distribution incompatible with \cref{fig:GDAG15} proposed by \citet{piannaar2016interesting} is given by
+\begin{align}\label{eq:pienaardistro}
+P^{\text{JP}}_{A D E F}=\frac{[0000]+[0101]+[1000]+[1110]}{4},\quad\text{i.e.}\quad P^{\text{JP}}_{A D E F}(a d e f)=\begin{cases}\tfrac{1}{4}&\text{if }  e\eql a\cramp{\cdot} d \text{ and } f\eql  (a\cramp{\oplus} 1)\cramp{\cdot} d , \\ 0&\text{otherwise}.\end{cases}
+\end{align}
+This distribution is indeed rejected by~\cref{eq:DAG15ineqs}, although it satisfies the observable CI relations, which state that $A\perp D$ and $E\perp F | A$~\cite{pusey2014gdag}. Another way to see that this distribution is not compatible with~\cref{eq:DAG15ineqs} is by noting that the marginal distribution $P^{\text{JP}}_{D E F}$ is not even compatible with the triangle scenario, since it violates inequality \#38 of~\cref{sec:38ineqs}.
+
+Finally, it may be worth noting that the inflation of~\cref{fig:Inflated15} is precisely the ``bilocality'' scenario considered by~\citet{BilocalCorrelations}, so that inflation permits us to translate every ``bilocality'' inequality into an inequality for the interesting DAG of~\cref{fig:GDAG15}.
 
 
 %\purp{T: I've commented this out since we're not concerned here with observational equivalence, and I have the feeling that it would still require a major clean-up operation. The example of 6 observationally equivalent DAGs is not very good since they are all equivalent to A <-- S --> B, which doesn't contain any latent nodes}
