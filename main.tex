@@ -1762,7 +1762,7 @@ We here demonstrate how the inflation DAG technique can be used for this purpose
 \begin{minipage}[b]{0.5\linewidth}
 \centering
 \includegraphics[scale=1]{scen15InflationDAG.pdf}
-\caption{A useful inflation.}\label{fig:Inflated15}
+\caption{A useful inflation of \cref{fig:GDAG15}.}\label{fig:Inflated15}
 \end{minipage}
 \end{figure}
 
@@ -1791,6 +1791,11 @@ Applying factorization consistent with the inflation DAG in we obtain the precur
  \p[A_2]{0} \p[A_1 D F_1]{100} \leq \p[A_1 F_1]{10} \p[A_2 E_2]{00} + \p[A_1]{1} \p[A_2 D E_2]{001}.    
 \end{align}
 %which is equivalent to \cref{eq:DAG15ineqs}.
+
+Interesting, the distribution $P^{\text{JP}}$ can also be certified incompatible with \cref{fig:GDAG15} using only our results from the Triangle scenario. By marginalizing over the random variable $A$ in \cref{eq:pienaardistro} we obtain tripartite distribution which is rejected by inequality $\#38$ in the table of inequalities on \cpageref{page:nontrivlist}. This is the same inequality which rejects the W-distribution per \cref{eq:wdistribution1}.
+
+It is worth noting that  $P^{\text{JP}}$ not only satisfies all Shannon-type entropic inequalities pertinent to \cref{eq:pienaardistro}, but lies within an inner approximation to the genuine entropy cone for that scenario\citet[private correspondence]{weilenmann2016entropic}. In other words, a distribution with the same entropic profile as  $P^{\text{JP}}$ \emph{is} compatible with \cref{fig:GDAG15}.
+
 
 
 %\purp{T: I've commented this out since we're not concerned here with observational equivalence, and I have the feeling that it would still require a major clean-up operation. The example of 6 observationally equivalent DAGs is not very good since they are all equivalent to A <-- S --> B, which doesn't contain any latent nodes}
@@ -1954,7 +1959,7 @@ In the following table, the inequalities are listed in expectation-value form, w
 \end{tabular}}
 \end{table*}
 
-\clearpage
+\clearpage\label{page:nontrivlist}
 \includepdf[pages=-,scale=0.90]{nontrivlist.pdf}
 
 %\section*{References}
