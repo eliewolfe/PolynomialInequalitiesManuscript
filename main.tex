@@ -1650,39 +1650,38 @@ Note that a \texttt{True} response from \texttt{RedundantRowQ} indicates that th
 %\purp{T: All the copy bijections that we ever use are also graph isomorphisms, so there's no point in introducing the notion of copy bijection separately}
 
 %By restricting our attention to inflation models, we see that sometimes the distributions of different injectable sets coincide, i.e. $\pdf{\bm{X}}=\pdf{\bm{Y}}$ whenever both $\bm{X}$ and $\bm{Y}$ are injectable, and $\subsim{\bm{X}}=\subsim{\bm{Y}}$. Sometimes sets of random variables which are \emph{not} injectable, however, can also be shown to have necessarily coinciding distributions. Coinciding (not necessarily injectable) marginal distributions among the inflation DAG variables is a consequence of \cref{eq:funcdependences}. For example, we can verify that $\pdf{A_1 A_2 B_1}=\pdf{A_1 A_2 B_2}$ follows from \cref{fig:Tri222}, even though $\brackets{A_1 A_2 B_1}$ and $\brackets{A_1 A_2 B_2}$ are not injectable sets. Here we formalize this type of constraint more generally.
-Whenever some causal structure is inflated, the corresponding inflated causal hypothesis includes the embedded constraints that every copy of a node in the inflation DAG has the same functional dependence on its parents, i.e. \cref{eq:funcdependences}. At minimum, the coinciding functional dependencies implies that the single-variate marginal probability distribution of every individual copy is identical,
+
+Whenever one considers some inflation DAG, the corresponding inflated causal hypothesis includes the constraint that every copy of a variable in the inflation DAG has the same functional dependence on its parents, i.e. \cref{eq:funcdependences}. In particular, this implies that the single-variable marginal distribution of all copies are equal,
 \begin{align}
      \forall i,j \in \mathbb{N}:\; \pfunc{A_i}=\pfunc{A_j}.
 \end{align}
-Coinciding functional dependencies of individual nodes on their parents also implies that various \emph{multivariate} marginal probability distribution also coincide.
+As we will see in the following, the inflation hypothesis also implies similar constraints on the marginal distributions of certain \emph{sets} of variables.
 
-In order to discuss when two multivariate marginal distributions have coinciding distributions we first need notation to distinguish \tblue{ordered lists} from orderless sets. We continue to use bold symbols when referring to a collection of variables, however we now wrap the bold symbol in curly braces $\{\}$ when explicitly referring to an orderless set, and in square brackets $[]$ when explicitly referring to an ordered list.
+Given sets of nodes $\bm{U}$ and $\bm{Y}$ in an inflation DAG $G'$, let us say that a map $\varphi:\bm{U}\to\bm{V}$ is a \tblue{copy isomorphism} if it is a graph isomorphism such that $\varphi(X)\sim X$ for all $X\in\bm{U}$, meaning that $\varphi$ maps every node $X\in\bm{U}$ to a node $\varphi(X)\in\bm{Y}$ that is equivalent to $X$ under dropping the copy index. We have been using the notion of a copy isomorphism previously by writing $\bm{U}\sim\bm{V}$ whenever there exists a copy isomorphism $\varphi:\bm{U}\to\bm{V}$.
 
-We refer to any map whose domain and range are both sets of nodes of an inflation DAG as \tblue{copy-preserving} if every element $X_i$ in the domain gets mapped to some $X_j$, with $i$ not necessarily distinct from $j$, such that the action of the map on any node effectively leaves the node invariant under dropping the copy index. 
+% A special case of a bijection is a graph isomorphism, which is a bijection between the nodes of one graph and the nodes and another such that the action of the bijection is to reversibly transform the first graph into the second one.
+% A copy isomorphism, therefore, is defined as a graph isomorphism that is also a copy bijection. The same specialization apply to graph automorphism: an inflation DAG can posses many symmetries, i.e. permutations of the nodes such that the permutation leaves the DAG invariant. Generally, however, only a subset of the possible automorphisms are also copy bijections, i.e. copy automorphisms are a subset of graph isomorphism.
 
-Given two lists of nodes $[\bm{U}]$ and $[\bm{V}]$ in an inflation DAG $G'$, let us say that a bijective map $\varphi:[\bm{U}]\bm{\to}[\bm{V}]$ is an \tblue{ordered copy-preserving isomorphism} between them if $\varphi$ maps the elements of $[\bm{U}]$ to elements of $[\bm{V}]$ \emph{in order}, \tred{and} $\varphi$ a graph isomorphism which takes $\subgraph[G']{\{\bm{U}\}}$ to $\subgraph[G']{\{\bm{V}\}}$, \tred{and} $\varphi$ is copy preserving.  It should be clear that the existence of an ordered copy-preserving copy isomorphism between $[\bm{U}]$ and $[\bm{V}]$ is a necessary but insufficient precondition for $P_{[\bm{U}]} = P_{[\bm{V}]}$ in any inflation model.
-
-$\subgraph[\text{\cref{fig:ancestralsubgraphnotenough}}]{\{X_2 Y_2 Z_1\}}$ is not graphically isomorphic to $\subgraph[\text{\cref{fig:ancestralsubgraphnotenough}}]{\{X_1 Y_2 Z_2\}}$
-
-In order to justify coinciding distribution we require a stronger notion than copy isomorphism. We therefore say that an ordered isomorphism $\varphi:[\bm{U}]\bm{\to}[\bm{V}]$ is further an \tblue{ordered inflationary isomorphism} if and only if there exists some copy-preserving graph isomorphism $\Psi : \ansubgraph{\{\bm{U}\}}\bm{\to}\ansubgraph{\{\bm{V}\}}$ such that $\Psi$ \tblue{extends} $\varphi$, i.e. $\Psi$ reduces to $\varphi$ when restricted to the domain $\{\bm{U}\}$.
-
-
-%Furthermore, we say that a copy isomorphism $\varphi : \bm{U}\to\bm{V}$ is an \tblue{inflationary isomorphism} whenever it can be extended to a copy isomorphism $\hat{\varphi} : \ansubgraph{\bm{U}}\to\ansubgraph{\bm{V}}$. If such a $\hat{\varphi}$ exists, then it is sufficient for $\varphi$ to be bijective, since it automatically follows that it must be a copy isomorphism as well.
+Furthermore, we say that a copy isomorphism $\varphi : \bm{U}\to\bm{V}$ is an \tblue{inflationary isomorphism} whenever it can be extended to a copy isomorphism $\Phi : \ansubgraph{\bm{U}}\to\ansubgraph{\bm{V}}$. If one starts with such a $\Phi$, then one can reconstruct $\varphi$ by restricting the domain of $\Phi$ to $\bm{U}$. If the image of this restriction is $\bm{V}$, then one obtains an inflationary isomorphism; that this restriction is indeed a copy isomorphism follows automatically. So in practice, one can either start with $\varphi : \bm{U}\to\bm{V}$ and try to extend it to $\Phi : \ansubgraph{\bm{U}}\to\ansubgraph{\bm{V}}$, or start with such a $\Phi$ and see whether it restricts to a $\varphi:\bm{U}\to\bm{V}$.
 
 %which satisfies two conditions simultaneously: 1) the copy bijection is a graph isomorphism relating $\ansubgraph[G']{\bm{X}}$ to $\ansubgraph[G']{\bm{Y}}$, and 2) the copy bijection takes $\bm{X}$ to $\bm{Y}$.
+
 % re is only one copy isomorphism between the two ancestral subgraphs, namely the bijections which leaves all nodes invariant except for $\{B_1,B_2,Z_1,Z_2\}\leftrightarrow\{B_2,B_1,Z_2,Z_1\}$. This bijection clearly takes $B_1$ to $B_2$, and hence both the requisite conditions are met.
 
-By the very definition of inflation model, we have:
+By the very definition of inflation model, the inflation hypothesis implies an equation between marginal distributions:
+
 \begin{lemma}
+	If $\varphi:\bm{U}\to\bm{V}$ is an inflationary isomorphism, then $P_{\bm{U}} = P_{\bm{V}}$ in any inflation model, where the variables in $\bm{U}$ and $\bm{V}$ are matched up according to $\varphi$.
 	\label{lem:coincide}
-	If $\varphi:[\bm{U}]\to[\bm{V}]$ is an ordered inflationary isomorphism, then $P_{[\bm{U}]} = P_{[\bm{V}]}$ in any inflation model.%, where the variables are identified according to $\varphi$.
 \end{lemma}
 
-For example in~\cref{fig:Tri222}, the map $\varphi:\left[A_1,A_2,B_1\right] \to \left[A_1,A_2,B_2\right]$ 
-%\[
-%	\varphi \: : \: \left[A_1,A_2,B_1\right] \to \left[A_1,A_2,B_2\right]
-%\]
-implements an ordered inflationary isomorphism between $[\bm{U}]=\left[A_1 A_2 B_1\right]$ and $[\bm{V}]=\left[A_1 A_2 B_2\right]$. From this we conclude that any inflation model satisfies $P_{A_1 A_2 B_1} = P_{A_1 A_2 B_2}$. 
+In order to equate the distribution $P_{\bm{U}}$ with the distribution $P_{\bm{V}}$, one needs to specify a correspondence between the variables that make up $\bm{U}$ and those that make up $\bm{V}$. This is exactly the data provided by $\varphi$. If $\varphi$ is not the identity map, then the resulting equation $P_{\bm{U}} = P_{\bm{V}}$ is nontrivial equation even when $\bm{U}=\bm{V}$: in this case, the equation is effectively requiring $P_{\bm{U}}$ to be invariant under permuting the variables according to $\varphi$.
+
+We illustrate Lemma~\ref{lem:coincide} with an example. For the inflation of~\cref{fig:Tri222}, the map
+\[
+	\varphi \: : \: A_1 \mapsto A_1,\qquad A_2\mapsto A_2,\qquad B_1\mapsto B_2
+\]
+is a copy isomorphism between $\bm{U}=\{A_1 A_2 B_1\}$ and $\bm{V}=\{A_1 A_2 B_2\}$, since it maps each copy to a copy of the same type, and trivially implements a graph isomorphism between $\subgraph{\bm{U}}$ and $\subgraph{\bm{V}}$, since neither of these graphs has any edges. There is a unique choice to extend $\varphi$ to a copy isomorphism $\ansubgraph{\bm{U}}\to\ansubgraph{\bm{V}}$ given by each of $Y_2$, $X_1$, and $Y_1$ mapping to itself, as well as $Z_1\mapsto Z_2$. Therefore $\varphi$ is indeed an inflationary isomorphism. From Lemma~\ref{lem:coincide}, we then conclude that any inflation model satisfies $P_{A_1 A_2 B_1} = P_{A_1 A_2 B_2}$.
 
 \begin{figure}[b]
     \centering
@@ -1703,9 +1702,7 @@ implements an ordered inflationary isomorphism between $[\bm{U}]=\left[A_1 A_2 B
     \end{minipage}
 \end{figure}
 
-It is educational to contrast a genuine ordered inflationary isomorphism with a non-example. Consider the inflation DAG in \cref{fig:ancestralsubgraphnotenough}. The orderless node sets $\{X_2 Y_2 Z_1\}$ and $\{X_1 Y_2 Z_2\}$ have \emph{exactly the same} ancestral subgraphs in \cref{fig:IScopyDAG}; the common ancestral subgraph is depicted in \cref{fig:ancestralsubgraphnotenough}. 
-%The identity map implements a copy isomorphism $\ansubgraph{X_2 Y_2 Z_1}\sim\ansubgraph{X_1 Y_2 Z_2}$, since both of these ancestral subgraphs are the entire DAG.
-Nevertheless, there is no ordered inflationary isomorphism between $\left[X_2 Y_2 Z_1\right]$ and $\left[X_1 Y_2 Z_2\right]$, because the ordered map between the two lists cannot be extended into a copy-preserving graph isomorphism between the two (identical) ancestral subgraphs of \cref{fig:IScopyDAG}. Indeed, the only copy-preserving automorphism of \cref{fig:ancestralsubgraphnotenough} is the identity map, which does not reduce to $\varphi: \left[A_1,A_2,B_1\right] \to \left[A_1,A_2,B_2\right]$. For that matter, there isn't even any plain \emph{copy-preserving} isomorphism between  $\{X_2, Y_2, Z_1\}$ and $\{[X_1 Y_2 Z_2\}$, because $\subgraph[\text{\cref{fig:IScopyDAG}}]{\{X_2 Y_2 Z_1\}}$ is not graphically isomorphic to $\subgraph[\text{\cref{fig:IScopyDAG}}]{\{X_1 Y_2 Z_2\}}$.
+For a non-example, consider the inflation DAG in \cref{fig:IScopyDAG}. The identity map implements a copy isomorphism $\ansubgraph{X_2 Y_2 Z_1}\sim\ansubgraph{X_1 Y_2 Z_2}$, since both of these ancestral subgraphs are the DAG of~\cref{fig:ancestralsubgraphnotenough}. Nevertheless there is no inflationary isomorphism between ${X_2 Y_2 Z_1}$ and ${X_1 Y_2 Z_2}$, since the subgraphs on these two sets of nodes are not even copy isomorphic, i.e.~$\{X_2Y_2 Z_1\}\not\sim\{X_1 Y_2 Z_2\}$.
 
 %In general there may exist multiple inflationary isomorphisms, for example the sets $\brackets{A_1 A_2 B_1}$ and $\brackets{A_1 A_2 B_2}$ can be related by either 
 %\begin{align}
@@ -1728,46 +1725,17 @@ Nevertheless, there is no ordered inflationary isomorphism between $\left[X_2 Y_
 
 %In other words, $\pdf{\bm{X}}=\pdf{\bm{Y}}$ if and only if an inflationary graph isomorphism exists between $\ansubgraph[G']{\bm{X}}$ and $\ansubgraph[G']{\bm{Y}}$ which preserves the inflationary isomorphism between $\bm{X}$ and $\bm{Y}$. 
 
-Note that $P_{[\bm{U}]} = P_{[\bm{V}]}$ may be a nontrivial equation even if $\{\bm{U}\}=\{\bm{V}\}$: in this case, equality means that $P_{[\bm{U}]}$ is invariant under permuting the variables according to $\varphi:[\bm{U}]\to[\bm{V}]$.
+One can try to make use of Lemma~\ref{lem:coincide} when deriving polynomial inequalities with inflation via solving the marginal problem, by imposing $P_{\bm{U}} = P_{\bm{V}}$ as an additional constraint for every inflationary isomorphism $\varphi : \bm{U}\to\bm{V}$ between sets of observable nodes. This is advantageous to speed up to the linear quantifier elimination, since one can solve each of the resulting equations for one of the unknown joint probabilities and thereby eliminate that probability directly without Fourier-Motzkin elimination.
 
-
-
-
-
-
-
-One can try to make use of Lemma~\ref{lem:coincide} when deriving polynomial inequalities with inflation via solving the marginal problem, by imposing $P_{[\bm{U}]} = P_{[\bm{V}]}$ as an additional constraint whenever so justified by Lemma~\ref{lem:coincide}.
-%for every inflationary isomorphism $\varphi : \bm{U}\to\bm{V}$ between sets of observable nodes. 
-This is advantageous to speed up to the linear quantifier elimination, since one can solve each of the resulting equations for one of the unknown joint probabilities and thereby eliminate that probability directly without Fourier-Motzkin elimination. Moreover, one could also hope that these additional equations would result in tighter constraints on the marginal problem, which then result in better polynomial inequalities.
-
-However, our computations have so far not revealed any example of such a tightening. In some cases, this lack of impact can be explained as follows.
-
+Moreover, one could also hope that these additional equations would result in tighter constraints on the marginal problem, which then results in better polynomial inequalities. However, our computations have so far not revealed any example of such a tightening. In some cases, this lack of impact can be explained as follows.
 % We define two ordered sets of observable nodes $\bm{X}$ and $\bm{Y}$ in some inflation DAG $G'$ to be \tblue{irrelevant to the marginal problem} if there exists a copy bijection $\varphi:\nodes{G'}\to\nodes{G'}$ which satisfies two conditions:
 %\begin{enumerate}
 %	\item $\varphi$ is a graph isomorphism,
 %	\item $\varphi$ maps $\bm{X}$ onto $\bm{Y}$.
 %\end{enumerate}
-If the marginals are consistent, i.e. if the marginal problem has a solution, then there exists some \emph{ordered} set of variables $[\bm{J}]$ and a probability distribution $P_{[\bm{J}]}$ such that $\{\bm{J}\}$ contains all the observed marginal sets, and the various marginalizations of $P_{[\bm{J}]}$ recover the given marginal distributions.
+Suppose that $\varphi:\bm{U}\to\bm{V}$ is an inflationary isomorphism which is not just the restriction of a copy isomorphism between the ancestral subgraphs, but even the restriction of a copy isomorphism $\Phi':G'\to G'$ of the entire inflation DAG onto itself; in particular, this assumption implies that $\Phi'$ also restricts to a copy isomorphism $\Phi:\ansubgraph{\bm{U}}\to\ansubgraph{\bm{V}}$ between the ancestral subgraphs. In this case, the irrelevance of the additional constraint $P_{\bm{U}} = P_{\bm{V}}$ to the marginal problem for inflation models can be explained by the following argument. Suppose that some joint distribution $P$ solves the unconstrained marginal problem, i.e.~without requiring $P_{\bm{U}} = P_{\bm{V}}$. Now apply $\Phi'$ to the variables in $P$, switching the variables around, to generate a new distribution $P'$. Because the set of marginal distributions that arise from inflation models is invariant under this switching of variables, we conclude that $P'$ is also a solution to the unconstrained marginal problem. Taking the uniform mixture of $P$ and $P'$ is therefore still a solution of the unconstrained marginal problem. But this uniform mixture also satisfies the supplementary constraint $P_{\bm{U}} = P_{\bm{V}}$. Hence the supplementary constrained is satisfiable automatically whenever the unconstrained marginal problem is solvable, which makes adding the constraint irrelevant.
 
-We have seen that Lemma~\ref{lem:coincide} can sometimes imply coinciding distributions over two different \emph{orderings} of the same set of variables. Suppose that there exists an ordering of all observable variables $[\bm{J'}]$ which is distinct from $[\bm{J}]$, but  $\{\bm{J'}\}=\{\bm{J}\}=\SmallNamedFunction{ObservedNodes}{G'}$ where this other ordering $[\bm{J'}]$ can be used to construct an ordered inflationary isomorphism $\Phi:[\bm{J}]\to[\bm{J'}]$. Accordingly, if $P_{[\bm{J}]}$ is a solution to the marginal problem, then so is $P_{[\bm{J'}]}$, because  $P_{[\bm{J}]}=P_{[\bm{J'}]}$ for all inflation models. Moreover, the uniform mixture of $P_{[\bm{J}]}$ and $P_{[\bm{J'}]}$ is also a solution to the marginal problem, due to linearity.
-
-If $\Phi$ is an extension of some $\varphi:[\bm{U}]\to[\bm{V}]$, i.e. $\Phi$ reduces to $\varphi$ when restricted to the domain $\{\bm{U}\}$, then the uniform mixture of $P_{[\bm{J}]}$ and $P_{[\bm{J'}]}$ automatically obeys the non-marginal-problem constraint $P_{[\bm{U}]} = P_{[\bm{V}]}$. In other words, imposing the additional constraint $P_{[\bm{U}]} = P_{[\bm{V}]}$ does not impact the yes/no determination of the consistency of the given marginal distributions whenever $\varphi$ can be extended to an inflationary isomorphism $\Phi$ pertaining to \emph{all} the observable variables in the inflation DAG. If the marginal problem is solvable in the absence of $P_{[\bm{U}]} = P_{[\bm{V}]}$, then without loss of generality the marginal problem is also solvable when supplementarily constrained by $P_{[\bm{U}]} = P_{[\bm{V}]}$.
-
-By definition, any inflationary isomorphism $\Phi:[\bm{J}]\to[\bm{J'}]$ can be extended to some copy-preserving automorphism of the entire inflation DAG. In practice, therefore, one needs to only check against the few copy-preserving automorphisms of the inflation DAG in order to assess whether a given ordered inflationary isomorphism $\varphi:[\bm{U}]\to[\bm{V}]$ is subsumed by some $\Phi$.
-
-%Suppose that when $\Phi:[\bm{U}]\to[\bm{V}]$ is not only an inflationary isomorphism, but such that there exists some automorphism $\Phi:G'\to G'$ which takes the entire inflation DAG to itself in a manner so that nodes are permuted only up to copy indices, \tred{and} $\Phi$ extends $\varphi$. 
-
-%which is not just the restriction of a copy isomorphism between the ancestral subgraphs, but even the restriction of a copy isomorphism $\tilde{\varphi}:G'\to G'$ of the entire inflation DAG onto itself. (In particular, this assumption implies that $\tilde{\varphi}$ also restricts to a copy isomorphism $\ansubgraph{\bm{U}}\to\ansubgraph{\bm{V}}$.) 
-
-%Then the irrelevance of the additional constraint $P_{[\bm{U}]} = P_{[\bm{V}]}$ to the marginal problem for inflation models can be explained by the following argument. Suppose that some joint distribution $\tilde{P}$ solves the unconstrained marginal problem, i.e.~without requiring $P_{[\bm{U}]} = P_{[\bm{V}]}$. Now apply $\Phi$ to the variables in $\tilde{P}$, permuting the variables up to copy indices, to generate a new distribution $\tilde{P'}$. 
-
-%Because the set of marginal distributions that arise from inflation models is invariant under this permutation of variables, we conclude that $\tilde{P'}$ is also a solution to the unconstrained marginal problem. Taking the uniform mixture of $\tilde{P}$ and $\tilde{P'}$ is therefore also a solution of the unconstrained marginal problem. But this uniform mixture also satisfies the supplementary constraint $P_{[\bm{U}]} = P_{[\bm{V}]}$. Therefore the supplementary constrained is satisfiable automatically whenever the unconstrained marginal problem is solvable, and adding the constraint is irrelevant.
-
-Note that the argument does not apply if the inflationary isomorphism $\varphi:[\bm{U}]\to[\bm{V}]$ cannot be extended to an inflationary isomorphism who's domain is $\SmallNamedFunction{ObservedNodes}{G'}$. 
-%automorphism of the entire inflation DAG $\Phi$. 
-It also does not apply if one uses the conditional independence relations on the inflation DAG as well, since this destroys linearity. We do not know what happens in either of these cases.
-
-% These equations can be used to supplement the marginal problem, and may be of practical use for reducing the dimensionality of the problem (number of quantifiers which need to be eliminated). 
+Note that the argument does not apply if the inflationary isomorphism $\varphi:\bm{U}\to\bm{V}$ cannot be extended to a copy isomorphism of the entire inflation DAG. It also does not apply if one uses the conditional independence relations on the inflation DAG as well, since this destroys linearity. We do not know what happens in either of these cases.
 
 
 
