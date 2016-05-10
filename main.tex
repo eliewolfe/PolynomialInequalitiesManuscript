@@ -1762,7 +1762,7 @@ One way to close this loophole would be to show that the novel Shannon-type ineq
 \begin{minipage}[b]{0.5\linewidth}
 \centering
 \includegraphics[scale=1]{scen15InflationDAG.pdf}
-\caption{A useful inflation.}\label{fig:Inflated15}
+\caption{A useful inflation of \cref{fig:GDAG15}.}\label{fig:Inflated15}
 \end{minipage}
 \end{figure}
 
@@ -1788,6 +1788,11 @@ P^{\text{JP}}_{A D E F}=\frac{[0000]+[0101]+[1000]+[1110]}{4},\quad\text{i.e.}\q
 This distribution is indeed rejected by~\cref{eq:DAG15ineqs}, although it satisfies the observable CI relations, which state that $A\perp D$ and $E\perp F | A$~\cite{pusey2014gdag}. Another way to see that this distribution is not compatible with~\cref{eq:DAG15ineqs} is by noting that the marginal distribution $P^{\text{JP}}_{D E F}$ is not even compatible with the triangle scenario, since it violates inequality \#38 of~\cref{sec:38ineqs}.
 
 Finally, it may be worth noting that the inflation of~\cref{fig:Inflated15} is precisely the ``bilocality'' scenario considered by~\citet{BilocalCorrelations}, so that inflation permits us to translate every ``bilocality'' inequality into an inequality for the interesting DAG of~\cref{fig:GDAG15}.
+
+Interesting, the distribution $P^{\text{JP}}$ can also be certified incompatible with \cref{fig:GDAG15} using only our results from the Triangle scenario. By marginalizing over the random variable $A$ in \cref{eq:pienaardistro} we obtain tripartite distribution which is rejected by inequality $\#38$ in the table of inequalities on \cpageref{page:nontrivlist}. This is the same inequality which rejects the W-distribution per \cref{eq:wdistribution1}.
+
+It is worth noting that  $P^{\text{JP}}$ not only satisfies all Shannon-type entropic inequalities pertinent to \cref{eq:pienaardistro}, but lies within an inner approximation to the genuine entropy cone for that scenario\citet[private correspondence]{weilenmann2016entropic}. In other words, a distribution with the same entropic profile as  $P^{\text{JP}}$ \emph{is} compatible with \cref{fig:GDAG15}.
+
 
 
 %\purp{T: I've commented this out since we're not concerned here with observational equivalence, and I have the feeling that it would still require a major clean-up operation. The example of 6 observationally equivalent DAGs is not very good since they are all equivalent to A <-- S --> B, which doesn't contain any latent nodes}
@@ -1904,54 +1909,54 @@ The following polynomial inequalities for the Triangle scenario have been derive
 
 In the following table, the inequalities are listed in expectation-value form, where we assume the two possible outcomes of each variables to be $\{-1,+1\}$. Each row in the table gives the coefficients with one inequality, which is then $\geq 0$.
 
-\begin{table*}[ht]\centering\caption{List of inequalities as table of coefficients.}
+\begin{table*}[ht]\centering\caption{List of inequalities as table of coefficients. This is a machine-readable version of the table on \cref{page:nontrivlist}.}
 \resizebox{\textwidth}{!}{
-\begin{tabular}{c@{\hspace{1em}}ccc@{\hspace{1em}}ccc@{\hspace{1em}}c@{\hspace{1em}}ccc@{\hspace{1em}}ccc@{\hspace{1em}}c} 
+\begin{tabular}{lc@{\hspace{1em}}ccc@{\hspace{1em}}ccc@{\hspace{1em}}c@{\hspace{1em}}ccc@{\hspace{1em}}ccc@{\hspace{1em}}c} 
 %\begin{array}{rrrrrrrrrrrrrrrr}
-  constant & \(\expec{A}\) & \(\expec{B}\) & \(\expec{C}\) & \(\expec{A B}\) & \(\expec{A C}\) & \(\expec{B C}\) & \(\expec{A B C}\) & \(\expec{A}\expec{B}\) & \(\expec{A}\expec{C}\) & \(\expec{B}\expec{C}\) & \(\expec{C}\expec{A B}\) & \(\expec{B}\expec{A C}\) &
+  & constant & \(\expec{A}\) & \(\expec{B}\) & \(\expec{C}\) & \(\expec{A B}\) & \(\expec{A C}\) & \(\expec{B C}\) & \(\expec{A B C}\) & \(\expec{A}\expec{B}\) & \(\expec{A}\expec{C}\) & \(\expec{B}\expec{C}\) & \(\expec{C}\expec{A B}\) & \(\expec{B}\expec{A C}\) &
    {\(\expec{A}\expec{B C}\)} & {\(\expec{A}\expec{B}\expec{C}\)}   \\\bottomrule
- 1 & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\
- 2 & 0 & 0 & 0 & 0 & -2 & 0 & 0 & 0 & 0 & 0 & -1 & 0 & 0 & 1 \\
- 3 & 1 & 1 & 1 & 3 & -1 & 0 & 0 & 0 & 0 & -1 & 1 & -1 & 0 & 1 \\
- 3 & 1 & 1 & -1 & 3 & 1 & 0 & 0 & 0 & 0 & 1 & -1 & -1 & 0 & 1 \\
- 3 & 0 & 0 & 1 & -2 & 0 & -2 & 0 & 1 & 0 & 0 & -1 & -1 & 0 & 1 \\
- 3 & 0 & 1 & 0 & 1 & 0 & -2 & 0 & -1 & 1 & 0 & 1 & -1 & 0 & 1 \\
- 3 & 0 & 1 & 0 & 1 & 0 & -2 & 0 & 1 & -1 & 0 & 1 & 1 & 0 & -1 \\
- 3 & 1 & 1 & 1 & 2 & 2 & 2 & -1 & 1 & 1 & 1 & 1 & 1 & 1 & -1 \\
- 3 & 1 & 1 & 1 & 2 & 0 & -2 & 1 & 1 & -1 & 1 & 1 & 1 & -1 & -1 \\
- 4 & 0 & 0 & 2 & -2 & -2 & 0 & -1 & 2 & 0 & 2 & 1 & 1 & 1 & 0 \\
- 4 & 0 & -2 & 0 & -2 & 0 & -3 & 1 & 0 & 0 & 1 & 1 & -1 & 0 & 1 \\
- 4 & 0 & 0 & -2 & -2 & -2 & -3 & 1 & 2 & 0 & 1 & 1 & 1 & 0 & -1 \\
- 4 & 0 & 0 & 0 & 2 & -2 & 1 & 1 & 2 & 2 & -1 & 1 & -1 & 0 & -1 \\
- 4 & 0 & 0 & 0 & 2 & -2 & 1 & 1 & -2 & 2 & -1 & 1 & 1 & 0 & 1 \\
- 4 & 0 & 0 & 0 & -2 & 0 & 3 & 1 & 2 & 0 & 1 & -1 & -1 & 0 & 1 \\
- 4 & 0 & 0 & -2 & -2 & -2 & -2 & 1 & 2 & 0 & 0 & 1 & 1 & -1 & 0 \\
- 4 & 0 & 0 & 0 & -2 & -2 & -2 & 1 & 2 & 2 & 2 & 1 & 1 & 1 & 0 \\
- 5 & 1 & 1 & 1 & 3 & 1 & -4 & 0 & -2 & 0 & 1 & 1 & -1 & 0 & 1 \\
- 5 & 1 & 1 & 1 & 3 & -1 & -4 & 0 & 2 & -2 & 1 & 1 & 1 & 0 & -1 \\
- 5 & 1 & -1 & 1 & 1 & 2 & -2 & -2 & -2 & -1 & 1 & 1 & -2 & -2 & 0 \\
- 5 & 3 & 1 & 1 & 1 & 3 & 1 & -1 & 2 & 0 & 0 & -2 & 0 & 0 & 2 \\
- 5 & 1 & 1 & 1 & 1 & 2 & -2 & -1 & 0 & -1 & -1 & 2 & 1 & 1 & -2 \\
- 5 & -1 & 1 & 1 & 1 & 1 & -1 & 1 & -2 & -2 & 2 & -2 & -2 & -2 & 0 \\
- 5 & 1 & 1 & 1 & 2 & 1 & -1 & 1 & -1 & 0 & 2 & -1 & -2 & -2 & 1 \\
- 5 & 1 & 1 & 1 & -1 & 2 & 2 & 1 & -2 & -1 & -1 & 2 & 1 & -1 & -2 \\
- 6 & 0 & 0 & 0 & -3 & -4 & 0 & 0 & 1 & 2 & 2 & -1 & -2 & -2 & 1 \\
- 6 & 0 & 2 & 0 & 3 & -4 & 0 & 0 & 1 & 2 & 0 & 1 & -2 & -2 & 1 \\
- 6 & -2 & 2 & 0 & -3 & -5 & 0 & 0 & 1 & 1 & 0 & 1 & -1 & -2 & 2 \\
- 6 & 0 & 0 & 0 & 1 & -3 & 2 & 0 & 1 & 1 & -4 & 1 & -1 & -2 & -2 \\
- 6 & 0 & 0 & 2 & 0 & 3 & -5 & 0 & -2 & 1 & 1 & 2 & 1 & 1 & -2 \\
- 6 & 0 & 0 & -2 & 2 & -2 & 1 & 0 & -4 & 2 & -1 & 2 & 2 & 1 & 1 \\
- 6 & 0 & 0 & 0 & -3 & -2 & -2 & -2 & 1 & 0 & 4 & -1 & -2 & 0 & 1 \\
- 7 & 1 & 1 & 1 & 2 & 1 & -3 & 3 & 1 & -2 & 2 & 3 & 2 & -2 & -1 \\
- 8 & 0 & 0 & 0 & -4 & -2 & -2 & -3 & 4 & 2 & -2 & 1 & -1 & -3 & 2 \\
- 8 & 2 & -2 & 0 & 1 & -6 & 0 & 1 & -1 & 0 & 2 & 2 & 1 & -3 & 3 \\
- 8 & 2 & 0 & 0 & 6 & 1 & -2 & 1 & 0 & 1 & 2 & -1 & -2 & -3 & 3 \\
- 8 & 0 & -2 & -2 & 0 & -6 & 1 & 1 & 2 & 0 & -1 & 3 & 1 & -2 & -3 \\
- 8 & 0 & 0 & 2 & 2 & 1 & -6 & 1 & -2 & 1 & 0 & 3 & 2 & -1 & -3 
+ \textbf{($\#$1):} & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+ \textbf{($\#$2):} & 2 & 0 & 0 & 0 & 0 & -2 & 0 & 0 & 0 & 0 & 0 & -1 & 0 & 0 & 1 \\
+ \textbf{($\#$3):} & 3 & 1 & 1 & 1 & 3 & -1 & 0 & 0 & 0 & 0 & -1 & 1 & -1 & 0 & 1 \\
+ \textbf{($\#$4):} & 3 & 1 & 1 & -1 & 3 & 1 & 0 & 0 & 0 & 0 & 1 & -1 & -1 & 0 & 1 \\
+ \textbf{($\#$5):} & 3 & 0 & 0 & 1 & -2 & 0 & -2 & 0 & 1 & 0 & 0 & -1 & -1 & 0 & 1 \\
+ \textbf{($\#$6):} & 3 & 0 & 1 & 0 & 1 & 0 & -2 & 0 & -1 & 1 & 0 & 1 & -1 & 0 & 1 \\
+ \textbf{($\#$7):} & 3 & 0 & 1 & 0 & 1 & 0 & -2 & 0 & 1 & -1 & 0 & 1 & 1 & 0 & -1 \\
+ \textbf{($\#$8):} & 3 & 1 & 1 & 1 & 2 & 2 & 2 & -1 & 1 & 1 & 1 & 1 & 1 & 1 & -1 \\
+ \textbf{($\#$9):} & 3 & 1 & 1 & 1 & 2 & 0 & -2 & 1 & 1 & -1 & 1 & 1 & 1 & -1 & -1 \\
+ \textbf{($\#$10):} & 4 & 0 & 0 & 2 & -2 & -2 & 0 & -1 & 2 & 0 & 2 & 1 & 1 & 1 & 0 \\
+ \textbf{($\#$11):} & 4 & 0 & -2 & 0 & -2 & 0 & -3 & 1 & 0 & 0 & 1 & 1 & -1 & 0 & 1 \\
+ \textbf{($\#$12):} & 4 & 0 & 0 & -2 & -2 & -2 & -3 & 1 & 2 & 0 & 1 & 1 & 1 & 0 & -1 \\
+ \textbf{($\#$13):} & 4 & 0 & 0 & 0 & 2 & -2 & 1 & 1 & 2 & 2 & -1 & 1 & -1 & 0 & -1 \\
+ \textbf{($\#$14):} & 4 & 0 & 0 & 0 & 2 & -2 & 1 & 1 & -2 & 2 & -1 & 1 & 1 & 0 & 1 \\
+ \textbf{($\#$15):} & 4 & 0 & 0 & 0 & -2 & 0 & 3 & 1 & 2 & 0 & 1 & -1 & -1 & 0 & 1 \\
+ \textbf{($\#$16):} & 4 & 0 & 0 & -2 & -2 & -2 & -2 & 1 & 2 & 0 & 0 & 1 & 1 & -1 & 0 \\
+ \textbf{($\#$17):} & 4 & 0 & 0 & 0 & -2 & -2 & -2 & 1 & 2 & 2 & 2 & 1 & 1 & 1 & 0 \\
+ \textbf{($\#$18):} & 5 & 1 & 1 & 1 & 3 & 1 & -4 & 0 & -2 & 0 & 1 & 1 & -1 & 0 & 1 \\
+ \textbf{($\#$19):} & 5 & 1 & 1 & 1 & 3 & -1 & -4 & 0 & 2 & -2 & 1 & 1 & 1 & 0 & -1 \\
+ \textbf{($\#$20):} & 5 & 1 & -1 & 1 & 1 & 2 & -2 & -2 & -2 & -1 & 1 & 1 & -2 & -2 & 0 \\
+ \textbf{($\#$21):} & 5 & 3 & 1 & 1 & 1 & 3 & 1 & -1 & 2 & 0 & 0 & -2 & 0 & 0 & 2 \\
+ \textbf{($\#$22):} & 5 & 1 & 1 & 1 & 1 & 2 & -2 & -1 & 0 & -1 & -1 & 2 & 1 & 1 & -2 \\
+ \textbf{($\#$23):} & 5 & -1 & 1 & 1 & 1 & 1 & -1 & 1 & -2 & -2 & 2 & -2 & -2 & -2 & 0 \\
+ \textbf{($\#$24):} & 5 & 1 & 1 & 1 & 2 & 1 & -1 & 1 & -1 & 0 & 2 & -1 & -2 & -2 & 1 \\
+ \textbf{($\#$25):} & 5 & 1 & 1 & 1 & -1 & 2 & 2 & 1 & -2 & -1 & -1 & 2 & 1 & -1 & -2 \\
+ \textbf{($\#$26):} & 6 & 0 & 0 & 0 & -3 & -4 & 0 & 0 & 1 & 2 & 2 & -1 & -2 & -2 & 1 \\
+ \textbf{($\#$27):} & 6 & 0 & 2 & 0 & 3 & -4 & 0 & 0 & 1 & 2 & 0 & 1 & -2 & -2 & 1 \\
+ \textbf{($\#$28):} & 6 & -2 & 2 & 0 & -3 & -5 & 0 & 0 & 1 & 1 & 0 & 1 & -1 & -2 & 2 \\
+ \textbf{($\#$29):} & 6 & 0 & 0 & 0 & 1 & -3 & 2 & 0 & 1 & 1 & -4 & 1 & -1 & -2 & -2 \\
+ \textbf{($\#$30):} & 6 & 0 & 0 & 2 & 0 & 3 & -5 & 0 & -2 & 1 & 1 & 2 & 1 & 1 & -2 \\
+ \textbf{($\#$31):} & 6 & 0 & 0 & -2 & 2 & -2 & 1 & 0 & -4 & 2 & -1 & 2 & 2 & 1 & 1 \\
+ \textbf{($\#$32):} & 6 & 0 & 0 & 0 & -3 & -2 & -2 & -2 & 1 & 0 & 4 & -1 & -2 & 0 & 1 \\
+ \textbf{($\#$33):} & 7 & 1 & 1 & 1 & 2 & 1 & -3 & 3 & 1 & -2 & 2 & 3 & 2 & -2 & -1 \\
+ \textbf{($\#$34):} & 8 & 0 & 0 & 0 & -4 & -2 & -2 & -3 & 4 & 2 & -2 & 1 & -1 & -3 & 2 \\
+ \textbf{($\#$35):} & 8 & 2 & -2 & 0 & 1 & -6 & 0 & 1 & -1 & 0 & 2 & 2 & 1 & -3 & 3 \\
+ \textbf{($\#$36):} & 8 & 2 & 0 & 0 & 6 & 1 & -2 & 1 & 0 & 1 & 2 & -1 & -2 & -3 & 3 \\
+ \textbf{($\#$37):} & 8 & 0 & -2 & -2 & 0 & -6 & 1 & 1 & 2 & 0 & -1 & 3 & 1 & -2 & -3 \\
+ \textbf{($\#$38):} & 8 & 0 & 0 & 2 & 2 & 1 & -6 & 1 & -2 & 1 & 0 & 3 & 2 & -1 & -3
 \end{tabular}}
 \end{table*}
 
-\clearpage
+\clearpage\label{page:nontrivlist}
 \includepdf[pages=-,scale=0.90]{nontrivlist.pdf}
 
 %\section*{References}
