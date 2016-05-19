@@ -638,7 +638,7 @@ P_{A B C}=\frac{[100]+[010]+[001]}{3},\quad\text{i.e.}\quad P_{A B C}(a b c)=\be
 We call this the W-type distribution\footnote{Because its correlations are reminiscent of those one obtains for the quantum state appearing in Ref. \cite{3Qubits2Ways}, and which is called the W state.}. 
 %To our knowledge, the fact that the Triangle causal structure is inconsistent with the W-type distribution has not been demonstrated previously.
 
-To settle the compatibility question, we consider the inflation DAG of \cref{fig:Tri222}.  The injectable sets in this case include $\{ A_1 B_1 C_1\}$, $\{A_2 C_1\}$, $\{B_2 A_1\}$, $\{A_2 B_1\}$,  $\{ A_2\}$, $\{B_2\}$ and $\{C_2\}$. 
+To settle the compatibility question, we consider the inflation DAG of \cref{fig:Tri222v2}.  The injectable sets in this case include $\{A_1 B_1 C_1\}$, $\{A_2 C_1\}$, $\{B_2 A_1\}$, $\{C_2 B_1\}$,  $\{A_2\}$, $\{B_2\}$ and $\{C_2\}$. 
 
 Therefore, we turn our attention to determining whether the marginals of the W-type distribution on the images of these injectable sets are compatible with the triangle hypothesis.  These marginals are:
 \begin{align}
@@ -1097,7 +1097,7 @@ B_2\aindep A_2\\
 B_2\aindep C_1\\
 C_2\aindep A_1\\
 C_2\aindep B_2
-\end{matrix}}_{\substack{\text{adjacent nodes in}\\\text{the injection graph}}}}
+\end{matrix}}_{\substack{\text{ancestrally independent}\\\text{pairs of nodes}}}}
 \qquad\qquad
 {\underbrace{\begin{matrix}
 \\ \\
@@ -1154,7 +1154,7 @@ The most trivial constraint on possible marginal probabilities, regardless of ca
 %on the pre-injectable set
 is simply the \emph{existence of some joint probability distribution} from which the marginal distributions can be recovered through marginalization. This isn't really causal inference---as no nontrivial causal hypothesis is considered---but rather more of a preliminary sanity check. If the marginal distributions are not \tblue{consistent}, then the answer to ``Can these marginal distributions be explained by this particular causal hypothesis?'' is automatically ``No''. This type of problem is known as a \tblue{marginal problem}. For some of the long history of marginal problems and further references, see~\cite{fritz2013marginal}; for a more recent account using the language of presheaves, see~\cite{abramsky_contextuality_2011}.
 
-More precisely, a \emph{marginal problem} consists of a finite set $\bm{X}$ containing the variables to be considered together with a collection of subsets $\bm{U}_1,\ldots,\bm{U}_n$ called \tblue{contexts}, as well as a specification of the (finite) number of outcomes that each variable is allowed to take. It may help to draw the visualize contexts in terms of the simplicial complex that they generate, as in~\cref{fig:Tri222}. Now every joint distribution $P_{\bm{X}}$ restricts to a collection of marginal distributions $(P_{\bm{U}_1},\ldots,P_{\bm{U}_n})$. The marginal problem is concerned with the converse: given a collection marginal distributions $(P_{\bm{U}_1},\ldots,P_{\bm{U}_n})$, under what conditions can one find a joint distribution $\hat{P}_{\bm{X}}$ which has all the given distributions as marginals, as $P_{\bm{U}_i} = \hat{P}_{\bm{U}_i}$ for all $i$?
+More precisely, a \emph{marginal problem} consists of a finite set $\bm{X}$ containing the variables to be considered together with a collection of subsets $\bm{U}_1,\ldots,\bm{U}_n$ called \tblue{contexts}, as well as a specification of the (finite) number of outcomes that each variable is allowed to take. It may help to draw the visualize contexts in terms of the simplicial complex that they generate, as in~\cref{fig:simplicialcomplex222}. Now every joint distribution $P_{\bm{X}}$ restricts to a collection of marginal distributions $(P_{\bm{U}_1},\ldots,P_{\bm{U}_n})$. The marginal problem is concerned with the converse: given a collection marginal distributions $(P_{\bm{U}_1},\ldots,P_{\bm{U}_n})$, under what conditions can one find a joint distribution $\hat{P}_{\bm{X}}$ which has all the given distributions as marginals, as $P_{\bm{U}_i} = \hat{P}_{\bm{U}_i}$ for all $i$?
 
 There is a simple necessary condition: in order for $\hat{P}_{\bm{X}}$ to exist, the marginals clearly must be consistent, in the sense that marginalizing $P_{\bm{U}_i}$ and $P_{\bm{U}_j}$ to the variables in $\bm{U}_i\cap\bm{U}_j$ results in the same distribution\footnote{This is difficult to express explicitly in our notation, since $P_{\bm{U}_i\cap \bm{U}_j}$ could refer to either marginal.}. As we have already seen in the previous section, in many cases this is not sufficient\footnote{Depending on how the contexts intersect with one another, this \emph{may} be sufficient. A criterion for when this occurs has been found by~\citet{vorobev_extension_1960}.}. So what are the necessary and sufficient conditions?
 
@@ -1340,12 +1340,12 @@ is such a minimal transversal: every assignment of values to all variables which
 We convert these implications into inequalities in the usual way, by replacing ``$\Rightarrow$'' by ``$\leq$'' at the level of probabilities and the disjunctions by sums. For example the possibilistic constraint \cref{eq:F3implicationform} translates to the probabilistic constraint
 \begin{align}\label{eq:F3rawprobform}
 %    P_{A_2 B_2 C_2}\parens{\mgreen{a_2} \mgreen{b_2} \mgreen{c_2}} \leq \p{\n{a_1} \n{b_1} \n{c_1}}+\p{a_1 \mgreen{b_2 c_2}}+\p{\mgreen{a_2} b_1 \mgreen{c_2}}+\p{\mgreen{a_2 b_2} c_1}
-    P_{A_2 B_2 C_2}\parens{\mgreen{1} \mgreen{1} \mgreen{1}} \leq P_{A_1 B_1 C_1}\parens{1 1 1}+P_{A_1 B_2 C_2}\parens{a_1 \mgreen{1 1}}+P_{A_2 B_1 C_2}\parens{\mgreen{1} 1 \mgreen{1}}+P_{A_2 B_2 C_1}\parens{\mgreen{1 1} 1}
+    P_{A_2 B_2 C_2}\parens{\mgreen{1} \mgreen{1} \mgreen{1}} \leq P_{A_1 B_1 C_1}\parens{0 0 0}+P_{A_1 B_2 C_2}\parens{1 \mgreen{1 1}}+P_{A_2 B_1 C_2}\parens{\mgreen{1} 1 \mgreen{1}}+P_{A_2 B_2 C_1}\parens{\mgreen{1 1} 1}
 \end{align}
 %\[
 %	P_{A_2 B_2 C_2}(111) \leq P_{A_1 B_1 C_1}(000) + P_{A_1 B_2 C_2}(111) + P_{A_2 B_1 C_2}(111) + P_{A_2 B_2 C_1}(111).
 %\]
-\cref{eq:F3rawprobform} is equivalent to \cref{eq:FritzF3raw}; therefore applying it the inflation depicted in~\cref{fig:Tri222} recovers \cref{eq:FritzF3}.
+i.e. \cref{eq:FritzF3raw}. Therefore \cref{eq:F3implicationform} recovers \cref{eq:FritzF3raw}, and hence \cref{eq:F3implicationform} can be thoughts of as the fundamental progenitor of \cref{eq:FritzF3}.
 
 Inequalities resulting from hypergraph transversals are generally weaker than those that result from completely solving the marginal problem. Nevertheless, many Bell inequalities are of this form---such as the CHSH inequality which follows in this way from Hardy's original implication. So it seems that this method is still sufficiently powerful to generate plenty of interesting inequalities. At the same time, it should be significantly easier to perform in practice than the full-fledged linear (let alone nonlinear) quantifier elimination, even if one does it for every possible antecedent.
 
@@ -1554,7 +1554,7 @@ On the other hand, by intentionally using broadcasting in an inflation DAG, we c
 
 Even when using broadcasting inflation DAGs, it may still be possible to derive inequalities valid for quantum distributions if one appropriately the nonnegativity inequalities in the marginal problem, e.g. such as \cref{eq:nonnegativity}. The modification would replace demanding nonnegativity of the full joint distribution with instead demanding the nonnegativity of only quantum-physically-meaningful marginal probability distributions. 
 
-Even when using broadcasting inflation DAGs, it may still be possible to derive inequalities valid for quantum distributions if one appropriately modifies \cref{sec:ineqs} to generate a different initial set of nonnegativity inequalities. This new set should capture the nonnegativity of only quantum-physically-meaningful marginal probability distributions. Indeed, a quantum causal model on the original DAG can potentially be inflated to a quantum inflation model on the inflation DAG in terms of the logical broadcasting maps of \citet{Coecke2011}. From this perspective, a broadcasting inflation DAG is an abstract logical concept, as opposed to a feasible physical construct. However, this would result in a joint distribution over all observable variables that may have some negative probabilities, and one cannot expect~\cref{eq:nonnegativity} to hold in general. But one can still try to reformulate the marginal problem so as to refer only to the existence of joint distributions on non-broadcastings sets rather than the existence of a full joint distribution from which the marginal distributions might be recovered. Here, a set $\bm{U}$ of observable nodes is non-broadcasting if $\An{\bm{U}}$ does not two distinct copies of a node which have a parent in common.
+Even when using broadcasting inflation DAGs, it may still be possible to derive inequalities valid for quantum distributions if one appropriately modifies \cref{sec:ineqs} to generate a different initial set of nonnegativity inequalities. This new set should capture the nonnegativity of only quantum-physically-meaningful marginal probability distributions. Indeed, a quantum causal model on the original DAG can potentially be inflated to a quantum inflation model on the inflation DAG in terms of the logical broadcasting maps of \citet{Coecke2011}. From this perspective, a broadcasting inflation DAG is an abstract logical concept, as opposed to a feasible physical construct. However, this would result in a joint distribution over all observable variables that may have some negative probabilities, and one cannot expect~\cref{eq:nonnegativity} to hold in general. But one can still try to reformulate the marginal problem so as to refer only to the existence of joint distributions on non-broadcastings sets rather than the existence of a full joint distribution from which the marginal distributions might be recovered. Here, a set $\bm{U}$ of observable nodes is non-broadcasting if $\An{\bm{U}}$ does not contain two distinct copies of a node both sharing a common latent parent.
 
 An analysis along these lines has already been carried out successfully by \citet{Chaves2015infoquantum} in the derivation of entropic inequalities that are valid for all quantum distributions. Although \citet{Chaves2015infoquantum} do not invoke inflation DAGs, they do seem to employ a similar type of structure to model the conditioning of a variable on a ``setting'' variable, and this also gives rise to non-broadcasting sets. \citet{Chaves2015infoquantum} take pains to avoid including full joint probability distributions in any of their initial entropic inequalities, precisely as we would want to do in constructing our initial probability inequalities, and they successfully derive quantumly valid entropic inequalities. But so far, no inequalities polynomial in the probabilities have been derived using this method.
 
@@ -1604,7 +1604,7 @@ It would be enlightening to understand the extent to which our (classical) polyn
 
 \begin{acknowledgments}
 %\bigskip\noindent\textbf{Acknowledgments}
-T.F.~would like to thank Guido Mont\'ufar for discussion and references. Research at Perimeter Institute is supported by the Government of Canada through Industry Canada and by the Province of Ontario through the Ministry of Economic Development and Innovation.
+T.F.~would like to thank Guido Mont\'ufar for discussion and references. E.W.~would like to thank Rafael Chaves and TC Fraser for suggestions which have improved this manuscript. Research at Perimeter Institute is supported by the Government of Canada through Industry Canada and by the Province of Ontario through the Ministry of Economic Development and Innovation.
 \end{acknowledgments}
 
 
@@ -1792,12 +1792,12 @@ Whenever one considers some inflation DAG, the corresponding inflated causal hyp
 \end{align}
 As we will see in the following, the inflation hypothesis also implies similar constraints on the marginal distributions of certain \emph{sets} of variables.
 
-Given sets of nodes $\bm{U}$ and $\bm{Y}$ in an inflation DAG $G'$, let us say that a map $\varphi:\bm{U}\to\bm{V}$ is a \tblue{copy isomorphism} if it is a graph isomorphism such that $\varphi(X)\sim X$ for all $X\in\bm{U}$, meaning that $\varphi$ maps every node $X\in\bm{U}$ to a node $\varphi(X)\in\bm{Y}$ that is equivalent to $X$ under dropping the copy index. We have been using the notion of a copy isomorphism previously by writing $\bm{U}\sim\bm{V}$ whenever there exists a copy isomorphism $\varphi:\bm{U}\to\bm{V}$.
+Given sets of nodes $\bm{U}$ and $\bm{Y}$ in an inflation DAG $G'$, let us say that a map $\varphi:\subgraph{\bm{U}}\to\subgraph{\bm{V}}$ is a \tblue{copy isomorphism} if it is a graph isomorphism\footnote{A graph isomorphism is a bijective map between the nodes of one graph and the nodes of another, such that the action of the map transforms the complete \emph{set of edges} defining the first graph into the complete set of edges comprising the second graph.} such that $\varphi(X)\sim X$ for all $X\in\bm{U}$, meaning that $\varphi$ maps every node $X\in\bm{U}$ to a node $\varphi(X)\in\bm{Y}$ that is equivalent to $X$ under dropping the copy index. %We have been using the notion of a copy isomorphism previously by writing $\bm{U}\sim\bm{V}$ whenever there exists a copy isomorphism $\varphi:\bm{U}\to\bm{V}$.
 
 % A special case of a bijection is a graph isomorphism, which is a bijection between the nodes of one graph and the nodes and another such that the action of the bijection is to reversibly transform the first graph into the second one.
 % A copy isomorphism, therefore, is defined as a graph isomorphism that is also a copy bijection. The same specialization apply to graph automorphism: an inflation DAG can posses many symmetries, i.e. permutations of the nodes such that the permutation leaves the DAG invariant. Generally, however, only a subset of the possible automorphisms are also copy bijections, i.e. copy automorphisms are a subset of graph isomorphism.
 
-Furthermore, we say that a copy isomorphism $\varphi : \bm{U}\to\bm{V}$ is an \tblue{inflationary isomorphism} whenever it can be extended to a copy isomorphism $\Phi : \ansubgraph{\bm{U}}\to\ansubgraph{\bm{V}}$. If one starts with such a $\Phi$, then one can reconstruct $\varphi$ by restricting the domain of $\Phi$ to $\bm{U}$. If the image of this restriction is $\bm{V}$, then one obtains an inflationary isomorphism; that this restriction is indeed a copy isomorphism follows automatically. So in practice, one can either start with $\varphi : \bm{U}\to\bm{V}$ and try to extend it to $\Phi : \ansubgraph{\bm{U}}\to\ansubgraph{\bm{V}}$, or start with such a $\Phi$ and see whether it restricts to a $\varphi:\bm{U}\to\bm{V}$.
+Furthermore, we say that a copy isomorphism $\varphi : \subgraph{\bm{U}}\to\subgraph{\bm{V}}$ is an \tblue{inflationary isomorphism} whenever it can be extended to a copy isomorphism $\Phi : \ansubgraph{\bm{U}}\to\ansubgraph{\bm{V}}$. If one starts with such a $\Phi$, then one can reconstruct $\varphi$ by restricting the domain of $\Phi$ to $\bm{U}$. If the image of this restriction is $\bm{V}$, then one obtains an inflationary isomorphism; that this restriction is indeed a copy isomorphism follows automatically. So in practice, one can either start with $\varphi \subgraph{\bm{U}}\to\subgraph{\bm{V}}$ and try to extend it to $\Phi : \ansubgraph{\bm{U}}\to\ansubgraph{\bm{V}}$, or start with such a $\Phi$ and see whether it restricts to a $\varphi:\subgraph{\bm{U}}\to\subgraph{\bm{V}}$.
 
 %which satisfies two conditions simultaneously: 1) the copy bijection is a graph isomorphism relating $\ansubgraph[G']{\bm{X}}$ to $\ansubgraph[G']{\bm{Y}}$, and 2) the copy bijection takes $\bm{X}$ to $\bm{Y}$.
 
@@ -1806,17 +1806,17 @@ Furthermore, we say that a copy isomorphism $\varphi : \bm{U}\to\bm{V}$ is an \t
 By the very definition of inflation model, the inflation hypothesis implies an equation between marginal distributions:
 
 \begin{lemma}
-	If $\varphi:\bm{U}\to\bm{V}$ is an inflationary isomorphism, then $P_{\bm{U}} = P_{\bm{V}}$ in any inflation model, where the variables in $\bm{U}$ and $\bm{V}$ are matched up according to $\varphi$.
+	If $\varphi:\subgraph{\bm{U}}\to\subgraph{\bm{V}}$ is an inflationary isomorphism, then $P_{\bm{U}} = P_{\bm{V}}$ in any inflation model, where the variables in $\bm{U}$ and $\bm{V}$ are matched up according to $\varphi$.
 	\label{lem:coincide}
 \end{lemma}
 
-In order to equate the distribution $P_{\bm{U}}$ with the distribution $P_{\bm{V}}$, one needs to specify a correspondence between the variables that make up $\bm{U}$ and those that make up $\bm{V}$. This is exactly the data provided by $\varphi$. If $\varphi$ is not the identity map, then the resulting equation $P_{\bm{U}} = P_{\bm{V}}$ is nontrivial equation even when $\bm{U}=\bm{V}$: in this case, the equation is effectively requiring $P_{\bm{U}}$ to be invariant under permuting the variables according to $\varphi$.
+In order to equate the distribution $P_{\bm{U}}$ with the distribution $P_{\bm{V}}$, one needs to specify a correspondence between the variables that make up $\bm{U}$ and those that make up $\bm{V}$. This is exactly the data provided by $\varphi$. If $\varphi$ is not the identity map, then the resulting equation $P_{\bm{U}} = P_{\bm{V}}$ is nontrivial equation even when $\bm{U}=\bm{V}$: in this case, the equation is effectively requiring $P_{\bm{U}}$ to be invariant under permuting the variables according to the automorphism $\varphi$.
 
 We illustrate Lemma~\ref{lem:coincide} with an example. For the inflation of~\cref{fig:Tri222}, the map
 \[
 	\varphi \: : \: A_1 \mapsto A_1,\qquad A_2\mapsto A_2,\qquad B_1\mapsto B_2
 \]
-is a copy isomorphism between $\bm{U}=\{A_1 A_2 B_1\}$ and $\bm{V}=\{A_1 A_2 B_2\}$, since it maps each copy to a copy of the same type, and trivially implements a graph isomorphism between $\subgraph{\bm{U}}$ and $\subgraph{\bm{V}}$, since neither of these graphs has any edges. There is a unique choice to extend $\varphi$ to a copy isomorphism $\ansubgraph{\bm{U}}\to\ansubgraph{\bm{V}}$ given by each of $Y_2$, $X_1$, and $Y_1$ mapping to itself, as well as $Z_1\mapsto Z_2$. Therefore $\varphi$ is indeed an inflationary isomorphism. From Lemma~\ref{lem:coincide}, we then conclude that any inflation model satisfies $P_{A_1 A_2 B_1} = P_{A_1 A_2 B_2}$.
+is a copy isomorphism between the non-ancestral subgraphs of $\bm{U}=\{A_1 A_2 B_1\}$ and $\bm{V}=\{A_1 A_2 B_2\}$, since it maps each copy to a copy of the same type, and trivially implements a graph isomorphism between $\subgraph{\bm{U}}$ and $\subgraph{\bm{V}}$, since neither of these graphs has any edges. There is a unique choice to extend $\varphi$ to a copy isomorphism $\ansubgraph{\bm{U}}\to\ansubgraph{\bm{V}}$ given by each of $Y_2$, $X_1$, and $Y_1$ mapping to itself, as well as $Z_1\mapsto Z_2$. Therefore $\varphi$ is indeed an inflationary isomorphism. From Lemma~\ref{lem:coincide}, we then conclude that any inflation model satisfies $P_{A_1 A_2 B_1} = P_{A_1 A_2 B_2}$.
 
 \begin{figure}[b]
     \centering
@@ -1832,12 +1832,14 @@ is a copy isomorphism between $\bm{U}=\{A_1 A_2 B_1\}$ and $\bm{V}=\{A_1 A_2 B_2
     \end{minipage}\hfill    
     \begin{minipage}[t]{0.3\linewidth}      \centering
     \includegraphics[scale=1]{ISancestorDAG.pdf}
-    \caption{The ancestral subgraph of \cref{fig:IScopyDAG} for either $\{X_2 Y_2 Z_1\}$ or $\{X_1 Y_2 Z_2\}$.}
+    \caption{The ancestral subgraph of \cref{fig:IScopyDAG} for either $\{X_1 Y_2 Z_1\}$ or $\{X_1 Y_2 Z_2\}$.}
     \label{fig:ancestralsubgraphnotenough}
     \end{minipage}
 \end{figure}
 
-For a non-example, consider the inflation DAG in \cref{fig:IScopyDAG}. The identity map implements a copy isomorphism $\ansubgraph{X_2 Y_2 Z_1}\sim\ansubgraph{X_1 Y_2 Z_2}$, since both of these ancestral subgraphs are the DAG of~\cref{fig:ancestralsubgraphnotenough}. Nevertheless there is no inflationary isomorphism between ${X_2 Y_2 Z_1}$ and ${X_1 Y_2 Z_2}$, since the subgraphs on these two sets of nodes are not even copy isomorphic, i.e.~$\{X_2Y_2 Z_1\}\not\sim\{X_1 Y_2 Z_2\}$.
+To be clear, the existence of a copy isomorphism between ancestral subgraphs is \emph{not}, by itself, a sufficient criterion to justify coinciding distributions. Nor is the existence of a copy isomorphism between non-ancestral subgraphs. Rather, the ancestral subgraph isomorphism must reduce to the non-ancestral subgraph isomorphism. The following example illustrates why the existence of a copy isomorphism between ancestral subgraphs is not, by itself, a sufficient criterion to justify coinciding distributions.
+
+Consider the inflation DAG in \cref{fig:IScopyDAG}. The identity map implements the only possible copy isomorphism $\ansubgraph{X_1 Y_2 Z_1}\to\ansubgraph{X_1 Y_2 Z_2}$, since both of these ancestral subgraphs are the DAG of~\cref{fig:ancestralsubgraphnotenough}. Nevertheless there is no inflationary isomorphism between ${X_1 Y_2 Z_1}$ and ${X_1 Y_2 Z_2}$, since the non-ancestral subgraphs of these two sets of nodes are not even copy isomorphic, i.e.~$\subgraph{X_1 Y_2 Z_1}\not\sim\subgraph{X_1 Y_2 Z_2}$!
 
 %In general there may exist multiple inflationary isomorphisms, for example the sets $\brackets{A_1 A_2 B_1}$ and $\brackets{A_1 A_2 B_2}$ can be related by either 
 %\begin{align}
@@ -1860,7 +1862,7 @@ For a non-example, consider the inflation DAG in \cref{fig:IScopyDAG}. The ident
 
 %In other words, $\pdf{\bm{X}}=\pdf{\bm{Y}}$ if and only if an inflationary graph isomorphism exists between $\ansubgraph[G']{\bm{X}}$ and $\ansubgraph[G']{\bm{Y}}$ which preserves the inflationary isomorphism between $\bm{X}$ and $\bm{Y}$. 
 
-One can try to make use of Lemma~\ref{lem:coincide} when deriving polynomial inequalities with inflation via solving the marginal problem, by imposing $P_{\bm{U}} = P_{\bm{V}}$ as an additional constraint for every inflationary isomorphism $\varphi : \bm{U}\to\bm{V}$ between sets of observable nodes. This is advantageous to speed up to the linear quantifier elimination, since one can solve each of the resulting equations for one of the unknown joint probabilities and thereby eliminate that probability directly without Fourier-Motzkin elimination.
+One can try to make use of Lemma~\ref{lem:coincide} when deriving polynomial inequalities with inflation via solving the marginal problem, by imposing $P_{\bm{U}} = P_{\bm{V}}$ as an additional constraint for every inflationary isomorphism $\varphi : \subgraph{\bm{U}}\to\subgraph{\bm{V}}$ between sets of observable nodes. This is advantageous to speed up to the linear quantifier elimination, since one can solve each of the resulting equations for one of the unknown joint probabilities and thereby eliminate that probability directly without Fourier-Motzkin elimination.
 
 Moreover, one could also hope that these additional equations would result in tighter constraints on the marginal problem, which then results in better polynomial inequalities. However, our computations have so far not revealed any example of such a tightening. In some cases, this lack of impact can be explained as follows.
 % We define two ordered sets of observable nodes $\bm{X}$ and $\bm{Y}$ in some inflation DAG $G'$ to be \tblue{irrelevant to the marginal problem} if there exists a copy bijection $\varphi:\nodes{G'}\to\nodes{G'}$ which satisfies two conditions:
@@ -1868,7 +1870,9 @@ Moreover, one could also hope that these additional equations would result in ti
 %	\item $\varphi$ is a graph isomorphism,
 %	\item $\varphi$ maps $\bm{X}$ onto $\bm{Y}$.
 %\end{enumerate}
-Suppose that $\varphi:\bm{U}\to\bm{V}$ is an inflationary isomorphism which is not just the restriction of a copy isomorphism between the ancestral subgraphs, but even the restriction of a copy isomorphism $\Phi':G'\to G'$ of the entire inflation DAG onto itself; in particular, this assumption implies that $\Phi'$ also restricts to a copy isomorphism $\Phi:\ansubgraph{\bm{U}}\to\ansubgraph{\bm{V}}$ between the ancestral subgraphs. In this case, the irrelevance of the additional constraint $P_{\bm{U}} = P_{\bm{V}}$ to the marginal problem for inflation models can be explained by the following argument. Suppose that some joint distribution $P$ solves the unconstrained marginal problem, i.e.~without requiring $P_{\bm{U}} = P_{\bm{V}}$. Now apply $\Phi'$ to the variables in $P$, switching the variables around, to generate a new distribution $P'$. Because the set of marginal distributions that arise from inflation models is invariant under this switching of variables, we conclude that $P'$ is also a solution to the unconstrained marginal problem. Taking the uniform mixture of $P$ and $P'$ is therefore still a solution of the unconstrained marginal problem. But this uniform mixture also satisfies the supplementary constraint $P_{\bm{U}} = P_{\bm{V}}$. Hence the supplementary constrained is satisfiable automatically whenever the unconstrained marginal problem is solvable, which makes adding the constraint irrelevant.
+Suppose that $\varphi:\subgraph{\bm{U}}\to\subgraph{\bm{V}}$ is an inflationary isomorphism which is not just the restriction of a copy isomorphism between the ancestral subgraphs, but even the restriction of a copy automorphism $\Phi':G'\to G'$ of the entire inflation DAG onto itself; in particular, this assumption implies that $\Phi'$ also restricts to a copy isomorphism $\Phi:\ansubgraph{\bm{U}}\to\ansubgraph{\bm{V}}$ between the ancestral subgraphs. In this case, the irrelevance of the additional constraint $P_{\bm{U}} = P_{\bm{V}}$ to the marginal problem for inflation models can be explained by the following argument. 
+
+Suppose that some joint distribution $P$ solves the unconstrained marginal problem, i.e.~without requiring $P_{\bm{U}} = P_{\bm{V}}$. Now apply $\Phi'$ to the variables in $P$, switching the variables around, to generate a new distribution $P'$. Because the set of marginal distributions that arise from inflation models is invariant under this switching of variables, we conclude that $P'$ is also a solution to the unconstrained marginal problem. Taking the uniform mixture of $P$ and $P'$ is therefore still a solution of the unconstrained marginal problem. But this uniform mixture also satisfies the supplementary constraint $P_{\bm{U}} = P_{\bm{V}}$. Hence the supplementary constrained is satisfiable automatically whenever the unconstrained marginal problem is solvable, which makes adding the constraint irrelevant.
 
 Note that the argument does not apply if the inflationary isomorphism $\varphi:\bm{U}\to\bm{V}$ cannot be extended to a copy isomorphism of the entire inflation DAG. It also does not apply if one uses the conditional independence relations on the inflation DAG as well, since this destroys linearity. We do not know what happens in either of these cases.
 
@@ -2000,7 +2004,7 @@ As it turns out, the inflation DAG technique is also useful outside of the probl
 \begin{lemma}
 	Let $A$, $B$ and $C$ be random variables with distribution $P_{ABC}$. Then there exists a fourth random variable $A'$ and joint distribution $P_{AA'BC}$ such that:
 	\begin{enumerate}
-		\item $P_{AB} = P_{AB'}$,
+		\item $P_{AB} = P_{A'B}$,
 		\item $A' \perp AC \:|\: B$.
 	\label{copylemma}
 	\end{enumerate}
