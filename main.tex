@@ -429,7 +429,7 @@ A given distribution over observed variables is said to be \tblue{compatible} wi
 We now introduce the notion of \tblue{an inflation of a causal model}.  %Let $C_G$ denote a causal model associated to a DAG $G$.  
 If the original causal model is associated to a DAG $G$, then a nontrivial inflation of this model is associated to a different DAG, $G'$.  
 %An inflation of this model is another causal model, denoted $C_{G'}$ and associated to a different DAG, $G'$.  
-We refer to $G'$ as an inflation of $G$.  There are many possible choices of $G'$ for a given $G$ (specified below), hence many possible inflations of a given DAG.  We denote the set of these by $\SmallNamedFunction{Inflations}{G}$.   The choice of an element $G'\in \SmallNamedFunction{Inflations}{G}$ is the only freedom in the inflation of a causal model.  Once a choice is made, the set of parameters of the inflation model $M'$ is fixed uniquely by the set of parameters of the original model $M$ by a function $\SmallNamedFunction{Inflation}{G\to G'}$ (specified below), such that $M' = \SmallNamedFunction[G\to G']{Inflation}{M}$.
+We refer to $G'$ as an inflation of $G$.  There are many possible choices of $G'$ for a given $G$ (specified below), hence many possible inflations of a given DAG.  We denote the set of these by $\SmallNamedFunction{Inflations}{G}$.   The choice of an element $G'\in \SmallNamedFunction{Inflations}{G}$ is the only freedom in the inflation of a causal model.  Once a choice is made, the set of parameters of the inflation model $M'$ is fixed uniquely by the set of parameters of the original model $M$ by a function $\mathsf{Inflation}_{G\to G'}$ (specified below), such that $M' = \SmallNamedFunction[G\to G']{Inflation}{M}$.
 
 We begin by defining the condition under which a DAG $G'$  is an inflation of a DAG $G$.  This requires some preliminary definitions. 
 
@@ -494,10 +494,10 @@ Different inflations of the Triangle scenario are depicted in \cref{fig:TriFullD
 \end{minipage}
 \end{figure}
 
-We now turn to specifying the function $\SmallNamedFunction{Inflation}\;_{G\to G'}$, that is, to specifying how a causal model transforms under inflation. 
+We now turn to specifying the function $\mathsf{Inflation}_{G\to G'}$, that is, to specifying how a causal model transforms under inflation. 
 
 \begin{definition}
-Consider causal models $M$ and $M'$ where $\SmallNamedFunction{DAG}{M}=G$ and $\SmallNamedFunction{DAG}{M'}=G'$ and such that $G'$ is an inflation of $G$.   The causal model $M'$ is said to be the \tblue{$G\to G'$ inflation of $M$}, that is, $M' = \SmallNamedFunction{Inflation}{M}$,  if and only if for every node $A_i$ in $G'$, the manner in which $A_i$ depends causally on its parents within $G'$ must be the same as the manner in which $A$ depends causally on its parents within $G$.  Noting that $A_i \sim A$ and that $\Pa[G']{A_i} \sim \Pa[G]{A}$ (given Eq.~\eqref{eq:definflationDAG}), one can formalize this condition as:
+Consider causal models $M$ and $M'$ where $\SmallNamedFunction{DAG}{M}=G$ and $\SmallNamedFunction{DAG}{M'}=G'$ and such that $G'$ is an inflation of $G$.   The causal model $M'$ is said to be the {\em \tblue{$G\to G'$ inflation of $M$}}, that is, $M' = \SmallNamedFunction[G\to G']{Inflation}{M}$,  if and only if for every node $A_i$ in $G'$, the manner in which $A_i$ depends causally on its parents within $G'$ must be the same as the manner in which $A$ depends causally on its parents within $G$.  Noting that $A_i \sim A$ and that $\Pa[G']{A_i} \sim \Pa[G]{A}$ (given Eq.~\eqref{eq:definflationDAG}), one can formalize this condition as:
 \begin{align}\label{eq:funcdependences}
 %M' = \SmallNamedFunction{Inflation}{M}_{G\to G'}  \quad \text{iff}\quad 
  \forall A_i \in \SmallNamedFunction{Nodes}{G'}:\; \pfunc{A_i| \Pa[G']{A_i}}=\pfunc{A|\Pa[G]{A}},
@@ -512,9 +512,9 @@ To sum up then, the inflation of a causal model is a new causal model where (i) 
 
 We are now in a position to describe the key property of the inflation of a causal model, the one that makes it useful for causal inference. 
 
-Let $G$ and $G'$ be DAGs with $G' \in \SmallNamedFunction{Inflations}{G}$, let $M$ and $M'$ be causal models with $M' = \SmallNamedFunction{Inflation}{M} _{G\to G'}$, and let $P$ and $P'$ be the joint distributions over observed variables arising in models $M$ and $M'$ respectively.  Finally, let $P_{\bm{U}}$ and $P'_{\bm{U}'}$ denote the marginal distribution of $P$ on $\bm{U}$ and of $P'$ on $\bm{U}'$ respectively. For any sets of nodes $\bm{U}' \subseteq \SmallNamedFunction{Nodes}{G'}$ and   $\bm{U} \subseteq \SmallNamedFunction{Nodes}{G}$,
+Let $G$ and $G'$ be DAGs with $G' \in \SmallNamedFunction{Inflations}{G}$, let $M$ and $M'$ be causal models with $M' = \SmallNamedFunction[G\to G']{Inflation}{M}$, and let $P$ and $P'$ be the joint distributions over observed variables arising in models $M$ and $M'$ respectively.  Finally, let $P_{\bm{U}}$ and $P'_{\bm{U}'}$ denote the marginal distribution of $P$ on $\bm{U}$ and of $P'$ on $\bm{U}'$ respectively. For any sets of nodes $\bm{U}' \subseteq \SmallNamedFunction{Nodes}{G'}$ and   $\bm{U} \subseteq \SmallNamedFunction{Nodes}{G}$,
 \begin{align}\label{eq:coincidingdistrodef}
-\text{if }\quad \ansubgraph[G']{\bm{U}'}\sim\ansubgraph[G]{\bm{U}}\quad\text{then}\quad P_{\bm{U}'}=P_{\bm{U}}.
+P_{\bm{U}'}=P_{\bm{U}} \quad\text{if }\quad \ansubgraph[G']{\bm{U}'}\sim\ansubgraph[G]{\bm{U}}.%\quad\text{then}\quad P_{\bm{U}'}=P_{\bm{U}}.
 \end{align}
 
 This follows from the fact that the probability distributions over $\bm{U}'$ and $\bm{U}$ depend only on their ancestral subgraphs and the parameters defined thereon, which by the definition of inflation are the same for $\bm{U}'$ and for $\bm{U}$.
@@ -538,7 +538,8 @@ The fact that the sets $\brackets{A_1 B_1 C_1}$ and $\brackets{A_2 C_1}$ are inj
 
 It is useful to express \cref{eq:coincidingdistrodef} in the language of injectable sets, namely, as 
 \begin{align}\label{keyinference}
-\text{if }  \quad  \bm{U}'\in\SmallNamedFunction{InjectableSets}{{G'}_{\!\!^{/\!}G}} \quad \text{and} \quad \bm{U} \sim \bm{U}'  \quad\text{then}\quad P'_{\bm{U}'}=P_{\bm{U}}.
+%\text{if }  \quad  \bm{U}'\in\SmallNamedFunction{InjectableSets}{{G'}_{\!\!^{/\!}G}} \quad \text{and} \quad \bm{U} \sim \bm{U}'  \quad\text{then}\quad P'_{\bm{U}'}=P_{\bm{U}}.
+P'_{\bm{U}'}=P_{\bm{U}}\quad\text{if }  \bm{U} \sim \bm{U}'\quad \text{and} \quad \bm{U}'\in\SmallNamedFunction{InjectableSets}{{G'}_{\!\!^{/\!}G}}.% \quad \text{and} \quad \bm{U} \sim \bm{U}'  \quad\text{then}\quad P'_{\bm{U}'}=P_{\bm{U}}.
 \end{align}
 
 Finally, we can explain why inflation is relevant for deciding whether a distribution is compatible with a causal structure.  For a family of marginal distributions $\{ P_{\bm{U}} : \bm{U} \in \SmallNamedFunction{ImagesInjectableSets}{{G}_{\!^{/\!}G'}}$ to be compatible with $G$, there must be a causal model $M$ that yields a joint distribution with this family as its marginals.   Similarly, for a family of marginal distributions $\{ P'_{\bm{U}'} : \bm{U}' \in \SmallNamedFunction{InjectableSets}{{G'}_{\!\!^{/\!}G}}$ to be compatible with $G'$, there must be a causal model $M'$ that yields a joint distribution with this family as its marginals.  Now note that in the first problem, the only parameters of the model $M$ that are relevant are those pertaining to nodes in the ancestral subgraph of some $\bm{U}\in \SmallNamedFunction{ImagesInjectableSets}{{G}_{\!^{/\!}G'}}$, and in the second problem, the only parameters of the model $M'$ that are relevant are those pertaining to nodes in the ancestral subgraph of some $\bm{U}' \in \SmallNamedFunction{InjectableSets}{{G'}_{\!\!^{/\!}G}}$.  But for a given pair $\bm{U}$ and $\bm{U}'$ such that  $\bm{U} \sim \bm{U}'$, the parameters in the model $M$ that determine the distribution on  $\bm{U}$ are, by the definition of inflation, precisely equal to the parameters in the model $M' = \SmallNamedFunction[G\to G']{Inflation}{M}$ that determine the distribution on $\bm{U}'$.  
@@ -674,12 +675,12 @@ implies that $C_1\eql 0$ whenever $A_2 \eql 1$. Similarly, Eq.~\eqref{W2} implie
 
 Our inflation DAG is such that $A_2$,$B_2$, and $C_2$ have no common ancestor and consequently, they are all marginally independent in any distribution consistent with this inflation DAG.  This fact, together with Eqs.~\eqref{W5}-\eqref{W7}, implies that %$A_2$,$B_2$, and $C_2$ sometimes all take the value 1,
 \begin{align} \label{WW2}
-\text{sometimes} \quad &A_2 \eql 1\,\text{ and }\, B_2 \eql 1\,\text{ and }\, C_2 \eql 1.
+\text{Sometimes} \quad &A_2 \eql 1\,\text{ and }\, B_2 \eql 1\,\text{ and }\, C_2 \eql 1.
 \end{align} 
 
 Finally, Eqs.~\eqref{Ws1}-\eqref{Ws3} together with Eq.~\eqref{WW2} imply
 \begin{align} \label{WW3}
-\text{sometimes} \quad &A_1 \eql 0\,\text{ and }\, B_1 \eql 0\,\text{ and }\, C_1 \eql 0.
+\text{Sometimes} \quad &A_1 \eql 0\,\text{ and }\, B_1 \eql 0\,\text{ and }\, C_1 \eql 0.
 \end{align}
 This, however, contradicts Eq.~\eqref{W4}.  Consequently, the set of marginals described in Eqs.~\eqref{W4}-\eqref{W7} are \emph{not} compatible with the DAG of Fig.~\ref{fig:Tri222v2}.  By lemma \ref{mainlemma}, this implies that the set of marginals described in Eqs.~\eqref{V4}-\eqref{V7}---and therefore the W-type distribution of which they are marginals---is not compatible with the DAG of the triangle scenario.
 % and the fact that $P_{\text{W}}$ has no weight on $[000]$.
@@ -1012,7 +1013,7 @@ In all of the examples from the previous section, the inequality with which one 
 
 A set of nodes $\bm{U}'$ in the inflation DAG $G'$ will be called \tblue{pre-injectable} whenever it is a union of injectable sets with disjoint ancestries. 
 \begin{align}\label{eq:defpreinj}
-\bm{U}'\in\SmallNamedFunction{PreInjectableSets}{G'} \quad\text{ iff }\quad  \exists \{ \bm{U}_i \in \SmallNamedFunction{InjectableSets}{G'} \} \quad \text{s.t.}\quad \bm{U}'=\bigcup_i \bm{U}_i  \quad\text{and} \quad  \forall i\ne j: \bm{U}_i \aindep \bm{U}_j.
+\bm{U}'\in\SmallNamedFunction{PreInjectableSets}{{G'}_{\!\!^{/\!}G}} \quad\text{ iff }\quad  \exists \{ \bm{U}_i \in \SmallNamedFunction{InjectableSets}{{G'}_{\!\!^{/\!}G}} \} \quad \text{s.t.}\quad \bm{U}'=\bigcup_i \bm{U}_i  \quad\text{and} \quad  \forall i\ne j: \bm{U}_i \aindep \bm{U}_j.
 %\bm{U}\in\SmallNamedFunction{PreInjectableSets}{G'} \quad\text{ iff }\quad  \exists \{ \bm{U}_i \}_i \quad \text{s.t.}\quad \bm{U}=\bigcup_i \bm{U}_i  \quad\text{and} \quad \forall i 
 %: \bm{U}_i \in \SmallNamedFunction{InjectableSets}{G'}\quad \text{and}\quad \forall i,j
 %: \bm{U}_i \aindep \bm{U}_j.
