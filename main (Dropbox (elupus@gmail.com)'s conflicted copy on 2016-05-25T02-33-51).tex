@@ -291,7 +291,7 @@ anchorcolor=OliveGreen}
 \begin{document}
 %\preprint{ }
 %\title{Transitivity of implication and causal structure}
-\title{The Inflation Technique for Causal Inference with Latent Variables}
+\title{The inflation technique for Causal Inference with Latent Variables}
 \author{Elie Wolfe}
 \email{ewolfe@perimeterinstitute.ca}
 \affiliation{Perimeter Institute for Theoretical Physics, Waterloo, Ontario, Canada, N2L 2Y5}
@@ -307,37 +307,12 @@ anchorcolor=OliveGreen}
 
 \begin{abstract}
 
-The fundamental problem of causal inference is to determine whether or not a given probability distribution over observed variables is compatible with some causal structure (which may incorporate latent variables).  
-It is therefore valuable to be able to derive causal compatibility inequalities.  These are inequalities whose violation by a distribution witnesses the incompatibility of that distribution with the given causal structure.  
-Prominent examples are Bell inequalities and Pearl's instrumental inequality.
-% but these each pertain to only a single specific causal structure.  
-%Such inequalities arise in many fields.  
-%The problem of causal inference via incompatibility witnesses comes up in many fields. Special causal compatibility inequalities are Bell inequalities (which distinguish non-classical from classical distributions) and Tsirelson inequalities (which distinguish quantum from post-quantum distributions), and Pearl's instrumental inequality. All of these are limited to very specific causal structures. 
-%Analogues of such inequalities for more-general causal structures, i.e., necessary criteria for either classical or quantum distributions to be realizable from the structure, are highly sought after. 
-We here introduce a technique for deriving such inequalities for arbitrary causal structures.
- It consists of applying a map, which we term {\em inflation}, on the causal structure of interest in order to obtain a new causal structure that can contain multiple copies of one or more of the variables of the original.
-%, a process we call {\em inflation}.  
-By construction, any causal compatability inequality on the inflated structure can be translated into one for the original structure, and because inflation often introduces novel d-separation relations, it often generates easy opportunities for such translations. 
-% {\em obvious} inequalities on the inflated structure which yield nonobvious inequalities for the original structure. 
-\begin{comment}
-The inflation map is defined in such a way that any causal compatability inequality on the inflated structure can be translated into one for the original structure.  It often introduces novel d-separation relations among the observed variables, which in turn lead to obvious inequalities for the inflated structure that are then translatable into nonobvious inequalities for the original structure. 
-\end{comment}
-%first \textit{inflating} the causal structure and then translating weak constraints on the inflated structure into stronger constraints on the original structure. 
-We provide several examples of how the technique is powerful enough to rederive known results, such as the copy lemma and Bell inequalities, and we numerically derive all of the constraints that it implies for a particular concrete example---an inflation of the so-called triangle scenario
- %(a causal structure consisting of three observed variables each pair of which shares a distinct latent parent)
- ---obtaining a set of causal compatability inequalities that are provably stronger than those derived from other techniques.
-%Concretely, we derive polynomial inequalities for the so-called Triangle scenario, and we show how all Bell inequalities also follow from our method. %analyze Pearl's instrumental inequality from our perspective. 
-%We also show that if one is 
-Given a {\em specific} probability distribution and a causal structure, our technique provides an efficient means of witnessing their incompatibility.
-%can be used to efficiently witness their incompatibility.
-%, without requiring explicit inequalities.
-\begin{comment}
-Furthermore, given both a causal structure and a specific probability distribution, our technique can be used to efficiently witness their incompatibility, without requiring explicit inequalities. The inflation technique is therefore both relevant and practical for general causal inference tasks with latent variables.
-\end{comment}
-Finally, we show how our technique can be used to derive causal compatibility inequalities for a quantum generalization of the notion of a causal model as well as for a post-quantum generalization of the notion of a causal model (so-called generalized probabilistic theories).  
-%Moreover, we show that our technique can be used to also derive causal compatibility inequalities for causal models that obey quantum theory and for causal models that are neither classical nor quantum but rather obey some generalized probabilistic theories.  
-%Moreover, we show how our technique can be tuned to yield either classical witnesses (i.e., that may have quantum violations), or post-classical witnesses (i.e., that hold even in the context of general probability theories), depending on whether or not the inflation implicitly broadcasts the value of a  latent variable. 
+The fundamental problem of causal inference is to infer if an observed probability distribution is compatible with some causal structure which may incorporate latent variables.
+Given a particular causal structure, it is therefore valuable to derive incompatibility inequalities, i.e. criteria whose violation witnesses the incompatibility of the violating distribution with the given causal structure.
+The problem of causal inference via incompatibility witnesses comes up in many fields. Special causal incompatibility inequalities are Bell inequalities (which distinguish non-classical from classical distributions) and Tsirelson inequalities (which distinguish quantum from post-quantum distributions), and Pearl's instrumental inequality. All of these are limited to very specific causal structures. Analogues of such inequalities for more-general causal structures, i.e., necessary criteria for either classical or quantum distributions to be realizable from the structure, are highly sought after. 
 
+We here introduce a technique for deriving such causal incompatibility inequalities, applicable to any causal structure. It consists of first \textit{inflating} the causal structure and then translating weak constraints on the inflated structure into stronger constraints on the original structure. Moreover, we show how our technique can be tuned to yield either classical witnesses (i.e., that may have quantum violations), or post-classical witnesses (i.e., that hold even in the context of general probability theories), depending on whether or not the inflation implicitly broadcasts the value of a hidden variable. Concretely, we derive polynomial inequalities for the so-called Triangle scenario, and we show how all Bell inequalities also follow from our method. %analyze Pearl's instrumental inequality from our perspective. 
+Furthermore, given both a causal structure and a specific probability distribution, our technique can be used to efficiently witness their incompatibility, without requiring explicit inequalities. The inflation technique is therefore both relevant and practical for general causal inference tasks with hidden variables.
 
 
 \end{abstract}
@@ -348,19 +323,16 @@ Finally, we show how our technique can be used to derive causal compatibility in
 
 \section{Introduction}
 
-Given a probability distribution over some observed variables, the problem of \tblue{causal inference} is to determine which hypotheses about the causal mechanisms---both causal relations among the observed variables and between these and unobserved variables that may act upon them---can explain the probability distribution.
-%what causal relations could hold among the set of variables that includes these as well as a putative set of unobserved variables that act upon them. 
-%, among the observed variables themselves or among these and a putative set of unobserved variables, could  this distribution.
-%among these variables and possibly also some unobserved variables could have generated this distribution.
- This type of problem arises in a wide variety of scientific disciplines, from sussing out biological pathways to enabling machine learning \cite{pearl2009causality,spirtes2011causation,studeny2005probabilistic,koller2009probabilistic}. A related problem is to determine, for a given set of causal relations, the set of all probability distributions that can be generated from them.   
-A special case of both problems is the following decision problem: given a probability distribution and a hypothesis about the causal relations,  determine whether the two are compatible, in the sense that the hypothesized causal relations could in principle have generated the given distribution. 
-In this article, we focus on techniques for solving the decision problem and for finding necessary conditions on a probability distribution for it to be compatible with a given hypothesis about the causal relations.
+Given a probability distribution over some random variables, the problem of \tblue{causal inference} is to determine what causal relations among these variables and possibly also some unobserved variables could have generated this distribution. This type of problem arises in a wide variety of scientific disciplines, from sussing out biological pathways to enabling machine learning \cite{pearl2009causality,spirtes2011causation,studeny2005probabilistic,koller2009probabilistic}. A related problem is to determine, for a given set of causal relations, the set of all probability distributions that can be generated from them.   
+A special case of both is the following decision problem: given a probability distribution and a causal hypothesis, 
+determine whether the two are compatible, in the sense that the causal relations permitted by the hypothesis could in principle have generated the given distribution. 
+In this article, we focus on techniques for solving the decision problem and for finding necessary conditions on a probability distribution for compatibility with a given causal hypothesis.
 
 %\tblue{infeasibility criteria}, i.e., observable constraints such that the their violation implies the invalidity of the hypothesis as an explanation for observational data. 
 
-In the simplest setting, the causal hypothesis consists of a directed acyclic graph (DAG) {\em all} of whose nodes correspond to observed variables. In this case, obtaining a verdict on the compatibility of a given distribution with the causal hypothesis is simple: the compatibility holds if and only if the distribution is Markov with respect to the DAG, which is to say that all of the conditional independence relations in the distribution are explained by the structure of the DAG. The compatible DAGs can be determined algorithmically solely from the distribution. \sout{ i.e.~without having an \emph{a priori} hypothesis}~\cite{pearl2009causality}.
+In the simplest setting, the causal hypothesis consists of a directed acyclic graph (DAG) whose nodes all correspond to {\em observed} variables. In this case, obtaining a verdict on the compatibility of a given distribution with the causal hypothesis is simple: the compatibility holds if and only if the distribution is Markov with respect to the DAG, which is to say that all of the conditional independence relations in the distribution are explained by the structure of the DAG. The compatible DAGs can be determined algorithmically solely from the distribution. \sout{ i.e.~without having an \emph{a priori} hypothesis}~\cite{pearl2009causality}.
 
-A significantly more difficult case is when one considers a causal hypothesis which consists of a DAG whose nodes include \tblue{latent} (i.e., unobserved) variables, so that the set of observed variables is a strict subset of the nodes of the DAG. This case occurs, e.g.,~in situations where one needs to deal with the possible presence of unobserved confounders, and is particularly relevant for experimental design in statistics. 
+A significantly more difficult case is when one considers a causal hypothesis which consists of a DAG whose nodes include \tblue{latent} variables, so that the set of observable variables is only a subset of the nodes of the DAG. This case occurs, e.g.,~in situations where one needs to deal with the possible presence of unobserved confounders, and is particularly relevant for experimental design in statistics. 
 
 It is useful to distinguish two varieties of this problem: (i) the causal hypothesis specifies the nature of the latent variables, for instance, that they are discrete and of a particular cardinality (the cardinality of a variable is the number of possible values it can take), and (ii) the nature of the latent variables is arbitrary.  
 
@@ -1123,7 +1095,7 @@ Preliminary to every strategy, however, is the identification of the pre-injecta
 
 \topic{\tred{Identifying the Pre-Injectable Sets}}\label{step:findpreinjectable}
 
-To identify the pre-injectable sets of an inflated DAG, we must first identify the \emph{injectable} sets. This problem can be reduced to identifying the injectable pairs, because it is the case that if all of the pairs in a set of nodes are injectable, then so too is the set itself.  The latter claim is proven as follows.   
+To identify the pre-injectable sets of an inflated DAG, we must first identify the \emph{injectable} sets. This problem can be reduced to identifying the injectable pairs, because it is the case that if all of the pairs in a set of nodes are injectable, then so too is the set itself.  The latter claim is proven as follows.   \color{purple} 
 %To prove this, it suffices to prove that if all of the pairs in a set of nodes are injectable, then so too is the set itself.  
 Let $\varphi : G' \to G$ be the projection map from the inflated DAG $G'$ to
 the original DAG $G$, corresponding to removing the copy-indices.  Then $\varphi$ has the characteristic feature that it takes edges to edges: if $A  \to B$ in $G'$, then also $\varphi(A) \to \varphi(B)$ in $G$. Conversely, if
@@ -1302,16 +1274,14 @@ Hence the image of the set of possibilities for the distribution $P_{\bm{X}}$ un
 
 %Thus solving the marginal problem is an instance of a facet enumeration problem, or equivalently a linear quantifier elimination problem;~\cref{sec:projalgorithms} gives an overview of how to solve this in practice. 
 
-Solving the marginal problem is therefore an instance of a facet enumeration problem. In \cref{sec:projalgorithms}, we provide an overview of techniques for solving this problem.  As we note there, it can be reduced to a linear quantifier elimination problem, which is the technique we apply here.
+Solving the marginal problem is therefore an instance of a facet enumeration problem. In \cref{sec:projalgorithms}, we provide an overview of techniques for solving this problem.  In particular, it can be reduced to a linear quantifier elimination problem, which is the technique we apply here.
 
 
 % quantifier-free form in terms of inequalities such that satisfaction of all such inequalities is necessary and sufficient for marginal compatibility. An efficient algorithm to solve the marginal problem is given in \cref{sec:projalgorithms}. The marginal problem comes up in a variety of applications, and has been studied extensively; see~\cite{fritz2013marginal} for further references.
 
-As an example, we consider 
-%here's how the marginal problem can be phrased as a linear quantifier elimination problem in 
-the marginal problem where $\bm{X} := \{ A_1, A_2, B_1, B_2, C_1, C_2\}$ and the contexts are the 
+As an example, here's how the marginal problem can be phrased as a linear quantifier elimination problem in the marginal problem where $\bm{X} := \{ A_1, A_2, B_1, B_2, C_1, C_2\}$ and the contexts are the 
 %case of the five three-variable marginal distributions corresponding to the 
-maximal pre-injectable sets in \cref{eq:basicsetup222} and show how to express it as a linear quantifier elimination problem.
+maximal pre-injectable sets in \cref{eq:basicsetup222}.
 % For simplicity, we assume that all observable variables are binary.
 %\footnote{If the observables are not binary, then the resulting  binary-outcome inequalities are necessary for marginal compatibility, in that they should hold for any course-graining of the observational data into two classes, but the binary-outcome inequalities are no longer sufficient.}.
 % In order for the five pre-injectable sets in \cref{eq:preinjectableuses222} to be marginally compatible there must exist 64 nonnegative joint probabilities, i.e. satisfying
@@ -1330,24 +1300,20 @@ and is required to reproduce the marginal distribution on each context via
 \end{split}
 \end{align}
 %For example in the case of binary variables, we therefore 
-If each variable is binary, then we have 64 inequalities and 40 equalities, although the latter are not all independent. In this case, facet enumeration requires eliminating 64 unknowns from those linear inequalities and equalities, namely, the joint probabilities $\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}$ for each of the 64 choices of $(a_1 a_2 b_1 b_2 c_1 c_2)$.
+If each variable is binary, then we have 64 inequalities and 40 equalities, although the latter are not all independent. In this case, facet enumeration requires eliminating 64 unknowns from those inequalities and equalities, namely, the joint probabilities $\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}$ for each of the 64 choices of $(a_1 a_2 b_1 b_2 c_1 c_2)$.
 %joint probabilities $\{ \p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2} : (a_1 a_2 b_1 b_2 c_1 c_2) {\underline{\phantom{xxxxx}}}$, 
 %and to thereby compute the inequalities that constrain the marginal probabilities.
 %We coin the term gedankenprobability to denote any probability pertaining to a \emph{not}-pre-injectable set of inflation-DAG variables. The gedankenprobabilities evoke thought experiments, because any \purp{black box implementation of the original causal structure % \emph{in-principle}.
 
-A general scheme for deriving causal compatibility inequalities for a DAG can be summarized as follows.  Choose an inflation of the DAG and identify the maximal pre-injectable sets thereon.  Next, solve the marginal problem where the contexts are the maximal pre-injectable sets.  By substituting into these inequalities the factorization conditions implied by ancestral independences among the variables in the maximal pre-injectable sets, one obtains causal compatibility inequalities for the inflated DAG.  Finally, these can be converted into causal compatibility inequalities for the original DAG using Corollary~\ref{maincorollary}.
+Given a set of inequality describing a facet of the marginal polytope 
 
-Note that if one merely has linear inequalities that contain the marginal polytope rather than describing its facets, one can still follow the above prescription for deriving causal compatibility inequalities.  This is the approach that we will consider in the next section.
-
-%\color{purple} Move this paragraph to later. \color{black}
-%Given a facet of the marginal polytope---or any other linear inequality that bounds it---we can construct a polynomial inequality for our original causal inference problem by plugging in the factorization relations of Lemma~\ref{mainlemma}. Doing the same with the equations of coinciding submarginals shows that these are trivially satisfied, and thus it is only the inequalities that are of interest to us.
+\color{purple} Move this paragraph to later. \color{black}
+Given a facet of the marginal polytope---or any other linear inequality that bounds it---we can construct a polynomial inequality for our original causal inference problem by plugging in the factorization relations of Lemma~\ref{mainlemma}. Doing the same with the equations of coinciding submarginals shows that these are trivially satisfied, and thus it is only the inequalities that are of interest to us.
 
 
-Linear quantifier elimination is already widely used in causal inference for deriving entropic causal compatibility inequalities \cite{fritz2013marginal,chaves2014novel,chaves2014informationinference}. In that task, however, the quantifiers being eliminated are entropies on sets of variables for which one or more is latent. By contrast, the quantifiers being eliminated in the inflation technique are all probabilities on sets of variables all of which are observed (although they are the observed variables of the inflated DAG rather than the original DAG); 
-%The unknowns we eliminate are the not-pre-injectable joint probabilities, which are, at least on first look, quite different from probabilities involving latent variables;
-~\cref{sec:Bellscenarios} will partly elucidate the relation.
+Linear quantifier elimination is already widely used in causal inference to derive entropic inequalities \cite{fritz2013marginal,chaves2014novel,chaves2014informationinference}. In that task, however, the quantifiers being eliminated are those entropies which refer to latent variables. By contrast, the probabilities we consider here are exclusively in terms of observable variables right from the very start (although not in terms of the original observables). The unknowns we eliminate are the not-pre-injectable joint probabilities, which are, at least on first look, quite different from probabilities involving latent variables;~\cref{sec:Bellscenarios} will partly elucidate the relation.
 
-Note that the marginal problem can be solved by computing \emph{either} a convex hull \emph{or} by eliminating quantifiers from linear inequalities. The derivation of entropic inequalities, by contrast, is strictly a linear quantifier elimination task, and cannot be recast as a convex hull problem. As such, while convex hull enumeration tools \emph{are} useful for deriving polynomial inequalities via the inflation technique, they are \emph{not} available for the derivation of entropic inequalities; see \cref{sec:projalgorithms} for further details.
+Note that the marginal problem can be solved by computing \emph{either} a convex hull \emph{or} by eliminating quantifiers from linear inequalities. The derivation of entropic inequalities, by contrast, is strictly a linear quantifier elimination task, and cannot be recast as a convex hull problem. As such, while convex hull enumerations tools \emph{are} useful to derive polynomial inequalities via the inflation technique, they are \emph{not} available for the derivation of entropic inequalities; see \cref{sec:projalgorithms} for further details.
 
 % When solving the marginal problem is too difficult, one may consider solving a relaxation of it, instead. One extremely computationally amenable relaxation of the marginal problem is to enumerate probabilistic Hardy-type paradoxes. This is discussed later on in  \cref{sec:TSEM}.
 
@@ -1358,54 +1324,23 @@ Note that the marginal problem can be solved by computing \emph{either} a convex
 
 \section{Deriving Hardy-type constraints for the marginal problem}\label{sec:TSEM}
 
-In the literature on Bell inequalities, it has been noticed that incompatibility with the Bell scenario DAG can sometimes be witnessed by only looking at which events have zero probability and which events have nonzero probability. In other words, instead of considering the \emph{probability} of a composite outcome, the inconsistency of some marginal distributions can be evident from considering only the \emph{possibility} or \emph{impossibility} of each composite outcome. This insight is originally due to~\citet{L.Hardy:PRL:1665}, and versions of Bell's theorem that are based on the violation of such \tblue{possibilistic constraints} are known as \tblue{Hardy-type paradoxes}. For more background on Hardy-type paradoxes, see Refs.~\cite{Garuccio95,CabelloHardyInequality,Braun08,Mancinska14,LSW}; a partial classification of these can be found in Ref.~\cite{Mansfield2012}.
+In the literature on Bell inequalities, it has been noticed that incompatibility with the Bell scenario DAG can sometimes be witnessed by only looking at which probabilities are zero and which ones are nonzero. In other words, instead of considering the \emph{probability} of a composite outcome, the inconsistency of some marginal distributions can be evident from considering only the \emph{possibility} or \emph{impossibility} of each composite outcome. This is due to~\citet{L.Hardy:PRL:1665}, and hence such \tblue{possibilistic constraints} are also known as \tblue{Hardy-type paradoxes}, in the sense that the ``paradox'' is said to occur whenever the constraint is violated. For more background on Hardy's paradoxes, see Refs.~\cite{Garuccio95,CabelloHardyInequality,Braun08,Mancinska14,LSW}; a partial classification of Hardy-type paradoxes in Bell scenarios can be found in Ref.~\cite{Mansfield2012}
 
-%The usual presentation
-The logical form of a simple Hardy-type paradox is as follows. One assumes the compatibility of a particular joint distribution and some causal structure,
- %(a distribution implied by quantum theory and the causal structure of the Bell scenario , 
- and one shows that these imply a set of mutually contradictory facts of the following form: that some event $E_1$ never occurs (is not possible), that some event $E_0$ \emph{does} occur sometimes (is possible), and that whenever $E_0$ occurs, then $E_1$ occurs as well. 
-%   Even though events $E_1, \ldots, E_n$ never occur (are not possible), some other event $E_0$ \emph{does} occur sometimes (is possible). However, 
-%logical relations between these events are such
-% that whenever $E_0$ occurs, then also at least one of $E_1,\ldots,E_n$ occurs, and this is in contradiction with the previous statement. 
- 
-We have already provided a simple example of this sort of argument in Sec.~\ref{}, in the logic used to demonstrate that the marginal distributions of Eqs.~\eqref{W4}-\eqref{W7} are incompatible with the DAG depicted in Fig.~\ref{fig:Tri222v2}.  The marginal distributions implied that the event $A_1= 0, B_1=0, C_1=0$ {\em never} occurs, while the marginal distributions and the causal structure together implied that the event $A_2 = 1, B_2 =1, C_2 =1$ must occur sometimes.  However, the marginal distributions also implied that if the latter event occurs, then the former event occurs as well, thereby establishing a contradiction and allowing us to conclude that the hypothesis of compatibility was false.
-%W-type distributions is incompatible with the triangle scenario. 
-%For the DAG depicted in Fig.~\ref{fig:Tri222v2}, the event $A_1 =0 
+The usual presentation of a Hardy-type paradox takes the following form: Even though events $E_1, \ldots, E_n$ never occur (are not possible), some other event $E_0$ \emph{does} occur sometimes (is possible). However, the logical relations between these events are such that whenever $E_0$ occurs, then also at least one of $E_1,\ldots,E_n$ occurs, and this is in contradiction with the previous statement.
 
-%\newcommand{\smiley}{\textrm{\Smiley}}
-%\newcommand{\frowny}{\textrm{\Frowny}}
+\newcommand{\smiley}{\textrm{\Smiley}}
+\newcommand{\frowny}{\textrm{\Frowny}}
 
-%The following example illustrates a Hardy-type paradox. Suppose a plague has suddenly wiped out a population of rats. Three kinds of autopsies are performed on different samples of the dead rats. Autopsies checking specifically for heart and brain disease find that every rat suffered from at least one of those conditions i.e. the event $[\mathrm{Brain}\eql\smiley,\mathrm{Heart}\eql\smiley]$ is found to be \emph{not possible}. In a slightly different vein, suppose further that autopsies specifically checking for brain and lung diseases find that every dead rat afflicted by brain disease also suffered from lungs disease, i.e. the event $[\mathrm{Brain}\eql\frowny,\mathrm{Lungs}\eql\smiley]$ is not possible. Logic (and the absence of sampling bias) then dictates that an autopsy for heart and lung disease will never find both heart and lungs simultaneously healthy. If some medical examiner checking rats heart and lung conditions then finds that \emph{it is possible} for a rat to have $[\mathrm{Heart}\eql\smiley,\mathrm{Lungs}\eql\smiley]$, this would be considered an occurrence of a Hardy-type paradox.
+The following example illustrates a Hardy-type paradox. Suppose a plague has suddenly wiped out a population of rats. Three kinds of autopsies are performed on different samples of the dead rats. Autopsies checking specifically for heart and brain disease find that every rat suffered from at least one of those conditions %, but never from \emph{both} conditions,
+i.e. the event $[\mathrm{Brain}\eql\smiley,\mathrm{Heart}\eql\smiley]$ is found to be \emph{not possible}. In a slightly different vein, suppose further that autopsies specifically checking for brain and lung diseases find that every dead rat afflicted by brain disease also suffered from lungs disease, i.e. the event $[\mathrm{Brain}\eql\frowny,\mathrm{Lungs}\eql\smiley]$ is not possible. Logic (and the absence of sampling bias) then dictates that an autopsy for heart and lung disease will never find both heart and lungs simultaneously healthy. If some medical examiner checking rats heart and lung conditions then finds that \emph{it is possible} for a rat to have $[\mathrm{Heart}\eql\smiley,\mathrm{Lungs}\eql\smiley]$, this would be considered an occurrence of a Hardy-type paradox.
 
 % Hardy-type paradoxes are predicated on assuming the existence of a solution to the marginal problem. Thus, ensuring the observational data avoids any Hardy-type paradoxes is a necessary condition for solving the marginal problem. \citet[Section~III.C]{LSW} discuss the use of possibilistic constraints to certify the incompatibility of marginal distributions in contexts of than Bell scenarios.
 
-A more general form of Hardy-type paradox is one wherein
-%More generally, it may be that 
-there is a {\em set} of events, $E_1, \ldots, E_n$, that never occur (rather than a single event $E_1$), an event $E_0$ that sometimes occurs, and an inference from $E_0$ occuring to at least one of $E_1,\ldots,E_n$ occuring.  The inference can be expressed as
-\begin{align}\label{eq:inference}
-    \SmallNamedFunction{}{E_0} \implies \SmallNamedFunction{}{E_1} \lor \ldots \lor \SmallNamedFunction{}{E_n}.
-\end{align}
-where $\lor$ denotes logical disjunction.  %Here too, if $E_0$ sometimes occurs, one obtains a constradiction.
-We refer to inferences of this sort as possibilistic constraints. 
-
-Any possibilistic constraint can be immediately translated into a probabilistic constraint, as noted by \citet{Mansfield2012}.  Specifically, if one applies the union bound to the possibilistic constraint of Eq.~\eqref{eq:inference} (the union bound asserts that the probability of at least one of a set of events occuring is no greater than the sum of the probabilities of each event occuring), then one obtains the probabilistic constraint
-\begin{align}
-\p{E_0}\leq \sum\limits_{j=1}^n{\p{E_j}}.
-\end{align}
-The fact that $E_1,\ldots,E_n$ never occur and the fact that $E_0$ sometimes occurs are expressed probabilistically as $P(E_1) = \dots = P(E_n)=0$ and $p(E_0) > 0$ respectively, and these valuations clearly violate the inequality.  But the inequality excludes other cases as well.
-
-%Any possibilistic constraint can be immediately translated into a stronger probabilistic one, as noted by \citet{Mansfield2012}. The probabilistic variant states than \emph{whenever} the event $E_0$ occurs than at least one of the events $E_1 .. E_N$ should also occur. Applying the union bound to the probability of the right-hand side we obtain
-%\begin{align}
-%\p{E_0}\leq \sum\limits_{j=1}^n{\p{E_j}}.
-%\end{align}
-
-\begin{comment}
 The possibilistic constraint which is equivalent to a Hardy-type paradox is as follows,
 \begin{align}
-\lnot[ E_1] \land \lnot[ E_2 ] \land  \ldots \land \lnot [ E_n ] \implies \lnot [E_0],
+    \SmallNamedFunction{Never}{E_1} \land \ldots \land \SmallNamedFunction{Never}{E_n} \implies \SmallNamedFunction{Never}{E_0},
 \end{align}
-where $\land$ and $lnot$ denote logical conjunction and negation respectively.  This inference can be expressed in contrapositive form as
-%although it can be expressed more fundamentally in conjuctive form, i.e.
+although it can be expressed more fundamentally in conjuctive form, i.e.
 \begin{align}
     \SmallNamedFunction{}{E_0} \implies \SmallNamedFunction{}{E_1} \lor \ldots \lor \SmallNamedFunction{}{E_n}.
 \end{align}
@@ -1413,7 +1348,6 @@ Any possibilistic constraint can be immediately translated into a stronger proba
 \begin{align}
 \p{E_0}\leq \sum\limits_{j=1}^n{\p{E_j}}.
 \end{align}
-\end{comment}
 
 In order to derive causal incompatibility witnesses via consistency of the marginal distributions, therefore, we may consider the task of \tblue{enumerating} Hardy-type paradoxes, each of which we can then express as an inequality in terms of probabilities. In the following, we explain how to determine \emph{all} such constraints for \emph{any} marginal problem.
 
@@ -2211,17 +2145,19 @@ As it turns out, the inflation technique is also useful outside of the problem o
 
 The proof via inflation is as follows.
 \begin{proof}
-We begin by noting that every possible joint distribution $P_{ABC}$ is compatible with a DAG of the form of~\cref{fig:beforecopy}.  This follows from the fact that one may take $X$ to be any \tblue{sufficient statistic} for the joint variable $(A,C)$ given $B$, such as $X := (A,B,C)$.  Next, we consider the inflation of \cref{fig:beforecopy} depicted in~\cref{fig:aftercopy}. The maximal injectable sets are $\{ A_1 B_1 C_1\}$ and $\{A_2 B_1\}$.  By lemma~\ref{mainlemma}, because $P_{ABC}$ is assumed to be compatible with~\cref{fig:beforecopy}, it follows that the marginals $\{ P_{A_1 B_1 C_1}, P_{A_2 B_1}\}$, where $P_{A_1 B_1 C_1}:= P_{A B C}$ and $P_{A_2 B_1} := P_{AB}$, are compatible with the inflated DAG of~\cref{fig:aftercopy}.  The fact that $A_2$ is d-separated from $A_1 C_1$ by $B_1$ in ~\cref{fig:aftercopy} implies that the joint distribution can be expressed as $P_{A_1 A_2 B_1 C_1} := P_{A_1 B_1 C_1} \otimes P_{A_2 B_1} \otimes P_{B_1}^{-1}$, which is only defined for those values of $b_1$ such that $P_{B_1}(b_1) \ne 0$.  By construction, $P_{A_1 A_2 B_1 C_1}$ has $P_{A_1 B_1}= P_{A_2 B_1} =P_{AB}$ and satisfies the conditional independence relation $A_2 \perp A_1 C_1 \:|\: B_1$.
+We begin by noting that every possible joint distribution $P_{ABC}$ is compatible with a DAG of the form of~\cref{fig:beforecopy}.  This follows from the fact that one may take $X$ to be any \tblue{sufficient statistic} for the joint variable $(A,C)$ given $B$, such as $X := (A,B,C)$.  Next, we consider the inflation of \cref{fig:beforecopy} depicted in~\cref{fig:aftercopy}. The maximal injectable sets are $\{ A_1 B_1 C_1\}$ and $\{A_2 B_1\}$.  By lemma~\ref{mainlemma}, because $P_{ABC}$ is assumed to be compatible with~\cref{fig:beforecopy}, it follows that the marginals $\{ P_{A_1 B_1 C_1}, P_{A_2 B_1}\}$, where $P_{A_1 B_1 C_1}:= P_{A B C}$ and $P_{A_2 B_1} := P_{AB}$, are compatible with the inflated model with the DAG of~\cref{fig:aftercopy}.  The fact that $A_2$ is d-separated from $A_1 C_1$ by $B_1$ in ~\cref{fig:aftercopy} implies that the joint distribution can be expressed as $P_{A_1 A_2 B_1 C_1} := P_{A_1 B_1 C_1} P_{A_2 B_1} / P_{B_1}$.  By construction, $P_{A_1 A_2 B_1 C_1}$ has $P_{A_1 B_1}= P_{A_2 B_1} =P_{AB}$ and satisfies the conditional independence relation $A_2 \perp A_1 C_1 \:|\: B_1$.
 %If the original distribution $P_{ABC}$ is compatible with~\cref{fig:beforecopy}, then the associated inflated model marginalizes to a distribution $P_{A_1 A_2 B_1 C_1}$ which has the required properties.
 %Consider the original DAG of~\cref{fig:beforecopy} and the associated inflated DAG of~\cref{fig:aftercopy}. If the original distribution $P_{ABC}$ is compatible with~\cref{fig:beforecopy}, then the associated inflated model marginalizes to a distribution $P_{A_1 A_2 B C}$ which has the required properties. To see that every $P_{ABC}$ is compatible with~\cref{fig:beforecopy} one may take $X$ to be any \tblue{sufficient statistic} for the joint variable $(A,C)$ given $B$, such as $X := (A,B,C)$.
 \end{proof}
 
 
-While it is also not hard to write down a distribution with the desired properties explicitly~\cite[Lemma~15.8]{yeung_network_2008}, the fact that one can rederive it using the inflation technique is significant.  For one, all the non-Shannon type inequalities derived by \citet{zeger_2011_nonshannon} are obtained by applying some Shannon type inequality to the distribution that is implied to exist by the Copy Lemma.  Our result shows, therefore, that one can understand these non-Shannon type inequalities for a DAG as arising from Shannon-type inequalities applied to an inflation of the DAG.  Indeed, it may be that the inflation technique may be a more general-purpose tool for deriving non-Shannon-type entropic inequalities.  A natural direction for future research is to explore whether more sophisticated applications of the inflation technique might result  in \emph{new} examples of such inequalities. 
+While it is also not hard to write down a distribution with the desired properties explicitly~\cite[Lemma~15.8]{yeung_network_2008}, the fact that one can rederive it using the inflation technique is significant.   
+
+All the non-Shannon type inequalities derived by \citet{zeger_2011_nonshannon} are obtained by applying some Shannon type inequality to the distribution that is implied to exist by the Copy Lemma.  Our result shows, therefore, that one can understand these non-Shannon type inequalities for a DAG as arising from Shannon type inequalities applied to an inflation of the DAG.  Indeed, it may be that the inflation technique may be a more general-purpose tool for deriving non-Shannon type entropic inequalities.  A natural question is whether more sophisticated applications of the inflation technique might result  in \emph{new} examples of such inequalities. 
 %our purpose in rederiving the lemma via inflation is our hope that more sophisticated applications of the inflation technique will result in \emph{new} non-Shannon type entropic inequalities. 
 %For example, all the non-Shannon type inequalities derived by \citet{zeger_2011_nonshannon} are applications of the Copy Lemma, and each proof therein can be recast in terms of some Shannon type inequalities appied to a suitable inflation.
 
-%Note that this inflation is non-broadcasting. The Copy Lemma is therefore valid even in the paradigm of quantum mechanics or any generalized probability theory, as we would expect. \color{purple} [R:Why do we expect this?  Elie's answer: I was thinking that the Copy Lemma should hold regardless of the classical/quantum paradigm, because it is just a way of obtaining non-Shannon type inequalities. The set of jointly-observable variables may differ in classical and quantum theories, but the validity of all Shannon and non-Shannon type inequalities regarding any jointly-observable set is never in question.]\color{black}
+Note that this inflation is non-broadcasting. The Copy Lemma is therefore valid even in the paradigm of quantum mechanics or any generalized probability theory, as we would expect. \color{purple} [R:Why do we expect this?]\color{black}
 
 \begin{figure}[H]
 \centering
