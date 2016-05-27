@@ -271,7 +271,6 @@ anchorcolor=OliveGreen}
 \newcommand{\cramp}[1]{\ensuremath{\mathord{#1}}}
 %\newcommand{\cramp}[1]{\ensuremath{\mathopen{}#1\mathclose{}}} oldway. New way is better.
 \newcommand{\eql}{\cramp{=}}
-\newcommand{\neql}{\cramp{\neq}}
 
 \usepackage{bm}
 \newcommand{\setlambda}{\bm{\lambda}}
@@ -343,7 +342,6 @@ Finally, we show how our technique can be used to derive causal compatibility in
 
 \end{abstract}
 \maketitle
-\tableofcontents
 %In Ref.~\cite{WoodSpekkens}, the standard proof of Bell's theorem is presented in the language of causal inference.  In particular, the CHSH inequality emerges as a special case of what Pearl calls an ``instrumental inequality''.  Hardy's proof of Bell's theorem is quite different from the standard proof and the following question naturally arises: is there a generic tool for classical causal inference of which the Hardy argument can be considered a special case when applied to the M-shaped causal structure of the Bell experiment?
 
 %To try and answer this question, we apply Hardy-type reasoning to the triangle causal structure, that is, the one with three observed variables, each pair of which have a common cause.  We show that this sort of reasoning does indeed facilitate causal inference in the case of the triangle causal structure, thereby lending some evidence to the notion that this style of argument has the potential to be generalized into a generic tool for classical causal inference.
@@ -399,9 +397,7 @@ The challenge was taken up recently by... {\color{purple} Summarize the Shannon 
 
 We here introduce a new technique for deriving necessary conditions on a distribution for compatibility with a given causal structure. 
 %, applicable to any causal structure, for deriving incompatibility witnesses. 
-%This technique allows for, but is not limited to, the derivation of polynomial inequalities. 
-The technique is capable of generating inequalities on probabilities (rather than merely on entropic quantities), which are generically nonlinear, in which case we say that the inequalities are \emph{polynomial}. 
-As far as we know, our method is the first systematic tool for doing causal inference with latent variables that goes beyond observable conditional independence relations while not assuming any bounds on the number of values of each latent variable. While our method can be used to systematically generate necessary conditions for compatibility with a given causal structure, we do not know whether the set of inequalities thus generated are also sufficient.  
+This technique allows for, but is not limited to, the derivation of polynomial inequalities. As far as we know, our method is the first systematic tool for doing causal inference with latent variables that goes beyond observable conditional independence relations and does not assume any bounds on the number of values of each latent variable. While our method can be used to systematically generate necessary conditions for compatibility with a given causal structure, we do not know whether the set of inequalities thus generated are also sufficient.  
 %, and we currently have conflicting evidence on this question. On the one hand, our method rederives all Bell-type inequalities (\cref{sec:Bellscenarios}), but on the other hand 
 The fact that we have not yet been able to obtain Pearl's instrumental inequality from our method suggests that it may not be sufficient.
 
@@ -466,10 +462,8 @@ A given distribution over observed variables is said to be \tblue{compatible} wi
 
 
 %\section{Inflation: a tool for causal inference}
-%\section{Witnessing incompatibility using the Inflation technique}
-\section{The inflation technique for causal inference}
+\section{Witnessing incompatibility using the Inflation technique}
 
-\subsection{The inflation of a causal model}
 
 We now introduce the notion of \tblue{an inflation of a causal model}.  %Let $C_G$ denote a causal model associated to a DAG $G$.  
 If the original causal model is associated to a DAG $G$, then a nontrivial inflation of this model is associated to a different DAG, $G'$.  
@@ -586,8 +580,6 @@ It is useful to express \cref{eq:coincidingdistrodef} in the language of injecta
 %\text{if }  \quad  \bm{U}'\in\SmallNamedFunction{InjectableSets}{G'} \quad \text{and} \quad \bm{U} \sim \bm{U}'  \quad\text{then}\quad P'_{\bm{U}'}=P_{\bm{U}}.
 P'_{\bm{U}'}=P_{\bm{U}}\quad\text{if }  \bm{U} \sim \bm{U}'\quad \text{and} \quad \bm{U}'\in\SmallNamedFunction{InjectableSets}{G'}.% \quad \text{and} \quad \bm{U} \sim \bm{U}'  \quad\text{then}\quad P'_{\bm{U}'}=P_{\bm{U}}.
 \end{align}
-
-\subsection{Witnessing incompatibility}
 
 Finally, we can explain why inflation is relevant for deciding whether a distribution is compatible with a causal structure.  For a family of marginal distributions $\{ P_{\bm{U}} : \bm{U} \in \SmallNamedFunction{ImagesInjectableSets}{G}$ to be compatible with $G$, there must be a causal model $M$ that yields a joint distribution with this family as its marginals.   Similarly, for a family of marginal distributions $\{ P'_{\bm{U}'} : \bm{U}' \in \SmallNamedFunction{InjectableSets}{G'}$ to be compatible with $G'$, there must be a causal model $M'$ that yields a joint distribution with this family as its marginals.  Now note that in the first problem, the only parameters of the model $M$ that are relevant are those pertaining to nodes in the ancestral subgraph of some $\bm{U}\in \SmallNamedFunction{ImagesInjectableSets}{G}$, and in the second problem, the only parameters of the model $M'$ that are relevant are those pertaining to nodes in the ancestral subgraph of some $\bm{U}' \in \SmallNamedFunction{InjectableSets}{G'}$.  But for a given pair $\bm{U}$ and $\bm{U}'$ such that  $\bm{U} \sim \bm{U}'$, the parameters in the model $M$ that determine the distribution on  $\bm{U}$ are, by the definition of inflation, precisely equal to the parameters in the model $M' = \SmallNamedFunction[G\to G']{Inflation}{M}$ that determine the distribution on $\bm{U}'$.  
 Consequently, if there is a causal model $M$ on $G$ yielding the family $\{ P_{\bm{U}} : \bm{U} \in \SmallNamedFunction{ImagesInjectableSets}{G}$ then there is a model $M'$ on $G'$ yielding the family $\{ P'_{\bm{U}'} : \bm{U}' \in \SmallNamedFunction{InjectableSets}{G'}$ with $P'_{\bm{U}'}= P_{\bm{U}}$.  
@@ -712,27 +704,6 @@ P_{B_2}&=\frac{2}{3}[0] + \frac{1}{3}[1]  &&&&&&&&\label{W6}\\
 P_{C_2}&= \frac{2}{3}[0] + \frac{1}{3}[1]  &&&&&&&&\label{W7}
 \end{align}
 
-\color{purple} 
-%Eq.~\eqref{W1} implies that one never has $A_2 \eql 1$ and $C_1\eql 0$, Eq.~\eqref{W2} implies that one never has $B_2 \eql 1$ and $A_1\eql 0$, and Eq.~\eqref{W3} implies that one never has $C_2 \eql 1$ and $B_1\eql 0$.  Similarly, Eq.~\eqref{W4} implies that one never has $A_1 =1$,  $B_1 =1$ and $C_1 =1$. 
-From Eqs.~\eqref{W1}, \eqref{W2} and \eqref{W3}  respectively, one infers that one never has $A_2 \eql 1$ and $C_1\eql 0$, one never has $B_2 \eql 1$ and $A_1\eql 0$, and one never has $C_2 \eql 1$ and $B_1\eql 0$. Similarly, Eq.~\eqref{W4} implies that one never has $A_1 =0$,  $B_1 =0$ and $C_1 =0$.  From the latter constraint one infers that at least one of $A_1$, $B_1$ and $C_1$ must be 1, which from the former constraints implies that at least one of $A_2$, $B_2$ and $C_2$ must be 0, so that it is not the case that all of $A_2$, $B_2$ and $C_2$ are 1.
-
-Recasting this argument in logical notation, the marginal distributions imply the truth of the following conjunction:
-%We can therefore infer the truth of the conjunction of these claims, which can be expressed in logical notation as:
-%a particular conjunction of events, namely, it implies the truth of
-\begin{align}
-\lnot [A_2 =1 \land C_1 =1] \land \lnot [B_2 =1 \land A_1 =1] \land \lnot [C_2 =1 \land B_1 =1] \land \lnot [A_1 =1 \land B_1 =1 \land C_1 =1],
-\end{align}
-and this logically implies the truth of
-\begin{align}\label{consequent}
-\lnot [A_2 =1 \land B_2 =1 \land C_2 =1].
-\end{align}
-
-However, our inflated DAG is such that $A_2$,$B_2$, and $C_2$ have no common ancestor and consequently, they are all marginally independent in any distribution consistent with this inflated DAG, and this fact, together with Eqs.~\eqref{W5}-\eqref{W7}, implies that $A_2$,$B_2$, and $C_2$ sometimes all take the value 1, which contradicts \cref{consequent}.
-
-Consequently, the set of marginals described in Eqs.~\eqref{W4}-\eqref{W7} are \emph{not} compatible with the DAG of Fig.~\ref{fig:Tri222v2}.  By lemma \ref{mainlemma}, this implies that the set of marginals described in Eqs.~\eqref{V4}-\eqref{V7}---and therefore the W-type distribution of which they are marginals---is not compatible with the DAG of the triangle scenario.
-\color{black}
-
-\color{blue}
 Eq.~\eqref{W1} %together with the form of $P_{\text{W}}$ 
 implies that $C_1\eql 0$ whenever $A_2 \eql 1$. Similarly, Eq.~\eqref{W2} implies that $A_1\eql 0$ whenever $B_2\eql 1$ and Eq.~\eqref{W3} implies that $B_1\eql 0$ whenever $C_2\eql 1$, 
 %, that is, $A_2=1$ and $B_2=1$ and $C_2=1$.  
@@ -754,10 +725,8 @@ Finally, Eqs.~\eqref{Ws1}-\eqref{Ws3} together with Eq.~\eqref{WW2} imply
 \end{align}
 This, however, contradicts Eq.~\eqref{W4}.  Consequently, the set of marginals described in Eqs.~\eqref{W4}-\eqref{W7} are \emph{not} compatible with the DAG of Fig.~\ref{fig:Tri222v2}.  By lemma \ref{mainlemma}, this implies that the set of marginals described in Eqs.~\eqref{V4}-\eqref{V7}---and therefore the W-type distribution of which they are marginals---is not compatible with the DAG of the triangle scenario.
 % and the fact that $P_{\text{W}}$ has no weight on $[000]$.
-\color{black}
 
-We have secured our verdict of incompatibility using logic reminiscent of  Hardy's version of Bell's theorem \cite{L.Hardy:PRL:1665,Mansfield2012}, see \cref{sec:TSEM} for further discussion of such logic and its applications to causal inference. 
-%Hardy-type paradoxes and their applications.
+We have secured our verdict of incompatibility using logic reminiscent of  Hardy's version of Bell's theorem \cite{L.Hardy:PRL:1665,Mansfield2012}, see \cref{sec:TSEM} for further discussion of Hardy-type paradoxes and their applications.
 
 To our knowledge, the fact that the W-type distribution of Eq.~\eqref{eq:wdistribution1} is incompatible with the triangle DAG has not been demonstrated previously.
 
@@ -870,10 +839,9 @@ The mathematical structure of this proof parallels that of standard proofs of th
 %Many causal inference techniques can be used to derive sufficient conditions for the incompatibility of the causal hypothesis $H_{G',S'}$ with the observational data $\forall \bm{U} \in \SmallNamedFunction{PreInjectableSets}{\bm{O}}: \pdf{\bm{U}} = \pdf{\subsim{\bm{U}_1}}\pdf{\subsim{\bm{U}_2}} \dots \pdf{\subsim{\bm{U}_n}}$. We will call sets of such conditions \tblue{incompatibility witnesses}.   
 
 
-%\subsection{Deriving causal compatibility inequalities using the inflation technique}\label{Sec:DerivingInequalities}
-\subsection{Deriving causal compatibility inequalities}\label{Sec:DerivingInequalities}
+\section{Deriving causal compatibility inequalities using the inflation technique}\label{Sec:DerivingInequalities}
 
-As noted in the introduction, the inflation technique can be used not only to witness the incompatibility of a given distribution with a given causal structure, but also to derive necessary conditions that a distribution must satisfy to be compatible with the given causal structure.   When these necessary conditions are expressed as inequalities, we will refer to them as {\em causal compatibility inequalities}.  Formally, we have:
+As noted in the introduction, the inflation technique can be used not only to witness the incompatibility of a given distribution with a given causal structure, but it can also be used to derive necessary conditions that a distribution must satisfy to be compatible with the given causal structure.   When these necessary conditions are expressed as inequalities, we will refer to them as {\em causal compatibility inequalities}.  Formally, we have:
 \begin{definition}
 
 Consider a causal structure $G$ and a set of the observed nodes thereon, $S \subseteq \SmallNamedFunction{ObservedNodes}{G}$.  Let $I_S$ denote an inequality that is evaluated on a family of marginal distributions  $\{ P_{\bm{U}}: \bm{U} \in S\}$.  The inequality $I_S$ is termed a \tblue{\em causal compatibility inequality for the causal structure $G$} whenever it is satisfied by every family of distributions $\{ P_{\bm{U}}: \bm{U} \in S\}$ that is compatible with the causal structure $G$.
@@ -1091,10 +1059,8 @@ In the rest of this article, we shall continue to rely only on the ancestral ind
 %In all of these examples, the inequality with which one starts---a constraint upon marginals that is independent of the causal structure---involves sets of observed variables that are not all injectable.  Each of these sets can, however, be partitioned into disjoint subsets each of which {\em is} injectable where the partitioning represents ancestral independence in the inflated DAG.  It is useful to have a name for such sets of observed variables: we will call them {\em pre-injectable}.  We begin by defining this notion carefully before describing our general inflation technique. 
 \color{black}
 
-\section{Deriving causal compatibility inequalities systematically}
+\section{Deriving polynomial inequalities systematically}
 \label{sec:ineqs}
-
-%\subsection{Pre-injectable sets}
 
 In all of the examples from the previous section, the inequality with which one starts---a constraint upon marginals that is independent of the causal structure---involves sets of observed variables that are not all injectable.  Each of these sets can, however, be partitioned into disjoint subsets each of which {\em is} injectable where the partitioning represents ancestral independence in the inflated DAG.   For instance, in the first example from the previous section, the set $\{ A_2 B_1\}$ can be partitioned into the singleton sets $\{ A_2 \}$ and $\{ B_1\}$ which are ancestrally independent and each of which is injectable.  It is useful to have a name for such sets of observed variables: we will call them \tblue{pre-injectable}.  We begin by defining this notion carefully before describing our general inflation technique. 
 
@@ -1115,7 +1081,7 @@ $\bm{U}'$ is a pre-injectable set and $\bm{U}_1,\bm{U}_2,\ldots,\bm{U}_n$ are th
 \pdfp{\bm{U}'} = \pdfp{\bm{U}_1} \pdfp{\bm{U}_2}  \cdots \pdfp{\bm{U}_n}.
 \end{align}
 
-The situation, therefore, is this: for any constraints that one can derive for the marginals on the pre-injectable sets based on the existence of a joint distribution (and hence without reference to the causal structure), one can infer constraints that {\em do} refer to the causal structure by substituting within these constraints equalities of the form of Eq.~\eqref{eq:preinjfactor}.  The problem of determinig constraints on marginals follows from the existence of a joint distribution is known as the {\em marginal problem}.   Thus, we can summarize the situation as follows: an inequality derived from the marginal problem, after applying the equalities of Eq.~\eqref{eq:preinjfactor}, becomes a causal compatibility inequality for the inflated DAG. 
+The situation, therefore, is this: for any constraints that one can derive for the marginals on the pre-injectable sets based on the existence of a joint distribution (and hence without reference to the causal structure), one can infer constraints that {\em do} refer to the causal structure by substituting within these constraints equalities of the form of Eq.~\eqref{eq:preinjfactor}.  Thus, an inequality derived from the marginal problem, after applying the equalities of Eq.~\eqref{eq:preinjfactor}, becomes a causal compatibility inequality for the inflated DAG. 
 
 The latter inequality can then be converted into a causal compatibility inequality for the original DAG using corollary \ref{maincorollary}.
 
@@ -1155,8 +1121,7 @@ In the narrative below the marginal problem is discussed first; the nonlinear st
 
 Preliminary to every strategy, however, is the identification of the pre-injectable sets, so we begin with this problem.
 
-\subsection{Identifying the pre-injectable sets}\label{step:findpreinjectable}
-%\topic{\tred{Identifying the Pre-Injectable Sets}}\label{step:findpreinjectable}
+\topic{\tred{Identifying the Pre-Injectable Sets}}\label{step:findpreinjectable}
 
 To identify the pre-injectable sets of an inflated DAG, we must first identify the \emph{injectable} sets. This problem can be reduced to identifying the injectable pairs, because it is the case that if all of the pairs in a set of nodes are injectable, then so too is the set itself.  The latter claim is proven as follows.   
 %To prove this, it suffices to prove that if all of the pairs in a set of nodes are injectable, then so too is the set itself.  
@@ -1302,10 +1267,9 @@ Using the ancestral independence relations, the marginal distributions for the m
 %Having identified the pre-injectable sets (and how to use them), we next consider various ways to invoke constraints on the distributions over the pre-injectable sets.
 Having described how to identify the pre-injectable sets and what factorization relations are implied by ancestral independences in the causal structure, we now turn to a discussion of how to obtain constraints on the marginal distributions over the pre-injectable sets, 
 
-\subsection{The marginal problem}\label{step:marginalsproblem}
-%\subsection{Constraining distributions over the pre-injectable sets via the marginal problem}
+\topic{\tred{Constraining Distributions over Pre-Injectable Sets via the Marginal Problem}}\label{step:marginalsproblem}
 
-For a given family of probability distributions, each defined on a subset of the variables, determining whether there exists a joint probability distribution over the full set of variables from which all of these can be obtained as marginal distributions is known as the {\em marginal problem}.
+For a given family of probability distributions, each defined on a subset of the variables, determining whether there exists a joint probabiity distribution over the full set of variables from which all of these can be obtained as marginal distributions is known as the {\em marginal problem}.
 %they can be obtained through marginalization of a single joint probability 
 %The most trivial constraint on possible marginal probabilities, regardless of causal structure,  
 %on the pre-injectable set
@@ -1366,49 +1330,24 @@ and is required to reproduce the marginal distribution on each context via
 \end{split}
 \end{align}
 %For example in the case of binary variables, we therefore 
-If each variable is binary, then we have 64 inequalities and 40 equalities, although the latter are not all independent. In this case, facet enumeration requires eliminating 64 unknowns from those linear inequalities and equalities, namely, the joint probabilities $\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}$ for each of the 64 choices of the values $(a_1 a_2 b_1 b_2 c_1 c_2)$.
+If each variable is binary, then we have 64 inequalities and 40 equalities, although the latter are not all independent. In this case, facet enumeration requires eliminating 64 unknowns from those linear inequalities and equalities, namely, the joint probabilities $\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}$ for each of the 64 choices of $(a_1 a_2 b_1 b_2 c_1 c_2)$.
 %joint probabilities $\{ \p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2} : (a_1 a_2 b_1 b_2 c_1 c_2) {\underline{\phantom{xxxxx}}}$, 
 %and to thereby compute the inequalities that constrain the marginal probabilities.
 %We coin the term gedankenprobability to denote any probability pertaining to a \emph{not}-pre-injectable set of inflation-DAG variables. The gedankenprobabilities evoke thought experiments, because any \purp{black box implementation of the original causal structure % \emph{in-principle}.
 
-\subsection{Causal compatibility inequalities via the marginal problem}
-
 A general scheme for deriving causal compatibility inequalities for a DAG can be summarized as follows.  Choose an inflation of the DAG and identify the maximal pre-injectable sets thereon.  Next, solve the marginal problem where the contexts are the maximal pre-injectable sets.  By substituting into these inequalities the factorization conditions implied by ancestral independences among the variables in the maximal pre-injectable sets, one obtains causal compatibility inequalities for the inflated DAG.  Finally, these can be converted into causal compatibility inequalities for the original DAG using Corollary~\ref{maincorollary}.
+
+Note that if one merely has linear inequalities that contain the marginal polytope rather than describing its facets, one can still follow the above prescription for deriving causal compatibility inequalities.  This is the approach that we will consider in the next section.
 
 %\color{purple} Move this paragraph to later. \color{black}
 %Given a facet of the marginal polytope---or any other linear inequality that bounds it---we can construct a polynomial inequality for our original causal inference problem by plugging in the factorization relations of Lemma~\ref{mainlemma}. Doing the same with the equations of coinciding submarginals shows that these are trivially satisfied, and thus it is only the inequalities that are of interest to us.
 
-
-
-As an example, 
-%To illustrate the power of the inflation technique, 
-we present all of the causal compatibility inequalities that one can derive for the Triangle scenario with binary observed variables using the inflation of  ~\cref{fig:Tri222}.
-
-Using the maximal pre-injectable sets identified in \cref{eq:basicsetup222} as the contexts for the marginal problem, we solve the latter using the linear quantifier elimination method of~\cref{sec:ineqs}.  The facets of the marginal polytope can be characterized by a generating set of 64 inequalities.  The full set of inequalities is obtained from the generating set by closing these under the action of two types of symmetry transformations: permutations of the observed variables and complementation (inversion) of the value for each variable. 
-%The following polynomial inequalities for the Triangle scenario with binary observed variables have been derived via the linear quantifier elimination method of~\cref{sec:ineqs} using the inflated DAG of~\cref{fig:Tri222}. 
-%This results in 64 symmetry classes of causal compatibility inequalities for the Triangle scenario, where the symmetries are given by permuting the variables and inverting the outcomes. 
-We then factorize the probabilities according to the ancestral independences in the inflated DAG, also identified in \cref{eq:basicsetup222}, to obtain a set of causal compatibility inequalities for the inflated DAG.  Finally, these are converted to a generating set of causal compatibility inequalities for the original DAG using corollary~\ref{maincorollary}.  Note, however, that there is no guarantee that each such conversion results in a nontrivial inequality at the level of the original DAG, where nontriviality means that the inequality is not true of all distributions, but is instead a consequence of the causal structure. Indeed, we find that only 38 of the inequalities in the generating set for the marginal polytope yield nontrivial causal compatability inequalities for the Triangle scenario. 
- %For the resulting 64 inequalities, numerical checks have found violations of only 38 of them: although they are all facets of the marginal polytope over the distributions on pre-injectable sets, there is no guarantee that they are also nontrivial inequalities at the level of the original DAG, and this has indeed turned out not to be the case for 26 of these symmetry classes of inequalities. 
-Moreover, it is likely to be the case that these 38 causal compatibility inequalities are not a minimal generating set, where a minimal generating set is defined as one such that, for every inequality, there is a distribution that violates it while satisfying all of the others. 
-%; we have not yet checked whether for every inequality there is a distribution which violates that inequality but satisfies all the others.
-We present our generating set of causal compatibility inequalities for the Triangle scenario below.
-
-\clearpage
-%\label{page:nontrivlist}
-\includepdf[pages=1,scale=0.90,link,linkname=nontriv,pagecommand={\refstepcounter{includepdfpage}\label{nontriv.\theincludepdfpage}}]{nontrivlist.pdf}
 
 Linear quantifier elimination is already widely used in causal inference for deriving entropic causal compatibility inequalities \cite{fritz2013marginal,chaves2014novel,chaves2014informationinference}. In that task, however, the quantifiers being eliminated are entropies on sets of variables for which one or more is latent. By contrast, the quantifiers being eliminated in the inflation technique are all probabilities on sets of variables all of which are observed (although they are the observed variables of the inflated DAG rather than the original DAG); 
 %The unknowns we eliminate are the not-pre-injectable joint probabilities, which are, at least on first look, quite different from probabilities involving latent variables;
 ~\cref{sec:Bellscenarios} will partly elucidate the relation.
 
 Note that the marginal problem can be solved by computing \emph{either} a convex hull \emph{or} by eliminating quantifiers from linear inequalities. The derivation of entropic inequalities, by contrast, is strictly a linear quantifier elimination task, and cannot be recast as a convex hull problem. As such, while convex hull enumeration tools \emph{are} useful for deriving polynomial inequalities via the inflation technique, they are \emph{not} available for the derivation of entropic inequalities; see \cref{sec:projalgorithms} for further details.
-
-
-Note that if one does not have a characterization of the facets of the marginal polytope, but only a set of inequalities that contain the marginal polytope but are not tight, one can still apply the prescription described above to derive causal compatibility inequalities from these.  We consider an example of such an approach in the next section.
-%This is the approach that we will consider in the next section.
-%Note that if one merely has linear inequalities that contain the marginal polytope rather than describing its facets, one can still follow the above prescription for deriving causal compatibility inequalities.  This is the approach that we will consider in the next section.
-
-
 
 % When solving the marginal problem is too difficult, one may consider solving a relaxation of it, instead. One extremely computationally amenable relaxation of the marginal problem is to enumerate probabilistic Hardy-type paradoxes. This is discussed later on in  \cref{sec:TSEM}.
 
@@ -1418,41 +1357,10 @@ Note that if one does not have a characterization of the facets of the marginal 
 
 
 %\section{Deriving Hardy-type constraints for the marginal problem}\label{sec:TSEM}
-%\section{Deriving inequalities for the marginal problem from possibilistic constraints}\label{sec:TSEM}
-%\subsection{The possibilistic marginal problem and its implications for the probabilistic marginal problem}\label{sec:TSEM}
-\subsection{Causal compatibility inequalities via the possibilistic counterpart to the marginal problem}\label{sec:TSEM}
+\section{Deriving inequalities for the marginal problem from possibilistic constraints}\label{sec:TSEM}
 
-In the literature on Bell inequalities, it has been noticed that incompatibility with the Bell DAG can sometimes be witnessed by merely looking at which events have zero probability and which events have nonzero probability. In other words, instead of considering the \emph{probability} of a composite outcome, the inconsistency of some marginal distributions can be evident from considering only the \emph{possibility} or \emph{impossibility} of each composite outcome. This insight is originally due to~\citet{L.Hardy:PRL:1665}, and versions of Bell's theorem that are based on the violation of such \tblue{possibilistic constraints} are known as \tblue{Hardy-type paradoxes}. For more background on Hardy-type paradoxes, see Refs.~\cite{Garuccio95,CabelloHardyInequality,Braun08,Mancinska14,LSW}; a partial classification of these can be found in Ref.~\cite{Mansfield2012}.
+In the literature on Bell inequalities, it has been noticed that incompatibility with the Bell scenario DAG can sometimes be witnessed by merely looking at which events have zero probability and which events have nonzero probability. In other words, instead of considering the \emph{probability} of a composite outcome, the inconsistency of some marginal distributions can be evident from considering only the \emph{possibility} or \emph{impossibility} of each composite outcome. This insight is originally due to~\citet{L.Hardy:PRL:1665}, and versions of Bell's theorem that are based on the violation of such \tblue{possibilistic constraints} are known as \tblue{Hardy-type paradoxes}. For more background on Hardy-type paradoxes, see Refs.~\cite{Garuccio95,CabelloHardyInequality,Braun08,Mancinska14,LSW}; a partial classification of these can be found in Ref.~\cite{Mansfield2012}.
 
-\color{purple}
-
-
-We have already provided a simple example of this sort of argument in \cref{Sec:DerivingInequalities}, in the logic used to demonstrate that the marginal distributions of Eqs.~\eqref{W4}-\eqref{W7} are incompatible with the DAG depicted in Fig.~\ref{fig:Tri222v2}.   For our present purposes, it is useful to recast the argument of \cref{Sec:DerivingInequalities} into a new but manifestly equivalent form.  
-%The argument we provided is usefully cast as follows.  
-First, one notes that the following proposition is a logical tautology for 0/1 valued random variables:
-\begin{align}\begin{split}\label{tautology1}
-&\lnot [A_2 \eql 1 \land C_1 \eql 1] \bigwedge \lnot [B_2 \eql 1 \land A_1 \eql 1] \bigwedge \lnot [C_2 \eql 1 \land B_1 \eql 1] \bigwedge \lnot [A_1 \eql 0 \land B_1 \eql 0 \land C_1 \eql 0]\\
- &\qquad\implies
-\lnot [A_2 \eql 1 \land B_2 \eql 1 \land C_2 \eql 1].
-\end{split}\end{align}
-Next, one notes that the given distribution and causal structure imply that the antecedent is true while the consequent is false, so that the distribution and causal structure together imply a contradiction.
-
-One can understand \cref{tautology1} to be a possibilistic counterpart of a constraint on marginals, or a {\em constraint on possibilistic marginals} for short.  
-
-But every constraint on possibilistic marginals implies a constraint on probabilistic marginals, as follows.  First, cast \eqref{tautology1} as ...  then rewrite this in its contrapositive form ...
-Next use the union bound.  
-Applying this to \eqref{tautology1}, we get ...
-%\begin{align}
-%&[A_2 =1 \land B_2 =1 \land C_2 =1] \nonumber\\
-% &\implies [A_2 =1 \land C_1 =1] \land \lnot [B_2 =1 \land A_1 =1] \land \lnot [C_2 =1 \land B_1 =1] \land \lnot [A_1 =1 \land B_1 =1 \land C_1 =1]
-%\end{align}
-
-Just as a constraint on  {\em probabilistic}  marginals, such as Eq. ??, can be used to derive causal compatibility inequalities, it turns out that a constraint on possibilistic marginals can be leveraged to do so as well. 
-%witness the incompatibility of a given distribution and causal structure, so too can a constraint on possibilistic marginals, as we have just noted.
-
-
-
-\color{blue}
 %The usual presentation
 The logical form of a simple Hardy-type paradox is as follows. One assumes a particular joint distribution and a particular causal structure,
  %(a distribution implied by quantum theory and the causal structure of the Bell scenario , 
@@ -1461,7 +1369,7 @@ The logical form of a simple Hardy-type paradox is as follows. One assumes a par
 %logical relations between these events are such
 % that whenever $E_0$ occurs, then also at least one of $E_1,\ldots,E_n$ occurs, and this is in contradiction with the previous statement. 
  
-We have already provided a simple example of this sort of argument in \cref{Sec:DerivingInequalities}, in the logic used to demonstrate that the marginal distributions of Eqs.~\eqref{W4}-\eqref{W7} are incompatible with the DAG depicted in Fig.~\ref{fig:Tri222v2}.  The marginal distributions implied that the event $A_1= 0, B_1=0, C_1=0$ {\em never} occurs, while the marginal distributions and the causal structure together implied that the event $A_2 = 1, B_2 =1, C_2 =1$ {\em sometimes} occurs.  However, the marginal distributions also implied that if the latter event occurs, then the former event occurs as well, thereby establishing a contradiction and allowing us to conclude the incompatability of the marginal distributions with the causal structure. 
+We have already provided a simple example of this sort of argument in Sec.~\ref{}, in the logic used to demonstrate that the marginal distributions of Eqs.~\eqref{W4}-\eqref{W7} are incompatible with the DAG depicted in Fig.~\ref{fig:Tri222v2}.  The marginal distributions implied that the event $A_1= 0, B_1=0, C_1=0$ {\em never} occurs, while the marginal distributions and the causal structure together implied that the event $A_2 = 1, B_2 =1, C_2 =1$ {\em sometimes} occurs.  However, the marginal distributions also implied that if the latter event occurs, then the former event occurs as well, thereby establishing a contradiction and allowing us to conclude the incompatability of the marginal distributions with the causal structure. 
 %at the hypothesis of compatibility was false.
 %W-type distributions is incompatible with the triangle scenario. 
 %For the DAG depicted in Fig.~\ref{fig:Tri222v2}, the event $A_1 =0 
@@ -1481,7 +1389,6 @@ there is a {\em set} of events, $E_1, \ldots, E_n$, that never occur (rather tha
 \end{align}
 where $\lor$ denotes logical disjunction.  %Here too, if $E_0$ sometimes occurs, one obtains a constradiction.
 We refer to inferences of this sort as possibilistic constraints. 
-\color{black}
 
 Any possibilistic constraint can be immediately translated into a probabilistic constraint, as noted by \citet{Mansfield2012}.  Specifically, if one applies the union bound to the possibilistic constraint of Eq.~\eqref{eq:inference} (the union bound asserts that the probability of at least one of a set of events occuring is no greater than the sum of the probabilities of each event occuring), then one obtains the probabilistic constraint
 \begin{align}\label{eq:possinference}
@@ -1495,7 +1402,7 @@ It was shown by [cite Ghirardi, others?] that in the case of the Bell scenario w
 In standard Hardy-type arguments, inferences of the form of Eq.~\eqref{eq:possinference} are a consequence of the particular distribution that is being considered.  Nonetheless, there are logical inferences of this sort that hold for {\em all} distributions.  These sorts of inferences can then be used to derive results for the marginal problem.  We demonstrate the idea using a simple example. 
 
 %Suppose that we are in a marginal scenario 
-Consider the marginal problem where the variables are $\{ A,B,C\}$, with each being binary, and the contexts are the pairs $\{A,B\}$, $\{A,C\}$, and $\{B,C\}$.  
+Consider the marginal problem where the full set of variables is $\{ A,B,C\}$ where each variable is binary and the contexts are the pairs $\{A,B\}$, $\{A,C\}$, and $\{B,C\}$.  
 %where the pairwise joint distributions of three variables $A$, $B$ and $C$ are given. %, and these two variables are binary with values in $\{0,1\}$. 
 Events here correspond to value-assignments to these variables.  A possibilistic constraint that follows from logic alone, and therefore is true regardless of the joint distribution over $A, B, C$, is this one:
 %One Hardy-type possibilistic constraint which we would want to enumerate is
@@ -1542,17 +1449,15 @@ We outline the general procedure using a slightly more sophisticated example tha
 %	\{A_2 B_2 C_1\},\\
 %	\{A_2 B_2 C_2\}.
 %\end{align*}
-Now a possibilistic constraint on this marginal problem consists of a logical implication with a joint valuation of one of the contexts as the \tblue{antecedent} and a disjunction over contexts of joint valuations thereon as the \tblue{consequent}. In the following, we explain how to generate \emph{all} such implications which are tight in the sense that their right-hand sides are minimal.
+Now a possibilistic constraint on this marginal problem consists of a logical implication with one joint outcome as the \tblue{antecedent} and a disjunction of joint outcomes as the \tblue{consequent}. In the following, we explain how to generate \emph{all} such implications which are tight in the sense that their right-hand sides are minimal.
 
-First we fix the antecedant by choosing some context and a joint valuation of its variables. In order to generate all possibilistic constraints, one will have to perform this procedure for \emph{every} context as the antecedent and every choice of joint valuation thereof. For the sake of concreteness, we take the example of $\bracks{\mgreen{A_2 \eql 1}, \mgreen{B_2 \eql 1}, \mgreen{C_2 \eql 1}}$ as the antecedent.  
+First we fix the antecedant by choosing some context and a composite outcome for its variables. In order to generate all possibilistic constraints, one will have to perform this procedure for \emph{every} context as the antecedent and every choice of joint outcome thereupon. For the sake of concreteness we take $\bracks{\mgreen{A_2 \eql 1}, \mgreen{B_2 \eql 1}, \mgreen{C_2 \eql 1}}$ to be the fixed antecedent.
 
-The consequent will be a \sout{conjunction} disjunction over contexts of joint valuations for each context, with the additional property that any variable that appears in both the antecendent and the consequent must be given the same value in both. 
-%all outcomes of variables that also occur in the antecedent carry the same outcome. 
-%For the implication to be valid, the consequent must further be such that \tred{for any \emph{joint} composite outcome which extends the antecedent's marginal composite outcome, also at least one of the marginal composite outcomes in the consequent must occur.}
+The consequent will be a conjunction of composite outcomes in marginal contexts, with the additional property that all outcomes of variables that also occur in the antecedent carry the same outcome. For the implication to be valid, the consequent must further be such that \tred{for any \emph{joint} composite outcome which extends the antecedent's marginal composite outcome, also at least one of the marginal composite outcomes in the consequent must occur.}
 
 To formally determine all valid consequents, we first consider two hypergraphs. %Take the set of nodes to be the disjoint union over all the contexts of all the joint outcomes which are compatible with~\eqref{eq:lhshardy}\footnote{In the left-hand side context there will thus be only one node, and one can also omit this one node without changing the result.}. 
-The nodes in the first hypegraph correspond to every possible joint valuation of the variables in a context for every possible context.
-The hyperedges correspond to every possible joint valuation of all variables. A hyperedge (joint valuation) contains a node (marginal joint valuation) iff the hyperedge is an extension of the node; for example the hyperedge $\bracks{A_1 \eql 0, \mgreen{A_2 \eql 1}, B_1 \eql 0, \mgreen{B_2 \eql 1}, C_1 \eql 1, \mgreen{C_2 \eql 1}}$ is an extension of the node $\bracks{A_1 \eql 0,  \mgreen{B_2 \eql 1}, \mgreen{C_2 \eql 1}}$. In our example following \cref{fig:simplicialcomplex222}, this initial hypergraph has $5\cdot 2^3 = 40$ nodes and $2^6 = 64$ hyperedges.
+The nodes in the first hypegraph correspond to every possible composite outcome for every possible context.
+The hyperedges correspond to every possible joint outcome of all variables. A hyperedge (joint composite outcome) contains a node (marginal composite outcome) iff the hyperedge is an extension of the node; for example the hyperedge $\bracks{A_1 \eql 0, \mgreen{A_2 \eql 1}, B_1 \eql 0, \mgreen{B_2 \eql 1}, C_1 \eql 1, \mgreen{C_2 \eql 1}}$ is an extension of the node $\bracks{A_1 \eql 0,  \mgreen{B_2 \eql 1}, \mgreen{C_2 \eql 1}}$. In our example following \cref{fig:simplicialcomplex222}, this initial hypergraph has $5\cdot 2^3 = 40$ nodes and $2^6 = 64$ hyperedges.
 
 The second hypergraph is a sub-hypergraph of the first one. We delete from the first graph all nodes and hyperedges which contradict the outcomes supposed by the antecedent. For example, the node $\bracks{\mgreen{A_2 \eql 1}, \mred{B_2 \eql 0}, C_1 \eql 1}$ contradicts the antecedent $\bracks{\mgreen{A_2 \eql 1}, \mgreen{B_2 \eql 1}, \mgreen{C_2 \eql 1}}$. We also delete the node corresponding to the antecedent itself. In our example, this final resulting hypergraph has $2^3 + 3\cdot 2^1 = 14$ nodes and $2^3 = 8$ hyperedges.
 
@@ -1585,52 +1490,216 @@ In conclusion, linear quantifier elimination is the preferable tool for deriving
 
 % We note that the connection between classical propositional logic and linear inequalities has been used previously in the task of causal inference. Noteworthy examples of works deriving causal infeasibility criteria via classical logic are \citet{Pitowsky1989} and \citet{Ghirardi08}, see also Refs. \cite{pitowsky_boole_1994,kellerer_marginal_1964,leggett_garg_1985,araujo_cycle_2013}. Novel to this work, however, is the use of the hypergraph transversals problem to formally enumerate relevant logical implications. 
 
+\section{Bell scenarios and inflation}
+\label{sec:Bellscenarios}
 
-\section{Inequalities for the marginal problem via Hardy-type paradoxes and minimal transversals}
 
-\purp{T: this may replace the tautologies section}
+To further illustrate the power of our inflated DAG approach, we now demonstrate how to recover all Bell inequalities~\cite{Brunner2013Bell,bell1966lhvm,CHSHOriginal} via our method. To keep things simple we only discuss the case of a bipartite Bell scenario with two values for both ``settings'' and ``outcome'' variables here, but the case of more parties and/or more values per variable is totally analogous.
+%It is critical that our method should be able to derive these seminal criteria, as Bell inequalities have been a foundational component of quantum information theory for the last half century \cite{scarani2012device,BancalDIApproach}.
 
-In the literature on Bell inequalities, it has been noticed that the infeasibility with the Bell scenario DAG can sometimes be witnessed by only looking at which joint probabilities are zero and which ones are nonzero. In other words, instead of considering the probability of a joint outcome, some distributions can be witnesses as infeasible by only considering the \emph{possibility} or \emph{impossibility} of each joint outcome. This has been originally noticed by~\citet{L.Hardy:PRL:1665}, and hence such possibilistic constraints are also known as \tblue{Hardy-type paradoxes}. The ``paradox'' occurs whenever the possibilistic constraint is violated. For a systematic account of Hardy-type paradoxes in Bell scenarios, see~\cite{Mansfield2012}. It has been noted previously that such possibilistic constraints also exist for other types of marginal problems~\cite[Section~III.C]{LSW}. In the following, we explain how to determine \emph{all} such constraints for \emph{any} marginal problem.
+The causal structure associated to the Bell \cite{bell1964einstein,Brunner2013Bell,bell1966lhvm,CHSHOriginal} experiment [\citealp{pusey2014gdag}~(Fig.~E\#2), \citealp{WoodSpekkens}~(Fig.~19), \citealp{chaves2014novel}~(Fig.~1), \citealp{BeyondBellII}~(Fig.~1), \citealp{wolfe2015nonconvexity}~(Fig.~2b), \citealp{steeg2011relaxation}~(Fig.~2)] is depicted here in \cref{fig:NewBellDAG1}. The observable variables are $A,B,X,Y$, and $\Lambda$ is the latent common cause of $A$ and $B$. In a Bell scenario, one traditionally works with the conditional distribution $P_{AB|XY}$, to be understood as an array of distributions indexed by the possible values of $X$ and $Y$, instead of with the original distribution $P_{ABXY}$, which is what we do.
 
-To start with a simple example, suppose that we are in a marginal scenario where the pairwise joint distributions of three variables $A$, $B$ and $C$ are given, and these two variables are binary with values in $\{0,1\}$. Then we have the implication
-\[
-	[A\eql 1,C\eql 1] \Longrightarrow [A\eql 0,B=\eql 0] \lor [B\eql 1,C \eql 1].
-\]
-Assuming the existence of a solution to the marginal problem, we can apply the union bound to the probability of the right-hand side. This translates the implication into the inequality
-\[
-	P_{AC}(01) \leq P_{AB}(00) + P_{BC}(11),
-\]
-which is therefore a necessary condition for the marginal problem to have a solution. Applying this together with the inflation technique to the Triangle scenario results in an inequality equivalent to~\cref{eq:polymonogamy}.
+In the Bell scenario DAG, the maximal pre-injectable sets are
+\begin{align}\begin{split}
+	\label{eq:bellcontexts}
+&\brackets{A_1 B_1 X_1 X_2 Y_1 Y_2} \\
+&\brackets{A_1 B_2 X_1 X_2 Y_2 Y_2} \\
+&\brackets{A_2 B_1 X_1 X_2 Y_2 Y_2} \\
+&\brackets{A_2 B_2 X_1 X_2 Y_2 Y_2} ,
+\end{split}\end{align}
+where notably every maximal pre-injectable set contains all ``settings'' variables $X_1$ to $Y_2$. The marginal distributions on these pre-injectable sets are then specified by the original observable distribution via
+\begin{align}\begin{split}&\forall{a b x_1 x_2 y_1 y_2}:\; \begin{cases}
+	P_{A_1 B_1 X_1 X_2 Y_1 Y_2}(a b x_1 x_2 y_1 y_2)  = P_{A B X Y}(a b x_1 y_1) P_X(x_2) P_Y(y_2), \\
+	P_{A_1 B_2 X_1 X_2 Y_1 Y_2}(a b x_1 x_2 y_1 y_2)  = P_{A B X Y}(a b x_1 y_2) P_X(x_2) P_Y(y_1), \\
+	P_{A_2 B_1 X_1 X_2 Y_1 Y_2}(a b x_1 x_2 y_1 y_2)  = P_{A B X Y}(a b x_2 y_1) P_X(x_1) P_Y(y_2), \\
+	P_{A_2 B_2 X_1 X_2 Y_1 Y_2}(a b x_1 x_2 y_1 y_2)  = P_{A B X Y}(a b x_2 y_2) P_X(x_1) P_Y(y_1), \\
+\hspace{2.5pc}	P_{X_1 X_2 Y_1 Y_2}(x_1 x_2 y_1 y_2)  = P_X(x_1) P_X(x_2) P_Y(y_1) P_Y(y_2).
+\end{cases}\end{split}\end{align}
+%where it should be understood implicitly that the inequalities hold for all values of $\{a b x_1 x_2 y_1 y_2\}$.
+%The last equations follows from each of the others by making use of the Markov condition $P_{XY} = P_X P_Y$ for the original distribution, it nevertheless
+By dividing each of the first four equations by the fifth, we obtain
+\begin{align}\begin{split}
+	\label{eq:bellfactor}
+	\forall{a b x_1 x_2 y_1 y_2}:\; \begin{cases}
+	P_{A_1 B_1 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2)  = P_{A B | X Y}(a b | x_1 y_1), \\
+	P_{A_1 B_2 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2)  = P_{A B | X Y}(a b | x_1 y_2), \\
+	P_{A_2 B_1 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2)  = P_{A B | X Y}(a b | x_2 y_1), \\
+	P_{A_2 B_2 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2)  = P_{A B | X Y}(a b | x_2 y_2).
+\end{cases}\end{split}\end{align}
+The existence of a joint distribution over all six variables---i.e.~the existence of a solution to the marginal problem---implies in particular
+%If we then impose marginal compatibility according the the marginal problem we find that the (minimal!) consequence of the inflation hypothesis is 
+\begin{align}
+	\forall{a b x_1 x_2 y_1 y_2}: \quad P_{A_1 B_1 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(a a' b b'|x_1 x_2 y_1 y_2),
+\end{align}
+and similarly for the other three conditional distributions under consideration. For consistency with the causal hypothesis, therefore, the original distribution must satisfy in particular
+\begin{align}\begin{split}\label{eq:finalBellstep}\forall{a b}:\; \begin{cases}
+	P_{A B | X Y}(a b | 0 0)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(a a' b b'|0101) \\
+	P_{A B | X Y}(a b | 1 0)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(a' a b b'|0101) \\
+	P_{A B | X Y}(a b | 0 1)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(a a' b' b|0101) \\
+	P_{A B | X Y}(a b | 1 1)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(a' a b' b|0101)
+\end{cases}\end{split}\end{align}
+The possibility to write the conditional probabilities in the Bell scenario in this form is equivalent to the existence of a latent variable model, as noted in Fine's Theorem~\cite{FineTheorem}. Thus, if an inflated model exists with the required marginals, then a latent variable model of the original distribution exists as well (and conversely, trivially). Hence the inflated DAG of~\cref{fig:BellDagCopy1} provides necessary and sufficient conditions for the consistency of the original observed distribution with the Bell scenario causal structure.
 
-We outline the general procedure using a slightly more sophisticated example. Consider the marginal scenario of~\cref{fig:simplicialcomplex222}, where the contexts are
+%The last equations turns out to be rather useful to write down explicitly: putting $x_1 = y_1 = 0$ and $x_2 = y_2 = 1$ and dividing the first equation by the last one results in
+%\begin{align*}
+%	P_{A B X Y}(a b | 0 0)  =  \sum_{a',b'} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(aa'bb'|0101).
+%\end{align*}
+%Similarly, $P_{A B X Y}(a b | 0 1)$, $P_{A B X Y}(a b | 1 0)$ and $P_{A B X Y}(a b | 1 1)$ can also be written as marginals of a conditional distribution. 
+%By Fine's Theorem~\cite{FineTheorem}, this implies the existence of a hidden-variable model. Conversely, if a hidden-variable model exists, then the existence of the inflated model implies the existence of a solution to the marginal problem.
+
+% In conclusion, we therefore find in the case of the inflated DAG~\cref{fig:BellDagCopy1}, the inflation method yields necessary and sufficient infeasibility criteria for the Bell causal structure, i.e. the Bell/CHSH inequalities, just by requiring marginal compatibility of the pre-injectable sets.
+% More generally, we can use Fine's theorem to show that applying the marginal problem to suitable inflated DAGs can reproduce \emph{all} Bell inequalities, for any standard Bell scenario, no matter how many parties or settings or possible outcomes. 
+
+Moreover, it is possible to describe the marginal polytope over the pre-injectable sets of~\cref{eq:bellcontexts}, due to the fact that the ``settings'' variables $X_1$ to $Y_4$ occur in all four contexts. This description is easier to state for the marginal \emph{cone}, by which we mean the convex cone spanned by the marginal polytope, i.e.~the convex cone consisting of all nonnegative linear combinations of deterministic assignments of values, or equivalently the convex cone of all measures on the set of joint outcomes. This cone lives in $\oplus_{i=1}^4 \mathbb{R}^{2^6} = \oplus_{i=1}^4 (\mathbb{R}^2)^{\otimes 6}$, where each tensor factor has basis vectors corresponding to the two possible outcomes of each variable, and the direct summands enumerate the four contexts. Now the marginal cone is precisely the set of all nonnegative linear combinations of the points
 \begin{align*}
-	\{A_1 B_1 C_1\},\\
-	\{A_1 B_2 C_2\},\\
-	\{A_2 B_1 C_2\},\\
-	\{A_2 B_2 C_1\},\\
-	\{A_2 B_2 C_2\}.
+	(e_{A_1} & \otimes e_{B_1} \otimes e_{X_1} \otimes e_{X_2} \otimes e_{Y_1} \otimes e_{Y_2}) \\
+	\oplus\: (e_{A_1} & \otimes e_{B_2} \otimes e_{X_1} \otimes e_{X_2} \otimes e_{Y_1} \otimes e_{Y_2}) \\
+	\oplus\: (e_{A_2} & \otimes e_{B_1} \otimes e_{X_1} \otimes e_{X_2} \otimes e_{Y_1} \otimes e_{Y_2}) \\
+	\oplus\: (e_{A_2} & \otimes e_{B_2} \otimes e_{X_1} \otimes e_{X_2} \otimes e_{Y_1} \otimes e_{Y_2}),
 \end{align*}
-Now a possibilistic constraint on this marginal problem consists of a logical implication with one joint outcome as the implicant and a disjunction of joint outcomes as the conclusion (implicate?). In the following, we explain how to generate \emph{all} such implications which are tight in the sense that their right-hand sides are minimal. So let us fix some joint outcome for the left-hand side for the sake of concreteness, taking
-\begin{equation}
-	\label{eq:lhshardy}
-	[A_2 \eql 1, B_2 \eql 1, C_2 \eql 1].
-\end{equation}
-To generate all possibilistic constraints, one will have to perform the following procedure for every choice of joint outcome in every context as the left-hand side. Assuming these concrete outcomes, the right-hand side of the implication needs to be a conjunction of joint outcomes which is such that for any deterministic assignment of outcomes to the variables which extends~\cref{eq:lhshardy}, also at least one of the joint outcomes on the right-hand side occurs. To determine what the possibilities for choosing this right-hand side are, it helps to draw the following hypergraph: take the set of nodes to be the disjoint union over all the contexts of all the joint outcomes which are compatible with~\eqref{eq:lhshardy}\footnote{In the left-hand side context there will thus be only one node, and one can also omit this one node without changing the result.}. Furthermore, let the hyperedges correspond to complete deterministic assignments of values to all variables extending~\cref{eq:lhshardy}, such that such a hyperedge contains precisely those nodes that are the marginal outcomes to which it restricts. In our example, the resulting hypergraph has $2^3 + 3\cdot 2^1 = 14$ nodes and $2^3 = 8$ hyperedges. Then the possible right-hand sides of the implications are precisely the \tblue{transversals} of this hypergraph, i.e.~the sets of nodes which have the property that they intersect every hyperedge in at least one node. In order to get implications which are as tight as possible, it is sufficient to enumerate only the \tblue{minimal transversals}. Doing so is a well-studied problem in computer science with various natural reformulations and for which manifold algorithms have been developed~\cite{eiter_dualization_2008}. We expect that this enumeration of minimal transversals will be computationally much more tractable than the linear quantifier elimination, even if one does it for every possible left-hand side of the implication.
-
-In our example, it is not hard to check that the right-hand side of
-\begin{align*}
-	[A_2 \eql 1, B_2 \eql 1, C_2 \eql 1] \Longrightarrow [A_1 \eql 0, B_1 & \eql 0, A_1 \eql 0] \lor [A_1 \eql 1, B_2 \eql 1, C_2 \eql 1] \\
-		& \lor [A_2 \eql 1, B_1 \eql 1, C_2 \eql 1] \lor [A_2 \eql 1, B_2 \eql 1, C_1 \eql 1]
-\end{align*}
-is such a minimal transversal: every assignment of values to all variables which extends the assignment on the left-hand side satisfies at least one of the terms on the right, but this ceases to hold as soon as one removes any one term on the right.
-
-Finally, we convert the implication into an inequality by replacing the implication itself by an inequality and the disjunctions by sums,
+where all six variables range over their deterministic outcomes. Since the last four tensor factors occur in every direct summand in exactly the same way, the resulting marginal cone is linearly isomorphic to the cone generated by all vectors of the form
 \[
-	P_{A_2 B_2 C_2}(111) \leq P_{A_1 B_1 C_1}(000) + P_{A_1 B_2 C_2}(111) + P_{A_2 B_1 C_2}(111) + P_{A_2 B_2 C_1}(111).
+	\left[ (e_{A_1} \otimes e_{B_1}) \oplus (e_{A_1} \otimes e_{B_2}) \oplus (e_{A_2} \otimes e_{B_1}) \oplus (e_{A_2} \otimes e_{B_2})\right] \otimes \left[ e_{X_1} \otimes e_{X_2} \otimes e_{Y_1} \otimes e_{Y_2}\right]
 \]
-Applying this to our inflation DAG of~\cref{fig:Tri222} results again in one of our previous inequalities.
+in $\mathbb{R}^{2^2}\otimes \mathbb{R}^{2^4}$. Now since the first four variables in the first tensor factor vary completely independently of the latter four variables in the second tensor factor, the resulting cone will be precisely the tensor product~\cite{namioka_tensor_1969} of two cones: first, the cone generated by all vectors of the form
+\[
+	(e_{A_1} \otimes e_{B_1}) \oplus (e_{A_1} \otimes e_{B_2}) \oplus (e_{A_2} \otimes e_{B_1}) \oplus (e_{A_2} \otimes e_{B_2}),
+\]
+and second the one spanned by all $e_{X_1} \otimes e_{X_2} \otimes e_{Y_1} \otimes e_{Y_2}$. While the latter cone is simply the standard positive cone of $\mathbb{R}^8$, the former cone is the cone generated by the ``local polytope'' or ``Bell polytope'' that is traditionally used in the context of Bell scenarios~\cite[Sec.~II.B]{Brunner2013Bell}. Standard results on tensor products of cones and polytopes~\cite{bogart_hom_2013} therefore imply that our marginal polytope is the tensor product of the Bell polytope, corresponding to the $A_1$ to $B_2$ part, with a simplex corresponding to the $X_1$ to $Y_2$ ``settings'' part. This implies that the facets of our marginal polytope are precisely the pairs consisting of a facet of the Bell polytope and a facet of the simplex. For example, in this way we obtain one version of the CHSH inequality as a facet of the marginal polytope,
+\[
+	\sum_{a,b,x,y} (-1)^{a + b + xy} P_{A_x B_y X_1 X_2 Y_1 Y_2}(a b 0 1 0 1) \leq 2 P_{X_1 X_2 Y_1 Y_2}(0101).
+\]
+Upon using~\cref{eq:bellfactor}, this becomes
+\begin{align*}
+	\sum_{a,b} (-1)^{a + b} \big( & P_{A B X Y}(ab00)P_X(1)P_Y(1) + P_{A B X Y}(ab01)P_X(1)P_Y(0) \\
+	& + P_{A B X Y}(ab10)P_X(0)P_Y(1) - P_{A B X Y}(ab11)P_X(0)P_Y(0) \big) \leq P_X(0)P_X(1)P_Y(0)P_Y(1),
+\end{align*}
+so that dividing by the right-hand side results in essentially the conventional form of the CHSH inequality,
+\[
+	\sum_{a,b} (-1)^{a + b} \left( P_{AB|XY}(ab|00) + P_{AB|XY}(ab|01) + P_{AB|XY}(ab|10) - P_{AB|XY}(ab|11) \right) \leq 2.
+\]
+In conclusion, the inflation technique is powerful enough to get a precise characterization of all distributions consistent with the Bell causal structure, and our technique for generating polynomial inequalities while solving the marginal problem recovers all Bell inequalities.
 
-Since also many Bell inequalities are of this form---such as the CHSH inequality which follows in this way from Hardy's original implication---we conclude that this still sufficiently powerful to generate plenty of interesting inequalities, and at the same time significantly easier to perform in practice than the full-fledged linear (let alone nonlinear) quantifier elimination.
+\begin{comment}
+Analysis of the inflated DAG in \cref{fig:BellDagCopy1} shows that  
+\begin{align}\label{eq:bellypolymapped}
+ \p{a b x y}\p{\n{x}} \p{\n{y}}
+&\leq
+ \p{a \n{b} x \n{y}}\p{\n{x}}\p{y} +  \p{\n{a} b \n{x} y}\p{x} \p{\n{y}}+\p{a b \n{x} \n{y}}\p{x} \p{y}
+\\
+\shortintertext{by virtue of the unmapped (but factored) inequality}
+\label{eq:bellypolyunmapped}
+ \p{a_1 b_1 x_1 y_1}\p{\n{x}_2} \p{\n{y}_2}
+&\leq
+ \p{a_1 \n{b}_2 x_1 \n{y}_2}\p{\n{x}_2} \p{y_1} +\p{\n{a}_2 b_1 \n{x}_2 y_1}\p{x_1}\p{\n{y}_2}+  \p{a_2 b_2 \n{x}_2 \n{y}_2}\p{x_1} \p{y_1}
+\end{align}
+where \emph{every} probability appearing in \cref{eq:bellypolyunmapped} maps to the original scenario, hence yielding \cref{eq:bellypolymapped}. To derive the usual Bell inequalities from \cref{eq:bellypolymapped} we switch to conditional probabilities via ${\p{a b x y}\to\p{a b | x y}\p{x y}=\p{a b | x y}\p{x}\p{y}}$ which, after dividing both sides of \cref{eq:bellypolymapped} by $\p{x}\p{\n{x}}\p{y}\p{\n{y}}$, yields
+\begin{align}\label{eq:chwithneg}
+&\p{a b | x y}
+\leq
+{\p{a \n{b} | x \n{y}} + \p{\n{a} b | \n{x} y}+\p{a b | \n{x} \n{y}}}
+\\
+\hspace{-\mathindent}\text{or, equivalently,}\quad
+\label{eq:chwithoutneg}
+&{\p{a b | x y}+\p{a b | x \n{y}} + \p{a b | \n{x} y}}
+\leq
+{\p{a|\n{x}}+\p{b|\n{y}} + \p{a b | \n{x} \n{y}}}
+\end{align}
+which is precisely the Clauser-Horne (CH) inequality \cite{CHInequality} for the Bell scenario. Note that to obtain \cref{eq:chwithoutneg} from \cref{eq:chwithneg} we implicitly made use of the no-signalling assumptions, namely $\p{a|x y}=\p{a|x}$ and $\p{b| x y}=\p{b | y}$. The CH inequality is the \emph{unique} Bell inequality (up to permutations) for the Bell scenario if $\brackets{A,B,X,Y}$ are all binary, and hence the CH inequality is a necessary and sufficient criterion to ascertain if correlations are compatible with that Bell scenario variant.
+
+The causal structure of a Bell scenario can also be formulated directly in terms of conditional random variables. For example, the conditional-structure interpretation of \cref{fig:BellDagCopy1} is \cref{fig:BellConditionalDAG}. 
+
+\begin{figure}[t]
+\centering
+\begin{minipage}[t]{0.45\linewidth}
+\centering
+\includegraphics[scale=1]{BellDagConditionForm.pdf}
+\caption{The causal structure of the Bell scenario expressed in a form which makes use of conditional random variables.}\label{fig:BellConditionalDAG}
+\end{minipage}
+%\hfill
+%\begin{minipage}[t]{0.45\linewidth}
+%\centering
+%\includegraphics[scale=1]{BellDagCopy.pdf}
+%\caption{An inflated DAG of the Bell scenario, where both local settings variables have been duplicated.}\label{fig:BellDagCopy}
+%\end{minipage}
+\end{figure}
+
+The Bell inequalities are then self-evident from \cref{fig:BellConditionalDAG} without the need for an inflated DAG. The conditional-structure formulation innately implies its own inaccessible gedankenprobabilities, such as $\{\p{a|x , a|\n{x}}$, $\p{a|x , \n{a}|\n{x}},...\}$ etc. By eliminating these gedankenprobabilities from the set of inequalities generated by $0\leq \pdf{A|x , A|\n{x} , B|y , B|\n{y}}$ we obtain
+\begin{align}\label{eq:bellcondeq}
+0
+\leq
+{\p{a|\n{x}} + \p{b|\n{y}} + \p{a|x , b|y} -\p{a|x ,b|\n{y}} -\p{a|\n{x} , b|y} -\p{a|\n{x} , b|\n{y}}}\,,
+\end{align}
+for example. It should be clear that \cref{eq:bellcondeq} is equivalent to \cref{eq:chwithoutneg}.
+\end{comment}
+
+%We can perform quantifier elimination on the set of (polynomial) inequalities given by $0\leq \pdf{A|x , A|\n{x} , B|y , B|\n{y}}$. The use of a conditional-structure DAG innately implies certain inaccessible gedankenprobabilities, such as $\{\p{a|x , a|\n{x}}$, $\p{a|x , \n{a}|\n{x}},...\}$ etc. 
+%\purp{Rob says kill next two paragraphs?}
+
+%Conditional-structure gedankenprobabilities are somewhat different from the inflated DAG kind, in that they reference multiple counterfactual events, such as ``What is the probability that Alice would choose to visit the museum \emph{IF} (given that) it's a rainy day in Maryland \emph{AND} that Alice would choose to go the beach \emph{IF} (given that) it's sunny in Maryland?". By contrast, unconditional gedankenprobabilities which live on an inflated DAG reference multiple heterofactual (for lack of a better word) events, such as ``What is the probability that Alice-copy-\#1 chooses to visit the museum \emph{AND} that it's raining in Maryland-copy-\#1 \emph{AND} that Alice-copy-\#2 chooses to go the beach \emph{AND} that it's sunny in Maryland-copy-\#2?". 
+
+%Joint counterfactual probabilities are experimentally inaccessible, just the same as joint heterofactual probabilities are. Suppose one could establish both Alice's propensity for going to the museum when it rains and her propensity for going to the beach when it's sunny. Even so, neither the joint counterfactual probability nor the joint heterofactual probability can be established from that limited data. For example, the value of the hidden variable ${\Lambda\cramp{=}\lambda}$ may influence Alice's willingness to get out of bed at all, or determine if she is on-call as a volunteer EMT on a particular day, or $\lambda$ might encode if Alice is travelling out-of-state. If we could measure $\p{a|x , \n{a}|\n{x}},...\}$ we might learn that Alice's likelihood of visiting the museum if it rains in Maryland is highly correlated with her likelihood of visiting the beach when it's sunny in Maryland. Or we might learn that those two counterfactual probabilities are relatively statistically independent. The ``hidden-ness" of the classical variable corresponding to the latent node shields the gedankenprobabilities from being determined. 
+
+
+\section{Quantum Causal Inference and the No-Broadcasting Theorem}\label{sec:classicallity}
+
+{\color{purple}  Mention that the distinction between whether the nodes of the DAG represent variables or quantum algebras or post-quantum things is something that is part of the causal parameters, not the causal structure.  We must therefore revise our description of a causal model to accommodate quantum and post-quantum causal models.  Specifically, we drop the claim that the nodes are variables.  Fortunately, the notion of observed versus latent and of the cardinality of an object can be made theory-independent. ---RWS}
+
+In the causal inference problems with latent nodes that we have considered so far, the latent nodes correspond to unobserved random variables. This describes things that come up in \emph{classical} physics (and things outside of physics). In \emph{quantum} physics, however, the latent nodes may instead carry \emph{quantum systems}. Whenever this is allowed, we say that the DAG represents a \tblue{quantum causal structure}. Some quantum causal structures are famously capable of generating distributions over the observable variables that would not be possible classically\footnote{The incompatibility of quantum correlations with practical causal structure which generates them is known as Bell's theorem \cite{bell1966lhvm}. The particular distributions which violate Bell inequalities are known as nonlocal correlations~\cite{Brunner2013Bell}. Although the term suggests the existence of nonlocal interactions, in the sense that the actual causal structure may be different from the hypothesized one, this interpretation is at odds with the fact that no nonlocal interactions have been observed in nature, implying that their presence would require fine-tuning~\cite{WoodSpekkens}. A less problematic alternative conclusion from Bell's theorem is the impossibility to model quantum physics in terms of the usual notions of ``classical'' probability theory.}.
+
+The set of quantumly realizable distributions is superficially quite similar to the classical subset \cite{pusey2014gdag,fritz2012bell}. For example, classical and quantum distributions alike respect all conditional independence relations implied by the common underlying causal structure \cite{pusey2014gdag}. It is an interesting problem to find quantum distributions that are not realizable classically, or to show that there are no such distributions on a given DAG.
+
+However, this is by no means an easy task. For example, recent work has found that quantum causal structure also implies many of the entropic inequalities that hold classically~\cite{pusey2014gdag,Chaves2015infoquantum,ChavesNoSignalling}. To date, no quantum distribution has been found to violate a Shannon-type entropic inequality on observable variables derived from the Markov conditions on all nodes \cite{chaves2012entropic,fritz2012bell}. Fine-graining the scenario by conditioning on root variables (``settings'') leads to a different kind of entropic inequality, and these have proven somewhat quantum-sensitive \cite{braunstein1988entropic,SchumacherInequality,chaves2014novel}. Such inequalities are still limited, however, in that they only apply in the presence of observable root nodes\footnote{Rafael Chaves and E.W.~are exploring the potential of entropic analysis based on conditioning on non-root observable nodes. This generalizes the method of entropic inequalities, and might be capable of providing much stronger entropic witnesses.}, and they still fail to witness certain distributions as classically impossible~\cite{chaves2014novel,fritz2012bell}.
+
+We hope that polynomial inequalities derived from broadcasting inflated DAGs will provide an additional tool for witnessing certain quantum distributions as non-classical. For example due to the results of~\cref{sec:Bellscenarios}, it seems conceivable that these inequalities will be much stronger and provide much tighter constraints than entropic inequalities.
+
+It is worth pondering how it is possible that some of the inequalities that can be derived via inflation---such as Bell inequalities---have quantum violations, i.e.~why one cannot expect them to be valid for all quantum distributions as well. The reason for this is that duplicating an outgoing edge in a DAG during inflation amounts to \tblue{broadcasting} the value of the random variable. For example while the information about $X$ in~\cref{fig:TriMainDAG} was ``sent'' to $A$ and $C$, the information about $X_1$ is sent to $A_1$ \emph{and} $A_2$ and $C$ in the inflation \cref{fig:simpleinflation}. Since quantum theory satisfies a no-broadcasting theorem~\cite{NoCloningQuantum1996,NoCloningGeneral2006}, one cannot expect such broadcasting to be possible quantumly. More generally, there is an analogous no-broadcasting theorem in the regime of epistemically restricted general probabilistic theories (GPTs) \cite{SpekkensToyTheory,NoCloningGeneral2006,Barnum2012GPT,Janotta2014GPT}, so that the same statement applies in many theories other than quantum theory. As a consequence, a quantum or general probabilistic causal model on the original DAG does generally not inflate to a ``quantum inflated model'' or ``general probabilistic inflated model'' on the inflated DAG. 
+
+Some inflations, such as the one of~\cref{fig:simplestinflation}, do not require such broadcasting. By remove $A_1$ from the broadcasting inflation of \cref{fig:simpleinflation} we obtain the non-broadcasting inflation of \cref{fig:simplestinflation}. In \cref{fig:simplestinflation} the channel from $X$ to $A$ is merely \emph{redirected} from it original configuration in \cref{fig:TriMainDAG}; there is no broadcasting of information required.
+
+\begin{definition}
+	$G'\in\SmallNamedFunction{Inflations}{G}$ is \tblue{non-broadcasting} if every latent node in $G'$ has at most one copy of each $A\in\SmallNamedFunction{Nodes}{G}$ among its children.
+\end{definition}
+
+It follows that every quantum causal model can be inflated to a non-broadcasting DAG, so that one obtains a quantum and general probabilistic analogue of Lemma~\ref{mainlemma} in the non-broadcasting case. Constraints derived from non-broadcasting inflations are therefore valid also for quantum and even general probabilistic distributions. In the specific case of the entropic monogamy inequality for the Triangle scenario, i.e. \cref{eq:monogomyofcorrelations} here, this was originally noticed in Ref.~\cite{pusey2014gdag}. Another example is \cref{eq:polymonogamy}, which was derived from the non-broadcasting inflation of \cref{fig:TriDagSubA2B1C1}. \cref{eq:polymonogamy} too, therefore, is a necessary criterion for compatibility with the Triangle scenario even when the latent nodes are allowed to carry quantum or general probabilistic systems.
+% This confirms our numerical computations, which indicated that~\eqref{eq:polymonogamy} does not have any quantum violations. The same is true for monogamy of correlations, per \cref{eq:monogomyofcorrelations}.
+Since the perfect-correlation distribution considered in~\cref{eq:ghzdistribution1} violates both of these inequalities, it evidently cannot be generated within the Triangle scenario even with quantum or general probabilistic states on the hidden nodes. This was also pointed out in Ref.~\cite{pusey2014gdag}.
+
+%\begin{align}\label{eq:nonbroadcastinginflationDAG}
+%G'\in\SmallNamedFunction{NonBroadcastingInflations}{G} \quad\text{ iff }\quad \forall{\text{latent }A_i\in G'}\; \Ch[G']{A_i} \text{ is an irredundant set.}
+%\end{align}
+
+On the other hand, by intentionally using broadcasting in an inflated DAG, we can specifically try to witness certain quantum or general probabilistic distributions as non-classical. This is exactly what happens in Bell's theorem.
+
+%  We also find it useful to define the notion of a non-broadcasting subset of nodes within some larger broadcasting inflated DAG.
+% Let's define any pair of redundant nodes which share a latent parent to be a \tblue{fundamental broadcasting pair}. An inflated DAG is non-broadcasting if it does not contain any fundamental broadcasting pairs. Similarly, a set of nodes $\bm{U}$ is a \tblue{non-broadcasting set} iff $\An[G']{\bm{U}}$ is free of any fundamental broadcasting pairs.
+
+%A set of nodes $\bm{U}$ is a \tblue{non-broadcasting set} iff $\ansubgraph[G']{\bm{U}}$ is a non-broadcasting inflated DAG. Any inference about the original DAG which can be made by referencing exclusively to non-broadcasting sets hold in both the classical and quantum paradigms. Broadcasting inflated DAGs are therefore especially useful for deriving criteria which distinguish quantum and classical probability distributions, but we anticipate them to be valuable for broader causal inference tasks as well.
+
+% It is worth emphasizing that broadcasting the values of hidden variables %which are predicated on multiple counterfactual or heterofactual events 
+%are strictly classical constructs. If the latent node in the Bell scenario in \cref{fig:NewBellDAG1} is allowed to be a quantum resource $\mathcal{H}^{d_A\otimes d_B}$, for example, then broadcasting gedankendistributions such as $\pdf{A|x , A|\n{x},...}$ or $\pdf{A_1,A_2,...}$ are \tblue{physically prohibited} if the quantum state is suitably entangled.
+
+% More precisely, quantum states are governed by a no-broadcasting theorem \cite{NoCloningQuantum1996,NoCloningGeneral2006}: If half the state is sent to Alice and she performs some measurement on it, she fundamentally perturbs the state by measuring it. Post-measurement, that half of the state cannot be ``re-sent" to Alice, that she might re-measure it using a different measurement setting. As a consequence of the no-broadcasting theorem, in the inflated DAG picture a quantum state which was initially available to a single party cannot be distributed both to Alice-copy-\#1 and Alice-copy-\#2 in the way a classical hidden variable could be. 
+
+% This means that considerations on inflated DAGs cannot be used to derive quantum causal infeasibility criteria whenever a gedankenprobability presupposes the ability to broadcast a latent node's system. Broadcasting and non-broadcasting sets of variables are distinguished per \cref{eq:nonbroadcastinginflationDAG}.
+
+%When analyzing GPT causal structures one may not assume that a joint probability distribution over observable variables is universally nonnegative if the set of observable variables has simultaneous meaning only under broadcasting of latent variables. This is in direct contrast to \cref{step:generateineqs} in \cref{sec:mainalgorithm}. 
+
+%Not every inflation requires broadcasting, however, and hence not every gedankenprobability is physically prohibited by quantum theory. 
+%An inflated DAG is a \tblue{non-broadcasting inflation} whenever the children of every individual node in the inflated DAG $G'$ map injectively to the corresponding children of the mapped node in the original DAG $G$, i.e. $dmap\parenths*{\Ch[G']{X}}\subseteq\Ch[G]{dmap\parenths*{X}}$ for all $X\in\nodes{G'}$. 
+% \cref{fig:TriDagSubA2B1C1} is an example of a non-broadcasting inflation.
+
+Even when using broadcasting inflated DAGs, it may still be possible to derive inequalities valid for quantum distributions if one appropriately the nonnegativity inequalities in the marginal problem, e.g. such as \cref{eq:nonnegativity}. The modification would replace demanding nonnegativity of the full joint distribution with instead demanding the nonnegativity of only quantum-physically-meaningful marginal probability distributions. 
+
+Even when using broadcasting inflated DAGs, it may still be possible to derive inequalities valid for quantum distributions if one appropriately modifies \cref{sec:ineqs} to generate a different initial set of nonnegativity inequalities. This new set should capture the nonnegativity of only quantum-physically-meaningful marginal probability distributions. Indeed, a quantum causal model on the original DAG can potentially be inflated to a quantum inflated model on the inflated DAG in terms of the logical broadcasting maps of \citet{Coecke2011}. From this perspective, a broadcasting inflated DAG is an abstract logical concept, as opposed to a feasible physical construct. However, this would result in a joint distribution over all observable variables that may have some negative probabilities, and one cannot expect~\cref{eq:nonnegativity} to hold in general. But one can still try to reformulate the marginal problem so as to refer only to the existence of joint distributions on non-broadcastings sets rather than the existence of a full joint distribution from which the marginal distributions might be recovered. Here, a set $\bm{U}$ of observable nodes is non-broadcasting if $\An{\bm{U}}$ does not contain two distinct copies of a node both sharing a common latent parent.
+
+An analysis along these lines has already been carried out successfully by \citet{Chaves2015infoquantum} in the derivation of entropic inequalities that are valid for all quantum distributions. Although \citet{Chaves2015infoquantum} do not invoke inflated DAGs, they do seem to employ a similar type of structure to model the conditioning of a variable on a ``setting'' variable, and this also gives rise to non-broadcasting sets. \citet{Chaves2015infoquantum} take pains to avoid including full joint probability distributions in any of their initial entropic inequalities, precisely as we would want to do in constructing our initial probability inequalities, and they successfully derive quantumly valid entropic inequalities. But so far, no inequalities polynomial in the probabilities have been derived using this method.
+
+% Our current inflated DAG method can be employed to derive causal infeasibility criteria for general causal structures, thus generalizing Bell inequalities somewhat. From a quantum foundations perspective, however, generalizing Tsirelson inequalities \cite{Tsirelson1980,Brunner2013Bell}---the ultimate constraints on what quantum theory makes possible---is even more desirable. 
+
+A tight set of inequalities characterizing quantum distributions would provide the ultimate constraints on what quantum theory allows. Deriving additional inequalities that hold for quantum distributions is therefore a priority for future research.
+
+
 
 
 
@@ -1698,70 +1767,6 @@ As far as we can tell, our inequalities are not related to the nonlinear incompa
 
 
 \color{black}
-
-
-\section{Quantum Causal Inference and the No-Broadcasting Theorem}\label{sec:classicallity}
-
-{\color{purple}  Mention that the distinction between whether the nodes of the DAG represent variables or quantum algebras or post-quantum things is something that is part of the causal parameters, not the causal structure.  We must therefore revise our description of a causal model to accommodate quantum and post-quantum causal models.  Specifically, we drop the claim that the nodes are variables.  Fortunately, the notion of observed versus latent and of the cardinality of an object can be made theory-independent. ---RWS}
-
-In the causal inference problems with latent nodes that we have considered so far, the latent nodes correspond to unobserved random variables. This describes things that come up in \emph{classical} physics (and things outside of physics). In \emph{quantum} physics, however, the latent nodes may instead carry \emph{quantum systems}. Whenever this is allowed, we say that the DAG represents a \tblue{quantum causal structure}. Some quantum causal structures are famously capable of generating distributions over the observable variables that would not be possible classically\footnote{The incompatibility of quantum correlations with practical causal structure which generates them is known as Bell's theorem \cite{bell1966lhvm}. The particular distributions which violate Bell inequalities are known as nonlocal correlations~\cite{Brunner2013Bell}. Although the term suggests the existence of nonlocal interactions, in the sense that the actual causal structure may be different from the hypothesized one, this interpretation is at odds with the fact that no nonlocal interactions have been observed in nature, implying that their presence would require fine-tuning~\cite{WoodSpekkens}. A less problematic alternative conclusion from Bell's theorem is the impossibility to model quantum physics in terms of the usual notions of ``classical'' probability theory.}.
-
-The set of quantumly realizable distributions is superficially quite similar to the classical subset \cite{pusey2014gdag,fritz2012bell}. For example, classical and quantum distributions alike respect all conditional independence relations implied by the common underlying causal structure \cite{pusey2014gdag}. It is an interesting problem to find quantum distributions that are not realizable classically, or to show that there are no such distributions on a given DAG.
-
-However, this is by no means an easy task. For example, recent work has found that quantum causal structure also implies many of the entropic inequalities that hold classically~\cite{pusey2014gdag,Chaves2015infoquantum,ChavesNoSignalling}. To date, no quantum distribution has been found to violate a Shannon-type entropic inequality on observable variables derived from the Markov conditions on all nodes \cite{chaves2012entropic,fritz2012bell}. Fine-graining the scenario by conditioning on root variables (``settings'') leads to a different kind of entropic inequality, and these have proven somewhat quantum-sensitive \cite{braunstein1988entropic,SchumacherInequality,chaves2014novel}. Such inequalities are still limited, however, in that they only apply in the presence of observable root nodes\footnote{Rafael Chaves and E.W.~are exploring the potential of entropic analysis based on conditioning on non-root observable nodes. This generalizes the method of entropic inequalities, and might be capable of providing much stronger entropic witnesses.}, and they still fail to witness certain distributions as classically impossible~\cite{chaves2014novel,fritz2012bell}.
-
-We hope that polynomial inequalities derived from broadcasting inflated DAGs will provide an additional tool for witnessing certain quantum distributions as non-classical. For example due to the results of~\cref{sec:Bellscenarios}, it seems conceivable that these inequalities will be much stronger and provide much tighter constraints than entropic inequalities.
-
-It is worth pondering how it is possible that some of the inequalities that can be derived via inflation---such as Bell inequalities---have quantum violations, i.e.~why one cannot expect them to be valid for all quantum distributions as well. The reason for this is that duplicating an outgoing edge in a DAG during inflation amounts to \tblue{broadcasting} the value of the random variable. For example while the information about $X$ in~\cref{fig:TriMainDAG} was ``sent'' to $A$ and $C$, the information about $X_1$ is sent to $A_1$ \emph{and} $A_2$ and $C$ in the inflation \cref{fig:simpleinflation}. Since quantum theory satisfies a no-broadcasting theorem~\cite{NoCloningQuantum1996,NoCloningGeneral2006}, one cannot expect such broadcasting to be possible quantumly. More generally, there is an analogous no-broadcasting theorem in the regime of epistemically restricted general probabilistic theories (GPTs) \cite{SpekkensToyTheory,NoCloningGeneral2006,Barnum2012GPT,Janotta2014GPT}, so that the same statement applies in many theories other than quantum theory. As a consequence, a quantum or general probabilistic causal model on the original DAG does generally not inflate to a ``quantum inflated model'' or ``general probabilistic inflated model'' on the inflated DAG. 
-
-Some inflations, such as the one of~\cref{fig:simplestinflation}, do not require such broadcasting. By remove $A_1$ from the broadcasting inflation of \cref{fig:simpleinflation} we obtain the non-broadcasting inflation of \cref{fig:simplestinflation}. In \cref{fig:simplestinflation} the channel from $X$ to $A$ is merely \emph{redirected} from it original configuration in \cref{fig:TriMainDAG}; there is no broadcasting of information required.
-
-\begin{definition}
-	$G'\in\SmallNamedFunction{Inflations}{G}$ is \tblue{non-broadcasting} if every latent node in $G'$ has at most one copy of each $A\in\SmallNamedFunction{Nodes}{G}$ among its children.
-\end{definition}
-
-It follows that every quantum causal model can be inflated to a non-broadcasting DAG, so that one obtains a quantum and general probabilistic analogue of Lemma~\ref{mainlemma} in the non-broadcasting case. Constraints derived from non-broadcasting inflations are therefore valid also for quantum and even general probabilistic distributions. In the specific case of the entropic monogamy inequality for the Triangle scenario, i.e. \cref{eq:monogomyofcorrelations} here, this was originally noticed in Ref.~\cite{pusey2014gdag}. Another example is \cref{eq:polymonogamy}, which was derived from the non-broadcasting inflation of \cref{fig:TriDagSubA2B1C1}. \cref{eq:polymonogamy} too, therefore, is a necessary criterion for compatibility with the Triangle scenario even when the latent nodes are allowed to carry quantum or general probabilistic systems.
-% This confirms our numerical computations, which indicated that~\eqref{eq:polymonogamy} does not have any quantum violations. The same is true for monogamy of correlations, per \cref{eq:monogomyofcorrelations}.
-Since the perfect-correlation distribution considered in~\cref{eq:ghzdistribution1} violates both of these inequalities, it evidently cannot be generated within the Triangle scenario even with quantum or general probabilistic states on the hidden nodes. This was also pointed out in Ref.~\cite{pusey2014gdag}.
-
-%\begin{align}\label{eq:nonbroadcastinginflationDAG}
-%G'\in\SmallNamedFunction{NonBroadcastingInflations}{G} \quad\text{ iff }\quad \forall{\text{latent }A_i\in G'}\; \Ch[G']{A_i} \text{ is an irredundant set.}
-%\end{align}
-
-On the other hand, by intentionally using broadcasting in an inflated DAG, we can specifically try to witness certain quantum or general probabilistic distributions as non-classical. This is exactly what happens in Bell's theorem.
-
-%  We also find it useful to define the notion of a non-broadcasting subset of nodes within some larger broadcasting inflated DAG.
-% Let's define any pair of redundant nodes which share a latent parent to be a \tblue{fundamental broadcasting pair}. An inflated DAG is non-broadcasting if it does not contain any fundamental broadcasting pairs. Similarly, a set of nodes $\bm{U}$ is a \tblue{non-broadcasting set} iff $\An[G']{\bm{U}}$ is free of any fundamental broadcasting pairs.
-
-%A set of nodes $\bm{U}$ is a \tblue{non-broadcasting set} iff $\ansubgraph[G']{\bm{U}}$ is a non-broadcasting inflated DAG. Any inference about the original DAG which can be made by referencing exclusively to non-broadcasting sets hold in both the classical and quantum paradigms. Broadcasting inflated DAGs are therefore especially useful for deriving criteria which distinguish quantum and classical probability distributions, but we anticipate them to be valuable for broader causal inference tasks as well.
-
-% It is worth emphasizing that broadcasting the values of hidden variables %which are predicated on multiple counterfactual or heterofactual events 
-%are strictly classical constructs. If the latent node in the Bell scenario in \cref{fig:NewBellDAG1} is allowed to be a quantum resource $\mathcal{H}^{d_A\otimes d_B}$, for example, then broadcasting gedankendistributions such as $\pdf{A|x , A|\n{x},...}$ or $\pdf{A_1,A_2,...}$ are \tblue{physically prohibited} if the quantum state is suitably entangled.
-
-% More precisely, quantum states are governed by a no-broadcasting theorem \cite{NoCloningQuantum1996,NoCloningGeneral2006}: If half the state is sent to Alice and she performs some measurement on it, she fundamentally perturbs the state by measuring it. Post-measurement, that half of the state cannot be ``re-sent" to Alice, that she might re-measure it using a different measurement setting. As a consequence of the no-broadcasting theorem, in the inflated DAG picture a quantum state which was initially available to a single party cannot be distributed both to Alice-copy-\#1 and Alice-copy-\#2 in the way a classical hidden variable could be. 
-
-% This means that considerations on inflated DAGs cannot be used to derive quantum causal infeasibility criteria whenever a gedankenprobability presupposes the ability to broadcast a latent node's system. Broadcasting and non-broadcasting sets of variables are distinguished per \cref{eq:nonbroadcastinginflationDAG}.
-
-%When analyzing GPT causal structures one may not assume that a joint probability distribution over observable variables is universally nonnegative if the set of observable variables has simultaneous meaning only under broadcasting of latent variables. This is in direct contrast to \cref{step:generateineqs} in \cref{sec:mainalgorithm}. 
-
-%Not every inflation requires broadcasting, however, and hence not every gedankenprobability is physically prohibited by quantum theory. 
-%An inflated DAG is a \tblue{non-broadcasting inflation} whenever the children of every individual node in the inflated DAG $G'$ map injectively to the corresponding children of the mapped node in the original DAG $G$, i.e. $dmap\parenths*{\Ch[G']{X}}\subseteq\Ch[G]{dmap\parenths*{X}}$ for all $X\in\nodes{G'}$. 
-% \cref{fig:TriDagSubA2B1C1} is an example of a non-broadcasting inflation.
-
-Even when using broadcasting inflated DAGs, it may still be possible to derive inequalities valid for quantum distributions if one appropriately the nonnegativity inequalities in the marginal problem, e.g. such as \cref{eq:nonnegativity}. The modification would replace demanding nonnegativity of the full joint distribution with instead demanding the nonnegativity of only quantum-physically-meaningful marginal probability distributions. 
-
-Even when using broadcasting inflated DAGs, it may still be possible to derive inequalities valid for quantum distributions if one appropriately modifies \cref{sec:ineqs} to generate a different initial set of nonnegativity inequalities. This new set should capture the nonnegativity of only quantum-physically-meaningful marginal probability distributions. Indeed, a quantum causal model on the original DAG can potentially be inflated to a quantum inflated model on the inflated DAG in terms of the logical broadcasting maps of \citet{Coecke2011}. From this perspective, a broadcasting inflated DAG is an abstract logical concept, as opposed to a feasible physical construct. However, this would result in a joint distribution over all observable variables that may have some negative probabilities, and one cannot expect~\cref{eq:nonnegativity} to hold in general. But one can still try to reformulate the marginal problem so as to refer only to the existence of joint distributions on non-broadcastings sets rather than the existence of a full joint distribution from which the marginal distributions might be recovered. Here, a set $\bm{U}$ of observable nodes is non-broadcasting if $\An{\bm{U}}$ does not contain two distinct copies of a node both sharing a common latent parent.
-
-An analysis along these lines has already been carried out successfully by \citet{Chaves2015infoquantum} in the derivation of entropic inequalities that are valid for all quantum distributions. Although \citet{Chaves2015infoquantum} do not invoke inflated DAGs, they do seem to employ a similar type of structure to model the conditioning of a variable on a ``setting'' variable, and this also gives rise to non-broadcasting sets. \citet{Chaves2015infoquantum} take pains to avoid including full joint probability distributions in any of their initial entropic inequalities, precisely as we would want to do in constructing our initial probability inequalities, and they successfully derive quantumly valid entropic inequalities. But so far, no inequalities polynomial in the probabilities have been derived using this method.
-
-% Our current inflated DAG method can be employed to derive causal infeasibility criteria for general causal structures, thus generalizing Bell inequalities somewhat. From a quantum foundations perspective, however, generalizing Tsirelson inequalities \cite{Tsirelson1980,Brunner2013Bell}---the ultimate constraints on what quantum theory makes possible---is even more desirable. 
-
-A tight set of inequalities characterizing quantum distributions would provide the ultimate constraints on what quantum theory allows. Deriving additional inequalities that hold for quantum distributions is therefore a priority for future research.
-
-
-
-
-
 
 \section{Conclusions}
 %\purp{Not yet written. To discuss: 
@@ -1871,9 +1876,9 @@ Approach & General problem & Standard algorithm(s) & Difficulty \\
 \midrule
 Nonlinear quantifier elimination & Real quantifier elimination & Cylindrical algebraic decomposition, see \cite{ChavesPolynomial} & Very hard \\
 \hline
-marginal problem & Facet enumeration & Fourier-Motzkin~\cite{fordan1999projection,DantzigEaves,Bastrakov2015,BalasProjectionCone,Jones2008}, lexicographic reverse search~\cite{Avis2000lrs} & Hard \\
+Solve marginal problem & Facet enumeration & Fourier-Motzkin~\cite{fordan1999projection,DantzigEaves,Bastrakov2015,BalasProjectionCone,Jones2008}, lexicographic reverse search~\cite{Avis2000lrs} & Hard \\
 \hline
-Possibilistic marginal problem & Identify hypergraph transversals & See~\citet{eiter_dualization_2008} & Very easy \\
+Enumerate Hardy-type paradoxes & Hypergraph transversals & See~\citet{eiter_dualization_2008} & Very easy \\
 \midrule
 Nonlinear satisfiability & Nonlinear optimization & See \cite{BarFT-SMTLIB}, and semidefinite relaxations~\cite{laurent_polynomial_2012} & Easy \\
 \hline
@@ -2242,11 +2247,10 @@ While it is also not hard to write down a distribution with the desired properti
 %\end{minipage}
 \end{figure}
 
-%\section{Classifying polynomial inequalities for the Triangle scenario}
-\section{Causal compatibility inequalities for the Triangle scenario in machine-readable format}
+\section{Classifying polynomial inequalities for the Triangle scenario}
 \label{sec:38ineqs}
 
-The following polynomial inequalities for the Triangle scenario with binary observed variables have been derived via the linear quantifier elimination method of~\cref{sec:ineqs} using the inflated DAG of~\cref{fig:Tri222}. Initially this has resulted in 64 symmetry classes of inequalities, where the symmetries are given by permuting the variables and inverting the outcomes. For the resulting 64 inequalities, numerical checks have found violations of only 38 of them: although they are all facets of the marginal polytope over the distributions on pre-injectable sets, there is no guarantee that they are also nontrivial inequalities at the level of the original DAG, and this has indeed turned out not to be the case for 26 of these symmetry classes of inequalities. Moreover, it is still likely to be the case that some of these inequalities are redundant; we have not yet checked whether for every inequality there is a distribution which violates the inequality but satisfies all others.
+The following polynomial inequalities for the Triangle scenario have been derived via the linear quantifier elimination method of~\cref{sec:ineqs} using the inflated DAG of~\cref{fig:Tri222}. Initially this has resulted in 64 symmetry classes of inequalities, where the symmetries are given by permuting the variables and inverting the outcomes. For the resulting 64 inequalities, numerical checks have found violations of only 38 of them: although they are all facets of the marginal polytope over the distributions on pre-injectable sets, there is no guarantee that they are also nontrivial inequalities at the level of the original DAG, and this has indeed turned out not to be the case for 26 of these symmetry classes of inequalities. Moreover, it is still likely to be the case that some of these inequalities are redundant; we have not yet checked whether for every inequality there is a distribution which violates the inequality but satisfies all others.
 
 In the following table, the inequalities are listed in expectation-value form, where we assume the two possible outcomes of each variables to be $\{-1,+1\}$. Each row in the table gives the coefficients with one inequality, which is then $\geq 0$.
 
@@ -2297,160 +2301,9 @@ In the following table, the inequalities are listed in expectation-value form, w
 \end{tabular}}
 \end{table*}
 
-
-\section{Recovering the Bell inequalities from the inflation technique}
-\label{sec:Bellscenarios}
-
-
-To further illustrate the power of our inflated DAG approach, we now demonstrate how to recover all Bell inequalities~\cite{Brunner2013Bell,bell1966lhvm,CHSHOriginal} via our method. To keep things simple we only discuss the case of a bipartite Bell scenario with two values for both ``settings'' and ``outcome'' variables here, but the case of more parties and/or more values per variable is totally analogous.
-%It is critical that our method should be able to derive these seminal criteria, as Bell inequalities have been a foundational component of quantum information theory for the last half century \cite{scarani2012device,BancalDIApproach}.
-
-The causal structure associated to the Bell \cite{bell1964einstein,Brunner2013Bell,bell1966lhvm,CHSHOriginal} experiment [\citealp{pusey2014gdag}~(Fig.~E\#2), \citealp{WoodSpekkens}~(Fig.~19), \citealp{chaves2014novel}~(Fig.~1), \citealp{BeyondBellII}~(Fig.~1), \citealp{wolfe2015nonconvexity}~(Fig.~2b), \citealp{steeg2011relaxation}~(Fig.~2)] is depicted here in \cref{fig:NewBellDAG1}. The observable variables are $A,B,X,Y$, and $\Lambda$ is the latent common cause of $A$ and $B$. In a Bell scenario, one traditionally works with the conditional distribution $P_{AB|XY}$, to be understood as an array of distributions indexed by the possible values of $X$ and $Y$, instead of with the original distribution $P_{ABXY}$, which is what we do.
-
-In the Bell scenario DAG, the maximal pre-injectable sets are
-\begin{align}\begin{split}
-	\label{eq:bellcontexts}
-&\brackets{A_1 B_1 X_1 X_2 Y_1 Y_2} \\
-&\brackets{A_1 B_2 X_1 X_2 Y_2 Y_2} \\
-&\brackets{A_2 B_1 X_1 X_2 Y_2 Y_2} \\
-&\brackets{A_2 B_2 X_1 X_2 Y_2 Y_2} ,
-\end{split}\end{align}
-where notably every maximal pre-injectable set contains all ``settings'' variables $X_1$ to $Y_2$. The marginal distributions on these pre-injectable sets are then specified by the original observable distribution via
-\begin{align}\begin{split}&\forall{a b x_1 x_2 y_1 y_2}:\; \begin{cases}
-	P_{A_1 B_1 X_1 X_2 Y_1 Y_2}(a b x_1 x_2 y_1 y_2)  = P_{A B X Y}(a b x_1 y_1) P_X(x_2) P_Y(y_2), \\
-	P_{A_1 B_2 X_1 X_2 Y_1 Y_2}(a b x_1 x_2 y_1 y_2)  = P_{A B X Y}(a b x_1 y_2) P_X(x_2) P_Y(y_1), \\
-	P_{A_2 B_1 X_1 X_2 Y_1 Y_2}(a b x_1 x_2 y_1 y_2)  = P_{A B X Y}(a b x_2 y_1) P_X(x_1) P_Y(y_2), \\
-	P_{A_2 B_2 X_1 X_2 Y_1 Y_2}(a b x_1 x_2 y_1 y_2)  = P_{A B X Y}(a b x_2 y_2) P_X(x_1) P_Y(y_1), \\
-\hspace{2.5pc}	P_{X_1 X_2 Y_1 Y_2}(x_1 x_2 y_1 y_2)  = P_X(x_1) P_X(x_2) P_Y(y_1) P_Y(y_2).
-\end{cases}\end{split}\end{align}
-%where it should be understood implicitly that the inequalities hold for all values of $\{a b x_1 x_2 y_1 y_2\}$.
-%The last equations follows from each of the others by making use of the Markov condition $P_{XY} = P_X P_Y$ for the original distribution, it nevertheless
-By dividing each of the first four equations by the fifth, we obtain
-\begin{align}\begin{split}
-	\label{eq:bellfactor}
-	\forall{a b x_1 x_2 y_1 y_2}:\; \begin{cases}
-	P_{A_1 B_1 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2)  = P_{A B | X Y}(a b | x_1 y_1), \\
-	P_{A_1 B_2 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2)  = P_{A B | X Y}(a b | x_1 y_2), \\
-	P_{A_2 B_1 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2)  = P_{A B | X Y}(a b | x_2 y_1), \\
-	P_{A_2 B_2 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2)  = P_{A B | X Y}(a b | x_2 y_2).
-\end{cases}\end{split}\end{align}
-The existence of a joint distribution over all six variables---i.e.~the existence of a solution to the marginal problem---implies in particular
-%If we then impose marginal compatibility according the the marginal problem we find that the (minimal!) consequence of the inflation hypothesis is 
-\begin{align}
-	\forall{a b x_1 x_2 y_1 y_2}: \quad P_{A_1 B_1 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(a a' b b'|x_1 x_2 y_1 y_2),
-\end{align}
-and similarly for the other three conditional distributions under consideration. For consistency with the causal hypothesis, therefore, the original distribution must satisfy in particular
-\begin{align}\begin{split}\label{eq:finalBellstep}\forall{a b}:\; \begin{cases}
-	P_{A B | X Y}(a b | 0 0)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(a a' b b'|0101) \\
-	P_{A B | X Y}(a b | 1 0)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(a' a b b'|0101) \\
-	P_{A B | X Y}(a b | 0 1)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(a a' b' b|0101) \\
-	P_{A B | X Y}(a b | 1 1)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(a' a b' b|0101)
-\end{cases}\end{split}\end{align}
-The possibility to write the conditional probabilities in the Bell scenario in this form is equivalent to the existence of a latent variable model, as noted in Fine's Theorem~\cite{FineTheorem}. Thus, if an inflated model exists with the required marginals, then a latent variable model of the original distribution exists as well (and conversely, trivially). Hence the inflated DAG of~\cref{fig:BellDagCopy1} provides necessary and sufficient conditions for the consistency of the original observed distribution with the Bell scenario causal structure.
-
-%The last equations turns out to be rather useful to write down explicitly: putting $x_1 = y_1 = 0$ and $x_2 = y_2 = 1$ and dividing the first equation by the last one results in
-%\begin{align*}
-%	P_{A B X Y}(a b | 0 0)  =  \sum_{a',b'} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(aa'bb'|0101).
-%\end{align*}
-%Similarly, $P_{A B X Y}(a b | 0 1)$, $P_{A B X Y}(a b | 1 0)$ and $P_{A B X Y}(a b | 1 1)$ can also be written as marginals of a conditional distribution. 
-%By Fine's Theorem~\cite{FineTheorem}, this implies the existence of a hidden-variable model. Conversely, if a hidden-variable model exists, then the existence of the inflated model implies the existence of a solution to the marginal problem.
-
-% In conclusion, we therefore find in the case of the inflated DAG~\cref{fig:BellDagCopy1}, the inflation method yields necessary and sufficient infeasibility criteria for the Bell causal structure, i.e. the Bell/CHSH inequalities, just by requiring marginal compatibility of the pre-injectable sets.
-% More generally, we can use Fine's theorem to show that applying the marginal problem to suitable inflated DAGs can reproduce \emph{all} Bell inequalities, for any standard Bell scenario, no matter how many parties or settings or possible outcomes. 
-
-Moreover, it is possible to describe the marginal polytope over the pre-injectable sets of~\cref{eq:bellcontexts}, due to the fact that the ``settings'' variables $X_1$ to $Y_4$ occur in all four contexts. This description is easier to state for the marginal \emph{cone}, by which we mean the convex cone spanned by the marginal polytope, i.e.~the convex cone consisting of all nonnegative linear combinations of deterministic assignments of values, or equivalently the convex cone of all measures on the set of joint outcomes. This cone lives in $\oplus_{i=1}^4 \mathbb{R}^{2^6} = \oplus_{i=1}^4 (\mathbb{R}^2)^{\otimes 6}$, where each tensor factor has basis vectors corresponding to the two possible outcomes of each variable, and the direct summands enumerate the four contexts. Now the marginal cone is precisely the set of all nonnegative linear combinations of the points
-\begin{align*}
-	(e_{A_1} & \otimes e_{B_1} \otimes e_{X_1} \otimes e_{X_2} \otimes e_{Y_1} \otimes e_{Y_2}) \\
-	\oplus\: (e_{A_1} & \otimes e_{B_2} \otimes e_{X_1} \otimes e_{X_2} \otimes e_{Y_1} \otimes e_{Y_2}) \\
-	\oplus\: (e_{A_2} & \otimes e_{B_1} \otimes e_{X_1} \otimes e_{X_2} \otimes e_{Y_1} \otimes e_{Y_2}) \\
-	\oplus\: (e_{A_2} & \otimes e_{B_2} \otimes e_{X_1} \otimes e_{X_2} \otimes e_{Y_1} \otimes e_{Y_2}),
-\end{align*}
-where all six variables range over their deterministic outcomes. Since the last four tensor factors occur in every direct summand in exactly the same way, the resulting marginal cone is linearly isomorphic to the cone generated by all vectors of the form
-\[
-	\left[ (e_{A_1} \otimes e_{B_1}) \oplus (e_{A_1} \otimes e_{B_2}) \oplus (e_{A_2} \otimes e_{B_1}) \oplus (e_{A_2} \otimes e_{B_2})\right] \otimes \left[ e_{X_1} \otimes e_{X_2} \otimes e_{Y_1} \otimes e_{Y_2}\right]
-\]
-in $\mathbb{R}^{2^2}\otimes \mathbb{R}^{2^4}$. Now since the first four variables in the first tensor factor vary completely independently of the latter four variables in the second tensor factor, the resulting cone will be precisely the tensor product~\cite{namioka_tensor_1969} of two cones: first, the cone generated by all vectors of the form
-\[
-	(e_{A_1} \otimes e_{B_1}) \oplus (e_{A_1} \otimes e_{B_2}) \oplus (e_{A_2} \otimes e_{B_1}) \oplus (e_{A_2} \otimes e_{B_2}),
-\]
-and second the one spanned by all $e_{X_1} \otimes e_{X_2} \otimes e_{Y_1} \otimes e_{Y_2}$. While the latter cone is simply the standard positive cone of $\mathbb{R}^8$, the former cone is the cone generated by the ``local polytope'' or ``Bell polytope'' that is traditionally used in the context of Bell scenarios~\cite[Sec.~II.B]{Brunner2013Bell}. Standard results on tensor products of cones and polytopes~\cite{bogart_hom_2013} therefore imply that our marginal polytope is the tensor product of the Bell polytope, corresponding to the $A_1$ to $B_2$ part, with a simplex corresponding to the $X_1$ to $Y_2$ ``settings'' part. This implies that the facets of our marginal polytope are precisely the pairs consisting of a facet of the Bell polytope and a facet of the simplex. For example, in this way we obtain one version of the CHSH inequality as a facet of the marginal polytope,
-\[
-	\sum_{a,b,x,y} (-1)^{a + b + xy} P_{A_x B_y X_1 X_2 Y_1 Y_2}(a b 0 1 0 1) \leq 2 P_{X_1 X_2 Y_1 Y_2}(0101).
-\]
-Upon using~\cref{eq:bellfactor}, this becomes
-\begin{align*}
-	\sum_{a,b} (-1)^{a + b} \big( & P_{A B X Y}(ab00)P_X(1)P_Y(1) + P_{A B X Y}(ab01)P_X(1)P_Y(0) \\
-	& + P_{A B X Y}(ab10)P_X(0)P_Y(1) - P_{A B X Y}(ab11)P_X(0)P_Y(0) \big) \leq P_X(0)P_X(1)P_Y(0)P_Y(1),
-\end{align*}
-so that dividing by the right-hand side results in essentially the conventional form of the CHSH inequality,
-\[
-	\sum_{a,b} (-1)^{a + b} \left( P_{AB|XY}(ab|00) + P_{AB|XY}(ab|01) + P_{AB|XY}(ab|10) - P_{AB|XY}(ab|11) \right) \leq 2.
-\]
-In conclusion, the inflation technique is powerful enough to get a precise characterization of all distributions consistent with the Bell causal structure, and our technique for generating polynomial inequalities while solving the marginal problem recovers all Bell inequalities.
-
-\begin{comment}
-Analysis of the inflated DAG in \cref{fig:BellDagCopy1} shows that  
-\begin{align}\label{eq:bellypolymapped}
- \p{a b x y}\p{\n{x}} \p{\n{y}}
-&\leq
- \p{a \n{b} x \n{y}}\p{\n{x}}\p{y} +  \p{\n{a} b \n{x} y}\p{x} \p{\n{y}}+\p{a b \n{x} \n{y}}\p{x} \p{y}
-\\
-\shortintertext{by virtue of the unmapped (but factored) inequality}
-\label{eq:bellypolyunmapped}
- \p{a_1 b_1 x_1 y_1}\p{\n{x}_2} \p{\n{y}_2}
-&\leq
- \p{a_1 \n{b}_2 x_1 \n{y}_2}\p{\n{x}_2} \p{y_1} +\p{\n{a}_2 b_1 \n{x}_2 y_1}\p{x_1}\p{\n{y}_2}+  \p{a_2 b_2 \n{x}_2 \n{y}_2}\p{x_1} \p{y_1}
-\end{align}
-where \emph{every} probability appearing in \cref{eq:bellypolyunmapped} maps to the original scenario, hence yielding \cref{eq:bellypolymapped}. To derive the usual Bell inequalities from \cref{eq:bellypolymapped} we switch to conditional probabilities via ${\p{a b x y}\to\p{a b | x y}\p{x y}=\p{a b | x y}\p{x}\p{y}}$ which, after dividing both sides of \cref{eq:bellypolymapped} by $\p{x}\p{\n{x}}\p{y}\p{\n{y}}$, yields
-\begin{align}\label{eq:chwithneg}
-&\p{a b | x y}
-\leq
-{\p{a \n{b} | x \n{y}} + \p{\n{a} b | \n{x} y}+\p{a b | \n{x} \n{y}}}
-\\
-\hspace{-\mathindent}\text{or, equivalently,}\quad
-\label{eq:chwithoutneg}
-&{\p{a b | x y}+\p{a b | x \n{y}} + \p{a b | \n{x} y}}
-\leq
-{\p{a|\n{x}}+\p{b|\n{y}} + \p{a b | \n{x} \n{y}}}
-\end{align}
-which is precisely the Clauser-Horne (CH) inequality \cite{CHInequality} for the Bell scenario. Note that to obtain \cref{eq:chwithoutneg} from \cref{eq:chwithneg} we implicitly made use of the no-signalling assumptions, namely $\p{a|x y}=\p{a|x}$ and $\p{b| x y}=\p{b | y}$. The CH inequality is the \emph{unique} Bell inequality (up to permutations) for the Bell scenario if $\brackets{A,B,X,Y}$ are all binary, and hence the CH inequality is a necessary and sufficient criterion to ascertain if correlations are compatible with that Bell scenario variant.
-
-The causal structure of a Bell scenario can also be formulated directly in terms of conditional random variables. For example, the conditional-structure interpretation of \cref{fig:BellDagCopy1} is \cref{fig:BellConditionalDAG}. 
-
-\begin{figure}[t]
-\centering
-\begin{minipage}[t]{0.45\linewidth}
-\centering
-\includegraphics[scale=1]{BellDagConditionForm.pdf}
-\caption{The causal structure of the Bell scenario expressed in a form which makes use of conditional random variables.}\label{fig:BellConditionalDAG}
-\end{minipage}
-%\hfill
-%\begin{minipage}[t]{0.45\linewidth}
-%\centering
-%\includegraphics[scale=1]{BellDagCopy.pdf}
-%\caption{An inflated DAG of the Bell scenario, where both local settings variables have been duplicated.}\label{fig:BellDagCopy}
-%\end{minipage}
-\end{figure}
-
-The Bell inequalities are then self-evident from \cref{fig:BellConditionalDAG} without the need for an inflated DAG. The conditional-structure formulation innately implies its own inaccessible gedankenprobabilities, such as $\{\p{a|x , a|\n{x}}$, $\p{a|x , \n{a}|\n{x}},...\}$ etc. By eliminating these gedankenprobabilities from the set of inequalities generated by $0\leq \pdf{A|x , A|\n{x} , B|y , B|\n{y}}$ we obtain
-\begin{align}\label{eq:bellcondeq}
-0
-\leq
-{\p{a|\n{x}} + \p{b|\n{y}} + \p{a|x , b|y} -\p{a|x ,b|\n{y}} -\p{a|\n{x} , b|y} -\p{a|\n{x} , b|\n{y}}}\,,
-\end{align}
-for example. It should be clear that \cref{eq:bellcondeq} is equivalent to \cref{eq:chwithoutneg}.
-\end{comment}
-
-%We can perform quantifier elimination on the set of (polynomial) inequalities given by $0\leq \pdf{A|x , A|\n{x} , B|y , B|\n{y}}$. The use of a conditional-structure DAG innately implies certain inaccessible gedankenprobabilities, such as $\{\p{a|x , a|\n{x}}$, $\p{a|x , \n{a}|\n{x}},...\}$ etc. 
-%\purp{Rob says kill next two paragraphs?}
-
-%Conditional-structure gedankenprobabilities are somewhat different from the inflated DAG kind, in that they reference multiple counterfactual events, such as ``What is the probability that Alice would choose to visit the museum \emph{IF} (given that) it's a rainy day in Maryland \emph{AND} that Alice would choose to go the beach \emph{IF} (given that) it's sunny in Maryland?". By contrast, unconditional gedankenprobabilities which live on an inflated DAG reference multiple heterofactual (for lack of a better word) events, such as ``What is the probability that Alice-copy-\#1 chooses to visit the museum \emph{AND} that it's raining in Maryland-copy-\#1 \emph{AND} that Alice-copy-\#2 chooses to go the beach \emph{AND} that it's sunny in Maryland-copy-\#2?". 
-
-%Joint counterfactual probabilities are experimentally inaccessible, just the same as joint heterofactual probabilities are. Suppose one could establish both Alice's propensity for going to the museum when it rains and her propensity for going to the beach when it's sunny. Even so, neither the joint counterfactual probability nor the joint heterofactual probability can be established from that limited data. For example, the value of the hidden variable ${\Lambda\cramp{=}\lambda}$ may influence Alice's willingness to get out of bed at all, or determine if she is on-call as a volunteer EMT on a particular day, or $\lambda$ might encode if Alice is travelling out-of-state. If we could measure $\p{a|x , \n{a}|\n{x}},...\}$ we might learn that Alice's likelihood of visiting the museum if it rains in Maryland is highly correlated with her likelihood of visiting the beach when it's sunny in Maryland. Or we might learn that those two counterfactual probabilities are relatively statistically independent. The ``hidden-ness" of the classical variable corresponding to the latent node shields the gedankenprobabilities from being determined. 
-
-
-
-
+\clearpage
+%\label{page:nontrivlist}
+\includepdf[pages=1,scale=0.90,link,linkname=nontriv,pagecommand={\refstepcounter{includepdfpage}\label{nontriv.\theincludepdfpage}}]{nontrivlist.pdf}
 
 %\section*{References}
 %\nocite{*}
