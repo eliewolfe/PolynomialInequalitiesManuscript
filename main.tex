@@ -498,7 +498,7 @@ To illustrate the notion of inflation, we consider the DAG of \cref{fig:TriMainD
 %The Triangle scenario is a correlation scenario in the sense of \citet{fritz2012bell}; see especially Sec. 2.3 there. 
 Different inflations of the Triangle scenario are depicted in \cref{fig:TriFullDouble,fig:Tri222,fig:simpleinflation,fig:simplestinflation,fig:TriDagSubA2B1C1}.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \begin{minipage}[t]{0.23\linewidth}
 \centering
@@ -716,7 +716,7 @@ P_{C_2}&= \frac{2}{3}[0] + \frac{1}{3}[1]  &&&&&&&&\label{W7}
 %Eq.~\eqref{W1} implies that one never has $A_2 \eql 1$ and $C_1\eql 0$, Eq.~\eqref{W2} implies that one never has $B_2 \eql 1$ and $A_1\eql 0$, and Eq.~\eqref{W3} implies that one never has $C_2 \eql 1$ and $B_1\eql 0$.  Similarly, Eq.~\eqref{W4} implies that one never has $A_1 =1$,  $B_1 =1$ and $C_1 =1$. 
 From Eqs.~\eqref{W1}, \eqref{W2} and \eqref{W3}  respectively, one infers that one never has $A_2 \eql 1$ and $C_1\eql 0$, one never has $B_2 \eql 1$ and $A_1\eql 0$, and one never has $C_2 \eql 1$ and $B_1\eql 0$. Similarly, Eq.~\eqref{W4} implies that one never has $A_1 =0$,  $B_1 =0$ and $C_1 =0$.  From the latter constraint one infers that at least one of $A_1$, $B_1$ and $C_1$ must be 1, which from the former constraints implies that at least one of $A_2$, $B_2$ and $C_2$ must be 0, so that it is not the case that all of $A_2$, $B_2$ and $C_2$ are 1.
 
-Recasting this argument in logical notation, the marginal distributions imply the truth of the following conjunction:
+Recasting this argument in logical notation, where $\land$, $\lor$ and $\lnot$ denote conjunction, disjunction and negation respectively, the marginal distributions imply the truth of the following conjunction:
 %We can therefore infer the truth of the conjunction of these claims, which can be expressed in logical notation as:
 %a particular conjunction of events, namely, it implies the truth of
 \begin{align}
@@ -727,11 +727,12 @@ and this logically implies the truth of
 \lnot [A_2 =1 \land B_2 =1 \land C_2 =1].
 \end{align}
 
-However, our inflated DAG is such that $A_2$,$B_2$, and $C_2$ have no common ancestor and consequently, they are all marginally independent in any distribution consistent with this inflated DAG, and this fact, together with Eqs.~\eqref{W5}-\eqref{W7}, implies that $A_2$,$B_2$, and $C_2$ sometimes all take the value 1, which contradicts \cref{consequent}.
+However, our inflated DAG is such that $A_2$,$B_2$, and $C_2$ have no common ancestor and consequently, they are all marginally independent in any distribution consistent with this DAG.  This fact, together with Eqs.~\eqref{W5}-\eqref{W7}, implies that $A_2$,$B_2$, and $C_2$ sometimes all take the value 1, which contradicts \cref{consequent}.
 
 Consequently, the set of marginals described in Eqs.~\eqref{W4}-\eqref{W7} are \emph{not} compatible with the DAG of Fig.~\ref{fig:Tri222v2}.  By lemma \ref{mainlemma}, this implies that the set of marginals described in Eqs.~\eqref{V4}-\eqref{V7}---and therefore the W-type distribution of which they are marginals---is not compatible with the DAG of the triangle scenario.
 \color{black}
 
+%\begin{comment}
 \color{blue}
 Eq.~\eqref{W1} %together with the form of $P_{\text{W}}$ 
 implies that $C_1\eql 0$ whenever $A_2 \eql 1$. Similarly, Eq.~\eqref{W2} implies that $A_1\eql 0$ whenever $B_2\eql 1$ and Eq.~\eqref{W3} implies that $B_1\eql 0$ whenever $C_2\eql 1$, 
@@ -755,6 +756,7 @@ Finally, Eqs.~\eqref{Ws1}-\eqref{Ws3} together with Eq.~\eqref{WW2} imply
 This, however, contradicts Eq.~\eqref{W4}.  Consequently, the set of marginals described in Eqs.~\eqref{W4}-\eqref{W7} are \emph{not} compatible with the DAG of Fig.~\ref{fig:Tri222v2}.  By lemma \ref{mainlemma}, this implies that the set of marginals described in Eqs.~\eqref{V4}-\eqref{V7}---and therefore the W-type distribution of which they are marginals---is not compatible with the DAG of the triangle scenario.
 % and the fact that $P_{\text{W}}$ has no weight on $[000]$.
 \color{black}
+%\end{comment}
 
 We have secured our verdict of incompatibility using logic reminiscent of  Hardy's version of Bell's theorem \cite{L.Hardy:PRL:1665,Mansfield2012}, see \cref{sec:TSEM} for further discussion of such logic and its applications to causal inference. 
 %Hardy-type paradoxes and their applications.
@@ -834,7 +836,32 @@ P_{A_1 B_2 |X_1 Y_2}&=P_{A B |X Y}\label{PR3b}\\
 P_{A_2 B_2 |X_2 Y_2}&=P_{A B |X Y}\label{PR4b}.
 \end{align}
 
+\color{purple}
+From Eqs.~\eqref{PR1b}-\eqref{PR4b} together with  the definition of PR box correlations, Eq.~\eqref{eq:PRbox}, we conclude that 
+\begin{align} 
+&X_1 \eql 0, Y_1 \eql 0 \implies A_1\eql B_1 \label{PRs1},\\
+&X_1 \eql 0, Y_2 \eql 1 \implies A_1\eql B_2 \label{PRs2},\\
+&X_2 \eql 1, Y_1 \eql 0 \implies A_2\eql B_1 \label{PRs3},\\
+&X_2 \eql 1, Y_2 \eql 1 \implies A_2\ne B_2 \label{PRs4}.
+\end{align}
+We can write this equivalently in logical notation as 
+\begin{align}\label{kk2}
+\lnot [ X_1 \eql 0 \land Y_1 \eql 0 \land A_1\ne B_1] \bigwedge \lnot [ X_1 \eql 0 \land Y_2 \eql 1 \land A_1\ne B_2]\\
+\bigwedge \lnot [ X_2 \eql 1 \land Y_1 \eql 0 \land A_2\ne B_1] \bigwedge \lnot [ X_2 \eql 1 \land Y_2 \eql 1 \land A_1 = B_2].
+\end{align}
+A logical implication of this conjunction is that 
+\begin{align}
+\lnot [ X_1 \eql 0 \land X_2=1 \land Y_1 \eql 0 \land Y_2 =1 \bigwedge  A_1\ne B_1  \land A_1\ne B_2 \land A_2\ne B_1\land A_1 = B_2].
+\end{align}
+But given that $ A_1\ne B_1  \land A_1\ne B_2 \land A_2\ne B_1\land A_1 = B_2$ is a contradiction, we infer that Eq.~\eqref{kk2} implies 
+\begin{align}\label{kk3}
+\lnot [ X_1 \eql 0 \land X_2=1 \land Y_1 \eql 0 \land Y_2 =1]
+\end{align}
 
+Finally, we make an appeal to the causal structure: because $\{X_1\}$, $\{X_2\}$, $\{Y_1\}$, and $\{Y_2\}$ have no common ancestor in the inflated DAG, these variables must be marginally independent in any distribution compatible with this DAG,  that is, we have $P_{X_1 X_2 Y_1 Y_2} = P_{X_1} P_{X_2} P_{Y_1} P_{Y_2}$ in any such distribution.   Given the fact that the distributions $P_{X}$ and $P_{Y}$ are full support, it follows from Eqs.~\eqref{PR5}-\eqref{PR8} that sometimes $X_1 \eql 0 \land X_2 \eql1 \land  Y_1 \eql 0\land Y_2 \eql 1$, which contradicts Eq.~\eqref{kk3}.
+
+
+\color{blue}
 Because $\{X_1\}$, $\{X_2\}$, $\{Y_1\}$, and $\{Y_2\}$ have no common ancestor, these variables must be marginally independent in any distribution compatible with the inflated DAG,  that is, we have $P_{X_1 X_2 Y_1 Y_2} = P_{X_1} P_{X_2} P_{Y_1} P_{Y_2}$ in any such distribution.   Given the assumption that the distributions $P_{X}$ and $P_{Y}$ are full support, it follows from Eqs.~\eqref{PR5}-\eqref{PR8} that
 \begin{align}\label{PRs}
 \text{Sometimes} \quad &X_1 \eql 0, X_2 \eql1, Y_1 \eql 0, Y_2 \eql 1.
@@ -842,17 +869,18 @@ Because $\{X_1\}$, $\{X_2\}$, $\{Y_1\}$, and $\{Y_2\}$ have no common ancestor, 
 
 Next, from Eqs.~\eqref{PR1b}-\eqref{PR4b} together with  the definition of PR box correlations, Eq.~\eqref{eq:PRbox}, we conclude that 
 \begin{align} 
-&X_1 \eql 0, Y_1 \eql 0 \implies A_1\eql B_1 \label{PRs1},\\
-&X_1 \eql 0, Y_2 \eql 1 \implies A_1\eql B_2 \label{PRs2},\\
-&X_2 \eql 1, Y_1 \eql 0 \implies A_2\eql B_1 \label{PRs3},\\
-&X_2 \eql 1, Y_2 \eql 1 \implies A_2\ne B_2 \label{PRs4}.
+&X_1 \eql 0, Y_1 \eql 0 \implies A_1\eql B_1 \label{PRs1alt},\\
+&X_1 \eql 0, Y_2 \eql 1 \implies A_1\eql B_2 \label{PRs2alt},\\
+&X_2 \eql 1, Y_1 \eql 0 \implies A_2\eql B_1 \label{PRs3alt},\\
+&X_2 \eql 1, Y_2 \eql 1 \implies A_2\ne B_2 \label{PRs4alt}.
 \end{align}
 
-Combining Eq.~\eqref{PRs} with Eqs,~\eqref{PRs1}-\eqref{PRs4}, we obtain
+Combining \cref{PRs} with \cref{PRs1alt,PRs2alt,PRs3alt,PRs4alt}, we obtain
 \begin{align}
 \text{Sometimes} \quad &A_1\eql B_1, A_1\eql B_2, A_2\eql B_1, A_2\ne B_2.
 \end{align} 
 No values of $A_1, A_2, B_1, B_2$ can jointly satisfy these conditions---the first three entail perfect correlation between $A_2$ and $B_2$, while the fourth entails perfect anit-correlation---so we have reached a contradiction.
+\color{black}
 
 %For these values, \cref{eq:PRinflated} specifies perfect correlation between $A_1$ and $B_1$.  Similarly, it the inflated observational data also specified perfect correlation between $A_1$ and $B_2$, perfect correlation between $A_2$ and $B_1$, and perfect \emph{anti}correlation between $A_2$ and $B_2$. Those four requirements are not mutually compatible, however: since perfect correlation is transitive, the first three properties entail perfect correlation between $A_2$ and $B_2$. 
 
@@ -986,9 +1014,9 @@ To see how this works in the case of the triangle scenario, consider again the i
 
 One can follow the same logic as in the preceding example, but starting from a different constraint on marginals.  For any distribution on three variables $\{A_2 B_1 C_1\}$ of arbitrary cardinality (again, regardless of the causal structure in which they are embedded), the marginals on $\brackets{A_2 C_1}$, $\brackets{B_1 C_1}$ and $\brackets{A_2 B_1}$ satisfy the following inequality
 \begin{align}\label{eq:MIraw}
-	I(A_2 : C_1) + I(C_1 : B_1) - I(A_2 : B_1) \leq H(B_1),	
+	I(A_2 : C_1) + I(C_1 : B_1) - I(A_2 : B_1) \leq H(C_1),	
 \end{align}
-where $H(X)$ denotes the Shannon entropy of the distribution over $X$, and $I(X: Y)$ denotes the mutual information between $X$ and $Y$ for the marginal on $X$ and $Y$.  This was shown in Ref.~\cite{fritz2013marginal}.
+where $H(X)$ denotes the Shannon entropy of the distribution over $X$, and $I(X: Y)$ denotes the mutual information between $X$ and $Y$ for the marginal on $X$ and $Y$. This was shown in Ref.~\cite{fritz2013marginal}.
 
 The fact that $A_2$ and $B_1$ have no common ancestor in the inflated DAG implies that in any distribution that is compatible with the inflated DAG, $A_2$ and $B_1$ are marginally independent.  This is expressed entropically as the vanishing of their mutual information, 
 \begin{align}\label{entropicfact}
@@ -996,15 +1024,15 @@ A_2 \aindep B_1 \implies  I(A_2 : B_1)  =0.
 \end{align}
 Substituting the latter equality into Eq.~\eqref{eq:MIraw}, we have
 \begin{align}
-	I(A_2 : C_1) + I(C_1 : B_1)  \leq H(B_1).
+	I(A_2 : C_1) + I(C_1 : B_1)  \leq H(C_1).
 \end{align}
 This is another example of a nontrivial causal compatibility inequality for the DAG of Fig.~\ref{fig:TriDagSubA2B1C1v2}.  
 
 By corollary \ref{maincorollary}, it follows that 
 \begin{align}\label{eq:monogomyofcorrelations}
-	I(A : C) + I(C : B) \leq H(B),
+	I(A : C) + I(C : B) \leq H(C),
 \end{align}
-is also a causal compatibility inequality for the Triangle scenario.  This inequality was originally derived in Ref.~\cite{fritz2012bell}. Our rederivation in terms of inflation coincides with the proof technique found in~\citet{pusey2014gdag}.
+is also a causal compatibility inequality for the Triangle scenario.  This inequality was originally derived in Ref.~\cite[Eq. (29)]{fritz2012bell}. Our rederivation in terms of inflation coincides with the proof technique found in~\citet{pusey2014gdag}.
 
 %To see how this distribution is incompatible with \cref{eq:tritrivial1}, note that for three \emph{identically distributed} (but not independent) binary variables a further special case of \cref{eq:tritrivial1} is
 %\begin{align*}\begin{split}
@@ -1020,7 +1048,7 @@ is also a causal compatibility inequality for the Triangle scenario.  This inequ
 
 
 
-Consider the inflation of the triangle scenario depicted in~\cref{fig:Tri222v2}, and consider the injectable sets$\{A_1 B_1 C_1\}$, $\{A_1 B_2\}$, $\{B_1 C_2\}$, $\{ A_1, C_2\}$, $\{A_2\}$, $\{B_2\}$, and $\{C_2\}$.
+Consider the inflation of the triangle scenario depicted in~\cref{fig:Tri222v2}, and consider the injectable sets $\{A_1 B_1 C_1\}$, $\{A_1 B_2\}$, $\{B_1 C_2\}$, $\{ A_1, C_2\}$, $\{A_2\}$, $\{B_2\}$, and $\{C_2\}$.
 %.  The injectable sets in this case include $\{A_1 B_1 C_1\}$, $\{A_1 B_2\}$, $\{B_1 C_2\}$, $\{ A_1, C_2\}$, $\{A_2\}$, $\{B_2\}$, and $\{C_2\}$.  
 We here derive a causal compatibility inequality under the assumption that the observed variables are all binary, and we adopt the convention that they take values in the set $\{0,1\}$.
 
@@ -1420,121 +1448,112 @@ Note that if one does not have a characterization of the facets of the marginal 
 %\section{Deriving Hardy-type constraints for the marginal problem}\label{sec:TSEM}
 %\section{Deriving inequalities for the marginal problem from possibilistic constraints}\label{sec:TSEM}
 %\subsection{The possibilistic marginal problem and its implications for the probabilistic marginal problem}\label{sec:TSEM}
-\subsection{Causal compatibility inequalities via the possibilistic counterpart to the marginal problem}\label{sec:TSEM}
+%\subsection{Causal compatibility inequalities via the possibilistic counterpart to the marginal problem}\label{sec:TSEM}
+\subsection{Causal compatibility inequalities via a partial solution of the marginal problem}\label{sec:TSEM}
+
+
+%\color{red}
+
 
 In the literature on Bell inequalities, it has been noticed that incompatibility with the Bell DAG can sometimes be witnessed by merely looking at which events have zero probability and which events have nonzero probability. In other words, instead of considering the \emph{probability} of a composite outcome, the inconsistency of some marginal distributions can be evident from considering only the \emph{possibility} or \emph{impossibility} of each composite outcome. This insight is originally due to~\citet{L.Hardy:PRL:1665}, and versions of Bell's theorem that are based on the violation of such \tblue{possibilistic constraints} are known as \tblue{Hardy-type paradoxes}. For more background on Hardy-type paradoxes, see Refs.~\cite{Garuccio95,CabelloHardyInequality,Braun08,Mancinska14,LSW}; a partial classification of these can be found in Ref.~\cite{Mansfield2012}.
 
-\color{purple}
+In this approach, the possibilistic constraints follow from a consideration of {\em logical relations} that can hold among deterministic assignments to the observed variables.  As it turns out, such logical constraints can also be leveraged to derive probabilistic constraints instead of possibilistic ones, as shown in [Ghirardietal, others?].  These constraints yield a partial solution to the marginal problem.  In this section, we demonstrate how to systematically derive all such inequalities for a given DAG. 
+
+%We have already provided a simple example of this sort of argument in \cref{Sec:DerivingInequalities}, in the argument used to demonstrate that the marginal distributions of Eqs.~\eqref{W4}-\eqref{W7} are incompatible with the DAG depicted in Fig.~\ref{fig:Tri222v2}.   For our present purposes, it is useful to recast the argument of \cref{Sec:DerivingInequalities} into a new but manifestly equivalent form.  First, one notes that the following proposition is a logical tautology for binary variables:
+%\begin{align}\begin{split}\label{tautology1}
+%&\lnot [A_2 \eql 1 \land C_1 \eql 1] \bigwedge \lnot [B_2 \eql 1 \land A_1 \eql 1] \bigwedge \lnot [C_2 \eql 1 \land B_1 \eql 1] \bigwedge \lnot [A_1 \eql 0 \land B_1 \eql 0 \land C_1 \eql 0]\\
+% &\qquad\implies
+%\lnot [A_2 \eql 1 \land B_2 \eql 1 \land C_2 \eql 1].
+%\end{split}\end{align}
+%Next, one notes that the given distribution and causal structure imply that the antecedent is true while the consequent is false for every valuation in the support of the distribution, so that the distribution and causal structure together imply a contradiction.
 
 
-We have already provided a simple example of this sort of argument in \cref{Sec:DerivingInequalities}, in the logic used to demonstrate that the marginal distributions of Eqs.~\eqref{W4}-\eqref{W7} are incompatible with the DAG depicted in Fig.~\ref{fig:Tri222v2}.   For our present purposes, it is useful to recast the argument of \cref{Sec:DerivingInequalities} into a new but manifestly equivalent form.  
-%The argument we provided is usefully cast as follows.  
-First, one notes that the following proposition is a logical tautology for 0/1 valued random variables:
+We have already provided a simple example of a Hardy-type argument in \cref{Sec:DerivingInequalities}, in the logic used to demonstrate that the marginal distributions of Eqs.~\eqref{W4}-\eqref{W7} are incompatible with the DAG depicted in Fig.~\ref{fig:Tri222v2}.   For our present purposes, it is useful to recast the argument of \cref{Sec:DerivingInequalities} into a new but manifestly equivalent form.    
+
+First, note that for the distribution in question, we have
+\begin{align} 
+&A_2 \eql 1 \implies C_1\eql 0\label{WWs1}\\
+&B_2\eql 1 \implies A_1\eql 0\label{WWs2}\\
+&C_2 \eql 1 \implies B_1 \eql 0\label{WWs3}\\
+\text{Never}  \quad &A_1 \eql 0\,\text{ and }\, B_1 \eql 0\,\text{ and }\, C_1 \eql 0.\label{WWs4}
+\end{align}
+From the last constraint one infers that at least one of $A_1$, $B_1$ and $C_1$ must be 1, which from the three other constraints implies that at least one of $A_2$, $B_2$ and $C_2$ must be 0, so that it is not the case that all of $A_2$, $B_2$ and $C_2$ are 1.  Thus Eqs.~\eqref{WWs1}-\eqref{WWs4} imply
+\begin{align} \label{consequent2}
+\text{Never}  \quad &A_2 \eql 1\,\text{ and }\, B_2 \eql 1\,\text{ and }\, C_2 \eql 1.
+\end{align}
+However, the DAG of Fig.~\ref{fig:Tri222v2} is such that $A_2$,$B_2$, and $C_2$ have no common ancestor and consequently these variables are marginally independent in any distribution consistent with this DAG.  Combining this with the fact that the marginal distribution for each of these three variables has full support implies that $A_2$,$B_2$, and $C_2$ sometimes all take the value 1, which contradicts \cref{consequent2}.  What is nice about this form of the reasoning is that the appeal to the causal structure occurs only in the very last step.  
+
+We are here interested in recasting the argument in such a way that the appeal to {\em both} the causal structure {\em and} the form of the marginal distributions occurs only in the very last step.  This is done as follows.  The first step of the argument is to note that the following proposition is a logical tautology for binary variables (here, $\land$, $\lor$ and $\lnot$ denote conjunction, disjunction and negation respectively):
 \begin{align}\begin{split}\label{tautology1}
 &\lnot [A_2 \eql 1 \land C_1 \eql 1] \bigwedge \lnot [B_2 \eql 1 \land A_1 \eql 1] \bigwedge \lnot [C_2 \eql 1 \land B_1 \eql 1] \bigwedge \lnot [A_1 \eql 0 \land B_1 \eql 0 \land C_1 \eql 0]\\
  &\qquad\implies
 \lnot [A_2 \eql 1 \land B_2 \eql 1 \land C_2 \eql 1].
 \end{split}\end{align}
-Next, one notes that the given distribution and causal structure imply that the antecedent is true while the consequent is false, so that the distribution and causal structure together imply a contradiction.
+The second and final step of the argument notes that the given distribution and the given causal structure imply that the antecedent is true while the consequent is false, so that the distribution and causal structure together imply a contradiction.
 
-One can understand \cref{tautology1} to be a possibilistic counterpart of a constraint on marginals, or a {\em constraint on possibilistic marginals} for short.  
+%Such Hardy-type arguments for incompatibility actually only require one to be given an assignment of {\em possible} or {\em impossible} to certain valuations of variables rather an assignment of probabilities thereto. We call such assignments {\em possibilistic}.  
 
-But every constraint on possibilistic marginals implies a constraint on probabilistic marginals, as follows.  First, cast \eqref{tautology1} as ...  then rewrite this in its contrapositive form ...
-Next use the union bound.  
-Applying this to \eqref{tautology1}, we get ...
-%\begin{align}
-%&[A_2 =1 \land B_2 =1 \land C_2 =1] \nonumber\\
-% &\implies [A_2 =1 \land C_1 =1] \land \lnot [B_2 =1 \land A_1 =1] \land \lnot [C_2 =1 \land B_1 =1] \land \lnot [A_1 =1 \land B_1 =1 \land C_1 =1]
-%\end{align}
-
-Just as a constraint on  {\em probabilistic}  marginals, such as Eq. ??, can be used to derive causal compatibility inequalities, it turns out that a constraint on possibilistic marginals can be leveraged to do so as well. 
-%witness the incompatibility of a given distribution and causal structure, so too can a constraint on possibilistic marginals, as we have just noted.
+In our recasting of the Hardy-type argument, the first step---identifying a logical tautology among valuations of certain subsets of the variables---
+can be understood as a constraint on marginal {\em deterministic assignments}, and it is a constraint that follows from logic alone.  
+%It can be understood as the logical analogue of identifying a constraint on marginals distributions that holds for {\em any} joint distribution.  
+It is useful to think of this first step as the logical counterpart of a consraint on marginals. 
+%the marginal problem.
 
 
+%Imagine that one has specified the full set of variables, denoted $\bm{X}$, together with a family of subsets of $\bm{X}$, termed contexts and denoted $(\bm{U}_1,\ldots,\bm{U}_n)$.  A \emph{joint deterministic assignment} to $\bm{X}$ specifies a joint valuation of the variables in $\bm{X}$.  A \emph{marginal deterministic assignment} for the context $\bm{U}_i$, specifies a  joint valuation of the variables in $\bm{U_i}$. Clearly, every joint deterministic assignment defines a family of marginal deterministic assignments through restriction.   For any given family of marginal deterministic assigments, one can seek to find the conditions under which therese are the restriction of some joint deteministic assignment.  [IS THAT LAST THING RIGHT?]
 
-\color{blue}
-%The usual presentation
-The logical form of a simple Hardy-type paradox is as follows. One assumes a particular joint distribution and a particular causal structure,
- %(a distribution implied by quantum theory and the causal structure of the Bell scenario , 
- and one shows that these imply a set of mutually contradictory facts of the following form: that some event $E_1$ never occurs (is not possible), that some event $E_0$ \emph{does} occur sometimes (is possible), and that whenever $E_0$ occurs, then $E_1$ occurs as well. 
-%   Even though events $E_1, \ldots, E_n$ never occur (are not possible), some other event $E_0$ \emph{does} occur sometimes (is possible). However, 
-%logical relations between these events are such
-% that whenever $E_0$ occurs, then also at least one of $E_1,\ldots,E_n$ occurs, and this is in contradiction with the previous statement. 
- 
-We have already provided a simple example of this sort of argument in \cref{Sec:DerivingInequalities}, in the logic used to demonstrate that the marginal distributions of Eqs.~\eqref{W4}-\eqref{W7} are incompatible with the DAG depicted in Fig.~\ref{fig:Tri222v2}.  The marginal distributions implied that the event $A_1= 0, B_1=0, C_1=0$ {\em never} occurs, while the marginal distributions and the causal structure together implied that the event $A_2 = 1, B_2 =1, C_2 =1$ {\em sometimes} occurs.  However, the marginal distributions also implied that if the latter event occurs, then the former event occurs as well, thereby establishing a contradiction and allowing us to conclude the incompatability of the marginal distributions with the causal structure. 
-%at the hypothesis of compatibility was false.
-%W-type distributions is incompatible with the triangle scenario. 
-%For the DAG depicted in Fig.~\ref{fig:Tri222v2}, the event $A_1 =0 
 
-%\newcommand{\smiley}{\textrm{\Smiley}}
-%\newcommand{\frowny}{\textrm{\Frowny}}
+%As such, \cref{tautology1} can indeed be understood as a constraint on marginal possibilistic assignments.  Thinking of it this way makes it clear that witnessing incompatibility by starting with a Hardy-type logical tautology is the possibilistic analogue of deriving causal compatibility inequalities starting with a solution of the marginal problem.  More importantly, such constraints on marginal possibilistic assignments are interesting because they can be used to derive constraints on marginal distributions, as was shown by \citet{Mansfield2012}.  [cite Ghirardi as well?]
 
-%The following example illustrates a Hardy-type paradox. Suppose a plague has suddenly wiped out a population of rats. Three kinds of autopsies are performed on different samples of the dead rats. Autopsies checking specifically for heart and brain disease find that every rat suffered from at least one of those conditions i.e. the event $[\mathrm{Brain}\eql\smiley,\mathrm{Heart}\eql\smiley]$ is found to be \emph{not possible}. In a slightly different vein, suppose further that autopsies specifically checking for brain and lung diseases find that every dead rat afflicted by brain disease also suffered from lungs disease, i.e. the event $[\mathrm{Brain}\eql\frowny,\mathrm{Lungs}\eql\smiley]$ is not possible. Logic (and the absence of sampling bias) then dictates that an autopsy for heart and lung disease will never find both heart and lungs simultaneously healthy. If some medical examiner checking rats heart and lung conditions then finds that \emph{it is possible} for a rat to have $[\mathrm{Heart}\eql\smiley,\mathrm{Lungs}\eql\smiley]$, this would be considered an occurrence of a Hardy-type paradox.
-
-% Hardy-type paradoxes are predicated on assuming the existence of a solution to the marginal problem. Thus, ensuring the observational data avoids any Hardy-type paradoxes is a necessary condition for solving the marginal problem. \citet[Section~III.C]{LSW} discuss the use of possibilistic constraints to certify the incompatibility of marginal distributions in contexts of than Bell scenarios.
-
-A more general form of Hardy-type paradox is one wherein
-%More generally, it may be that 
-there is a {\em set} of events, $E_1, \ldots, E_n$, that never occur (rather than a single event $E_1$), an event $E_0$ that sometimes occurs, and an inference from $E_0$ occuring to at least one of $E_1,\ldots,E_n$ occuring.  The inference can be expressed as
+We illustrate this last claim with the example just discussed.  It can be cast as a marginal scenario where the contexts are $\{A_2 B_2 C_2\}$, $\{A_2 C_1\}$, $\{B_2 A_1\}$, $\{C_2 B_1\}$, and  $\{A_1 B_1 C_1\}$.  The logical tautology \eqref{tautology1} is then a constraint on marginal determinstic  assignments for this marginal scenario.   To see how to obtain a constraint on marginal {\em distributions}, we start by rewriting \cref{tautology1} in its contrapositive form
+\begin{align}\begin{split}\label{tautology2}
+&[A_2 \eql 1 \land B_2 \eql 1 \land C_2 \eql 1] \\
+&\qquad \implies [A_2 \eql 1 \land C_1 \eql 1] \lor  [B_2 \eql 1 \land A_1 \eql 1] \lor  [C_2 \eql 1 \land B_1 \eql 1] \lor  [A_1 \eql 0 \land B_1 \eql 0 \land C_1 \eql 0].
+\end{split}\end{align}
+Next, we note that if a logical tautology can be expressed as
 \begin{align}\label{eq:inference}
-    \SmallNamedFunction{}{E_0} \implies \SmallNamedFunction{}{E_1} \lor \ldots \lor \SmallNamedFunction{}{E_n}.
+    \SmallNamedFunction{}{E_0} \implies \SmallNamedFunction{}{E_1} \lor \ldots \lor \SmallNamedFunction{}{E_n},
 \end{align}
-where $\lor$ denotes logical disjunction.  %Here too, if $E_0$ sometimes occurs, one obtains a constradiction.
-We refer to inferences of this sort as possibilistic constraints. 
-\color{black}
-
-Any possibilistic constraint can be immediately translated into a probabilistic constraint, as noted by \citet{Mansfield2012}.  Specifically, if one applies the union bound to the possibilistic constraint of Eq.~\eqref{eq:inference} (the union bound asserts that the probability of at least one of a set of events occuring is no greater than the sum of the probabilities of each event occuring), then one obtains the probabilistic constraint
+then by applying the union bound (which asserts that the probability of at least one of a set of events occuring is no greater than the sum of the probabilities of each event occuring), 
+%\color{red} understand $[A2=1 \land B2=0]$ as an event in the sense of probability theory: a subset of the sample space. A logical and then stands for intersection of events, an or for union, and the implication for the subset relation. Equivalently, by the correspondence between subsets of a set and characteristic functions on the set, you can also understand $[A2 = 1 \land B2=0]$ as a Boolean-valued random variable on the sample space, and then the logical connectives have the obvious semantics. The fact that it's enough to consider deterministic assignments to prove the implication (as in my previous paragraph) then follows from the fact that these logical operations are defined pointwise. \color{black}
+ one obtains
 \begin{align}\label{eq:possinference}
 \p{E_0}\leq \sum\limits_{j=1}^n{\p{E_j}}.
 \end{align}
-The fact that $E_1,\ldots,E_n$ never occur and the fact that $E_0$ sometimes occurs are expressed probabilistically as $P(E_1) = \dots = P(E_n)=0$ and $p(E_0) > 0$ respectively, and these valuations clearly violate the inequality.  But the inequality excludes other cases as well.
+Applying the union bound to \cref{tautology2} in particular yields
+\begin{align}\label{eq:F3rawweak}
+P_{A_2 B_2 C_2}\parens{\mgreen{1} \mgreen{1} \mgreen{1}} \leq P_{A_1 B_1 C_1}\parens{0 0 0}+P_{A_1 B_2}\parens{1 \mgreen{1 }}+P_{ B_1 C_2}\parens{ 1 \mgreen{1}}+P_{A_2 C_1}\parens{\mgreen{1 } 1},
+\end{align}
+which is a constraint on the marginal {\em distributions}.
+ 
+Note that this inequality allows one to demonstrate the incompatibility of the marginal distributions of Eqs.~\eqref{W4}-\eqref{W7} with the inflated DAG just as easily as one can with the tautology of \cref{tautology1}.  It suffices to note that the given distribution and causal structure imply that the left-hand side has nonzero probability (which corresponds to the consequent of \cref{tautology1} being false) while every term on the right-hand side has zero probability (which corresponds to the antecedent of  \cref{tautology1} begin true).
+%This is a causal compatibility inequality for the inflated DAG.  It can be used to demonstrate the incompatibility of the marginal distributions of Eqs.~\eqref{W4}-\eqref{W7} with the inflated DAG because these marginal distributions assing probability 0 to all terms on the right-hand side, while these together with the causal structure imply a nonzero probability for the term on the left-hand side.  
+But, of course, the inequality can witness many other incompatibilities in addition to this one.
 
-It was shown by [cite Ghirardi, others?] that in the case of the Bell scenario when one promotes Hardy-type possibilistic constraints to probabilistic constraints, one obtains Bell inequalities. 
+%The truth of the proposition $[U_i = u_i]$ implies that the marginal possibilistic assignment $S_{\bm{U}_1}$ must judge the joint valuation $u_i$ to be possible.  Consequently, any logical tautology in terms of such propositions can be understood as a constraint on the marginal possibilistic assignments. 
 
-%The inference from $E_0$ to $E_1,\ldots,E_n$ 
-In standard Hardy-type arguments, inferences of the form of Eq.~\eqref{eq:possinference} are a consequence of the particular distribution that is being considered.  Nonetheless, there are logical inferences of this sort that hold for {\em all} distributions.  These sorts of inferences can then be used to derive results for the marginal problem.  We demonstrate the idea using a simple example. 
-
-%Suppose that we are in a marginal scenario 
-Consider the marginal problem where the variables are $\{ A,B,C\}$, with each being binary, and the contexts are the pairs $\{A,B\}$, $\{A,C\}$, and $\{B,C\}$.  
+As another example, consider the marginal problem where the variables are $\{ A,B,C\}$, with each being binary, and the contexts are the pairs $\{AB\}$, $\{AC\}$, and $\{BC\}$.  
 %where the pairwise joint distributions of three variables $A$, $B$ and $C$ are given. %, and these two variables are binary with values in $\{0,1\}$. 
-Events here correspond to value-assignments to these variables.  A possibilistic constraint that follows from logic alone, and therefore is true regardless of the joint distribution over $A, B, C$, is this one:
+The following tautology provides a constraint on marginal deterministic assignments:
+%A possibilistic constraint that follows from logic alone, and therefore is true regardless of the joint distribution over $A, B, C$, is this one:
 %One Hardy-type possibilistic constraint which we would want to enumerate is
 \begin{align}
 %    \bracks{\mgreen{A \eql a}, \mgreen{C \eql c}} \implies \bracks{\mgreen{A \eql a}, B \eql b} \bigvee \bracks{B \eql \n{b}, \mgreen{C \eql c}}
-   \bracks{\mgreen{A \eql 1}, \mgreen{C \eql 1}} \implies \bracks{\mgreen{A \eql 1}, B \eql 1} \lor \bracks{B \eql 0, \mgreen{C \eql 1}}.
+ \bracks{\mgreen{A \eql 1}, \mgreen{C \eql 1}} \implies \bracks{\mgreen{A \eql 1}, B \eql 1} \lor \bracks{B \eql 0, \mgreen{C \eql 1}}.
 \end{align}
-(This follows from simple logic: $E \land F  \implies  E \land F \land (G \lor \lnot G) = (E \land F \land G) \lor (E\land F \land \lnot G) \implies (E \land G) \lor (F \land \lnot G)$.) 
-Applying the union bound, one obtains the probabilistic constraint\footnote{This inequality is in fact equivalent to \cref{eq:polymonogamyraw}.}
+(To see that this is a tautology, simply note that $E \land F  \implies  E \land F \land (G \lor \lnot G) = (E \land F \land G) \lor (E\land F \land \lnot G) \implies (E \land G) \lor (F \land \lnot G)$.) 
+Applying the union bound, one obtains the following constraint on marginal distributions\footnote{This inequality is in fact equivalent to \cref{eq:polymonogamyraw}.}
 \begin{align}\label{eq:trivmarginalconstraint}
 	P_{AC}(\mgreen{1 1}) \leq P_{AB}(\mgreen{1} 1) + P_{BC}(0 \mgreen{1}).
 \end{align}
-\cref{eq:trivmarginalconstraint} is therefore a necessary condition on $P_{A B}$, $P_{A C}$, and $P_{B C}$ for there to exist a joint distribution having these as marginals.  Consequently, promoting possibilistic contraints to probabilistic constraints in this manner provides a means of deriving linear inequalities for the marginal problem.  In this section, we seek to determine, for any marginal problem, the set of \emph{all} linear inequalities that can be derived in this manner.  We do so by \tblue{enumerating} the full set of possibilistic constraints that arise in a given marginal problem.
 
-\begin{comment} 
-In order to derive causal incompatibility witnesses via consistency of the marginal distributions, therefore, we may consider the task of \tblue{enumerating} Hardy-type paradoxes, each of which we can then express as an inequality in terms of probabilities. In the following, we explain how to determine \emph{all} such constraints for \emph{any} marginal problem.
 
-To start with a simple example, suppose that we are in a marginal scenario where the pairwise joint distributions of three variables $A$, $B$ and $C$ are given. %, and these two variables are binary with values in $\{0,1\}$. 
-One Hardy-type possibilistic constraint which we would want to enumerate is
-\begin{align}
-%    \bracks{\mgreen{A \eql a}, \mgreen{C \eql c}} \implies \bracks{\mgreen{A \eql a}, B \eql b} \bigvee \bracks{B \eql \n{b}, \mgreen{C \eql c}}
-   \bracks{\mgreen{A \eql 1}, \mgreen{C \eql 1}} \implies \bracks{\mgreen{A \eql 1}, B \eql 1} \lor \bracks{B \eql 0, \mgreen{C \eql 1}},
-\end{align}
-resulting in the probabilistic constraint
-\begin{align}\label{eq:trivmarginalconstraint}
-	P_{AC}(\mgreen{1 1}) \leq P_{AB}(\mgreen{1} 1) + P_{BC}(0 \mgreen{1}).
-\end{align}
-\cref{eq:trivmarginalconstraint} is a necessary condition for the existence of a joint distribution of $P_{A B}$, $P_{A C}$, and $P_{B C}$; it is equivalent to \cref{eq:polymonogamyraw} and therefore also implies the polynomial inequality~\cref{eq:polymonogamy}.
-\end{comment}
+In this section, we seek to determine, for any marginal scenario, the set of \emph{all} inequalities that can be derived in this manner.  We do so by \tblue{enumerating} the full set of constraints on marginal deterministic assignments for the given marginal scenario.
+% that arise in a given marginal problem.
 
-%Applying this constraint, together with the inflation technique to the Triangle scenario, results in
-%\[
-%	\p[AC]{a c} \leq \p[A]{a}\p[B]{b} + \p[BC]{\n{b} c},
-%\]
-%which is equivalent to~\cref{eq:polymonogamy}.
-%
-%\purp{I'm in the middle of switching the notation here to lowercase probabilities. ~EW}
-
-We outline the general procedure using a slightly more sophisticated example than the one provided above. Consider the marginal scenario of~\cref{fig:simplicialcomplex222}, where the full set of variables is $\{ A_1, A_2, B_1, B_2, C_1, C_2\}$ and the contexts are $\{A_1 B_1 C_1\}$, $\{A_1 B_2 C_2\}$, $\{A_2 B_1 C_2\}$, $\{A_2 B_2 C_1\}$ and $\{A_2 B_2 C_2\}$, pursuant to \cref{eq:basicsetup222}.
+We outline the general procedure using 
+%a slightly more sophisticated example than the one provided above. Consider 
+the marginal scenario of~\cref{fig:simplicialcomplex222}, where the full set of variables is $\{ A_1, A_2, B_1, B_2, C_1, C_2\}$ and the contexts are $\{A_1 B_1 C_1\}$, $\{A_1 B_2 C_2\}$, $\{A_2 B_1 C_2\}$, $\{A_2 B_2 C_1\}$ and $\{A_2 B_2 C_2\}$, pursuant to \cref{eq:basicsetup222}.
 %\begin{align*}
 %	\{A_1 B_1 C_1\},\\
 %	\{A_1 B_2 C_2\},\\
@@ -1542,17 +1561,21 @@ We outline the general procedure using a slightly more sophisticated example tha
 %	\{A_2 B_2 C_1\},\\
 %	\{A_2 B_2 C_2\}.
 %\end{align*}
-Now a possibilistic constraint on this marginal problem consists of a logical implication with a joint valuation of one of the contexts as the \tblue{antecedent} and a disjunction over contexts of joint valuations thereon as the \tblue{consequent}. In the following, we explain how to generate \emph{all} such implications which are tight in the sense that their right-hand sides are minimal.
+As before, we will express the constraints on marginal deterministic assignments as logical implications with
+%Now a possibilistic constraint on this marginal problem consists of a logical implication with 
+a joint valuation of one of the contexts as the \tblue{antecedent} and a disjunction over contexts of joint valuations thereon as the \tblue{consequent}. In the following, we explain how to generate \emph{all} such implications which are tight in the sense that the consequent is minimal, i.e., involves as few terms as possible in the disjunction. 
+%ir right-hand sides are minimal.
 
-First we fix the antecedant by choosing some context and a joint valuation of its variables. In order to generate all possibilistic constraints, one will have to perform this procedure for \emph{every} context as the antecedent and every choice of joint valuation thereof. For the sake of concreteness, we take the example of $\bracks{\mgreen{A_2 \eql 1}, \mgreen{B_2 \eql 1}, \mgreen{C_2 \eql 1}}$ as the antecedent.  
-
-The consequent will be a \sout{conjunction} disjunction over contexts of joint valuations for each context, with the additional property that any variable that appears in both the antecendent and the consequent must be given the same value in both. 
+First, we fix the antecedant by choosing some context and a joint valuation of its variables. In order to generate all contraints on marginal deterministic assignments, one will have to perform this procedure for \emph{every} context as the antecedent and every choice of joint valuation thereof. For the sake of concreteness, we take the example of $\bracks{\mgreen{A_2 \eql 1}, \mgreen{B_2 \eql 1}, \mgreen{C_2 \eql 1}}$ as the antecedent.  
+Each logical implication we consider is required to have the property 
+%The consequent will be a disjunction over contexts of joint valuations for each context, with the additional property
+ that any variable that appears in both the antecendent and the consequent must be given the same value in both. 
 %all outcomes of variables that also occur in the antecedent carry the same outcome. 
 %For the implication to be valid, the consequent must further be such that \tred{for any \emph{joint} composite outcome which extends the antecedent's marginal composite outcome, also at least one of the marginal composite outcomes in the consequent must occur.}
 
 To formally determine all valid consequents, we first consider two hypergraphs. %Take the set of nodes to be the disjoint union over all the contexts of all the joint outcomes which are compatible with~\eqref{eq:lhshardy}\footnote{In the left-hand side context there will thus be only one node, and one can also omit this one node without changing the result.}. 
 The nodes in the first hypegraph correspond to every possible joint valuation of the variables in a context for every possible context.
-The hyperedges correspond to every possible joint valuation of all variables. A hyperedge (joint valuation) contains a node (marginal joint valuation) iff the hyperedge is an extension of the node; for example the hyperedge $\bracks{A_1 \eql 0, \mgreen{A_2 \eql 1}, B_1 \eql 0, \mgreen{B_2 \eql 1}, C_1 \eql 1, \mgreen{C_2 \eql 1}}$ is an extension of the node $\bracks{A_1 \eql 0,  \mgreen{B_2 \eql 1}, \mgreen{C_2 \eql 1}}$. In our example following \cref{fig:simplicialcomplex222}, this initial hypergraph has $5\cdot 2^3 = 40$ nodes and $2^6 = 64$ hyperedges.
+The hyperedges correspond to every possible joint valuation of all the variables. A hyperedge (joint valuation) contains a node (marginal joint valuation) iff the hyperedge is an extension of the node; for example the hyperedge $\bracks{A_1 \eql 0, \mgreen{A_2 \eql 1}, B_1 \eql 0, \mgreen{B_2 \eql 1}, C_1 \eql 1, \mgreen{C_2 \eql 1}}$ is an extension of the node $\bracks{A_1 \eql 0,  \mgreen{B_2 \eql 1}, \mgreen{C_2 \eql 1}}$. In our example following \cref{fig:simplicialcomplex222}, this initial hypergraph has $5\cdot 2^3 = 40$ nodes and $2^6 = 64$ hyperedges.
 
 The second hypergraph is a sub-hypergraph of the first one. We delete from the first graph all nodes and hyperedges which contradict the outcomes supposed by the antecedent. For example, the node $\bracks{\mgreen{A_2 \eql 1}, \mred{B_2 \eql 0}, C_1 \eql 1}$ contradicts the antecedent $\bracks{\mgreen{A_2 \eql 1}, \mgreen{B_2 \eql 1}, \mgreen{C_2 \eql 1}}$. We also delete the node corresponding to the antecedent itself. In our example, this final resulting hypergraph has $2^3 + 3\cdot 2^1 = 14$ nodes and $2^3 = 8$ hyperedges.
 
@@ -1560,32 +1583,38 @@ All valid (minimal) consequents are (minimal) \tblue{transversals} of this latte
 
 %It is then possible right-hand sides of the implications are precisely the \tblue{transversals} of this hypergraph, i.e.~the sets of nodes which have the property that they intersect every hyperedge in at least one node. In order to get implications which are as tight as possible, it is sufficient to enumerate only the \tblue{minimal transversals}. Doing so is a well-studied problem in computer science with various natural reformulations and for which manifold algorithms have been developed~\cite{eiter_dualization_2008}. We expect that this enumeration of minimal transversals will be computationally much more tractable than the linear quantifier elimination, even if one does it for every possible left-hand side of the implication.
 
-In our example, it is not hard to check that the right-hand side of
+In our example, it is not hard to check that the consequent of
 \begin{align}\begin{split}\label{eq:F3implicationform}
 	\bracks{\mgreen{A_2 \eql 1}, \mgreen{B_2 \eql 1}, \mgreen{C_2 \eql 1}} \quad\Longrightarrow\quad &\bracks{A_1 \eql 0, B_1 \eql 0, C_1 \eql 0} \lor \bracks{A_1 \eql 1, \mgreen{B_2 \eql 1}, \mgreen{C_2 \eql 1}} \\
 	\lor\: & \bracks{\mgreen{A_2 \eql 1}, B_1 \eql 1, \mgreen{C_2 \eql 1}} \lor \bracks{\mgreen{A_2 \eql 1}, \mgreen{B_2 \eql 1}, C_1 \eql 1}
 \end{split}\end{align}
 is such a minimal transversal: every assignment of values to all variables which extends the assignment on the left-hand side satisfies at least one of the terms on the right, but this ceases to hold as soon as one removes any one term on the right. 
 
-We convert these implications into inequalities in the usual way, by replacing ``$\Rightarrow$'' by ``$\leq$'' at the level of probabilities and the disjunctions by sums. For example the possibilistic constraint \cref{eq:F3implicationform} translates to the probabilistic constraint
+We convert these implications into inequalities in the usual way via the union bound (i.e., replacing ``$\Rightarrow$'' by ``$\leq$'' at the level of probabilities and the disjunctions by sums). For example the constraint on marginal deterministic assignments \cref{eq:F3implicationform} translates to the constraint on marginal distributions
 \begin{align}\label{eq:F3rawprobform}
 %    P_{A_2 B_2 C_2}\parens{\mgreen{a_2} \mgreen{b_2} \mgreen{c_2}} \leq \p{\n{a_1} \n{b_1} \n{c_1}}+\p{a_1 \mgreen{b_2 c_2}}+\p{\mgreen{a_2} b_1 \mgreen{c_2}}+\p{\mgreen{a_2 b_2} c_1}
-    P_{A_2 B_2 C_2}\parens{\mgreen{1} \mgreen{1} \mgreen{1}} \leq P_{A_1 B_1 C_1}\parens{0 0 0}+P_{A_1 B_2 C_2}\parens{1 \mgreen{1 1}}+P_{A_2 B_1 C_2}\parens{\mgreen{1} 1 \mgreen{1}}+P_{A_2 B_2 C_1}\parens{\mgreen{1 1} 1}
+    P_{A_2 B_2 C_2}\parens{\mgreen{1} \mgreen{1} \mgreen{1}} \leq P_{A_1 B_1 C_1}\parens{0 0 0}+P_{A_1 B_2 C_2}\parens{1 \mgreen{1 1}}+P_{A_2 B_1 C_2}\parens{\mgreen{1} 1 \mgreen{1}}+P_{A_2 B_2 C_1}\parens{\mgreen{1 1} 1}.
 \end{align}
 %\[
 %	P_{A_2 B_2 C_2}(111) \leq P_{A_1 B_1 C_1}(000) + P_{A_1 B_2 C_2}(111) + P_{A_2 B_1 C_2}(111) + P_{A_2 B_2 C_1}(111).
 %\]
-i.e. \cref{eq:FritzF3raw}. Therefore \cref{eq:F3implicationform} recovers \cref{eq:FritzF3raw}, and hence \cref{eq:F3implicationform} can be thoughts of as the fundamental progenitor of \cref{eq:FritzF3}.
+Note that \cref{eq:F3rawprobform} is a strengthening of \cref{eq:F3rawweak}.  \cref{eq:F3rawprobform} was used earlier in this article as the starting point of our third example of how to derive a causal compatibility inequality for the Triangle scenario, in Sec.~\ref{Sec:DerivingInequalities} (see \cref{eq:FritzF3raw}). Because \cref{eq:F3implicationform} is the progenitor of this inequality, it can be thought of as the progenitor of the causal compatibility inequality that one derives from it, namely, \cref{eq:FritzF3}.  
 
-Inequalities resulting from hypergraph transversals are generally weaker than those that result from completely solving the marginal problem. Nevertheless, many Bell inequalities are of this form---such as the CHSH inequality which follows in this way from Hardy's original implication [cite Ghirardi]. So it seems that this method is still sufficiently powerful to generate plenty of interesting inequalities. At the same time, it should be significantly easier to perform in practice than the full-fledged linear (let alone nonlinear) quantifier elimination, even if one does it for every possible antecedent.
 
-In conclusion, linear quantifier elimination is the preferable tool for deriving inequalities whenever it is computationally tractable; but whenever it is not, then enumerating hypergraph transversals presents a good alternative. %: \cref{eq:trisimplestunmapped} here corresponds to Eq. (2-4) in~\cite{Pitowsky1989}%, and \cref{eq:bellcondeq} here corresponds to Eq. (30) in Ref. \cite{Ghirardi08}
+Inequalities on marginal distributions that one derives from hypergraph transversals are generally weaker than those that result from a complete solution of the marginal problem. Nevertheless, many Bell inequalities are of this form---such as the CHSH inequality which follows in this way from the logical constraints used in Hardy's version of Bell's theorem [cite Ghirardi].  So it seems that this method is still sufficiently powerful to generate plenty of interesting inequalities. At the same time, it should be significantly easier to perform in practice than the full-fledged linear (let alone nonlinear) quantifier elimination, even if one does it for every possible antecedent.
+
+In conclusion, linear quantifier elimination is the preferable tool for deriving inequalities for the marginal problem whenever it is computationally tractable; but whenever it is not, then enumerating hypergraph transversals presents a good alternative. %: \cref{eq:trisimplestunmapped} here corresponds to Eq. (2-4) in~\cite{Pitowsky1989}%, and \cref{eq:bellcondeq} here corresponds to Eq. (30) in Ref. \cite{Ghirardi08}
+
+\color{black}
+
+
+
 
 %One can also come up with a \emph{satisfiability} version of a marginal problem at the possibilistic level. Possibilistic satisfiability is the following: for every joint marginal outcome with positive probability, one needs to find an assignment of values to all variables which extends the given marginal outcomes and such that the restriction to every context also has positive probability. This is very easy to do: one can simply enumerate all deterministic assignments of values to all observables, discard all those that have a marginal with zero probability, and then check whether the remaining assignments are enough to generate all the joint marginal outcomes with positive probability.
 
 % We note that the connection between classical propositional logic and linear inequalities has been used previously in the task of causal inference. Noteworthy examples of works deriving causal infeasibility criteria via classical logic are \citet{Pitowsky1989} and \citet{Ghirardi08}, see also Refs. \cite{pitowsky_boole_1994,kellerer_marginal_1964,leggett_garg_1985,araujo_cycle_2013}. Novel to this work, however, is the use of the hypergraph transversals problem to formally enumerate relevant logical implications. 
 
-
+\begin{comment}
 \section{Inequalities for the marginal problem via Hardy-type paradoxes and minimal transversals}
 
 \purp{T: this may replace the tautologies section}
@@ -1631,7 +1660,163 @@ Finally, we convert the implication into an inequality by replacing the implicat
 Applying this to our inflation DAG of~\cref{fig:Tri222} results again in one of our previous inequalities.
 
 Since also many Bell inequalities are of this form---such as the CHSH inequality which follows in this way from Hardy's original implication---we conclude that this still sufficiently powerful to generate plenty of interesting inequalities, and at the same time significantly easier to perform in practice than the full-fledged linear (let alone nonlinear) quantifier elimination.
+\end{comment}
 
+
+\begin{comment}
+\color{purple} 
+[Version that uses modal logic]
+
+In the literature on Bell inequalities, it has been noticed that incompatibility with the Bell DAG can sometimes be witnessed by merely looking at which events have zero probability and which events have nonzero probability. In other words, instead of considering the \emph{probability} of a composite outcome, the inconsistency of some marginal distributions can be evident from considering only the \emph{possibility} or \emph{impossibility} of each composite outcome. This insight is originally due to~\citet{L.Hardy:PRL:1665}, and versions of Bell's theorem that are based on the violation of such \tblue{possibilistic constraints} are known as \tblue{Hardy-type paradoxes}. For more background on Hardy-type paradoxes, see Refs.~\cite{Garuccio95,CabelloHardyInequality,Braun08,Mancinska14,LSW}; a partial classification of these can be found in Ref.~\cite{Mansfield2012}.
+
+
+We have already provided a simple example of this sort of argument in \cref{Sec:DerivingInequalities}, in the logic used to demonstrate that the marginal distributions of Eqs.~\eqref{W4}-\eqref{W7} are incompatible with the DAG depicted in Fig.~\ref{fig:Tri222v2}.   For our present purposes, it is useful to recast the argument of \cref{Sec:DerivingInequalities} into a new but manifestly equivalent form.    For the distribution in question, we have
+\begin{align} 
+\text{Necessarily}\quad &A_2 \eql 1 \implies C_1\eql 0\label{WWs1}\\
+\text{Necessarily}\quad &B_2\eql 1 \implies A_1\eql 0\label{WWs2}\\
+\text{Necessarily}\quad &C_2 \eql 1 \implies B_1 \eql 0\label{WWs3}\\
+\text{Necessarily not}  \quad &A_1 \eql 0\,\text{ and }\, B_1 \eql 0\,\text{ and }\, C_1 \eql 0.\label{WWs4}
+\end{align}
+From the last constraint one infers that necessarily at least one of $A_1$, $B_1$ and $C_1$ must be 1, which from the three other constraints implies that necessarily at least one of $A_2$, $B_2$ and $C_2$ must be 0, so that it is necessarily not the case that all of $A_2$, $B_2$ and $C_2$ are 1.  Thus Eqs.~\eqref{WWs1}-\eqref{WWs4} imply
+\begin{align} \label{consequent2}
+\text{Necessarily not}  \quad &A_2 \eql 1\,\text{ and }\, B_2 \eql 1\,\text{ and }\, C_2 \eql 1.
+\end{align}
+However, the DAG of Fig.~\ref{fig:Tri222v2} is such that $A_2$,$B_2$, and $C_2$ have no common ancestor and consequently these variables are marginally independent in any distribution consistent with this DAG.  Combining this with the fact that the marginal distribution for each of these three variables has full support implies that $A_2$,$B_2$, and $C_2$ sometimes all take the value 1, that is,
+\begin{align} 
+\text{Possibly}  \quad &A_1 \eql 0\,\text{ and }\, B_1 \eql 0\,\text{ and }\, C_1 \eql 0.\label{WWs4}
+\end{align}
+and this contradicts \cref{consequent2}.
+
+What is nice about this form of the reasoning is that the appeal to the causal structure occurs only in the very last step.  In fact, one can even recast the argument in such a way that the appeal to the form of the marginal distributions also occurs only in the very last step.  In the first step, one notes only that the following proposition is a logical tautology in modal logic (here, $\land$, $\lor$ and $\lnot$ denote conjunction, disjunction and negation respectively, while $\square$ and $\diamond$ denote the modal unary operations {\em necessarily} and {\em possibly}):
+\begin{align}\begin{split}\label{tautology1}
+&(\square \lnot [A_2 \eql 1 \land C_1 \eql 1]) \bigwedge (\square \lnot [B_2 \eql 1 \land A_1 \eql 1]) \bigwedge (\square \lnot [C_2 \eql 1 \land B_1 \eql 1]) \bigwedge (\square \lnot [A_1 \eql 0 \land B_1 \eql 0 \land C_1 \eql 0])\\
+ &\qquad\implies
+\square \lnot [A_2 \eql 1 \land B_2 \eql 1 \land C_2 \eql 1].
+\end{split}\end{align}
+In the second and final step, one notes that the given distribution and the given causal structure imply that the antecedent is true while the consequent is false (because of Eq.~\eqref{WWs4}, which in logical form is
+$\diamond [A_2 \eql 1 \land B_2 \eql 1 \land C_2 \eql 1]$,
+and the fact that in modal logic $\diamond X = \lnot \square \lnot X$).  Thus the distribution and causal structure together imply a contradiction.
+
+Such Hardy-type arguments for incompatibility actually only require one to be given an assignment of {\em possible} or {\em impossible} to certain valuations of variables rather an assignment of probabilities thereto. We call such assignments {\em possibilistic}.  In our final recasting of the Hardy-type argument for our example, the first step---identifying the logical tautology---can be understood as a constraint on marginal possibilistic assignments that follows from logic alone.  It can be understood as the possibilistic analogue of identifying a constraint on marginals distributions that holds for {\em any} joint distribution.  Thus it is useful to think of the problem in the first step of such proofs as the possibilistic counterpart of solving the marginal problem.
+%Identifying such tautologies can be understood as a constraint on marginal {\em possibilistic assignments} rather than marginal distributions.  
+
+Imagine that one has specified the full set of variables, denoted $\bm{X}$, together with a family of subsets of $\bm{X}$, termed contexts and denoted $(\bm{U}_1,\ldots,\bm{U}_n)$.  A \emph{joint possibilistic assignment} to $\bm{X}$, denoted $S_{\bm{X}}$, specifies for each joint valuation of the variables in $\bm{X}$ whether it is possible or not.  A \emph{marginal possibilistic assignment} for the context $\bm{U}_i$, denoted $S_{\bm{U}_i}$,  specifies for each joint valuation of the variables in $\bm{U_i}$ whether it is possible or not. Clearly, every joint possibilistic assignment $S_{\bm{X}}$ defines a family of marginal possibilistic assignments, $(S_{\bm{U}_1}, \ldots,S_{\bm{U}_n})$ through restriction.   In a \emph{possibilistic marginal problem}, one is given a family of marginal possibilistic assignments and one seeks to find the conditions under which one can find a joint possibilistic assignment that yields these under restriction. 
+
+
+To assert that the valuation $\bm{U}_i = \bm{u}_i$ is {\em impossible} is to assert that it is necessarily not the case that  $\bm{U}_i = \bm{u}_i$, denoted logically as $\square \lnot  [\bm{U}_i = \bm{u}_i]$. A logical tautology involving such assertions can therefore be understood as a constraint on marginal possibilistic assignments.
+%Because asserting the {\em impossibility} of some valuation $\bm{U}_i = \bm{u}_i$ is equivalent to asserting the falsity of the proposition $[\bm{U}_i = \bm{u}_i]$, it follows that any logical tautology involving only logical negations of particular valuations for the contexts can be understood as a constraint on marginal possibilistic assignments. 
+
+
+As such, \cref{tautology1} can indeed be understood as a constraint on marginal possibilistic assignments.  Thinking of it this way makes it clear that witnessing incompatibility by starting with a Hardy-type logical tautology is the possibilistic analogue of deriving causal compatibility inequalities starting with a solution of the marginal problem.  More importantly, such constraints on marginal possibilistic assignments are interesting because they can be used to derive constraints on marginal distributions, as was shown by \citet{Mansfield2012}.  [cite Ghirardi as well?]
+
+We illustrate this last claim with the example just discussed.  It can be cast as a marginal scenario where the contexts are $\{A_2 B_2 C_2\}$, $\{A_2 C_1\}$, $\{B_2 A_1\}$, $\{C_2 B_1\}$, and  $\{A_1 B_1 C_1\}$.  The logical tautology \eqref{tautology1} is then a constraint on marginal possibilistic assignments for this marginal scenario.   To see how to obtain a constraint on marginal distributions, we start by rewriting \cref{tautology1} in its contrapositive form (recall that $\lnot \square \lnot X = \diamond X$),
+\begin{align}\begin{split}\label{tautology2}
+&\diamond [A_2 \eql 1 \land B_2 \eql 1 \land C_2 \eql 1] \\
+&\qquad \implies \diamond [A_2 \eql 1 \land C_1 \eql 1] \lor \diamond [B_2 \eql 1 \land A_1 \eql 1] \lor \diamond [C_2 \eql 1 \land B_1 \eql 1] \lor \diamond [A_1 \eql 0 \land B_1 \eql 0 \land C_1 \eql 0].
+\end{split}\end{align}
+Next, we note that if a logical tautology can be expressed as
+\begin{align}\label{eq:inference}
+   \diamond \SmallNamedFunction{}{E_0} \implies \diamond \SmallNamedFunction{}{E_1} \lor \ldots \lor \diamond \SmallNamedFunction{}{E_n},
+\end{align}
+then by applying
+%because  a possibilistic assertion, such as $diamond E_i$, can be cashed out as ``the set of possible worlds in which $E_i$ is the case is not empty'', it follows that we can apply
+ the union bound (which asserts that the probability of at least one of a set of events occuring is no greater than the sum of the probabilities of each event occuring), one obtains
+\begin{align}\label{eq:possinference}
+\p{E_0}\leq \sum\limits_{j=1}^n{\p{E_j}}.
+\end{align}
+Applying the union bound to \cref{tautology2} in particular yields
+\begin{align}\label{eq:F3rawweak}
+P_{A_2 B_2 C_2}\parens{\mgreen{1} \mgreen{1} \mgreen{1}} \leq P_{A_1 B_1 C_1}\parens{0 0 0}+P_{A_1 B_2}\parens{1 \mgreen{1 }}+P_{ B_1 C_2}\parens{ 1 \mgreen{1}}+P_{A_2 C_1}\parens{\mgreen{1 } 1},
+\end{align}
+which is a constraint on the marginal {\em distributions}.
+ 
+Note that this inequality allows one to demonstrate the incompatibility of the marginal distributions of Eqs.~\eqref{W4}-\eqref{W7} with the inflated DAG just as easily as one can with the tautology of \cref{tautology1}.  It suffices to note that the given distribution and causal structure imply that the left-hand side has nonzero probability (which corresponds to the consequent of \cref{tautology1} being false) while every term on the right-hand side has zero probability (which corresponds to the antecedent of  \cref{tautology1} begin true).
+%This is a causal compatibility inequality for the inflated DAG.  It can be used to demonstrate the incompatibility of the marginal distributions of Eqs.~\eqref{W4}-\eqref{W7} with the inflated DAG because these marginal distributions assing probability 0 to all terms on the right-hand side, while these together with the causal structure imply a nonzero probability for the term on the left-hand side.  
+But, of course, the inequality can witness many other incompatibilities in addition to this one.
+
+%The truth of the proposition $[U_i = u_i]$ implies that the marginal possibilistic assignment $S_{\bm{U}_1}$ must judge the joint valuation $u_i$ to be possible.  Consequently, any logical tautology in terms of such propositions can be understood as a constraint on the marginal possibilistic assignments. 
+
+As another example, consider the marginal problem where the variables are $\{ A,B,C\}$, with each being binary, and the contexts are the pairs $\{AB\}$, $\{AC\}$, and $\{BC\}$.  
+%where the pairwise joint distributions of three variables $A$, $B$ and $C$ are given. %, and these two variables are binary with values in $\{0,1\}$. 
+The following tautology provides a constraint on marginal possibilistic assignments:
+%A possibilistic constraint that follows from logic alone, and therefore is true regardless of the joint distribution over $A, B, C$, is this one:
+%One Hardy-type possibilistic constraint which we would want to enumerate is
+\begin{align}
+%    \bracks{\mgreen{A \eql a}, \mgreen{C \eql c}} \implies \bracks{\mgreen{A \eql a}, B \eql b} \bigvee \bracks{B \eql \n{b}, \mgreen{C \eql c}}
+\diamond \bracks{\mgreen{A \eql 1}, \mgreen{C \eql 1}} \implies \diamond \bracks{\mgreen{A \eql 1}, B \eql 1} \lor  \diamond \bracks{B \eql 0, \mgreen{C \eql 1}}.
+\end{align}
+(To see that this is a tautology, simply note that $E \land F  \implies  E \land F \land (G \lor \lnot G) = (E \land F \land G) \lor (E\land F \land \lnot G) \implies (E \land G) \lor (F \land \lnot G)$ and that if $X \implies Y$ then $\diamond X \implies \diamond Y$ and that $\diamond (W \lor Z) = \diamond W \lor \diamond Z$. \color{red} Check that I've got my modal logic right.\color{black}) 
+Applying the union bound, one obtains the following constraint on marginal distributions\footnote{This inequality is in fact equivalent to \cref{eq:polymonogamyraw}.}
+\begin{align}\label{eq:trivmarginalconstraint}
+	P_{AC}(\mgreen{1 1}) \leq P_{AB}(\mgreen{1} 1) + P_{BC}(0 \mgreen{1}).
+\end{align}
+\color{purple}
+[New modal version]
+\begin{align}\label{eq:trivmarginalconstraint}
+	S_{AC}(\mgreen{1 1}) \leq \text{max}\{ S_{AB}(\mgreen{1} 1) ,S_{BC}(0 \mgreen{1})\}.
+\end{align}
+\color{black}
+
+In this section, we seek to determine, for any marginal scenario, the set of \emph{all} inequalities that can be derived in this manner.  We do so by \tblue{enumerating} the full set of constraints on marginal possibilistic assignments for the given marginal scenario.
+% that arise in a given marginal problem.
+
+
+
+We outline the general procedure using 
+%a slightly more sophisticated example than the one provided above. Consider 
+the marginal scenario of~\cref{fig:simplicialcomplex222}, where the full set of variables is $\{ A_1, A_2, B_1, B_2, C_1, C_2\}$ and the contexts are $\{A_1 B_1 C_1\}$, $\{A_1 B_2 C_2\}$, $\{A_2 B_1 C_2\}$, $\{A_2 B_2 C_1\}$ and $\{A_2 B_2 C_2\}$, pursuant to \cref{eq:basicsetup222}.
+%\begin{align*}
+%	\{A_1 B_1 C_1\},\\
+%	\{A_1 B_2 C_2\},\\
+%	\{A_2 B_1 C_2\},\\
+%	\{A_2 B_2 C_1\},\\
+%	\{A_2 B_2 C_2\}.
+%\end{align*}
+As before, we will express the constraints on marginal possibilistic assignments as logical implications with
+%Now a possibilistic constraint on this marginal problem consists of a logical implication with 
+a joint valuation of one of the contexts as the \tblue{antecedent} and a disjunction over contexts of joint valuations thereon as the \tblue{consequent}. In the following, we explain how to generate \emph{all} such implications which are tight in the sense that the consequent is minimal, i.e., involves as few terms as possible in the disjunction. 
+%ir right-hand sides are minimal.
+
+First, we fix the antecedant by choosing some context and a joint valuation of its variables. In order to generate all contraints on marginal possibilistic assignments, one will have to perform this procedure for \emph{every} context as the antecedent and every choice of joint valuation thereof. For the sake of concreteness, we take the example of $\bracks{\mgreen{A_2 \eql 1}, \mgreen{B_2 \eql 1}, \mgreen{C_2 \eql 1}}$ as the antecedent.  
+Each logical implication we consider is required to have the property 
+%The consequent will be a disjunction over contexts of joint valuations for each context, with the additional property
+ that any variable that appears in both the antecendent and the consequent must be given the same value in both. 
+%all outcomes of variables that also occur in the antecedent carry the same outcome. 
+%For the implication to be valid, the consequent must further be such that \tred{for any \emph{joint} composite outcome which extends the antecedent's marginal composite outcome, also at least one of the marginal composite outcomes in the consequent must occur.}
+
+To formally determine all valid consequents, we first consider two hypergraphs. %Take the set of nodes to be the disjoint union over all the contexts of all the joint outcomes which are compatible with~\eqref{eq:lhshardy}\footnote{In the left-hand side context there will thus be only one node, and one can also omit this one node without changing the result.}. 
+The nodes in the first hypegraph correspond to every possible joint valuation of the variables in a context for every possible context.
+The hyperedges correspond to every possible joint valuation of all the variables. A hyperedge (joint valuation) contains a node (marginal joint valuation) iff the hyperedge is an extension of the node; for example the hyperedge $\bracks{A_1 \eql 0, \mgreen{A_2 \eql 1}, B_1 \eql 0, \mgreen{B_2 \eql 1}, C_1 \eql 1, \mgreen{C_2 \eql 1}}$ is an extension of the node $\bracks{A_1 \eql 0,  \mgreen{B_2 \eql 1}, \mgreen{C_2 \eql 1}}$. In our example following \cref{fig:simplicialcomplex222}, this initial hypergraph has $5\cdot 2^3 = 40$ nodes and $2^6 = 64$ hyperedges.
+
+The second hypergraph is a sub-hypergraph of the first one. We delete from the first graph all nodes and hyperedges which contradict the outcomes supposed by the antecedent. For example, the node $\bracks{\mgreen{A_2 \eql 1}, \mred{B_2 \eql 0}, C_1 \eql 1}$ contradicts the antecedent $\bracks{\mgreen{A_2 \eql 1}, \mgreen{B_2 \eql 1}, \mgreen{C_2 \eql 1}}$. We also delete the node corresponding to the antecedent itself. In our example, this final resulting hypergraph has $2^3 + 3\cdot 2^1 = 14$ nodes and $2^3 = 8$ hyperedges.
+
+All valid (minimal) consequents are (minimal) \tblue{transversals} of this latter hypergraph. A transversal is a set of nodes which has the property that it intersects every hyperedge in at least one node. In order to get implications which are as tight as possible, it is sufficient to enumerate only the minimal transversals. Doing so is a well-studied problem in computer science with various natural reformulations and for which manifold algorithms have been developed~\cite{eiter_dualization_2008}.
+
+%It is then possible right-hand sides of the implications are precisely the \tblue{transversals} of this hypergraph, i.e.~the sets of nodes which have the property that they intersect every hyperedge in at least one node. In order to get implications which are as tight as possible, it is sufficient to enumerate only the \tblue{minimal transversals}. Doing so is a well-studied problem in computer science with various natural reformulations and for which manifold algorithms have been developed~\cite{eiter_dualization_2008}. We expect that this enumeration of minimal transversals will be computationally much more tractable than the linear quantifier elimination, even if one does it for every possible left-hand side of the implication.
+
+In our example, it is not hard to check that the consequent of
+\begin{align}\begin{split}\label{eq:F3implicationform}
+	\bracks{\mgreen{A_2 \eql 1}, \mgreen{B_2 \eql 1}, \mgreen{C_2 \eql 1}} \quad\Longrightarrow\quad &\bracks{A_1 \eql 0, B_1 \eql 0, C_1 \eql 0} \lor \bracks{A_1 \eql 1, \mgreen{B_2 \eql 1}, \mgreen{C_2 \eql 1}} \\
+	\lor\: & \bracks{\mgreen{A_2 \eql 1}, B_1 \eql 1, \mgreen{C_2 \eql 1}} \lor \bracks{\mgreen{A_2 \eql 1}, \mgreen{B_2 \eql 1}, C_1 \eql 1}
+\end{split}\end{align}
+is such a minimal transversal: every assignment of values to all variables which extends the assignment on the left-hand side satisfies at least one of the terms on the right, but this ceases to hold as soon as one removes any one term on the right. 
+
+We convert these implications into inequalities in the usual way via the union bound (i.e., replacing ``$\Rightarrow$'' by ``$\leq$'' at the level of probabilities and the disjunctions by sums). For example the constraint on marginal possibilistic assignments \cref{eq:F3implicationform} translates to the constraint on marginal distributions
+\begin{align}\label{eq:F3rawprobform}
+%    P_{A_2 B_2 C_2}\parens{\mgreen{a_2} \mgreen{b_2} \mgreen{c_2}} \leq \p{\n{a_1} \n{b_1} \n{c_1}}+\p{a_1 \mgreen{b_2 c_2}}+\p{\mgreen{a_2} b_1 \mgreen{c_2}}+\p{\mgreen{a_2 b_2} c_1}
+    P_{A_2 B_2 C_2}\parens{\mgreen{1} \mgreen{1} \mgreen{1}} \leq P_{A_1 B_1 C_1}\parens{0 0 0}+P_{A_1 B_2 C_2}\parens{1 \mgreen{1 1}}+P_{A_2 B_1 C_2}\parens{\mgreen{1} 1 \mgreen{1}}+P_{A_2 B_2 C_1}\parens{\mgreen{1 1} 1}.
+\end{align}
+%\[
+%	P_{A_2 B_2 C_2}(111) \leq P_{A_1 B_1 C_1}(000) + P_{A_1 B_2 C_2}(111) + P_{A_2 B_1 C_2}(111) + P_{A_2 B_2 C_1}(111).
+%\]
+Note that \cref{eq:F3rawprobform} is a strengthening of \cref{eq:F3rawweak}.  \cref{eq:F3rawprobform} was used earlier in this article as the starting point of our third example of how to derive a causal compatibility inequality for the Triangle scenario, in Sec.~\ref{Sec:DerivingInequalities} (see \cref{eq:FritzF3raw}). Because \cref{eq:F3implicationform} is the progenitor of this inequality, it can be thought of as the progenitor of the causal compatibility inequality that one derives from it, namely, \cref{eq:FritzF3}.  
+
+
+Inequalities on marginal distributions that one derives from hypergraph transversals are generally weaker than those that result from a complete solution of the marginal problem. Nevertheless, many Bell inequalities are of this form---such as the CHSH inequality which follows in this way from the possibilistic constraints used in Hardy's version of Bell's theorem [cite Ghirardi].  So it seems that this method is still sufficiently powerful to generate plenty of interesting inequalities. At the same time, it should be significantly easier to perform in practice than the full-fledged linear (let alone nonlinear) quantifier elimination, even if one does it for every possible antecedent.
+
+In conclusion, linear quantifier elimination is the preferable tool for deriving inequalities for the marginal problem whenever it is computationally tractable; but whenever it is not, then enumerating hypergraph transversals presents a good alternative. %: \cref{eq:trisimplestunmapped} here corresponds to Eq. (2-4) in~\cite{Pitowsky1989}%, and \cref{eq:bellcondeq} here corresponds to Eq. (30) in Ref. \cite{Ghirardi08}
+
+\end{comment}
 
 
 \section{Prospects for the inflation technique}
@@ -2387,6 +2572,27 @@ so that dividing by the right-hand side results in essentially the conventional 
 	\sum_{a,b} (-1)^{a + b} \left( P_{AB|XY}(ab|00) + P_{AB|XY}(ab|01) + P_{AB|XY}(ab|10) - P_{AB|XY}(ab|11) \right) \leq 2.
 \]
 In conclusion, the inflation technique is powerful enough to get a precise characterization of all distributions consistent with the Bell causal structure, and our technique for generating polynomial inequalities while solving the marginal problem recovers all Bell inequalities.
+
+
+\color{purple} Worth noting that possibilistic marginal problem is sufficient to get the Bell inequalities?  If so, here's the beginning of the story. 
+
+The tautology that we have used can be expressed as
+\begin{align}
+&[ X_1 \eql 0 \land X_2=1 \land Y_1 \eql 0 \land Y_2 =1]\\
+& \implies 
+ [ X_1 \eql 0 \land Y_1 \eql 0 \land A_1\ne B_1] \lor  [ X_1 \eql 0 \land Y_2 \eql 1 \land A_1\ne B_2]\\
+&\lor [ X_2 \eql 1 \land Y_1 \eql 0 \land A_2\ne B_1] \lor [ X_2 \eql 1 \land Y_2 \eql 1 \land A_2 = B_2].
+\end{align}
+which implies, by the union bound that
+\begin{align}
+P_{X_1 X_2Y_1  Y_2}(0101) \le \sum_{x} P_{ X_1 Y_1 A_1 B_1] }(00 x\bar{x} ) + \sum_{ x} P_{ X_1 Y_2 A_1 B_2] }(01 x\bar{x} )
++ \sum_{ x} P_{ X_2 Y_1 A_2 B_1] }(01 x\bar{x} ) + \sum_{x} P_{ X_2 Y_2 A_1 B_2 }(01 xx ).
+\end{align}
+Using the ancestral independence of $X_1$, $X_2$, $Y_1$, and $Y_2$, we infer that $P_{X_1 X_2Y_1  Y_2} = P_{X_1} P_{ X_2} P_{Y_1} P_{Y_2}$.  
+
+Dividing through by $P_{X_1} P_{ X_2} P_{Y_1} P_{Y_2}$, we get...
+
+\color{black}
 
 \begin{comment}
 Analysis of the inflated DAG in \cref{fig:BellDagCopy1} shows that  
