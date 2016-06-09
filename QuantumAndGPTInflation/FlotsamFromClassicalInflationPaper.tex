@@ -1,0 +1,594 @@
+%\begin{filecontents}
+%  @CONTROL{apsrev41Control,title="0"%,author="48",editor="1",pages="1",year="0"}
+%\end{filecontents}
+\RequirePackage[l2tabu, orthodox]{nag}
+\RequirePackage{fixltx2e}
+\RequirePackage{fix-cm}
+\PassOptionsToPackage{pdftex,psdextra=true,
+pdfversion=1.7,
+pdfencoding=auto,
+pdfnewwindow=true,
+pdfusetitle=true,
+psdextra=true,
+%pdftoolbar=true,
+%pdfmenubar=true,
+bookmarks=true,
+bookmarksnumbered=true,
+bookmarksopen=true,
+pdfpagemode=UseThumbs,
+bookmarksopenlevel=1,
+pdfpagelabels=false
+}{hyperref}
+\PassOptionsToPackage{usenames,dvipsnames}{xcolor}
+\documentclass[aps,english,superscriptaddress,onecolumn,twoside,longbibliography,pra,floatfix,fleqn,nofootinbib]{revtex4-1}%
+
+
+\usepackage[utf8]{inputenx}% for arXiv use encoding ansinew
+\input{ix-utf8enc.dfu}
+%\usepackage[utf8x]{inputenc}% for arXiv use encoding ansinew
+%\usepackage{utf8mathlite}% custom style sheet for unicode-ish math
+%\usepackage{newunicodechar}
+%\newunicodechar{∫}{\int}
+%\usepackage{unicode-math}
+\usepackage[OT1]{fontenc}
+\usepackage{ucs} %for unichar
+
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[intlimits,fleqn]{amsmath}
+%\usepackage{mathdots}
+\usepackage{graphicx}%
+\usepackage{placeins} %for FloatBarrier
+\usepackage{afterpage} %for FloatBarrier in afterpage wrapper
+%\usepackage{flushend}
+%\usepackage{dblfloatfix}
+\usepackage[normalem]{ulem} %for sout
+\usepackage[raggedright,bf,nooneline]{subfigure}
+\renewcommand{\thesubfigure}{\alph{subfigure}}
+\usepackage{paralist}
+
+%\usepackage{ellipsis}
+\usepackage{float}% (not with floatrow)
+\usepackage{wrapfig}
+%\usepackage{floatrow}
+
+\usepackage{marvosym} % for \Smiley and \Frowny
+\usepackage{setspace}
+\usepackage{array}
+\usepackage{ragged2e}%for justifying text in tables
+\usepackage{tabularx}
+\def\tabularxcolumn#1{m{#1}}
+\usepackage{booktabs}
+%\usepackage{tabulary}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\newcolumntype{J}{>{\justifying\arraybackslash}X}
+\usepackage{adjustbox}
+\usepackage{multirow}
+\newcolumntype{T}[2]{%
+    >{\adjustbox{angle=#1,lap=\width-(#2)}\bgroup}%
+    l%
+    <{\egroup}%
+}
+\newcommand*\rot{\multicolumn{1}{T{90}{1em}}}% no optional argument here, please!
+
+\setcounter{MaxMatrixCols}{30}
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+%\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+%\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{prop}{Proposition}
+\newtheorem{taut}{Tautology}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+%\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+
+% hyperlink stuff
+\usepackage[usenames,dvipsnames]{xcolor}
+\definecolor{ultramarine}{RGB}{63, 0, 255}
+\definecolor{medblue}{RGB}{0, 0, 100}
+\definecolor{panblue}{RGB}{0,24,150}
+\definecolor{carmine}{RGB}{150, 0, 24}
+\usepackage[breaklinks=true]{hyperref}
+\hypersetup{colorlinks,
+linkcolor=carmine,
+citecolor=medblue,
+urlcolor=panblue,
+anchorcolor=OliveGreen}
+%\usepackage{url}
+\usepackage{pdfpages}
+\newcounter{includepdfpage}
+
+\definecolor{purple}{RGB}{128,0,128}
+\definecolor{PURPLE}{RGB}{128,0,128}
+\definecolor{BLACK}{RGB}{0,0,0}
+\definecolor{ultramarine}{RGB}{63, 0, 255}
+\definecolor{medblue}{RGB}{0, 0, 100}
+\definecolor{panblue}{RGB}{0,24,150}
+\definecolor{carmine}{RGB}{150, 0, 24}
+\definecolor{gray}{RGB}{150, 150, 150}
+
+\newcommand{\purp}[1]{{\color{purple}{#1}\color{black}}}
+\newcommand*{\mred}[1]{{\color{RawSienna}{\mathbf{#1}}}}
+\newcommand*{\mblue}[1]{{\color{MidnightBlue}{\ensuremath{#1}}}}
+\newcommand*{\mpurp}[1]{{\color{Plum}{\mathbf{#1}}}}
+\newcommand*{\mgreen}[1]{{\color{OliveGreen}{\mathbf{#1}}}}
+\newcommand*{\tred}[1]{{\color{carmine}{\textbf{#1}}}}
+\newcommand*{\tblue}[1]{{\color{MidnightBlue}{\textbf{#1}}}}
+\newcommand*{\tpurp}[1]{{\color{Plum}{\textbf{#1}}}}
+\newcommand*{\tgreen}[1]{{\color{Sepia}{\textbf{#1}}}}
+
+\newcommand{\quoteby}{\raise.17ex\hbox{$\scriptstyle\sim$}}
+
+\usepackage{verbatim} %for comment command
+\usepackage{units}% for nicefrac
+\usepackage{xfrac}% for sfrac
+\newcommand{\half}[1]{\nicefrac{#1}{2}}
+
+%\usepackage{braket} %provide \bra and \Bra and \set and \Set etc...
+%\newcommand{\brackets}[1]{\lbrace{#1\rbrace}}
+%\newcommand{\brackets}{\Set}
+
+
+
+\usepackage{microtype}
+%\usepackage{MnSymbol}
+%\usepackage{mathabx}
+
+\usepackage[capitalise]{cleveref}
+\Crefname{eqs}{Eqs.}{Eqs.}
+
+\creflabelformat{eqs}{(#2#1#3)}
+\crefrangelabelformat{equation}{(#3#1#4-#5#2#6)}
+%\crefmultiformat{equation}{eqs.~(#2#1#3)}{ and~(#2#1#3)}{, (#2#1#3)}{ and~(#2#1#3)}
+\Crefmultiformat{equation}{Eqs.~(#2#1#3}{,#2#1#3)}{,#2#1#3}{,#2#1#3)}
+\crefrangelabelformat{eqs}{(#3#1#4-#5#2#6)}
+\Crefmultiformat{eqs}{Eqs.~(#2#1#3}{,#2#1#3)}{,#2#1#3}{,#2#1#3)}
+\Crefname{prop}{\textbf{Prop}.}{\textbf{Props}.}
+\Crefname{taut}{\textbf{Taut}.}{\textbf{Tauts}.}
+\Crefname{section}{Sec.}{Secs.}
+
+%\Crefname{ineq}{Ineq.}{Ineqs.}
+%\creflabelformat{ineq}{(#2#1#3)}
+%\crefrangelabelformat{ineq}{(#3#1#4-#5#2#6)}
+%\Crefmultiformat{ineq}{Ineqs.~(#2#1#3}{,#2#1#3)}{,#2#1#3}{,#2#1#3)}
+
+%\Crefname{ineqs}{Ineqs.}{Ineqs.}
+%\creflabelformat{ineqs}{(#2#1#3)}
+%\crefrangelabelformat{ineqs}{(#3#1#4-#5#2#6)}
+%\Crefmultiformat{ineqs}{Ineqs.~(#2#1#3}{,#2#1#3)}{,#2#1#3}{,#2#1#3)}
+
+\newenvironment{topic}[1][]{\par\medskip\noindent\textbf{\rmfamily#1}}{\par\medskip\par}
+
+\newcounter{step}[section]
+\newenvironment{step}[1][]{\refstepcounter{step}\par\medskip
+   \noindent \textbf{Step~\thestep}\rmfamily#1}{\par\medskip\par}
+%\newenvironment{step}[1][Step]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\Crefname{step}{Step}{Steps}
+\creflabelformat{step}{#2#1#3}
+\crefrangelabelformat{step}{#3#1#4-#5#2#6}
+\Crefmultiformat{step}{Steps.~#2#1#3}{,#2#1#3}{,#2#1#3}{,#2#1#3}
+\renewcommand{\thestep}{\arabic{step}}
+
+
+\newcounter{example}[section]
+\newenvironment{example}[1][]{\refstepcounter{example}\par\medskip
+   \noindent \textbf{Example~\theexample}\rmfamily#1}{\par\medskip\par}
+%\newenvironment{step}[1][Step]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\Crefname{example}{Exmpl.}{Exmpls.}
+\creflabelformat{example}{#2#1#3}
+\crefrangelabelformat{example}{#3#1#4-#5#2#6}
+\Crefmultiformat{example}{Exmpls.~#2#1#3}{,#2#1#3}{,#2#1#3}{,#2#1#3}
+\renewcommand{\theexample}{\arabic{example}}
+
+
+\usepackage[intlimits,fleqn]{mathtools} %for mathclap and prescript and more. Learning to love this package. And DeclarePairDelimeter!
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\parens}{\lparen}{\rparen}
+\DeclarePairedDelimiter{\parenths}{\lparen}{\rparen}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\braces}{\lbrace}{\rbrace}
+\DeclarePairedDelimiter{\bracks}{\lbrack}{\rbrack}
+\DeclarePairedDelimiter{\expec}{\langle}{\rangle}
+\newcommand{\brackets}[1]{\braces*{#1}}
+
+%\usepackage{nath} %automatically pair delimiters. Provides \inline and \displayed. Adjusts \frac and /
+
+%\newcommand{\na}{\ensuremath{\mathring{a}}}
+%\newcommand{\nb}{\ensuremath{\mathring{b}}}
+%\newcommand{\nc}{\ensuremath{\mathring{c}}}
+\newcommand{\na}{\ensuremath{\overline{a}}}
+\newcommand{\nb}{\ensuremath{\overline{b}}}
+\newcommand{\nc}{\ensuremath{\overline{c}}}
+
+\newcommand{\naf}{\ensuremath{\lnot a}}
+\newcommand{\nbf}{\ensuremath{\lnot b}}
+\newcommand{\ncf}{\ensuremath{\lnot c}}
+
+\newcommand{\n}[1]{\ensuremath{\overline{#1}}}
+\newcommand{\ot}[1]{\ensuremath{\overline{#1}}}
+\newcommand{\Nor}[1]{\operatorname{\mathsf{Nor}}\!\bracks*{#1}}
+
+\newcommand{\larray}[1]{\ensuremath{\begin{array}{l}#1\end{array}}}
+\newcommand{\lparens}[1]{\ensuremath{\parens*{\larray{#1}}}}
+%\newcommand{\NamedFunction}[2]{\operatorname{\mathsf{#1}}\!\bracks*{#2}}
+%\newcommand{\NamedFunction}[2]{\operatorname{\mathsf{#1}}\!\bracks*{\larray{#2}}}
+\newcommand{\NamedFunction}[2]{\operatorname{\mathsf{#1}}\!\begin{bmatrix*}[l]#2\end{bmatrix*}}
+%\newcommand{\SmallNamedFunction}[2]{\operatorname{\mathsf{#1}}\bracks{#2}}
+\newcommand{\SmallNamedFunction}[3][]{{\operatorname{\mathsf{#2}}_{#1}}\bracks{#3}}
+\newcommand{\nap}{\ensuremath{a'}}
+\newcommand{\nbp}{\ensuremath{b'}}
+\newcommand{\ncp}{\ensuremath{c'}}
+\newcommand{\napp}{\ensuremath{a''}}
+\newcommand{\nbpp}{\ensuremath{b''}}
+\newcommand{\ncpp}{\ensuremath{c''}}
+
+\newcommand{\p}[2][]{{P_{#1}}\parenths{#2}}
+%\newcommand{\pdf}[1]{\operatorname{\mathsf{PDF}}\!\parenths{#1}}
+\newcommand{\pdf}[2][]{{P_{#1}}\parenths{#2}}
+\newcommand{\pdfp}[2][]{{P_{#1}}^{\prime}\parenths{#2}}
+\newcommand{\pfunc}[1]{P_{#1}}
+\newcommand{\An}[2][]{{\mathsf{An}_{#1}}\parenths{#2}}
+\newcommand{\Pa}[2][]{{\mathsf{Pa}_{#1}}\parenths{#2}}
+\newcommand{\Ch}[2][]{{\mathsf{Ch}_{#1}}\parenths{#2}}
+\newcommand{\subgraph}[2][]{{\operatorname{\mathsf{SubDAG}}_{#1}}\parenths[\big]{#2}}
+\newcommand{\ansubgraph}[2][]{{\operatorname{\mathsf{AnSubDAG}}_{#1}}\parenths[\big]{#2}}
+\newcommand{\pasubgraph}[2][]{{\operatorname{\mathsf{PaSubDAG}}_{#1}}\parenths[\big]{#2}}
+\newcommand{\nodes}[1]{\SmallNamedFunction{Nodes}{#1}}
+\newcommand{\edges}[1]{\SmallNamedFunction{Edges}{#1}}
+\newcommand{\namedand}[1]{\SmallNamedFunction{And}{#1}}
+\newcommand{\namedor}[1]{\SmallNamedFunction{Or}{#1}}
+\newcommand{\aindep}{\ensuremath{\mathrel{\mathopen{\Lsh}{\scriptstyle\emptyset}\mathclose{\Rsh}}}}
+
+
+%\newcommand{\subsim}[1]{\substack{\textstyle #1\\[-0.3ex]\sim}}
+%\newcommand{\subsim}{\utilde}
+%\def\subsim#1{\mathord{\vtop{\ialign{##\crcr
+%$\hfil\displaystyle{#1}\hfil$\crcr\noalign{\kern1.5pt\nointerlineskip}
+%$\hfil\tilde{}\hfil$\crcr\noalign{\kern1.5pt}}}}}
+\newcommand{\subsim}[1]{\tilde{#1}}
+
+\newcommand{\cramp}[1]{\ensuremath{\mathord{#1}}}
+%\newcommand{\cramp}[1]{\ensuremath{\mathopen{}#1\mathclose{}}} oldway. New way is better.
+\newcommand{\eql}{\cramp{=}}
+\newcommand{\neql}{\cramp{\neq}}
+
+\usepackage{bm}
+\newcommand{\setlambda}{\bm{\lambda}}
+
+
+%%%% Tobias: to mark my edits and stuff
+%\usepackage{showkeys}
+\usepackage[draft]{fixme}
+\newcommand{\btob}{\color{OliveGreen}}
+\newcommand{\etob}{\color{black}}
+
+
+
+\let\stdsection\section
+%\renewcommand\section{\clearpage\stdsection}%every section new page
+
+
+\begin{document}
+
+
+\title{Notes on inflation technique adapted to quantum and GPT causal models}
+\author{TF, EW, RWS}
+%\date{}                                           % Activate to display a given date or no date
+
+\maketitle
+%\section{}
+%\subsection{}
+
+{\bf What we said in the inflation paper}
+
+\section{Causal inference in quantum theory and in generalized probabilistic theories}\label{sec:classicallity}
+%\section{Quantum Causal Inference and the No-Broadcasting Theorem}\label{sec:classicallity}
+
+
+%In the causal inference problems with latent nodes that we have considered so far, the latent nodes correspond to unobserved random variables. In \emph{quantum} physics, however, the latent nodes may instead represent \emph{quantum systems}. 
+
+Recent work has sought to explore quantum generalizations of the notion of a causal model, termed {\em quantum causal models} [citations].  The causal structures are still represented by DAGs, but (i) whereas classically each latent node of the DAG represents a random variable, quantumly, each latent node represents a quantum system associated to a complex Hilbert space, and (ii) whereas classically the manner in which a node depends causally on its parents is 
+ %and the way in which it depends causally on its parents is 
+ represented by a conditional probability distribution, quantumly, it is represented by a completely-positive trace-preserving linear map.
+  %each latent node represents a quantum system associated to a complex Hilbert space and the way in which it depends causally on its parents is represented by a completely-positive trace-preserving linear map.  
+ Note, however, that a quantum causal model is still ultimately in the service of explaining joint distributions over classical variables.  These variables represent the settings of preparation procedures and the outcomes of measurements that are used in an experiment on quantum systems, and the statistical distribution over such variables is the only experimental data with which one can confront a given quantum causal model.  The basic problem of causal inference for quantum causal models, therefore, concerns the compatibility of a joint distribution over observed classical variables with a given DAG when the model supplementing the DAG is quantum (that is, includes latent nodes that are quantum).  If a joint distribution over observed variables is compatible with a given DAG within the framework of quantum causal models, we say that it is {\em quantumly compatible} with that DAG.  
+ 
+%[provide definition of a quantum causal model?]
+
+One motivation for studying quantum causal models is that they offer a new perspective on an old  problem in the foundations of quantum theory: that of establishing precisely which of the principles of classical physics must be abandoned in quantum physics.  It was shown in~\cite{WoodSpekkens} that Bell's theorem~\cite{bell1966lhvm} can be leveraged to prove that there exist distributions over observed variables (predicted by quantum theory and observed experimentally [citations]) that cannot be accounted for in the Bell scenario under any classical causal model
+%which classically are {\em not} compatible with the causal structure of the Bell scenario (Fig. ??), in the sense that one cannot account for these distributions 
+without doing violence to fundamental principles of causal inference such as Reichenbach's principle and the principle that conditional independences should not be fine-tuned (the principle of faithfulness).  Quantum causal models, on the other hand, {\em can} account for these distributions in the Bell scenario.  In other words, although these distributions are not {\em classically} compatible with the Bell scenario, they are {\em quantumly} compatible with it.  Furthermore, such quantum causal explanations suggest [cite:LeiferSpekkens, ParadigmKinematicsAndDynamics, SomethingByHenson?] that quantum theory is perhaps best understood as revising our notions of the nature of unobserved entitites, how one represents causal dependences thereon and incomplete knowledge thereof, while 
+%the innovation of quantum theory may be best understood as an innovation to how one represents incomplete knowledge of unobserved entities (the latent nodes), while 
+nonetheless {\em preserving} the spirit of Reichenbach's principle and the principle of no fine-tuning. 
+% is represented while offer the possibility of securing causal explanations of such distributions while maintaining the spirit of these principles.
+
+Another motivaton for studying quantum causal models is a practical one.  Violations of Bell inequalities have  been shown to constitute resources for information processing [citations].   To achieve such an advantage, however, it is necessary that a given information processing task can be recast in such a way that the causal structure of the protocol mirrors that of the Bell scenario.  Many tasks, however, may not be amenable to being cast in this form.  And yet the Bell scenario is not the only DAG for which there is a quantum-classical separation, that is, for which there exist distributions that are quantumly but not classically compatible with the DAG. 
+ %one can identify distributions that are quantum compatible but  where there is a separation between the distributions consistent with a quantum causal model and those consistent with a classical causal model. 
+  It has been shown that such a separation also exists 
+%not just for the Bell scenario, but for other causal structures as well, such as
+ in the bilocality scenario [Branciardetal]\cite{fritz2012bell} and the triangle scenario~\cite{fritz2012bell}, and it is likely that there will be many more DAGs for which a quantum-classical separation can be found.  The hope, therefore, is that for any DAG where one can identify a quantum-classical separation, the separating distributions may constitute a resource for information processing. 
+ %achieving a quantum-classical separation in novel DAGs might, like distributions that violate the Bell inequalities, be resources for information processing.
+
+%In a causal model, each latent node of the causal structure represents a random variable and the way in which a node depends causally on its parents is represented by a conditional probability distribution.  In the field of quantum foundations, however, there has recently been interest in defining a quantum generalization of the notion of a causal model---a quantum causal model---wherein the latent nodes instead represent \emph{quantum systems} and the way in which a node depends causally on its parents is represented by a completely-positive trace-preserving map. 
+
+%Whenever this is allowed, we say that the DAG represents a \tblue{quantum causal structure}. Some quantum causal structures are famously capable of generating distributions over the observed variables that would not be possible classically\footnote{The incompatibility of quantum correlations with practical causal structure which generates them is known as Bell's theorem \cite{bell1966lhvm}. The particular distributions which violate Bell inequalities are known as nonlocal correlations~\cite{Brunner2013Bell}. Although the term suggests the existence of nonlocal interactions, in the sense that the actual causal structure may be different from the hypothesized one, this interpretation is at odds with the fact that no nonlocal interactions have been observed in nature, implying that their presence would require fine-tuning~\cite{WoodSpekkens}. A less problematic alternative conclusion from Bell's theorem is the impossibility to model quantum physics in terms of the usual notions of ``classical'' probability theory.}.
+
+For both foundational and practical reasons, therefore, there is a strong motivation to find examples of DAGs that exhibit a quantum-classical separation.
+%and distributions over its observed variables such that the distribution is compatible with a quantum causal model on the DAG but incompatible with a classical causal model. 
+%, or to show that there is no separation. 
+However, this is by no means an easy task.
+The set of distributions that are quantumly compatible with a given DAG is actually very similar to the set of distributions that are classically compatible with that DAG~\cite{pusey2014gdag,fritz2012bell}. For example, both the classical and quantum sets respect all the conditional independence relations among observed nodes that are implied by the $d$-separation relations of the DAG~\cite{pusey2014gdag}.
+% It is an interesting problem to find distributions that are realizable quantumly but not classically on a given DAG, or to show that there are no separation. 
+%However, this is by no means an easy task. For example, 
+Furthermore, recent work has found that set of distributions that are quantumly compatible with a given DAG satisfy many of the entropic inequalities that hold classically~\cite{pusey2014gdag,Chaves2015infoquantum,ChavesNoSignalling}. To date, no quantum-classical separation has been identified where the separation is achieved by
+ %distribution has been found to violate 
+ a Shannon-type entropic inequality on observed variables that is derived from the Markov conditions on all nodes \cite{chaves2012entropic,fritz2012bell}. Fine-graining the scenario by conditioning on root variables (``settings'') leads to a different kind of entropic inequality, and these have proven somewhat quantum-sensitive \cite{braunstein1988entropic,SchumacherInequality,chaves2014novel}. Such inequalities are still limited, however, in that they only apply \sout{in the presence of observable root nodes} \color{purple} to DAGs that include root nodes that are observed\color{black}\footnote{Rafael Chaves and E.W.~are exploring the potential of entropic analysis based on \color{purple} distributions that are \color{black} conditioned on non-root observed nodes. This generalizes the method of entropic inequalities, and might be capable of providing much stronger entropic witnesses.}, and they still fail to witness cases of classical incompatibility of certain distributions with a given DAG (where the incompatibility is witnessed by stronger techniques)~\cite{chaves2014novel,fritz2012bell}.
+
+%Some constraints on compatibility can be proven to apply not only to quantum generalizations of causal models, but also to {\em postquantum} generalizations as well~\cite{pusey2014gdag}. 
+
+In addition to quantum generalizations of causal models, one can define generalizations for other operational theories that are neither classical nor quantum, as was done in Henson, Lal and Pusey~\cite{pusey2014gdag}. 
+%also define {\em postquantum} generalizations thereof, as was done in Henson, Lal and Pusey~\cite{pusey2014gdag}.  
+%The latter notion is
+Such generalizations are formalized using the framework of {\em generalized probabilistic theories} (GPTs) [citations], a framework that is sufficiently general to describe any operational theory that makes statistical predictions about the outcomes of experiments and respects some weak constraints.  Some constraints on compatibility can be proven to apply not only to classical and quantum causal models, but to any theory expressible in this framework.  %{\em postquantum} generalizations as well.  
+In the terminology of Ref.~\cite{pusey2014gdag},  such constraints on compatibility constitute {\em theory-independent} limits on correlations.  These are of interest because they clarify what any conceivable theory of physics can achieve in a given causal scenario.  
+
+Furthermore, by knowing which constraints hold in the GPT framework, one can seek to identify DAGs that exhibit a GPT-classical separation or a GPT-quantum separation, that is, to identify DAGs for which there exist distributions that are GPT compatible but not classically compatible (respectively not quantumly compatible) with the DAG.  
+% one can identify DAGs that exhibit a GPT-classical separation, that is, for which there exist distributions that are GPT compatible but not classically compatible with the DAG.  
+ 
+Consider GPT-classical separation first.  Many examples of DAGs exhibiting such a separation were provided in Ref.~\cite{pusey2014gdag}.   Of the classes of DAGs with six or fewer nodes identified therein as having the potential to be interesting (by not satisfying a sufficient condition for being uninteresting), all but three classes were demonstrated to indeed be interesting.  Pienaar recently demonstrated that the three remaining classes are interesting as well [citation].  In Appendix ??, we show how the inflation technique provides an alternative means of demonstrating the interestingness of one of these three classes. 
+%can also be used to demonstrate a GPT-classical separation for one of these three cases. 
+
+%Finally, one can seek to identify DAGs that exhibit a separation between GPT causal models and quantum causal models.  
+
+GPT-quantum separations are harder to find. The Bell scenario is known to manifest such a separation, through the work of Tsirelson and Popescu and Rohrlich [citations].  The identification of such stronger-than-quantum correlations in the Bell scenario has been a focus of much foundational research in recent years.  Traditionally the foundational question has always been: why does quantum theory predict correlations that are {\em stronger} than one would expect classically?  But now there is a new question being asked: why does quantum theory predict correlations that are {\em weaker} than those predicted by other GPTs?  There has been some interesting progress in identifying physical principles that can pick out the precise degree of correlations that are exhibited by quantum theory [cite:informationcausality, macroscopiclocality, etcetera].  Further opportunities for identifying such principles would be useful.  This motivates a classification of DAGs into those which have a quantum-classical separation, those which have a GPT-quantum separation and those which have both.
+% is likely to yield further insights into the principles underlying the quantum formalism.  
+
+%A slightly easier problem than characterizing 
+
+%{\color{purple}  Mention that the distinction between whether the nodes of the DAG represent variables or quantum algebras or post-quantum things is something that is part of the causal parameters, not the causal structure.  We must therefore revise our description of a causal model to accommodate quantum and post-quantum causal models.  Specifically, we drop the claim that the nodes are variables.  Fortunately, the notion of observed versus latent and of the cardinality of an object can be made theory-independent. ---RWS}
+
+The difference between classical, quantum and GPT causal models is the manner in which latent nodes are represented as well as the manner in which the causal influence of a latent node on other nodes is represented.  (It shares, however, the feature that the entitites that represent such causal influences mirror the causal structure---for instance, in all cases, the state of a pair of root nodes in the DAG is presumed to factorize. )
+%wo subgraphs nodes that are ancestrally independent  in the graph are always represented as factorizing 
+% Unlike other techniques for deriving constraints on compatibility, the inflation technique considers only the {\em observed nodes}, so it is not clear, at first glance, how it could hope to see such differences. 
+
+%Henson, Lal and Pusey\cite{pusey2014gdag} sought to derive causal compatibility inequalities that are necessary conditions on compatibility relative to {\em any} GPT (including classical and quantum theories).  This motivated them to avoid any reference to the latent nodes...
+
+Henson, Lal and Pusey\cite{pusey2014gdag} were able to identify constraints on compatibility that hold for {\em any} GPT by  avoiding making reference to the latent nodes of the DAG (which are treated differently in different GPTs) and only making reference to the observed variables in the DAG.   
+%In [Henson, Lal, Pusey], it was shown that under the constraints that ..., one can derive causal compatibility inequalities that are necessary conditions on compatibility relative to {\em any} GPT. 
+
+The inflation technique also only makes reference to the observed nodes in a DAG.  In some cases, the inequalities one thereby derives hold for the GPT notion of compatibility.  Indeed, the inequality for the triangle scenario that we presented in Eq. ?? is the probabilistic version of the one that Henson Lal and Pusey derive in their article, and---as we already noted---in this case, their proof technique can be understood as an instance of the inflation technique. 
+
+Nonetheless, the inflation technique also yields inequalities that hold only for the {\em classical} notion of compatibility. 
+%are necessary conditions for compatibility with a {\em classical} can  distinguish different types of causal model. 
+ It is for this reason that it can be used to derive inequalities that are quantumly violated.  For instance, in Sec. ?? and Appendix ??, we have shown how the inflation technique can be used to derive Bell inequalities, which clearly admit of quantum violations. 
+ % In Appendix ??, we demonstrate that the inflation technique can be used to derive {\em all} the Bell inequalities. 
+The inflation technique can also be used to derive inequalities for the Triangle scenario that are quantumly violated.
+Specifically, our technique is able to reproduce the result shown by Fritz [citation], that a particular distribution, inspired by the Bell example, is quantumly but not classically compatible with the triangle scenario.  \color{purple} [R: Elie: should we say this here or leave it for some putative future paper with TC?] \color{black}
+
+It is possible that one could generalize the inflation technique to derive inequalities that can achieve a GPT-quantum separation. This, however, requires a careful definition of a quantum causal model and is beyond the scope of this article.  Nonetheless, we will note below in which inflation in the quantum context will differ from its classical counterpart. 
+%For the moment, however, we 
+
+Our main focus here, however, will be to explain 
+%We here restrict ourselves to explaining 
+what distinguishes applications of the inflation technique that yield inequalities for GPT compatibility from those that yield inequalities for classical compatibility.   The distinction rests on a structural feature of the inflated DAG, which we now define.
+
+%As noted earlier in this article, the inflation technique also refers {\em only} to the observed nodes in a DAG.  Indeed, this is one of its strengths.  \sout{However, this same fact may suggest, at first glance, that the technique will only causal compatibility inequalities of the sort derived by HLP, that is, inequalities that are necessary conditions for compatibility in {\em all} GPTs.  At first glance, therefore, it might seem that the inflation technique will be unable to distinguish classical compatibility, quantum compatibility, and GPT compatibility. }
+
+%This is clearly not a concern given that we ruled out PR-box correlations. Also we witness the incompability of Tobias's distribution with the triangle scenario by solving the satisfiability problem.  How can that be?  How does one understand that?
+
+
+\begin{definition}
+A DAG $G'\in\SmallNamedFunction{Inflations}{G}$, is said to contain an \tblue{inflationary fan-out} if it contains a latent node that has two or more children that are copy-index equivalent.  
+\end{definition}
+
+The inflations of the triangle DAG that are depicted in \cref{fig:TriFullDouble} and \cref{fig:Tri222} contain one or more inflationary fan-outs, as does the inflation of the Bell DAG that is depicted in \cref{fig:BellDagCopy1}.  On the other hand, the simplest inflation of the triangle DAG that we consider in this article, that of \cref{fig:simplestinflation}, does not contain any inflationary fan-outs.
+%Examples of inflated DAGs that exhibit inflationary fan-out are \cref{fig:TriFullDouble}, \cref{fig:Tri222},  and \cref{fig:BellDagCopy1}, while an example of an inflated DAG that does not is ~\cref{fig:simplestinflation}.
+
+%Some inflations, such as the one of~\cref{fig:simplestinflation}, do not require such broadcasting. By removing $A_1$ from the broadcasting inflation of \cref{fig:simpleinflation} we obtain the non-broadcasting inflation of \cref{fig:simplestinflation}. In \cref{fig:simplestinflation} the channel from $X$ to $A$ is merely \emph{redirected} from it original configuration in \cref{fig:TriMainDAG}; there is no broadcasting of information required.
+
+In the classical context, for every inflationary fan-out, all of the copy-index-equivalent children of the latent node are required to causally depend on the latent node in precisely the same way as their counterparts in the original DAG did.  However, the only maps that can achieve such a duplication of dependences, known as {\em broadcasting maps}, are not physically realizable, as was famously shown for quantum theory in Ref. [citation Barnum et al.] and generalized to GPTs in Ref. [Lefier, Barnum, Barrett, Wilce].  These no-broadcasting results are related to the monogamy of entanglement in quantum theory [cite:monogamypapers] (see also the discussion of the quantum conditional problem in Ref. [LeiferSpekkens]).  Mathematically, there {\em are} linear maps that can achieve broadcasting, as shown in \cref{Coecke2011}, but if one used these to define the inflation of a quantum causal model, then distributions over certain sets of variables in the inflated DAG (those containing the children of an inflationary fan-out) might fail to be nonnegative.  Such inflations might still be useful as a mathematical tool for ultimately deriving causal compatibility inequalities on the original DAG, but one would need to proceed differently from the way we have proceeded in this article: whereas we have here assumed that all joint valuations of the set of observed variables on the inflated DAG are nonnegative, one could not impose such a constraint for the type of quantum inflation just described.  Rather than demanding nonnegativity of the full joint distribution, one could only demand nonnegativity for distributions on sets of variables that did not include multiple children of an inflationary fan-out.  Note that the inflated DAG in such cases could not be interpreted as a causal structure.  Rather, it woudl be interpreted as describing multiple different {\em counterfactual} scenarios within which the causal dependences are the same. 
+
+%From this perspective, a broadcasting inflated DAG is an abstract logical concept, as opposed to a feasible physical construct. However, this would result in a joint distribution over all observable variables that may have some negative probabilities, and one cannot expect~\cref{eq:nonnegativity} to hold in general. But one can still try to reformulate the marginal problem so as to refer only to the existence of joint distributions on non-broadcastings sets rather than the existence of a full joint distribution from which the marginal distributions might be recovered. Here, a set $\bm{U}$ of observable nodes is non-broadcasting if $\An{\bm{U}}$ does not contain two distinct copies of a node both sharing a common latent parent.
+
+An analysis along these lines has already been carried out successfully by \citet{Chaves2015infoquantum} in the derivation of entropic inequalities that capture quantum compatibility. Although \citet{Chaves2015infoquantum} do not invoke the inflation technique, they do seem to employ a similar type of structure to model the conditioning of an observed variable on a ``setting'' variable, a structure that we would describe as an inflated DAG that has no inflationary fan-outs. \citet{Chaves2015infoquantum} take pains to avoid including full joint probability distributions in any of the entropic inequalities they apply to this structure \color{purple} {R: why must they take pain to do so when the DAG has no inflationary fan-out?]\color{black}, precisely as we would want to do in constructing inequalities on our inflated DAG, and they successfully derive entropic inequalities for quantum compatibility. But so far, no inequalities polynomial in the probabilities have been derived using this method.
+
+
+\section{Flotsam from the Inflation paper}
+
+The reason that the inflation technique can see the difference is that it does not confine its attention to the observed nodes of the original DAG, but considers also the observed nodes of the inflated DAG.   Regardless of the theory one considers, ancestral independence always yields factorization of probabilities. 
+
+
+The assumption that two sets of variables in the inflated DAG that are copy-index equivalent can both causally depend on their parents in the same way that they could have in the original DAG {\em does not hold} for broadcasting DAGs, because of the quantum and GPT no-broadcasting theorems.
+
+\color{purple} Suppose that quantum systems $B$ and $C$ both depend causally on quantum system $A$.  The two dependences are represented by quantum channels from $A$ to $B$ and from $A$ to $C$ respectively.  However, not every pair of channels is permitted.  A well-known result known as the {\em quantum no-broadcasting theorem} establishes that the two channels cannot both be the identity channel.  In fact, if one of the channels is the identity channel, then the other is a so-called deletion channel wherein the output does not depend at all on the input.  (The latter result is equivalent, through the Choi-isomorphism, to the fact that pure entanglement is monogamous.)  Even if neither channel is the identity channel, the amount of quantum information transmitted down one channel necessarily trades off with the amount transmitted down the other. [Are there good references for this?]
+\color{black}
+
+\color{purple} [My stuff w Jon Barrett may be considered a solution of the quantum conditionals problem when the conditioning system is a complete common cause.  In this case, the condition is simply commutativity of the quantum conditionals.]
+
+\color{cyan}
+In a quantum causal model, a specification of the causal structure includes a specification of the dimension of Hilbert space of the quantum system associated to each node, and a specification of the set of causal parameters specifies, for each node, the quantum channel from the tensor product of the operator spaces associated to the node's parents to the operator space of the node.  In the case of root nodes, the parents are the null set so that the quantum channel is simply a preparation of a quantum state.  We will denote a quantum channel from a system $X$ to a system $Y$ as $\mathcal{E}_{Y|X}: \mathcal{L}(\mathcal{H}_X) \to \mathcal{L}(\mathcal{H}_Y)$. Therefore, a given set of causal parameters has the form
+\begin{align}
+ \{ \mathcal{E}_{A|\Pa[G]{A}} : A \in \SmallNamedFunction{Nodes}{G} \}.
+\end{align}
+A quantum causal model $M$ constitutes a causal structure together with a set of causal parameters, $M := ( G,   \{ \mathcal{E}_{A|\Pa[G]{A}} : A \in \SmallNamedFunction{Nodes}{G} \})$.
+
+A quantum causal model specifies a joint distribution over all observed variables in the DAG by tracing over the latent systems,
+\begin{align}\label{MarkovObservedQuantum}
+P_{\SmallNamedFunction{ObservedNodes}{G}} =  {\rm tr}_{\SmallNamedFunction{LatentNodes}{G}} \bigotimes_{A\in \SmallNamedFunction{Nodes}{G}} \mathcal{E}_{A|\Pa[G]{A}},
+\end{align}
+where the tensor product represents Hardy's causaloid product. Actually, there is a constraint on what quantum channels can appear here.  For any two nodes, if we consider the complete common cause of the two, then the quantum channels from this common cause to each of the nodes is such that their Choi-isomorphic states commute.
+
+
+
+A given distribution over observed variables is said to be \tblue{quantum compatible} with a given causal structure if there is some choice of the causal parameters that yields the given distribution via Eq.~\eqref{MarkovObservedQuantum}.  Note that a given set of marginal distributions over various subsets of observed variables is said to be quantum compatible with a given causal structure if and only if the joint distribution over observed variables that yields these marginals is quantum compatible with the causal structure.
+
+Why should {\em any} of the inequalities we derive continue to hold for GPT causal models when the definition of an inflation of a classical causal model is different from that of a GPT causal model?  I think the answer is this: as long as it is unambiguous how the causal dependences in the inflated GPT model are determined by those in the original GPT model (i.e., one does not need to specify how to broadcast a state in the model), then the analogues of lemma~\ref{mainlemma} and corollary~\ref{maincorollary} for quantum compatibility can be proven to hold.  Therefore, for certain types of inflations of a DAG, it is possible to convert causal compatibility inequalities on the inflated DAG into causal compatiblity inequalities on the original DAG.  
+
+But this introduces a new question: which techniques for deriving causal compatibility inequalities on the inflated DAG are true not only of classical causal models, but of GPT causal models as well?  I believe that if one uses a solution of the marginal problem on the inflated DAG, together with ancestral independences to factorize some of the distributions on the pre-injectable sets, then the causal compatibility inequalities one obtains are true for GPT compatibility. 
+
+Evidently, if one derived a causal compatibility inequality using $d$-separation criteria that made reference to latent variables, then this would not apply to GPT compatibility.  Similarly if one uses copy-index equivalence relations to derive the causal compatibility inequality.
+
+\color{black}
+
+
+
+Because quantum and GPT causal models also presume that a DAG describes the causal structure, the notion of the inflation of a DAG continues to apply to these cases.  However, for a DAG $G$ and an inflation $G'$ thereof, our definition of the $G \to G'$  inflation of a causal model {\em has} presumed that the latent nodes are random variables.  Consequently, one must generalize this definition to the quantum case as follows.
+
+
+
+
+%We want to distinguish those inequlaities that hold for all GPTs and those that hold only for classical copatibility.
+
+%Note: there are two separate motivations for discriminating the broadcast and nonbroadcast DAGs: the problem of finding future-proof inequalities, and the problem of separating classical and nonclassical. 
+
+%Alternative narrative:
+%Note that inflation recovers inequalities that hold for all GPTS, but also some that only hold classically and are violated by GPTs.
+
+%, so it is not clear, at first glance, how it could hope to see such differences. 
+
+
+
+%Can't yet distinguish quantum from GPT.
+
+
+******
+
+We hope that causal compatibility inequalities derived from broadcasting inflated DAGs will provide an additional tool for witnessing certain quantum distributions as non-classical. For example due to the results of~\cref{sec:Bellscenarios}, it seems conceivable that these inequalities will be much stronger and provide much tighter constraints than entropic inequalities.
+
+It is worth pondering how it is possible that some of the inequalities that can be derived via inflation---such as Bell inequalities---have quantum violations, i.e.,~why one cannot expect them to be valid for all quantum distributions as well. The reason for this is that duplicating an outgoing edge in a DAG during inflation amounts to \tblue{broadcasting} the value of the random variable. For example, while in the triangle scenario, ~\cref{fig:TriMainDAG}, the information about $X$ in~\cref{fig:TriMainDAG} is ``sent'' to $A$ and $C$, in the inflated DAG of \cref{fig:simpleinflation}, the information about $X_1$ is sent to $A_1$ \emph{and} $A_2$ and $C$. Since quantum theory satisfies a no-broadcasting theorem~\cite{NoCloningQuantum1996,NoCloningGeneral2006}, one cannot expect such broadcasting to be possible quantumly. More generally, there is an analogous no-broadcasting theorem in various alternatives to quantum theory; indeed it is a generic feature of so-called generalized probabilistic theories (GPTs) \cite{SpekkensToyTheory,NoCloningGeneral2006,Barnum2012GPT,Janotta2014GPT}.
+%, so that the same statement applies in many theories other than quantum theory. 
+As a consequence, a quantum or GPT causal model on the original DAG does not generally inflate to a ``quantum inflated model'' or ``GPT inflated model'' on the inflated DAG. 
+
+Some inflations, such as the one of~\cref{fig:simplestinflation}, do not require such broadcasting. By removing $A_1$ from the broadcasting inflation of \cref{fig:simpleinflation} we obtain the non-broadcasting inflation of \cref{fig:simplestinflation}. In \cref{fig:simplestinflation} the channel from $X$ to $A$ is merely \emph{redirected} from it original configuration in \cref{fig:TriMainDAG}; there is no broadcasting of information required.
+
+\begin{definition}
+%$G'\in\SmallNamedFunction{Inflations}{G}$ is \tblue{non-broadcasting} if every latent node in $G'$ has at most one copy of each $A\in\SmallNamedFunction{Nodes}{G}$ among its children.
+A DAG $G'\in\SmallNamedFunction{Inflations}{G}$, is said to be \tblue{broadcasting} if there exists a latent node in $G'$ that has two or more children that are copy-index equivalent.  Otherwise, it is said to be \tblue{nonbroadcasting}. 
+%more than one copy of some node of $G$ a given node from each $A\in\SmallNamedFunction{Nodes}{G}$ among its children.
+\end{definition}
+
+\color{purple} The broadcasting terminology stems from the fact that copy-index-equivalent variables in an inflated DAG must have the same statistical dependence on their parents, such that the map from a distribution on the parents to a distribution on the copy-index-equivalent variables is one that yields the same marginal distribution for each such variable, together with the fact that such maps have been termed {\em broadcasting maps} in the quantum context [cite: nobroadcastingtheorem].\color{black}
+
+It follows that every quantum causal model can be inflated to a non-broadcasting DAG, so that one obtains a quantum and general probabilistic analogue of Lemma~\ref{mainlemma} in the non-broadcasting case. Constraints derived from non-broadcasting inflations are therefore valid also for quantum and even general probabilistic distributions. In the specific case of the entropic monogamy inequality for the Triangle scenario, i.e. \cref{eq:monogomyofcorrelations} here, this was originally noticed in Ref.~\cite{pusey2014gdag}. Another example is \cref{eq:polymonogamy}, which was derived from the non-broadcasting inflation of \cref{fig:TriDagSubA2B1C1}. \cref{eq:polymonogamy} too, therefore, is a necessary criterion for compatibility with the Triangle scenario even when the latent nodes are allowed to carry quantum or general probabilistic systems.
+% This confirms our numerical computations, which indicated that~\eqref{eq:polymonogamy} does not have any quantum violations. The same is true for monogamy of correlations, per \cref{eq:monogomyofcorrelations}.
+Since the perfect-correlation distribution considered in~\cref{eq:ghzdistribution1} violates both of these inequalities, it evidently cannot be generated within the Triangle scenario even with quantum or general probabilistic states on the hidden nodes. This was also pointed out in Ref.~\cite{pusey2014gdag}.
+
+%\begin{align}\label{eq:nonbroadcastinginflationDAG}
+%G'\in\SmallNamedFunction{NonBroadcastingInflations}{G} \quad\text{ iff }\quad \forall{\text{latent }A_i\in G'}\; \Ch[G']{A_i} \text{ is an irredundant set.}
+%\end{align}
+
+On the other hand, by intentionally using broadcasting in an inflated DAG, we can specifically try to witness certain quantum or general probabilistic distributions as non-classical. This is exactly what happens in Bell's theorem.
+
+%  We also find it useful to define the notion of a non-broadcasting subset of nodes within some larger broadcasting inflated DAG.
+% Let's define any pair of redundant nodes which share a latent parent to be a \tblue{fundamental broadcasting pair}. An inflated DAG is non-broadcasting if it does not contain any fundamental broadcasting pairs. Similarly, a set of nodes $\bm{U}$ is a \tblue{non-broadcasting set} iff $\An[G']{\bm{U}}$ is free of any fundamental broadcasting pairs.
+
+%A set of nodes $\bm{U}$ is a \tblue{non-broadcasting set} iff $\ansubgraph[G']{\bm{U}}$ is a non-broadcasting inflated DAG. Any inference about the original DAG which can be made by referencing exclusively to non-broadcasting sets hold in both the classical and quantum paradigms. Broadcasting inflated DAGs are therefore especially useful for deriving criteria which distinguish quantum and classical probability distributions, but we anticipate them to be valuable for broader causal inference tasks as well.
+
+% It is worth emphasizing that broadcasting the values of hidden variables %which are predicated on multiple counterfactual or heterofactual events 
+%are strictly classical constructs. If the latent node in the Bell scenario in \cref{fig:NewBellDAG1} is allowed to be a quantum resource $\mathcal{H}^{d_A\otimes d_B}$, for example, then broadcasting gedankendistributions such as $\pdf{A|x , A|\n{x},...}$ or $\pdf{A_1,A_2,...}$ are \tblue{physically prohibited} if the quantum state is suitably entangled.
+
+% More precisely, quantum states are governed by a no-broadcasting theorem \cite{NoCloningQuantum1996,NoCloningGeneral2006}: If half the state is sent to Alice and she performs some measurement on it, she fundamentally perturbs the state by measuring it. Post-measurement, that half of the state cannot be ``re-sent" to Alice, that she might re-measure it using a different measurement setting. As a consequence of the no-broadcasting theorem, in the inflated DAG picture a quantum state which was initially available to a single party cannot be distributed both to Alice-copy-\#1 and Alice-copy-\#2 in the way a classical hidden variable could be. 
+
+% This means that considerations on inflated DAGs cannot be used to derive quantum causal infeasibility criteria whenever a gedankenprobability presupposes the ability to broadcast a latent node's system. Broadcasting and non-broadcasting sets of variables are distinguished per \cref{eq:nonbroadcastinginflationDAG}.
+
+%When analyzing GPT causal structures one may not assume that a joint probability distribution over observable variables is universally nonnegative if the set of observable variables has simultaneous meaning only under broadcasting of latent variables. This is in direct contrast to \cref{step:generateineqs} in \cref{sec:mainalgorithm}. 
+
+%Not every inflation requires broadcasting, however, and hence not every gedankenprobability is physically prohibited by quantum theory. 
+%An inflated DAG is a \tblue{non-broadcasting inflation} whenever the children of every individual node in the inflated DAG $G'$ map injectively to the corresponding children of the mapped node in the original DAG $G$, i.e. $dmap\parenths*{\Ch[G']{X}}\subseteq\Ch[G]{dmap\parenths*{X}}$ for all $X\in\nodes{G'}$. 
+% \cref{fig:TriDagSubA2B1C1} is an example of a non-broadcasting inflation.
+
+Even when using broadcasting inflated DAGs, it may still be possible to derive inequalities valid for quantum distributions if one appropriately the nonnegativity inequalities in the marginal problem, e.g. such as \cref{eq:nonnegativity}. The modification would replace demanding nonnegativity of the full joint distribution with instead demanding the nonnegativity of only quantum-physically-meaningful marginal probability distributions. 
+
+Even when using broadcasting inflated DAGs, it may still be possible to derive inequalities valid for quantum distributions if one appropriately modifies \cref{sec:ineqs} to generate a different initial set of nonnegativity inequalities. This new set should capture the nonnegativity of only quantum-physically-meaningful marginal probability distributions. Indeed, a quantum causal model on the original DAG can potentially be inflated to a quantum inflated model on the inflated DAG in terms of the logical broadcasting maps of \citet{Coecke2011}. From this perspective, a broadcasting inflated DAG is an abstract logical concept, as opposed to a feasible physical construct. However, this would result in a joint distribution over all observable variables that may have some negative probabilities, and one cannot expect~\cref{eq:nonnegativity} to hold in general. But one can still try to reformulate the marginal problem so as to refer only to the existence of joint distributions on non-broadcastings sets rather than the existence of a full joint distribution from which the marginal distributions might be recovered. Here, a set $\bm{U}$ of observable nodes is non-broadcasting if $\An{\bm{U}}$ does not contain two distinct copies of a node both sharing a common latent parent.
+
+An analysis along these lines has already been carried out successfully by \citet{Chaves2015infoquantum} in the derivation of entropic inequalities that are valid for all quantum distributions. Although \citet{Chaves2015infoquantum} do not invoke inflated DAGs, they do seem to employ a similar type of structure to model the conditioning of a variable on a ``setting'' variable, and this also gives rise to non-broadcasting sets. \citet{Chaves2015infoquantum} take pains to avoid including full joint probability distributions in any of their initial entropic inequalities, precisely as we would want to do in constructing our initial probability inequalities, and they successfully derive quantumly valid entropic inequalities. But so far, no inequalities polynomial in the probabilities have been derived using this method.
+
+% Our current inflated DAG method can be employed to derive causal infeasibility criteria for general causal structures, thus generalizing Bell inequalities somewhat. From a quantum foundations perspective, however, generalizing Tsirelson inequalities \cite{Tsirelson1980,Brunner2013Bell}---the ultimate constraints on what quantum theory makes possible---is even more desirable. 
+
+A tight set of inequalities characterizing quantum distributions would provide the ultimate constraints on what quantum theory allows. Deriving additional inequalities that hold for quantum distributions is therefore a priority for future research.
+
+
+
+
+\purp{Mention relation to the quantum conditionals problem. Say something about how we anticipate deriving new inequalities that might be violated by quantum theory---RWS.}
+% like Tsirelson inequalities \cite{Tsirelson1980,Brunner2013Bell}, i.e. constraints which are satisfied by all distributions realizable from a given quantum causal structure. 
+
+
+\section{Causal compatibility inequalities for marginal possibilistic assignments}
+
+In \cref{sec:TSEM}, we showed that for any given marginal scenario, one can derive constraints on the marginal probabilistic assignments from logical relations that hold among the marginal deterministic assignments.  We also noted that the idea was inspired by Hardy's version of Bell's theorem, which makes reference only to which valuations of the observed variables are possible and which are impossible.  That is, Hardy-type arguments can be understood as deriving constraints on the marginal {\em possibilistic} assignments from logical relations that hold among the marginal deterministic assignments.   To get {\em all} constraints that follow from logical tautologies in a given marginal scenario, it suffices to follows the prescription of \cref{sec:TSEM}, with one alteration: replace the application of the union bound to a possibilistic analogue thereof.  
+
+First, we formalize the notion of a marginal possibilistic assignment.  Let $S_{\bm{U}}(\bm{u})$ denote the possibilistic assignment to the joint valuation $\bm{u}$ of the subset of observed variables ${\bm U}$.  Specifically, we set $S_{\bm{U}}(\bm{u})=0$ if  $P_{\bm{U}}(\bm{u})=0$ and we set $S_{\bm{U}}(\bm{u})=1$ if  $P_{\bm{U}}(\bm{u})\ne 0$.  
+
+Next, recall that if a logical tautology can be expressed as
+\begin{align}
+    \SmallNamedFunction{}{E_0} \implies \SmallNamedFunction{}{E_1} \lor \ldots \lor \SmallNamedFunction{}{E_n},
+\end{align}
+then the union bound implies that 
+\begin{align}
+\p{E_0}\leq \sum\limits_{j=1}^n{\p{E_j}}.
+\end{align}
+The possibilistic analogue of the union bound is the inference from Eq.~\eqref{eq:inference} to
+\begin{align}
+S(E_0)\leq  \max_{j \in \{1,\dots, n\}} S(E_j).
+\end{align}
+
+For instance, in the marginal problem where the variables are $\{ A,B,C\}$, with each being binary, and the contexts are the pairs $\{AB\}$, $\{AC\}$, and $\{BC\}$, we considered in \cref{sec:TSEM} the tautology
+\begin{align}
+ \bracks{\mgreen{A \eql 1}, \mgreen{C \eql 1}} \implies \bracks{\mgreen{A \eql 1}, B \eql 1} \lor \bracks{B \eql 0, \mgreen{C \eql 1}},
+\end{align}
+and derived thereform the following constraint on marginal probability assignments 
+\begin{align}
+	P_{AC}(\mgreen{1 1}) \leq P_{AB}(\mgreen{1} 1) + P_{BC}(0 \mgreen{1}).
+\end{align}
+The corresponding constraint on marginal possibilistic assignments is simply 
+\begin{align}\label{eq:possmargconstraintV1}
+	S_{AC}(\mgreen{1 1}) \leq \text{max}\{ S_{AB}(\mgreen{1} 1) ,S_{BC}(0 \mgreen{1})\}.
+\end{align}
+
+%We can leverage this possibilistic constraint to derive a causal compatibility inequality that is possibilistic.  
+
+Ancestral independences also imply factorization for possibilistic assigments.  For example, recall that the DAG of Fig.~\ref{fig:TriDagSubA2B1C1v2} has $\{ A_2, B_1\}$ as a pre-injectable set, where $A_2$ and $B_1$ are ancestrally independent.  This implies that if a given valuation $[A_2=a]$ is possible {\em and} a given valuation $[B_1 =b]$ is possible, then the joint valuation $[A_2\eql a,B_1\eql b]$ is also possible,
+\begin{align}\label{possfact}
+A_2 \aindep B_1 \implies  S_{A_2 B_1}(ab) = S_{A_2}(a) S_{B_1}(b).
+\end{align}
+
+
+If one wishes, one can derive causal compatibility inequalities for possibilistic assignments rather than probabilistic ones.  For instance, for the DAG of Fig.~\ref{fig:TriDagSubA2B1C1v2}, the marginal possibilistic assignments to $\brackets{A_2 C_1}$, $\brackets{B_1 C_1}$ and $\brackets{A_2 B_1}$ satisfy the analogue of Eq.~\eqref{eq:trivmarginalconstraint}, namely,
+\begin{align}\label{eq:possmargconstraint}
+	S_{A_2 C_1}(\mgreen{1 1}) \leq \text{max}\{ S_{A_2 B_1}(\mgreen{1} 1) ,S_{B_1 C_1}(0 \mgreen{1})\}.
+\end{align}
+
+Because Fig.~\ref{fig:TriDagSubA2B1C1v2} is an inflation of the triangle scenario, and $\brackets{A_2 C_1}$, $\brackets{B_1 C_1}$ and $\brackets{A_2 B_1}$ are pre-injectable sets, we can substitute Eq.~\eqref{possfact} into Eq.~\eqref{eq:possmargconstraint} to obtain
+\begin{align}\label{eq:possmargconstraint}
+	S_{A_2 C_1}(\mgreen{1 1}) \leq \text{max}\{ S_{A_2}(\mgreen{1} ) S_{B_1}(1) ,S_{B_1 C_1}(0 \mgreen{1})\}.
+\end{align}
+which is a possibilistic causal compatibility inequality for the triangle scenario.  It can be interpreted as asserting that if $[A_2\eql 1, C_1\eql 1]$ is possible, then {\em either} $[B_1\eql 0, C_1 \eql 1]$ is possible or {\em both} $[A_2 \eql 1]$ and $[B_1\eql 1]$ are possible.  Equivalently, it asserts that if $[B_1\eql 0, C_1 \eql 1]$ is impossible and {\em either} $[A_2 \eql 1]$ or $[B_1\eql 1]$ is impossible, then necessarily $[A_2\eql 1, C_1\eql 1]$ is impossible as well. 
+
+\color{black}
+
+
+
+
+\end{document}  

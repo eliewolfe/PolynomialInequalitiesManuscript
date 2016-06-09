@@ -261,7 +261,7 @@ anchorcolor=OliveGreen}
 
 
 %%%% Tobias: to mark my edits and stuff
-\usepackage{showkeys}
+%\usepackage{showkeys}
 \usepackage[draft]{fixme}
 \newcommand{\btob}{\color{OliveGreen}}
 \newcommand{\etob}{\color{black}}
@@ -330,270 +330,13 @@ Similarly, we indicate probability distributions using upper-case $P$, whereas l
 
 % We choose to indicate logical negation by $\n{x}\coloneqq\SmallNamedFunction{Not}{x}$, such that $\n{x}$ references the possibility of \emph{any} outcome other than $x$, so that $\p{\n{x}}\coloneqq\p{X\cramp{\neq}x}=1-\p{X\cramp{=}x}$. This convention effectively coarse-grains the outcome space into just two possibilities: $x$ and $\n{x}$. %Logical conjunction is herein represented by default, such that $\p{x y}$ is the joint probability of the two events  $X\cramp{=}x$ \emph{and} $Y\cramp{=}y$. 
 
-\color{red}
+A causal structure, for the purpose of this article, is taken to be given by a directed acyclic graph (DAG): each node in the DAG corresponds to a random variable\footnote{In the quantum context, however, only \emph{observable} nodes correspond to classical random variables, such as the outcomes of measurements. Latent nodes, however, represent quantum systems. Functional dependence is replaced by the action of a quantum operation, and edges then dictate the ways in which quantum systems factor and/or compose. See Refs. \cite{pusey2014gdag,leifer2013conditionalstates}. \purp{Rob, add appendix? Classical/Quantum/GPT everything? I'm thinking a table would be nice.}}, while each edge represents a possible causal influence between variables. In our graphical depictions we follow the convention of representing latent nodes by circles, and observable nodes by triangles \cite{pusey2014gdag}.
 
-%We need to define several notions.
+Our terminology for the causal relations between the nodes in a DAG is the standard one. The parents of a node $X$ in a given graph $G$ are defined as those nodes which have directed edges originating at them and terminating at $X$, i.e. $\Pa[G]{X} = \{\:Y\:|\:Y\to X\:\}$. If $\bm{U}$ is a set of nodes, then we put $\Pa[G]{\bm{U}} := \bigcup_{X\in\bm{U}} \Pa[G]{X}$. Similarly the children of a node $X$ in a given graph $G$ are defined as those nodes which have have directed edges originating at $X$ and terminating at them, i.e. $\Ch[G]{X} = \{\:Y\:|\: X\to Y\:\}$. The \tblue{ancestors} $\An{\bm{U}}$ are defined as those nodes which have a directed \emph{path} to some node in $\bm{U}$, including the nodes in $\bm$ themselves. Equivalently, $\An{\bm{U}} := \bigcup_{n\in\mathbb{N}} \mathsf{Pa}^n(\bm{U})$, where $\mathsf{Pa}^n(\bm{U})$ is inductively defined via $\mathsf{Pa}^0(\bm{U}) := \bm{U}$ and $\mathsf{Pa}^{n+1}(\bm{U}) := \mathsf{Pa}(\mathsf{Pa}^n(\bm{U}))$. 
 
-%A causal inference problem is one whose input is some feature of observed statistical data---a sample of the probability distribution over the observed variables or some coarse-grained properties thereof, such as a list of conditional independence relations---and whose output is a verdict on (or probabilistic inference about) whether a given causal hypothesis can explain the observed data.   
+We refer to a pair of nodes which not share any common ancestor as being \tblue{ancestrally independent}, for which we invent the notation $X\aindep Y$. Generalizing to sets, $\bm{U}\aindep \bm{V}$ indicates that no node in $\bm{U}$ shares a common ancestor with any node in $\bm{V}$, i.e.~$\An{\bm{U}}\cap\An{\bm{V}}=\emptyset$. It is possible for more than two sets to be ancestrally independent: the notation ${\bm{U}\aindep \bm{V}\aindep \bm{W}}$ should be understood as indicating that the ancestors of $\bm{U}$,$\bm{V}$, and $\bm{W}$ comprise three distinct non-overlapping sets, i.e.~$\bm{U}\aindep \bm{V}$ and $\bm{V}\aindep \bm{W}$ and $\bm{U}\aindep \bm{W}$.
 
-
-
-
-
-
-A causal model consists of a pair of objects: a causal structure and a set of parameters.  The causal structure is a directed acyclic graph (DAG).  Recall that a DAG $G$ consists of a set of nodes and directed edges (i.e., ordered pairs of nodes), which we denote by $\SmallNamedFunction{Nodes}{G}$ and $\SmallNamedFunction{Edges}{G}$ respectively.  Physically, each node in the DAG corresponds to a localized system and a directed edge between two nodes corresponds to there being a direct causal influence from one system to the other.  The parameters specify, for each root node, how the system corresponding to that node is prepared, and for each node that has parents in the DAG, the precise manner in which it causally depends on its parents.  If a DAG is denoted $G$ and the parameter values thereon are denoted $\mathcal{P}(G)$, then the corresponding causal model is the pair $C = (G,\mathcal{P}(G))$.  We shall also make use of the notation $\SmallNamedFunction{DAG}{C}$ for $G$ and $\SmallNamedFunction{ParamVals}{C}$ for $\mathcal{P}(G)$.
-
-Our terminology for the causal relations between the nodes in a DAG is the standard one. The parents of a node $X$ in a given graph $G$ are defined as those nodes which have directed edges originating at them and terminating at $X$, i.e. $\Pa[G]{X} = \{\:Y\:|\:Y\to X\:\}$.  Similarly the children of a node $X$ in a given graph $G$ are defined as those nodes which have have directed edges originating at $X$ and terminating at them, i.e. $\Ch[G]{X} = \{\:Y\:|\: X\to Y\:\}$. If $\bm{U}$ is a set of nodes, then we put $\Pa[G]{\bm{U}} := \bigcup_{X\in\bm{U}} \Pa[G]{X}$ and $\Ch[G]{\bm{U}} := \bigcup_{X\in\bm{U}} \Ch[G]{X}$.  The \tblue{ancestors} of a set of nodes $\bm{U}$, denoted $\An{\bm{U}}$, are defined as those nodes which have a directed \emph{path} to some node in $\bm{U}$, including the nodes in $\bm{U}$ themselves. Equivalently, $\An{\bm{U}} := \bigcup_{n\in\mathbb{N}} \mathsf{Pa}^n(\bm{U})$, where $\mathsf{Pa}^n(\bm{U})$ is inductively defined via $\mathsf{Pa}^0(\bm{U}) := \bm{U}$ and $\mathsf{Pa}^{n+1}(\bm{U}) := \mathsf{Pa}(\mathsf{Pa}^n(\bm{U}))$. 
-
-The subgraph of $G$ induced by restricting attention to the set of nodes $\bm{V}$ will be denoted $\subgraph[G]{\bm{V}}$.
-It consists of the nodes $\bm{V}$ and the edges between pairs of nodes in $\bm{V}$ per the original graph. Of special importance to us is the 
-\tblue{ancestral subgraph} of $\bm{V}$, denoted $\ansubgraph{\bm{V}}$, which is the minimal subgraph containing the full ancestry of $\bm{V}$, $\ansubgraph{\bm{V}}\coloneqq\subgraph{\An{\bm{V}}}$. 
-
-
-In a causal model, the localized systems are random variables, and the parameters are conditional probabilities\footnote{This is the definitio of a {\em classical}  causal model, which will be the primary focus of this article. Nonetheless, there is a quantum generalization of the notion of a causal model that will feature in our discussions at the end of this article.  In a {\em quantum} causal model\cite{leifer2013conditionalstates}, the localized systems are types of quantum systems (specified by Hilbert space dimensionality), and the parameters are quantum operations.  Specifically, for each root node, the model specifies a unit-trace positive operator on the Hilbert space for that system and for each non-root node, the model specifies a trace-preserving completely-positive linear map from the operators on the Hilbert space of the parents of the system to the operators on the Hilbert space of the system.  Certain nodes in a quantum causal model may be considered classical, in which case all states and operations must be diagonal in some fixed basis on that system.  One can also generalize the notion of a causal model further still to the case of generalized probabilistic theories, as was done in Ref.~\cite{pusey2014gdag}.
-}.
- %probabilities and conditional probabilities on these random variables.  
-Specifically, for each node, the model specifies a conditional probability distribution over the values of the random variable associated to that node, given the values of the variables associated to its parents in the DAG.  (In the case of root nodes, the parents are the null set and the conditional probability distribution is simply a probability distribution.)
- %Specifically, for each root node, the model specifies a probability distribution over the values of the associated random variable, and for each non-root node, it specifies a conditional probability distribution over the values of the random variable associated to that node, given the values of the variables associated to its parents in the DAG.  
-Denoting the conditional probability distribution associated to a node $A$ in the DAG $G$ by $\pdf{A|\Pa[G]{A}}$, we have
-\begin{align}
-\mathcal{P}(G) \equiv \{\pdf{A|\Pa[G]{A}}: A \in \SmallNamedFunction{Nodes}{G}\}.
-\end{align}
-%Note that the root nodes are included as those for which the parents are the null set and the conditional probability distribution is simply a probability distribution.
-As is standard, we assume that the joint distribution defined by the causal model is $\pdf{\SmallNamedFunction{Nodes}{G}} = \Pi_{A\in \SmallNamedFunction{Nodes}{G}} \pdf{A|\Pa[G]{A}}$ (this is called the Markov condition).  The subset of nodes of $G$ that are observed is denoted $\SmallNamedFunction{ObservedNodes}{G}$ and the rest are denoted $\SmallNamedFunction{LatentNodes}{G}$. 
-The joint distribution over the observed variables is obtained from the joint distribution over all variables by marginalization over the latent variables $\pdf{\SmallNamedFunction{ObservedNodes}{G}} =  \sum_{\{X :X \in\SmallNamedFunction{LatentNodes}{G}\}} \pdf{\SmallNamedFunction{Nodes}{G}}$.
-
-In addition to the notion of a causal model, we define the notion of a causal hypothesis, which is a set of causal models consistent with a single DAG. Specifically, if $G$ is a DAG and $S$ is a set of parameter values  consistent with $G$ (i.e. a set of possibilities for the conditional probability distributions at each node of $G$), then $G$ and $S$ define a causal hypothesis, which we denote by $H_{G,S}$, and which we define formally as the following set of causal models:
-\begin{align}
-H_{G,S} \equiv \{ C \mid \SmallNamedFunction{DAG}{C}=G, \SmallNamedFunction{ParamVals}{C} \in S\}.
-\end{align}
-% (is this standard usage of the term "model"?  In physics, a model typically does not include a specification of the boundary conditions, or does it?)
-We denote  the set of {\em all} parameter values consistent with $G$ by $S_{\rm full}$, so that $H_{G,{S_{\rm full}}}$ is simply the causal hypothesis that the DAG is $G$, that is, the hypothesis that there exists {\em some} parameter values supplementing $G$ such that the observed data can be explained by the resulting causal model. 
-
-
-With these notions in hand, we can give a broad definition of causal inference.  It is useful to characterize any algorithm for causal inference as one that takes two inputs:
-\begin{itemize}
-\item an {\em observational input}, which is a specification of some feature of observed statistical data
-%---a sample of the probability distribution over the observed variables or some coarse-grained properties thereof, such as a list of conditional independence relations
-\item a {\em causal input}, which is a specification of some causal hypothesis
-\end{itemize}
-and that outputs some sort of verdict about their compatibility.
-
-The most informative sort of observational input is a specification of the joint distributions over all of the observed variables.  The observational input in real-world applications necessarily falls short of this ideal because one only ever obtains a {\em finite sample} of the joint distribution.  Moreover, even if one sets aside finite-sample concerns and imagines the input as infinite-run statistics, there are other ways in which the observational input to a causal inference problem might be less informative than a specification of the joint distribution.  For instance, one might merely have a description of the conditional independence relations that hold among the observed variables.  Or one might merely have a specification of the marginals of the joint distribution for certain subsets of the observed variables.  Indeed, the latter sort of restriction on the observational input will be relevant for our inflation DAG technique.  
-
-The most fine-grained specification of the causal input is one wherein the causal hypothesis specifies a specific DAG as well as a complete specification of all the parameters supplementing the DAG.  The causal inference problem that is perhaps most widely studied is one wherein the causal hypothesis just concerns the DAG.  Between these are causal inference problems that explore more refined causal hypotheses, incorporating constraints on how  certain nodes in the DAG functionally depend on their parents.  An example is the assumption of an additive noise model for certain causal influences: if observed variable $Y$ has an observed variable $X$ as a parent and also a latent variable $U$, then the noise is deemed additive if $Y=\alpha X + \beta U$ for some scalars $\alpha$ and $\beta$ [provide references].  More general constraints on the causal dependences in the model have also been explored [provide references].  (Note that constraints on the probability distributions over the latent variables can be understood as a kind of constraint on the causal dependences.)
-%Another conceivable constraint on the parameters is a constraint on the form of the probabilities distributions over the latent variables.  
-Our inflation DAG technique will require consideration of a novel and unusual sort of constraint on the causal dependences of the model. 
-
-Finally, the verdict about the compatibility of the observational input and the causal hypothesis could come in different forms.  The simplest possibility is a specification of whether the observational input is consistent with the causal hypothesis.  However, the notion of compatibility at play might be more refined than this, for instance, the algorithm might specify a confidence level with which one can reject the given causal hypothesis as an explanation of the observational input.
-%output is a verdict on (or probabilistic inference about) whether a given causal hypothesis can explain the observed data.   
-
-%The most informative sort of observational input is a specification of the joint distributions over all of the observed variables.  Nonetheless, causal inference problems often proceed with a less informative sort of observational input.  For instance, one might merely have a description of the conditional independence relations that hold among the obeerved variables.  Another example of how the observational input might be less informative is if it merely specifies the marginals of the joint distribution for certain subsets of the observed variables.  (Indeed, the latter sort of observational input will be relevant for our inflation DAG technique.)   The observational input might also be less informative in another sense, namely, that it is merely a {\em finite sample} of some joint distribution.
-
-The inflation DAG technique is a way of mapping a given causal inference problem onto a new causal inference problem where the observational and causal inputs of the latter problem are determined by the observational and causal inputs of the original problem.   In particular, under the inflation map, the observational input becomes less informative while the causal hypothesis becomes more fine-grained, in a manner that we shall now make explicit.
-
-\subsection{Inflation: a tool for causal inference}
-
-We now introduce the notion of \tblue{an inflation of a causal model}.  Let $C_G$ denote a causal model associated to a DAG $G$.  An inflation of this model is another causal model, denoted $C_{G'}$ and associated to a different DAG, $G'$.  We refer to $G'$ as an inflation of $G$.  There are many possible choices of $G'$ for a given $G$ (specified below), hence many possible inflations of a given causal model.  We denote the set of these by $\SmallNamedFunction{Inflations}{G}$.   Once an element $G'\in \SmallNamedFunction{Inflations}{G}$ is specified, however, the parameters of the causal model $C_{G'}$ are fixed by the parameters of the causal model $C_{G}$.  We denote this function by $C_(G') = \SmallNamedFunction{Inflation}{C_(G)}$.
-
-% $\mathcal{P'}(G')$ are fixed uniquely by $\mathcal{P}(G)$.  We call the parameters $\mathcal{P'}(G')$ the inflationary image of the parameters $\mathcal{P}(G)$, and write $\mathcal{P'}(G') = \SmallNamedFunction{Inflation}{\mathcal{P}(G)}$.  Let $C=(G,\mathcal{P}(G))$ denote the original causal model and $C'=(G',\mathcal{P'}(G'))$ an inflation thereof.   We say that the DAG $G'$ is an inflation of the DAG $G$.  There are many possible choices of $G'$ for a given $G$, hence many possible inflations of a given causal model.  We denote this set by $\SmallNamedFunction{Inflations}{G}$.   Once an element $G'\in \SmallNamedFunction{Inflations}{G}$ is specified, however, the parameters $\mathcal{P'}(G')$ are fixed uniquely by $\mathcal{P}(G)$.  We call the parameters $\mathcal{P'}(G')$ the inflationary image of the parameters $\mathcal{P}(G)$, and write $\mathcal{P'}(G') = \SmallNamedFunction{Inflation}{\mathcal{P}(G)}$.
- %We now describe concretely what an inflation is for the DAG and for the parameters in turn.  
-
-We begin by defining the condition under which a DAG $G'$  is an inflation of a DAG $G$.
-
-For each node of $G$, $G'$ may contain one or more copies of that node. If $A$ denotes a node in the DAG $G$ that has copies in $G'$, then we denote these copies by $A_1,\ldots, A_k$.  The variable that indexes the copies is termed the {\em copy-index}.
-%, and a set of variables in $G'$ that differ only by copy-index are called a {\em copy set}.  
-The necessary condition on $G'$ for being an inflation of $G$ is that the ancestral subgraph in $G'$ of a node $A_i$ is equivalent, under removal of the copy-index, to the ancestral subgraph in $G$ of the node $A$.  
-When two objects (e.g.~nodes, sets of nodes, DAGs, etc\ldots) are the same up to copy-indices, then we use $\sim$ to indicate this.  For instance, we have $A_i\sim A_j\sim A$.  Given this notational convention, we can formalize the condition for $G'$ to be an inflation of $G$ as follows:
-\begin{align}\label{eq:definflationDAG}
-%\forall A \in \SmallNamedFunction{Nodes}{G}, ???\nonumber\\
-G' \in\SmallNamedFunction{Inflations}{G} \quad\text{ iff }\quad \forall A_i\in \SmallNamedFunction{Nodes}{G'}:\; \ansubgraph[G']{A_i}\sim\ansubgraph[G]{A}.
-\end{align}
-
-To illustrate the notion of the inflation of a DAG, we consider the DAG of \cref{fig:TriMainDAG}, which is called the {\em Triangle scenario} (for obvious reasons) and which has been studied by many authors [\citealp{pusey2014gdag}~(Fig.~E\#8), \citealp{WoodSpekkens}~(Fig.~18b), \citealp{fritz2012bell}~(Fig.~3), \citealp{chaves2014novel}~(Fig.~6a), \citealp{Chaves2015infoquantum}~(Fig.~1a), \citealp{BilocalCorrelations}~(Fig.~8), \citealp{steudel2010ancestors}~(Fig.~1b), \citealp{chaves2014informationinference}~(Fig.~4b)]
-%As an example, consider the Triangle scenario [\citealp{pusey2014gdag}~(Fig.~E\#8), \citealp{WoodSpekkens}~(Fig.~18b), \citealp{fritz2012bell}~(Fig.~3), \citealp{chaves2014novel}~(Fig.~6a), \citealp{Chaves2015infoquantum}~(Fig.~1a), \citealp{BilocalCorrelations}~(Fig.~8), \citealp{steudel2010ancestors}~(Fig.~1b), \citealp{chaves2014informationinference}~(Fig.~4b)]. The associated DAG, the shape of which explains the name, is depicted here in \cref{fig:TriMainDAG}. 
-%The Triangle scenario is a correlation scenario in the sense of \citet{fritz2012bell}; see especially Sec. 2.3 there. 
-Different inflations of the Triangle scenario are depicted in \cref{fig:TriFullDouble,fig:Tri222,fig:simpleinflation,fig:simplestinflation,fig:TriDagSubA2B1C1}.
-
-
-Next, we turn to specifying how the parameters in the inflation of a causal model are determined from those in the original model.
-%condition under which a set of parameters $\mathcal{P'}(G')$ are the inflationary image of the set of parameters $\mathcal{P}(G)$. 
-
-The condition is simply that for every node $A_i$ in the inflation DAG $G'$, the manner in which $A_i$ depends causally on its parents within $G'$ must be the same as the manner in which $A$ depends causally on its parents within the original DAG $G$.   Formally, 
-\begin{align}\label{eq:funcdependences}
-%\text{If} \quad G' \in\SmallNamedFunction{Inflations}{G}\quad \text{and} \quad \mathcal{P'}(G') = \SmallNamedFunction{Inflation}{\mathcal{P}(G)} \quad \text{then}\quad \forall A_i \in \SmallNamedFunction{Nodes}{G'}:\; \pdf{A_i| \Pa[G']{A_i}}=\pdf{A|\Pa[G]{A}},
-%\text{If} \quad G' \in\SmallNamedFunction{Inflations}{G}\quad \text{then} \quad C_{G'} = \SmallNamedFunction{Inflation}{C_{G}} \quad \text{iff}\quad \forall A_i \in \SmallNamedFunction{Nodes}{G'}:\; \pdf[C']{A_i| \Pa[G']{A_i}}=\pdf[C]{A|\Pa[G]{A}},
-C' \in \SmallNamedFunction{Inflations}{C} \quad \text{iff}\quad G' \in\SmallNamedFunction{Inflations}{G}
-%\SmallNamedFunction{DAG}{C'} \in \SmallNamedFunction{Inflations}{\SmallNamedFunction{DAG}{C}}
-\quad \text{and} \quad \forall A_i \in \SmallNamedFunction{Nodes}{G'}:\; \pdf[C']{A_i| \Pa[G']{A_i}}=\pdf[C]{A|\Pa[G]{A}},
-\end{align}
-where Eq.~\eqref{eq:definflationDAG} guarantees that $A_i \sim A$ and $\Pa[G']{A_i} \sim \Pa[G]{A}$.  
-
-%A causal model specifies the causal structure and the autonomous causal mechanisms.  
-To sum up then, inflation is a mapping to a new causal model wherein each given variable in the original DAG may have counterparts in the inflation DAG and where the causal dependences in the inflation DAG are given by the corresponding causal dependences in the original DAG.   Note that the operation of modifying a DAG and equipping the modified version with causal dependences that mirror those of the original also appears in the \emph{do calculus} of~\citet{pearl2009causality}. \fxnote{adhesivity and non-Shannon-type ineqs}
-%The copying of variables under inflation implies that causal mechanisms in the inflation DAG are not necessarily autonomous, but rather often coincide with one another.
-
-
-%defines a novel sort of constraint on the parameters of a causal model.  We pause to describe this constraint in general terms, before introducing the notion of inflation.  The sorts of causal structures that can arise in our inflation scheme have the property that necessarily there will be certain pairs of variables which have the same ancestral subgraph.  The constraint on the parameters is that the two conditional probability distributions describing how each variable of the pair depends on its parents are quantitatively equal to one another.  (To our knowledge, this sort of constraint has not been considered before in causal inference.)
-
-%The inflation DAG technique that we introduce allows questions about the viability of one causal hypothesis for certain observed data to be turned into questions about the viability of a different sort of causal hypothesis for an inflation of the observed data.
-
-%Because we have defined inflation as a map on causal models, 
-Because causal hypotheses are sets of causal models, any inflation map, by virtue of being a map on causal models, induces a map on causal hypotheses. Specifically,
-\begin{align}
-H_{G',S'} \in \SmallNamedFunction{Inflations}{H_{G,S}} \quad \text{iff}\quad 
-\quad G' \in\SmallNamedFunction{Inflations}{G}\quad \text{and} \quad 
-H_{G',S'} = \{ C' : C' = \SmallNamedFunction{Inflation}{C}, C \in H_{G,S} \}.
-%\forall C' \in H_{G',S'}  \exists C \in H_{G,S} : C' = \SmallNamedFunction{Inflation}{C}.
-%A_i \in \SmallNamedFunction{Nodes}{G'}:\; \pdf[C']{A_i| \Pa[G']{A_i}}=\pdf[C]{A|\Pa[G]{A}}, \SmallNamedFunction{Inflation}{H_{G,S}} = \{ \SmallNamedFunction{Inflation}{C} : C \in H_{G,S}\}
-%\SmallNamedFunction{Inflation}{H_{G,S}} = \{ \SmallNamedFunction{Inflation}{C} : C \in H_{G,S}\}
-\end{align}
-%[Put this after the lemma] Inflation can be understood as a map over causal hypotheses as follows: An inflation map takes a causal hypothesis $H_{G,S}$  to a causal hypotheses $H_{G',S'}$, where $G'$ and $S'$ satisfy:
-%\begin{itemize}
-%\item The DAG $G'$ is an inflation of the DAG $G$ 
-%\item $\{ \pdf{A_i| \Pa[G']{A_i}} : A_i \in \SmallNamedFunction{Nodes}{G'}\} \in S'$ if only if  $\{ \pdf{A| \Pa[G]{A}} : A \in \SmallNamedFunction{Nodes}{G}\} \in S$.
-%\end{itemize}
-
-Note that even if $S=S_{\rm full}$, so that the original causal hypothesis puts no constraints on the parameter values, one generally has $S'\ne S'_{\rm full}$, that is, the inflationary image of the full set of parameter values on $G$ is not the full set of parameter values on $G'$. Rather, $S'$ incorporates a nontrivial restriction on the parameters consistent with $G'$, namely, that if nodes $A_i$ and $A_j$ on $G'$ are copies of a single node $A$ on $G$,then the parameter values on $G'$ are constrained to satisfy $\pdf{A_i| \Pa[G']{A_i}}=\pdf{A_j|\Pa[G']{A_j}}$.
-
-%Finally, we can begin to spell out how the inflation technique is useful for causal inference.  
-%First, we emphasize the broad notion of causal inference that we have in mind here. 
-
-
-
-%[Note that the distinction between observed nodes and latent nodes in the DAG $G$ is inherited by the DAG $G'$.]
-
-
-To see how inflation is relevant for causal inference, we must explain how the distributions that can be achieved in the inflation model are constrained by those in the original model.  In what follows, we assume that $G' \in \SmallNamedFunction{Inflations}{G}$ and that $C' = \SmallNamedFunction{Inflation}{C}$.
-
-Note, first of all, that for any sets of nodes $\bm{U}\in \SmallNamedFunction{Nodes}{G'}$ and   $\subsim{\bm{U}}\in \SmallNamedFunction{Nodes}{G}$,
-\begin{align}\label{eq:coincidingdistrodef}
-\text{if }\quad \ansubgraph[G']{\bm{U}}\sim\ansubgraph[G]{\subsim{\bm{U}}}\quad\text{then}\quad \pdf[C']{\bm{U}}=\pdf[C]{\subsim{\bm{U}}}.
-\end{align}
-This follows from the fact that the probability distributions over $\bm{U}$ and $\subsim{\bm{U}}$ depend only on their ancestral subgraphs and the parameters defined thereon, which by the definition of inflation are the same for $\bm{U}$ and for $\subsim{\bm{U}}$.
-
-It is useful to have a name for a set of nodes in the inflation DAG, $\bm{U} \subseteq \SmallNamedFunction{Nodes}{G'}$, such that one can find a corresponding set in the original DAG, $\subsim{\bm{U}} \subseteq \SmallNamedFunction{Nodes}{G}$, which has an equivalent ancestral subgraph.   We say that such subsets of the nodes of $G'$ are injectable into $G$ and we call them the \tblue{injectable sets},
-% into $\SmallNamedFunction{Nodes}{G}$,
-\begin{align}\label{eq:definjectable}
-\bm{U}\in\SmallNamedFunction{InjectableSets}{G'} \quad\text{ iff }\quad \exists \subsim{\bm{U}}\subseteq \SmallNamedFunction{Nodes}{G}: \ansubgraph[G']{\bm{U}}\sim\ansubgraph[G]{\subsim{\bm{U}}}.
-\end{align}
-In \cref{fig:Tri222}, for example, the set $\brackets{A_1 B_1 C_1}$ is injectable because its ancestral subgraph is equivalent up to copy-indices to the ancestral subgraph of $\brackets{A B C}$ in the original DAG (which is just the full DAG), and the set $\brackets{A_2 C_1}$ is injectable because its ancestral subgraph is equivalent to that of $\brackets{ A C}$ in the original DAG. 
-
-Note that it is clear that a set of nodes in the inflation DAG can only be injectable if it contains at most one copy of any node from the original DAG.  Similarly, it can only be injectable if its ancestral subgraph also contains at most one copy of any node from the original DAG.  
-Thus, in \cref{fig:Tri222}, $\brackets{A_1 A_2 C_1}$ is not injectable because it contains two copies of $A$, and $\brackets{A_2 B_1 C_1}$ is not injectable because its ancestral subgraph contains two copies of $Y$. 
-
-%The relation between nodes of the inflation DAG $G'$ to nodes on the DAG $G$ that will be of primary interest to us is not injectability  actually slightly weaker than the notion of injectability.  
-The sets of nodes of $G'$ that will be of primary interest to us are not the injectable sets per se, but sets satisfying a slightly weaker constraint.
-%We call this notion {\em pre-injectability}.  
-To define the latter sorts of sets, which we term {\em pre-injectable}, we must first introduce some additional terminology. 
-
-We refer to a pair of nodes which do not share any common ancestor as being \tblue{ancestrally independent}, for which we invent the notation $X\aindep Y$. Generalizing to sets, $\bm{U}\aindep \bm{V}$ indicates that no node in $\bm{U}$ shares a common ancestor with any node in $\bm{V}$, 
-\begin{align}
-\bm{U}\aindep \bm{V} \quad \text{iff} \quad \An{\bm{U}}\cap\An{\bm{V}}=\emptyset.
-\end{align}
-%i.e.~$\An{\bm{U}}\cap\An{\bm{V}}=\emptyset$. 
-%It is possible for more than two sets to be ancestrally independent: the notation ${\bm{U}\aindep \bm{V}\aindep \bm{W}}$ should be understood as indicating that the ancestors of $\bm{U}$,$\bm{V}$, and $\bm{W}$ comprise three distinct non-overlapping sets, i.e.~$\bm{U}\aindep \bm{V}$ and $\bm{V}\aindep \bm{W}$ and $\bm{U}\aindep \bm{W}$.
-Ancestral independence is equivalent to $d$-separation by the empty set~\cite{pearl2009causality,spirtes2011causation,studeny2005probabilistic,koller2009probabilistic}. 
-
-
-  A set of nodes $\bm{U}$ in the inflation DAG $G'$ will be called \tblue{pre-injectable} whenever it is a union of injectable sets with disjoint ancestries. 
-\begin{align}\label{eq:definjectable}
-\bm{U}\in\SmallNamedFunction{PreInjectableSets}{G'} \quad\text{ iff }\quad  \exists \{ \bm{U}_i \in \SmallNamedFunction{InjectableSets}{G'} \} \quad \text{s.t.}\quad \bm{U}=\bigcup_i \bm{U}_i  \quad\text{and} \quad  \forall i\ne j: \bm{U}_i \aindep \bm{U}_j.
-%\bm{U}\in\SmallNamedFunction{PreInjectableSets}{G'} \quad\text{ iff }\quad  \exists \{ \bm{U}_i \}_i \quad \text{s.t.}\quad \bm{U}=\bigcup_i \bm{U}_i  \quad\text{and} \quad \forall i 
-%: \bm{U}_i \in \SmallNamedFunction{InjectableSets}{G'}\quad \text{and}\quad \forall i,j
-%: \bm{U}_i \aindep \bm{U}_j.
-\end{align}
-%Equivalently, a set of nodes is pre-injectable if and only if its (weakly) connected components are injectable. 
-Note that every injectable set is a trivial example of a pre-injectable set.
-
-Because ancestral independence in the DAG implies statistical independence for any probability distribution consistent with the DAG, it follows that  if 
-$\bm{U}$ is a pre-injectable set and $\bm{U}_1,\bm{U}_2,\ldots,\bm{U}_n$ are the ancestrally independent components of $\bm{U}$, then 
-\begin{align}\label{eq:preinjfactor}
-%\forall \bm{U}\in\SmallNamedFunction{PreInjectableSets}{G'}:	
-\pdf[C']{\bm{U}} = \pdf[C']{\bm{U}_1} \pdf[C']{\bm{U}_2}  \cdots \pdf[C']{\bm{U}_n}.
-\end{align}
-Furthermore, because each injectable set of variables $\bm{U}_i$ satisfies Eq.~\eqref{eq:coincidingdistrodef}, it follows that joint distributions on pre-injectable sets in the inflation model can be expressed in terms of distributions defined on the original causal model,
-\begin{align}\label{eq:preinjfactor}
-%\forall \bm{U}\in\SmallNamedFunction{PreInjectableSets}{G'}:	
-\pdf[C']{\bm{U}} = \pdf[C]{\subsim{\bm{U}}_1} \pdf[C]{\subsim{\bm{U}}_2}  \cdots \pdf[C]{\subsim{\bm{U}}_n}.
-\end{align}
-This latter property implies that the probability distribution over any pre-injectable set in the inflation model is fully determined by the parameters in the original causal model.  Indeed, this relation is what motivates us to consider the pre-injectable sets.
-
-Consider a causal inference problem where the observational input is a probability distribution over a set $\bm{O}$ of observed variables, denoted $\pdf{\bm{O}}$ and the causal hypothesis is $H_{G,S}$ where $\SmallNamedFunction{ObservedNodes}{G}=\bm{O}$.  Suppose that one seeks only to determine whether the causal hypothesis is consistent with the observational input.  
-%Then the following condition is necessary and sufficient for such consistency
-This holds if and only if
-\begin{align}
-\exists C \in H_{G,S} : \pdf[C]{\SmallNamedFunction{ObservedNodes}{G}}= \pdf{\bm{O}}.
-\end{align}
-
-%Consider a causal inference problem where the input data is a joint distribution over a set of observed variables.  A causal model is only a candidate for a causal explanation of this joint distribution if it posits a DAG $G$ for which $\SmallNamedFunction{ObservedNodes}{G}$ corresponds to the set of observed variables, so we assume this henceforth. The causal hypothesis $H_{G,S}$ is consistent with data $\pdf{\SmallNamedFunction{ObservedNodes}{G}}$ if and only if there exists a causal model satisfying the constraints of the hypothesis, $C \in H_{G,S}$, such that $\pdf[C]{\SmallNamedFunction{ObservedNodes}{G}} = \pdf{\SmallNamedFunction{ObservedNodes}{G}}$. 
-
-
-
-\begin{lemma}
-%Suppose the original causal inference problem is to determine the consistency of a probability distribution over a set $\bm{O}$ of observed variables, denoted $\pdf{\bm{O}}$ with a causal hypothesis $H_{G,S}$.  
-Suppose the original causal inference problem takes as its inputs  a probability distribution over a set $\bm{O}$ of observed variables, denoted $\pdf{\bm{O}}$, and a causal hypothesis $H_{G,S}$, and seeks to determine whether these are consistent.  
-
-We now define a new causal inference problem at the level of the inflation DAG.  The causal hypothesis is an inflation of the causal hypothesis $H_{G,S}$. 
-observational input 
-
-Let $H_{G',S'}$ be a causal hypothesis that is the image under inflation of the causal hypothesis $H_{G,S}$. 
-
- Let $\{ P(\bm{U}_i) : \bm{U}_i \in \SmallNamedFunction{PreInjectableSets}{G'} \}$ 
-
-The causal hypothesis $H_{G,S}$ is consistent with statistical data $\pdf{\SmallNamedFunction{ObservedNodes}{G}}$  if and only if the causal hypothesis $H_{G',S'}$ is consistent with the following constraints on the distribution over the observed variables in $G'$: 
-\begin{align}
-\forall \bm{U} \in \SmallNamedFunction{InjectableSets}{\SmallNamedFunction{ObservedNodes}{G'}}: \pdf[G']{\bm{U}} = \pdf{\subsim{\bm{U}}}.
-\end{align}
-\end{lemma}
-
-
-\begin{lemma}
-The causal hypothesis $H_{G,S}$ is consistent with statistical data $\pdf{\SmallNamedFunction{ObservedNodes}{G}}$  if and only if the causal hypothesis $H_{G',S'}$ is consistent with the following constraints on the distribution over the observed variables in $G'$: 
-\begin{align}
-\forall \bm{U} \in \SmallNamedFunction{InjectableSets}{\SmallNamedFunction{ObservedNodes}{G'}}: \pdf[G']{\bm{U}} = \pdf{\subsim{\bm{U}}}.
-\end{align}
-\end{lemma}
-
-We see, therefore, that a causal inference problem at the level of the original DAG defines a causal inference problem at the level of the inflated DAG.
-
-
-%Let the set of observed variables be denoted by $\bm{O}$, and consider a given joint distribution over $\bm{O}$, denoted $\pdf{\bm{O}}$.  A causal model is only a candidate for a causal explanation of  $\pdf{\bm{O}}$ if it posits a DAG $G$ satisfying $\SmallNamedFunction{ObservedNodes}{G}=\bm{O}$, so we assume this henceforth.  
-%The causal hypothesis $H_{G,S}$ is consistent with data $\pdf{\bm{O}} if and only if there exists a causal model satisfying the constraints of the hypothesis, $C \in H_{G,S}$, such that $\pdf[C]{\SmallNamedFunction{ObservedNodes}{G}} = \pdf{\bm{O}}$. 
-%\begin{lemma}
-%The causal hypothesis $H_{G,S}$ is consistent with a distribution $\pdf{\bm{O}}$ over the observed variables in $G$  if and only if the causal hypothesis $H_{G',S'}$ is consistent with the following constraints on the distribution over the observed variables in $G'$: $\forall \bm{U} \in \SmallNamedFunction{InjectableSets}{\SmallNamedFunction{ObservedNodes}{G'}} \cap : \pdf[G']{\bm{U}} = \pdf{\subsim{\bm{U}}}$.
-%\end{lemma}
-
-
-%If the DAG $G$ is inflated to the DAG $G'$, then we denote the image of $\SmallNamedFunction{ObservedNodes}{G}$ under the inflation by $\SmallNamedFunction{ObservedNodes}{G'}$.  [....]
-
-
-%Therefore, for distributions that are Markov with respect to the DAG~\cite{pearl2009causality,spirtes2011causation,studeny2005probabilistic,koller2009probabilistic}, ancestral independence of nodes implies marginal independence of the random variables. For us, all distributions over the variables represented by the nodes of a DAG will be assumed Markov. Intuitively, we presume that no statistical correlation is possible without causal explanation. Thus if a DAG possesses the feature ${\bm{U}\aindep \bm{V}\aindep \bm{W}}$, we demand \color{red} [Isn't this implied by the definitions and therefore doesn't need to be demanded?] \color{black} factorization of the marginal distributions such that ${\pdf{\bm{U} \bm{V} \bm{W}} = \pdf{\bm{U}} \pdf{\bm{V}} \pdf{\bm{W}}}$.
-
-
-%The crucial property of a pre-injectable set $\bm{U}$ is that the probability distribution over this set in the inflation model, $\pdf[G']{\bm{U}}$, is fully determined by the original causal model via \cref{eq:funcdepends}. More concretely, if $\bm{U}_1,\bm{U}_2,\ldots,\bm{U}_n$ are the ancestrally independent components of the pre-injectable set $\bm{U}$, then because ancestral independence in the DAG implies statistical independence for any probability distribution consistent with the DAG, and because each injectable set of variables $\bm{U}_i$ satisfies Eq.~\eqref{eq:coincidingdistrodef}, it follows that in the inflation model,
-%\begin{align}\label{eq:preinjfactor}
-%\forall \bm{U}\in\SmallNamedFunction{PreInjectableSets}{G'}:	P(\bm{U}) = P(\bm{U}_1) P(\bm{U}_2)  \cdots P(\bm{U}_n) = P(\subsim{\bm{U}}_1) P(\subsim{\bm{U}}_2) \cdots P(\subsim{\bm{U}}_n).
-%\end{align}
-%For this reason, pre-injectable sets will play a role in deriving polynomial inequalities via polytope projection techniques.
-
-
-
-%Inflation is a map from a causal hypothesis on a DAG G to a causal hypothesis on a DAG G', where both G' and the set of constraints on the parameters supplementing G' depend on G.  Note that nontrivial constraints on the causal hypothesis on G also get mapped under inflation into nontrivial constraints on the causal hypothesis on G'.  
-
-
-
-%What follows from this definition?
-%The idea is that at the level of distributions, this property guarantees that all copies of a node in the inflation DAG have the same distribution as the corresponding node in the original DAG \emph{if} the functional dependencies among the variables are taken to be the same.
-
-
- \color{black}
-
-Our terminology for the causal relations between the nodes in a DAG is the standard one. The parents of a node $X$ in a given graph $G$ are defined as those nodes which have directed edges originating at them and terminating at $X$, i.e. $\Pa[G]{X} = \{\:Y\:|\:Y\to X\:\}$.  Similarly the children of a node $X$ in a given graph $G$ are defined as those nodes which have have directed edges originating at $X$ and terminating at them, i.e. $\Ch[G]{X} = \{\:Y\:|\: X\to Y\:\}$. If $\bm{U}$ is a set of nodes, then we put $\Pa[G]{\bm{U}} := \bigcup_{X\in\bm{U}} \Pa[G]{X}$ and $\Ch[G]{\bm{U}} := \bigcup_{X\in\bm{U}} \Ch[G]{X}$.  The \tblue{ancestors} of a set of nodes $\bm{U}$, denoted $\An{\bm{U}}$, are defined as those nodes which have a directed \emph{path} to some node in $\bm{U}$, including the nodes in $\bm{U}$ themselves. Equivalently, $\An{\bm{U}} := \bigcup_{n\in\mathbb{N}} \mathsf{Pa}^n(\bm{U})$, where $\mathsf{Pa}^n(\bm{U})$ is inductively defined via $\mathsf{Pa}^0(\bm{U}) := \bm{U}$ and $\mathsf{Pa}^{n+1}(\bm{U}) := \mathsf{Pa}(\mathsf{Pa}^n(\bm{U}))$. 
-
-We refer to a pair of nodes which do not share any common ancestor as being \tblue{ancestrally independent}, for which we invent the notation $X\aindep Y$. Generalizing to sets, $\bm{U}\aindep \bm{V}$ indicates that no node in $\bm{U}$ shares a common ancestor with any node in $\bm{V}$, i.e.~$\An{\bm{U}}\cap\An{\bm{V}}=\emptyset$. It is possible for more than two sets to be ancestrally independent: the notation ${\bm{U}\aindep \bm{V}\aindep \bm{W}}$ should be understood as indicating that the ancestors of $\bm{U}$,$\bm{V}$, and $\bm{W}$ comprise three distinct non-overlapping sets, i.e.~$\bm{U}\aindep \bm{V}$ and $\bm{V}\aindep \bm{W}$ and $\bm{U}\aindep \bm{W}$.
-
-Ancestral independence is equivalent to $d$-separation by the empty set \cite{pearl2009causality,spirtes2011causation,studeny2005probabilistic,koller2009probabilistic}. Therefore, for distributions that are Markov with respect to the DAG~\cite{pearl2009causality,spirtes2011causation,studeny2005probabilistic,koller2009probabilistic}, ancestral independence of nodes implies marginal independence of the random variables. For us, all distributions over the variables represented by the nodes of a DAG will be assumed Markov. Intuitively, we presume that no statistical correlation is possible without causal explanation. Thus if a DAG possesses the feature ${\bm{U}\aindep \bm{V}\aindep \bm{W}}$, we demand \color{red} [Isn't this implied by the definitions and therefore doesn't need to be demanded?] \color{black} factorization of the marginal distributions such that ${\pdf{\bm{U} \bm{V} \bm{W}} = \pdf{\bm{U}} \pdf{\bm{V}} \pdf{\bm{W}}}$.
+Ancestral independence is equivalent to $d$-separation by the empty set \cite{pearl2009causality,spirtes2011causation,studeny2005probabilistic,koller2009probabilistic}. Therefore, for distributions that are Markov with respect to the DAG~\cite{pearl2009causality,spirtes2011causation,studeny2005probabilistic,koller2009probabilistic}, ancestral independence of nodes implies marginal independence of the random variables. For us, all distributions over the variables represented by the nodes of a DAG will be assumed Markov. Intuitively, we presume that no statistical correlation is possible without causal explanation. Thus if a DAG possesses the feature ${\bm{U}\aindep \bm{V}\aindep \bm{W}}$, we demand factorization of the marginal distributions such that ${\pdf{\bm{U} \bm{V} \bm{W}} = \pdf{\bm{U}} \pdf{\bm{V}} \pdf{\bm{W}}}$.
 
 
 $\subgraph[G]{\bm{V}}$ refers to the induced subgraph of $G$ on a set of nodes $\bm{V}$. It consists of the nodes $\bm{V}$ and the edges between pairs of nodes in $\bm{V}$ per the original graph. Of special importance to us is the %\tblue{parental subgraph}, $\pasubgraph[G]{\bm{V}}\coloneqq\subgraph{\bm{V}\bigcup\Pa{\bm{V}}}$, the subgraph on $\bm{V}$ and all the parents of $\bm{V}$. We also make use of the
@@ -642,8 +385,7 @@ We now introduce the notion of an \tblue{inflation DAG}. The nodes of an inflati
 
 When two objects (e.g.~nodes, sets of nodes, DAGs, etc\ldots) are the same up to dummy indices, then we use $\sim$ to indicate this, so $A_i\sim A_j\sim A$. 
 The formal definition of an inflation DAG is therefore as follows:
-\begin{align}
-%\label{eq:definflationDAG}
+\begin{align}\label{eq:definflationDAG}
 G'\in\SmallNamedFunction{Inflations}{G} \quad\text{ iff }\quad \forall_{A_i\in G'}\; \ansubgraph[G']{A_i}\sim\ansubgraph[G]{A}.
 \end{align}
 
@@ -676,7 +418,7 @@ G'\in\SmallNamedFunction{Inflations}{G} \quad\text{ iff }\quad \forall_{A_i\in G
 
 As an example, consider the Triangle scenario [\citealp{pusey2014gdag}~(Fig.~E\#8), \citealp{WoodSpekkens}~(Fig.~18b), \citealp{fritz2012bell}~(Fig.~3), \citealp{chaves2014novel}~(Fig.~6a), \citealp{Chaves2015infoquantum}~(Fig.~1a), \citealp{BilocalCorrelations}~(Fig.~8), \citealp{steudel2010ancestors}~(Fig.~1b), \citealp{chaves2014informationinference}~(Fig.~4b)]. The associated DAG, the shape of which explains the name, is depicted here in \cref{fig:TriMainDAG}. 
 %The Triangle scenario is a correlation scenario in the sense of \citet{fritz2012bell}; see especially Sec. 2.3 there. 
-Two examples of inflations of the Triangle scenario are depicted in \cref{fig:TriFullDouble,fig:Tri222}.
+Possible inflations of the Triangle scenario are depicted in \cref{fig:TriFullDouble,fig:Tri222}.
 
 %Possible inflations of the Triangle scenario are depicted in \cref{fig:TriFullDouble,fig:Tri222}; every copy of the random variable $A$ in an inflation has precisely two parents, one of which is a copy of the random variable $X$ and one of which is a copy of the random variable $Y$, just as in the original DAG. %The duplication of $Y$ into $Y_1$ and $Y_2$ leads to $X_1$ having outgoing edges to both $A_1$ and $A_2$ in \cref{fig:TriFullDouble,fig:Tri222}. Thus, inflating a DAG not only leads to duplicated nodes but to duplicated \emph{edges}. 
 
@@ -710,16 +452,16 @@ because of \cref{eq:funcdepends} and $\ansubgraph[G']{A_i}\sim\ansubgraph[G]{A}$
 %\text{Let}\quad\p{a_1 a_2 ...}\coloneqq \p{A_1\cramp{=}a \bigwedge A_2\cramp{=}a \bigwedge ...} \quad\text{ and }\quad
 %\p{\n{a}_1 a_2 b_1...}= \p{A_1\cramp{\neq}a \bigwedge A_2\cramp{=}a \bigwedge B_1\cramp{=}b\bigwedge ...}\quad\text{etc.}
 %\end{align*}
-To be perfectly clear however, $a_1$ and $a_2$ \emph{do not} refer to two distinct possible outcomes of one random variable; rather $a_1\land a_2$  represents the event in which $A_1$ and $A_2$ both have the same outcome $a$. Moreover, generally $\p{a_1 a_2}\neq \p{a}$, because although $\pdf{A_1}=\pdf{A_2}$, nevertheless $A_1$ and $A_2$ may not be perfectly correlated. In the same vein, generally $\p{a_1 a_2}\neq \p{a_1}\p{a_2}$, because identically distributed does not mean independently distributed. Indeed, in \cref{fig:Tri222}, for example, $A_1$ and $A_2$ share the common ancestor $X_1$, and hence they are not independent. On the other hand, sometimes two copies of a random variable not share any common ancestor, such as $A_1$ and $A_4$ in \cref{fig:TriFullDouble}. \cref{fig:TriFullDouble} implies, therefore, that $\p{a_1 a_4}=\p{a_1}\p{a_4}$. \fxnote{need this?}
+To be perfectly clear however, $a_1$ and $a_2$ \emph{do not} refer to two distinct possible outcomes of one random variable; rather $a_1\land a_2$  represents the event in which $A_1$ and $A_2$ both have the same outcome $a$. Moreover, generally $\p{a_1 a_2}\neq \p{a}$, because although $\pdf{A_1}=\pdf{A_2}$, nevertheless $A_1$ and $A_2$ may not be perfectly correlated. In the same vein, generally $\p{a_1 a_2}\neq \p{a_1}\p{a_2}$, because identically distributed does not mean independently distributed. Indeed, in \cref{fig:Tri222}, for example, $A_1$ and $A_2$ share the common ancestor $X_1$, and hence they are not independent. On the other hand, sometimes two copies of a random variable not share any common ancestor, such as $A_1$ and $A_4$ in \cref{fig:TriFullDouble}. \cref{fig:TriFullDouble} implies, therefore, that $\p{a_1 a_4}=\p{a_1}\p{a_4}$. 
 
 Any subset of nodes of the inflation DAG which contains multiple copies of some node is considered a \tblue{redundant} set. Formally, $\bm{U}$ is redundant if and only if there are $A$ and indices $i,j$ such that $\brackets{A_i,A_j}\subseteq\bm{U}$. Otherwise, $\bm{U}$ is said to be irredundant. Alternatively, $\bm{U}\subseteq\nodes{G'}$ is irredundant if and only if there is $\bm{V}\subseteq\nodes{G}$ such that $\bm{U}\sim\bm{V}$. 
 %A graph $Q$ is said to be irredundant iff $\nodes{Q}$ are irredundant. 
-When discussing irredundant sets we hereafter denote the corresponding original-DAG node-set by the same letter but with an overscript $\sim$, i.e., $\bm{U}\sim\subsim{\bm{U}}$ where $\subsim{\bm{U}}\subseteq\nodes{G}$. 
+When discussing irredundant sets we hereafter denote the corresponding original-DAG node-set by overscript $\sim$, i.e.
+$\bm{U}\sim\subsim{\bm{U}}$ where $\subsim{\bm{U}}\subseteq\nodes{G}$. 
 
 Critically, the idea that coinciding causal histories implies coinciding distributions can be generalized from individual nodes to irredundant sets. While generally $\pdf{\bm{U}}\neq\pdf{\subsim{\bm{U}}}$,  $\bm{U}$ and $\subsim{\bm{U}}$ \emph{must} have coinciding distribution whenever their respective ancestral subgraphs are equivalent up to dummy indices, as a consequence of  \cref{eq:funcdepends}.
 The natural generalization of \cref{eq:singlevariatecoincidence}, therefore, is,
-\begin{align}
-%\label{eq:coincidingdistrodef}
+\begin{align}\label{eq:coincidingdistrodef}
 \pdf{\bm{U}}=\pdf{\subsim{\bm{U}}} \quad\text{ whenever }\quad\ansubgraph[G']{\bm{U}}\sim\ansubgraph[G]{\subsim{\bm{U}}}.
 \end{align}
 
@@ -727,7 +469,7 @@ For example, any individual node $\bm{U} = \{X\}$ has this property. General set
 \begin{align}\label{eq:definjectable}
 \bm{U}\in\SmallNamedFunction{Injectables}{G'} \quad\text{ iff }\quad \ansubgraph[G']{\bm{U}}\sim\ansubgraph[G]{\subsim{\bm{U}}}.
 \end{align}
-Any redundant set is obviously not injectable \color{red} [Insofar as injectability was defined as a property of irredundant sets, I'm not sure it makes sense to say this.]\color{black}; it should be clear from \cref{eq:definjectable} that $\bm{U}$ is also not injectable whenever $\An{\bm{U}}$ is redundant. Moreover, 
+Any redundant set is obviously not injectable; it should be clear from \cref{eq:definjectable} that $\bm{U}$ is also not injectable whenever $\An{\bm{U}}$ is redundant. Moreover, 
 \begin{align}\label{eq:definjectable2}
 \bm{U} \text{ is injectable}\quad \text{iff}\quad \An{\bm{U}} \text{ is irredundant,}
 \end{align}
@@ -739,9 +481,9 @@ It is useful to consider a looser notion than injectability. A set of nodes in t
 %&\text{Then }\quad\bm{U}\in\SmallNamedFunction{PreInjectables}{\nodes{G'}} \quad\text{ iff }\quad \forall_{\bm{X}\in\SmallNamedFunction{DiscComp}{\bm{U}}} \;\bm{X} \text{ is injectable.}
 %\end{split}\end{align}
 
-For us, the crucial property of a pre-injectable set $\bm{U}$ is that in an inflation model, $\pdf{\bm{U}}$ is fully determined by the original causal model via \cref{eq:funcdepends}. More concretely, if $\bm{U}_1,\bm{U}_2,\ldots,\bm{U}_n$ are the weakly connected components of $\bm{U}$, then in an inflation model we must have
+For us, the crucial property of a pre-injectable set $\bm{U}$ is that in an inflation model, $\pdf{\bm{U}}$ is fully determined by the original causal model via \cref{eq:funcdepends}. More concretely, if $\bm{U}_1,\ldots,\bm{U}_n$ are the weakly connected components of $\bm{U}$, then in an inflation model we must have
 \begin{align}\label{eq:preinjfactor}
-	P(\bm{U}) = P(\bm{U}_1) P(\bm{U}_2)  \cdots P(\bm{U}_n) = P(\subsim{\bm{U}}_1) P(\subsim{\bm{U}}_2) \cdots P(\subsim{\bm{U}}_n).
+	P(\bm{U}) = P(\bm{U}_1) \cdots P(\bm{U}_n) = P(\subsim{\bm{U}}_1) \cdots P(\subsim{\bm{U}}_n).
 \end{align}
 % but there are other possibilities as well, such as when $\pdf{\bm{U}}=\pdf{\bm{X}}\pdf{\bm{Y}}$ due to $\bm{X}\aindep\bm{Y}$. In this example, if $\bm{X}$ and $\bm{Y}$ are both injectable sets, then consequently $\bm{U}$ is pre-injectable, even if $\bm{U}$ is redundant, and hence the distribution over $\bm{U}$ would be $\pdf{\bm{U}}=\pdf{\subsim{\bm{X}}}\pdf{\subsim{\bm{Y}}}$.
 For this reason, pre-injectable sets will play a role in deriving polynomial inequalities via polytope projection techniques.
@@ -750,9 +492,12 @@ It is worth noting that duplicating an outgoing edge in a causal structure means
 
 So a non-broadcasting inflation DAG is one in which the set of children of every latent node in the inflation DAG $G'$ is irredundant, i.e.  
 \begin{align}\label{eq:nonbroadcastinginflationDAG}
-G'\in\SmallNamedFunction{NonBroadcastingInflations}{G} \quad\text{ iff }\quad \forall A_i\in \SmallNamedFunction{LatentNodes}{G'} :\; \Ch[G']{A_i} \text{ is an irredundant set.}
+G'\in\SmallNamedFunction{NonBroadcastingInflations}{G} \quad\text{ iff }\quad \forall_{\text{latent }A_i\in G'}\; \Ch[G']{A_i} \text{ is an irredundant set.}
 \end{align}
-We also find it useful to define the notion of a non-broadcasting subset of nodes within some larger broadcasting inflation DAG. A set of nodes $\bm{U}$ is a \tblue{non-broadcasting set} iff $\ansubgraph[G']{\bm{U}}$ is a non-broadcasting inflation DAG. Any inference about the original DAG which can be made by referencing exclusively to non-broadcasting sets hold in both the classical and quantum paradigms. Broadcasting inflation DAGs are therefore especially useful for deriving criteria which distinguish quantum and classical probability distributions, but we anticipate them to be valuable for broader causal inference tasks as well.
+We also find it useful to define the notion of a non-broadcasting subset of nodes within some larger broadcasting inflation DAG.
+Let's define any pair of redundant nodes which share a latent parent to be a \tblue{fundamental broadcasting pair}. An inflation DAG is non-broadcasting if it does not contain any fundamental broadcasting pairs. Similarly, a set of nodes $\bm{U}$ is a \tblue{non-broadcasting set} iff $\An[G']{\bm{U}}$ is free of any fundamental broadcasting pairs.
+
+%A set of nodes $\bm{U}$ is a \tblue{non-broadcasting set} iff $\ansubgraph[G']{\bm{U}}$ is a non-broadcasting inflation DAG. Any inference about the original DAG which can be made by referencing exclusively to non-broadcasting sets hold in both the classical and quantum paradigms. Broadcasting inflation DAGs are therefore especially useful for deriving criteria which distinguish quantum and classical probability distributions, but we anticipate them to be valuable for broader causal inference tasks as well.
 
 In classical causal structures the latent nodes correspond to classical hidden variables. In quantum causal structures, however, the latent nodes are taken to be quantum systems. Some quantum causal structures are famously capable of realizing distributions that would not be possible classically, although the set of quantum distribution is superficially quite similar to the classical subset \cite{pusey2014gdag,fritz2012bell}. For example, classical and quantums distributions alike respect all conditional independence relations implied by the common underlying causal structure \cite{pusey2014gdag}. Recent work has found that quantum causal structure implies many of the entropic inequalities implied by their classical counterparts \cite{pusey2014gdag,Chaves2015infoquantum,ChavesNoSignalling}. To-date, no quantum distribution has been witnessed to violate a Shannon-type entropic inequality on observable variables derived from the Markov conditions on all nodes \cite{chaves2012entropic,fritz2012bell}. Fine-graining the scenario by conditioning on discrete settings leads to a different kind of entropic inequality, and these have proven somewhat quantum-sensitive \cite{braunstein1988entropic,SchumacherInequality,chaves2014novel}. Such \citet{braunstein1988entropic} type inequalities are still limited, however, in that they rely on root observable nodes\footnote{Rafael Chaves and E.W. are exploring the potential of entropic analysis based on fine-graining causal structures over non-root observable nodes. This generalizes the method of entropic inequalities, and might be capable of providing much stronger entropic infeasibility criteria.}, and they still fail to detect certain extremal non-classical distributions \cite{chaves2014novel,fritz2012bell}.  
 
@@ -793,7 +538,7 @@ Let us ask, is it possible for the three original-scenario observable variables 
 \begin{align}\label{eq:ghzdistribution1}
 p_{\text{GHZ}}\parens{a b c}=\frac{[000]+[111]}{2}=\begin{cases}\tfrac{1}{2}&\text{if }\; a=b=c, \\ 0&\text{otherwise}.\end{cases}
 \end{align}
-We assume uniform binary variables for the sake of concreteness, but the argument is general. Let's temporarily (falsely) assume $P_{\text{GHZ}}$ to be feasible for the triangle scenario. Since $\brackets{A_2 C_1}$ is an injectable set we have $\pdf{A_2 C_1}=\pdf{A C}$, and therefore $P_{\text{GHZ}}$ implies that $A_2$ and $C_1$ are perfectly correlated. Similarly, since $\brackets{B_1 C_1}$ is an injectable set we have $\pdf{B_1 C_1}=\pdf{A C}$, and therefore $B_1$ and $C_1$ must be perfectly correlated, and by extension $B_1$ and $A_2$ are perfectly correlated as well. On the other hand, $A_2$ and $B_1$ must be statistically independent, as they do not share any common ancestor. The only way for two variables to be \emph{both} perfectly correlated and independent is by being deterministic. This is not the case in $P_{\text{GHZ}}$, and thus we have certified that $P_{\text{GHZ}}$ is not realizable from the Triangle causal structure, recovering the seminal result of \citet{steudel2010ancestors}.
+We assume uniform binary variables for the sake of concreteness, but the argument is general. Let's temporarily (falsely) assume $P_{\text{GHZ}}$ to be realizable for the triangle scenario. Since $\brackets{A_2 C_1}$ is an injectable set we have $\pdf{A_2 C_1}=\pdf{A C}$, and therefore $P_{\text{GHZ}}$ implies that $A_2$ and $C_1$ are perfectly correlated. Similarly, since $\brackets{B_1 C_1}$ is an injectable set we have $\pdf{B_1 C_1}=\pdf{A C}$, and therefore $B_1$ and $C_1$ must be perfectly correlated, and by extension $B_1$ and $A_2$ are perfectly correlated as well. On the other hand, $A_2$ and $B_1$ must be statistically independent, as they do not share any common ancestor. The only way for two variables to be \emph{both} perfectly correlated and independent is by being deterministic. This is not the case in $P_{\text{GHZ}}$, and thus we have certified that $P_{\text{GHZ}}$ is not realizable from the Triangle causal structure, recovering the seminal result of \citet{steudel2010ancestors}.
 
 To be clear, one can employ \emph{any} kind of causal infeasibility criteria on the inflation DAGs to constrain the distributions on the original DAG. For example, here's a quantitative version of the same proof against perfect correlation in the Triangle scenario, this time using entropic arguments: Trivially $H(A_2|B_1)\leq H(A_2|C_1)+H(C_1|B_1)$, because the amount of information required to learn $A_2$ from $B_1$ is surely less than the amount of information required to learn  $A_2$ from $C_1$ and also to learn $C_1$ from $B_1$. On the other hand, the marginal independence of $A_2$ and $B_1$ implies $H(A_2|B_1)=H(A_2)$. $P_{\text{GHZ}}$ is ruled out, because it would yield $H(A_2|C_1)=H(C_1|B_1)=0$ while $H(A_2)=1$. The entropic conclusion is $H(A_2)\leq H(A_2|C_1)+H(C_1|B_1)$, or equivalently, $I(A_2:C_1)+I(B_1:C_1)\leq H(C_1)$. The injectability of sets per \cref{fig:TriDagSubA2B1C1} in turn yields
 \begin{align}\label{eq:monogomyofcorrelations}
@@ -856,7 +601,7 @@ The W-type distribution is difficult to witness as unrealizable using convention
 
 Consider the causal structure associated to the Bell \cite{bell1964einstein,Brunner2013Bell,bell1966lhvm,CHSHOriginal} scenario [\citealp{pusey2014gdag}~(Fig.~E\#2), \citealp{WoodSpekkens}~(Fig.~19), \citealp{chaves2014novel}~(Fig.~1), \citealp{BeyondBellII}~(Fig.~1), \citealp{wolfe2015nonconvexity}~(Fig.~2b), \citealp{steeg2011relaxation}~(Fig.~2)], depicted here in \cref{fig:NewBellDAG1}. The observable variables are $\brackets{A,B,X,Y}$, and $\Lambda$ is the latent common cause of $A$ and $B$. An inflation of the Bell scenario is show in \cref{fig:BellDagCopy1}.
 
-The PR-box distribution is famously inconsistent with the Bell scenario \cite{PROriginal,PRUnit}. Here we prove its unrealizability using inflation DAG logic. The distribution  is given by ${P_{\text{PR}}}\parenths{A B X Y} = P_{\text{PR}}\parenths{A B | X Y} P(X) P(Y)$, where $P(X)$ and $P(Y)$ are arbitrary full-support distributions\footnote{In the literature on the Bell scenario, these variables are known as ``settings''. Generally, We may think of endogenous observable variables as settings, coloring them light green in the DAG figures. Settings variables are natural candidates for conditioning on.} over the binary variables $X$ and $Y$, and
+The \citet{PROriginal} PR-box distribution is famously inconsistent with the Bell scenario \cite{PROriginal,PRUnit}. Here we prove its unrealizability using inflation DAG logic. The distribution  is given by ${P_{\text{PR}}}\parenths{A B X Y} = P_{\text{PR}}\parenths{A B | X Y} P(X) P(Y)$, where $P(X)$ and $P(Y)$ are arbitrary full-support distributions\footnote{In the literature on the Bell scenario, these variables are known as ``settings''. Generally, We may think of endogenous observable variables as settings, coloring them light green in the DAG figures. Settings variables are natural candidates for conditioning on.} over the binary variables $X$ and $Y$, and
 \begin{align}\begin{split}\label{eq:PRbox}
 % & p_{\text{PR}}\parens{a b |x y}=\frac{[00|00]+[11|00]+[00|10]+[11|10]+[00|01]+[11|01]+[01|11]+[10|11]}{8}\\
 p_{\text{PR}}\parens{a b |x y}=\begin{cases}\tfrac{1}{2}&\text{if }\; \SmallNamedFunction[2]{mod}{a+b}=x\cdot y, \\ 0&\text{otherwise}.\end{cases}
@@ -877,6 +622,29 @@ No matter how biased the distributions $P(X)$ and $P(Y)$ are, however, surely th
 %&= \p{A_1\cramp{\neq}B_2|X_1\eql 0, Y_2\eql 1}+\p{A_2\cramp{\neq}B_1| Y_1\eql 0,X_2\eql 1}\\
 %&\therefore \p{A=B|X\eql Y\eql 0}\leq \p{A\neq B|X\eql 1,Y\eql 0}+\p{A\neq B|X\eql 0,Y\eql 1}
 %\end{split}\end{align}
+
+\begin{comment}
+\example{: \tred{The center-break distribution cannot arise from the Instrumental scenario}}\par\smallskip\nobreak
+\begin{figure}[t]
+\centering
+\begin{minipage}[b]{0.375\linewidth}
+\centering
+\includegraphics[scale=1]{InstrumentalDAGpearl.pdf}
+\caption{The Instrumental scenario}\label{fig:instrumental}
+\end{minipage}\hspace{80pt}
+\begin{minipage}[b]{0.4\linewidth}
+\centering
+\includegraphics[scale=1]{InstrumentalInflation.pdf}
+\caption{An inflation of the Instrumental scenario.}\label{fig:instrumentalinflation}
+\end{minipage}\hfill
+\end{figure}
+
+The (disallowed) center-break distribution for the Instrumental scenario is one in which $Y$ and $Z$ are perfectly correlated while $X$ is fixed as a point distribution, i.e. returning one outcome with 100\% probability.
+\begin{align}\begin{split}\label{eq:PRbox}
+&{P_{\text{CB}}}\parenths{X Y Z} \coloneqq\quad p_{\text{CB}}\parens{x y z} y}=\frac{[000]+[011]}{2}=\begin{cases}\tfrac{1}{2}&\text{if }\; y\eql z \land x\eql0 \\ 0&\text{otherwise}\end{cases}
+\end{split}\end{align}
+We prove its infeasibility by considering the inflation DAG in \cref{fig:instrumentalinflation}. 
+\end{comment}
 
 
 The following section discusses how to procedurally derive polynomial infeasibility criteria pertaining to original DAG from properties of an inflation DAG. 
@@ -908,7 +676,7 @@ Our final goal in deriving polynomial inequalities is to derive constraints on t
 
 We are aware of a variety of methods for identifying interesting constraints on the distributions over the variables in the pre-injectable sets. But here, we focus on the very simplest and weakest such constraint: the nonnegativity of probabilities together with the factorization~\cref{eq:preinjfactor}. In fact, this is all that we have used in the previous section as well.
 
-Our method is based on deriving inequalities for the so-called \tblue{marginal problem}. This relies on linear quantifier elimination, which is computationally feasible in at least some cases. A nonlinear method for deriving even tighter constraints is discussed in appendix \cref{sec:nonlinearelimination}. The simpler method discussed here consists of two steps: 1) Identify the pre-injectable sets, and 2) Solve the marginal problem with respect to the pre-injectable sets.
+Our method is based on deriving inequalities for the so-called \tblue{marginal problem}. This relies on linear quantifier elimination, which is computationally feasible in at least some cases. A nonlinear method for deriving even tighter constraints is discussed in \cref{sec:nonlinearelimination}. The simpler method discussed here consists of two steps: 1) Identify the pre-injectable sets, and 2) Solve the marginal problem with respect to the pre-injectable sets.
 
 
 \step{: \tred{Identifying the Pre-Injectable Sets}}\label{step:findpreinjectable}\par\smallskip\nobreak
@@ -1006,7 +774,7 @@ Having identified the pre-injectable sets (and how to use them), we next turn to
 
 The most trivial constraint possible 
 %on the pre-injectable set
-is the \emph{existence of a joint probability distribution} over all the observable variables in the inflation DAG. Each of the five three-variable distributions in \cref{eq:preinjectableuses222} is a different marginal distribution of the six-variable joint distribution $\pdf{A_1 A_2 B_1 B_2 C_1 C_2}$. Solving the marginal problem means finding inequalities on the marginal distributions such that the inequalities will satisfied only if there exists some joint distribution from which the distributions on the marginal sets can be recovered through marginalization. The marginal problem comes up in a variety of applications, and has been studied extensively; see~\cite{fritz2013marginal} for further references.\purp{Tobias, say better? And add citations please!} \purp{T: Ok, I'll get back to this on my second iteration} 
+is the \emph{existence of a joint probability distribution} over all the observable variables in the inflation DAG. Each of the five three-variable distributions in \cref{eq:preinjectableuses222} is a different marginal distribution of the six-variable joint distribution $\pdf{A_1 A_2 B_1 B_2 C_1 C_2}$. Solving the marginal problem means finding inequalities on the marginal distributions such that the inequalities will satisfied only if there exists some joint distribution from which the distributions on the marginal sets can be recovered through marginalization, i.e. if the distributions are \tblue{marginally compatible}. The marginal problem comes up in a variety of applications, and has been studied extensively; see~\cite{fritz2013marginal} for further references.\purp{Tobias, say better? And add citations please!} \purp{T: Ok, I'll get back to this on my second iteration} 
 
 \purp{Comment about how solving marginals problem still gives polynomial inequalities.}
 
@@ -1056,7 +824,12 @@ Linear quantifier elimination routines are available in many software tools\foot
 
 Linear quantifier elimination is already widely used in causal inference to derive entropic inequalities \cite{fritz2013marginal,chaves2014novel,chaves2014informationinference}. In that task, however, the quantifiers being eliminated are those entropies which refer to hidden variables. By contrast, the probabilities we consider here are exclusively in terms of observable variables right from the very start. The quantifiers we eliminate are the gedankenprobabilities, which are quite different from probabilities involving hidden variables.
 
-Although linear quantifier elimination can be highly optimized, it can still prove computationally difficult. It is therefore sometimes useful to consider relaxations of the marginals problem. The \emph{full} marginals problem is to find inequalities on the marginal distributions such that the inequalities are satisfied \emph{if and only if} the given marginal distributions can be extended. It is much easier to generate necessary-but-insufficient inequalities, i.e. satisfied by all compatible marginal distributions but such that no-violation does not certify compatibility. We have identified a technique for rapidly generating such quantifier-free inequalities by restricting the search to inequalities of a very particular form. We found this alternative technique — trading generality for speed — to be extraordinarily practical. The type of inequalities that we consider are given by a certain class of tautologies in classical propositional logic, see \cref{sec:TSEM} for further details.
+One may include further linear constraints beyond the usual marginals problem. For example, we know that sometimes the distributions of different injectable sets coincide, i.e. 
+$\pdf{\bm{X}}=\pdf{\bm{Y}}$ whenever both $\bm{X}$ and $\bm{Y}$ are injectable, and $\subsim{\bm{X}}=\subsim{\bm{Y}}$, because injectability implies $\pdf{\bm{X}}=\pdf{\subsim{\bm{X}}}$ etc. Such equations relating coinciding marginal distributions can be used to further constrain the gedankenprobabilities; they can even be used to pre-eliminate some gedankenprobabilities through Gaussian elimination, slightly reducing the need for linear quantifier elimination. These linear constraints are not part of the usual marginal problem, however; see \cref{sec:nonlinearelimination} for further discussion.
+
+One may also substitute numeric values for all the pre-injectable probabilities appearing in the marginals problem. Upon doing so, the quantifier elimination problem is converted to a quantifier existence problem: Do there exist gedankenprobabilities that satisfy the resulting system of inequalities? Such \emph{satisfiability} questions can be resolved quite rapidly, especially when the quantifiers are linear \cite{Korovin2012ImplementingCRA,Bobot2012SimplexSAT}. Note that real-world data with uncertainties can also be incorporated into these satisfiability questions. Instead of asserting that a particular probability is equal to a given \emph{value}, one can incorporate new inequalities which constrain the experimentally-known probabilities to lie in given \emph{intervals}. Assigning probabilities to intervals as opposed to numeric values results in further free parameters in the system, but the problem nevertheless remains one of \emph{universal} existential closure, and can be resolved with extreme efficiency.
+
+Although linear quantifier elimination can be highly optimized, it can still prove computationally difficult. It is therefore sometimes useful to consider relaxations of the marginals problem. The \emph{full} marginals problem is to find inequalities on the marginal distributions such that the inequalities are satisfied \emph{if and only if} the given marginal distributions can be extended. It is much easier to generate necessary-but-insufficient inequalities, i.e. satisfied by all compatible marginal distributions but such that no-violation does not certify marginal compatibility. We have identified a technique for rapidly generating such quantifier-free inequalities by restricting the search to inequalities of a very particular form. We found this alternative technique — trading generality for speed — to be extraordinarily practical. The type of inequalities that we consider are given by a certain class of tautologies in classical propositional logic, see \cref{sec:TSEM} for further details.
 
 %One useful alternative to linear quantifier elimination is to identify representative probability distributions which are incompatible with the (unprojected) constraints; \citet{ChavesNoSignalling} use this technique, for example. %That technique essentially translates the elimination problem to a satisfiability problem, and moreover an ultra-efficient \emph{linear} quantifier existence problem at that! In the context of polytope projection, these representative probability distributions correspond to extreme rays of the so-called ``projection cone" \cite{jones2004equality,Jones2008,BalasProjectionCone}.
 
@@ -1082,20 +855,20 @@ The nontrivial polynomial inequality
 \begin{align}\label{eq:tritrivial1}
 {\p{a} + \p{b} + \p{c}} \leq {1 + \p{a} \p{b} + \p{a c} + \p{b c}}
 \end{align}
-is found to be a constraint on the Triangle scenario through by summing the follow two inequalities
+is found to be a constraint on the Triangle scenario through by summing the follow two nonnegativity inequalities
 \begin{align}\begin{split}\label{eq:trisimplestunmapped}
  &0\leq  1 -\p{a_2} - \p{b_1} - \p{c_1}+ \p{a_2 b_1} + \p{a_2 c_1} + \p{b_1 c_1}  -\p{a_2 b_1 c_1} \quad\left[=\p{\n{a}_2 \n{b}_1 \n{c}_1}\right]
 \\&0\leq \p{a_2 b_1 c_1}
 \end{split}\\
 \shortintertext{subject to the following transformations}
-&  \underbrace{\larray{\\\p{a_2 b_1} \to \p{a_2} \p{b_1}}}_{\text{Factorization relation, per \cref{eq:dfac222}.}} \quad \text{and}\qquad
+&  \underbrace{\larray{\\\p{a_2 b_1} \to \p{a_2} \p{b_1}}}_{\text{via ancestral independence}} \quad \text{and}\qquad
  \underbrace{\begin{array}{c}
  \p{a_2}\to\p{a}\,, 
 \; \p{b_1}\to\p{b}\,, 
 \; \p{c_1}\to\p{c},
 \\ \p{a_2 c_1}\to \p{a c},
 \; \p{b_1 c_1}\to \p{b c}
-\end{array}}_{\text{Mapping relations, per \cref{eq:map222}}}.
+\end{array}}_{\text{via injectable set}}.
 \end{align}
 Indeed, this example has been chosen because \cref{eq:tritrivial1} can be derived directly from the small ancestral subgraph of $\{A_2 B_1 C_1\}$, namely \cref{fig:TriDagSubA2B1C1}.
 
@@ -1132,13 +905,13 @@ Slightly more involved but otherwise analogous considerations give rise to the i
  \p{a_2 b_1 c_2}\to \p{a_2} \p{b_1 c_2} \\
  \p{a_2 b_2 c_1}\to \p{b_2} \p{a_2 c_1} \\
  \p{a_2 b_2 c_2}\to \p{a_2} \p{b_2} \p{c_2} \\
-\end{array}}_{\text{Factorization relations}}   \quad \text{ and }\quad
+\end{array}}_{\text{via ancestral independence}}   \quad \text{ and }\quad
 \underbrace{\begin{array}{l}
 \p{a_1 b_2} \to \p{a b} \\
 \p{a_2 c_1} \to \p{a c} \\
 \p{b_1 c_2} \to \p{b c} \\
 \p{\n{a}_1 \n{b}_1 \n{c}_1}\to \p{\n{a} \n{b} \n{c}}  \\
-\end{array}\,.}_{\text{Nontrivial mapping relations}}
+\end{array}\,.}_{\text{via injectable sets}}
 \end{align}
 A consequence of \cref{eq:FritzF3} is that the W-type distribution per \cref{eq:wdistribution1}
 %\begin{align}\label{eq:wdistribution}
@@ -1309,79 +1082,60 @@ Not every inflation requires broadcasting, however, and hence not every gedanken
 \cref{fig:TriDagSubA2B1C1} is an example of a non-broadcasting inflation.
 Constraints derived from non-broadcasting inflations are valid even in the GPT paradigm. Consequently the inequality in \cref{eq:tritrivial1}, which was derived from \cref{fig:TriDagSubA2B1C1}, is therefore a causal infeasibility criterion which holds for the Triangle scenario even when the latent nodes are allowed to be quantum states. This confirms our numerical computations, which indicated that~\eqref{eq:tritrivial1} does not have any quantum violations. The same is true for monogamy of correlations, per \cref{eq:monogomyofcorrelations}. Since the GHZ-type distribution~\cref{eq:ghzdistribution1} violates both of these inequalities, it is forbidden even per the relaxed GPT Triangle scenario, as was pointed out earlier. 
 
-It might also be possible to derive quantum causal infeasibility criteria if one appropriately modifies \cref{step:generateineqs} to generate a different initial set of nonnegativity inequalities. This new set should capture the nonnegativity of only quantum-physically-meaningful marginal probability distributions. From this perspective, a broadcasting inflation DAG is an abstract logical concept, as opposed to a hypothetical physical construct. Indeed, the distributions in a quantum broadcasting inflation DAG can be characterized in terms of the logical broadcasting maps of \citet{Coecke2011}. Note that $\p{a_1,a_2}$ and other broadcasting-implicit gedankenprobabilities can be \emph{negative} pursuant to a logical broadcasting map, and hence \cref{step:generateineqs} in \cref{sec:mainalgorithm} would need to be modified.
+It might also be possible to derive quantum causal infeasibility criteria if one appropriately modifies \cref{sec:ineqs} to generate a different initial set of nonnegativity inequalities. This new set should capture the nonnegativity of only quantum-physically-meaningful marginal probability distributions. From this perspective, a broadcasting inflation DAG is an abstract logical concept, as opposed to a hypothetical physical construct. Indeed, the distributions in a quantum broadcasting inflation DAG can be characterized in terms of the logical broadcasting maps of \citet{Coecke2011}. Note that $\p{a_1,a_2}$ and other broadcasting-implicit gedankenprobabilities can be \emph{negative} pursuant to a logical broadcasting map, and hence the marginal problem should be reformulated as to the questioning the existence of non-broadcastings sets rather than the existence of a full joint distribution from which the marginal distributions might be recovered.
 
 An analysis along these lines has already been carried out successfully by \citet{Chaves2015infoquantum} in the derivation of entropic inequalities for non-classical causal structures. Although \citet{Chaves2015infoquantum} do not invoke inflation DAGs, they do employ conditional structure, which therefore gives rise to broadcasting sets. \citet{Chaves2015infoquantum} take pains to avoid including broadcasting gedankenentropies in any of their initial entropic inequalities, precisely as we would want to do in constructing our initial probability inequalities. Unlike entropic inequalities, the derivation of probability inequalities has not yet been achieved for non-classical causal structures other than Bell scenarios. 
 
 Our current inflation DAG method can be employed to derive causal infeasibility criteria for general causal structures, thus generalizing Bell inequalities somewhat. From a quantum foundations perspective, however, generalizing Tsirelson inequalities \cite{Tsirelson1980,Brunner2013Bell}---the ultimate constraints on what quantum theory makes possible---is even more desirable. Deriving additional quantum causal infeasibility criteria for general causal structure is therefore a priority for future research. \purp{T: move this to conclusions?}
 
+\section{Inequalities for the marginal problem via Hardy-type paradoxes and minimal transversals}\label{sec:TSEM}
 
-\section{Tautologies of the Supplemented Excluded Middle}\label{sec:TSEM}
+In the literature on Bell inequalities, it has been noticed that the infeasibility with the Bell scenario DAG can sometimes be witnessed by only looking at which joint probabilities are zero and which ones are nonzero. In other words, instead of considering the probability of a joint outcome, some distributions can be witnesses as infeasible by only considering the \emph{possibility} or \emph{impossibility} of each joint outcome. This has been originally noticed by~\citet{L.Hardy:PRL:1665}, and hence such possibilistic constraints are also known as \tblue{Hardy-type paradoxes}. The ``paradox'' occurs whenever the possibilistic constraint is violated. For a systematic account of Hardy-type paradoxes in Bell scenarios, see~\cite{Mansfield2012}. It has been noted previously that such possibilistic constraints also exist for other types of marginal problems~\cite[Section~III.C]{LSW}. In the following, we explain how to determine \emph{all} such constraints for \emph{any} marginal problem.
 
-The process of linear quantifier elimination, while orders of magnitude more computationally amenable than its nonlinear variant, is nevertheless nontrivial. When the number of observable random variables in the inflation DAG is too large, it quickly happens that even the linear quantifier elimination algorithms may be too slow for practical application. To this end we have developed a strategy that identifies only one particular class of causal infeasibility criteria, but does so nearly instantly.
+To start with a simple example, suppose that we are in a marginal scenario where the pairwise joint distributions of three variables $A$, $B$ and $C$ are given, and these two variables are binary with values in $\{0,1\}$. Then we have the implication
+\[
+	(A=0,C=1) \Longrightarrow (A=0,B=0) \lor (B=1,C=1).
+\]
+Assuming the existence of a solution to the marginal problem, we can apply the union bound to the probability of the right-hand side. This translates the implication into the inequality
+\[
+	P_{AC}(01) \leq P_{AB}(00) + P_{BC}(11),
+\]
+which is therefore a necessary condition for the marginal problem to have a solution. Applying this together with the inflation technique to the Triangle scenario results precisely in our earlier inequality~\cref{eq:tritrivial1}.
 
-In this approach we construct polynomial inequalities corresponding to some tautology of the excluded middle (TEM). In classical logic, the TEM refers to that self-evident truism that every proposition is either true or false, and hence 
-\begin{align}
-\mathsf{True} \iff \NamedFunction{Or}{ A\cramp{=}a , A\cramp{\neq}a }\,.
-\end{align}
-Note that we treat statistical events such as random variables yielding particular outcomes as identically logical propositions. The TEM can also be supplemented with certain ``givens", which we take to be known-true propositions on the left-hand-side. These ``givens" can then be interspersed throughout the right-rand-side while still yielding a valid tautology. Thus
-\begin{align}\label{eq:TSEMdemo}
-\NamedFunction{And}{ \mgreen{a} , \mgreen{b} }
-\implies 
-\NamedFunction{Or}{
-    \NamedFunction{And}{ \mgreen{a} , c } ,\\
-    \NamedFunction{And}{ \mgreen{b} , \n{c} }
-}
-\end{align}
-is an example of a tautology of the \emph{supplemented} excluded middle (T\emph{S}EM). For pedagogical clarity we color and bold the ``given" outcomes on both sides of the tautology.
+We outline the general procedure using a slightly more sophisticated example. Consider the marginal scenario of~\cref{fig:simplicialcomplex222}, where the contexts are
+\begin{align*}
+	\{A_1 B_1 C_1\},\\
+	\{A_1 B_2 C_2\},\\
+	\{A_2 B_1 C_2\},\\
+	\{A_2 B_2 C_1\},\\
+	\{A_2 B_2 C_2\}.
+\end{align*}
+Now a possibilistic constraint on this marginal problem consists of a logical implication with one joint outcome as the implicant and a disjunction of joint outcomes as the conclusion (implicate?). In the following, we explain how to generate \emph{all} such implications which are tight in the sense that their right-hand sides are minimal. So let us fix some joint outcome for the left-hand side for the sake of concreteness, taking
+\begin{equation}
+	\label{eq:lhshardy}
+	(A_2 = 1, B_2 = 1, C_2 = 1).
+\end{equation}
+To generate all possibilistic constraints, one will have to perform the following procedure for every choice of joint outcome in every context as the left-hand side. Assuming these concrete outcomes, the right-hand side of the implication needs to be a conjunction of joint outcomes which is such that for any deterministic assignment of outcomes to the variables which extends~\cref{eq:lhshardy}, also at least one of the joint outcomes on the right-hand side occurs. To determine what the possibilities for choosing this right-hand side are, it helps to draw the following hypergraph: take the set of nodes to be the disjoint union over all the contexts of all the joint outcomes which are compatible with~\eqref{eq:lhshardy}\footnote{In the left-hand side context there will thus be only one node, and one can also omit this one node without changing the result.}. Furthermore, let the hyperedges correspond to complete deterministic assignments of values to all variables extending~\cref{eq:lhshardy}, such that such a hyperedge contains precisely those nodes that are the marginal outcomes to which it restricts. In our example, the resulting hypergraph has $2^3 + 3\cdot 2^1 = 14$ nodes and $2^3 = 8$ hyperedges. Then the possible right-hand sides of the implications are precisely the \tblue{transversals} of this hypergraph, i.e.~the sets of nodes which have the property that they intersect every hyperedge in at least one node. In order to get implications which are as tight as possible, it is sufficient to enumerate only the \tblue{minimal transversals}. Doing so is a well-studied problem in computer science with various natural reformulations and for which manifold algorithms have been developed~\cite{eiter_dualization_2008}. We expect that this enumeration of minimal transversals will be computationally much more tractable than the linear quantifier elimination, even if one does it for every possible left-hand side of the implication.
 
-Every TSEM can be converted into a linear inequality by virtue of two connections between classical logical and probability:
-\begin{compactenum}
-\item As the antecedent always implies the consequent, the probability of the antecedent is necessarily less-than-or-equal-to the probability of the consequent. If $j \cramp{\scriptstyle \implies} k$ then $\p{j}\leq\p{k}$.
-\item The probability of a disjunction of events is less-than-or-equal-to the sum of the probabilities of the individual events, i.e. ${\p{j\lor k}=\p{j}+\p{k}-\p{j,k}\leq \p{j}+\p{k}}$.
-\end{compactenum}
-The inequality which would correspond to the TSEM in \cref{eq:TSEMdemo} is 
-\begin{align}
-    \p{a b} \leq \p{a c}+\p{b \n{c}}\,.
-\end{align}
+In our example, it is not hard to check that the right-hand side of
+\begin{align*}
+	(A_2 = 1, B_2 = 1, C_2 = 1) \Longrightarrow (A_1 = 0, B_1 & = 0, A_1 = 0) \lor (A_1 = 1, B_2 = 1, C_2 = 1) \\
+		& \lor (A_2 = 1, B_1 = 1, C_2 = 1) \lor (A_2 = 1, B_2 = 1, C_1 = 1)
+\end{align*}
+is such a minimal transversal: every assignment of values to all variables which extends the assignment on the left-hand side satisfies at least one of the terms on the right, but this ceases to hold as soon as one removes any one term on the right.
 
-TSEM inequalities can be used as precursors for polynomial inequalities by applying them to inflation DAGs. For example the TSEM inequality
-\begin{align}
-    \p{a_2 b_1} \leq \p{a_2 b_1}+\p{\n{b}_1 c_1}
-\end{align}
-applied to our inflation of the Triangle scenario would imply the causal infeasibility criterion  
-\begin{align}
-    \p{a}\p{c} \leq \p{a b}+\p{\n{b} c}
-\end{align}
-pursuant to \cref{fig:TriDagSubA2B1C1}.
+Finally, we convert the implication into an inequality by replacing ``$\Rightarrow$'' by ``$\leq$'' at the level of probabilities and the disjunctions by sums,
+\[
+	P_{A_2 B_2 C_2}(111) \leq P_{A_1 B_1 C_1}(000) + P_{A_1 B_2 C_2}(111) + P_{A_2 B_1 C_2}(111) + P_{A_2 B_2 C_1}(111).
+\]
+Applying this to our inflation DAG of~\cref{fig:Tri222} results again in one of our previous inequalities,~\cref{eq:FritzF3}.
 
-In fact almost every causal infeasibility criterion in this paper is a TSEM inequality! The Triangle scenario inequality \cref{eq:trifancyunmapped} corresponds to the logical TSEM
-\begin{align}
-    \NamedFunction{And}{\mgreen{a_2} , \mgreen{b_2} , \mgreen{c_2}}\implies 
-\NamedFunction{Or}{\NamedFunction{And}{\n{a}_1 , \n{b}_1 , \n{c}_1},\\ \NamedFunction{And}{a_1 , \mgreen{b_2} , \mgreen{c_2}},\\ \NamedFunction{And}{\mgreen{a_2} , b_1 , \mgreen{c_2}},\\ \NamedFunction{And}{\mgreen{a_2} , \mgreen{b_2} , c_1}}
-\end{align}
-and then Bell scenario inequality in \cref{eq:bellypolyunmapped} follows from the logical TSEM
-\begin{align}
- \NamedFunction{And}{\mgreen{a_1} , \mgreen{b_1} , \mgreen{x_1} , \mgreen{\n{x}_2}, \mgreen{y_1} ,  \mgreen{\n{y}_2}}
-\implies
-\NamedFunction{Or}{\NamedFunction{And}{\n{a}_2 , \mgreen{b_1} , \mgreen{x_1}, \mgreen{\n{x}_2} , \mgreen{y_1} , \mgreen{\n{y}_2}}\\
-\NamedFunction{And}{\mgreen{a_1} , \n{b}_2 , \mgreen{x_1} ,\mgreen{\n{x}_2},\mgreen{y_1},\mgreen{\n{y}_2}}\\
-\NamedFunction{And}{a_2 , b_2 , \mgreen{x_1}, \mgreen{\n{x}_2}, \mgreen{y_1}, \mgreen{\n{y}_2}}}
-\end{align}
-etc.
+Since also many Bell inequalities are of this form---such as the CHSH inequality which follows in this way from Hardy's original implication---we conclude that this method is still sufficiently powerful to generate plenty of interesting inequalities, and at the same time significantly easier to perform in practice than the full-fledged linear (let alone nonlinear) quantifier elimination.
 
-Generating TSEM inequalities is computationally much easier than performing quantifier elimination. A practical alternative to \cref{sec:mainalgorithm}, then, is the four-step process
-\begin{compactenum}
-\item Generate TSEM inequalities on the inflation DAG.
-\item Factor the probabilities (same as \cref{step:fac} in \cref{sec:mainalgorithm}).
-\item Map as many probabilities to the original DAG as possible (same as \cref{step:findmap} in \cref{sec:mainalgorithm}).
-\item Discard any remaining inequalities which involve unmappable gedankenprobabilities.
-\end{compactenum}
-Restricting one's search to TSEM inequalities makes deriving causal infeasibility criteria extremely tractable even for large DAGs, but a consequence, however, is that only one class of possible inequalities is being considered.
+One can also come up with a \emph{satisfiability} version of a marginal problem at the possibilistic level. Possibilistic satisfiability is the following: for every joint marginal outcome with positive probability, one needs to find an assignment of values to all variables which extends the given marginal outcomes and such that the restriction to every context also has positive probability. This is very easy to do: one can simply enumerate all deterministic assignments of values to all observables, discard all those that have a marginal with zero probability, and then check whether the remaining assignments are enough to generate all the joint marginal outcomes with positive probability.
 
-In order to make a TSEM inequality as compelling as possible one should ensure that every event on the left hand side is also referenced at least once on the right hand side. If one find a TSEM inequality lacking this property then one should tighten the inequalities by deleting any events which occur only on the left hand side. This preserves the tautology while increasing the probability of the left hand side.
-
-We note that the connection between classical propositional logic and linear inequalities has been used previously in the task of causal inference. We reiterate that inequalities resulting from propositional logic, however, are a subset of the inequalities that result from linear quantifier elimination. Consequently, linear quantifier elimination is the preferable tool for deriving inequalities whenever the elimination is computationally tractable. Noteworthy examples of works deriving causal infeasibility criteria via classical logic are \citet{Pitowsky1989} and \citet{Ghirardi08}: \cref{eq:trisimplestunmapped} here corresponds to Eq. (2-4) in Ref. \cite{Pitowsky1989}, and \cref{eq:bellcondeq} here corresponds to Eq. (30) in Ref. \cite{Ghirardi08}.
+We note that the connection between classical propositional logic and linear inequalities has been used previously in the task of causal inference. We reiterate that inequalities resulting from propositional logic, however, are a subset of the inequalities that result from linear quantifier elimination. Consequently, linear quantifier elimination is the preferable tool for deriving inequalities whenever the elimination is computationally tractable. Noteworthy examples of works deriving causal infeasibility criteria via classical logic are \citet{Pitowsky1989} and \citet{Ghirardi08}: \cref{eq:trisimplestunmapped} here corresponds to Eq. (2-4) in~\cite{Pitowsky1989}%, and \cref{eq:bellcondeq} here corresponds to Eq. (30) in Ref. \cite{Ghirardi08}
+.
 
 
 
@@ -1400,20 +1154,21 @@ We note that the connection between classical propositional logic and linear ine
 %}
 
 %\begin{spacing}{2.0}
-Our main contribution is a new way of deriving causal infeasibility criteria, namely the inflation DAG approach. An inflation DAG naturally implies nonlinear hybrid inequalities, i.e. containing gedankenprobabilities, which implicitly constrain the set of distribution consistent with the original causal structure. If desirable, one can further eliminate the gedankenprobabilities via quantifier elimination. Polynomial inequalities can be obtained through linear elimination techniques.
+Our main contribution is a new way of deriving causal infeasibility criteria, namely the inflation DAG approach. An inflation DAG naturally carries inflation models, and the existence of an inflation model implies inequalities, containing gedankenprobabilities, which implicitly constrain the set of distribution consistent with the original causal structure. If desirable, one can further eliminate the gedankenprobabilities via quantifier elimination. Polynomial inequalities can be obtained through \emph{linear} elimination techniques, or through further relaxation to purely \emph{possibilistic} constraints.
 
-These inequalities are necessary but not sufficient conditions on a joint distribution for it to be explained by the causal structure. We've seen that they can be stronger than entropic inequalities sometimes, yet just how strong they are is still unclear. A distribution might satisfy all our polynomial inequalities and yet not be realizable from the causal structure. %What would such superficially-feasible distributions look like? Are inflation DAG inequalities ever tight? 
-Our methods yields tight causal infeasibility criteria for Bell scenarios, but those scenarios are exceptional in that the sets of realizable distributions form a convex polytope.
+These inequalities are necessary conditions on a joint distribution to be explained by the causal structure. We currently do not know to what extent they can also be considered sufficient, and there is somewhat conflicting evidence: as we have seen, the inflation DAG approach reproduces all Bell inequalities; but on the other hand, we have not been able to use it to rederive Pearl's instrumental inequality, although the instrumental scenario also contains only one latent node. By excluding the W-type distribution on the Triangle scenario, we have seen that our polynomial inequalities are stronger than entropic inequalities in at least some cases.
+% yet just how strong they are is still unclear. A distribution might satisfy all our polynomial inequalities and yet not be realizable from the causal structure. %What would such superficially-feasible distributions look like? Are inflation DAG inequalities ever tight? 
+% Our methods yields tight causal infeasibility criteria for Bell scenarios, but those scenarios are exceptional in that the sets of realizable distributions form a convex polytope.
 
-The most elementary of all causal infeasibility criteria are the conditional independence (CI) relations. Our method explicitly incorporates all marginal independence relations implied by a causal structure. We have found that generic CI relations also appear to be implied by our polynomial inequalities. In future research we hope to clarify the process through which CI relations are manifested as properties of the inflation DAG.
+The most elementary of all causal infeasibility criteria are the conditional independence (CI) relations. Our method explicitly incorporates all marginal independence relations implied by a causal structure. We have found that some CI relations also appear to be implied by our polynomial inequalities. In future research we hope to clarify the process through which CI relations are manifested as properties of the inflation DAG.
 
-A single causal structure has unlimited potential inflations. Selecting the right inflation from which to derive polynomial inequalities is an interesting challenge. To this end, it would be desirable to understand how particular features of the original causal structure are exposed when different nodes in the DAG are duplicated. By isolating which features are exposed in each inflation we could conceivably quantify the causal inference strength of each inflation. In so doing, we might find that inflated DAGs beyond a certain level of variable duplication need not be considered. The multiplicity beyond which further inflation is irrelevant is presumably related to the maximum degree of those polynomials which tightly characterize a causal scenario. Presently, however, it is not clear how to upper bound either number.
+A single causal structure has unlimited potential inflations. Selecting a good inflation from which strong polynomial inequalities can be derived is an interesting challenge. To this end, it would be desirable to understand how particular features of the original causal structure are exposed when different nodes in the DAG are duplicated. By isolating which features are exposed in each inflation, we could conceivably quantify the causal inference strength of each inflation. In so doing, we might find that inflated DAGs beyond a certain level of variable duplication need not be considered. The multiplicity beyond which further inflation is irrelevant may be related to the maximum degree of those polynomials which tightly characterize a causal scenario. Presently, however, it is not clear how to upper bound either number.
 
 %that one inflation DAG is or is not ``stronger" than another? Can we upper bound the maximum dimension of those polynomials which in-principle tightly characterize a given causal structure? A ``yes" answer to any of the aformentioned questions means that that perhaps inflation DAGs beyond a certain level of complexity need not be considered. These remain open questions, however.
 
-Our method turns the quantum no-broadcasting theorem \cite{NoCloningQuantum1996,NoCloningGeneral2006} on its head by emphasizing that classical hidden variables \emph{can}, in-principle, be cloned. This classical cloning possibility motivates the inflation DAG method, and underpins the implied causal infeasibility criteria. We have speculated about generalizing our method to obtain causal infeasibility criteria that constitute necessary constraints even for \emph{quantum} causal scenarios, a common desideratum in recent works \cite{fritz2012bell,pusey2014gdag,Chaves2015infoquantum,ChavesNoSignalling,BeyondBellII}. It would be enlightening to understand the extent to which our (classical) polynomial inequalities are violated in quantum theory. A variety of techniques exist for estimating the amount by which a linear inequality \cite{NPA2008Long,I3322NPA1} is violated in quantum theory, but finding the quantum violation of a \emph{polynomial} inequality is a more challenging task \cite{NPAReview}.
+Our method turns the quantum no-broadcasting theorem \cite{NoCloningQuantum1996,NoCloningGeneral2006} on its head by crucially relying on the fact that classical hidden variables \emph{can} be cloned. The possibility of classical cloning motivates the inflation DAG method, and underpins the implied causal infeasibility criteria. We have speculated about generalizing our method to obtain causal infeasibility criteria that constitute necessary constraints even for \emph{quantum} causal scenarios, a common desideratum in recent works \cite{fritz2012bell,pusey2014gdag,Chaves2015infoquantum,ChavesNoSignalling,BeyondBellII}. It would be enlightening to understand the extent to which our (classical) polynomial inequalities are violated in quantum theory. A variety of techniques exist for estimating the amount by which a Bell inequality \cite{NPA2008Long,I3322NPA1} is violated in quantum theory, but even finding a quantum violation of one of our \emph{polynomial} inequalities presents a new task for which we currently lack a systematic approach.
 
-The difference between classical ontic-state duplication and quantum no-broadcasting makes the inequalities that result from our consideration to be especially suited for distinguishing the set of quantum-realizable distributions from its subset of classically-realizable distributions. Causal infeasibility criteria that are sensitive to the classical-quantum distinction are precisely the sort of generalizations of the Bell inequalities which are sought after, in order to study the quantum features of generalized causal scenarios. Entropic inequalities have been lacking in this regard \cite{fritz2012bell,pusey2014gdag,Chaves2015infoquantum}, and the inflation DAG considerations proposed here constitute a significant alternative strategy.
+The difference between classical ontic-state duplication and quantum no-broadcasting makes the inequalities that result from our consideration to be especially suited for distinguishing the set of quantum-realizable distributions from its subset of classically-realizable distributions. Causal infeasibility criteria that are sensitive to the classical-quantum distinction are precisely the sort of generalizations of the Bell inequalities which are sought after, in order to study the quantum features of generalized causal scenarios. Entropic inequalities have been lacking in this regard \cite{fritz2012bell,pusey2014gdag,Chaves2015infoquantum}, and the inflation DAG considerations proposed here constitute an alternative strategy that holds some promise.
 %\end{spacing}
 
 
@@ -1427,60 +1182,130 @@ Research at Perimeter Institute is supported by the Government of Canada through
 
 
 \onecolumngrid
+\newpage
 \appendix
 \renewcommand{\theequation}{A-\arabic{equation}}
 \setcounter{equation}{0}
 
 \section{Nonlinear Quantifier Elimination Approach}\label{sec:nonlinearelimination}
-In the main text we considered deriving constraints on the pre-injectable sets via the marginal problem. There are further implications in the inflation DAG, however, which can be leveraged to further constrain the marginal distributions consisted with the inflation DAG.
+
+In the main text we considered deriving constraints on the marginal distributions on pre-injectable sets via the marginal problem. There are further constraints in the inflation DAG, however, which can be leveraged to further constrain the marginal distributions consisted with the inflation DAG.
 
 \begin{asparadesc}
 \medskip\item[\tred{Conditional Independence Relations}] \noindent
 \par\hspace{\parskip} 
-The most familiar such further constraints are the conditional independence relations relating observable variables in the inflation DAG. Conditional independence relations are inferred by $d$-separation; if $\bm{X}$ and $\bm{Y}$ are $d$-separated in the (inflation) DAG by $\bm{Z}$, then we infer $\bm{X}\bot\bm{Y}|\bm{Z}$. The $d$-separation criterion is explained at length in Refs. \cite{pearl2009causality,studeny2005probabilistic,WoodSpekkens,pusey2014gdag}, we present it only informally here.
+The most familiar such further constraints are the conditional independence relations relating observable variables in the inflation DAG. Conditional independence relations are inferred by $d$-separation; if $\bm{X}$ and $\bm{Y}$ are $d$-separated in the (inflation) DAG by $\bm{Z}$, then we infer the conditional independence $\bm{X}\bot\bm{Y}|\bm{Z}$. The $d$-separation criterion is explained at length in~\cite{pearl2009causality,studeny2005probabilistic,WoodSpekkens,pusey2014gdag}, and therefore we present it only very briefly here.
 
-We first define the notion of \tblue{exclusive ancestors}, because the usual notion of ancestors is inclusive, i.e. $\An{\bm{Z}}$ contains $\bm{Z}$. Let the exclusive ancestors of $\bm{Z}$ so that $\An{\setminus\bm{Z}}\coloneqq\An{\bm{Z}}\setminus\bm{Z}$. Next we define \tblue{conditioning a DAG} over $\bm{Z}$, i.e. $G_{\setminus\bm{Z}}$, which is formed by deleting any outgoing edges from $\bm{Z}$ in $G$. Conditional DAGs enable the definition of \tblue{conditional ancestors}, i.e. 
+% We first define the notion of \tblue{exclusive ancestors}, because the usual notion of ancestors is inclusive, i.e. $\An{\bm{Z}}$ contains $\bm{Z}$. Let the exclusive ancestors of $\bm{Z}$ be given by $\An{\setminus\bm{Z}}\coloneqq\An{\bm{Z}}\setminus\bm{Z}$.
+Next we define 
+% \tblue{conditioning a DAG} over $\bm{Z}$, i.e. $G_{\setminus\bm{Z}}$, which is formed by deleting any outgoing edges from $\bm{Z}$ in $G$. Conditional DAGs enable the definition of
+the notion of \tblue{conditional ancestors} for a set of nodes $\bm{X}$ relative to a set $\bm{Z}$ which is disjoint from $X$ as
 \begin{align}
     \An[G]{\bm{X}|\bm{Z}}\coloneqq \begin{cases}
-    \An[G_{\setminus\bm{Z}}]{\bm{X}}& \text{if } \An[G_{\setminus\bm{Z}}]{\bm{X}} and \An[G]{\setminus\bm{Z}} are disjoint\\
-    \An[G_{\setminus\bm{Z}}]{\bm{X}} \bigcup \An[G]{\setminus\bm{Z}} & \text{if } \An[G_{\setminus\bm{Z}}]{\bm{X}} and \An[G]{\setminus\bm{Z}} overlap.
+	    \An[G\setminus\bm{Z}]{\bm{X}}& \text{if } \An[G\setminus\bm{Z}]{\bm{X}}\text{ and }\An[G]{\bm{Z}}\setminus\bm{Z}\text{ are disjoint},\\
+	    \An[G\setminus\bm{Z}]{\bm{X}} \bigcup \An[G]{\bm{Z}}\setminus\bm{Z} & \text{if } \An[G\setminus\bm{Z}]{\bm{X}}\text{ and } \An[G]{\bm{Z}}\setminus\bm{Z}\text{ overlap.}
     \end{cases}
 \end{align}
-Finally, $\bm{X}$ and $\bm{Y}$ are $d$-separated by $\bm{Z}$ iff $\An[G]{\bm{X}|\bm{Z}}$ and $\An[G]{\bm{Y}|\bm{Z}}$ are disjoint.
+Then $\bm{X}$ and $\bm{Y}$ are $d$-separated by $\bm{Z}$ iff $\An[G]{\bm{X}|\bm{Z}}$ and $\An[G]{\bm{Y}|\bm{Z}}$ are disjoint.
 
-Every conditional independence relation can be translated into a nonlinear constraint on probabilities, as $\bm{X}\bot\bm{Y}|\bm{Z}$ implies $\p{\bm{x}\bm{y}|\bm{z}}=\p{\bm{x}|\bm{z}}\p{\bm{y}|\bm{z}}$ for all $\bm{x}$, $\bm{y}$, and $\bm{z}$. As we generally prefer to work with unconditional probabilities, we summarize as follows: If $\bm{X}$ and $\bm{Y}$ are $d$-separated by $\bm{Z}$ then $\p{\bm{x}\bm{y}\bm{z}}\p{\bm{z}}=\p{\bm{x}\bm{z}}\p{\bm{y}\bm{z}}$ for all $\bm{x}$, $\bm{y}$, and $\bm{z}$. Such nonlinear constraints can be incorporated as restrictions on distributions consistent with the inflation DAG, supplementing the more trivial marginal-problem type constraints, and hence implicitly further constraining the injectable sets. Nonlinear quantifier elimination can then be used to make the implied constraints explicit.
+Every conditional independence relation can be translated into a nonlinear constraint on probabilities, as $\bm{X}\bot\bm{Y}|\bm{Z}$ implies $\p{\bm{x}\bm{y}|\bm{z}}=\p{\bm{x}|\bm{z}}\p{\bm{y}|\bm{z}}$ for all $\bm{x}$, $\bm{y}$, and $\bm{z}$. As we generally prefer to work with unconditional probabilities, we rewrite this as follows: If $\bm{X}$ and $\bm{Y}$ are $d$-separated by $\bm{Z}$, then $\p{\bm{x}\bm{y}\bm{z}}\p{\bm{z}}=\p{\bm{x}\bm{z}}\p{\bm{y}\bm{z}}$ for all $\bm{x}$, $\bm{y}$, and $\bm{z}$. Such nonlinear constraints can be incorporated as restrictions on distributions consistent with the inflation DAG, supplementing the basic nonnegativity of probability constraints as we used them in~\cref{sec:ineqs}. Hence this additional constraints may impose further constrains on the distributions over the pre-injectable sets. Nonlinear quantifier elimination can then be used to determine the constraints at the level of the distribution on the original DAG, again by constraining the distributions on pre-injectables on the inflation DAG and applying~\cref{eq:preinjfactor}.
 
 Many modern computer algebra systems have functions capable of tackling nonlinear quantifier elimination symbolically\footnote{For example \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://reference.wolfram.com/language/ref/Resolve.html}{\texttt{Resolve}} command, \textit{Redlog}'s \href[pdfnewwindow]{http://www.redlog.eu/documentation/reals/rlqe.php}{\texttt{rlposqe}}, or \textit{Maple$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://maplesoft.com/support/help/Maple/view.aspx?path=RegularChains/SemiAlgebraicSetTools/RepresentingQuantifierFreeFormula}{\texttt{RepresentingQuantifierFreeFormula}}, etc.}. 
 %One might then hope to use such software systems to rid the hybrid inequalities of the gedankenprobabilities. 
-Currently, however, it is not practical to perform nonlinear quantifier elimination on large polynomial systems with many quantifiers. Nevertheless, the nonlinear constraints can be easily accounted for numerically. Upon substituting numeric values for all the injectable probabilities the former quantifier elimination problem is converted to a universal quantifier existence problem: Do there exist gedankenprobabilities that satisfy the full set of linear and nonlinear constraints? Most computer algebra systems can resolve such \emph{satisfiability} questions quite rapidly\footnote{For example \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$} \href[pdfnewwindow]{http://reference.wolfram.com/language/Experimental/ref/ExistsRealQ.html}{\texttt{Reduce\`{}ExistsRealQ}} function. Specialized satisfiability software such as SMT-LIB's \href[pdfnewwindow]{http://smtlib.cs.uiowa.edu/solvers.shtml}{\texttt{check-sat}} \cite{BarFT-SMTLIB} are particularly apt for this purpose. One can also exploit the fact than any nonlinear optimizer will return an error when a set of constraints cannot be satisfied. Nonlinear optimizers include \textit{Maple$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://www.maplesoft.com/support/help/Maple/view.aspx?path=Optimization/NLPSolveMatrixForm}{\texttt{NLPSolve}}, \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://reference.wolfram.com/language/ref/message/NMinimize/nsol.html}{\texttt{NMinimize}}, and dozens of free and commercial optimizers for \href[pdfnewwindow]{http://ampl.com/products/solvers/all-solvers-for-ampl}{\textit{AMPL}} and/or \href[pdfnewwindow]{https://neos-server.org/neos/solvers/index.html\#nco}{\textit{GAMS}}}.
+Currently, however, it is not practical to perform nonlinear quantifier elimination on large polynomial systems with many quantifiers. Nevertheless, the nonlinear constraints can be easily accounted for numerically. Upon substituting numerical values for all the injectable probabilities, the former quantifier elimination problem is converted to a universal quantifier existence problem: Do there exist gedankenprobabilities that satisfy the full set of linear and nonlinear constraints? Most computer algebra systems can resolve such \emph{satisfiability} questions quite rapidly\footnote{For example \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$} \href[pdfnewwindow]{http://reference.wolfram.com/language/Experimental/ref/ExistsRealQ.html}{\texttt{Reduce\`{}ExistsRealQ}} function. Specialized satisfiability software such as SMT-LIB's \href[pdfnewwindow]{http://smtlib.cs.uiowa.edu/solvers.shtml}{\texttt{check-sat}} \cite{BarFT-SMTLIB} are particularly apt for this purpose.
+%One can also exploit the fact than any nonlinear optimizer will return an error when a set of constraints cannot be satisfied. Nonlinear optimizers include \textit{Maple$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://www.maplesoft.com/support/help/Maple/view.aspx?path=Optimization/NLPSolveMatrixForm}{\texttt{NLPSolve}}, \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://reference.wolfram.com/language/ref/message/NMinimize/nsol.html}{\texttt{NMinimize}}, and dozens of free and commercial optimizers for \href[pdfnewwindow]{http://ampl.com/products/solvers/all-solvers-for-ampl}{\textit{AMPL}} and/or \href[pdfnewwindow]{https://neos-server.org/neos/solvers/index.html\#nco}{\textit{GAMS}}
+}.
 
-\begin{table*}[ht]\centering\caption{A comparison of different approaches constraining the pre-injectable sets. The primary divide is quantifier elimination versus quantifier existence, with approaches being further subdivided into linear and nonlinear variants.}
+\begin{table*}[ht]\centering\caption{A comparison of different approaches for constraining the distributions on the pre-injectable sets. The primary divide is quantifier elimination, which is more difficult but produces inequalities, versus satisfiability which can witness the infeasibility of a specific distribution. The approaches subdivide further subdivided into nonlinear, linear, and possibilistic variants.}
 \begin{tabularx}{\linewidth}{ |l|L|c|L| } 
 \hline
-Approach & Also Known As & Difficulty & End Results \\
+Approach & General problem & Standard algorithm(s) & Difficulty \\
 \bottomrule
-Nonlinear Quantifier Elimination & Resolving Partial Existential Closure & Very Hard & Necessary-but-not-Sufficient Polynomial Inequalities \\
+Nonlinear quantifier elimination & Real quantifier elimination & Cylindrical algebraic decomposition & Very hard \\
 \hline
-Nonlinear Quantifier Satisfiability & Universal Existential Closure,\newline Nonlinear Programming & Easy & Certify the infeasibility of a specific distribution \\
+Nonlinear satisfiability & Nonlinear programming,\newline polynomial optimization & e.g.~semidefinite relaxations~\cite{laurent_polynomial_2012} & Easy \\
 \hline
-Linear Quantifier Elimination & Polytope Projection & Moderate & Necessary-but-not-Sufficient Polynomial Inequalities \\
+Linear quantifier elimination & Compute facets of polytope & Fourier-Motzkin elimination & Hard \\
 \hline
-Linear Quantifier Satisfiability & Linear Programming,\newline Universal Existential Closure & Very Easy & Certify the infeasibility of a specific distribution \\
+Linear satisfiability & Linear programming & Simplex method & Very easy \\
 \hline
-Alternate: Logical Tautologies & Combinatorial / Set-Theoretic Implications\newline Partial Marginal Problem & Easy & Necessary-but-not-Sufficient Polynomial Inequalities 
+Possibilistic quantifier elimination & Hypergraph transversal problem & See~\citet{eiter_dualization_2008} & Very easy \\
+\hline 
+Possibilistic satisfiability & --- & --- & Super easy
 \\\toprule
 \end{tabularx}
 \end{table*}
 
-It is also possible to use a mixed strategy of linear and nonlinear quantifier elimination, such as \citet{ChavesPolynomial} advocates. The explicit results of Ref. \cite{ChavesPolynomial} are therefore consequences of any inflation DAG, achieved by applying a mixed quantifier elimination strategy.
+It is also possible to use a mixed strategy of linear and nonlinear quantifier elimination, such as \citet{ChavesPolynomial} advocates. The explicit results of Ref. \cite{ChavesPolynomial} are therefore consequences of any inflation DAG, achieved by applying a mixed quantifier elimination strategy.\purp{T: rewrite this in light of new narrative!}
 
-\medskip\item[\tred{Coinciding Marginal Distributions}] \noindent
+\clearpage\medskip\item[\tred{Coinciding Marginal Distributions}] \noindent
+\par\hspace{\parskip}
+By restricting our attention to inflation models, we see that sometimes the distributions of different injectable sets coincide, i.e. $\pdf{\bm{X}}=\pdf{\bm{Y}}$ whenever both $\bm{X}$ and $\bm{Y}$ are injectable, and $\subsim{\bm{X}}=\subsim{\bm{Y}}$. Sometimes sets of random variables which are \emph{not} injectable, however, can also be shown to have necessarily coinciding distributions. Coinciding (not necessarily injectable) marginal distributions among the inflation DAG variables is a consequence of \cref{eq:funcdepends}. For example, we can verify that $\pdf{A_1 A_2 B_1}=\pdf{A_1 A_2 B_2}$ follows from \cref{fig:Tri222}, even though $\brackets{A_1 A_2 B_1}$ and $\brackets{A_1 A_2 B_2}$ are not injectable sets. Here we formalize this type of constraint more generally.
+
+We call two sets of observable nodes $\bm{X}$ and $\bm{Y}$ \tblue{inflationarily isomorphic} if there exists an isomorphism $\ansubgraph[G']{\bm{X}}\sim\ansubgraph[G']{\bm{Y}}$ which has the additional property that it takes $\bm{X}$ itself bijectively to $\bm{Y}$. For example in~\cref{fig:Tri222}, the sets $\bm{X}=\{A_1 A_2 B_1\}$ and $\bm{Y}=\{A_1 A_2 B_2\}$ are inflationarily isomorphic. Then 
+
+In general there may exist multiple inflationary isomorphisms, for example the sets $\brackets{A_1 A_2 B_1}$ and $\brackets{A_1 A_2 B_2}$ can be related by either 
+\begin{align}
+    \begin{pmatrix}
+     A_1 \leftrightarrow A_1 \\
+     A_2 \leftrightarrow A_2 \\
+     B_1 \leftrightarrow B_2 \\
+    \end{pmatrix}
+    \qquad\text{or}\qquad
+    \begin{pmatrix}
+     A_1 \leftrightarrow A_2 \\
+     A_2 \leftrightarrow A_1 \\
+     B_1 \leftrightarrow B_2 \\
+    \end{pmatrix}
+\end{align}
+% Two inflation DAGs $G'_1$ and $G'_2$ are said to be inflationarily isomorphic if there exists a graph isomorphism between them which is itself also an inflationary isomorphism. This occurs iff $G'_1\sim G'_2$.
+% We say that one isomorphim \tblue{contains} another if the rule-set of the latter is a subset of the rule-set of the former.
+
+Now, consider an inflation DAG $G'$ and two sets of nodes $\bm{X}$ and $\bm{Y}$ such that not only $\bm{X}\sim\bm{Y}$ but also $\ansubgraph[G']{\bm{X}}\sim\ansubgraph[G']{\bm{Y}}$. If an inflationary isomorphism between $\ansubgraph[G']{\bm{X}}$ and $\ansubgraph[G']{\bm{Y}}$ \emph{contains} an inflationary isomorphism between $\bm{X}$ and $\bm{Y}$, then $\pdf{\bm{X}}=\pdf{\bm{Y}}$. In other words, $\pdf{\bm{X}}=\pdf{\bm{Y}}$ if and only if an inflationary graph isomorphism exists between $\ansubgraph[G']{\bm{X}}$ and $\ansubgraph[G']{\bm{Y}}$ which preserves the inflationary isomorphism between $\bm{X}$ and $\bm{Y}$. Then we can conclude that $P(\bm{X}) = P(\bm{Y})$ in any inflation model.
+
+Coinciding ancestral subgraphs is not, by itself, a strong enough condition to justify coinciding distributions; rather the variables in question must play similar \emph{roles} in their coinciding ancestral subgraphs. To illustrate this, consider the inflation DAG in \cref{fig:ancestralsubgraphnotenough}. We have $\ansubgraph[(\textrm{\cref{fig:ancestralsubgraphnotenough}})]{X_1 Y_2 Z_1}\sim\ansubgraph[(\textrm{\cref{fig:ancestralsubgraphnotenough}})]{X_1 Y_2 Z_2}$, since both of these ancestral subgraphs are the entire DAG. But there is no isomorphism which in addition takes $\{X_1 Y_1 Z_1\}$ to $\{X_1 Y_2 Z_2\}$, since the induced subgraphs on these two nodes are different, and therefore $\{X_1 Y_1 Z_1\}\not\sim\{X_1 Y_2 Z_2\}$.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}[t]{0.6\linewidth}      \centering
+    \includegraphics[scale=1]{instrumentalvariant.pdf}
+    \caption{An inflation DAG which illustrates why coinciding ancestral subgraphs don't necessarily imply coinciding distributions.}
+    \label{fig:ancestralsubgraphnotenough}
+    \end{minipage}
+\end{figure}
+
+Constraints of the above form be used to supplement the marginal problem, and may be of practical use for reducing the dimensionality of the problem (number of gedankenprobabilities that need to be eliminated by quantifier elimination). However, we are not aware of any case in which this would actually result in tighter exclusions for the distributions on the original DAG. In many cases, this can be explained by the following argument. Suppose that there is an automorphism of the inflation DAG which takes copies of nodes to copies\footnote{Note the similarity to \emph{deck transformations} in covering space theory.} and restricts to an inflationary isomorphism $\ansubgraph[G']{\bm{X}}\sim\ansubgraph[G']{\bm{Y}}$ as above. If $\hat{P}$ solves the unsupplemented marginal problem, then switching the variables in $\hat{P}$ according to the automorphism still solves the unsupplemented marginal problem, since the given marginal distributions are preserved by the automorphism. Now taking the uniform mixture of this new distribution with $\hat{P}$ results in a distribution that still solves the marginal problem, and in addition satisfies the supplemented constraint $P_{\bm{X}} = P_{\bm{Y}}$.
+
+Note that the argument does not apply if there is no automorphism which restricts to $\ansubgraph[G']{\bm{X}}\sim\ansubgraph[G']{\bm{Y}}$, and it also does not apply if one uses the conditional independence relations on the inflation DAG as well, since this destroys linearity. We do not know what happens in either of these cases.
+
+\end{asparadesc}\clearpage
 
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{comment}
 
 In principle one can exploit any $d$-separation criteria from the inflation DAG in order to transform or supplement the inequalities. If $\bm{X}$ and $\bm{Y}$ are $d$-separated by $Z$, then $\p{\bm{x} \bm{y} \bm{z}}=\frac{\p{\bm{x}\bm{z}}\p{\bm{y}\bm{z}}}{\p{\bm{z}}}$ \cite{pearl2009causality,spirtes2011causation,studeny2005probabilistic,koller2009probabilistic}.
 
@@ -1594,7 +1419,6 @@ Here we account for injectable sets. As any subset of an injectable set is also 
 \text{and }\pdf{A_1 B_1 C_1}=\pdf{A B C}.
 \end{array}\end{align}
 
-\begin{comment}
 Recall that the random variables in the inflated DAG are constructed to be copies of the original random variables. As such, it is possible that two distinct subgraphs of the inflated DAG may represent precisely the \emph{same} causal structure, if the two subgraphs are equivalent up to ``dummy index" of the copied variables. Moreover, some subgraphs of the inflated DAG are equivalent to subgraphs of the original DAG, in the same sense of equivalent. When two graphs are equivalent in this sense we call them \tblue{copy equivalent}. Note that this notion of copy equivalence is stronger than merely graph isomorphism: For two causal structures to be copy equivalent there must exist an isomorphism between the graphs such that every random variables is mapped to itself or a copy of itself. \purp{With expanded notation moved up front, this discussion should be trimmed.}
 
 Consider, now, two different subsets of observable random variables in the inflated DAG. Both subsets should be described by the same marginal probability distribution if the \tblue{ancestral subgraphs} of both sets are copy equivalent. We define the ancestral subgraph of a set of variables $\bm{V}$ to mean the subgraph of the causal structure containing $\bm{V}$'s complete causal history, i.e. $\NamedFunction{Ancestors}{\!\bm{V}\!}$. $\NamedFunction{Ancestors}{\!\bm{V}\!}$ refers to the set $\bm{V}$ along with any vertices that have a directed path to leading from them to $\bm{V}$. Thus the ancestral subgraph of $\bm{V}$ consists of the vertices $\NamedFunction{Ancestors}{\!\bm{V}\!}$ and all edges between them per the original graph. As an example: \cref{fig:Tri222} is the ancestral subgraph of \cref{fig:TriFullDouble} on the six observable variables $\{A_1 A_2 B_1 B_2 C_1 C_2\}$. The ancestral subgraph corresponding to observables $\brackets{A_1 B_2 C_1}$ is illustrated in \cref{fig:TriDagSubA1B2C1}. In contrast, the ancestral subgraph of $\brackets{A_1 B_1 C_1}$ is copy equivalent to \cref{fig:TriMainDAG}. When a set of variables admits partitioning into causally independent partitions, then the ancestral subgraph of that set will have unconnected components. An example of a multiple-components ancestral subgraph is \cref{fig:TriDagSubA2B1C2}, where ${A_2\,\bot\,\brackets{B_1 C_2}}$, as per \cref{eq:dfac222}.
@@ -1633,7 +1457,7 @@ The inter-DAG marginal distribution coincidences between \cref{fig:Tri222,fig:Tr
 \pdf{A_1 B_2}=\pdf{A B},\;\pdf{B_1 C_2}=\pdf{B C},\;\pdf{A_2 C_1}=\pdf{A C},\;\pdf{A_1 B_1 C_1}=\pdf{A B C},
 \end{split}\end{align}
 and their subsets.
-\end{comment}
+
 
 
 The injectable sets allow us to transform our set of inequalities once more, this time into inequalities which have bearing on the original causal structure. We call this transformation of probabilities the \tblue{injection map}; the injection map pursuant to \cref{eq:dmap222} takes
@@ -1686,26 +1510,32 @@ Firstly, one may substitute numeric values for all the injectable probabilities 
 
 Note that real-world data with uncertainties can also be incorporated into these satisfiability questions. Instead of asserting that a particular probability is equal to a given \emph{value}, one can incorporate new inequalities which constrain the experimentally-known probabilities to lie in given \emph{intervals}. Assigning probabilities to intervals as opposed to numeric values results in further free parameters in the system, but the problem nevertheless remains one of \emph{universal} existential closure, and can be efficiently tested.
 
-
+\end{comment}
 
 
 \section{Further Polytope Projection Algorithms}\label{sec:projalgorithms}
 
-The Equality Set Projection (ESP) algorithm \cite{jones2004equality,JonesThesis2005} is ideal for handling inflation DAGs, because its computational complexity scales only according to the facet count of the final projection. Our use of larger-and-larger inflation DAGs to obtain causal infeasibility criteria on the same underlying original DAG means that while the complexity of the starting polytope is unbounded, the complexity of the projection is finite. Practically, this suggests that the ESP algorithm could parse the implications due to a very large inflation DAGs efficiently. Formally, ESP should require minimal computational overhead to consider a larger inflation DAG relative to considering a much smaller inflation DAG, when the \emph{implications} of the small and large inflations are similar. By contrast, the computation complexity of Fourier-Motzkin (FM) elimination algorithm scales with the number of quantifiers being eliminated. The number of gedankenprobabilities requiring elimination is exponentially related to the number of variables in the inflation DAG. The FM algorithm, therefore, is utterly impractical very for large inflation DAGs.
+Redundant inequalities can be filtered out using Chernikov rules \cite{Shapot2012,Bastrakov2015}. 
 
-Another positive feature of the ESP algorithm is that it commences outputting quantifier-free inequalities immediately, and terminates upon deriving the complete set of inequalities. By contrast, FM works by eliminating one quantifier at a time. Terminating the ESP algorithm before it reaches completion would result in an incomplete list of inequalities. Even an incomplete list is valuable, though, since the causal infeasibility criteria we are deriving are anyways necessary but not sufficient.
+% We find the strategy of employing linear programming in concert with the second Cernikov rule to be extremely efficient.
 
-Vertex projection (VP) algorithms are another computational tool which may be used to assist in linear quantifier elimination \cite{Avis2000lrs}. VP works by first enumerating the vertices of the initial polytope (H-rep to V-rep), projecting the vertices, and then converting back to inequalities (V-rep to H-rep). For generic high-dimensional polytopes, the operation of converting from a representation in terms of halfspaces to one in terms of extremal-vertices representations can be computationally costly (high-$d$ H-rep to V-rep). Starting from a vertex representation in a high dimensional space, however, one can immediately determine the vertex representation of the polytope's projection in a lower dimensional space. The projection is along the coordinate axes, so one just ``discards" the coordinate of the eliminated quantifier. To obtain the inequalities which characterize the projected polytope one then applies a convex hull algorithm to the projected vertices (low-$d$ V-rep to H-rep).
+There are plenty of other algorithms for computing the facets of a polytope from its vertices. The Equality Set Projection (ESP) algorithm~\cite{jones2004equality,JonesThesis2005} could be an interesting algorithm to use in practice, as it starts churning out facets one by one from the very beginning, whereas Fourier-Motzkin only has the ability to generate the entire list of facets all in one, which quickly becomes computationally intractable. So ESP may provide a useful tool for deriving an incomplete list of inequalities on inflation DAGs that are too large for the Fourier-Motzkin elimination to work.
+% ideal for handling inflation DAGs, because its computational complexity scales only according to the facet count of the final projection. Our use of larger-and-larger inflation DAGs to obtain causal infeasibility criteria on the same underlying original DAG means that while the complexity of the starting polytope is unbounded, the complexity of the projection is finite. Practically, this suggests that the ESP algorithm could parse the implications due to very large inflation DAGs efficiently. Formally, ESP should require minimal computational overhead to consider a larger inflation DAG relative to considering a much smaller inflation DAG, when the \emph{implications} of the small and large inflations are similar. By contrast, the computation complexity of Fourier-Motzkin (FM) elimination algorithm scales with the number of quantifiers being eliminated. The number of gedankenprobabilities requiring elimination is exponentially related to the number of variables in the inflation DAG. The FM algorithm, therefore, is utterly impractical very for large inflation DAGs.
 
-For probability distributions, however, the extremal vertices are precisely the deterministic possibilities. Since the extremal vertices of the initial polytope are easily enumerated, it is possible to avoid the high-$d$ V-rep to H-rep step entirely. There is a one-to-one correspondence between the inflation-DAG's initial generating inequalities and its initial extreme observable probability distributions. 
-We used this V-rep to H-rep technique to project the initial polytope implied by \cref{fig:Tri222} (\cref{step:generateineqs}) to an intermediate 23-dimensional polytope, where each of the 23 remaining can be mapped the original DAG.  Only then did we apply the transformations of factorization and mappings (\cref{step:fac,step:findmap}) to convert those linear inequalities to polynomial inequalities pertaining to the original DAG. We found that the V-rep to H-rep technique, using \textit{lrs} [\href[pdfnewwindow]{http://cgm.cs.mcgill.ca/~avis/C/lrslib/USERGUIDE.html#Installation\%20Section}{\texttt{lrs}}], was orders-of-magnitude faster than FM elimination at obtaining the same result.
+% Another positive feature of the ESP algorithm is that it commences outputting quantifier-free inequalities immediately, and terminates upon deriving the complete set of inequalities. By contrast, FM works by eliminating one quantifier at a time. Terminating the ESP algorithm before it reaches completion would result in an incomplete list of inequalities. Even an incomplete list is valuable, though, since the causal infeasibility criteria we are deriving are anyways necessary but not sufficient.
 
-Yet another technique is also possible. Suppose the initial polytope is given by $\brackets{\vec{x},\vec{y}\,|\hat{A}.\vec{x}+\hat{B}.\vec{y}\geq\bm{c}}$, where $y$ are the quantifiers. If we can find any completely nonnegative vector $\bm{w}$ such that $\bm{w}.\hat{B}=\vec{0}$ then we automatically establish the quantifier-free inequality $\bm{w}.\hat{A}.\vec{x}\geq\bm{w}.\bm{c}$. Solving for ``random" nonnegative vectors $\bm{w}$ is easy; solving for all possible solutions is rather more difficult. \citet{BalasProjectionCone} refined this method so that each extremal construction of $\bm{w}$ corresponds to an irredundant inequality in the H-rep description of the projected polytope. Nevertheless, even without utilizing the full projection cone, this technique can be used to rapidly obtain a few quantifier-free inequalities. 
+% Vertex projection (VP) algorithms are another computational tool which may be used to assist in linear quantifier elimination \cite{Avis2000lrs}. VP works by first enumerating the vertices of the initial polytope (H-rep to V-rep), projecting the vertices, and then converting back to inequalities (V-rep to H-rep). For generic high-dimensional polytopes, the operation of converting from a representation in terms of halfspaces to one in terms of extremal-vertices representations can be computationally costly (high-$d$ H-rep to V-rep). Starting from a vertex representation in a high dimensional space, however, one can immediately determine the vertex representation of the polytope's projection in a lower dimensional space. The projection is along the coordinate axes, so one just ``discards" the coordinate of the eliminated quantifier. To obtain the inequalities which characterize the projected polytope one then applies a convex hull algorithm to the projected vertices (low-$d$ V-rep to H-rep).
 
-\section{Optimized Algorithm for Recognizing Redundant Inequalities}\label{sec:redundancy}
-When performing Fourier-Motzkin linear quantifier elimination one must periodically filter out redundant inequalities from the set of linear inequalities. Equivalently, the means identifying redundant halfspace constraints in the description of the polytope. An individual constraint in a set is redundant if it is implied by the other constraints. 
+% For probability distributions, however, the extremal vertices are precisely the deterministic possibilities. Since the extremal vertices of the initial polytope are easily enumerated, it is possible to avoid the high-$d$ V-rep to H-rep step entirely. There is a one-to-one correspondence between the inflation-DAG's initial generating inequalities and its initial extreme observable probability distributions. 
+% We used this V-rep to H-rep technique to project the initial marginals-problem polytope implied by \cref{fig:Tri222} to an intermediate 23-dimensional polytope, where the 23 remaining dimensions correspond to the probabilities pertainining to  pre-injectable sets.  Only then did we apply translate those probabilities into probabilities pertaining to the original DAG, and in so doing we convert linear inflation-DAG inequalities to polynomial inequalities pertaining to the original DAG. We found that the V-rep to H-rep technique, using \textit{lrs} [\href[pdfnewwindow]{http://cgm.cs.mcgill.ca/~avis/C/lrslib/USERGUIDE.html#Installation\%20Section}{\texttt{lrs}}], was orders-of-magnitude faster than FM elimination at obtaining the same result.
 
-An individual linear inequality is redundant if and only if it is a \emph{positive} linear combination of the others [Thm. 5.8 in \citealp{fordan1999projection}]\footnote{The ``if" is obvious. The ``only if" is a consequence of Farka's lemma \cite{fordan1999projection}.}. This is related to the V-rep characterization of polyhedral cones: If a cone is defined such that $W_{\hat{M}}\coloneqq\brackets{\vec{x}\,|\exists_{\bm{v}\geq\bm{0}}:\, \hat{M}.\bm{v}=\vec{x}}$ then $\vec{b}\in W_{\hat{M}}$ if and only if the linear system of equations $\hat{M}.\bm{v}=\vec{b}$ has a solution such that all the elements of $\bm{v}$ are nonnegative.  Thus, the computational tool required is one which accepts as input the matrix $\hat{M}$ and the column vector $\vec{b}$ and returns $\vec{b}\in W_{\hat{M}}$ as True or False. 
+% Yet another technique is also possible. Suppose the initial polytope is given by $\brackets{\vec{x},\vec{y}\,|\hat{A}.\vec{x}+\hat{B}.\vec{y}\geq\bm{c}}$, where $y$ are the quantifiers. If we can find any completely nonnegative vector $\bm{w}$ such that $\bm{w}.\hat{B}=\vec{0}$ then we automatically establish the quantifier-free inequality $\bm{w}.\hat{A}.\vec{x}\geq\bm{w}.\bm{c}$. Solving for ``random" nonnegative vectors $\bm{w}$ is easy; solving for all possible solutions is rather more difficult. \citet{BalasProjectionCone} refined this method so that each extremal construction of $\bm{w}$ corresponds to an irredundant inequality in the H-rep description of the projected polytope. Nevertheless, even without utilizing the full projection cone, this technique can be used to rapidly obtain a few quantifier-free inequalities. 
+
+%\section{Optimized Algorithm for Recognizing Redundant Inequalities}\label{sec:redundancy}
+
+% When performing Fourier-Motzkin linear quantifier elimination one must periodically filter out redundant inequalities from the set of linear inequalities. Equivalently, the means identifying redundant halfspace constraints in the description of the polytope. An individual constraint in a set is redundant if it is implied by the other constraints. 
+
+% An individual linear inequality is redundant if and only if it is a \emph{positive} linear combination of the others [Thm. 5.8 in \citealp{fordan1999projection}]\footnote{The ``if" is obvious. The ``only if" is a consequence of Farka's lemma \cite{fordan1999projection}.}. This is related to the V-rep characterization of polyhedral cones: If a cone is defined such that $W_{\hat{M}}\coloneqq\brackets{\vec{x}\,|\exists_{\bm{v}\geq\bm{0}}:\, \hat{M}.\bm{v}=\vec{x}}$ then $\vec{b}\in W_{\hat{M}}$ if and only if the linear system of equations $\hat{M}.\bm{v}=\vec{b}$ has a solution such that all the elements of $\bm{v}$ are nonnegative.  Thus, the computational tool required is one which accepts as input the matrix $\hat{M}$ and the column vector $\vec{b}$ and returns $\vec{b}\in W_{\hat{M}}$ as True or False. 
 
 
 %It turns out that we can optimize the detection of redundant halfspaces when considering polyhedral cones as opposed to polytopes. Happily, the inequalities that pertain to the nonnegativity of probability describe a polytope which is identically the intersection of a cone with a hyperplane. The cone is given by the usual nonnegativity inequalities, just without defining $\p{}=1$. The hyperplane, then, is exactly $\p{}=1$. As the hyperplane-intersection constraint has no bearing on the quantifiers, we can set it aside, perform the projection, and then re-incorporate the $\p{}=1$ normalization condition after the Fourier-Motzkin procedure has completed.
@@ -1716,7 +1546,9 @@ An individual linear inequality is redundant if and only if it is a \emph{positi
 
 %For our purposes, $\hat{M}$ is the set of all rays \emph{other} than $\vec{b}$, where the columns of $\hat{M}$ are the other rays. 
 
-Below, we present two possible \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$} implementations which assess if a given column $\vec{b}$ can be expressed as a positive linear combination of the columns of $\hat{M}$. The former function is easy to understand, but the latter utilizes efficient low-level code and \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$}'s internal error-handling to rapidly recognize infeasible linear programs.
+% Below, we present two possible \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$} implementations which assess if a given column $\vec{b}$ can be expressed as a positive linear combination of the columns of $\hat{M}$. The former function is easy to understand, but the latter utilizes efficient low-level code and \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$}'s internal error-handling to rapidly recognize infeasible linear programs.
+
+\begin{comment}
 \begin{align*}
  &\hspace{-\mathindent}\texttt{PositiveLinearSolveTest}[{M}\_?\texttt{MatrixQ},{b}\_]{:=}
  \texttt{With}[\{{vars}=\texttt{Thread}[\texttt{Subscript}[x,{\texttt{Dimensions}[{M}][[2]]}]]\},
@@ -1766,7 +1598,10 @@ If $\hat{A}$ is the matrix who's rows are nonnegativity inequalities, then the f
 Note that a \texttt{True} response from \texttt{RedundantRowQ} indicates that the row $n$ is redundant.
 
 %Obtaining a redundancy-free collection of (convex) polyhedral-cone inequalities is therefore related to obtaining a non-negative factorization of a matrix. \purp{Need citation. Also, give explicit connection between NN factorization and redundancy elimination. Does this connection appears elsewhere in the literature?}
+\end{comment}
 
+%%% T: I've commented this out since we're not concerned here with observational equivalence, and I have the feeling that it would still require a major clean-up operation. The example of 6 observationally equivalent DAGs is not very good since they are all equivalent to A <-- S --> B, which doesn't contain any latent nodes
+\begin{comment}
 \clearpage\section{Recognizing observationally equivalent DAGs}
 
 %\purp{Notes to self: Comment about matching-up latent variables between causal structures, for ObsEquiv test.}
@@ -1826,74 +1661,20 @@ Naturally, two causal structures are observationally equivalent if one can be tr
 \renewcommand{\labelenumi}{(\alph{enumi})}
 \renewcommand{\theenumi}{(\alph{enumi})}
 \renewcommand{\labelitemi}{$\circ$}
+\end{comment}
 
 
 
-\section{Tobias's Original 7 Inequalities}
+\section{Classifying polynomial inequalities for the Triangle scenario}
 
-``I present several inequalities... together with a method of proof which has a combinatorial flavour. No quantum violations of any of these inequalities has been found to date."
-%
-%In the following the complement of a value is marked by an empty circle accent, so $\mathring{b}$ means ``anything but $b$", and accordingly $P(\mathring{a}\mathring{b})=P(A\mathopen{\neq}a,B\mathopen{\neq}b)$. 
-%Additionally, an underscore stands for the corresponding marginal probability, like this: $P(\_b\_) := P(abc) + P(ab\mathring{c}) + P(\mathring{a}bc) + P(\mathring{a}b\mathring{c})$. 
-\begin{theorem}
-The following inequalities hold for all classical correlations in the triangle scenario:
-\begin{enumerate}
-\item
-\(\quad
-%--(a)--
-%p(0\_\_)p(\_\_1) \leq p(00\_)+p(\_11)
-p(a) p(c)  \leq  p(a b) + p(\nb c)
-\)
-\item
-\(\quad
-%--(b)--
-%p(001) p(010) p(100)  \leq  p(000) + p(11\_) p(001) p(0\_\_) + p(1\_1) p(010) p(\_\_0) + p(\_11) p(100) p(\_0\_)
-p(a b\nc) p(a \nb c) p(\na b c) \leq p(a b c) + p(\na \nb) p(a b \nc) p(a) + p(\na\nc) p(a\nb c) p(c)  + p(\nb \nc) p(\na b c) p(b)
-\)
-\item 
-\(\quad
-%--(c)--
-%p(001) p(010) p(100) \leq  p(000)^2 + 2 p(11\_) p(001) + 2 p(1\_1) p(010) + 2 p(\_11) p(100)
-p(a b\nc) p(a \nb c) p(\na b c) \leq p(a b c)^2 + 2\parens*{p(\na \nb) p(a b \nc) + p(\na\nc) p(a\nb c)  + p(\nb \nc) p(\na b c)}
-\)
-\item
-\(\quad
-%--(d)--
-%p(000)^2 p(111)  \leq  p(001) p(010) p(100) + (2 p(000) + p(111)) (1 - p(000) - p(111))
-p(a b c)^2 p(\na\nb\nc)  \leq  p(a b \nc) p(a \nb c) p(\na b c) + \parens*{2 p(a b c) + p(\na\nb\nc)} \parens*{1 - p(a b c) - p(\na\nb\nc)}
-\)
-\item
-\(\quad
-%--(e)--
-%p(000)^2 p(111)  \leq  p(000)^3 + (2 p(000) + p(111)) (1 - p(000) - p(111))
-p(a b c)^2 p(\na\nb\nc)  \leq  p(a b c)^3 + \parens*{2 p(a b c) + p(\na\nb\nc)} \parens*{1 - p(a b c) - p(\na\nb\nc)}
-\)
-\item
-\(\quad
-%--(f)--
-%p(1\_\_)p(\_1\_)p(\_\_1) \leq p(000)+p(11\_)p(\_\_1)+p(1\_1)p(\_1\_)+p(\_11)p(1\_\_)
-p(a) p(b) p(c) \leq  p(\na\nb\nc) + p(a b) p(c) + p(a c) p(b) + p(b c) p(a)
-\)
-\item
-\(\quad
-%--(g)--
-%p(1\_\_)p(\_1\_)p(\_\_1) \leq p(000)^2+2 p(11\_)p(\_\_1) + 2 p(1\_1)p(\_1\_) + 2 p(\_11)p(1\_\_)
-p(a) p(b) p(c) \leq  p(\na\nb\nc)^2 +2\parens[\Big]{ p(a b) p(c) + p(a c) p(b) + p(b c) p(a) }
-\)
-\end{enumerate}
-\end{theorem}
+The following polynomial inequalities for the Triangle scenario have been derived via the linear quantifier elimination method of~\cref{sec:ineqs} using the inflation DAG of~\cref{fig:Tri222}. Initially this has resulted in 64 symmetry classes of inequalities, where the symmetries are given by permuting the variables and inverting the outcomes. For the resulting 64 inequalities, numerical checks have found violations of only 38 of them: although they are all facets of the marginal polytope over the distributions on pre-injectable sets, there is no guarantee that they are also nontrivial inequalities at the level of the original DAG, and this has indeed turned out not to be the case for 26 of these symmetry classes of inequalities. Moreover, it is still likely to be the case that some of these inequalities are redundant; we have not yet checked whether for every inequality there is a distribution which violates the inequality but satisfies all others.
 
-It is quite likely that some of these inequalities are dominated by the others, but I do not know for sure whether any of them are actually redundant."
+In the following table, the inequalities are listed in expectation-value form, where we assume the two possible outcomes of each variables to be $\{-1,+1\}$.
 
-\purp{Note that \cref{eq:FritzF3} implies inequalities (a), (b), and (f). I haven't checked the others yet. \quoteby EW}
+\purp{T: it may be better to list this as a table of coefficients, as e.g.~in \href{http://arxiv.org/abs/1101.2477}{arXiv:1101.2477}, p.14/15?}
 
-
-\section{Some of Elie's Triangle Scenario Inequalities}
-
-The following inequalities follow from \cref{fig:Tri222} using linear quantifier elimination. The list is incomplete; longer inequalities have been excised in order to fit the page. A denser but complete list is embedded as the final page of this PDF. All the inequalities below are nontrivial, and are also unique under permutation of the parties or inverting outcomes. In expectation-value formation we imagine the two possible outcomes of each random variables to be $+1$ and $-1$.
-
-\begin{align*}\def\arraystretch{1.5}
-\hspace{-\mathindent}\begin{array}{l}
+\begin{comment}
+\begin{align*}\def\arraystretch{1.5} \hspace{-\mathindent}\begin{array}{l}
  0
 \leq
 {1 + \expec{A B} + \expec{A C} + \expec{B} \expec{C}} \\
@@ -2002,8 +1783,10 @@ The following inequalities follow from \cref{fig:Tri222} using linear quantifier
 \end{array}
 \end{align*}
 
+
+\end{comment}
 \clearpage
-\includepdf[pages=-]{64InequalitiesForTobias.pdf}
+\includepdf[pages=-,scale=0.90]{nontrivlist.pdf}
 
 %\section*{References}
 %\nocite{*}
@@ -2015,57 +1798,3 @@ The following inequalities follow from \cref{fig:Tri222} using linear quantifier
 \bibliography{hardyinference}
 
 \end{document}
-
-\color{blue} A causal model consists of a pair of objects: a causal structure and a set of parameters.  The causal structure is a directed acyclic graph (DAG).  Recall that a DAG $G$ consists of a set of nodes and directed edges (i.e., ordered pairs of nodes), which we denote by $\SmallNamedFunction{Nodes}{G}$ and $\SmallNamedFunction{Edges}{G}$ respectively.  Physically, each node in the DAG corresponds to a localized system and a directed edge between two nodes corresponds to there being a direct causal influence from one system to the other.  The parameters specify, for each root node, how the system corresponding to that node is prepared, and for each node that has parents in the DAG, the precise manner in which it causally depends on its parents.  If a DAG is denoted $G$ and the parameters thereon are denoted $\mathcal{P}(G)$, then the corresponding causal model is the pair $C = (G,\mathcal{P}(G))$.  We shall also make use of the notation $\SmallNamedFunction{DAG}{C}$ for $G$ and $\SmallNamedFunction{Params}{C}$ for $\mathcal{P}(G)$.
-
-In a {\em classical} causal model, the localized systems are random variables, and the parameters are probabilities and conditional probabilities on these random variables.  Specifically, for each root node, the model specifies a probability distribution over the values of the associated random variable, and for each non-root node, it specifies a conditional probability distribution over the values of the random variable associated to that node, given the values of the variables associated to its parents in the DAG.  Denoting the conditional probability distribution associated to a node $A$ in the DAG $G$ by $P_G(A|{\rm Pa}(A))$, we have
-\begin{align}
-\mathcal{P}(G) \equiv \{ P_G(A|{\rm Pa}(A)): A \in \SmallNamedFunction{Nodes}{G}\}.
-\end{align}
-Note that the root nodes are included as those for which the parents are the null set and the conditional probability distribution is simply a probability distribution.
-
-Classical causal models will be the primary focus of this article. Nonetheless, there is a quantum generalization of the notion of a causal model that will feature in our discussions at the end of this article.  In a {\em quantum} causal model\cite{leifer2013conditionalstates}, the localized systems are types of quantum systems (specified by Hilbert space dimensionality), and the parameters are quantum operations.  Specifically, for each root node, the model specifies a unit-trace positive operator on the Hilbert space for that system and for each non-root node, the model specifies a trace-preserving completely-positive linear map from the operators on the Hilbert space of the parents of the system to the operators on the Hilbert space of the system.  Certain nodes in a quantum causal model may be considered classical, in which case all states and operations must be diagonal in some fixed basis on that system.  One can also generalize the notion of a causal model further still to the case of generalized probabilistic theories, as was done in Ref.~\cite{pusey2014gdag}.
- %random variable\footnote{In the quantum context, however, only \emph{observable} nodes correspond to classical random variables, such as the outcomes of measurements. Latent nodes, however, represent quantum systems. Functional dependence is replaced by the action of a quantum operation, and edges then dictate the ways in which quantum systems factor and/or compose. See Refs. \cite{pusey2014gdag,leifer2013conditionalstates}. \purp{Rob, add appendix? Classical/Quantum/GPT everything? I'm thinking a table would be nice.}}, while each edge represents a possible causal influence between variables. 
-
-When a causal model constitutes a hypothesis for explaining a probability distribution over a set of observed variables, then it is natural to distinguish the nodes in the DAG that correspond to observed variables and those that correspond to unobserved variables.  As is standard, the only unobserved variables worth incorporating into one's DAG are those that act as common causes of observed variables.  These are termed {\em latent variables}.  In our graphical depictions of the DAG, we follow the convention of representing the latent nodes by circles, and observable nodes by triangles \cite{pusey2014gdag}.
-
-A causal inference problem is one whose input is some observed data---for instance, a sample of the probability distribution over the observed variables, or some coarse-grained properties thereof---and whose output is a verdict on (or probabilistic inference about) whether a given causal model can explain the observed data.   The particular causal inference problem that is most widely studied is one wherein there is no constraint on the set of parameters that supplements the given causal structure.  Another version of the problem, however, seeks to determine whether the given causal structure can explain the observed data when certain parameters are constrained to be of a particular form.  For instance, the parameters might be constrained to describe a particular type of functional dependence of some variable on its parents.  An example is the assumption of an additive noise model [provide references].
-
-The inflation DAG technique that we introduce will define a novel sort of constraint on the parameters of a causal model.  We pause to describe this constraint in general terms, before introducing the notion of inflation.  The sorts of causal structures that can arise in our inflation scheme have the property that necessarily there will be certain pairs of variables which have the same ancestral subgraph.  The constraint on the parameters is that the two conditional probability distributions describing how each variable of the pair depends on its parents are quantitatively equal to one another.  (To our knowledge, this sort of constraint has not been considered before in causal inference.)
-
-{\bf Describing the hard problem, which, if it were solved, would exhaust what one can infer from the inflation DAG technique.}
-
-We now introduce the notion of \tblue{the inflation of a causal model}.  We describe what inflation means for the causal structure and the parameters.  Let $C=(G,\mathcal{P}(G))$ denote the original causal model and $C'=(G',\mathcal{P'}(G'))$ its inflation.
-
-For $C'$ to be an inflation of $C$, the DAG $G'$ must be related to $G$ as follows:  (i) For each node of $G$, $G'$ contains one or more copies of that node. If $A$ denotes a node in the DAG $G$, then we denote its copies in the inflation DAG $G'$ by $A_1,\ldots, A_k$.  The variable that indexes the copies is termed {\em the copy-index}, and a set of variables in $G'$ that differ only by copy-index are called a {\em copy set} and we denote the set of these by $\SmallNamedFunction{CopySets}{G'}$; (ii) the ancestral subgraph in $G'$ of a node $A_i$ is equivalent, under removal of the copy-index, to the ancestral subgraph in $G$ of the node $A$.  
-
-When two objects (e.g.~nodes, sets of nodes, DAGs, etc\ldots) are the same up to copy-indices, then we use $\sim$ to indicate this, so $A_i\sim A_j\sim A$.  Given this notational convention, we can formalize the condition for $G'$ to be the DAG for an inflation of a causal model with DAG $G$ as follows:
-\begin{align}\label{eq:definflationDAG}
-%\forall A \in \SmallNamedFunction{Nodes}{G}, ???\nonumber\\
-G' \in\SmallNamedFunction{Inflations}{G} \quad\text{ iff }\quad \forall A_i\in \SmallNamedFunction{Nodes}{G'}:\; \ansubgraph[G']{A_i}\sim\ansubgraph[G]{A}.
-\end{align}
-
-Note that this implies that if $G'$ is a DAG arising from inflation, then certain subgraphs of $G'$ are identical,
-\begin{align}\label{eq:ConstraintOnInflationDAG}
-\forall S \in \SmallNamedFunction{CopySets}{G'}: A_i,A_j \in S \implies \ansubgraph[G']{A_i}\sim\ansubgraph[G]{A}.
-\end{align}
-
-
-Furthermore, For the causal model $C'$ to be an inflation of the causal model $C$, the parameters $\mathcal{P'}(G')$ must be related to the parameters $\mathcal{P}(G)$ as follows: 
-For every node $A_i$ in $G'$, the manner in which $A_i$ causally depends on its parents within $G'$ must be the same as the manner in which $A$ causally depends on its parents within $G$.   Formally, 
-\begin{align}\label{eq:funcdependences}
-\forall A_i \in \SmallNamedFunction{Nodes}{G'}:\; \pdf{A_i| {\rm Pa}_{G'}(A_i)}=\pdf{A|{\rm Pa}_{G}(A)}.
-\end{align}
-
-Note that this implies that if $\mathcal{P}(G')$ are the parameters of a causal model arising from inflation, then these are constrained relative to the set of possible parameters that could be defined for a DAG $G'$.  The constraint is:
-\begin{align}\label{eq:ConstraintOnFuncdependences}
-\forall S \in \SmallNamedFunction{CopySets}{G'}: A_i,A_j \in S \implies \pdf{A_i| {\rm Pa}_{G'}(A_i)}=\pdf{A_j|{\rm Pa}_{G'}(A_j)}.
-\end{align}
-
-It is worth emphasizing the significance of the latter constraint.  Let the set $\mathcal{C}_G$ be the set of all causal models associated with a DAG $G$, which is to say the set of pairs $(G, \mathcal{P}(G))$ wherein $\mathcal{P}(G)$ are a set of valid conditional probabilities, 
-\begin{align}
-\mathcal{C}_G \equiv \{ C: \SmallNamedFunction{DAG}{C} =G\}.
-\end{align}
-Let the set of causal models $\mathcal{C}'_{G'}$ be the image of $\mathcal{C}_G$ under some nontrivial inflation map.  $\mathcal{C}'_{G'}$ is {\em not} the set of all causal models associated with $G'$ but rather the subset that satisfy Eq.~\eqref{eq:ConstraintOnFuncdependences}.
-
-
