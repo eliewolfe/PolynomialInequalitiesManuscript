@@ -374,7 +374,9 @@ finding necessary conditions on a probability distribution for it to be compatib
 
 In the simplest setting, the causal hypothesis consists of a directed acyclic graph (DAG) {\em all} of whose nodes correspond to observed variables. In this case, obtaining a verdict on the compatibility of a given distribution with the causal hypothesis is simple: the compatibility holds if and only if the distribution is Markov with respect to the DAG, which is to say that all of the conditional independence relations in the distribution are explained by the structure of the DAG. 
 %(Recall that variables $X$ and $Y$ are conditionally independent given $Z$ if $P_{X,Y|Z}(xy|z) =P_{X|Z}(x|z) P_{Y|Z}(y|z) \;\forall z: P_{Z}(z)>0.$  We denote this in the conventional way:  $(X\indep Y\text{ }|\text{ }Z)$.) 
-The compatible DAGs can be determined algorithmically solely from the distribution. \sout{ i.e.~without having an \emph{a priori} hypothesis}~\cite{pearl2009causality}.
+The compatible DAGs can be determined algorithmically solely from the distribution
+%. \sout{ i.e.~without having an \emph{a priori} hypothesis}
+~\cite{pearl2009causality}.
 
 A significantly more difficult case is when one considers a causal hypothesis which consists of a DAG whose nodes include \tblue{latent} (i.e., unobserved) variables, so that the set of observed variables is a strict subset of the nodes of the DAG. This case occurs, e.g.,~in situations where one needs to deal with the possible presence of unobserved confounders, and is particularly relevant for experimental design in statistics. 
 
@@ -1385,11 +1387,11 @@ There is a simple necessary condition: in order for $\hat{P}_{\bm{X}}$ to exist,
 
 To answer this question, it helps to realize two things:
 \begin{itemize}
-	\item The set of possibilities for the distribution $P_{\bm{X}}$ is the convex hull of the deterministic assignments of values to $\bm{X}$ (the point distributions), and \sout{conversely}
+	\item The set of possibilities for the distribution $P_{\bm{X}}$ is the convex hull of the deterministic assignments of values to $\bm{X}$ (the point distributions), and 
 %	Every joint distribution $P_{\bm{X}}$ is a convex combination of deterministic assignments of values to all variables (delta distributions), and conversely.
 	\item The map $P_{\bm{X}}\to (P_{\bm{U}_1},\ldots,P_{\bm{U}_n})$, describing marginalization to each of the contexts in $(\bm{U}_1,\ldots,\bm{U}_n)$, is $n$-wise linear.
 \end{itemize}
-Hence the image of the set of possibilities for the distribution $P_{\bm{X}}$ under the map $P_{\bm{X}}\to (P_{\bm{U}_1},\ldots,P_{\bm{U}_n})$ is exactly the convex hull of the deterministic assignments of values to $(\bm{U}_1,\ldots,\bm{U}_n)$ (more precisely, the deterministic assignments that are consistent where these contexts overlap). Since there are only finitely many such deterministic assignments, this convex hull is a polytope; it is called the \tblue{marginal polytope}~\cite{kahle_marginal_2010}. \sout{Together with the above set of equations,} \color{purple} [R: Aren't the facet inequalities themselves necessary and sufficient? \color{black} the facet inequalities of the marginal polytopes form necessary and sufficient conditions for the marginal problem to have a solution.
+Hence the image of the set of possibilities for the distribution $P_{\bm{X}}$ under the map $P_{\bm{X}}\to (P_{\bm{U}_1},\ldots,P_{\bm{U}_n})$ is exactly the convex hull of the deterministic assignments of values to $(\bm{U}_1,\ldots,\bm{U}_n)$ (more precisely, the deterministic assignments that are consistent where these contexts overlap). Since there are only finitely many such deterministic assignments, this convex hull is a polytope; it is called the \tblue{marginal polytope}~\cite{kahle_marginal_2010}. Together with the above set of equations, the facet inequalities of the marginal polytopes form necessary and sufficient conditions for the marginal problem to have a solution.
 
 %Thus solving the marginal problem is an instance of a facet enumeration problem, or equivalently a linear quantifier elimination problem;~\cref{sec:projalgorithms} gives an overview of how to solve this in practice. 
 
@@ -2020,7 +2022,7 @@ The set of distributions that are quantumly compatible with a given DAG is actua
 %However, this is by no means an easy task. For example, 
 Furthermore, recent work has found that set of distributions that are quantumly compatible with a given DAG satisfy many of the entropic inequalities that hold classically~\cite{pusey2014gdag,Chaves2015infoquantum,ChavesNoSignalling}. To date, no quantum-classical separation has been identified where the separation is achieved by
  %distribution has been found to violate 
-a Shannon-type entropic inequality on observed variables that is derived from the Markov conditions on all nodes \cite{chaves2012entropic,fritz2012bell}. Fine-graining the scenario by conditioning on root variables (``settings'') leads to a different kind of entropic inequality, and these have proven somewhat quantum-sensitive \cite{braunstein1988entropic,SchumacherInequality,chaves2014novel}. Such inequalities are still limited, however, in that they only apply \sout{in the presence of observable root nodes} \color{purple} to DAGs that include root nodes that are observed\color{black}\footnote{Rafael Chaves and E.W.~are exploring the potential of entropic analysis based on \color{purple} distributions that are \color{black} conditioned on non-root observed nodes. This generalizes the method of entropic inequalities, and might be capable of providing much stronger entropic witnesses.}, and they still fail to witness cases of classical incompatibility of certain distributions with a given DAG (where the incompatibility is witnessed by stronger techniques)~\cite{chaves2014novel,fritz2012bell}.
+a Shannon-type entropic inequality on observed variables that is derived from the Markov conditions on all nodes \cite{chaves2012entropic,fritz2012bell}. Fine-graining the scenario by conditioning on root variables (``settings'') leads to a different kind of entropic inequality, and these have proven somewhat quantum-sensitive \cite{braunstein1988entropic,SchumacherInequality,chaves2014novel}. Such inequalities are still limited, however, in that they only apply to DAGs that include root nodes that are observed\footnote{Rafael Chaves and E.W.~are exploring the potential of entropic analysis based on considering distributions conditioned on \emph{non}-root observed nodes. Jacques Pienaar has alluded to similar considerations as a possible avenues for further research as well \cite{pianaar2016interesting}.}, and they still fail to witness cases of classical incompatibility of certain distributions with a given DAG (where the incompatibility is witnessed by stronger techniques)~\cite{chaves2014novel,fritz2012bell}.
 
 %Some constraints on compatibility can be proven to apply not only to quantum generalizations of causal models, but also to {\em postquantum} generalizations as well~\cite{pusey2014gdag}. 
 
@@ -2059,7 +2061,7 @@ The inflation technique also only makes reference to the observed nodes in a DAG
 Nonetheless, the inflation technique also yields inequalities that hold only for the {\em classical} notion of compatibility; it is for this reason that it can be used to derive inequalities that are quantumly violated.  For instance, in \cref{example:noPR} of \cref{subsec:witnessingincompat} and \cref{sec:Bellscenarios}, we have shown how the inflation technique can be used to derive Bell inequalities, which clearly admit quantum violations. 
 
 
-The inflation technique can also be used to derive inequalities of the sort which  admit quantum violations for the Triangle scenario.
+The inflation technique can be used to derive inequalities of the sort which admit quantum violations for the Triangle scenario as well.
 Specifically, our technique is able to reproduce the result shown by \citet[Theorem~2.16]{fritz2012bell}, that a particular distribution, inspired by the Bell example, is quantumly but not classically compatible with the triangle scenario.  \color{purple} [R: Elie: should we say this here or leave it for some putative future paper with TC?] \color{black}
 
 It is possible that one could generalize the inflation technique to derive inequalities that can achieve a GPT-quantum separation. This, however, requires a careful definition of a quantum causal model and is beyond the scope of this article.  Nonetheless, we will note below in which inflation in the quantum context will differ from its classical counterpart. 
@@ -2151,7 +2153,7 @@ Approach & General problem & Standard algorithm(s) & Difficulty \\
 \midrule
 %\hline
 %\hline
-\sout{Nonlinear quantifier elimination} Complete solution of marginal problem with arbitrary $d$-separation conditions & Real quantifier elimination & Cylindrical algebraic decomposition, see \cite{ChavesPolynomial} & Very hard \\
+Complete solution of marginal problem with arbitrary nonlinear $d$-separation conditions & Real quantifier elimination & Cylindrical algebraic decomposition, see \cite{ChavesPolynomial} & Very hard \\
 \hline
 Complete solution of marginal problem with ancestral independences & Facet enumeration & Fourier-Motzkin elimination~\cite{fordan1999projection,DantzigEaves,Bastrakov2015,BalasProjectionCone,Jones2008}, lexicographic reverse search~\cite{Avis2000lrs} & Hard \\
 \hline
@@ -2521,8 +2523,8 @@ Note that the argument does not apply if the inflationary isomorphism $\varphi:\
 
 \section{Using the Inflation Technqiue to Certify a DAG as ``Interesting"\label{sec:interestingproof}}
 
-By considering all possible $d$-separation conditions implied by a given DAG, one can infer the set of all conditional independence (CI) relations that must hold in any joint distribution over the observed variables that is compatible with the given DAG. In the presence of nontrivial latent nodes, the set of all  \emph{observable} CI relations (that is, CI relations among observed variables)
-\sout{is a strict subset of the set of all CI relations} 
+By considering all possible $d$-separation conditions implied by a given DAG, one can infer the set of all conditional independence (CI) relations that must hold in any joint distribution over the observed variables that is compatible with the given DAG. In the presence of nontrivial latent nodes, the set of all  \emph{observable} CI relations (that is, CI relations among observed variables) 
+%\sout{is a strict subset of the set of all CI relations} 
 do not always exhaust the constraints on the joint distribution over the observed variables. \citet{pusey2014gdag} were concerned with identifying DAGs for which an observable distribution satisfying all observable CI relations is \emph{not} a sufficient criterion for compatibility.  They introduced the term \tblue{interesting} to refer to any DAG which exhibits a discrepancy between the set of observable distributions genuinely compatible with it and the set of observable distributions that merely reproduce its observable CI relations.
 
 \citet{pusey2014gdag} derived novel necessary criteria on the structure of a DAG in order for it to be interesting, and they conjectured that their criteria may, in fact, be necessary and sufficient. As evidence in favour of this conjecture, they enumerated all possible DAGs with no more than six nodes satisfying their criteria.
@@ -2535,16 +2537,16 @@ One way to close this loophole would be to show that the novel Shannon-type ineq
 
 \begin{figure}[b]
 \centering
-\begin{minipage}[b]{0.4\linewidth}
+\begin{minipage}[t]{0.4\linewidth}
 \centering
-\includegraphics[scale=1]{scen15DAG.pdf}
-\caption{DAG \#15 in Ref. \cite{pusey2014gdag}. \color{purple} [R: Can this DAG be depicted with node locations equivalent to the node locations in our depiction of the triangle scenario?] \color{black}}\label{fig:GDAG15}
+\includegraphics[scale=1]{scen15DAGV2.pdf}
+\caption{DAG \#15 in Ref. \cite{pusey2014gdag}.}\label{fig:GDAG15}
 \end{minipage}
 \hfill
-\begin{minipage}[b]{0.5\linewidth}
+\begin{minipage}[t]{0.5\linewidth}
 \centering
-\includegraphics[scale=1]{scen15InflationDAG.pdf}
-\caption{A useful inflation of \cref{fig:GDAG15}.  \color{purple} [R: Can this be put in the same form as the corresponding inflation of the triangle scenario?] \color{black}}\label{fig:Inflated15}
+\includegraphics[scale=1]{scen15InflationDAGV2.pdf}
+\caption{A useful inflation of \cref{fig:GDAG15}.}\label{fig:Inflated15}
 \end{minipage}
 \end{figure}
 
@@ -2695,7 +2697,7 @@ While it is also not hard to write down a distribution with the desired properti
 \begin{minipage}[t]{0.4\linewidth}
 \centering
 \includegraphics[scale=1]{shannonYEScopyV1.pdf}
-\caption{An inflation of \cref{fig:beforecopy}.  \color{purple} [Add subscripts to $B$ and $C$ in keeping with our notational convention.  ---RWS] \color{black}}\label{fig:aftercopy}
+\caption{An inflation of \cref{fig:beforecopy}.}\label{fig:aftercopy}
 \end{minipage}
 %\hfill
 %\begin{minipage}[t]{0.3\linewidth}
