@@ -382,7 +382,9 @@ A significantly more difficult case is when one considers a causal hypothesis wh
 
 It is useful to distinguish two varieties of this problem: (i) the causal hypothesis specifies the nature of the latent variables, for instance, that they are discrete and of a particular cardinality (the cardinality of a variable is the number of possible values it can take), and (ii) the nature of the latent variables is arbitrary.  
 
-Consider the first variety of causal inference problem.  If the latent variables are all discrete then the mathematical problem which one must solve to infer the distributions that are compatible with the hypothesis is a quantifier elimination problem for some finite number of quantifiers.  \purp{Say something here about quantifier elimination ---RWS} The parameters specifying the probability distribution over the observed variables can all be expressed as functions of the parameters specifying the conditional probabilities of each node given its parents.  Many of the latter parameters are associated to the latent variables.  However, if one can eliminate the parameters associated to the latent variables, one obtains constraints that refer exclusively to the probability distribution over the observed variables.  Because this is a {\em nonlinear} quantifier elimination problem in the general case, it is infeasible to provide an exact solution except in particularly simple scenarios \cite{LeeSpekkens}.  Nonetheless, because the mathematical problem to be solved is known in this case, any techniques developed for finding approximate solutions to problems of nonlinear quantifier elimination can be leveraged.
+Consider the first variety of causal inference problem.  If the latent variables are all discrete then the mathematical problem which one must solve to infer the distributions that are compatible with the hypothesis is a quantifier elimination problem for some finite number of quantifiers: 
+
+The parameters specifying the probability distribution over the observed variables can all be expressed as functions of the parameters specifying the conditional probabilities of each node given its parents.  Many of the latter parameters are associated to the latent variables.  However, if one can eliminate the parameters associated to the latent variables, one obtains constraints that refer exclusively to the probability distribution over the observed variables.  Because this is a {\em nonlinear} quantifier elimination problem in the general case, it is infeasible to provide an exact solution, except in particularly simple scenarios \cite{LeeSpekkens}. Techniques for finding approximate solutions to problems of nonlinear quantifier elimination, such as \cite{ChavesPolynomial}, can be leveraged in this case.
 
 The second variety of causal inference problem, where the latent variables are arbitrary, is more difficult, but also the case that has been the focus of most research and that motivates the present work. It is possible that inference problems of this variety might also be reducible to quantifier elimination problems. This would be the case, for instance, if one could show that discrete latent variables of a certain finite cardinality (rather than arbitrary latent variables) are sufficient to generate all the distributions compatible with that DAG \footnote{\citet{rosset2016finite} have an unpublished proof purporting to upper bound the cardinality of sufficiently general latent variables. We do not pursue the question here.}. At present, therefore, the problem of providing a mathematical algorithm for deciding compatibility in this second case---let alone an efficient algorithm---remains open.  Moreover, even if it {\em is} possible to achieve a reduction to the case of latent variables with finite cardinality, one would still be faced with a difficult nonlinear quantifier elimination problem.  As such, heuristic techniques for obtaining nontrivial constraints, such as the one presented in this work, are still valuable in practice. 
 
@@ -402,7 +404,7 @@ than $c$ variables has a common ancestor (here $n,c \in \mathbb{N}$ are unrestri
 
 Recently, Henson, Lal and Pusey~\cite{pusey2014gdag} have found a sufficient condition for a DAG to be {\em interesting}, a term that they introduced which means that conditional independence relations do not exhaust the set  of constraints on the compatibility of a joint distribution over observed variables with the DAG.  They have also explicitly presented a catalogue of all the interesting DAGs having seven or fewer nodes in Appendix E of Ref.~\cite{pusey2014gdag}.  The Bell scenario, the Instrumental scenario, and the Triangle scenario appear in the catalogue, but even for six or fewer nodes, there are many more cases to consider.   Furthermore, the fraction of DAGs that are interesting increases as the total number of nodes increases.  This highlights the need for moving beyond a case-by-case consideration of individual DAGs and for developing techniques for deriving constraints beyond conditional independence relations that can be applied to any interesting DAG.  
 
-The challenge was taken up recently by... {\color{purple} Summarize the Shannon inequalities stuff \cite{fritz2013marginal,chaves2014novel,chaves2014informationinference} and follow-up work on non-Shannon inequalities \cite{weilenmann2016entropic,kela2016covariance,pianaar2016interesting}.  Also summarize Chaves' work on polynomial Bell inequalities.  Summarize why these techniques are still wanting.}
+Shannon-type entropic inequalities provide excellent constraints beyond conditional independence relations \cite{fritz2013marginal,chaves2014novel,chaves2014informationinference}. Entropic inequalities can be derived for a given DAG with relative ease, via exclusively linear quantifier elimination. Like conditional independence relations, entropic inequalities automatically apply to any number of possible outcomes for the observable variables. Recent work has also looked at deriving non-Shannon type inequalities, potentially further strengthening the entropic constraints  \cite{weilenmann2016entropic,pianaar2016interesting}. All entropic techniques are still wanting, however, as they are not sensitive enough to distinguish uniquely-quantum correlations from their classical causal counterparts \cite{fritz2012bell,weilenmann2016entropic}.
 
 %In contexts other than quantum theory, the latent nodes in causal structures are generally taken to represent hidden variables. This is not fully general, however, so we apply the retronym\footnote{Retronym (noun): a modification of an original term to distinguish it from a later development \cite{retronym}.} ``classical", as in classical causal structure and classical causal inference. The classical distributions of a given causal structure are defined as those which arise from it while restricting the latent nodes to be arbitrary (classical) random variables. Quantum distributions, by contrast, are those which are realizable if the latent nodes in the causal structure are allowed to be quantum systems. We hereafter take all causal structures and probability distributions to be classical, except where explicitly stated otherwise.
 
@@ -422,13 +424,13 @@ The technique is capable of generating causal compatibility inequalities for the
 %, in which case we say that the inequalities are \emph{polynomial}. 
 As far as we know, our method is the first systematic tool for causal inference with latent variables that goes beyond observable conditional independence relations while not assuming any bounds on the number of values of each latent variable. While our method can be used to systematically generate necessary conditions for compatibility with a given causal structure, we do not know whether the set of inequalities thus generated are also sufficient.  
 %, and we currently have conflicting evidence on this question. On the one hand, our method rederives all Bell-type inequalities (\cref{sec:Bellscenarios}), but on the other hand 
-The fact that we have not yet been able to obtain Pearl's instrumental inequality from our method suggests that it may not be sufficient.
 
-\color{purple} [R:We still need to say: That here we have only used ancestral independences in the inflated DAG, but that there are prospects for using arbitrary d-separation criteria as well as other features of the inflated model.  
+
+%\color{purple} [R:We still need to say: That here we have only used ancestral independences in the inflated DAG, but that there are prospects for using arbitrary d-separation criteria as well as other features of the inflated model.  
 % Finally, we discuss what applications our technique might have for causal models in quantum theory and generalized probabilistic theories.   
- Elie, could you try to write a frist draft of this paragraph?  
+% Elie, could you try to write a frist draft of this paragraph?  
  %I'm thinking that perhaps we could fold into this discussion a summary of the paper by referring to the appropriate section as we describe what is done in the paper.
- ]\color{black}
+% ]\color{black}
 
 % We show how the no-broadcasting theorem governing quantum theory \cite{NoCloningQuantum1996,NoCloningGeneral2006} can be exploited in order to derive specifically quantum-sensitive infeasibility criteria.
 While we present our technique primarily as a tool for standard causal inference, we also briefly discuss applications to {\em quantum} causal models and causal models within generalized probabilistic theories~\cite{fritz2012bell,pusey2014gdag,chaves2014informationinference,BeyondBellII}.  In particular, we describe conditions under which the inequalities we derive are also necessary conditions for a distribution over observed variables to be compatible with a given DAG within any generalized probabilistic theory. 
@@ -1147,7 +1149,7 @@ In the rest of this article, we shall continue to rely only on the ancestral ind
 %has a richer structure tends to make for more such opportunites for easy constraints. 
 
 %In all of these examples, the inequality with which one starts---a constraint upon marginals that is independent of the causal structure---involves sets of observed variables that are not all injectable.  Each of these sets can, however, be partitioned into disjoint subsets each of which {\em is} injectable where the partitioning represents ancestral independence in the inflated DAG.  It is useful to have a name for such sets of observed variables: we will call them {\em pre-injectable}.  We begin by defining this notion carefully before describing our general inflation technique. 
-\color{black}
+%\color{black}
 
 \section{Deriving causal compatibility inequalities systematically}
 \label{sec:ineqs}
@@ -1170,14 +1172,14 @@ Because ancestral independence in the DAG implies statistical independence for a
 $\bm{U}'$ is a pre-injectable set and $\bm{U}_1,\bm{U}_2,\ldots,\bm{U}_n$ are the ancestrally independent components of $\bm{U}'$, then 
 \begin{align}\label{eq:preinjfactor}
 %\forall \bm{U}\in\SmallNamedFunction{PreInjectableSets}{G'}:	
-\pdfp{\bm{U}'} = \pdfp{\bm{U}_1} \pdfp{\bm{U}_2}  \cdots \pdfp{\bm{U}_n}.
+P'_{\bm{U}'} = P'_{\bm{U}_1} P'_{\bm{U}_2}  \cdots P'_{\bm{U}_n}.
 \end{align}
 
 The situation, therefore, is this: for any constraints that one can derive for the marginals on the pre-injectable sets based on the existence of a joint distribution (and hence without reference to the causal structure), one can infer constraints that {\em do} refer to the causal structure by substituting within these constraints equalities of the form of Eq.~\eqref{eq:preinjfactor}.  The problem of determinig constraints on marginals follows from the existence of a joint distribution is known as the {\em marginal problem}.   Thus, we can summarize the situation as follows: an inequality derived from the marginal problem, after applying the equalities of Eq.~\eqref{eq:preinjfactor}, becomes a causal compatibility inequality for the inflated DAG. 
 
 The latter inequality can then be converted into a causal compatibility inequality for the original DAG using corollary \ref{maincorollary}.
 
-\tgreen{T: A lot of the things in this section \emph{also} need to be done when checking for satisfiability only, such as identifying the pre-injectable sets and writing down all the constraints.} \purp{R: I agree.  Should we put identifying the pre-injectable sets at the head of a section on witnessing incompatibility?}
+\purp{ADD SATISFIABILITY PARALLEL NARRATIVE ABOVE, and also new subsection after marginal problem}
 
 %We have defined causal inference as a decision problem, namely testing the consistency of some observational data with some some causal hypothesis. We have shown that this decision can sometimes be negatively answered by proxy, namely by demonstrating inconsistency of \emph{inflated} data with an \emph{inflated} hypothesis. But the inflation technique is more useful than that: we can also derive explicit \emph{inequalities} that a distribution on observable nodes needs to satisfy in order to be compatible with the causal structure. % Any such constraint is also an implicit consequence of the original hypothesis, and hence a relevant infeasibility criterion.
 
@@ -1428,7 +1430,7 @@ If each variable is binary, then we have 64 inequalities and 40 equalities, alth
 %and to thereby compute the inequalities that constrain the marginal probabilities.
 %We coin the term gedankenprobability to denote any probability pertaining to a \emph{not}-pre-injectable set of inflation-DAG variables. The gedankenprobabilities evoke thought experiments, because any \purp{black box implementation of the original causal structure % \emph{in-principle}.
 
-\subsection{Causal compatibility inequalities via a complete solution of the marginal problem}\label{CCineqs}
+\subsection{Causal compatibility inequalities via a complete solution of the marginal problem}\label{sec:CCineqs}
 
 A general scheme for deriving causal compatibility inequalities for a DAG can be summarized as follows.  Choose an inflation of the DAG and identify the maximal pre-injectable sets thereon.  Next, solve the marginal problem where the contexts are the maximal pre-injectable sets.  By substituting into these inequalities the factorization conditions implied by ancestral independences among the variables in the maximal pre-injectable sets, one obtains causal compatibility inequalities for the inflated DAG.  Finally, these can be converted into causal compatibility inequalities for the original DAG using Corollary~\ref{maincorollary}.
 
@@ -1449,16 +1451,100 @@ We then factorize the probabilities according to the ancestral independences in 
 Moreover, it is likely to be the case that these 37 causal compatibility inequalities are not a minimal generating set, where a minimal generating set is defined as one such that, for every inequality, there is a distribution that violates it while satisfying all of the others. 
 %; we have not yet checked whether for every inequality there is a distribution which violates that inequality but satisfies all the others.
 We present our generating set of causal compatibility inequalities for the Triangle scenario below.
-
+%
 %\clearpage
 %\label{page:nontrivlist}
 %\includepdf[pages=1,scale=0.90,link,linkname=nontriv,pagecommand={\refstepcounter{includepdfpage}\label{nontriv.\theincludepdfpage}}]{nontrivlist.pdf}
-\begin{figure}[H]
- \includegraphics[width=\textwidth]{nontrivlist.pdf}\label{nontriv.humanreadable}
-\color{purple} [R: Do we explain what the * means?]\color{black} A machine-readable version of this set of inequalities may be found in \cref{sec:38ineqs}.
-\end{figure}
-
-
+%
+%\begin{figure}[H]
+% \includegraphics[width=\textwidth]{nontrivlist.pdf}\label{nontriv.humanreadable}
+%\color{purple} [R: Do we explain what the * means?]\color{black} A machine-readable version of this set of inequalities may be found in \cref{sec:38ineqs}.
+%\end{figure}
+%
+\begin{align*}%\label{nontriv.humanreadable}
+\hspace{-\mathindent}\resizebox{\linewidth}{!}{\(
+\begin{array}{ll}
+ \text{($\#$} 1^* \text{):  } & 0\leq 1+\expec{B} \expec{C}+\expec{AB}+\expec{AC} \\
+ \text{($\#$} 2 \text{):  } & 0\leq 2+\expec{A} \expec{B} \expec{C}-\expec{C} \expec{AB}-2 \expec{AC} \\
+ \text{($\#$} 3^* \text{):  } & 0\leq 3+\expec{A}-\expec{B}+\expec{C}+\expec{B} \expec{C}+\expec{A} \expec{B}
+   \expec{C}+\expec{AB}-\expec{C} \expec{AB}+3 \expec{AC}-\expec{B} \expec{AC} \\
+ \text{($\#$} 4^* \text{):  } & 0\leq 3+\expec{A}-\expec{B}+\expec{C}+\expec{B} \expec{C}-\expec{A} \expec{B}
+   \expec{C}+\expec{AB}+\expec{C} \expec{AB}+3 \expec{AC}-\expec{B} \expec{AC} \\
+ \text{($\#$} 5 \text{):  } & 0\leq 3+\expec{B}-\expec{A} \expec{B}+\expec{A} \expec{C}+\expec{A} \expec{B}
+   \expec{C}+\expec{AB}+\expec{C} \expec{AB}-\expec{B} \expec{AC}-2 \expec{BC} \\
+ \text{($\#$} 6 \text{):  } & 0\leq 3+\expec{B}+\expec{A} \expec{C}+\expec{A} \expec{B} \expec{C}-\expec{C} \expec{AB}-2
+   \expec{AC}-\expec{B} \expec{AC}-2 \expec{BC} \\
+ \text{($\#$} 7 \text{):  } & 0\leq 3+\expec{B}+\expec{A} \expec{B}-\expec{A} \expec{C}-\expec{A} \expec{B}
+   \expec{C}+\expec{AB}+\expec{C} \expec{AB}+\expec{B} \expec{AC}-2 \expec{BC} \\
+ \text{($\#$} 8^* \text{):  } & 0\leq 3+\expec{A}+\expec{B}+\expec{A} \expec{B}+\expec{C}+\expec{A} \expec{C}+\expec{B}
+   \expec{C}-\expec{A} \expec{B} \expec{C}+2 \expec{AB}+\expec{C} \expec{AB}+2 \expec{AC}+\expec{B} \expec{AC}+2 \expec{BC}+\expec{A}
+   \expec{BC}-\expec{ABC} \\
+ \text{($\#$} 9^* \text{):  } & 0\leq 3+\expec{A}+\expec{B}-\expec{A} \expec{B}+\expec{C}+\expec{A} \expec{C}+\expec{B}
+   \expec{C}-\expec{A} \expec{B} \expec{C}+\expec{C} \expec{AB}+2 \expec{AC}+\expec{B} \expec{AC}-2 \expec{BC}-\expec{A}
+   \expec{BC}+\expec{ABC} \\
+ \text{($\#$} 10^* \text{):  } & 0\leq 4+2 \expec{A} \expec{B}+2 \expec{C}+2 \expec{B} \expec{C}-2 \expec{AB}+\expec{C} \expec{AB}-2
+   \expec{AC}+\expec{B} \expec{AC}+\expec{A} \expec{BC}-\expec{ABC} \\
+ \text{($\#$} 11^* \text{):  } & 0\leq 4-2 \expec{B}+\expec{B} \expec{C}+\expec{A} \expec{B} \expec{C}-2 \expec{AB}+\expec{C}
+   \expec{AB}-\expec{B} \expec{AC}-3 \expec{BC}+\expec{ABC} \\
+ \text{($\#$} 12^* \text{):  } & 0\leq 4-2 \expec{B}+2 \expec{A} \expec{C}+\expec{B} \expec{C}-\expec{A} \expec{B} \expec{C}-2
+   \expec{AB}+\expec{C} \expec{AB}-2 \expec{AC}+\expec{B} \expec{AC}-3 \expec{BC}+\expec{ABC} \\
+ \text{($\#$} 13^* \text{):  } & 0\leq 4-2 \expec{A} \expec{B}-2 \expec{A} \expec{C}-\expec{B} \expec{C}-\expec{A} \expec{B}
+   \expec{C}+2 \expec{AB}-\expec{C} \expec{AB}-2 \expec{AC}+\expec{B} \expec{AC}+\expec{BC}+\expec{ABC} \\
+ \text{($\#$} 14^* \text{):  } & 0\leq 4-2 \expec{A} \expec{B}+2 \expec{A} \expec{C}-\expec{B} \expec{C}+\expec{A} \expec{B}
+   \expec{C}+2 \expec{AB}+\expec{C} \expec{AB}-2 \expec{AC}+\expec{B} \expec{AC}+\expec{BC}+\expec{ABC} \\
+ \text{($\#$} 15^* \text{):  } & 0\leq 4+2 \expec{A} \expec{C}+\expec{B} \expec{C}+\expec{A} \expec{B} \expec{C}-\expec{C} \expec{AB}-2
+   \expec{AC}-\expec{B} \expec{AC}+3 \expec{BC}+\expec{ABC} \\
+ \text{($\#$} 16^* \text{):  } & 0\leq 4-2 \expec{B}+2 \expec{A} \expec{C}-2 \expec{AB}+\expec{C} \expec{AB}-2 \expec{AC}+\expec{B}
+   \expec{AC}-2 \expec{BC}-\expec{A} \expec{BC}+\expec{ABC} \\
+ \text{($\#$} 17^* \text{):  } & 0\leq 4+2 \expec{A} \expec{B}+2 \expec{A} \expec{C}+2 \expec{B} \expec{C}-2 \expec{AB}+\expec{C}
+   \expec{AB}-2 \expec{AC}+\expec{B} \expec{AC}-2 \expec{BC}+\expec{A} \expec{BC}+\expec{ABC} \\
+ \text{($\#$} 18 \text{):  } & 0\leq 5+\expec{A}+\expec{B}-2 \expec{A} \expec{B}+\expec{C}+\expec{B} \expec{C}+\expec{A} \expec{B}
+   \expec{C}+3 \expec{AB}+\expec{C} \expec{AB}+\expec{AC}-\expec{B} \expec{AC}-4 \expec{BC} \\
+ \text{($\#$} 19^* \text{):  } & 0\leq 5+\expec{A}+\expec{B}+2 \expec{A} \expec{B}+\expec{C}-2 \expec{A} \expec{C}+\expec{B}
+   \expec{C}-\expec{A} \expec{B} \expec{C}+3 \expec{AB}+\expec{C} \expec{AB}-\expec{AC}+\expec{B} \expec{AC}-4 \expec{BC} \\
+ \text{($\#$} 20^* \text{):  } & 0\leq 5+\expec{A}-\expec{B}-2 \expec{A} \expec{B}+\expec{C}-\expec{A} \expec{C}+\expec{B}
+   \expec{C}+\expec{AB}+\expec{C} \expec{AB}+2 \expec{AC}-2 \expec{B} \expec{AC}-2 \expec{BC}-2 \expec{A} \expec{BC}-2 \expec{ABC} \\
+ \text{($\#$} 21^* \text{):  } & 0\leq 5+\expec{A}+\expec{B}+\expec{C}-\expec{A} \expec{C}-\expec{B} \expec{C}-2 \expec{A} \expec{B}
+   \expec{C}+\expec{AB}+2 \expec{C} \expec{AB}+2 \expec{AC}+\expec{B} \expec{AC}-2 \expec{BC}+\expec{A} \expec{BC}-\expec{ABC} \\
+ \text{($\#$} 22^* \text{):  } & 0\leq 5-\expec{A}+\expec{B}-2 \expec{A} \expec{B}+\expec{C}-2 \expec{A} \expec{C}+2 \expec{B}
+   \expec{C}+\expec{AB}-2 \expec{C} \expec{AB}+\expec{AC}-2 \expec{B} \expec{AC}-\expec{BC}-2 \expec{A} \expec{BC}+\expec{ABC} \\
+ \text{($\#$} 23^* \text{):  } & 0\leq 5+\expec{A}+\expec{B}-\expec{A} \expec{B}+\expec{C}+2 \expec{B} \expec{C}+\expec{A} \expec{B}
+   \expec{C}+2 \expec{AB}-\expec{C} \expec{AB}+\expec{AC}-2 \expec{B} \expec{AC}-\expec{BC}-2 \expec{A} \expec{BC}+\expec{ABC} \\
+ \text{($\#$} 24^* \text{):  } & 0\leq 5+\expec{A}+\expec{B}-2 \expec{A} \expec{B}+\expec{C}-\expec{A} \expec{C}-\expec{B} \expec{C}-2
+   \expec{A} \expec{B} \expec{C}-\expec{AB}+2 \expec{C} \expec{AB}+2 \expec{AC}+\expec{B} \expec{AC}+2 \expec{BC}-\expec{A}
+   \expec{BC}+\expec{ABC} \\
+ \text{($\#$} 25 \text{):  } & 0\leq 6+2 \expec{A} \expec{B}+\expec{A} \expec{C}+2 \expec{B} \expec{C}+\expec{A} \expec{B} \expec{C}-4
+   \expec{AB}-2 \expec{C} \expec{AB}-3 \expec{AC}-\expec{B} \expec{AC}-2 \expec{A} \expec{BC} \\
+ \text{($\#$} 26 \text{):  } & 0\leq 6-2 \expec{A}+\expec{A} \expec{B}+2 \expec{C}+\expec{A} \expec{C}+2 \expec{A} \expec{B}
+   \expec{C}-5 \expec{AB}-\expec{C} \expec{AB}-3 \expec{AC}+\expec{B} \expec{AC}-2 \expec{A} \expec{BC} \\
+ \text{($\#$} 27 \text{):  } & 0\leq 6+2 \expec{A} \expec{B}+2 \expec{C}+\expec{A} \expec{C}+\expec{A} \expec{B} \expec{C}-4
+   \expec{AB}-2 \expec{C} \expec{AB}+3 \expec{AC}+\expec{B} \expec{AC}-2 \expec{A} \expec{BC} \\
+ \text{($\#$} 28 \text{):  } & 0\leq 6+\expec{A} \expec{B}+\expec{A} \expec{C}-4 \expec{B} \expec{C}-2 \expec{A} \expec{B}
+   \expec{C}+\expec{AB}+\expec{C} \expec{AB}-3 \expec{AC}-\expec{B} \expec{AC}+2 \expec{BC}-2 \expec{A} \expec{BC} \\
+ \text{($\#$} 29 \text{):  } & 0\leq 6+2 \expec{B}+\expec{A} \expec{B}-2 \expec{A} \expec{C}+\expec{B} \expec{C}-2 \expec{A} \expec{B}
+   \expec{C}+3 \expec{AB}+\expec{C} \expec{AB}+2 \expec{B} \expec{AC}-5 \expec{BC}+\expec{A} \expec{BC} \\
+ \text{($\#$} 30 \text{):  } & 0\leq 6+2 \expec{B}-2 \expec{A} \expec{B}+4 \expec{A} \expec{C}-\expec{B} \expec{C}+\expec{A} \expec{B}
+   \expec{C}+2 \expec{AB}+2 \expec{C} \expec{AB}-2 \expec{AC}+2 \expec{B} \expec{AC}+\expec{BC}+\expec{A} \expec{BC} \\
+ \text{($\#$} 31 \text{):  } & 0\leq 6+\expec{A} \expec{C}+4 \expec{B} \expec{C}+\expec{A} \expec{B} \expec{C}-2 \expec{AB}-2 \expec{C}
+   \expec{AB}-3 \expec{AC}-\expec{B} \expec{AC}-2 \expec{BC}-2 \expec{ABC} \\
+ \text{($\#$} 32 \text{):  } & 0\leq 7+\expec{A}+\expec{B}+\expec{A} \expec{B}+\expec{C}-2 \expec{A} \expec{C}+2 \expec{B}
+   \expec{C}-\expec{A} \expec{B} \expec{C}+2 \expec{AB}+3 \expec{C} \expec{AB}+\expec{AC}+2 \expec{B} \expec{AC}-3 \expec{BC}-2
+   \expec{A} \expec{BC}+3 \expec{ABC} \\
+ \text{($\#$} 33 \text{):  } & 0\leq 8+2 \expec{A} \expec{B}+4 \expec{A} \expec{C}-2 \expec{B} \expec{C}+2 \expec{A} \expec{B}
+   \expec{C}-2 \expec{AB}-\expec{C} \expec{AB}-4 \expec{AC}+\expec{B} \expec{AC}-2 \expec{BC}-3 \expec{A} \expec{BC}-3 \expec{ABC} \\
+ \text{($\#$} 34 \text{):  } & 0\leq 8+2 \expec{A}-2 \expec{C}-\expec{A} \expec{C}+2 \expec{B} \expec{C}+3 \expec{A} \expec{B}
+   \expec{C}-6 \expec{AB}+\expec{C} \expec{AB}+\expec{AC}+2 \expec{B} \expec{AC}-3 \expec{A} \expec{BC}+\expec{ABC} \\
+ \text{($\#$} 35 \text{):  } & 0\leq 8+2 \expec{A}+\expec{A} \expec{C}+2 \expec{B} \expec{C}+3 \expec{A} \expec{B} \expec{C}+6
+   \expec{AB}-\expec{C} \expec{AB}+\expec{AC}-2 \expec{B} \expec{AC}-2 \expec{BC}-3 \expec{A} \expec{BC}+\expec{ABC} \\
+ \text{($\#$} 36 \text{):  } & 0\leq 8-2 \expec{B}+2 \expec{A} \expec{B}-2 \expec{C}-\expec{B} \expec{C}-3 \expec{A} \expec{B}
+   \expec{C}+3 \expec{C} \expec{AB}-6 \expec{AC}+\expec{B} \expec{AC}+\expec{BC}-2 \expec{A} \expec{BC}+\expec{ABC} \\
+ \text{($\#$} 37 \text{):  } & 0\leq 8+2 \expec{B}+\expec{A} \expec{B}-2 \expec{A} \expec{C}-3 \expec{A} \expec{B}
+   \expec{C}+\expec{AB}+2 \expec{C} \expec{AB}+2 \expec{AC}+3 \expec{B} \expec{AC}-6 \expec{BC}-\expec{A} \expec{BC}+\expec{ABC} \\
+\end{array}
+\)}
+\end{align*}
+%
+%
 Linear quantifier elimination is already widely used in causal inference for deriving entropic causal compatibility inequalities \cite{fritz2013marginal,chaves2014novel,chaves2014informationinference}. In that task, however, the quantifiers being eliminated are entropies on sets of variables for which one or more is latent. By contrast, the quantifiers being eliminated in the inflation technique are all probabilities on sets of variables all of which are observed (although they are the observed variables of the inflated DAG rather than the original DAG); 
 %The unknowns we eliminate are the not-pre-injectable joint probabilities, which are, at least on first look, quite different from probabilities involving latent variables;
 ~\cref{sec:Bellscenarios} will partly elucidate the relation.
@@ -1639,218 +1725,9 @@ Inequalities on marginal distributions that one derives from hypergraph transver
 
 In conclusion, linear quantifier elimination is the preferable tool for deriving inequalities for the marginal problem whenever it is computationally tractable; but whenever it is not, then enumerating hypergraph transversals presents a good alternative. %: \cref{eq:trisimplestunmapped} here corresponds to Eq. (2-4) in~\cite{Pitowsky1989}%, and \cref{eq:bellcondeq} here corresponds to Eq. (30) in Ref. \cite{Ghirardi08}
 
-\color{black}
+%\color{black}
 
 
-
-
-%One can also come up with a \emph{satisfiability} version of a marginal problem at the possibilistic level. Possibilistic satisfiability is the following: for every joint marginal outcome with positive probability, one needs to find an assignment of values to all variables which extends the given marginal outcomes and such that the restriction to every context also has positive probability. This is very easy to do: one can simply enumerate all deterministic assignments of values to all observables, discard all those that have a marginal with zero probability, and then check whether the remaining assignments are enough to generate all the joint marginal outcomes with positive probability.
-
-% We note that the connection between classical propositional logic and linear inequalities has been used previously in the task of causal inference. Noteworthy examples of works deriving causal infeasibility criteria via classical logic are \citet{Pitowsky1989} and \citet{Ghirardi08}, see also Refs. \cite{pitowsky_boole_1994,kellerer_marginal_1964,leggett_garg_1985,araujo_cycle_2013}. Novel to this work, however, is the use of the hypergraph transversals problem to formally enumerate relevant logical implications. 
-
-\begin{comment}
-\section{Inequalities for the marginal problem via Hardy-type paradoxes and minimal transversals}
-
-\purp{T: this may replace the tautologies section}
-
-In the literature on Bell inequalities, it has been noticed that the infeasibility with the Bell scenario DAG can sometimes be witnessed by only looking at which joint probabilities are zero and which ones are nonzero. In other words, instead of considering the probability of a joint outcome, some distributions can be witnesses as infeasible by only considering the \emph{possibility} or \emph{impossibility} of each joint outcome. This has been originally noticed by~\citet{L.Hardy:PRL:1665}, and hence such possibilistic constraints are also known as \tblue{Hardy-type paradoxes}. The ``paradox'' occurs whenever the possibilistic constraint is violated. For a systematic account of Hardy-type paradoxes in Bell scenarios, see~\cite{Mansfield2012}. It has been noted previously that such possibilistic constraints also exist for other types of marginal problems~\cite[Section~III.C]{LSW}. In the following, we explain how to determine \emph{all} such constraints for \emph{any} marginal problem.
-
-To start with a simple example, suppose that we are in a marginal scenario where the pairwise joint distributions of three variables $A$, $B$ and $C$ are given, and these two variables are binary with values in $\{0,1\}$. Then we have the implication
-\[
-	[A\eql 1,C\eql 1] \Longrightarrow [A\eql 0,B=\eql 0] \lor [B\eql 1,C \eql 1].
-\]
-Assuming the existence of a solution to the marginal problem, we can apply the union bound to the probability of the right-hand side. This translates the implication into the inequality
-\[
-	P_{AC}(01) \leq P_{AB}(00) + P_{BC}(11),
-\]
-which is therefore a necessary condition for the marginal problem to have a solution. Applying this together with the inflation technique to the Triangle scenario results in an inequality equivalent to~\cref{eq:polymonogamy}.
-
-We outline the general procedure using a slightly more sophisticated example. Consider the marginal scenario of~\cref{fig:simplicialcomplex222}, where the contexts are
-\begin{align*}
-	\{A_1 B_1 C_1\},\\
-	\{A_1 B_2 C_2\},\\
-	\{A_2 B_1 C_2\},\\
-	\{A_2 B_2 C_1\},\\
-	\{A_2 B_2 C_2\}.
-\end{align*}
-Now a possibilistic constraint on this marginal problem consists of a logical implication with one joint outcome as the implicant and a disjunction of joint outcomes as the conclusion (implicate?). In the following, we explain how to generate \emph{all} such implications which are tight in the sense that their right-hand sides are minimal. So let us fix some joint outcome for the left-hand side for the sake of concreteness, taking
-\begin{equation}
-	\label{eq:lhshardy}
-	[A_2 \eql 1, B_2 \eql 1, C_2 \eql 1].
-\end{equation}
-To generate all possibilistic constraints, one will have to perform the following procedure for every choice of joint outcome in every context as the left-hand side. Assuming these concrete outcomes, the right-hand side of the implication needs to be a conjunction of joint outcomes which is such that for any deterministic assignment of outcomes to the variables which extends~\cref{eq:lhshardy}, also at least one of the joint outcomes on the right-hand side occurs. To determine what the possibilities for choosing this right-hand side are, it helps to draw the following hypergraph: take the set of nodes to be the disjoint union over all the contexts of all the joint outcomes which are compatible with~\eqref{eq:lhshardy}\footnote{In the left-hand side context there will thus be only one node, and one can also omit this one node without changing the result.}. Furthermore, let the hyperedges correspond to complete deterministic assignments of values to all variables extending~\cref{eq:lhshardy}, such that such a hyperedge contains precisely those nodes that are the marginal outcomes to which it restricts. In our example, the resulting hypergraph has $2^3 + 3\cdot 2^1 = 14$ nodes and $2^3 = 8$ hyperedges. Then the possible right-hand sides of the implications are precisely the \tblue{transversals} of this hypergraph, i.e.~the sets of nodes which have the property that they intersect every hyperedge in at least one node. In order to get implications which are as tight as possible, it is sufficient to enumerate only the \tblue{minimal transversals}. Doing so is a well-studied problem in computer science with various natural reformulations and for which manifold algorithms have been developed~\cite{eiter_dualization_2008}. We expect that this enumeration of minimal transversals will be computationally much more tractable than the linear quantifier elimination, even if one does it for every possible left-hand side of the implication.
-
-In our example, it is not hard to check that the right-hand side of
-\begin{align*}
-	[A_2 \eql 1, B_2 \eql 1, C_2 \eql 1] \Longrightarrow [A_1 \eql 0, B_1 & \eql 0, A_1 \eql 0] \lor [A_1 \eql 1, B_2 \eql 1, C_2 \eql 1] \\
-		& \lor [A_2 \eql 1, B_1 \eql 1, C_2 \eql 1] \lor [A_2 \eql 1, B_2 \eql 1, C_1 \eql 1]
-\end{align*}
-is such a minimal transversal: every assignment of values to all variables which extends the assignment on the left-hand side satisfies at least one of the terms on the right, but this ceases to hold as soon as one removes any one term on the right.
-
-Finally, we convert the implication into an inequality by replacing the implication itself by an inequality and the disjunctions by sums,
-\[
-	P_{A_2 B_2 C_2}(111) \leq P_{A_1 B_1 C_1}(000) + P_{A_1 B_2 C_2}(111) + P_{A_2 B_1 C_2}(111) + P_{A_2 B_2 C_1}(111).
-\]
-Applying this to our inflation DAG of~\cref{fig:Tri222} results again in one of our previous inequalities.
-
-Since also many Bell inequalities are of this form---such as the CHSH inequality which follows in this way from Hardy's original implication---we conclude that this still sufficiently powerful to generate plenty of interesting inequalities, and at the same time significantly easier to perform in practice than the full-fledged linear (let alone nonlinear) quantifier elimination.
-\end{comment}
-
-
-\begin{comment}
-\color{purple} 
-[Version that uses modal logic]
-
-In the literature on Bell inequalities, it has been noticed that incompatibility with the Bell DAG can sometimes be witnessed by merely looking at which events have zero probability and which events have nonzero probability. In other words, instead of considering the \emph{probability} of a composite outcome, the inconsistency of some marginal distributions can be evident from considering only the \emph{possibility} or \emph{impossibility} of each composite outcome. This insight is originally due to~\citet{L.Hardy:PRL:1665}, and versions of Bell's theorem that are based on the violation of such \tblue{possibilistic constraints} are known as \tblue{Hardy-type paradoxes}. For more background on Hardy-type paradoxes, see Refs.~\cite{Garuccio95,CabelloHardyInequality,Braun08,Mancinska14,LSW}; a partial classification of these can be found in Ref.~\cite{Mansfield2012}.
-
-
-We have already provided a simple example of this sort of argument in \cref{Sec:DerivingInequalities}, in the logic used to demonstrate that the marginal distributions of Eqs.~\eqref{W4}-\eqref{W7} are incompatible with the DAG depicted in Fig.~\ref{fig:Tri222v2}.   For our present purposes, it is useful to recast the argument of \cref{Sec:DerivingInequalities} into a new but manifestly equivalent form.    For the distribution in question, we have
-\begin{align} 
-\text{Necessarily}\quad &A_2 \eql 1 \implies C_1\eql 0\label{WWs1}\\
-\text{Necessarily}\quad &B_2\eql 1 \implies A_1\eql 0\label{WWs2}\\
-\text{Necessarily}\quad &C_2 \eql 1 \implies B_1 \eql 0\label{WWs3}\\
-\text{Necessarily not}  \quad &A_1 \eql 0\,\text{ and }\, B_1 \eql 0\,\text{ and }\, C_1 \eql 0.\label{WWs4}
-\end{align}
-From the last constraint one infers that necessarily at least one of $A_1$, $B_1$ and $C_1$ must be 1, which from the three other constraints implies that necessarily at least one of $A_2$, $B_2$ and $C_2$ must be 0, so that it is necessarily not the case that all of $A_2$, $B_2$ and $C_2$ are 1.  Thus Eqs.~\eqref{WWs1}-\eqref{WWs4} imply
-\begin{align} \label{consequent2}
-\text{Necessarily not}  \quad &A_2 \eql 1\,\text{ and }\, B_2 \eql 1\,\text{ and }\, C_2 \eql 1.
-\end{align}
-However, the DAG of Fig.~\ref{fig:Tri222v2} is such that $A_2$,$B_2$, and $C_2$ have no common ancestor and consequently these variables are marginally independent in any distribution consistent with this DAG.  Combining this with the fact that the marginal distribution for each of these three variables has full support implies that $A_2$,$B_2$, and $C_2$ sometimes all take the value 1, that is,
-\begin{align} 
-\text{Possibly}  \quad &A_1 \eql 0\,\text{ and }\, B_1 \eql 0\,\text{ and }\, C_1 \eql 0.\label{WWs4}
-\end{align}
-and this contradicts \cref{consequent2}.
-
-What is nice about this form of the reasoning is that the appeal to the causal structure occurs only in the very last step.  In fact, one can even recast the argument in such a way that the appeal to the form of the marginal distributions also occurs only in the very last step.  In the first step, one notes only that the following proposition is a logical tautology in modal logic (here, $\land$, $\lor$ and $\lnot$ denote conjunction, disjunction and negation respectively, while $\square$ and $\diamond$ denote the modal unary operations {\em necessarily} and {\em possibly}):
-\begin{align}\begin{split}\label{tautology1}
-&(\square \lnot [A_2 \eql 1 \land C_1 \eql 1]) \bigwedge (\square \lnot [B_2 \eql 1 \land A_1 \eql 1]) \bigwedge (\square \lnot [C_2 \eql 1 \land B_1 \eql 1]) \bigwedge (\square \lnot [A_1 \eql 0 \land B_1 \eql 0 \land C_1 \eql 0])\\
- &\qquad\implies
-\square \lnot [A_2 \eql 1 \land B_2 \eql 1 \land C_2 \eql 1].
-\end{split}\end{align}
-In the second and final step, one notes that the given distribution and the given causal structure imply that the antecedent is true while the consequent is false (because of Eq.~\eqref{WWs4}, which in logical form is
-$\diamond [A_2 \eql 1 \land B_2 \eql 1 \land C_2 \eql 1]$,
-and the fact that in modal logic $\diamond X = \lnot \square \lnot X$).  Thus the distribution and causal structure together imply a contradiction.
-
-Such Hardy-type arguments for incompatibility actually only require one to be given an assignment of {\em possible} or {\em impossible} to certain valuations of variables rather an assignment of probabilities thereto. We call such assignments {\em possibilistic}.  In our final recasting of the Hardy-type argument for our example, the first step---identifying the logical tautology---can be understood as a constraint on marginal possibilistic assignments that follows from logic alone.  It can be understood as the possibilistic analogue of identifying a constraint on marginals distributions that holds for {\em any} joint distribution.  Thus it is useful to think of the problem in the first step of such proofs as the possibilistic counterpart of solving the marginal problem.
-%Identifying such tautologies can be understood as a constraint on marginal {\em possibilistic assignments} rather than marginal distributions.  
-
-Imagine that one has specified the full set of variables, denoted $\bm{X}$, together with a family of subsets of $\bm{X}$, termed contexts and denoted $(\bm{U}_1,\ldots,\bm{U}_n)$.  A \emph{joint possibilistic assignment} to $\bm{X}$, denoted $S_{\bm{X}}$, specifies for each joint valuation of the variables in $\bm{X}$ whether it is possible or not.  A \emph{marginal possibilistic assignment} for the context $\bm{U}_i$, denoted $S_{\bm{U}_i}$,  specifies for each joint valuation of the variables in $\bm{U_i}$ whether it is possible or not. Clearly, every joint possibilistic assignment $S_{\bm{X}}$ defines a family of marginal possibilistic assignments, $(S_{\bm{U}_1}, \ldots,S_{\bm{U}_n})$ through restriction.   In a \emph{possibilistic marginal problem}, one is given a family of marginal possibilistic assignments and one seeks to find the conditions under which one can find a joint possibilistic assignment that yields these under restriction. 
-
-
-To assert that the valuation $\bm{U}_i = \bm{u}_i$ is {\em impossible} is to assert that it is necessarily not the case that  $\bm{U}_i = \bm{u}_i$, denoted logically as $\square \lnot  [\bm{U}_i = \bm{u}_i]$. A logical tautology involving such assertions can therefore be understood as a constraint on marginal possibilistic assignments.
-%Because asserting the {\em impossibility} of some valuation $\bm{U}_i = \bm{u}_i$ is equivalent to asserting the falsity of the proposition $[\bm{U}_i = \bm{u}_i]$, it follows that any logical tautology involving only logical negations of particular valuations for the contexts can be understood as a constraint on marginal possibilistic assignments. 
-
-
-As such, \cref{tautology1} can indeed be understood as a constraint on marginal possibilistic assignments.  Thinking of it this way makes it clear that witnessing incompatibility by starting with a Hardy-type logical tautology is the possibilistic analogue of deriving causal compatibility inequalities starting with a solution of the marginal problem.  More importantly, such constraints on marginal possibilistic assignments are interesting because they can be used to derive constraints on marginal distributions, as was shown by \citet{Mansfield2012}.
-
-We illustrate this last claim with the example just discussed.  It can be cast as a marginal scenario where the contexts are $\{A_2 B_2 C_2\}$, $\{A_2 C_1\}$, $\{B_2 A_1\}$, $\{C_2 B_1\}$, and  $\{A_1 B_1 C_1\}$.  The logical tautology \eqref{tautology1} is then a constraint on marginal possibilistic assignments for this marginal scenario.   To see how to obtain a constraint on marginal distributions, we start by rewriting \cref{tautology1} in its contrapositive form (recall that $\lnot \square \lnot X = \diamond X$),
-\begin{align}\begin{split}\label{tautology2}
-&\diamond [A_2 \eql 1 \land B_2 \eql 1 \land C_2 \eql 1] \\
-&\qquad \implies \diamond [A_2 \eql 1 \land C_1 \eql 1] \lor \diamond [B_2 \eql 1 \land A_1 \eql 1] \lor \diamond [C_2 \eql 1 \land B_1 \eql 1] \lor \diamond [A_1 \eql 0 \land B_1 \eql 0 \land C_1 \eql 0].
-\end{split}\end{align}
-Next, we note that if a logical tautology can be expressed as
-\begin{align}\label{eq:inference}
-   \diamond \SmallNamedFunction{}{E_0} \implies \diamond \SmallNamedFunction{}{E_1} \lor \ldots \lor \diamond \SmallNamedFunction{}{E_n},
-\end{align}
-then by applying
-%because  a possibilistic assertion, such as $diamond E_i$, can be cashed out as ``the set of possible worlds in which $E_i$ is the case is not empty'', it follows that we can apply
- the union bound (which asserts that the probability of at least one of a set of events occuring is no greater than the sum of the probabilities of each event occuring), one obtains
-\begin{align}\label{eq:possinference}
-\p{E_0}\leq \sum\limits_{j=1}^n{\p{E_j}}.
-\end{align}
-Applying the union bound to \cref{tautology2} in particular yields
-\begin{align}\label{eq:F3rawweak}
-P_{A_2 B_2 C_2}\parens{\mgreen{1} \mgreen{1} \mgreen{1}} \leq P_{A_1 B_1 C_1}\parens{0 0 0}+P_{A_1 B_2}\parens{1 \mgreen{1 }}+P_{ B_1 C_2}\parens{ 1 \mgreen{1}}+P_{A_2 C_1}\parens{\mgreen{1 } 1},
-\end{align}
-which is a constraint on the marginal {\em distributions}.
- 
-Note that this inequality allows one to demonstrate the incompatibility of the marginal distributions of Eqs.~\eqref{W4}-\eqref{W7} with the inflated DAG just as easily as one can with the tautology of \cref{tautology1}.  It suffices to note that the given distribution and causal structure imply that the left-hand side has nonzero probability (which corresponds to the consequent of \cref{tautology1} being false) while every term on the right-hand side has zero probability (which corresponds to the antecedent of  \cref{tautology1} begin true).
-%This is a causal compatibility inequality for the inflated DAG.  It can be used to demonstrate the incompatibility of the marginal distributions of Eqs.~\eqref{W4}-\eqref{W7} with the inflated DAG because these marginal distributions assing probability 0 to all terms on the right-hand side, while these together with the causal structure imply a nonzero probability for the term on the left-hand side.  
-But, of course, the inequality can witness many other incompatibilities in addition to this one.
-
-%The truth of the proposition $[U_i = u_i]$ implies that the marginal possibilistic assignment $S_{\bm{U}_1}$ must judge the joint valuation $u_i$ to be possible.  Consequently, any logical tautology in terms of such propositions can be understood as a constraint on the marginal possibilistic assignments. 
-
-As another example, consider the marginal problem where the variables are $\{ A,B,C\}$, with each being binary, and the contexts are the pairs $\{AB\}$, $\{AC\}$, and $\{BC\}$.  
-%where the pairwise joint distributions of three variables $A$, $B$ and $C$ are given. %, and these two variables are binary with values in $\{0,1\}$. 
-The following tautology provides a constraint on marginal possibilistic assignments:
-%A possibilistic constraint that follows from logic alone, and therefore is true regardless of the joint distribution over $A, B, C$, is this one:
-%One Hardy-type possibilistic constraint which we would want to enumerate is
-\begin{align}
-%    \bracks{\mgreen{A \eql a}, \mgreen{C \eql c}} \implies \bracks{\mgreen{A \eql a}, B \eql b} \bigvee \bracks{B \eql \n{b}, \mgreen{C \eql c}}
-\diamond \bracks{\mgreen{A \eql 1}, \mgreen{C \eql 1}} \implies \diamond \bracks{\mgreen{A \eql 1}, B \eql 1} \lor  \diamond \bracks{B \eql 0, \mgreen{C \eql 1}}.
-\end{align}
-(To see that this is a tautology, simply note that $E \land F  \implies  E \land F \land (G \lor \lnot G) = (E \land F \land G) \lor (E\land F \land \lnot G) \implies (E \land G) \lor (F \land \lnot G)$ and that if $X \implies Y$ then $\diamond X \implies \diamond Y$ and that $\diamond (W \lor Z) = \diamond W \lor \diamond Z$. \color{red} Check that I've got my modal logic right.\color{black}) 
-Applying the union bound, one obtains the following constraint on marginal distributions\footnote{This inequality is in fact equivalent to \cref{eq:polymonogamyraw}.}
-\begin{align}\label{eq:trivmarginalconstraintV2}
-	P_{AC}(\mgreen{1 1}) \leq P_{AB}(\mgreen{1} 1) + P_{BC}(0 \mgreen{1}).
-\end{align}
-\color{purple}
-[New modal version]
-\begin{align}\label{eq:trivmarginalconstraintV3}
-	S_{AC}(\mgreen{1 1}) \leq \text{max}\{ S_{AB}(\mgreen{1} 1) ,S_{BC}(0 \mgreen{1})\}.
-\end{align}
-\color{black}
-
-In this section, we seek to determine, for any marginal scenario, the set of \emph{all} inequalities that can be derived in this manner.  We do so by \tblue{enumerating} the full set of constraints on marginal possibilistic assignments for the given marginal scenario.
-% that arise in a given marginal problem.
-
-
-
-We outline the general procedure using 
-%a slightly more sophisticated example than the one provided above. Consider 
-the marginal scenario of~\cref{fig:simplicialcomplex222}, where the full set of variables is $\{ A_1, A_2, B_1, B_2, C_1, C_2\}$ and the contexts are $\{A_1 B_1 C_1\}$, $\{A_1 B_2 C_2\}$, $\{A_2 B_1 C_2\}$, $\{A_2 B_2 C_1\}$ and $\{A_2 B_2 C_2\}$, pursuant to \cref{eq:basicsetup222}.
-%\begin{align*}
-%	\{A_1 B_1 C_1\},\\
-%	\{A_1 B_2 C_2\},\\
-%	\{A_2 B_1 C_2\},\\
-%	\{A_2 B_2 C_1\},\\
-%	\{A_2 B_2 C_2\}.
-%\end{align*}
-As before, we will express the constraints on marginal possibilistic assignments as logical implications with
-%Now a possibilistic constraint on this marginal problem consists of a logical implication with 
-a joint valuation of one of the contexts as the \tblue{antecedent} and a disjunction over contexts of joint valuations thereon as the \tblue{consequent}. In the following, we explain how to generate \emph{all} such implications which are tight in the sense that the consequent is minimal, i.e., involves as few terms as possible in the disjunction. 
-%ir right-hand sides are minimal.
-
-First, we fix the antecedant by choosing some context and a joint valuation of its variables. In order to generate all contraints on marginal possibilistic assignments, one will have to perform this procedure for \emph{every} context as the antecedent and every choice of joint valuation thereof. For the sake of concreteness, we take the example of $\bracks{\mgreen{A_2 \eql 1}, \mgreen{B_2 \eql 1}, \mgreen{C_2 \eql 1}}$ as the antecedent.  
-Each logical implication we consider is required to have the property 
-%The consequent will be a disjunction over contexts of joint valuations for each context, with the additional property
- that any variable that appears in both the antecendent and the consequent must be given the same value in both. 
-%all outcomes of variables that also occur in the antecedent carry the same outcome. 
-%For the implication to be valid, the consequent must further be such that \tred{for any \emph{joint} composite outcome which extends the antecedent's marginal composite outcome, also at least one of the marginal composite outcomes in the consequent must occur.}
-
-To formally determine all valid consequents, we first consider two hypergraphs. %Take the set of nodes to be the disjoint union over all the contexts of all the joint outcomes which are compatible with~\eqref{eq:lhshardy}\footnote{In the left-hand side context there will thus be only one node, and one can also omit this one node without changing the result.}. 
-The nodes in the first hypegraph correspond to every possible joint valuation of the variables in a context for every possible context.
-The hyperedges correspond to every possible joint valuation of all the variables. A hyperedge (joint valuation) contains a node (marginal joint valuation) iff the hyperedge is an extension of the node; for example the hyperedge $\bracks{A_1 \eql 0, \mgreen{A_2 \eql 1}, B_1 \eql 0, \mgreen{B_2 \eql 1}, C_1 \eql 1, \mgreen{C_2 \eql 1}}$ is an extension of the node $\bracks{A_1 \eql 0,  \mgreen{B_2 \eql 1}, \mgreen{C_2 \eql 1}}$. In our example following \cref{fig:simplicialcomplex222}, this initial hypergraph has $5\cdot 2^3 = 40$ nodes and $2^6 = 64$ hyperedges.
-
-The second hypergraph is a sub-hypergraph of the first one. We delete from the first graph all nodes and hyperedges which contradict the outcomes supposed by the antecedent. For example, the node $\bracks{\mgreen{A_2 \eql 1}, \mred{B_2 \eql 0}, C_1 \eql 1}$ contradicts the antecedent $\bracks{\mgreen{A_2 \eql 1}, \mgreen{B_2 \eql 1}, \mgreen{C_2 \eql 1}}$. We also delete the node corresponding to the antecedent itself. In our example, this final resulting hypergraph has $2^3 + 3\cdot 2^1 = 14$ nodes and $2^3 = 8$ hyperedges.
-
-All valid (minimal) consequents are (minimal) \tblue{transversals} of this latter hypergraph. A transversal is a set of nodes which has the property that it intersects every hyperedge in at least one node. In order to get implications which are as tight as possible, it is sufficient to enumerate only the minimal transversals. Doing so is a well-studied problem in computer science with various natural reformulations and for which manifold algorithms have been developed~\cite{eiter_dualization_2008}.
-
-%It is then possible right-hand sides of the implications are precisely the \tblue{transversals} of this hypergraph, i.e.~the sets of nodes which have the property that they intersect every hyperedge in at least one node. In order to get implications which are as tight as possible, it is sufficient to enumerate only the \tblue{minimal transversals}. Doing so is a well-studied problem in computer science with various natural reformulations and for which manifold algorithms have been developed~\cite{eiter_dualization_2008}. We expect that this enumeration of minimal transversals will be computationally much more tractable than the linear quantifier elimination, even if one does it for every possible left-hand side of the implication.
-
-In our example, it is not hard to check that the consequent of
-\begin{align}\begin{split}\label{eq:F3implicationform}
-	\bracks{\mgreen{A_2 \eql 1}, \mgreen{B_2 \eql 1}, \mgreen{C_2 \eql 1}} \quad\Longrightarrow\quad &\bracks{A_1 \eql 0, B_1 \eql 0, C_1 \eql 0} \lor \bracks{A_1 \eql 1, \mgreen{B_2 \eql 1}, \mgreen{C_2 \eql 1}} \\
-	\lor\: & \bracks{\mgreen{A_2 \eql 1}, B_1 \eql 1, \mgreen{C_2 \eql 1}} \lor \bracks{\mgreen{A_2 \eql 1}, \mgreen{B_2 \eql 1}, C_1 \eql 1}
-\end{split}\end{align}
-is such a minimal transversal: every assignment of values to all variables which extends the assignment on the left-hand side satisfies at least one of the terms on the right, but this ceases to hold as soon as one removes any one term on the right. 
-
-We convert these implications into inequalities in the usual way via the union bound (i.e., replacing ``$\Rightarrow$'' by ``$\leq$'' at the level of probabilities and the disjunctions by sums). For example the constraint on marginal possibilistic assignments \cref{eq:F3implicationform} translates to the constraint on marginal distributions
-\begin{align}\label{eq:F3rawprobform}
-%    P_{A_2 B_2 C_2}\parens{\mgreen{a_2} \mgreen{b_2} \mgreen{c_2}} \leq \p{\n{a_1} \n{b_1} \n{c_1}}+\p{a_1 \mgreen{b_2 c_2}}+\p{\mgreen{a_2} b_1 \mgreen{c_2}}+\p{\mgreen{a_2 b_2} c_1}
-    P_{A_2 B_2 C_2}\parens{\mgreen{1} \mgreen{1} \mgreen{1}} \leq P_{A_1 B_1 C_1}\parens{0 0 0}+P_{A_1 B_2 C_2}\parens{1 \mgreen{1 1}}+P_{A_2 B_1 C_2}\parens{\mgreen{1} 1 \mgreen{1}}+P_{A_2 B_2 C_1}\parens{\mgreen{1 1} 1}.
-\end{align}
-%\[
-%	P_{A_2 B_2 C_2}(111) \leq P_{A_1 B_1 C_1}(000) + P_{A_1 B_2 C_2}(111) + P_{A_2 B_1 C_2}(111) + P_{A_2 B_2 C_1}(111).
-%\]
-Note that \cref{eq:F3rawprobform} is a strengthening of \cref{eq:F3rawweak}.  \cref{eq:F3rawprobform} was used earlier in this article as the starting point of our third example of how to derive a causal compatibility inequality for the Triangle scenario, in Sec.~\ref{Sec:DerivingInequalities} (see \cref{eq:FritzF3raw}). Because \cref{eq:F3implicationform} is the progenitor of this inequality, it can be thought of as the progenitor of the causal compatibility inequality that one derives from it, namely, \cref{eq:FritzF3}.  
-
-
-Inequalities on marginal distributions that one derives from hypergraph transversals are generally weaker than those that result from a complete solution of the marginal problem. Nevertheless, many Bell inequalities are of this form---such as the CHSH inequality which follows in this way from the possibilistic constraints used in Hardy's version of Bell's theorem \cite{Ghirardi08}.  So it seems that this method is still sufficiently powerful to generate plenty of interesting inequalities. At the same time, it should be significantly easier to perform in practice than the full-fledged linear (let alone nonlinear) quantifier elimination, even if one does it for every possible antecedent.
-
-In conclusion, linear quantifier elimination is the preferable tool for deriving inequalities for the marginal problem whenever it is computationally tractable; but whenever it is not, then enumerating hypergraph transversals presents a good alternative. %: \cref{eq:trisimplestunmapped} here corresponds to Eq. (2-4) in~\cite{Pitowsky1989}%, and \cref{eq:bellcondeq} here corresponds to Eq. (30) in Ref. \cite{Ghirardi08}
-
-\end{comment}
 
 
 \section{Further prospects for the inflation technique}\label{sec:otherprospects}
@@ -1860,9 +1737,9 @@ Corollary \ref{maincorollary} implies that {\em any} causal compatibility inequa
 We here consider two additional possibilities for constraints that might be leveraged by the inflation technique.
 
 %\topic{\tred{Constraining Possible Distributions over Pre-Injectable Sets via Conditional Independence Relations}}
-\subsection{Using \textit{d}-separation relations of the inflated DAG}
+\subsection{Using \textit{d}-separation relations of the inflated DAG}\label{sec:fulldsep}
 
-In Sec.~\ref{sec:ineqs}, we considered deriving causal compatiblity inequalities on the inflated DAG by a technique wherein one first finds a complete or partial solution to the marginal problem for the pre-injectable sets of the inflated DAG, and then one makes use the ancestral independences in the inflated DAG to factorize the joint distributions on some of the pre-injectable sets.
+In Sec.~\ref{sec:ineqs}, we considered deriving causal compatibility inequalities on the inflated DAG by a technique wherein one first finds a complete or partial solution to the marginal problem for the pre-injectable sets of the inflated DAG, and then one makes use the ancestral independences in the inflated DAG to factorize the joint distributions on some of the pre-injectable sets.
 % into the distributions over each of the ancestrally-independent injectable sets contained therein.  
 
 It is natural to wonder whether one can sometimes make use of facts about the causal structure that go beyond specifying ancestral independences.  Indeed, it is standard practice, when deriving compatibility conditions for a DAG, to make use of arbitrary $d$-separation relations among variables: if, in a given DAG, $\bm{X}$ and $\bm{Y}$ are $d$-separated by $\bm{Z}$, then a distribution is compatible with that DAG only if it satisfes the conditional independence relation $\bm{X}\bot\bm{Y}|\bm{Z}$. (The criterion for $d$-separation is explained at length in~\cite{pearl2009causality,studeny2005probabilistic,WoodSpekkens,pusey2014gdag}, so we elect not to review it here.)  As noted earlier, ancestral independence of $\bm{X}$ and $\bm{Y}$ is a special type of $d$-separation of $\bm{X}$ and $\bm{Y}$, namely, $d$-separation relative to the null set.  Thus the question naturally arises whether the inflation technique can sometimes make use of other $d$-separation relations among sets of observed variables.
@@ -2085,11 +1962,12 @@ The inflations of the triangle DAG that are depicted in \cref{fig:TriFullDouble}
 
 %Some inflations, such as the one of~\cref{fig:simplestinflation}, do not require such broadcasting. By removing $A_1$ from the broadcasting inflation of \cref{fig:simpleinflation} we obtain the non-broadcasting inflation of \cref{fig:simplestinflation}. In \cref{fig:simplestinflation} the channel from $X$ to $A$ is merely \emph{redirected} from it original configuration in \cref{fig:TriMainDAG}; there is no broadcasting of information required.
 
-In the classical context, for every inflationary fan-out, all of the copy-index-equivalent children of the latent node are required to causally depend on the latent node in precisely the same way as their counterparts in the original DAG did.  However, the only maps that can achieve such a duplication of dependencies, known as {\em broadcasting maps}, are not physically realizable, as was famously shown for quantum theory in Ref.~\cite{NoCloningQuantum1996} and generalized to GPTs in Ref.~\cite{NoCloningGeneral2006}.  These no-broadcasting results are related to the monogamy of entanglement in quantum theory \cite{wootters2001monogomy,winter2004monogomy} (see also the discussion of the quantum conditional problem in Ref.~\cite{leifer2013conditionalstates}).  Mathematically, there {\em are} linear maps that can achieve broadcasting, as shown in \cite{Coecke2011}, but if one used these to define the inflation of a quantum causal model, then distributions over certain sets of variables in the inflated DAG (those containing the children of an inflationary fan-out) might fail to be nonnegative.  Such inflations might still be useful as a mathematical tool for ultimately deriving causal compatibility inequalities on the original DAG, but one would need to proceed differently from the way we have proceeded in this article: whereas we have here assumed that all joint valuations of the set of observed variables on the inflated DAG are nonnegative, one could not impose such a constraint for the type of quantum inflation just described.  Rather than demanding nonnegativity of the full joint distribution, one could only demand nonnegativity for distributions on sets of variables that did not include multiple children of an inflationary fan-out.  Note that the inflated DAG in such cases could not be interpreted as a causal structure.  Rather, it woudl be interpreted as describing multiple different {\em counterfactual} scenarios within which the causal dependencies are the same. 
+In the classical context, for every inflationary fan-out, all of the copy-index-equivalent children of the latent node are required to causally depend on the latent node in precisely the same way as their counterparts in the original DAG did.  However, the only maps that can achieve such a duplication of dependencies, known as {\em broadcasting maps}, are not physically realizable, as was famously shown for quantum theory in Ref.~\cite{NoCloningQuantum1996} and generalized to GPTs in Ref.~\cite{NoCloningGeneral2006}.  These no-broadcasting results are related to the monogamy of entanglement in quantum theory \cite{wootters2001monogomy,winter2004monogomy} (see also the discussion of the quantum conditional problem in Ref.~\cite{leifer2013conditionalstates}).  Mathematically, there {\em are} linear maps that can achieve broadcasting, as shown in \cite{Coecke2011}, but if one used these to define the inflation of a quantum causal model, then distributions over certain sets of variables in the inflated DAG (those containing the children of an inflationary fan-out) might fail to be nonnegative.  Such inflations might still be useful as a mathematical tool for ultimately deriving causal compatibility inequalities on the original DAG, but one would need to proceed differently from the way we have proceeded in this article: whereas we have here assumed that all joint valuations of the set of observed variables on the inflated DAG are nonnegative, one could not impose such a constraint for the type of quantum inflation just described.  Rather than demanding nonnegativity of the full joint distribution, one could only demand nonnegativity for distributions on sets of variables that did not include multiple children of an inflationary fan-out.  Note that the inflated DAG in such cases could not be interpreted as a causal structure.  Rather, it would be interpreted as describing multiple different {\em counterfactual} scenarios within which the causal dependencies are the same. 
 
 %From this perspective, a broadcasting inflated DAG is an abstract logical concept, as opposed to a feasible physical construct. However, this would result in a joint distribution over all observable variables that may have some negative probabilities, and one cannot expect~\cref{eq:nonnegativity} to hold in general. But one can still try to reformulate the marginal problem so as to refer only to the existence of joint distributions on non-broadcastings sets rather than the existence of a full joint distribution from which the marginal distributions might be recovered. Here, a set $\bm{U}$ of observable nodes is non-broadcasting if $\An{\bm{U}}$ does not contain two distinct copies of a node both sharing a common latent parent.
 
-An analysis along these lines has already been carried out successfully by \citet{Chaves2015infoquantum} in the derivation of entropic inequalities that capture quantum compatibility. Although \citet{Chaves2015infoquantum} do not invoke the inflation technique, they do seem to employ a similar type of structure to model the conditioning of an observed variable on a ``setting'' variable, a structure that we would describe as an inflated DAG that has no inflationary fan-outs. \citet{Chaves2015infoquantum} take pains to avoid including full joint probability distributions in any of the entropic inequalities they apply to this structure \color{purple} {R: why must they take pain to do so when the DAG has no inflationary fan-out?]\color{black}, precisely as we would want to do in constructing inequalities on our inflated DAG, and they successfully derive entropic inequalities for quantum compatibility. But so far, no inequalities polynomial in the probabilities have been derived using this method.
+An analysis along these lines has already been carried out successfully by \citet{Chaves2015infoquantum} in the derivation of entropic inequalities that capture quantum compatibility. Although \citet{Chaves2015infoquantum} do not invoke the inflation technique, they do seem to employ a similar type of structure to model the conditioning of an observed variable on a ``setting'' variable, a structure that we would describe as an inflated DAG containing inflationary fan-outs. \citet{Chaves2015infoquantum} then take pains to avoid including full joint probability distributions in any of the entropic inequalities they apply to this structure, %\color{purple} {R: why must they take pain to do so when the DAG has no inflationary fan-out?]\color{black}, 
+precisely as we would want to do in constructing inequalities on our inflated DAG, and they successfully derive entropic inequalities for quantum compatibility. But so far, no inequalities polynomial in the probabilities have been derived using this method.
 
 % Our current inflated DAG method can be employed to derive causal infeasibility criteria for general causal structures, thus generalizing Bell inequalities somewhat. From a quantum foundations perspective, however, generalizing Tsirelson inequalities \cite{Tsirelson1980,Brunner2013Bell}---the ultimate constraints on what quantum theory makes possible---is even more desirable. 
 
@@ -2145,28 +2023,29 @@ We have described how the inflation technique can enhance the power of many diff
 %The primary divide is producing inequalities, as in the more difficult first three approaches, versus satisfiability which can witness the infeasibility of specific distributions. 
 %The approaches subdivide further into nonlinear, linear, and possibilistic variants.
 }
-\begin{tabularx}{\linewidth}{ |C|C|C|C| } 
+\begin{tabularx}{\linewidth}{ |c|C|c| } 
 \toprule
 %\hline
-Approach & General problem & Standard algorithm(s) & Difficulty \\
+Input from causal structure & General problem $\to$ Standard algorithm(s) & Difficulty \\
 \midrule
 \midrule
 %\hline
 %\hline
-Complete solution of marginal problem with arbitrary nonlinear $d$-separation conditions & Real quantifier elimination & Cylindrical algebraic decomposition, see \cite{ChavesPolynomial} & Very hard \\
+%Complete solution of marginal problem with arbitrary nonlinear 
+\parbox{5cm}{All $d$-separation conditions on the observable variables [\cref{sec:fulldsep}]} & Real Quantifier Elimination $\to$ Cylindrical Algebraic Decomposition, see \cite{ChavesPolynomial} & Very hard \\
 \hline
-Complete solution of marginal problem with ancestral independences & Facet enumeration & Fourier-Motzkin elimination~\cite{fordan1999projection,DantzigEaves,Bastrakov2015,BalasProjectionCone,Jones2008}, lexicographic reverse search~\cite{Avis2000lrs} & Hard \\
+\parbox{5cm}{Ancestral independences among the observed variables + copy-index equivalence relations [\cref{sec:coincidingdetails}]} & Linear quantifier elmination $\to$ Fourier-Motzkin Elimination~\cite{fordan1999projection,DantzigEaves,Bastrakov2015,BalasProjectionCone,Jones2008}, Equality set projection \cite{JonesThesis2005,jones2004equality} & Hard \\
 \hline
-Complete solution of marginal problem with ancestral independences and copy-index equivalence relations & Linear quantifier elmination & Fourier-Motzkin elimination~\cite{fordan1999projection,DantzigEaves,Bastrakov2015,BalasProjectionCone,Jones2008} & Hard \\
-\hline
-Partial solution of marginal problem using Hardy-type tautologies & Identifying all hypergraph transversals & See~\citet{eiter_dualization_2008} & Very easy \\
+\multirow{ 2}{*}{\parbox{5cm}{\centering Ancestral independences among the observed variables}}  & Marginal Problem [\cref{sec:CCineqs}], i.e. Facet Enumeration $\to$ Fourier-Motzkin Elimination~\cite{fordan1999projection,DantzigEaves,Bastrakov2015,BalasProjectionCone,Jones2008}, Lexicographic Reverse Search~\cite{Avis2000lrs} & Hard \\\cline{2-3}
+
+ & Finding Hardy-type tautologies (\emph{partial} solution of marginal problem) [\cref{sec:TSEM}] i.e. identifying hypergraph transversals $\to$ see~\citet{eiter_dualization_2008} & Very easy \\
 \midrule
 \midrule
 %\hline
 %\hline
-Nonlinear satisfiability & Nonlinear optimization & See \cite{BarFT-SMTLIB}, and semidefinite relaxations~\cite{laurent_polynomial_2012} & Easy \\
+Nonlinear Satisfiability & Nonlinear Optimization $\to$ See \cite{BarFT-SMTLIB}, and semidefinite relaxations~\cite{laurent_polynomial_2012} & Easy \\
 \hline
-Linear satisfiability & Linear programming & Simplex method \cite{Korovin2012ImplementingCRA,Bobot2012SimplexSAT} & Very easy \\
+Linear Satisfiability & Linear Programming $\to$ Simplex method \cite{Korovin2012ImplementingCRA,Bobot2012SimplexSAT} & Very easy \\
 %\hline 
 %Possibilistic satisfiability & --- & --- & Super easy
 \bottomrule
@@ -2226,7 +2105,7 @@ A generic facet enumeration problem takes a matrix of vertices $V\in\mathbb{R}^{
 % It should be evident from Eqs. (\ref{eq:nonnegativity}-\ref{eq:marginalequalities222}) that the marginal problem is precisely of this form. The individual probabilities of the joint outcome correspond to the weights in the convex hull problem. Recasting the marginal problem as a convex hull problem means that optimized convex hull algorithms can be used to directly solve the marginal problem. Fine's Theorem~\cite{FineTheorem} also follows along these lines. Fine's theorem states that the existence of a joint distribution is equivalent to having the observables marginal distribution lie inside the convex hull of all deterministic joint distributions. \purp{Tobias, can you say the previous sentence better perhaps?}
 % Geometrically, linear quantifier elimination is equivalent to projecting a high-dimensional polytope in halfspace representation (inequalities and equalities) into a lower-dimensional quotient space.
 % Polytope projection is a well-understood problem in combinatorial optimization,
-The oldest-known method for facet enumeration relies on \tblue{linear quantifier elimination} in the form of Fourier-Motzkin (FM) elimination~\cite{fordan1999projection,DantzigEaves}. This refers to the fact that one starts with the system $x=wV$, $w\geq 0$ and $\sum_i w_i = 1$, which is the half-space representation of a convex polytope (a simplex), and then one needs to project onto $x$-space by \emph{eliminating} the variables $w$ to which the existential \emph{quantifier} $\exists w$ refers. The Fourier-Motzkin algorithm is a particular method for performing this quantifier elimination one variable at a time; when applied to~\cref{projsimplex}, it is equivalent to the \emph{double description method}~\cite{DantzigEaves,Fukuda1996}. Linear quantifier elimination routines are available in many software tools\footnote{For example \textit{MATLAB$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://people.ee.ethz.ch/~mpt/2/docs/refguide/mpt/@polytope/projection.html}{\texttt{MPT2}}/\href[pdfnewwindow]{http://ellipsoids.googlecode.com/svn-history/r2740/branches/issue_119_vrozova/tbxmanager/toolboxes/mpt/3.0.14/all/mpt3-3_0_14/mpt/modules/geometry/sets/@Polyhedron/projection.m}{\texttt{MPT3}}, \textit{Maxima}'s \href[pdfnewwindow]{http://maxima.sourceforge.net/docs/manual/de/maxima_75.html}{\texttt{fourier\_elim}}, \textit{lrs}'s \href[pdfnewwindow]{http://cgm.cs.mcgill.ca/~avis/C/lrslib/USERGUIDE.html\#fourier}{\texttt{fourier}}, or \textit{Maple$^{_{\textit{\tiny\texttrademark}}}$}'s (v17+) \href[pdfnewwindow]{http://www.maplesoft.com/support/help/maple/view.aspx?path=RegularChains/SemiAlgebraicSetTools/LinearSolve}{\texttt{LinearSolve}} and \href[pdfnewwindow]{http://www.maplesoft.com/support/help/Maple/view.aspx?path=RegularChains/SemiAlgebraicSetTools/Projection}{\texttt{Projection}}. The efficiency of most of these software tools, however, drops off markedly when the dimension of the final projection is much smaller than the initial space of the inequalities. FM elimination aided by Chernikov rules \cite{Shapot2012,Bastrakov2015} is implemented in \href[pdfnewwindow]{http://sbastrakov.github.io/qskeleton/}{\textit{qskeleton}} \cite{qskeleton}.}. The authors found it convenient to custom-code a linear quantifier elimination routine in \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$}.
+The oldest-known method for facet enumeration relies on \tblue{linear quantifier elimination} in the form of Fourier-Motzkin (FM) elimination~\cite{fordan1999projection,DantzigEaves}. This refers to the fact that one starts with the system $x=wV$, $w\geq 0$ and $\sum_i w_i = 1$, which is the half-space representation of a convex polytope (a simplex), and then one needs to project onto $x$-space by \emph{eliminating} the variables $w$ to which the existential \emph{quantifier} $\exists w$ refers. The Fourier-Motzkin algorithm is a particular method for performing this quantifier elimination one variable at a time; when applied to~\cref{projsimplex}, it is equivalent to the \emph{double description method}~\cite{DantzigEaves,Fukuda1996}. Linear quantifier elimination routines are available in many software tools\footnote{For example \textit{MATLAB$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://people.ee.ethz.ch/~mpt/2/docs/refguide/mpt/@polytope/projection.html}{\texttt{MPT2}}/\href[pdfnewwindow]{http://ellipsoids.googlecode.com/svn-history/r2740/branches/issue_119_vrozova/tbxmanager/toolboxes/mpt/3.0.14/all/mpt3-3_0_14/mpt/modules/geometry/sets/@Polyhedron/projection.m}{\texttt{MPT3}}, \textit{Maxima}'s \href[pdfnewwindow]{http://maxima.sourceforge.net/docs/manual/de/maxima_75.html}{\texttt{fourier\_elim}}, \textit{lrs}'s \href[pdfnewwindow]{http://cgm.cs.mcgill.ca/~avis/C/lrslib/USERGUIDE.html\#fourier}{\texttt{fourier}}, or \textit{Maple$^{_{\textit{\tiny\texttrademark}}}$}'s (v17+) \href[pdfnewwindow]{http://www.maplesoft.com/support/help/maple/view.aspx?path=RegularChains/SemiAlgebraicSetTools/LinearSolve}{\texttt{LinearSolve}} and \href[pdfnewwindow]{http://www.maplesoft.com/support/help/Maple/view.aspx?path=RegularChains/SemiAlgebraicSetTools/Projection}{\texttt{Projection}}. The efficiency of most of these software tools, however, drops off markedly when the dimension of the final projection is much smaller than the initial space of the inequalities. Fast facet enumeration aided by Chernikov rules \cite{Shapot2012,Bastrakov2015} is implemented in \href[pdfnewwindow]{http://comopt.ifi.uni-heidelberg.de/software/PORTA/}{\textit{porta}}, \href[pdfnewwindow]{http://sbastrakov.github.io/qskeleton/}{\textit{qskeleton}}~\cite{qskeleton}, and \href[pdfnewwindow]{http://www.uic.unn.ru/~zny/skeleton/}{\textit{skeleton}}.}. The authors found it convenient to custom-code a linear quantifier elimination routine in \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$}.
 % Other possible algorithms for facet enumeration come in two kinds: first, algorithms that are---like Fourier-Motzkin---also based on linear quantifier elimination, or equivalently on computing the half-space representation of a polytope given in half-space representation; second, algorithms that solve the facet enumeration problem in a different manner. Other projection methods than FM include 
 
 Other algorithms for facet enumeration that are not based on linear quantifier elimination include the following. \emph{Lexicographic reverse search} (LRS)~\cite{Avis2000lrs}, which explores the entire polytope by repeatedly pivoting from one facet to an adjacent one, and is implemented in~\href[pdfnewwindow]{http://cgm.cs.mcgill.ca/~avis/C/lrslib/USERGUIDE.html#Installation\%20Section}{\texttt{lrs}}. Equality Set Projection (ESP)~\cite{jones2004equality,JonesThesis2005} is also based on pivoting from facet to facet, though its implementation is less stable\footnote{ESP  \cite{jones2004equality,JonesThesis2005,Jones2008} is supported by \href[pdfnewwindow]{http://people.ee.ethz.ch/~mpt/2/docs/refguide/mpt/@polytope/projection.html}{\texttt{MPT2}} but not \href[pdfnewwindow]{http://people.ee.ethz.ch/~mpt/3/}{\texttt{MPT3}}, and by the (undocumented) option of \href[pdfnewwindow]{https://github.com/tulip-control/polytope/blob/master/polytope/polytope.py\#L1406}{projection} in the \href[pdfnewwindow]{https://pypi.python.org/pypi/polytope}{\textit{polytope}} (v0.1.1 2015-10-26) python module.}. These algorithms could be interesting to use in practice, since each pivoting step churns out a new facet; by contrast, Fourier-Motzkin type algorithms only generate the entire list of facets at once, after all the quantifiers have been eliminated one by one.
@@ -2584,7 +2463,7 @@ It is easily verified that this distribution violates the causal incompatibility
 
 There is another way to see that this distribution is not compatible with~\cref{eq:DAG15ineqs} using the inflation technique.  First, one notes that any marginal distribution on $DEF$ that is compatible with the DAG of \cref{fig:GDAG15} is necessarily also compatible the triangle scenario (where $D$, $E$ and $F$ are the observed variables).
 % because making a latent variable observable does not alter serves only to restrict the cardinality of that variable.
-Second, one notes that the marginal distribution $P^{\text{Pien}}_{D E F}$ is incompatible with the triangle scenario, since it violates inequality \#8 of~\cref{CCineqs}.  This is the same inequality which rejects the W-distribution of~\cref{eq:wdistribution1}.
+Second, one notes that the marginal distribution $P^{\text{Pien}}_{D E F}$ is incompatible with the triangle scenario, since it violates inequality \#8 of~\cref{sec:CCineqs}.  This is the same inequality which rejects the W-distribution of~\cref{eq:wdistribution1}.
 Like the W-distribution, the distribution $P^{\text{Pien}}$
  %Yet another interesting point is that $P^{\text{Pien}}$ 
  not only satisfies all Shannon-type entropic inequalities pertinent to~\cref{fig:GDAG15}, but lies within an inner approximation to the genuine entropy cone for that scenario\footnote{This is due to Weilenmann and Colbeck (private correspondence).}. In other words, there exists a distribution with the same joint and marginal entropies as  $P^{\text{Pien}}$ which \emph{is} compatible with \cref{fig:GDAG15}.
@@ -2716,13 +2595,13 @@ The following polynomial inequalities for the Triangle scenario with binary obse
 
 In the following table, the inequalities are listed in expectation-value form, where we assume the two possible outcomes of each variables to be $\{-1,+1\}$. Each row in the table gives the coefficients with one inequality, which is then $\geq 0$. Inequalities $\#'s (1, 3, 4, 8-17, 19-24)$ in the table are also implied by the hypergraph transversals technique per \cref{sec:TSEM}.
 
-\begin{table*}[ht]\centering\caption{List of inequalities as table of coefficients. This is a machine-readable version of the table on \cpageref{nontriv.humanreadable}.\medskip}\label{tab:machinereadable}
+\begin{table*}[ht]\centering\caption{List of inequalities as table of coefficients. This is a machine-readable version of the table in \cref{sec:CCineqs}.\medskip}\label{tab:machinereadable}
 \resizebox{\textwidth}{!}{
 \begin{tabular}{lc@{\hspace{1em}}ccc@{\hspace{1em}}ccc@{\hspace{1em}}c@{\hspace{1em}}ccc@{\hspace{1em}}ccc@{\hspace{1em}}c} 
 %\begin{array}{rrrrrrrrrrrrrrrr}
   & constant & \(\expec{A}\) & \(\expec{B}\) & \(\expec{C}\) & \(\expec{A B}\) & \(\expec{A C}\) & \(\expec{B C}\) & \(\expec{A B C}\) & \(\expec{A}\expec{B}\) & \(\expec{A}\expec{C}\) & \(\expec{B}\expec{C}\) & \(\expec{C}\expec{A B}\) & \(\expec{B}\expec{A C}\) &
    {\(\expec{A}\expec{B C}\)} & {\(\expec{A}\expec{B}\expec{C}\)}   \\\bottomrule
-  \text{($\#$1):} & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+\text{($\#$1):} & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\
  \text{($\#$2):} & 2 & 0 & 0 & 0 & 0 & -2 & 0 & 0 & 0 & 0 & 0 & -1 & 0 & 0 & 1 \\
  \text{($\#$3):} & 3 & 1 & -1 & 1 & 1 & 3 & 0 & 0 & 0 & 0 & 1 & -1 & -1 & 0 & 1 \\
  \text{($\#$4):} & 3 & 1 & -1 & 1 & 1 & 3 & 0 & 0 & 0 & 0 & 1 & 1 & -1 & 0 & -1 \\
