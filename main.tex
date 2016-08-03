@@ -490,7 +490,9 @@ The \tblue{induced subgraph} of $G$ obtained by restricting to a subset of nodes
 It consists of the nodes $\bm{V}$ and those edges of $G$ of which both endpoints are in $\bm{V}$. Of special importance to us is the 
 \tblue{ancestral subgraph} of $\bm{V}$, denoted $\ansubgraph[G]{\bm{V}}$, which is the subgraph induced by the ancestry of $\bm{V}$, $\ansubgraph[G]{\bm{V}}\coloneqq\subgraph[G]{\An[G]{\bm{V}}}$. 
 
-In an inflation DAG $G'$, every node behaves like a copy of a node of $G$. More precisely, the structure of being an inflation DAG also comprises a map $G'\to G$. We call the preimages of a node $A\in\nodes{G}$ the \emph{copies} of $A$ in $G'$, and denote them by $A_1,\ldots, A_k$. The subscript that indexes the copies is termed the \tblue{copy-index}.  When two objects (e.g.~nodes, sets of nodes, DAGs, etc\ldots) are the same up to copy-indices, then we use $\sim$ to indicate this.  For instance, we have $A_i\sim A_j\sim A$.   This copying operation must also preserve the causal structure of the DAG, in a manner that is formalized by the following definition. 
+In an inflation DAG $G'$, every node behaves like a copy of a node of $G$. More precisely, the structure of being an inflation DAG also comprises a map $G'\to G$. We call the preimages of a node $A\in\nodes{G}$ the \emph{copies} of $A$ in $G'$, and denote them by $A_1,\ldots, A_k$. The subscript that indexes the copies is termed the \tblue{copy-index}.  When two objects (e.g.~nodes, sets of nodes, DAGs, etc\ldots) are the same up to copy-indices, then we use $\sim$ to indicate this, as in $A_i\sim A_j\sim A$. Other examples are that $\bm{U}\sim\bm{U'}$ for sets of nodes $\bm{U}\subseteq\nodes{G}$ and $\bm{U}'\subseteq\nodes{G'}$ if and only if $\bm{U'}$ contains exactly one copy of every node in $\bm{U}$, and similarly $\subgraph[G']{\bm{U}'}\sim\subgraph[G]{\bm{U}}$ means in addition that an edge is present between two nodes in $\bm{U}'$ if and only if it is present between the two associated nodes in $\bm{U}$.
+
+In order to be an inflation, $G'$ must locally mirror the causal structure of $G$:
 %, and a set of variables in $G'$ that differ only by copy-index are called a {\em copy set}.  
 \begin{definition}
 %The necessary condition on $G'$ for being an inflation of $G$ is that
@@ -543,7 +545,7 @@ Different inflations of the Triangle scenario are depicted in \cref{fig:TriFullD
 \begin{minipage}[t]{0.325\linewidth}
 \centering
 \includegraphics[scale=1]{TriDagSubA2B1C1.pdf}
-\caption{Another representation of \cref{fig:simplestinflation}. Despite not containing the original scenario, this is a valid inflation per~\cref{eq:definflationDAG}.}\label{fig:TriDagSubA2B1C1}
+\caption{A different drawing of \cref{fig:simplestinflation}. Despite not containing the original scenario, this is a valid inflation per~\cref{eq:definflationDAG}.}\label{fig:TriDagSubA2B1C1}
 \end{minipage}
 \end{figure}
 
@@ -564,51 +566,47 @@ It is clear that for given $G$, $G'$ and $M$, this specifies a unique inflation 
 %A causal model specifies the causal structure and the autonomous causal mechanisms.  
 To sum up then, the inflation of a causal model is a new causal model where (i) each variable in the original DAG may have counterparts in the inflated DAG with ancestral subgraphs mirroring those of the originals, and (ii) the manner in which a variable depends causally on its parents in the inflated DAG is given by the manner in which its counterpart in the original DAG depends causally on its parents. The operation of modifying a DAG and equipping the modified version with conditional probability distributions that mirror those of the original also appears in the \emph{do calculus} and \emph{twin networks} of~\citet{pearl2009causality}, and moreover bears some resemblance to the \emph{adhesivity} technique used in deriving non-Shannon-type entropic inequalities (App.~\ref{sec:NonShannon}).
 
-We are now in a position to describe the key property of the inflation of a causal model, the one that makes it useful for causal inference. 
-
-With notation as in Definition~\ref{def:inflat}, let $P$ and $P'$ be the joint distributions over observed variables arising in models $M$ and $M'$ respectively.  Finally, let $P_{\bm{U}}$ and $P'_{\bm{U}'}$ denote the marginal distribution of $P$ on some set of nodes $\bm{U}\subseteq\nodes{G}$ and of $P'$ on some $\bm{U}'\subseteq\nodes{G'}$, respectively. Then
+We are now in a position to describe the key property of the inflation of a causal model, the one that makes it useful for causal inference. With notation as in Definition~\ref{def:inflat}, let $P$ and $P'$ be the joint distributions over observed variables arising in a causal model $M$ and its inflation $M'$, respectively.  Finally, let $P_{\bm{U}}$ and $P'_{\bm{U}'}$ denote the marginal distribution of $P$ on some set of nodes $\bm{U}\subseteq\nodes{G}$ and of $P'$ on some $\bm{U}'\subseteq\nodes{G'}$, respectively. Then
 \begin{align}\label{eq:coincidingdistrodef}
 %P'_{\bm{U}'}=P_{\bm{U}} 
-\quad\text{if }\quad \ansubgraph[G']{\bm{U}'}\sim\ansubgraph[G]{\bm{U}}, \quad\text{then}\quad P'_{\bm{U}'}=P_{\bm{U}}.
+\quad\text{if }\quad \bm{U}'\sim \bm{U} \;\;\text{and}\;\; \ansubgraph[G']{\bm{U}'}\sim\ansubgraph[G]{\bm{U}}, \quad\text{then}\quad P'_{\bm{U}'}=P_{\bm{U}}.
 \end{align}
-
 This follows from the fact that the probability distributions over $\bm{U}'$ and $\bm{U}$ depend only on their ancestral subgraphs and the parameters defined thereon, which by the definition of inflation are the same for $\bm{U}'$ and for $\bm{U}$.
-It is useful to have a name for those sets of observed nodes in $G'$ which satisfy the antecedent of Eq.~\eqref{eq:coincidingdistrodef}, that is, for which one can find a corresponding set in the original DAG $G$ with a copy-index-equivalent ancestral subgraph.  We say that such subsets of the observed nodes of $G'$ are {\em injectable} into $G$ and we call them the \tblue{injectable sets}.  The set of all such subsets is denoted $\SmallNamedFunction{InjectableSets}{G'}$,
+It is useful to have a name for those sets of observed nodes in $G'$ which satisfy the antecedent of Eq.~\eqref{eq:coincidingdistrodef}, that is, for which one can find a copy-index-equivalent set in the original DAG $G$ with a copy-index-equivalent ancestral subgraph.  We call such subsets of the observed nodes of $G'$ \tblue{injectable sets},
 \begin{align}\begin{split}\label{eq:definjectable}
-&\bm{U}'\in\SmallNamedFunction{InjectableSets}{G'} \subseteq \SmallNamedFunction{ObservedNodes}{G'} \\
-&\quad\text{ iff }\quad \exists \bm{U}\subseteq \SmallNamedFunction{ObservedNodes}{G}: \ansubgraph[G']{\bm{U}'}\sim\ansubgraph[G]{\bm{U}}.
+&\bm{U}'\in\SmallNamedFunction{InjectableSets}{G'} \\
+&\quad\text{ iff }\quad \exists \bm{U}\subseteq \SmallNamedFunction{ObservedNodes}{G} \;\; :\;\; \bm{U}'\sim\bm{U} \;\;\text{and}\;\; \ansubgraph[G']{\bm{U}'}\sim\ansubgraph[G]{\bm{U}}.
 \end{split}\end{align}
 
-Similarly,  those sets of observed nodes in the original DAG $G$ which satisfy the antecedent of Eq.~\eqref{eq:coincidingdistrodef}, that is, for which one can find a corresponding set in the inflated DAG $G'$ with a copy-index-equivalent ancestral subgraph, we describe as {\em images of the injectable sets}, and we denote the set of these by $\SmallNamedFunction{ImagesInjectableSets}{G}$.
+Similarly,  those sets of observed nodes in the original DAG $G$ which satisfy the antecedent of Eq.~\eqref{eq:coincidingdistrodef}, that is, for which one can find a corresponding set in the inflated DAG $G'$ with a copy-index-equivalent ancestral subgraph, we describe as \tblue{images of the injectable sets},
 \begin{align}\begin{split}\label{eq:defimageinjectable}
-\bm{U}\in\SmallNamedFunction{ImagesInjectableSets}{G}\quad\text{ iff }\quad \exists \bm{U}' \subseteq \SmallNamedFunction{ObservedNodes}{G'}: \ansubgraph[G']{\bm{U}'}\sim\ansubgraph[G]{\bm{U}}.
+& \bm{U}\in\SmallNamedFunction{ImagesInjectableSets}{G} \\
+& \quad\text{ iff }\quad \exists \bm{U}' \subseteq \SmallNamedFunction{ObservedNodes}{G'} \;\; :\;\; \bm{U'}\sim\bm{U} \;\;\text{and}\;\; \ansubgraph[G']{\bm{U}'}\sim\ansubgraph[G]{\bm{U}}.
 \end{split}\end{align}
 Clearly, $\bm{U}\in\SmallNamedFunction{ImagesInjectableSets}{G}$ iff $\exists \bm{U}' \subseteq \SmallNamedFunction{InjectableSets}{G'}$ such that $\bm{U}\sim \bm{U}'$.
 
 
-For example in the inflation of the Triangle scenario depicted in~\cref{fig:Tri222}, the set of observed nodes $\brackets{A_1 B_1 C_1}$ is injectable because its ancestral subgraph is equivalent up to copy-indices to the ancestral subgraph of $\brackets{A B C}$ in the original DAG, and the set $\brackets{A_2 C_1}$ is injectable because its ancestral subgraph is equivalent to that of $\brackets{ A C}$ in the original DAG. A set of nodes in the inflated DAG can only be injectable if it contains at most one copy of any node from the original DAG. Similarly, it can only be injectable if its ancestral subgraph also contains at most one copy of any node from the original DAG.  
-Thus, in \cref{fig:Tri222}, $\brackets{A_1 A_2 C_1}$ is not injectable because it contains two copies of $A$, and $\brackets{A_2 B_1 C_1}$ is not injectable because its ancestral subgraph contains two copies of $Y$. 
+For example in the inflation of the Triangle scenario depicted in~\cref{fig:Tri222}, the set of observed nodes $\brackets{A_1 B_1 C_1}$ is injectable because its ancestral subgraph is equivalent up to copy-indices to the ancestral subgraph of $\brackets{A B C}$ in the original DAG, and the set $\brackets{A_2 C_1}$ is injectable because its ancestral subgraph is equivalent to that of $\brackets{ A C}$ in the original DAG. A set of nodes in the inflated DAG can only be injectable if it contains at most one copy of any node from the original DAG. More strongly, it can only be injectable if its ancestral subgraph contains at most one copy of any node from the original DAG.  
+Thus, in \cref{fig:Tri222}, $\brackets{A_1 A_2 C_1}$ is not injectable because it contains two copies of $A$, and $\brackets{A_2 B_1 C_1}$ is not injectable because its ancestral subgraph contains two copies of $Y$. The fact that the sets $\brackets{A_1 B_1 C_1}$ and $\brackets{A_2 C_1}$ are injectable implies, via Eq.~\eqref{eq:coincidingdistrodef}, that the marginals on each of these in the inflation model are precisely equal to the marginals on their counterparts, $\brackets{A B C}$ and $\brackets{A C}$, in the original causal model, so that $P'_{A_1 B_1 C_1} = P_{A B C}$ and $P'_{A_2 C_1} = P_{A C}$.
 
-The fact that the sets $\brackets{A_1 B_1 C_1}$ and $\brackets{A_2 C_1}$ are injectable implies, via Eq.~\eqref{eq:coincidingdistrodef}, that the marginals on each of these in the inflation model are precisely equal to the marginals on their counterparts, $\brackets{A B C}$ and $\brackets{A C}$, in the original causal model, so that $P'_{A_1 B_1 C_1} = P_{A B C}$ and $P'_{A_2 C_1} = P_{A C}$.
-
-It is useful to express \cref{eq:coincidingdistrodef} in the language of injectable sets, namely, as 
+It is useful to express \cref{eq:coincidingdistrodef} in the language of injectable sets,
 \begin{align}\label{keyinference}
 %\text{if }  \quad  \bm{U}'\in\SmallNamedFunction{InjectableSets}{G'} \quad \text{and} \quad \bm{U} \sim \bm{U}'  \quad\text{then}\quad P'_{\bm{U}'}=P_{\bm{U}}.
-P'_{\bm{U}'}=P_{\bm{U}}\quad\text{if }  \bm{U} \sim \bm{U}'\quad \text{and} \quad \bm{U}'\in\SmallNamedFunction{InjectableSets}{G'}.% \quad \text{and} \quad \bm{U} \sim \bm{U}'  \quad\text{then}\quad P'_{\bm{U}'}=P_{\bm{U}}.
+P'_{\bm{U}'}=P_{\bm{U}}\quad\text{if }  \;\; \bm{U}' \sim \bm{U}\;\; \text{and} \;\; \bm{U}'\in\SmallNamedFunction{InjectableSets}{G'}.% \quad \text{and} \quad \bm{U} \sim \bm{U}'  \quad\text{then}\quad P'_{\bm{U}'}=P_{\bm{U}}.
 \end{align}
 
 \subsection{Witnessing incompatibility\label{subsec:witnessingincompat}}
 
-Finally, we can explain why inflation is relevant for deciding whether a distribution is compatible with a causal structure.  For a family of marginal distributions $\{ P_{\bm{U}} : \bm{U} \in \SmallNamedFunction{ImagesInjectableSets}{G}$ to be compatible with $G$, there must be a causal model $M$ that yields a joint distribution with this family as its marginals.   Similarly, for a family of marginal distributions $\{ P'_{\bm{U}'} : \bm{U}' \in \SmallNamedFunction{InjectableSets}{G'}$ to be compatible with $G'$, there must be a causal model $M'$ that yields a joint distribution with this family as its marginals.  Now note that in the first problem, the only parameters of the model $M$ that are relevant are those pertaining to nodes in the ancestral subgraph of some $\bm{U}\in \SmallNamedFunction{ImagesInjectableSets}{G}$, and in the second problem, the only parameters of the model $M'$ that are relevant are those pertaining to nodes in the ancestral subgraph of some $\bm{U}' \in \SmallNamedFunction{InjectableSets}{G'}$.  But for a given pair $\bm{U}$ and $\bm{U}'$ such that  $\bm{U} \sim \bm{U}'$, the parameters in the model $M$ that determine the distribution on  $\bm{U}$ are, by the definition of inflation, precisely equal to the parameters in the model $M' = \SmallNamedFunction[G\to G']{Inflation}{M}$ that determine the distribution on $\bm{U}'$.  
-Consequently, if there is a causal model $M$ on $G$ yielding the family $\{ P_{\bm{U}} : \bm{U} \in \SmallNamedFunction{ImagesInjectableSets}{G}$ then there is a model $M'$ on $G'$ yielding the family $\{ P'_{\bm{U}'} : \bm{U}' \in \SmallNamedFunction{InjectableSets}{G'}$ with $P'_{\bm{U}'}= P_{\bm{U}}$.  
+Finally, we can explain why inflation is relevant for deciding whether a distribution is compatible with a causal structure.  For a family of marginal distributions $\{ P_{\bm{U}} : \bm{U} \in \SmallNamedFunction{ImagesInjectableSets}{G}\}$ to be compatible with $G$, there must be a causal model $M$ that yields a joint distribution with this family as its marginals. Looking at the inflation model $M' = \SmallNamedFunction[G\to G']{Inflation}{M}$, \cref{keyinference} implies that $M'$ has the corresponding family of marginals given by $\{ P'_{\bm{U}'} : \bm{U}' \in \SmallNamedFunction{InjectableSets}{G'}\}$ with $P'_{\bm{U}'} = P_{\bm{U}}$ for $\bm{U}'\sim\bm{U}$, and thus this family is compatible with $G'$.
 
-We formalize the result as a lemma. 
+The same considerations apply for subcollections of injectable sets:
+
 \begin{lemma} \label[lemma]{mainlemma}
-Let $G$ and $G'$ be DAGs, with $G'$ an inflation of $G$. 
-Let $S'  \subseteq \SmallNamedFunction{InjectableSets}{G'}$ be a collection of injectable sets on $\SmallNamedFunction{ObservedNodes}{G'}$, and let $S \subseteq \SmallNamedFunction{ImagesInjectableSets}{G}$ be the images on $\SmallNamedFunction{ObservedNodes}{G}$ of this collection.   If the family of marginal distributions $\{ P_{\bm{U}} : \bm{U} \in S \}$ is compatible with $G$, then the family of marginal distributions $\{ P'_{\bm{U}'} : \bm{U}' \in S' \}$ satisfying $P'_{\bm{U}'}= P_{\bm{U}}$ where $U \sim U'$ is compatible with $G'$.
+Let $G'$ an inflation DAG of $G$. 
+Let $S'  \subseteq \SmallNamedFunction{InjectableSets}{G'}$ be a collection of injectable sets, and let $S \subseteq \SmallNamedFunction{ImagesInjectableSets}{G}$ be the images of this collection.   If the family of marginal distributions $\{ P_{\bm{U}} : \bm{U} \in S \}$ is compatible with $G$, then the corresponding family of marginal distributions $\{ P'_{\bm{U}'} : \bm{U}' \in S' \}$ defined via $P'_{\bm{U}'}= P_{\bm{U}}$ for $\bm{U}' \sim \bm{U}$ is compatible with $G'$.
 \end{lemma}
 
-We have thereby converted a question about compatibility with the original causal structure to one about compatibility with the inflated causal structure.  If one can show that the new compatibility question is answered in the negative, one can infer that the original question is answered in the negative as well.    Some simple examples serve to illustrate the idea.
+We have thereby related a question about compatibility with the original causal structure to one about compatibility with the inflated causal structure.  If one can show that the new compatibility question on $G'$ is answered in the negative, then one can infer that the original question is answered in the negative as well.    Some simple examples serve to illustrate the idea.
 
 
 
@@ -638,9 +636,9 @@ Consider the following causal inference problem.  One is given a joint distribut
 \begin{align}\label{eq:ghzdistribution1}
 P_{A B C} =\frac{[000]+[111]}{2},\quad\text{i.e.,}\quad P_{A B C}(a b c)=\begin{cases}\tfrac{1}{2}&\text{if }\; a\eql b\eql c, \\ 0&\text{otherwise},\end{cases}
 \end{align}
-and one would like to determine whether it is compatible with the Triangle scenario, that is, the DAG depicted in \cref{fig:TriMainDAGv2}.  The sum-over-brackets notation in \cref{eq:ghzdistribution1} is a shorthand for indicating discrete probability distributions: the coefficient of each bracketted tuple indicates the probability of that particular mutltivariate outcome.
+and one would like to determine whether it is compatible with the Triangle scenario, that is, the DAG depicted in \cref{fig:TriMainDAGv2}.  The sum-over-brackets notation in \cref{eq:ghzdistribution1} is a shorthand for indicating discrete probability distributions: the coefficient of each bracketed tuple indicates the probability of that particular joint outcome.
 
-Note that there are no conditional independence relations among the observed variables in this DAG, so there is no opportunity for ruling out the distribution on the grounds that it fails to reproduce the correct conditional independences. 
+Since there are no conditional independence relations among the observed variables in the Triangle scenario, there is no opportunity for ruling out the distribution on the grounds that it fails to satisfy the required conditional independences. 
 
 %The causal hypothesis is that the DAG corresponds to the triangle scenario, depicted in \cref{fig:Tri222}.  
 %The problem is to decide whether the given distribution is compatible with this causal hypothesis.
@@ -648,17 +646,17 @@ Note that there are no conditional independence relations among the observed var
 To solve this problem, we consider the inflation of the Triangle scenario to the DAG depicted in Fig.~\ref{fig:TriDagSubA2B1C1v2}.  
 The injectable sets in this case include $\brackets{A_2 C_1}$ and $\brackets{B_1 C_1}$.  We therefore consider the marginals on these sets.
 
-Clearly, the given distribution is only compatible with the Triangle hypothesis if the following pair of marginals of the given distribution are compatible with the Triangle hypothesis:
-\begin{align}
+Clearly, the given distribution can only be compatible with the Triangle hypothesis if the following pair of marginals of the given distribution are compatible with the Triangle hypothesis:
+\begin{align*}
 %\label[eqs]{eq:GHZobsinf}
-P_{A C} &= \frac{[00]+[11]}{2}\label{j1}\\
-P_{B C} &= \frac{[00]+[11]}{2}\label{j2}
-\end{align}
-But by \cref{mainlemma}, this compatibility holds only if the following pair of marginals is compatible with the inflated DAG depicted in Fig.~\ref{fig:TriDagSubA2B1C1v2}:
-\begin{align}
-P_{A_2 C_1} &= \frac{[00]+[11]}{2} \label{k1}\\
-P_{B_1 C_1} &= \frac{[00]+[11]}{2} \label{k2}
-\end{align}
+P_{A C} &= \frac{[00]+[11]}{2}\\
+P_{B C} &= \frac{[00]+[11]}{2}
+\end{align*}
+But by \cref{mainlemma}, this compatibility holds only if the following pair of marginals is compatible with the inflation of Fig.~\ref{fig:TriDagSubA2B1C1v2},
+\begin{align*}
+P_{A_2 C_1} &= \frac{[00]+[11]}{2} \\
+P_{B_1 C_1} &= \frac{[00]+[11]}{2} 
+\end{align*}
 
 It is not difficult to see that the latter pair of marginals is \emph{not} compatible with our inflated DAG. It suffices to note that the only joint distribution that exhibits perfect correlation between $A_2$ and $C_1$ and between $B_1$ and $C_1$ also exhibits perfect correlation between $A_2$ and $B_1$.  But $A_2$ and $B_1$ have no common ancestors and hence must be marginally independent in the inflated DAG.
 
@@ -697,7 +695,7 @@ $P_{A B C}$ of the form
 \begin{align}\label{eq:wdistribution1}
 P_{A B C}=\frac{[100]+[010]+[001]}{3},\quad\text{i.e.,}\quad P_{A B C}(a b c)=\begin{cases}\tfrac{1}{3}&\text{if }\; a\cramp{+}b\cramp{+}c\eql 1, \\ 0&\text{otherwise}.\end{cases}
 \end{align}
-We call this the W-type distribution\footnote{Because its correlations are reminiscent of those one obtains for the quantum state appearing in Ref. \cite{3Qubits2Ways}, and which is called the W state.}. 
+We call this the W-type distribution\footnote{Because its correlations are reminiscent of those one obtains for the quantum state appearing in~\cite{3Qubits2Ways}, called the \emph{W state}.}. 
 %To our knowledge, the fact that the Triangle causal structure is inconsistent with the W-type distribution has not been demonstrated previously.
 
 To settle the compatibility question, we consider the inflated DAG of \cref{fig:Tri222v2}.  The injectable sets in this case include $\{A_1 B_1 C_1\}$, $\{A_2 C_1\}$, $\{B_2 A_1\}$, $\{C_2 B_1\}$,  $\{A_2\}$, $\{B_2\}$ and $\{C_2\}$. 
