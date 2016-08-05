@@ -278,7 +278,7 @@ anchorcolor=OliveGreen}
 
 
 %%%% Tobias: to mark my edits and stuff
-\usepackage{showkeys}
+%\usepackage{showkeys}
 \usepackage[draft]{fixme}
 \newcommand{\btob}{\color{OliveGreen}}
 \newcommand{\etob}{\color{black}}
@@ -560,7 +560,7 @@ Different inflations of the Triangle scenario are depicted in \cref{fig:TriFullD
 We now define the function $\mathsf{Inflation}_{G\to G'}$, that is, we specify how a causal model inflates.
 
 \begin{definition}
-\label{def:inflat}
+\label[definition]{def:inflat}
 Consider causal models $M$ and $M'$ where $\SmallNamedFunction{DAG}{M}=G$ and $\SmallNamedFunction{DAG}{M'}=G'$ and such that $G'$ is an inflation of $G$.   The causal model $M'$ is said to be the {\em \tblue{$G\to G'$ inflation of $M$}}, that is, $M' = \SmallNamedFunction[G\to G']{Inflation}{M}$,  if and only if for every node $A_i$ in $G'$, the manner in which $A_i$ depends causally on its parents within $G'$ is the same as the manner in which $A$ depends causally on its parents within $G$.  Noting that $A_i \sim A$ and that $\Pa[G']{A_i} \sim \Pa[G]{A}$ by~\cref{eq:definflationDAG}, one can formalize this condition as:
 \begin{align}\label{eq:funcdependences}
 %M' = \SmallNamedFunction{Inflation}{M}_{G\to G'}  \quad \text{iff}\quad 
@@ -569,15 +569,16 @@ Consider causal models $M$ and $M'$ where $\SmallNamedFunction{DAG}{M}=G$ and $\
 %where Eq.~\eqref{eq:definflationDAG} guarantees that $A_i \sim A$ and $\Pa[G']{A_i} \sim \Pa[G]{A}$.  
 \end{definition}
 
-It is clear that for given $G$, $G'$ and $M$, this specifies a unique inflation model $M'$, resulting in a well-defined function $\SmallNamedFunction[G\to G']{Inflation}{-}$.
+It is clear that for given $G$, $G'$ and $M$, this specifies a unique inflation model $M'$, resulting in a well-defined function ${\operatorname{\mathsf{Inflation}}_{G\to G'}}$. %$\SmallNamedFunction[G\to G']{Inflation}{-}$.
 
 %A causal model specifies the causal structure and the autonomous causal mechanisms.  
 To sum up then, the inflation of a causal model is a new causal model where (i) each variable in the original DAG may have counterparts in the inflated DAG with ancestral subgraphs mirroring those of the originals, and (ii) the manner in which a variable depends causally on its parents in the inflated DAG is given by the manner in which its counterpart in the original DAG depends causally on its parents. The operation of modifying a DAG and equipping the modified version with conditional probability distributions that mirror those of the original also appears in the \emph{do calculus} and \emph{twin networks} of~\citet{pearl2009causality}, and moreover bears some resemblance to the \emph{adhesivity} technique used in deriving non-Shannon-type entropic inequalities (App.~\ref{sec:NonShannon}).
 
-We are now in a position to describe the key property of the inflation of a causal model, the one that makes it useful for causal inference. With notation as in Definition~\ref{def:inflat}, let $P$ and $P'$ be the joint distributions over observed variables arising in a causal model $M$ and its inflation $M'$, respectively.  Finally, let $P_{\bm{U}}$ and $P'_{\bm{U}'}$ denote the marginal distribution of $P$ on some set of nodes $\bm{U}\subseteq\nodes{G}$ and of $P'$ on some $\bm{U}'\subseteq\nodes{G'}$, respectively. Then
+We are now in a position to describe the key property of the inflation of a causal model, the one that makes it useful for causal inference. With notation as in \cref{def:inflat}, let %$P$ and $P'$ be the joint distributions over observed variables arising in a causal model $M$ and its inflation $M'$, respectively.  Finally, let
+$P_{\bm{U}}$ and $P_{\bm{U}'}$ denote marginal distributions on some sets of nodes $\bm{U}\subseteq\nodes{G}$ and $\bm{U}'\subseteq\nodes{G'}$, respectively. Then
 \begin{align}\label{eq:coincidingdistrodef}
 %P'_{\bm{U}'}=P_{\bm{U}} 
-\quad\text{if }\quad \bm{U}'\sim \bm{U} \;\;\text{and}\;\; \ansubgraph[G']{\bm{U}'}\sim\ansubgraph[G]{\bm{U}}, \quad\text{then}\quad P'_{\bm{U}'}=P_{\bm{U}}.
+\quad\text{if }\quad \bm{U}'\sim \bm{U} \;\;\text{and}\;\; \ansubgraph[G']{\bm{U}'}\sim\ansubgraph[G]{\bm{U}}, \quad\text{then}\quad P_{\bm{U}'}=P_{\bm{U}}.
 \end{align}
 This follows from the fact that the probability distributions over $\bm{U}'$ and $\bm{U}$ depend only on their ancestral subgraphs and the parameters defined thereon, which by the definition of inflation are the same for $\bm{U}'$ and for $\bm{U}$.
 It is useful to have a name for those sets of observed nodes in $G'$ which satisfy the antecedent of~\cref{eq:coincidingdistrodef}, that is, for which one can find a copy-index-equivalent set in the original DAG $G$ with a copy-index-equivalent ancestral subgraph.  We call such subsets of the observed nodes of $G'$ \tblue{injectable sets},
@@ -595,23 +596,24 @@ Clearly, $\bm{U}\in\SmallNamedFunction{ImagesInjectableSets}{G}$ iff $\exists \b
 
 
 For example in the inflation of the Triangle scenario depicted in~\cref{fig:Tri222}, the set of observed nodes $\brackets{A_1 B_1 C_1}$ is injectable because its ancestral subgraph is equivalent up to copy-indices to the ancestral subgraph of $\brackets{A B C}$ in the original DAG, and the set $\brackets{A_2 C_1}$ is injectable because its ancestral subgraph is equivalent to that of $\brackets{ A C}$ in the original DAG. A set of nodes in the inflated DAG can only be injectable if it contains at most one copy of any node from the original DAG. More strongly, it can only be injectable if its ancestral subgraph contains at most one copy of any node from the original DAG.  
-Thus, in \cref{fig:Tri222}, $\brackets{A_1 A_2 C_1}$ is not injectable because it contains two copies of $A$, and $\brackets{A_2 B_1 C_1}$ is not injectable because its ancestral subgraph contains two copies of $Y$. The fact that the sets $\brackets{A_1 B_1 C_1}$ and $\brackets{A_2 C_1}$ are injectable implies, via~\cref{eq:coincidingdistrodef}, that the marginals on each of these in the inflation model are precisely equal to the marginals on their counterparts, $\brackets{A B C}$ and $\brackets{A C}$, in the original causal model, so that $P'_{A_1 B_1 C_1} = P_{A B C}$ and $P'_{A_2 C_1} = P_{A C}$.
+
+Thus, in \cref{fig:Tri222}, $\brackets{A_1 A_2 C_1}$ is not injectable because it contains two copies of $A$, and $\brackets{A_2 B_1 C_1}$ is not injectable because its ancestral subgraph contains two copies of $Y$. The fact that the sets $\brackets{A_1 B_1 C_1}$ and $\brackets{A_2 C_1}$ are injectable implies, via~\cref{eq:coincidingdistrodef}, that the marginals on each of these in the inflation model are precisely equal to the marginals on their counterparts, $\brackets{A B C}$ and $\brackets{A C}$, in the original causal model, so that $P_{A_1 B_1 C_1} = P_{A B C}$ and $P_{A_2 C_1} = P_{A C}$.
 
 It is useful to express \cref{eq:coincidingdistrodef} in the language of injectable sets,
 \begin{align}\label{keyinference}
 %\text{if }  \quad  \bm{U}'\in\SmallNamedFunction{InjectableSets}{G'} \quad \text{and} \quad \bm{U} \sim \bm{U}'  \quad\text{then}\quad P'_{\bm{U}'}=P_{\bm{U}}.
-P'_{\bm{U}'}=P_{\bm{U}}\quad\text{if }  \;\; \bm{U}' \sim \bm{U}\;\; \text{and} \;\; \bm{U}'\in\SmallNamedFunction{InjectableSets}{G'}.% \quad \text{and} \quad \bm{U} \sim \bm{U}'  \quad\text{then}\quad P'_{\bm{U}'}=P_{\bm{U}}.
+P_{\bm{U}'}=P_{\bm{U}}\quad\text{if }  \;\; \bm{U}' \sim \bm{U}\;\; \text{and} \;\; \bm{U}'\in\SmallNamedFunction{InjectableSets}{G'}.% \quad \text{and} \quad \bm{U} \sim \bm{U}'  \quad\text{then}\quad P'_{\bm{U}'}=P_{\bm{U}}.
 \end{align}
 
 \subsection{Witnessing incompatibility\label{subsec:witnessingincompat}}
 
-Finally, we can explain why inflation is relevant for deciding whether a distribution is compatible with a causal structure.  For a family of marginal distributions $\{ P_{\bm{U}} : \bm{U} \in \SmallNamedFunction{ImagesInjectableSets}{G}\}$ to be compatible with $G$, there must be a causal model $M$ that yields a joint distribution with this family as its marginals. Looking at the inflation model $M' = \SmallNamedFunction[G\to G']{Inflation}{M}$, \cref{keyinference} implies that $M'$ has the corresponding family of marginals given by $\{ P'_{\bm{U}'} : \bm{U}' \in \SmallNamedFunction{InjectableSets}{G'}\}$ with $P'_{\bm{U}'} = P_{\bm{U}}$ for $\bm{U}'\sim\bm{U}$, and thus this family is compatible with $G'$.
+Finally, we can explain why inflation is relevant for deciding whether a distribution is compatible with a causal structure.  For a family of marginal distributions $\{ P_{\bm{U}} : \bm{U} \in \SmallNamedFunction{ImagesInjectableSets}{G}\}$ to be compatible with $G$, there must be a causal model $M$ that yields a joint distribution with this family as its marginals. Looking at the inflation model $M' = \SmallNamedFunction[G\to G']{Inflation}{M}$, \cref{keyinference} implies that $M'$ has the corresponding family of marginals given by $\{ P_{\bm{U}'} : \bm{U}' \in \SmallNamedFunction{InjectableSets}{G'}\}$ with $P_{\bm{U}'} = P_{\bm{U}}$ for $\bm{U}'\sim\bm{U}$, and thus this family is compatible with $G'$.
 
 The same considerations apply for subcollections of injectable sets:
 
 \begin{lemma} \label[lemma]{mainlemma}
 Let $G'$ an inflation DAG of $G$. 
-Let $S'  \subseteq \SmallNamedFunction{InjectableSets}{G'}$ be a collection of injectable sets, and let $S \subseteq \SmallNamedFunction{ImagesInjectableSets}{G}$ be the images of this collection.   If the family of marginal distributions $\{ P_{\bm{U}} : \bm{U} \in S \}$ is compatible with $G$, then the corresponding family of marginal distributions $\{ P'_{\bm{U}'} : \bm{U}' \in S' \}$ defined via $P'_{\bm{U}'}= P_{\bm{U}}$ for $\bm{U}' \sim \bm{U}$ is compatible with $G'$.
+Let $S'  \subseteq \SmallNamedFunction{InjectableSets}{G'}$ be a collection of injectable sets, and let $S \subseteq \SmallNamedFunction{ImagesInjectableSets}{G}$ be the images of this collection.   If the family of marginal distributions $\{ P_{\bm{U}} : \bm{U} \in S \}$ is compatible with $G$, then the corresponding family of marginal distributions $\{ P_{\bm{U}'} : \bm{U}' \in S' \}$ --- defined via $P           _{\bm{U}'}= P_{\bm{U}}$ for $\bm{U}' \sim \bm{U}$ --- is compatible with $G'$.
 \end{lemma}
 
 We have thereby related a question about compatibility with the original causal structure to one about compatibility with the inflated causal structure.  If one can show that the new compatibility question on $G'$ is answered in the negative, then one can infer that the original question is answered in the negative as well.    Some simple examples serve to illustrate the idea.
@@ -884,11 +886,10 @@ The inflation technique is useful for deriving causal compatibility inequalities
 Suppose that $G'$ is an inflation of $G$. Let $S'  \subseteq \SmallNamedFunction{InjectableSets}{G'}$ be a family of injectable sets and $S \subseteq \SmallNamedFunction{ImagesInjectableSets}{G}$ the images of members of $S'$.
 %Let $S'$ be a family of injectable sets on $\SmallNamedFunction{ObservedNodes}{G'}$, $S'  \subseteq \SmallNamedFunction{InjectableSets}{G'}$, and let $S$ be the image on $\SmallNamedFunction{ObservedNodes}{G}$ of this family, $S \subseteq \SmallNamedFunction{ImagesInjectableSets}{G} \}$.    
 %Consider a family of marginal distributions on the elements of $S$, $\{ P_{\bm{U}} : \bm{U} \in S\}$, whose marginals are consistent on the places where the elements of $S$ overlap. 
-Let $I_{S'}$ be a causal compatibility inequality for $G'$ operating on families $\{ P'_{\bm{U}'} : \bm{U}' \in S'\}$. Define an inequality $I_S$ as follows: in the functional form of $I_{S'}$, replace every occurrence of a term $P'_{\bm{U}'}$ by $P_{\bm{U}}$ for the unique $\bm{U}\in S$ with $\bm{U} \sim \bm{U}'$. Then $I_S$ is a causal compatibility inequality for $G$ operating on families $\{ P_{\bm{U}} : \bm{U}\in S\}$.
+Let $I_{S'}$ be a causal compatibility inequality for $G'$ operating on families $\{ P_{\bm{U}'} : \bm{U}' \in S'\}$. Define an inequality $I_S$ as follows: in the functional form of $I_{S'}$, replace every occurrence of a term $P_{\bm{U}'}$ by $P_{\bm{U}}$ for the unique $\bm{U}\in S$ with $\bm{U} \sim \bm{U}'$. Then $I_S$ is a causal compatibility inequality for $G$ operating on families $\{ P_{\bm{U}} : \bm{U}\in S\}$.
 \end{corollary}
 
-The proof is as follows.  Suppose that the family $\{ P_{\bm{U}} : \bm{U} \in S\}$ is compatible with $G$.  By \cref{mainlemma}, it follows that the family $ \{ P'_{\bm{U}'} : \bm{U}' \in S'\}$ where $P'_{\bm{U}'}:= P_{\bm{U}}$ for $\bm{U}' \sim \bm{U}$  is compatible with $G'$.  Given that $I_{S'}$ is assumed to be a causal compatibility inequality for $G'$, it follows that $\{ P'_{\bm{U}'} : \bm{U}' \in S'\}$ satisfies $I_{S'}$.  But by the definition of $I_{S}$, its evaluation on $\{ P_{\bm{U}} : \bm{U} \in S\}$ is equal to $I_{S'}$ evaluated on $\{ P'_{\bm{U}'} : \bm{U}' \in S'\}$. Since $\{ P'_{\bm{U}'} : \bm{U}' \in S'\}$ satisfies $I_{S'}$, it therefore follows that $\{ P_{\bm{U}} : \bm{U} \in S\}$ satisfies $I_{S}$. Since $\{ P_{\bm{U}} : \bm{U}\in S\}$ was an arbitrary family compatible with $G$, it follows that $I_{S}$ is a causal compatibility inequality for $G$.  
-
+The proof is as follows.  Suppose that the family $\{ P_{\bm{U}} : \bm{U} \in S\}$ is compatible with $G$.  By \cref{mainlemma}, it follows that the family $ \{ P_{\bm{U}'} : \bm{U}' \in S'\}$ where $P_{\bm{U}'}:= P_{\bm{U}}$ for $\bm{U}' \sim \bm{U}$  is compatible with $G'$.  Given that $I_{S'}$ is assumed to be a causal compatibility inequality for $G'$, it follows that $\{ P_{\bm{U}'} : \bm{U}' \in S'\}$ satisfies $I_{S'}$.  But by the definition of $I_{S}$, its evaluation on $\{ P_{\bm{U}} : \bm{U} \in S\}$ is equal to $I_{S'}$ evaluated on $\{ P_{\bm{U}'} : \bm{U}' \in S'\}$. Since $\{ P_{\bm{U}'} : \bm{U}' \in S'\}$ satisfies $I_{S'}$, it therefore follows that $\{ P_{\bm{U}} : \bm{U} \in S\}$ satisfies $I_{S}$. Since $\{ P_{\bm{U}} : \bm{U}\in S\}$ was an arbitrary family compatible with $G$, it follows that $I_{S}$ is a causal compatibility inequality for $G$.  
 
 %\color{red} [No!  we can't have if and only if for the DAG G'.  If we have it at all, it's for the causal hypothesis that includes the parameter constraints. ]\color{black}
 
@@ -1101,7 +1102,7 @@ Because ancestral independence in the DAG implies statistical independence for a
 $\bm{U}'$ is a pre-injectable set and $\bm{U}_1,\ldots,\bm{U}_n$ are the ancestrally independent components of $\bm{U}'$, then 
 \begin{align}\label{eq:preinjfactor}
 %\forall \bm{U}\in\SmallNamedFunction{PreInjectableSets}{G'}:	
-P'_{\bm{U}'} = P'_{\bm{U}_1} \cdots P'_{\bm{U}_n}
+P_{\bm{U}'} = P_{\bm{U}_1} \cdots P_{\bm{U}_n}
 \end{align}
 for any distribution compatible with $G'$. The situation, therefore, is this: for any constraint that one can derive for the marginals on the pre-injectable sets based on the existence of a joint distribution---and hence without reference to the causal structure---one can infer constraints that {\em do} refer to the causal structure by substituting within these constraints factorizations of the form of~\cref{eq:preinjfactor}.  
 
@@ -1528,8 +1529,7 @@ In this approach, the possibilistic constraints follow from a consideration of {
 %\end{split}\end{align}
 %Next, one notes that the given distribution and causal structure imply that the antecedent is true while the consequent is false for every valuation in the support of the distribution, so that the distribution and causal structure together imply a contradiction.
 
-
-We have already provided a simple example of a Hardy-type argument in \cref{Sec:DerivingInequalities}, in the logic used to demonstrate that the marginal distributions of Eqs.~\eqref{W4}-\eqref{W7} are incompatible with the DAG depicted in~\cref{fig:Tri222v2}.   For our present purposes, it is useful to recast the argument of \cref{Sec:DerivingInequalities} into a new but manifestly equivalent form.    
+We have already provided a simple example of a Hardy-type argument in \cref{Sec:DerivingInequalities}, in the logic used to demonstrate that the marginal distributions of \cref{W4,W1,W5} are incompatible with the DAG depicted in \cref{fig:Tri222v2}.   For our present purposes, it is useful to recast the argument of \cref{Sec:DerivingInequalities} into a new but manifestly equivalent form.    
 
 First, note that for the distribution in question, we have
 \begin{align} 
@@ -1586,7 +1586,7 @@ P_{A_2 B_2 C_2}\parens{\mgreen{1} \mgreen{1} \mgreen{1}} \leq P_{A_1 B_1 C_1}\pa
 \end{align}
 which is a constraint on the marginal {\em distributions}.
  
-Note that this inequality allows one to demonstrate the incompatibility of the marginal distributions of Eqs.~\eqref{W4}-\eqref{W7} with the inflated DAG just as easily as one can with the tautology of \cref{tautology1}.  It suffices to note that the given distribution and causal structure imply that the left-hand side has nonzero probability (which corresponds to the consequent of \cref{tautology1} being false) while every term on the right-hand side has zero probability (which corresponds to the antecedent of  \cref{tautology1} begin true).
+Note that this inequality allows one to demonstrate the incompatibility of the marginal distributions of \cref{W4,W1,W5} with the inflated DAG just as easily as one can with the tautology of \cref{tautology1}.  It suffices to note that the given distribution and causal structure imply that the left-hand side has nonzero probability (which corresponds to the consequent of \cref{tautology1} being false) while every term on the right-hand side has zero probability (which corresponds to the antecedent of  \cref{tautology1} begin true).
 %This is a causal compatibility inequality for the inflated DAG.  It can be used to demonstrate the incompatibility of the marginal distributions of Eqs.~\eqref{W4}-\eqref{W7} with the inflated DAG because these marginal distributions assing probability 0 to all terms on the right-hand side, while these together with the causal structure imply a nonzero probability for the term on the left-hand side.  
 But, of course, the inequality can witness many other incompatibilities in addition to this one.
 
@@ -2355,7 +2355,7 @@ Suppose that $\varphi:\subgraph{\bm{U}}\to\subgraph{\bm{V}}$ is an inflationary 
 which is not just the restriction of a copy isomorphism between the ancestral subgraphs, but even the restriction of a copy automorphism 
 $\Phi':G'\to G'$ of the entire inflated DAG onto itself; in particular, this assumption implies that $\Phi'$ also restricts to a copy isomorphism $\Phi:\ansubgraph{\bm{U}}\to\ansubgraph{\bm{V}}$ between the ancestral subgraphs. In this case, the irrelevance of the additional constraint $P_{\bm{U}} = P_{\varphi(\bm{U})}$ to the marginal problem for inflated models can be explained by the following argument. 
 
-Suppose that some joint distribution $P$ solves the unconstrained marginal problem, i.e.,~without requiring $P_{\bm{U}} = P_{\varphi(\bm{U})}$. Now apply $\Phi'$ to the variables in $P$, switching the variables around, to generate a new distribution $P'$. Because the set of marginal distributions that arise from inflated models is invariant under this switching of variables, we conclude that $P'$ is also a solution to the unconstrained marginal problem. Taking the uniform mixture of $P$ and $P'$ is therefore still a solution of the unconstrained marginal problem. But this uniform mixture also satisfies the supplementary constraint $P_{\bm{U}} = P_{\varphi(\bm{U})}$. Hence the supplementary constraint is satisfiable automatically whenever the unconstrained marginal problem is solvable, which makes adding the constraint irrelevant.
+Suppose that some joint distribution $P_{\SmallNamedFunction{ObservedNodes}{G'}}$ solves the unconstrained marginal problem, i.e.,~without requiring $P_{\bm{U}} = P_{\varphi(\bm{U})}$. Now apply $\Phi'$ to the variables in $P_{\SmallNamedFunction{ObservedNodes}{G'}}$, switching the variables around, to generate a new distribution $P'=P_{\Phi'(\SmallNamedFunction{ObservedNodes}{G'})}$. Because the set of marginal distributions that arise from inflated models is invariant under this switching of variables, we conclude that $P'$ is also a solution to the unconstrained marginal problem. Taking the uniform mixture of $P$ and $P'$ is therefore still a solution of the unconstrained marginal problem. But this uniform mixture also satisfies the supplementary constraint $P_{\bm{U}} = P_{\varphi(\bm{U})}$. Hence the supplementary constraint is satisfiable automatically whenever the unconstrained marginal problem is solvable, which makes adding the constraint irrelevant.
 
 Note that the argument does not apply if the inflationary isomorphism $\varphi:\bm{U}\to\bm{V}$ cannot be extended to a copy automorphism of the entire inflated DAG. It also does not apply if one uses the $d$-separation conditions beyond ancestral independence  on the inflated DAG as additional constraints, because in this case the set of compatible distributions is not necessarily convex.  In either of these cases, it is not apparent whether or not constraints arising from copy-index equivalence could yield tighter inequalities. 
 %We do not know what happens in either of these cases.
