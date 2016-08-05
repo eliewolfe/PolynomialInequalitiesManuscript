@@ -1291,14 +1291,14 @@ Having identified the pre-injectable sets together with the factorization relati
 \subsection{The marginal problem}\label{step:marginalsproblem}
 %\subsection{Constraining distributions over the pre-injectable sets via the marginal problem}
 
-For a given family of probability distributions, each defined on a subset of the variables, determining whether there exists a joint probability distribution over the full set of variables from which all of these can be obtained as marginal distributions is known as the {\em marginal problem}.
+For a given family of marginal distributions, each defined on a subset of the variables, determining whether there exists a joint probability distribution over the full set of variables from which all of these can be obtained as marginal distributions is known as the {\em marginal problem}.
 %they can be obtained through marginalization of a single joint probability 
 %The most trivial constraint on possible marginal probabilities, regardless of causal structure,  
 %on the pre-injectable set
 %is simply the \emph{existence of some joint probability distribution} from which the marginal distributions can be recovered through marginalization. 
 %This isn't really causal inference---as no nontrivial causal hypothesis is considered---but rather more of a preliminary sanity check. If the marginal distributions are not \tblue{consistent}, then the answer to ``Can these marginal distributions be explained by this particular causal hypothesis?'' is automatically ``No''. 
 %This type of problem is known as a \tblue{marginal problem}. 
-For some of its history and for further references, see~\cite{fritz2013marginal}; for a more recent account using the language of presheaves, see~\cite{abramsky_contextuality_2011}.
+For some of its history and for further references, see~\cite{fritz2013marginal}; for a more modern account using the language of presheaves, see~\cite{abramsky_contextuality_2011}.
 
 %More precisely, a \emph{marginal problem} is specified by 
 To specify such a problem, one must specify the full set of variables to be considered, denoted $\bm{X}$, together with a family of subsets of $\bm{X}$, denoted $(\bm{U}_1,\ldots,\bm{U}_n)$ and called \tblue{contexts}.
@@ -1306,38 +1306,38 @@ To specify such a problem, one must specify the full set of variables to be cons
 A family of contexts can be visualized through 
 %It may help to draw the visualize contexts in terms of 
 the simplicial complex that they generate, as the example in~\cref{fig:simplicialcomplex222} illustrates. Every joint distribution $P_{\bm{X}}$ %marginalization to each of $(\bm{U}_1,\ldots,\bm{U}_n)$, 
-defines a family of marginal distributions, $(P_{\bm{U}_1},\ldots,P_{\bm{U}_n})$ through marginalization,  $P_{\bm{U}_i} := \sum_{\bm{X} \setminus \bm{U}_i} P_{\bm{X}}$. A \emph{marginal problem} concerns the converse inference.  What is given is a family of distributions $(P_{\bm{U}_1},\ldots,P_{\bm{U}_n})$, and what is sought are the conditions under which one can find a joint distribution $\hat{P}_{\bm{X}}$ which has all the given distributions as marginals, that is, which has $\hat{P}_{\bm{U}_i} = P_{\bm{U}_i}$ for all $i$, where $\hat{P}_{\bm{U}_i} := \sum_{\bm{X} \setminus \bm{U}_i} \hat{P}_{\bm{X}}$.
+defines a family of marginal distributions, $(P_{\bm{U}_1},\ldots,P_{\bm{U}_n})$ through marginalization,  $P_{\bm{U}_i} := \sum_{\bm{X} \setminus \bm{U}_i} P_{\bm{X}}$. A \emph{marginal problem} concerns the converse inference.  A family of distributions $(P_{\bm{U}_1},\ldots,P_{\bm{U}_n})$ is given, and one wants to find conditions for when a joint distribution $\hat{P}_{\bm{X}}$ exists which reproduces given marginals, $P_{\bm{U}_i} = \sum_{\bm{X}\setminus\bm{U}_i} \hat{P}_{\bm{X}}$ for all $i$.
 %as $P_{\bm{U}_i} = \hat{P}_{\bm{U}_i}$ for all $i$?
 
-There is a simple necessary condition: in order for $\hat{P}_{\bm{X}}$ to exist, the marginals clearly must be consistent, in the sense that marginalizing $P_{\bm{U}_i}$ to the variables in $\bm{U}_i\cap\bm{U}_j$ results in the same distribution as one obtains by marginalizing $P_{\bm{U}_j}$ to those variables.  
+There is a simple necessary condition: in order for $\hat{P}_{\bm{X}}$ to exist, the marginals clearly must be consistent, in the sense that marginalizing $P_{\bm{U}_i}$ to the variables in $\bm{U}_i\cap\bm{U}_j$ results in the same distribution as marginalizing $P_{\bm{U}_j}$ to those variables.  
 %\footnote{This is difficult to express explicitly in our notation, since $P_{\bm{U}_i\cap \bm{U}_j}$ could refer to either marginal.}. 
  %we have already seen in the previous section, 
- In many cases this is not sufficient; indeed, we have already seen examples of additional constraints, namely, the inequalities \eqref{eq:polymonogamyraw}, \eqref{eq:MIraw} and \eqref{eq:FritzF3raw} from Sec.~\ref{Sec:DerivingInequalities}\footnote{Note, however, that depending on how the contexts intersect with one another, this \emph{may} be sufficient. A criterion for when this occurs has been found by~\citet{vorobev_extension_1960}.}. So what are the necessary and sufficient conditions?
+ In many cases this is not sufficient; indeed, we have already seen examples of additional constraints, namely, the inequalities \eqref{eq:polymonogamyraw}, \eqref{eq:MIraw} and \eqref{eq:FritzF3raw} from Sec.~\ref{Sec:DerivingInequalities}\footnote{Depending on how the contexts intersect with one another, this \emph{may} be sufficient. A precise characterization for when this occurs has been found by~\citet{vorobev_extension_1960}.}. So what are the necessary and sufficient conditions?
 
 To answer this question, it helps to realize two things:
 \begin{itemize}
 	\item The set of possibilities for the distribution $P_{\bm{X}}$ is the convex hull of the deterministic assignments of values to $\bm{X}$ (the point distributions), and 
 %	Every joint distribution $P_{\bm{X}}$ is a convex combination of deterministic assignments of values to all variables (delta distributions), and conversely.
-	\item The map $P_{\bm{X}}\to (P_{\bm{U}_1},\ldots,P_{\bm{U}_n})$, describing marginalization to each of the contexts in $(\bm{U}_1,\ldots,\bm{U}_n)$, is $n$-wise linear.
+	\item The map $P_{\bm{X}}\to (P_{\bm{U}_1},\ldots,P_{\bm{U}_n})$, describing marginalization to each of the contexts in $(\bm{U}_1,\ldots,\bm{U}_n)$, is linear.
 \end{itemize}
-Hence the image of the set of possibilities for the distribution $P_{\bm{X}}$ under the map $P_{\bm{X}}\to (P_{\bm{U}_1},\ldots,P_{\bm{U}_n})$ is exactly the convex hull of the deterministic assignments of values to $(\bm{U}_1,\ldots,\bm{U}_n)$ (more precisely, the deterministic assignments that are consistent where these contexts overlap). Since there are only finitely many such deterministic assignments, this convex hull is a polytope; it is called the \tblue{marginal polytope}~\cite{kahle_marginal_2010}. Together with the above set of equations, the facet inequalities of the marginal polytopes form necessary and sufficient conditions for the marginal problem to have a solution.
+Hence the image of the set of possibilities for the distribution $P_{\bm{X}}$ under the map $P_{\bm{X}}\to (P_{\bm{U}_1},\ldots,P_{\bm{U}_n})$ is exactly the convex hull of the deterministic assignments of values to $(\bm{U}_1,\ldots,\bm{U}_n)$ (more precisely, the deterministic assignments that are consistent where these contexts overlap). Since there are only finitely many such deterministic assignments, this convex hull is a polytope; it is called the \tblue{marginal polytope}~\cite{kahle_marginal_2010}. Together with the above equations on coinciding submarginals, the facet inequalities of the marginal polytope form necessary and sufficient conditions for the marginal problem to have a solution.
 
 %Thus solving the marginal problem is an instance of a facet enumeration problem, or equivalently a linear quantifier elimination problem;~\cref{sec:projalgorithms} gives an overview of how to solve this in practice. 
 
 
 % quantifier-free form in terms of inequalities such that satisfaction of all such inequalities is necessary and sufficient for marginal compatibility. An efficient algorithm to solve the marginal problem is given in \cref{sec:projalgorithms}. The marginal problem comes up in a variety of applications, and has been studied extensively; see~\cite{fritz2013marginal} for further references.
 
-As an example, we consider the marginal problem where $\bm{X} := \{ A_1, A_2, B_1, B_2, C_1, C_2\}$ and the contexts are the 
+As every facet enumeration problem, this can also be phrased as a problem of \tblue{linear quantifier elimination}. We illustrate this with the example of the marginal problem where $\bm{X} := \{ A_1, A_2, B_1, B_2, C_1, C_2\}$ and the contexts are the 
 %case of the five three-variable marginal distributions corresponding to the 
-maximal pre-injectable sets in \cref{eq:basicsetup222} and show how to express it as a linear quantifier elimination problem.
+maximal pre-injectable sets in \cref{eq:basicsetup222}.
 % For simplicity, we assume that all observable variables are binary.
 %\footnote{If the observables are not binary, then the resulting  binary-outcome inequalities are necessary for marginal compatibility, in that they should hold for any course-graining of the observational data into two classes, but the binary-outcome inequalities are no longer sufficient.}.
 % In order for the five pre-injectable sets in \cref{eq:preinjectableuses222} to be marginally compatible there must exist 64 nonnegative joint probabilities, i.e. satisfying
-The joint distribution is nonnegative for each value of $\bm{X}$,
+Besides normalization of probability, the only constraint on the probabilities making up the joint distribution is nonnegativity,
 \begin{align}\label{eq:nonnegativity}
-\forall{a_1 a_2 b_1 b_2 c_1 c_2}:\; \pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2} \geq 0,
+\forall{a_1 a_2 b_1 b_2 c_1 c_2}:\; \pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2} \geq 0.
 \end{align}
-and is required to reproduce the marginal distribution on each context via
+We require the joint distribution to reproduce the marginal distribution on each context via
 \begin{align}\label[eqs]{eq:marginalequalities222}
 \begin{split}
 &\forall{a_1 b_1 c_1}:\;\pdf[A_1 B_1 C_1]{a_1 b_1 c_1} = \sum\nolimits_{a_2 b_2 b_2}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
@@ -1348,12 +1348,9 @@ and is required to reproduce the marginal distribution on each context via
 \end{split}
 \end{align}
 %For example in the case of binary variables, we therefore 
-If each variable is binary, then we have 64 inequalities and 40 equalities, although the latter are not all independent. 
+If each variable is binary, then we have $64$ inequalities and $40$ equations, although the latter are not all independent. 
 
-The marginal problem is a linear system of equations and inequalities involving ``unkowns", or quantifiers, namely the joint probabilities such as $\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}$ for each possible global composite joint outcome.
-
-
-In this case, facet enumeration requires eliminating 64 unknowns from those linear inequalities and equalities, namely, the joint probabilities $\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}$ for each of the 64 choices of the values $(a_1 a_2 b_1 b_2 c_1 c_2)$.
+The marginal problem is a linear system of equations and inequalities involving the unknown joint probabilities. The problem of quantifier elimination consists in finding an equivalent system of equations and inequalities that is satisfied if and only if the original system has a solution for the unknown probabilities. This requires eliminating 64 unknowns $\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}$ for each of the 64 choices of the values $a_1,\ldots,c_2$. The resulting new system consists of the coinciding-submarginals equations together with the facet inequalities of the marginal polytope.
 %joint probabilities $\{ \p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2} : (a_1 a_2 b_1 b_2 c_1 c_2) {\underline{\phantom{xxxxx}}}$, 
 %and to thereby compute the inequalities that constrain the marginal probabilities.
 %We coin the term gedankenprobability to denote any probability pertaining to a \emph{not}-pre-injectable set of inflation-DAG variables. The gedankenprobabilities evoke thought experiments, because any \purp{black box implementation of the original causal structure % \emph{in-principle}.
