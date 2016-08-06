@@ -278,7 +278,7 @@ anchorcolor=OliveGreen}
 
 
 %%%% Tobias: to mark my edits and stuff
-%\usepackage{showkeys}
+\usepackage{showkeys}
 \usepackage[draft]{fixme}
 \newcommand{\btob}{\color{OliveGreen}}
 \newcommand{\etob}{\color{black}}
@@ -1355,22 +1355,25 @@ The marginal problem is a linear system of equations and inequalities involving 
 %and to thereby compute the inequalities that constrain the marginal probabilities.
 %We coin the term gedankenprobability to denote any probability pertaining to a \emph{not}-pre-injectable set of inflation-DAG variables. The gedankenprobabilities evoke thought experiments, because any \purp{black box implementation of the original causal structure % \emph{in-principle}.
 
+
+Linear quantifier elimination is already used in causal inference for deriving entropic causal compatibility inequalities \cite{chaves2014novel,chaves2014informationinference}. In that task, however, the unknowns being eliminated are entropies on sets of variables of which one or more is latent. By contrast, the unknowns being eliminated above are all probabilities on sets of variables all of which are observed---but on the inflated DAG rather than the original DAG.
+%The unknowns we eliminate are the not-pre-injectable joint probabilities, which are, at least on first look, quite different from probabilities involving latent variables;
+\cref{sec:Bellscenarios} will partly elucidate the relation.
+
+The marginal problem is a standard facet enumeration problem, in that the vertices of the polytope are given. The derivation of entropic inequalities, by contrast, is a priori only a linear quantifier elimination task, and more difficult to cast as a facet enumeration problem with given vertices, since the vertices (extremal rays) of the Shannon cone elude a simple description. As such, while facet enumeration tools are useful for deriving polynomial inequalities via the inflation technique, they are not directly available for the derivation of entropic inequalities; see \cref{sec:projalgorithms} for further details.
+
 \subsection{Witnessing incompatibility by non-sastisfiability of the marginal problem}\label{sec:satisfiable}
 
-Given a particular distribution (pertaining to variables on the original DAG) one can use the inflation DAG technique to test causal compatibility as follows. Using the factorization conditions implied by ancestral independences among the variables in the maximal pre-injectable sets along with \cref{mainlemma} one can infer the \emph{distributions} over the maximal pre-injectable sets \emph{pursuant} to the given original-scenario distribution; this was essentially the first step in each example in \cref{subsec:witnessingincompat}. 
+Given a particular distribution of observable nodes of the original DAG, one can use the inflation technique to probe causal compatibility as follows. Using \cref{mainlemma} along with the factorization conditions implied by ancestral independences among the variables in the maximal pre-injectable sets, one can infer the distributions on the maximal pre-injectable sets pursuant to the given original-scenario distribution; this was the first step in each example in \cref{subsec:witnessingincompat}. This amounts to having known numerical values for the left-hand sides of the equations defining the marginal problem, such as \cref{eq:marginalequalities222}. A single linear program can then assess whether the marginal problem equalities can be solved using nonnegative values for the unknown joint probabilities or not. If the marginal problem cannot be satisfied, then the original distribution is witnessed as incompatible with the original DAG.
 
-Substituting explicit pre-injectable set distributions amounts to substituting numerical-values for the left-hand-side of every equality defined by the marginal problem, such as \cref{eq:marginalequalities222}. A single linear program can then assess whether the marginal problem equalities can be solved using nonnegative variables or not. If the inflation-DAG marginal problem \emph{cannot be satisfied} then the given original-scenario distribution is witnessed as incompatible with the original DAG.
-
-As satisfiability of the marginal problem can be resolved by a single linear program, testing specific distributions for causal compatibility with an inflation-DAG is computationally inexpensive. For instance, our technique is able to reproduce the result shown by \citet[Theorem~2.16]{fritz2012bell}, that a particular distribution, inspired by the Bell example, is quantumly but not classically compatible with the Triangle scenario, using the rather complex inflation depicted in \cref{fig:TriFullDouble}. 
+As this satisfiability problem is a linear program, testing specific distributions for causal compatibility for a given inflation DAG is computationally inexpensive. For instance, using the rather complex inflation of the Triangle scenario depicted in \cref{fig:TriFullDouble}, our numerical computations have reproduced~\cite[Theorem~2.16]{fritz2012bell}: a certain distribution, inspired by Bell's theorem, is incompatible with the Triangle scenario despite being realizable on the Triangle DAG with quantum systems on the latent nodes.
 
 
 \subsection{Causal compatibility inequalities via a complete solution of the marginal problem}\label{sec:CCineqs}
 
-A general scheme for deriving causal compatibility inequalities for a DAG can be summarized as follows.  Choose an inflation of the DAG and identify the maximal pre-injectable sets thereon.  Next, solve the marginal problem where the contexts are the maximal pre-injectable sets to obtain quantifier-free inequalities. Solving the marginal problem is therefore an instance of a facet enumeration problem. In \cref{sec:projalgorithms}, we provide an overview of techniques for solving this problem. 
-
+For deriving causal compatibility inequalities systematically, one chooses an inflation DAG and identifies the maximal pre-injectable sets as per the above. Then ones solves the marginal problem via facet enumeration\footnote{In \cref{sec:projalgorithms}, we provide an overview of techniques for facet enumeration.} of the marginal polytope, where the contexts are the maximal pre-injectable sets. This results in linear inequalities at the level of the inflation DAG.
 %As we note there, it can be reduced to a linear quantifier elimination problem, which is the technique we apply here.
-
-By substituting into these inequalities the factorization conditions implied by ancestral independences among the variables in the maximal pre-injectable sets, one obtains causal compatibility inequalities for the inflated DAG.  Finally, these can be converted into causal compatibility inequalities for the original DAG using \cref{maincorollary}.
+By substituting into these inequalities the factorization conditions implied by ancestral independences per \cref{eq:preinjfactor}, one obtains causal compatibility inequalities for the inflated DAG.  Finally, these can be converted into causal compatibility inequalities for the original DAG using \cref{maincorollary}.
 
 %\color{purple} Move this paragraph to later. \color{black}
 %Given a facet of the marginal polytope---or any other linear inequality that bounds it---we can construct a polynomial inequality for our original causal inference problem by plugging in the factorization relations of \cref{mainlemma}. Doing the same with the equations of coinciding submarginals shows that these are trivially satisfied, and thus it is only the inequalities that are of interest to us.
@@ -1379,27 +1382,11 @@ By substituting into these inequalities the factorization conditions implied by 
 
 As an example, 
 %To illustrate the power of the inflation technique, 
-we present all of the causal compatibility inequalities that one can derive for the Triangle scenario with binary observed variables using the inflation of  ~\cref{fig:Tri222}.
-
-Using the maximal pre-injectable sets identified in \cref{eq:basicsetup222} as the contexts for the marginal problem, we solve the latter using the linear quantifier elimination method of~\cref{sec:ineqs}.  The facets of the marginal polytope can be characterized by a generating set of 64 inequalities.  The full set of inequalities is obtained from the generating set by closing these under the action of two types of symmetry transformations: permutations of the observed variables and complementation (inversion) of the value for each variable. 
+we present all of the causal compatibility inequalities that one can derive for the Triangle scenario with binary observed variables using the inflation of \cref{fig:Tri222}. The contexts for the marginal problem are the maximal pre-injectable sets of \cref{eq:basicsetup222} and \cref{fig:simplicialcomplex222}, and we solve the latter using facet enumeration. It turns out that the marginal polytope has 64 symmetry classes of facets, where the symmetry transformations are given by permutations of the observed variables, flipping the value of one variable, and composites of these.
 %The following polynomial inequalities for the Triangle scenario with binary observed variables have been derived via the linear quantifier elimination method of~\cref{sec:ineqs} using the inflated DAG of~\cref{fig:Tri222}. 
 %This results in 64 symmetry classes of causal compatibility inequalities for the Triangle scenario, where the symmetries are given by permuting the variables and inverting the outcomes. 
-We then factorize the probabilities according to the ancestral independences in the inflated DAG, also identified in \cref{eq:basicsetup222}, to obtain a set of causal compatibility inequalities for the inflated DAG.  Finally, these are converted to a generating set of causal compatibility inequalities for the original DAG using \cref{maincorollary}.  Note, however, that there is no guarantee that each such conversion results in a nontrivial inequality at the level of the original DAG, where nontriviality means that the inequality is not true of all distributions, but is instead a consequence of the causal structure. Indeed, we find that only 37 of the inequalities in the generating set for the marginal polytope yield nontrivial causal compatability inequalities for the Triangle scenario. 
+Applying the factorization of probabilities according to ancestral independences per \cref{eq:basicsetup222} and converting into inequalities for the original DAG using \cref{maincorollary} results in 64 polynomial inequalities up to symmetry. However, there is no guarantee that each one of these inequalities is nontrivial at the level of the original DAG, where nontriviality of an inequality means that it is violated by at least one distribution. Numerically, we find that only 37 of these inequalities are nontrivial. We present them here\footnote{A machine-readable version of this list of inequalities may be found in \cref{sec:38ineqs}.} in correlator form:
  %For the resulting 64 inequalities, numerical checks have found violations of only 38 of them: although they are all facets of the marginal polytope over the distributions on pre-injectable sets, there is no guarantee that they are also nontrivial inequalities at the level of the original DAG, and this has indeed turned out not to be the case for 26 of these symmetry classes of inequalities. 
-Moreover, it is likely to be the case that these 37 causal compatibility inequalities are not a minimal generating set, where a minimal generating set is defined as one such that, for every inequality, there is a distribution that violates it while satisfying all of the others. 
-%; we have not yet checked whether for every inequality there is a distribution which violates that inequality but satisfies all the others.
-We present our generating set of causal compatibility inequalities for the Triangle scenario below.
-%
-%\clearpage
-%\label{page:nontrivlist}
-%\includepdf[pages=1,scale=0.90,link,linkname=nontriv,pagecommand={\refstepcounter{includepdfpage}\label{nontriv.\theincludepdfpage}}]{nontrivlist.pdf}
-%
-%\begin{figure}[H]
-% \includegraphics[width=\textwidth]{nontrivlist.pdf}\label{nontriv.humanreadable}
-%\color{purple} [R: Do we explain what the * means?]\color{black} 
-A machine-readable version of this set of inequalities may be found in \cref{sec:38ineqs}. A star next to the index of an inequality indicates that the inequality can also be derived by considering the possibilisitc marginal problem per \cref{sec:TSEM} in lieu of solving the usual (probabilistic) marginal problem.
-%\end{figure}
-%
 \begin{align*}%\label{nontriv.humanreadable}
 \hspace{-\mathindent}\resizebox{\linewidth}{!}{\(
 \begin{array}{ll}
@@ -1482,16 +1469,21 @@ A machine-readable version of this set of inequalities may be found in \cref{sec
 \end{array}
 \)}
 \end{align*}
+Moreover, it is likely to be the case that these 37 symmetry classes of causal compatibility inequalities are not a minimal generating set, where a minimal generating set is defined to be one such that, for every inequality, there is a distribution that violates it while satisfying all of the others. 
+%; we have not yet checked whether for every inequality there is a distribution which violates that inequality but satisfies all the others.
+%
+%\clearpage
+%\label{page:nontrivlist}
+%\includepdf[pages=1,scale=0.90,link,linkname=nontriv,pagecommand={\refstepcounter{includepdfpage}\label{nontriv.\theincludepdfpage}}]{nontrivlist.pdf}
+%
+%\begin{figure}[H]
+% \includegraphics[width=\textwidth]{nontrivlist.pdf}\label{nontriv.humanreadable}
+A star next to the index of an inequality indicates that the inequality can also be derived by considering the possibilisitc marginal problem per \cref{sec:TSEM} in lieu of solving the standard (probabilistic) marginal problem described above.
+%\end{figure}
 %
 %
-Linear quantifier elimination is already widely used in causal inference for deriving entropic causal compatibility inequalities \cite{fritz2013marginal,chaves2014novel,chaves2014informationinference}. In that task, however, the quantifiers being eliminated are entropies on sets of variables for which one or more is latent. By contrast, the quantifiers being eliminated in the inflation technique are all probabilities on sets of variables all of which are observed (although they are the observed variables of the inflated DAG rather than the original DAG); 
-%The unknowns we eliminate are the not-pre-injectable joint probabilities, which are, at least on first look, quite different from probabilities involving latent variables;
-~\cref{sec:Bellscenarios} will partly elucidate the relation.
-
-Note that the marginal problem can be solved by computing \emph{either} a convex hull \emph{or} by eliminating quantifiers from linear inequalities. The derivation of entropic inequalities, by contrast, is strictly a linear quantifier elimination task, and cannot be recast as a convex hull problem. As such, while convex hull enumeration tools \emph{are} useful for deriving polynomial inequalities via the inflation technique, they are \emph{not} available for the derivation of entropic inequalities; see \cref{sec:projalgorithms} for further details.
 
 
-Note that if one does not have a characterization of the facets of the marginal polytope, but only a set of inequalities that contain the marginal polytope but are not tight, one can still apply the prescription described above to derive causal compatibility inequalities from these.  We consider an example of such an approach in the next section.
 %This is the approach that we will consider in the next section.
 %Note that if one merely has linear inequalities that contain the marginal polytope rather than describing its facets, one can still follow the above prescription for deriving causal compatibility inequalities.  This is the approach that we will consider in the next section.
 
@@ -1512,11 +1504,11 @@ Note that if one does not have a characterization of the facets of the marginal 
 
 
 %\color{red}
+Enumerating all the facets of the marginal polytope is computationally feasible only for relatively small examples. But our method still applies when only some inequalities that bound the marginal polytope are known, and we now present a general approach for deriving such inequalities very quickly.
 
+In the literature on Bell inequalities, it has been noticed that incompatibility with the Bell DAG can sometimes be witnessed by merely looking at which joint outcomes have zero probability and which ones have nonzero probability. In other words, instead of considering the \emph{probability} of an outcome, the inconsistency of some marginal distributions can be evident from considering only the \emph{possibility} or \emph{impossibility} of each outcome. This insight is originally due to~\citet{L.Hardy:PRL:1665}, and versions of Bell's theorem that are based on the violation of such \tblue{possibilistic constraints} are known as \tblue{Hardy-type paradoxes}~\cite{Garuccio95,CabelloHardyInequality,Braun08,Mancinska14,LSW}; a partial classification of these can be found in~\cite{Mansfield2012}.
 
-In the literature on Bell inequalities, it has been noticed that incompatibility with the Bell DAG can sometimes be witnessed by merely looking at which events have zero probability and which events have nonzero probability. In other words, instead of considering the \emph{probability} of a composite outcome, the inconsistency of some marginal distributions can be evident from considering only the \emph{possibility} or \emph{impossibility} of each composite outcome. This insight is originally due to~\citet{L.Hardy:PRL:1665}, and versions of Bell's theorem that are based on the violation of such \tblue{possibilistic constraints} are known as \tblue{Hardy-type paradoxes}. For more background on Hardy-type paradoxes, see Refs.~\cite{Garuccio95,CabelloHardyInequality,Braun08,Mancinska14,LSW}; a partial classification of these can be found in Ref.~\cite{Mansfield2012}.
-
-In this approach, the possibilistic constraints follow from a consideration of {\em logical relations} that can hold among deterministic assignments to the observed variables.  As it turns out, such logical constraints can also be leveraged to derive probabilistic constraints instead of possibilistic ones, as shown in Refs. \cite{Pitowsky1989,Ghirardi08}.  These constraints yield a partial solution to the marginal problem.  In this section, we demonstrate how to systematically derive all such inequalities for a given DAG. 
+In this approach, the constraints follow from a consideration of {\em logical relations} that can hold among deterministic assignments to the observed variables. Such logical constraints can also be leveraged to derive probabilistic constraints instead of possibilistic ones, as shown in~\cite{Pitowsky1989,Ghirardi08}. This results in a partial solution to any given marginal problem. We now demonstrate how to systematically derive all inequalities of this type.
 
 %We have already provided a simple example of this sort of argument in \cref{Sec:DerivingInequalities}, in the argument used to demonstrate that the marginal distributions of Eqs.~\eqref{W4}-\eqref{W7} are incompatible with the DAG depicted in Fig.~\ref{fig:Tri222v2}.   For our present purposes, it is useful to recast the argument of \cref{Sec:DerivingInequalities} into a new but manifestly equivalent form.  First, one notes that the following proposition is a logical tautology for binary variables:
 %\begin{align}\begin{split}\label{tautology1}
@@ -1528,14 +1520,16 @@ In this approach, the possibilistic constraints follow from a consideration of {
 
 We have already provided a simple example of a Hardy-type argument in \cref{Sec:DerivingInequalities}, in the logic used to demonstrate that the marginal distributions of \cref{W4,W1,W5} are incompatible with the DAG depicted in \cref{fig:Tri222v2}.   For our present purposes, it is useful to recast the argument of \cref{Sec:DerivingInequalities} into a new but manifestly equivalent form.    
 
-First, note that for the distribution in question, we have
+First, for the distribution in question, we have
 \begin{align} 
-&A_2 \eql 1 \implies C_1\eql 0\label{WWs1}\\
-&B_2\eql 1 \implies A_1\eql 0\label{WWs2}\\
-&C_2 \eql 1 \implies B_1 \eql 0\label{WWs3}\\
-\text{Never}  \quad &A_1 \eql 0\,\text{ and }\, B_1 \eql 0\,\text{ and }\, C_1 \eql 0.\label{WWs4}
+\begin{split}\label{WWs}
+&A_2 \eql 1 \implies C_1\eql 0\\
+&B_2\eql 1 \implies A_1\eql 0\\
+&C_2 \eql 1 \implies B_1 \eql 0\\
+\text{Never}  &\quad A_1 \eql 0\,\text{ and }\, B_1 \eql 0\,\text{ and }\, C_1 \eql 0.
+\end{split}
 \end{align}
-From the last constraint one infers that at least one of $A_1$, $B_1$ and $C_1$ must be 1, which from the three other constraints implies that at least one of $A_2$, $B_2$ and $C_2$ must be 0, so that it is not the case that all of $A_2$, $B_2$ and $C_2$ are 1.  Thus~\cref{WWs1,WWs2,WWs3,WWs4} imply
+From the last constraint one infers that at least one of $A_1$, $B_1$ and $C_1$ must be 1, which from the three other constraints implies that at least one of $A_2$, $B_2$ and $C_2$ must be 0, so that it is not the case that all of $A_2$, $B_2$ and $C_2$ are 1.  Thus~\cref{WWs} implies
 \begin{align} \label{consequent2}
 \text{Never}  \quad &A_2 \eql 1\,\text{ and }\, B_2 \eql 1\,\text{ and }\, C_2 \eql 1.
 \end{align}
