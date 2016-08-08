@@ -1,0 +1,3 @@
+Remove mention of causal structure from IV.E. Instead, talk about the marginal problem only
+
+In V.C, relation between interestingness and the existence of a GPT-classical separation. Are these two things really equivalent?
