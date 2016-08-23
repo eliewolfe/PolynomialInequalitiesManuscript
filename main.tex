@@ -748,7 +748,7 @@ Consider another causal inference problem concerning the Triangle scenario, name
 %$P^{\text{W}}_{A B C}$
 $P_{A B C}$ of the form
 \begin{align}\label{eq:wdistribution1}
-P_{A B C}=\frac{[100]+[010]+[001]}{3},\quad\text{i.e.,}\quad P_{A B C}(a b c)=\begin{cases}\tfrac{1}{3}&\text{if }\; a\cramp{+}b\cramp{+}c\eql 1, \\ 0&\text{otherwise}.\end{cases}
+P_{A B C}=\frac{[100]+[010]+[001]}{3},\quad\text{i.e.,}\quad P_{A B C}(a b c)=\begin{cases}\tfrac{1}{3}&\text{if }\; a + b + c = 1, \\ 0&\text{otherwise}.\end{cases}
 \end{align}
 We call this the W-type distribution\footnote{The name stems from the fact that this distribution is reminiscent of 
 %hese \color{black} correlations are reminiscent of those one obtains for 
@@ -856,7 +856,7 @@ Bell's theorem~\cite{bell1964einstein,Brunner2013Bell,bell1966lhvm,CHSHOriginal}
 We consider the distribution ${P_{A B X Y} = P_{A B | X Y} P_{X} P_{Y}}$, where $P_{X}$ and $P_{Y}$ are arbitrary full-support distributions\footnote{In the literature on the Bell scenario, these variables are known as ``settings''. Generally, we may think of endogenous observable variables as settings, coloring them light green in the DAG figures. Settings variables are natural candidates for variables to condition on.} over the binary variables $X$ and $Y$, and
 \begin{align}\begin{split}\label{eq:PRbox}
 % & p_{\text{PR}}\parens{a b |x y}=\frac{[00|00]+[11|00]+[00|10]+[11|10]+[00|01]+[11|01]+[01|11]+[10|11]}{8}\\
-P_{A B | X Y}\parens{a b |x y}=\begin{cases}\tfrac{1}{2}&\text{if }\; a + b \equiv x \cdot y \pmod{2}, \\ 0&\text{otherwise},\end{cases}
+P_{A B | X Y}\parens{a b |x y}=\begin{cases}\tfrac{1}{2}&\text{if }\; a \oplus b = x \cdot y , \\ 0&\text{otherwise},\end{cases}
 \end{split}\end{align}
 a conditional distribution that was discovered by Tsirelson~\cite{Tsirelson1980} and later independently by Popescu and Rohrlich~\cite{PROriginal,PRUnit}. It has become known in the field of quantum foundations as the \emph{PR-box} after the latter authors.\footnote{The PR-box is of interest because it represents a manner in which experimental correlations could deviate from the predictions of quantum theory while still being consistent with relativity.}
 
@@ -2354,19 +2354,19 @@ This argument does not tell us anything when the inflationary isomorphism $\varp
 
 \section{Using the Inflation Technqiue to Certify a DAG as ``Interesting"\label{sec:interestingproof}}
 
-By considering all possible $d$-separation conditions implied by a given DAG, one can infer the set of all conditional independence (CI) relations that must hold in any joint distribution over the observed variables that is compatible with the given DAG. In the presence of nontrivial latent nodes, the set of all  \emph{observable} CI relations (that is, CI relations among observed variables) 
+By considering all possible $d$-separation conditions implied by a given DAG, one can infer the set of all conditional independence (CI) relations that must hold in any joint distribution over the observed variables that is compatible with the given DAG. In the presence of latent nodes, satisfying the CI relations among observed variables 
 %\sout{is a strict subset of the set of all CI relations} 
-do not always exhaust the constraints on the joint distribution over the observed variables. \citet{pusey2014gdag} were concerned with identifying DAGs for which an observable distribution satisfying all observable CI relations is \emph{not} a sufficient criterion for compatibility.  They introduced the term \tblue{interesting} to refer to any DAG which exhibits a discrepancy between the set of observable distributions genuinely compatible with it and the set of observable distributions that merely reproduce its observable CI relations.
+is generally not sufficient for compatibility with the DAG. \citet{pusey2014gdag} were concerned with identifying the \tblue{interesting} DAGs, by which they mean precisely those DAGs that exhibit a discrepancy between the set of observable distributions genuinely compatible with it and the set of observable distributions that merely satisfy its observable CI relations.
 
-\citet{pusey2014gdag} derived novel necessary criteria on the structure of a DAG in order for it to be interesting, and they conjectured that their criteria may, in fact, be necessary and sufficient. As evidence in favour of this conjecture, they enumerated all possible DAGs with no more than six nodes satisfying their criteria.
+\citet{pusey2014gdag} derived necessary criteria on the structure of a DAG in order for it to be interesting, and they conjectured that their criteria may also be sufficient. As evidence in favour of this conjecture, they enumerated all possible DAGs with no more than six nodes satisfying their criteria, resulting in 
 %for further testing. 
-They found only 21 unique classes of potentially interesting DAGs.
+only 21 equivalence classes of potentially interesting DAGs.
 %after accounting for symmetry \color{purple} [R: I think that the classes contain more than just DAGs that are related by symmetry.] \color{black} 
-Of those 21, they further proved that 18 were unambiguously interesting by writing down an explicit incompatible distribution which nevertheless satisfied the DAGs observable CI relations. Incompatibility of the constructed distribution was certified by means of entropic inequalities. 
+Of those 21, they further proved that 18 were unambiguously interesting by writing down explicit distributions which are incompatible despite satisfying the observable CI relations. Incompatibility was certified by means of entropic inequalities. 
 
 That left three classes of DAGs  as \emph{potentially} interesting. For each of these, \citet{pusey2014gdag} derived all Shannon-type entropic inequalities in two different ways, once by accounting for non-observable CI relations (that is, CI relations that do not refer exclusively to observed variables) and once without. The existence of \emph{novel} Shannon-type inequalities upon accounting for non-observable CI relations is evidence for the DAG being interesting. The only loophole is that perhaps those novel Shannon-type inequalities are actually non-novel non-Shannon-type inequalities implied by the observable CI relations alone \cite{pusey2014gdag}. %\color{purple} [R: why is this a loophole?] \color{black}
 
-One way to close this loophole would be to show that the novel Shannon-type inequalities imply constraints beyond some inner approximation to the genuine entropy cone absent non-observable CI relations, perhaps along the lines of Ref.~\cite{weilenmann2016entropic}. Another is to use causal compatibility inequalities beyond entropic inequalities to identify some CI-respecting but incompatible distributions. \citet{pianaar2016interesting} accomplished precisely this, and should be credited with the original insight to explicitly consider the different values that an observable root variable might take. In the following, we demonstrate how the inflation technique can be used for this purpose. So far, we have only considered one of the three enigmatic causal structures, namely,~\cref{fig:GDAG15}.
+One way to close this loophole would be to show that the novel Shannon-type inequalities imply constraints beyond some inner approximation to the genuine entropy cone absent non-observable CI relations, perhaps along the lines of~\cite{weilenmann2016entropic}. Another is to use causal compatibility inequalities beyond entropic inequalities to identify some CI-respecting but incompatible distributions. \citet{pianaar2016interesting} accomplished precisely this, and should be credited with the original insight to explicitly consider the different values that an observable root variable may take. In the following, we demonstrate how the inflation technique can be used for this purpose. So far, we have only considered one of the three enigmatic causal structures, namely,~\cref{fig:GDAG15}.
 
 \begin{figure}[b]
 \centering
@@ -2383,22 +2383,22 @@ One way to close this loophole would be to show that the novel Shannon-type ineq
 \end{minipage}
 \end{figure}
 
-The following representative causal compatibility inequalities for the DAG of~\cref{fig:GDAG15} follow from the inflation technique applied to causal compatibility inequalities for the inflated DAG of \cref{fig:Inflated15}, where the latter are obtained from Hardy-type tautologies as described in \cref{sec:TSEM}:
+The following representative causal compatibility inequalities for the DAG of~\cref{fig:GDAG15} follow from the inflation technique applied to causal compatibility inequalities for the inflation DAG of \cref{fig:Inflated15}, where the latter are obtained from Hardy-type tautologies as described in \cref{sec:TSEM}:
 \begin{align}
 \p[A]{0} \p[A D E]{0 0 0} \leq {\p[A E]{0 0} \p[A F]{0 0}  + \p[A]{0} \p[A D F]{0 0 1}}, \\
 \p[A]{0}\p[A D E]{1 0 0} \leq {\p[A E]{1 0} \p[A F]{0 0} + \p[A]{1} \p[A D F]{0 0 1}}.
 \label{eq:DAG15ineqs}
 \end{align}
 %\color{purple} [R: Why do we bother to provide the first of these two inequalities given that we do not use it to reject Pienaar's distribution?  Just as something else we can say about this DAG?]\color{black}
-For example, the second inequality may be explicitly derived as follows. A Hardy-type tautology on the variables of the inflated DAG implies the following constraint on marginals:
+For example, the second inequality may be explicitly derived as follows. A Hardy-type tautology on the variables of the inflation DAG implies the following constraint on marginals:
 %One Hardy-type probabilistic inequality required for consistency of marginal distributions is
 \begin{align}\label{eq:hardyforpienaar}
-     \pdf[A_1 A_2 D E_2]{0100} \leq \pdf[A_1 A_2 F_1 E_2]{0100} + \pdf[A_1 A_2 D F_1]{0101} .
+     \pdf[A_1 A_2 D E_2]{0100} \leq \pdf[A_1 A_2 E_2 F_1]{0100} + \pdf[A_1 A_2 D F_1]{0101} .
 \end{align}
 Applying factorization as per the ancestral independence relations of the inflated DAG, we obtain 
 %the precursor to \cref{eq:DAG15ineqs}, namely
 \begin{align}
- \p[A_1]{0} \p[A_2 D E_2]{100} \leq \p[A_1 F_1]{01} \p[A_2 E_2]{00} + \p[A_2]{1} \p[A_1 D F_1]{001},   
+ \p[A_1]{0} \p[A_2 D E_2]{100} \leq \p[A_2 E_2]{10} \p[A_1 F_1]{00} + \p[A_2]{1} \p[A_1 D F_1]{001},   
 \end{align}
 and finally translating this into a causal compatibility inequality on the original DAG using \cref{maincorollary}, we obtain \cref{eq:DAG15ineqs}. 
  
@@ -2406,22 +2406,22 @@ and finally translating this into a causal compatibility inequality on the origi
 %A distribution incompatible with \cref{fig:GDAG15} discovered by \citet{pianaar2016interesting} is given by
 In \citet{pianaar2016interesting}, it was shown that the following distribution, which is easily verified to satisfy the CI relations among the observed variables of \cref{fig:GDAG15}, namely, $A\indep D$ and $E\indep F | A$~\cite{pusey2014gdag}, is nonetheless incompatible with \cref{fig:GDAG15}:
 \begin{align}\label{eq:pienaardistro}
-P^{\text{Pien}}_{A D E F}:=\frac{[0000]+[0101]+[1000]+[1110]}{4},\quad\text{i.e.}\quad P^{\text{Pien}}_{A D E F}(a d e f):=\begin{cases}\tfrac{1}{4}&\text{if }  e\eql a\cramp{\cdot} d \text{ and } f\eql  (a\cramp{\oplus} 1)\cramp{\cdot} d , \\ 0&\text{otherwise}.\end{cases}
+	P^{\text{Pien}}_{A D E F}:=\frac{[0000]+[0101]+[1000]+[1110]}{4},\quad\text{i.e.}\quad P^{\text{Pien}}_{A D E F}(a d e f):=\begin{cases}\tfrac{1}{4}&\text{if }  a\cdot d = e \text{ and }  (a \oplus 1)\cdot d = f, \\ 0&\text{otherwise}.\end{cases}
 \end{align}
 %which can be easily verified to satisfy the CI relations among the observed variables of the DAG, namely, $A\indep D$ and $E\indep F | A$~\cite{pusey2014gdag}. 
 
-It is easily verified that this distribution violates the causal incompatibility inequality of~\cref{eq:DAG15ineqs}.  It is in this sense that the inflation technique can show that the DAG of \cref{fig:GDAG15} is interesting. 
+It is easily verified that this distribution violates the causal compatibility inequality of~\cref{eq:DAG15ineqs}.  It is in this sense that the inflation technique can show that the DAG of \cref{fig:GDAG15} is interesting. 
 %demonstrate this incompatibility 
 %rules out this distribution because it violates the causal incompatibility inequality~\cref{eq:DAG15ineqs}.
 
-There is another way to see that this distribution is not compatible with~\cref{eq:DAG15ineqs} using the inflation technique.  First, one notes that any marginal distribution on $DEF$ that is compatible with the DAG of \cref{fig:GDAG15} is necessarily also compatible the triangle scenario (where $D$, $E$ and $F$ are the observed variables).
+There is another way to see that this distribution is not compatible with~\cref{eq:DAG15ineqs} using the inflation technique.  First, one notes that any marginal distribution on $DEF$ that is compatible with the DAG of \cref{fig:GDAG15} is necessarily also compatible the triangle scenario (with $D$, $E$ and $F$ as observed variables).
 % because making a latent variable observable does not alter serves only to restrict the cardinality of that variable.
 Second, one notes that the marginal distribution $P^{\text{Pien}}_{D E F}$ is incompatible with the triangle scenario, since it violates inequality \#8 of~\cref{sec:CCineqs}.  This is the same inequality which rejects the W-distribution of~\cref{eq:wdistribution1}.
 Like the W-distribution, the distribution $P^{\text{Pien}}$
  %Yet another interesting point is that $P^{\text{Pien}}$ 
- not only satisfies all Shannon-type entropic inequalities pertinent to~\cref{fig:GDAG15}, but lies within an inner approximation to the genuine entropy cone for that scenario\footnote{This is due to Weilenmann and Colbeck (private correspondence).}. In other words, there exists a distribution with the same joint and marginal entropies as  $P^{\text{Pien}}$ which \emph{is} compatible with \cref{fig:GDAG15}.
+ not only satisfies all Shannon-type entropic inequalities pertinent to~\cref{fig:GDAG15}, but lies within an inner approximation to the genuine entropy cone for that scenario\footnote{This is due to Weilenmann and Colbeck (personal communication).}. In other words, there exists a distribution with the same joint and marginal entropies as  $P^{\text{Pien}}$ which \emph{is} compatible with \cref{fig:GDAG15}.
 
-Finally, it may be worth noting that the inflation of~\cref{fig:Inflated15} is precisely the ``bilocality scenario'' considered by~\citet{BilocalCorrelations}.  Therefore, the inflation technique permits us to translate every causal compatibility inequality for the bilocality scenario into a causal compatibility inequality for the DAG of~\cref{fig:GDAG15}.
+Finally, it may be worth noting that the inflation of~\cref{fig:Inflated15} is precisely the ``bilocality scenario'' investigated by~\citet{BilocalCorrelations}.  Therefore, the inflation technique permits us to translate every causal compatibility inequality for the bilocality scenario into a causal compatibility inequality for the DAG of~\cref{fig:GDAG15}.
 
 %Interesting, the distribution $P^{\text{Pien}}$ can also be certified incompatible with \cref{fig:GDAG15} using only our results from the Triangle scenario. By marginalizing over the random variable $A$ in \cref{eq:pienaardistro} we obtain tripartite distribution which is rejected by inequality $\#8$ in \cref{tab:machinereadable} and in the table of inequalities on \cpageref{page:nontrivlist}. This is the same inequality which rejects the W-distribution defined in \cref{eq:wdistribution1}.
 
@@ -2507,13 +2507,12 @@ As it turns out, the inflation technique is also useful outside of the problem o
 
 The proof via inflation is as follows.
 \begin{proof}
-We begin by noting that every possible joint distribution $P_{ABC}$ is compatible with a DAG of the form of~\cref{fig:beforecopy}.  This follows from the fact that one may take $X$ to be any \tblue{sufficient statistic} for the joint variable $(A,C)$ given $B$, such as $X := (A,B,C)$.  Next, we consider the inflation of \cref{fig:beforecopy} depicted in~\cref{fig:aftercopy}. The maximal injectable sets are $\{ A_1 B_1 C_1\}$ and $\{A_2 B_1\}$.  By \cref{mainlemma}, because $P_{ABC}$ is assumed to be compatible with~\cref{fig:beforecopy}, it follows that the marginals $\{ P_{A_1 B_1 C_1}, P_{A_2 B_1}\}$, where $P_{A_1 B_1 C_1}:= P_{A B C}$ and $P_{A_2 B_1} := P_{AB}$, are compatible with the inflated DAG of~\cref{fig:aftercopy}.  The fact that $A_2$ is d-separated from $A_1 C_1$ by $B_1$ in ~\cref{fig:aftercopy} implies that the joint distribution can be expressed as $P_{A_1 A_2 B_1 C_1} := P_{A_1 B_1 C_1} \otimes P_{A_2 B_1} \otimes P_{B_1}^{-1}$, which is only defined for those values of $b_1$ such that $P_{B_1}(b_1) \ne 0$.  By construction, $P_{A_1 A_2 B_1 C_1}$ has $P_{A_1 B_1}= P_{A_2 B_1} =P_{AB}$ and satisfies the conditional independence relation $A_2 \indep A_1 C_1 \:|\: B_1$.
+	We begin by noting that every possible joint distribution $P_{ABC}$ is compatible with a DAG of the form of~\cref{fig:beforecopy}.  This follows from the fact that one may take $X$ to be any \tblue{sufficient statistic} for the joint variable $(A,C)$ given $B$, such as $X := (A,B,C)$.  Next, we consider the inflation of \cref{fig:beforecopy} depicted in~\cref{fig:aftercopy}. The maximal injectable sets are $\{ A_1 B_1 C_1\}$ and $\{A_2 B_1\}$.  By \cref{mainlemma}, because $P_{ABC}$ is assumed to be compatible with~\cref{fig:beforecopy}, it follows that the family of marginals $\{ P_{A_1 B_1 C_1}, P_{A_2 B_1}\}$, where $P_{A_1 B_1 C_1}:= P_{A B C}$ and $P_{A_2 B_1} := P_{AB}$, is compatible with the inflation of~\cref{fig:aftercopy}. The resulting joint distribution $P_{A_1 A_2 B_1 C_1}$ has marginals $P_{A_1 B_1}= P_{A_2 B_1} =P_{AB}$ and satisfies the conditional independence relation $A_2 \indep A_1 C_1 \:|\: B_1$, since $A_2$ is $d$-separated from $A_1 C_1$ by $B_1$ in \cref{fig:aftercopy}.
 %If the original distribution $P_{ABC}$ is compatible with~\cref{fig:beforecopy}, then the associated inflated model marginalizes to a distribution $P_{A_1 A_2 B_1 C_1}$ which has the required properties.
 %Consider the original DAG of~\cref{fig:beforecopy} and the associated inflated DAG of~\cref{fig:aftercopy}. If the original distribution $P_{ABC}$ is compatible with~\cref{fig:beforecopy}, then the associated inflated model marginalizes to a distribution $P_{A_1 A_2 B C}$ which has the required properties. To see that every $P_{ABC}$ is compatible with~\cref{fig:beforecopy} one may take $X$ to be any \tblue{sufficient statistic} for the joint variable $(A,C)$ given $B$, such as $X := (A,B,C)$.
 \end{proof}
 
-
-While it is also not hard to write down a distribution with the desired properties explicitly~\cite[Lemma~15.8]{yeung_network_2008}, the fact that one can rederive it using the inflation technique is significant.  For one, all the non-Shannon type inequalities derived by \citet{zeger_2011_nonshannon} are obtained by applying some Shannon type inequality to the distribution that is implied to exist by the Copy Lemma.  Our result shows, therefore, that one can understand these non-Shannon type inequalities for a DAG as arising from Shannon-type inequalities applied to an inflation of the DAG.  Indeed, it may be that the inflation technique may be a more general-purpose tool for deriving non-Shannon-type entropic inequalities.  A natural direction for future research is to explore whether more sophisticated applications of the inflation technique might result  in \emph{new} examples of such inequalities. 
+While it is also not hard to write down the distribution constructed in the proof explicitly as $P_{A_1 A_2 B_1 C_1} := P_{A_1 B_1 C_1} P_{A_2 B_1} P_{B_1}^{-1}$~\cite[Lemma~15.8]{yeung_network_2008}, the fact that one can rederive it using the inflation technique is significant.  For one, all the non-Shannon type inequalities derived by \citet{zeger_2011_nonshannon} are obtained by applying some Shannon type inequality to the distribution that is implied to exist by the Copy Lemma.  Our result shows, therefore, that one can understand these non-Shannon type inequalities for a DAG as arising from Shannon-type inequalities applied to an inflation DAG.  Indeed, it may be that the inflation technique may be a more general-purpose tool for deriving non-Shannon-type entropic inequalities.  A natural direction for future research is to explore whether more sophisticated applications of the inflation technique might result  in \emph{new} examples of such inequalities. 
 %our purpose in rederiving the lemma via inflation is our hope that more sophisticated applications of the inflation technique will result in \emph{new} non-Shannon type entropic inequalities. 
 %For example, all the non-Shannon type inequalities derived by \citet{zeger_2011_nonshannon} are applications of the Copy Lemma, and each proof therein can be recast in terms of some Shannon type inequalities appied to a suitable inflation.
 
@@ -2544,9 +2543,9 @@ While it is also not hard to write down a distribution with the desired properti
 \section{Causal compatibility inequalities for the Triangle scenario in machine-readable format}
 \label{sec:38ineqs}
 
-The following polynomial inequalities for the Triangle scenario with binary observed variables have been derived via the linear quantifier elimination method of~\cref{sec:ineqs} using the inflated DAG of~\cref{fig:Tri222}. Initially this has resulted in 64 symmetry classes of inequalities, where the symmetries are given by permuting the variables and inverting the outcomes. For the resulting 64 inequalities, numerical checks have found violations of only 37 of them: although they are all facets of the marginal polytope over the distributions on pre-injectable sets, there is no guarantee that they are also nontrivial inequalities at the level of the original DAG, and this has indeed turned out not to be the case for 26 of these symmetry classes of inequalities. Moreover, it is still likely to be the case that some of these inequalities are redundant; we have not yet checked whether for every inequality there is a distribution which violates the inequality but satisfies all others.
+The following polynomial inequalities for the Triangle scenario with binary observed variables have been derived via the linear quantifier elimination method of~\cref{sec:ineqs} using the inflation DAG of~\cref{fig:Tri222}. Initially this has resulted in 64 symmetry classes of inequalities, where the symmetries are given by permuting the variables and inverting the outcomes. For the resulting 64 inequalities, numerical checks have found violations of only 37 of them: although they are all facets of the marginal polytope over the distributions on pre-injectable sets, there is no guarantee that they are also nontrivial inequalities at the level of the original DAG, and this has indeed turned out not to be the case for 26 of these symmetry classes of inequalities. Moreover, it is still likely to be the case that some of these inequalities are redundant; we have not checked whether for every inequality there is a distribution which violates the inequality but satisfies all others.
 
-In the following table, the inequalities are listed in expectation-value form, where we assume the two possible outcomes of each variables to be $\{-1,+1\}$. Each row in the table gives the coefficients with one inequality, which is then $\geq 0$. Inequalities $\#'s (1, 3, 4, 8-17, 19-24)$ in the table are also implied by the hypergraph transversals technique per \cref{sec:TSEM}.
+In the following table, the inequalities are listed in expectation-value form, where we assume the two possible outcomes of each variables to be $\{-1,+1\}$. Each row in the table gives the coefficients of one inequality, which is then $\geq 0$. Inequalities \#1, \#3--4, \#8--17 and \#19--24 in the table are also implied by the hypergraph transversals technique per \cref{sec:TSEM}.
 
 \begin{table*}[ht]\centering\caption{List of inequalities as table of coefficients. This is a machine-readable version of the table in \cref{sec:CCineqs}.\medskip}\label{tab:machinereadable}
 \resizebox{\textwidth}{!}{
@@ -2599,18 +2598,18 @@ In the following table, the inequalities are listed in expectation-value form, w
 \label{sec:Bellscenarios}
 
 
-To further illustrate the power of our inflated DAG approach, we now demonstrate how to recover all Bell inequalities~\cite{Brunner2013Bell,bell1966lhvm,CHSHOriginal} via our method. To keep things simple we only discuss the case of a bipartite Bell scenario with two values for both ``settings'' and ``outcome'' variables here, but the case of more parties and/or more values per variable is totally analogous.
+To further illustrate the power of our inflation DAG approach, we now demonstrate how to recover all Bell inequalities~\cite{Brunner2013Bell,bell1966lhvm,CHSHOriginal} via our method. To keep things simple we only discuss the case of a bipartite Bell scenario with two values for both ``settings'' and ``outcome'' variables here, but the case of more parties and/or more values per variable is totally analogous.
 %It is critical that our method should be able to derive these seminal criteria, as Bell inequalities have been a foundational component of quantum information theory for the last half century \cite{scarani2012device,BancalDIApproach}.
 
-The causal structure associated to the Bell \cite{bell1964einstein,Brunner2013Bell,bell1966lhvm,CHSHOriginal} experiment [\citealp{pusey2014gdag}~(Fig.~E\#2), \citealp{WoodSpekkens}~(Fig.~19), \citealp{chaves2014novel}~(Fig.~1), \citealp{BeyondBellII}~(Fig.~1), \citealp{wolfe2015nonconvexity}~(Fig.~2b), \citealp{steeg2011relaxation}~(Fig.~2)] is depicted here in \cref{fig:NewBellDAG1}. The observable variables are $A,B,X,Y$, and $\Lambda$ is the latent common cause of $A$ and $B$. In a Bell scenario, one traditionally works with the conditional distribution $P_{AB|XY}$, to be understood as an array of distributions indexed by the possible values of $X$ and $Y$, instead of with the original distribution $P_{ABXY}$, which is what we do.
+The causal structure associated to the Bell \cite{bell1964einstein,Brunner2013Bell,bell1966lhvm,CHSHOriginal} experiment [\citealp{pusey2014gdag}~(Fig.~E\#2), \citealp{WoodSpekkens}~(Fig.~19), \citealp{chaves2014novel}~(Fig.~1), \citealp{BeyondBellII}~(Fig.~1), \citealp{wolfe2015nonconvexity}~(Fig.~2b), \citealp{steeg2011relaxation}~(Fig.~2)] is depicted in \cref{fig:NewBellDAG1}. The observable variables are $A,B,X,Y$, and $\Lambda$ is the latent common cause of $A$ and $B$. In a Bell scenario, one traditionally works with the conditional distribution $P_{AB|XY}$, to be understood as an array of distributions indexed by the possible values of $X$ and $Y$, instead of with the original distribution $P_{ABXY}$, which is what we do.
 
-In the Bell scenario DAG, the maximal pre-injectable sets are
+In the inflation DAG of \cref{fig:BellDagCopy1}, the maximal pre-injectable sets are
 \begin{align}\begin{split}
 	\label{eq:bellcontexts}
-&\brackets{A_1 B_1 X_1 X_2 Y_1 Y_2} \\
-&\brackets{A_1 B_2 X_1 X_2 Y_2 Y_2} \\
-&\brackets{A_2 B_1 X_1 X_2 Y_2 Y_2} \\
-&\brackets{A_2 B_2 X_1 X_2 Y_2 Y_2} ,
+&\brackets{A_1 B_1 X_1 X_2 Y_1 Y_2}, \\
+&\brackets{A_1 B_2 X_1 X_2 Y_2 Y_2}, \\
+&\brackets{A_2 B_1 X_1 X_2 Y_2 Y_2}, \\
+&\brackets{A_2 B_2 X_1 X_2 Y_2 Y_2},
 \end{split}\end{align}
 where notably every maximal pre-injectable set contains all ``settings'' variables $X_1$ to $Y_2$. The marginal distributions on these pre-injectable sets are then specified by the original observable distribution via
 \begin{align}\begin{split}&\forall{a b x_1 x_2 y_1 y_2}:\; \begin{cases}
@@ -2634,74 +2633,66 @@ By dividing each of the first four equations by the fifth, we obtain
 The existence of a joint distribution over all six variables---i.e.~the existence of a solution to the marginal problem---implies in particular
 %If we then impose marginal compatibility according the the marginal problem we find that the (minimal!) consequence of the inflation hypothesis is 
 \begin{align}
-	\forall{a b x_1 x_2 y_1 y_2}: \quad P_{A_1 B_1 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(a a' b b'|x_1 x_2 y_1 y_2),
+	\forall{a b x_1 x_2 y_1 y_2}: \quad P_{A_1 B_1 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2 | X_1 X_2 Y_1 Y_2}(a a' b b'|x_1 x_2 y_1 y_2),
 \end{align}
-and similarly for the other three conditional distributions under consideration. For consistency with the causal hypothesis, therefore, the original distribution must satisfy in particular
+and similarly for the other three conditional distributions under consideration. For consistency with the causal hypothesis, \cref{eq:bellfactor} therefore implies that the original distribution must satisfy in particular
 \begin{align}\begin{split}\label{eq:finalBellstep}\forall{a b}:\; \begin{cases}
-	P_{A B | X Y}(a b | 0 0)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(a a' b b'|0101) \\
-	P_{A B | X Y}(a b | 1 0)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(a' a b b'|0101) \\
-	P_{A B | X Y}(a b | 0 1)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(a a' b' b|0101) \\
-	P_{A B | X Y}(a b | 1 1)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(a' a b' b|0101)
+	P_{A B | X Y}(a b | 0 0)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2| X_1 X_2 Y_1 Y_2}(a a' b b'|0101) \\
+	P_{A B | X Y}(a b | 1 0)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2| X_1 X_2 Y_1 Y_2}(a' a b b'|0101) \\
+	P_{A B | X Y}(a b | 0 1)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2| X_1 X_2 Y_1 Y_2}(a a' b' b|0101) \\
+	P_{A B | X Y}(a b | 1 1)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2| X_1 X_2 Y_1 Y_2}(a' a b' b|0101)
 \end{cases}\end{split}\end{align}
-The possibility to write the conditional probabilities in the Bell scenario in this form is equivalent to the existence of a latent variable model, as noted in Fine's Theorem~\cite{FineTheorem}. Thus, if an inflated model exists with the required marginals, then a latent variable model of the original distribution exists as well (and conversely, trivially). Hence the inflated DAG of~\cref{fig:BellDagCopy1} provides necessary and sufficient conditions for the consistency of the original observed distribution with the Bell scenario causal structure.
+The possibility to write the conditional probabilities in the Bell scenario in this form is equivalent to the existence of a latent variable model, as noted in Fine's theorem~\cite{FineTheorem}. Thus, the existence of a solution to our marginal problem implies the existence of a latent variable model for the original distribution; the converse follows from our \cref{mainlemma}. Hence the inflation DAG of~\cref{fig:BellDagCopy1} provides necessary and sufficient conditions for the compatibility of the original distribution with the Bell scenario causal structure.
 
-%The last equations turns out to be rather useful to write down explicitly: putting $x_1 = y_1 = 0$ and $x_2 = y_2 = 1$ and dividing the first equation by the last one results in
-%\begin{align*}
-%	P_{A B X Y}(a b | 0 0)  =  \sum_{a',b'} P_{A_1 A_2 B_1 B_2 X_1 X_2 Y_1 Y_2}(aa'bb'|0101).
-%\end{align*}
-%Similarly, $P_{A B X Y}(a b | 0 1)$, $P_{A B X Y}(a b | 1 0)$ and $P_{A B X Y}(a b | 1 1)$ can also be written as marginals of a conditional distribution. 
-%By Fine's Theorem~\cite{FineTheorem}, this implies the existence of a hidden-variable model. Conversely, if a hidden-variable model exists, then the existence of the inflated model implies the existence of a solution to the marginal problem.
-
-% In conclusion, we therefore find in the case of the inflated DAG~\cref{fig:BellDagCopy1}, the inflation method yields necessary and sufficient infeasibility criteria for the Bell causal structure, i.e. the Bell/CHSH inequalities, just by requiring marginal compatibility of the pre-injectable sets.
-% More generally, we can use Fine's theorem to show that applying the marginal problem to suitable inflated DAGs can reproduce \emph{all} Bell inequalities, for any standard Bell scenario, no matter how many parties or settings or possible outcomes. 
-
-Moreover, it is possible to describe the marginal polytope over the pre-injectable sets of~\cref{eq:bellcontexts}, due to the fact that the ``settings'' variables $X_1$ to $Y_4$ occur in all four contexts. This description is easier to state for the marginal \emph{cone}, by which we mean the convex cone spanned by the marginal polytope, i.e.~the convex cone consisting of all nonnegative linear combinations of deterministic assignments of values, or equivalently the convex cone of all measures on the set of joint outcomes. This cone lives in $\oplus_{i=1}^4 \mathbb{R}^{2^6} = \oplus_{i=1}^4 (\mathbb{R}^2)^{\otimes 6}$, where each tensor factor has basis vectors corresponding to the two possible outcomes of each variable, and the direct summands enumerate the four contexts. Now the marginal cone is precisely the set of all nonnegative linear combinations of the points
+Moreover, it is possible to describe the marginal polytope over the pre-injectable sets of~\cref{eq:bellcontexts}, resulting in a concrete correspondence between tight Bell inequalities and the facets of our marginal polytope. This is based on the observation that the ``settings'' variables $X_1$ to $Y_4$ occur in all four contexts. The marginal polytope lives in $\oplus_{i=1}^4 \mathbb{R}^{2^6} = \oplus_{i=1}^4 (\mathbb{R}^2)^{\otimes 6}$, where each tensor factor has basis vectors corresponding to the two possible outcomes of each variable, and the direct summands enumerate the four contexts. It is given by the convex hull of the points
 \begin{align*}
 	(e_{A_1} & \otimes e_{B_1} \otimes e_{X_1} \otimes e_{X_2} \otimes e_{Y_1} \otimes e_{Y_2}) \\
 	\oplus\: (e_{A_1} & \otimes e_{B_2} \otimes e_{X_1} \otimes e_{X_2} \otimes e_{Y_1} \otimes e_{Y_2}) \\
 	\oplus\: (e_{A_2} & \otimes e_{B_1} \otimes e_{X_1} \otimes e_{X_2} \otimes e_{Y_1} \otimes e_{Y_2}) \\
 	\oplus\: (e_{A_2} & \otimes e_{B_2} \otimes e_{X_1} \otimes e_{X_2} \otimes e_{Y_1} \otimes e_{Y_2}),
 \end{align*}
-where all six variables range over their deterministic outcomes. Since the last four tensor factors occur in every direct summand in exactly the same way, the resulting marginal cone is linearly isomorphic to the cone generated by all vectors of the form
+where all six variables range over their possible values. Since the last four tensor factors occur in every direct summand in exactly the same way, the resulting polytope is linearly isomorphic to the convex hull of the points
 \[
 	\left[ (e_{A_1} \otimes e_{B_1}) \oplus (e_{A_1} \otimes e_{B_2}) \oplus (e_{A_2} \otimes e_{B_1}) \oplus (e_{A_2} \otimes e_{B_2})\right] \otimes \left[ e_{X_1} \otimes e_{X_2} \otimes e_{Y_1} \otimes e_{Y_2}\right]
 \]
-in $\mathbb{R}^{2^2}\otimes \mathbb{R}^{2^4}$. Now since the first four variables in the first tensor factor vary completely independently of the latter four variables in the second tensor factor, the resulting cone will be precisely the tensor product~\cite{namioka_tensor_1969} of two cones: first, the cone generated by all vectors of the form
+in $\big(\oplus_{i=1}^4 \mathbb{R}^{2^2}\big)\otimes \mathbb{R}^{2^4}$. Now since the first four variables in the first tensor factor vary completely independently of the latter four variables in the second tensor factor, the resulting polytope will be precisely the tensor product~\cite{namioka_tensor_1969,bogart_hom_2013} of two polytopes: first, the convex hull of all points of the form
 \[
 	(e_{A_1} \otimes e_{B_1}) \oplus (e_{A_1} \otimes e_{B_2}) \oplus (e_{A_2} \otimes e_{B_1}) \oplus (e_{A_2} \otimes e_{B_2}),
 \]
-and second the one spanned by all $e_{X_1} \otimes e_{X_2} \otimes e_{Y_1} \otimes e_{Y_2}$. While the latter cone is simply the standard positive cone of $\mathbb{R}^8$, the former cone is the cone generated by the ``local polytope'' or ``Bell polytope'' that is traditionally used in the context of Bell scenarios~\cite[Sec.~II.B]{Brunner2013Bell}. Standard results on tensor products of cones and polytopes~\cite{bogart_hom_2013} therefore imply that our marginal polytope is the tensor product of the Bell polytope, corresponding to the $A_1$ to $B_2$ part, with a simplex corresponding to the $X_1$ to $Y_2$ ``settings'' part. This implies that the facets of our marginal polytope are precisely the pairs consisting of a facet of the Bell polytope and a facet of the simplex. For example, in this way we obtain one version of the CHSH inequality as a facet of the marginal polytope,
+and second the convex hull of all $e_{X_1} \otimes e_{X_2} \otimes e_{Y_1} \otimes e_{Y_2}$. While the latter polytope is just the standard probability simplex in $\mathbb{R}^8$, the former cone is precisely the ``local polytope'' or ``Bell polytope'' that is traditionally used in the context of Bell scenarios~\cite[Sec.~II.B]{Brunner2013Bell}. This implies that the facets of our marginal polytope are precisely the pairs consisting of a facet of the Bell polytope and a facet of the simplex, the latter of which are only the nonnegativity of probability inequalities like $P_{X_1X_2Y_1Y_2}(0101)\geq 0$. For example, in this way we obtain one version of the CHSH inequality as a facet of our marginal polytope,
 \[
 	\sum_{a,b,x,y} (-1)^{a + b + xy} P_{A_x B_y X_1 X_2 Y_1 Y_2}(a b 0 1 0 1) \leq 2 P_{X_1 X_2 Y_1 Y_2}(0101).
 \]
-Upon using~\cref{eq:bellfactor}, this becomes
+This translates into the standard form of the CHSH inequality as follows. Upon using~\cref{eq:bellfactor}, the inequality becomes
 \begin{align*}
-	\sum_{a,b} (-1)^{a + b} \big( & P_{A B X Y}(ab00)P_X(1)P_Y(1) + P_{A B X Y}(ab01)P_X(1)P_Y(0) \\
+	\sum_{a,b} (-1)^{a + b} \big( & P_{A B X Y}(ab00)P_X(1)P_Y(1) + P_{A B X Y}(ab01)P_X(1)P_Y(0) \\[-4pt]
 	& + P_{A B X Y}(ab10)P_X(0)P_Y(1) - P_{A B X Y}(ab11)P_X(0)P_Y(0) \big) \leq P_X(0)P_X(1)P_Y(0)P_Y(1),
 \end{align*}
-so that dividing by the right-hand side results in essentially the conventional form of the CHSH inequality,
+so that dividing by the right-hand side results in one of the conventional forms of the CHSH inequality,
 \[
 	\sum_{a,b} (-1)^{a + b} \left( P_{AB|XY}(ab|00) + P_{AB|XY}(ab|01) + P_{AB|XY}(ab|10) - P_{AB|XY}(ab|11) \right) \leq 2.
 \]
-In conclusion, the inflation technique is powerful enough to get a precise characterization of all distributions consistent with the Bell causal structure, and our technique for generating polynomial inequalities while solving the marginal problem recovers all Bell inequalities.
+In conclusion, the inflation technique is powerful enough to get a precise characterization of all distributions compatible with the Bell causal structure, and our technique for generating polynomial inequalities through solving the marginal problem recovers all Bell inequalities.
 
-It is worth noting that the Bell inequalities may also be derived using the hypergraph-transversals / logical-tautologies technique discussed in \cref{sec:TSEM}. For example, the inequality
+Some Bell inequalities may also be derived using the hypergraph transversals technique discussed in \cref{sec:TSEM}. For example, the inequality
 \begin{align}\label{eq:preBell}\begin{split}
-& \p[A_1 B_1 X_1 Y_1]{1111}\p[X_2]{0} \p[Y_2]{0} \\
+& \p[A_1 B_1 X_1 Y_1]{0000}\p[X_2]{1} \p[Y_2]{1} \\
 &\leq
- \p[A_1 B_2 X_1 Y_2]{1010}\p[X_2]{0} \p[Y_1]{1} +\p[A_2 B_1 X_2 Y_1]{0101}\p[X_1]{1}\p[Y_2]{0}+  \p[A_2 B_2 X_2 Y_2]{1100}\p[X_1]{1} \p[Y_1]{1}
+ \p[A_1 B_2 X_1 Y_2]{0001}\p[X_2]{1} \p[Y_1]{0} +\p[A_2 B_1 X_2 Y_1]{0010}\p[X_1]{0}\p[Y_2]{1}+  \p[A_2 B_2 X_2 Y_2]{1111}\p[X_1]{0} \p[Y_1]{0}
 \end{split}\end{align}
-is a clear precursor of the Bell inequality
+is the inflationary precursor of the Bell inequality
 \begin{align}\label{eq:aBell}
- \p[A B | X Y]{11|11} &\leq \p[A B | X Y]{10|10} +\p[A B | X Y]{01|01}+  \p[A B | X Y]{11|00}
+ \p[A B | X Y]{00|00} &\leq \p[A B | X Y]{00|01} +\p[A B | X Y]{00|10}+  \p[A B | X Y]{11|11},
 \end{align}
-as \cref{eq:aBell} is obtained from \cref{eq:preBell} by dividing both sides by $\p[X_1 Y_1 X_2 Y_2]{1100}=\p[X_1]{1} \p[Y_2]{1}\p[X_2]{0} \p[Y_2]{0}$ and then dropping copy indices. On the other hand, \cref{eq:preBell} follows directly from factorization of preinjectable sets and the tautology
+as \cref{eq:aBell} is obtained from \cref{eq:preBell} by dividing both sides by $\p[X_1 Y_1 X_2 Y_2]{0011}=\p[X_1]{0} \p[Y_2]{0}\p[X_2]{1} \p[Y_2]{1}$ and then dropping copy indices. On the other hand, \cref{eq:preBell} follows directly from factorization relations on pre-injectable sets and the tautology
 \begin{align}\begin{split}
-&[ \mgreen{A_1 \eql 1}, \mgreen{B_1 \eql 1}, \mgreen{X_1 \eql 1}, \mgreen{Y_1\eql 1}, \mgreen{X_2 \eql 0}, \mgreen{Y_2 \eql 0}]\\
- & \implies 
- [ \mgreen{A_1 \eql 1}, B_2 \eql 0, \mgreen{X_1 \eql 1}, \mgreen{Y_1\eql 1}, \mgreen{X_2 \eql 0}, \mgreen{Y_2 \eql 0}]
-\lor [ A_2 \eql 0, \mgreen{B_1 \eql 1}, \mgreen{X_1 \eql 1}, \mgreen{Y_1\eql 1}, \mgreen{X_2 \eql 0}, \mgreen{Y_2 \eql 0}] \\&\lor [ A_2 \eql 1, B_2 \eql 1, \mgreen{X_1 \eql 1}, \mgreen{Y_1\eql 1}, \mgreen{X_2 \eql 0}, \mgreen{Y_2 \eql 0}].
+	[ \mgreen{A_1 \eql 0}, & \mgreen{B_1 \eql 0}, \mgreen{X_1 \eql 0}, \mgreen{Y_1\eql 0}, \mgreen{X_2 \eql 1}, \mgreen{Y_2 \eql 1}]\\
+ \implies 
+	[ & \mgreen{A_1 \eql 0}, B_2 \eql 0, \mgreen{X_1 \eql 0}, \mgreen{Y_1\eql 0}, \mgreen{X_2 \eql 1}, \mgreen{Y_2 \eql 1}] \\
+	\mathrel{\lor} [ & A_2 \eql 0, \mgreen{B_1 \eql 0}, \mgreen{X_1 \eql 0}, \mgreen{Y_1\eql 0}, \mgreen{X_2 \eql 1}, \mgreen{Y_2 \eql 1}] \\
+	\mathrel{\lor} [ & A_2 \eql 1, B_2 \eql 1, \mgreen{X_1 \eql 0}, \mgreen{Y_1\eql 0}, \mgreen{X_2 \eql 1}, \mgreen{Y_2 \eql 1}].
 \end{split}\end{align}
+which corresponds to the original ``Hardy paradox''~\cite{L.Hardy:PRL:1665} in our notation.
 
 \begin{comment}
 
