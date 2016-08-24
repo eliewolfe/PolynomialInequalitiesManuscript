@@ -318,7 +318,7 @@ anchorcolor=OliveGreen}
 \begin{abstract}
 
 The fundamental problem of causal inference is to determine whether or not a given probability distribution over observed variables is compatible with some causal structure (which may incorporate latent variables).  
-It is therefore valuable to be able to derive inequalities whose violation by a distribution witnesses the incompatibility of that distribution with the given causal structure.  We term these causal compatibility inequalities. 
+It is therefore valuable to be able to derive inequalities whose violation by a distribution witnesses the incompatibility of that distribution with the given causal structure.  We term these ``causal compatibility inequalities''. 
 Prominent examples are Bell inequalities and Pearl's instrumental inequality.
 % but these each pertain to only a single specific causal structure.  
 %Such inequalities arise in many fields.  
@@ -334,7 +334,7 @@ The inflation map is defined in such a way that any causal compatability inequal
 \end{comment}
 %first \textit{inflating} the causal structure and then translating weak constraints on the inflated structure into stronger constraints on the original structure. 
 %We provide several examples of how the technique is powerful enough to rederive known results, such as the Bell inequalities, and 
-We demonstrate the technique's power by numerically deriving all of the constraints that it implies for a particular concrete example---an inflation of the so-called triangle scenario
+We demonstrate the technique's power by numerically deriving all of the constraints that it implies for a particular concrete example---an inflation of the so-called Triangle scenario
 ---obtaining a set of causal compatibility inequalities that are provably stronger than those derived from other techniques.
 %Concretely, we derive polynomial inequalities for the so-called Triangle scenario, and we show how all Bell inequalities also follow from our method. %analyze Pearl's instrumental inequality from our perspective. 
 %We also show that if one is 
@@ -696,9 +696,9 @@ We will show that the distribution of Eq.~\eqref{eq:ghzdistribution1} is not com
 P_{A C} = P_{B C} = \frac{[00]+[11]}{2}.
 \end{align*}
 From the definition of inflation, together with the fact that $\brackets{A_2 C_1}$ and $\brackets{B_1 C_1}$ are injectable sets whose images on the original DAG are $\brackets{AC}$ and $\brackets{BC}$, we can infer that if the marginals $P_{A C}$ and $P_{B C}$ are compatible with the Triangle scenario, then the marginals 
-\begin{align*}
+\begin{align}\label{ghzmarginals}
 P_{A_2 C_1} = P_{B_1 C_1} = \frac{[00]+[11]}{2}
-\end{align*}
+\end{align}
 are compatible with the Cut inflation of the Triangle scenario.  This is the specialization of \cref{mainlemma} to this example.  
 
 Finally, we show that the pair of marginals $P_{A_2 C_1}$ and $P_{B_1 C_1}$ are \emph{not} compatible with the Cut inflated DAG, thereby obtaining our contradiction.  It suffices to note that (i) the only joint distribution that exhibits perfect correlation between $A_2$ and $C_1$ and between $B_1$ and $C_1$ also exhibits perfect correlation between $A_2$ and $B_1$, and (ii) $A_2$ and $B_1$ have no common ancestor in the Cut inflated DAG and hence must be marginally independent in any distribution that is compatible with it. 
@@ -1144,7 +1144,7 @@ In the rest of this article, we shall continue to rely only on the ancestral ind
 
 %\subsection{Pre-injectable sets}
 
-In the examples from the previous section, the initial inequality---a constraint upon marginals that is independent of the causal structure---involves sets of observed variables that are \emph{not} all injectable.  Each of these sets can, however, be partitioned into disjoint subsets each of which {\em is} injectable whenever the partitioning represents ancestral independence in the inflated DAG.   For instance, in the first example from the previous section, the set $\{ A_2 B_1\}$ is not injectable but it can be partitioned into the singleton sets $\{ A_2 \}$ and $\{ B_1\}$ which are ancestrally independent and each of which is injectable.  It is useful to have a name for such sets of observed variables: we call them \tblue{pre-injectable}. So for a set of observable nodes $\bm{U}'$ in the inflated DAG $G'$,
+In the examples from the previous section, the initial inequality---a constraint upon marginals that is independent of the causal structure---involves sets of observed variables that are \emph{not} all injectable sets.  Each of these sets can, however, be partitioned into disjoint subsets each of which {\em is} injectable whenever the partitioning represents ancestral independence in the inflated DAG.   For instance, in the first example from the previous section, the set $\{ A_2 B_1\}$ is not injectable but it can be partitioned into the singleton sets $\{ A_2 \}$ and $\{ B_1\}$ which are ancestrally independent and each of which is injectable.  It is useful to have a name for such sets of observed variables: we call them \tblue{pre-injectable}. So for a set of observable nodes $\bm{U}'$ in the inflated DAG $G'$,
 \begin{align}\label{eq:defpreinj}
 \bm{U}'\in\SmallNamedFunction{PreInjectableSets}{G'} \quad\text{ iff }\quad  \exists \{ \bm{U}_i \in \SmallNamedFunction{InjectableSets}{G'} \} \quad \text{s.t.}\quad \bm{U}'=\bigcup_i \bm{U}_i  \quad\text{and} \quad  \forall i\ne j: \bm{U}_i \aindep_{G'} \bm{U}_j.
 %\bm{U}\in\SmallNamedFunction{PreInjectableSets}{G'} \quad\text{ iff }\quad  \exists \{ \bm{U}_i \}_i \quad \text{s.t.}\quad \bm{U}=\bigcup_i \bm{U}_i  \quad\text{and} \quad \forall i 
@@ -1160,19 +1160,89 @@ $\bm{U}'$ is a pre-injectable set and $\bm{U}_1,\bm{U}_2,\ldots,\bm{U}_n$ are th
 %\forall \bm{U}\in\SmallNamedFunction{PreInjectableSets}{G'}:	
 P_{\bm{U}'} = P_{\bm{U}_1} P_{\bm{U}_2} \cdots P_{\bm{U}_n}
 \end{align}
-for any distribution compatible with $G'$. The situation, therefore, is this: for any constraint that one can derive for the marginals on the pre-injectable sets based on the existence of a joint distribution---and hence without reference to the causal structure---one can infer constraints that {\em do} refer to the causal structure by substituting within these constraints factorizations of the form of~\cref{eq:preinjfactor}.  
+for any distribution compatible with $G'$. The situation, therefore, is this: for any constraint that one can derive for the marginals on the pre-injectable sets based on the existence of a joint distribution---and hence without reference to the causal structure---one can infer a constraint that {\em does} refer to the causal structure by substituting within the derived constraint a factorization of the form of~\cref{eq:preinjfactor}.  
 
-Thus the pre-injectable sets play a crucial role in linking the original DAG with the inflation DAG: they are precisely those sets of variables whose joint distributions in the inflated model are fully specified by the original causal model on the original DAG: they can be computed using \cref{mainlemma} and \cref{eq:preinjfactor}. If the resulting family of marginal distributions on pre-injectable sets is not compatible with the existence of a joint distribution, then the original distribution is witnessed as causally incompatible with the original DAG. This is the formal argument underpinning all of the examples in \cref{subsec:witnessingincompat}.
+Thus the pre-injectable sets play a crucial role in linking the original DAG with the inflated DAG: they are precisely those sets of variables whose joint distributions in the inflated model are fully specified by the causal model on the original DAG: they can be computed using \cref{mainlemma} and \cref{eq:preinjfactor}. 
 
 The problem of determining the constraints on marginals that follow from the existence of a joint distribution is known as the {\em marginal problem}. Thus, we can summarize the situation as follows: an inequality derived from the marginal problem, after applying the factorizations of~\cref{eq:preinjfactor}, becomes a causal compatibility inequality for the inflated DAG. The latter inequality can then be converted into a polynomial causal compatibility inequality for the original DAG using \cref{maincorollary}.
 %We have defined causal inference as a decision problem, namely testing the consistency of some observational data with some some causal hypothesis. We have shown that this decision can sometimes be negatively answered by proxy, namely by demonstrating inconsistency of \emph{inflated} data with an \emph{inflated} hypothesis. But the inflation technique is more useful than that: we can also derive explicit \emph{inequalities} that a distribution on observable nodes needs to satisfy in order to be compatible with the causal structure. % Any such constraint is also an implicit consequence of the original hypothesis, and hence a relevant infeasibility criterion.
 This section considers the problem of how to implement this procedure systematically.
 
 
+\color{blue}
+In addition to providing a means of systematizing the derivation of causal compatibiity inequalities for a DAG, the concept of pre-injectable set also provides a mean of systematizing the problem of witnessing the incompatibility of a given distribution with a DAG.  This is done as follows.
+%plays a critical role not only in deriving causal compatibility inequalities but of {\em witnessing} incompatibility as well.
+
+For any given distribution on the observed variables of the original DAG, one can determine the distribution on each pre-injectable set of the inflated DAG using corollary \label{}.  One then asks whether this family of distributions are the marginals of a single joint distribution on the observed variables of the inflated DAG.  
+
+While the term ``marginal problem'' refers to deriving inequalities on a family of marginal distributions that are necessary conditions for the family to arise as the marginals of a single joint distribution, the problem of determining whether a family of numerically-specified marginal distributions arise as the marginals of a single joint distribution we will term the ``marginal satisfiability problem''.
+
+%the {\em marginal satisfiability problem}.
+%If the resulting family of marginal distributions on pre-injectable sets is not compatible with the existence of a joint distribution, then the original distribution is witnessed as causally incompatible with the original DAG.
+
+The examples we provided in \cref{subsec:witnessingincompat} of how to witness incompatibility did not explicitly follow the logic of a marginal satisfiability problem, and so it is useful to see how the first such example can be recast in this form.  
+% therefore, we repeat the argument for example \label{} using the inflation technique did not make 
+
+% This is the formal argument underpinning all of the examples in \cref{subsec:witnessingincompat}.
+ 
+ %Here is an equivalent version of our example 1, designed to make the connection with the marginal problem evident.  
+ The Cut inflation DAG  of the Triangle scenario implies that the pre-injectable sets are $\{
+A_2 C_1\}, \{B_1 C_1\}, \{ A_2 B_1\}$.  Only the last of these is not itself an injectable set, but rather the union of the injectable sets $\{ A_2\}$, and $\{ B_1\}$ which satisfy the ancestral independence relation $A_2 \perp B_1$.  
+Consequently, the injectable sets appearing in these pre-injectable sets are $\{A_2 C_1\}, \{B_1 C_1\}, \{ A_2\}$, and $\{ B_1\}$.
+
+The logic of the argument is the same up to Eq.~\eqref{ghzmarginals}, that is, we infer that 
+\begin{equation}
+P_{A_2 C_1} = P_{B_1 C_1} = \frac{1}{2} [00] +\frac{1}{2} [11]\label{marginals1}
+\end{equation}
+from the given distribution on the original DAG, Eq.~\eqref{ghzdistribution1}, and corollary \ref{}. 
+It follows from Eq.~\eqref{marginals1} that the marginals on the injectable sets $\{ A_2\}$ and $\{ B_1\}$ are 
+%one infers that and consequently that
+\begin{equation}
+P_{A_2} = P_{B_1}=\frac{1}{2} [0] +\frac{1}{2} [1].
+\end{equation}
+From the latter, and the fact that $A_2$ and $B_1$ are ancestrally independent, we infer that the distribution $P_{A_2 B_1}$ is simply the product of $P_{A_2}$ and  $P_{B_1}$,
+\begin{equation}
+%P_{A_2 C_1} &=& P_{B_1 C_1} = \frac{1}{2} [00] +\frac{1}{2} [11]\nonumber\\
+P_{A_2 B_1} = (\frac{1}{2} [0] +\frac{1}{2} [1])(\frac{1}{2} [0] +\frac{1}{2} [1]).
+\label{marginals2}
+\end{equation}
+
+
+%we infer that the distribustions that must hold on each of the pre-injectable sets are
+%\begin{align}
+%P_{A_2 C_1} &=& P_{B_1 C_1} = \frac{1}{2} [00] +\frac{1}{2} [11]\nonumber\\
+%P_{A_2 B_1} &=& (\frac{1}{2} [0] +\frac{1}{2} [1])(\frac{1}{2} [0] +\frac{1}{2} [1]).
+%\label{marginalssat}
+%\end{align}
+%Here, it is the ancestral independence of $A_2$ and $B_1$ that implies that the distribustion $P_{A_2 B_1}$ is simply the product of $P_{A_2}$ and  $P_{B_1}$.
+
+The resulting marginal satisfiability problem, therefore, is this: for the distributions on $\{A_2 C_1\}$, $\{B_1 C_1\}$, and $\{A_2 B_1\}$ specified in Eqs.~\eqref{marginals1} and \eqref{marginals2}, is there a joint distribution on  $\{ A_2 B_1 C_1\}$ that has these three as marginals?
+
+%variables $\{ A_2 B_1 C_1\}$,  and contexts $\{A_2 C_1\}$, $\{B_1 C_1\}$, and $\{A_2 B_1\}$, is there a joint distribution whose marginals on these contexts are those given by Eqs.~\eqref{marginals1} and \eqref{marginals2}?
+
+In our prior discussion of this example, we noted that if the distribution on $\{ A_2 C_1\}$ exhibits perfect correlation between $A_2$ and $C_1$, and the distribution on $\{ B_1 C_1\}$ exhibits perfect correlation between $B_1$ and $C_1$, then the distribution on $\{ A_2 B_1\}$ must exhibit perfect correlation between $A_2$ and $B_1$ as well.  
+%$A_2$ and $C_1$ are perfectly correlated and $B_1$ and $C_1$ are perferectly correlated, then $A_2$ and $B_1$ must also be perfectly correlated. 
+But the three marginals of Eqs.~\eqref{marginals1} and \eqref{marginals2} contradict this implication.  The antecedent is satisfied but the consequent is not because, by Eq.~\eqref{marginals2}, the distribution on $\{ A_2 B_1\}$ exhibits statistical {\em independence} betwen $A_2$ and $B_1$.  It follows that there is no joint distribution that has the three distributions of Eqs.~\eqref{marginals1} and \eqref{marginals2} as its marginals. 
+
+Generalizing to an arbitrary DAG, therefore, the procedure is as follows:
+\begin{enumerate}
+\item Based on the inflated DAG, identify a family of pre-injectable sets and how they each partition into injectable sets.
+\item From the numcerically-specified distribution on the DAG, infer the family of distributions on the pre-injectable sets of the inflated DAG as follows: the distribution on any injectable set of the inflated DAG is equal to the corresponding distribution on its image in the original DAG and the distribution on any pre-injectable set of the inflated DAG is simply the product of the distributions on the injectable sets which it contains.
+\item Solve the resulting marginal satisfiability problem, that is, determine whether the family of distributions obtained in step 2 are the marginals of a sngle joint distribution.
+\end{enumerate}
+%This section also considers the problem of how to generalize this logic to an arbitrary DAG, that is, how to systematically witness the incompatibility of a numerically-specified distribution with a given DAG.  Explicitly, 
+
+This section considers the problem of how to solve a general instance of the sort of marginal satisfiability problem that is obtained through the inflation technique. 
+
+%%%%
+
+Summarizing, we have shown that, through the inflation technique, the marginal problem can be leveraged to derive causal compatibility inequalities and the marginal satisfiability problem can be leveraged to witness incompatibility.  This section begins with a discussion of how to find {\em all} of the pre-injectable sets for an arbitrary inflation of an arbitrary DAG.  We will then describe how to obtain {\em complete solutions} of the marginal problem and the marginal satisfiability problem that are defined by a given inflation. 
+\color{black}
+
 
 %In the discussion that follows, we continue to assume that the original hypothesis is nothing more than supposing the causal structure to be given by the original DAG. Furthermore we presume that the joint distribution over all original observable variables is accessible.
 
-We limit our attention to deriving causal compatibility inequalities expressed in terms of probabilities\footnote{Or, for binary variables, equivalently in terms of correlators, as in the first example of \cref{Sec:DerivingInequalities}.}, as these are generally the most powerful. However, the inflation technique can also be used to derive inequalities expressed in terms of entropies, as our second example from the previous section demonstrated. Indeed, we show in \cref{sec:NonShannon} that the inflation technique implies the core lemma for deriving non-Shannon-type inequalities.
+We will limit our attention to deriving causal compatibility inequalities expressed in terms of probabilities\footnote{Or, for binary variables, equivalently in terms of correlators, as in the first example of \cref{Sec:DerivingInequalities}.}, as these are generally the most powerful. However, the inflation technique can also be used to derive inequalities expressed in terms of entropies, as our second example from the previous section demonstrated. Indeed, we show in \cref{sec:NonShannon} that the inflation technique implies the core lemma for deriving non-Shannon-type inequalities.
 
 % The potential of using inflation as tool for deriving entropic inequalities is considered separately in \cref{sec:NonShannon}.
 
@@ -1344,10 +1414,14 @@ Using the ancestral independence relations, the marginal distributions for the m
 
 Having identified the pre-injectable sets together with the factorization relations implied by ancestral independences, we now discuss how to obtain constraints on the marginal distributions over the pre-injectable sets.
 
-\subsection{The marginal problem}\label{step:marginalsproblem}
+\subsection{The marginal problem \color{blue} and the marginal satisfiability problem \color{black}}\label{step:marginalsproblem}
 %\subsection{Constraining distributions over the pre-injectable sets via the marginal problem}
 
-For a given family of marginal distributions, each defined on a subset of the variables, determining whether there exists a joint probability distribution over the full set of variables from which all of these can be obtained as marginal distributions is known as the {\em marginal problem}.
+\color{blue}
+
+For a given set of variables and a family of subsets thereof, determining the constraints that must hold for a family of distributions over these subsets to be obtainable as the marginals of a joint distribution over the full set of variables is known as the {\em marginal problem}.
+%family of marginal distributions, each defined on a subset of the variables, determining whether there exists a joint probability distribution over the full set of variables from which all of these can be obtained as marginal distributions is known as the {\em marginal problem}.
+\color{black}
 %they can be obtained through marginalization of a single joint probability 
 %The most trivial constraint on possible marginal probabilities, regardless of causal structure,  
 %on the pre-injectable set
@@ -1355,35 +1429,36 @@ For a given family of marginal distributions, each defined on a subset of the va
 %This isn't really causal inference---as no nontrivial causal hypothesis is considered---but rather more of a preliminary sanity check. If the marginal distributions are not \tblue{consistent}, then the answer to ``Can these marginal distributions be explained by this particular causal hypothesis?'' is automatically ``No''. 
 %This type of problem is known as a \tblue{marginal problem}. 
 For some of its history and for further references, see~\cite{fritz2013marginal}; for a more modern account using the language of presheaves, see~\cite{abramsky_contextuality_2011}.
+\color{blue}
+Substantially easier than this is the problem is determining, for a numerically-specified family of distributions over these subsets, whether there exists a joint probability distribution over the full set of variables from which these can be obtained as marginals.  We refer to this as the {\em marginal satisfiability problem}.
+\color{black}
+
+
 
 %More precisely, a \emph{marginal problem} is specified by 
-To specify such a problem, one must specify the full set of variables to be considered, denoted $\bm{X}$, together with a family of subsets of $\bm{X}$, denoted $(\bm{U}_1,\ldots,\bm{U}_n)$ and called \tblue{contexts}.
+To specify \color{blue} either sort of marginal problem \color{black},
+%such a problem, 
+ one must specify the full set of variables to be considered, denoted $\bm{X}$, together with a family of subsets of $\bm{X}$, denoted $(\bm{U}_1,\ldots,\bm{U}_n)$ and called \tblue{contexts}.
 %, as well as a specification of the (finite) number of outcomes that each variable is allowed to take. 
 A family of contexts can be visualized through 
 %It may help to draw the visualize contexts in terms of 
-the simplicial complex that they generate, as the example in~\cref{fig:simplicialcomplex222} illustrates. Every joint distribution $P_{\bm{X}}$ %marginalization to each of $(\bm{U}_1,\ldots,\bm{U}_n)$, 
-defines a family of marginal distributions, $(P_{\bm{U}_1},\ldots,P_{\bm{U}_n})$ through marginalization,  $P_{\bm{U}_i} := \sum_{\bm{X} \setminus \bm{U}_i} P_{\bm{X}}$. A \emph{marginal problem} concerns the converse inference.  A family of distributions $(P_{\bm{U}_1},\ldots,P_{\bm{U}_n})$ is given, and one wants to find conditions for when a joint distribution $\hat{P}_{\bm{X}}$ exists which reproduces the given marginals, $P_{\bm{U}_i} = \sum_{\bm{X}\setminus\bm{U}_i} \hat{P}_{\bm{X}}$ for all $i$.
+the simplicial complex that they generate, as the example in~\cref{fig:simplicialcomplex222} illustrates. 
+
+Every joint distribution $P_{\bm{X}}$ %marginalization to each of $(\bm{U}_1,\ldots,\bm{U}_n)$, 
+defines a family of marginal distributions, $(P_{\bm{U}_1},\ldots,P_{\bm{U}_n})$ through marginalization,  $P_{\bm{U}_i} := \sum_{\bm{X} \setminus \bm{U}_i} P_{\bm{X}}$.  
+%A \emph{marginal problem} concerns
+\color{blue} The marginal problem and the marginal satisfiability problem concern \color{black}
+ the converse inference.  
+\color{blue}
+In the marginal problem, one seeks to find conditions on the family of distributions $(P_{\bm{U}_1},\ldots,P_{\bm{U}_n})$, considered as unknowns, for when a joint distribution $\hat{P}_{\bm{X}}$ exists which reproduces these as marginals, that is, for which $P_{\bm{U}_i} = \sum_{\bm{X}\setminus\bm{U}_i} \hat{P}_{\bm{X}}$ for all $i$.
+In the marginal satisfiability problem, a family of distributions $(P_{\bm{U}_1},\ldots,P_{\bm{U}_n})$ is given, and one wants to simply decide whether there exists a joint distribution $\hat{P}_{\bm{X}}$ such that $P_{\bm{U}_i} = \sum_{\bm{X}\setminus\bm{U}_i} \hat{P}_{\bm{X}}$ for all $i$.
+\color{black}
 %as $P_{\bm{U}_i} = \hat{P}_{\bm{U}_i}$ for all $i$?
 
-There is a simple necessary condition: in order for $\hat{P}_{\bm{X}}$ to exist, the marginals clearly must be consistent, in the sense that marginalizing $P_{\bm{U}_i}$ to the variables in $\bm{U}_i\cap\bm{U}_j$ results in the same distribution as marginalizing $P_{\bm{U}_j}$ to those variables.  
-%\footnote{This is difficult to express explicitly in our notation, since $P_{\bm{U}_i\cap \bm{U}_j}$ could refer to either marginal.}. 
- %we have already seen in the previous section, 
- In many cases this is not sufficient; indeed, we have already seen examples of additional constraints, namely, the inequalities \eqref{eq:polymonogamyraw}, \eqref{eq:MIraw} and \eqref{eq:FritzF3raw} from \cref{Sec:DerivingInequalities}\footnote{Depending on how the contexts intersect with one another, this \emph{may} be sufficient. A precise characterization for when this occurs has been found by~\citet{vorobev_extension_1960}.}. So what are the necessary and sufficient conditions?
-
-To answer this question, it helps to realize two things:
-\begin{itemize}
-	\item The set of possibilities for the distribution $P_{\bm{X}}$ is the convex hull of the deterministic assignments of values to $\bm{X}$ (the point distributions), and 
-%	Every joint distribution $P_{\bm{X}}$ is a convex combination of deterministic assignments of values to all variables (delta distributions), and conversely.
-	\item The map $P_{\bm{X}}\to (P_{\bm{U}_1},\ldots,P_{\bm{U}_n})$, describing marginalization to each of the contexts in $(\bm{U}_1,\ldots,\bm{U}_n)$, is linear.
-\end{itemize}
-Hence the image of the set of possibilities for the distribution $P_{\bm{X}}$ under the map $P_{\bm{X}}\to (P_{\bm{U}_1},\ldots,P_{\bm{U}_n})$ is exactly the convex hull of the deterministic assignments of values to $(\bm{U}_1,\ldots,\bm{U}_n)$ (more precisely, the deterministic assignments that are consistent where these contexts overlap). Since there are only finitely many such deterministic assignments, this convex hull is a polytope; it is called the \tblue{marginal polytope}~\cite{kahle_marginal_2010}. Together with the above equations on coinciding submarginals, the facet inequalities of the marginal polytope form necessary and sufficient conditions for the marginal problem to have a solution.
-
-%Thus solving the marginal problem is an instance of a facet enumeration problem, or equivalently a linear quantifier elimination problem;~\cref{sec:projalgorithms} gives an overview of how to solve this in practice. 
-
-
-% quantifier-free form in terms of inequalities such that satisfaction of all such inequalities is necessary and sufficient for marginal compatibility. An efficient algorithm to solve the marginal problem is given in \cref{sec:projalgorithms}. The marginal problem comes up in a variety of applications, and has been studied extensively; see~\cite{fritz2013marginal} for further references.
-
-As every facet enumeration problem, this can also be phrased as a problem of \tblue{linear quantifier elimination}. We illustrate this with the example of the marginal problem where $\bm{X} := \{ A_1, A_2, B_1, B_2, C_1, C_2\}$ and the contexts are the 
+  
+  \color{blue} [reordering of material starts here.]\color{black}
+  
+ We illustrate this with the example of the marginal problem where $\bm{X} := \{ A_1, A_2, B_1, B_2, C_1, C_2\}$ and the contexts are the 
 %case of the five three-variable marginal distributions corresponding to the 
 maximal pre-injectable sets in \cref{eq:basicsetup222}.
 % For simplicity, we assume that all observable variables are binary.
@@ -1406,16 +1481,50 @@ We require the joint distribution to reproduce the marginal distribution on each
 %For example in the case of binary variables, we therefore 
 If each variable is binary, then we have $64$ inequalities and $40$ equations, although the latter are not all independent. 
 
+\color{blue} To formalize the generic problem, we introduce \color{black}
+%the marginal problem in terms of
+  a \tblue{marginal description matrix} $\bm{M}$, a \tblue{marginal distribution vector} $\bm{b}$, and some unknown \tblue{joint distribution vector} $\bm{x}$. The generic
+  %marginal 
+  problem can then be stated as
+\begin{align}\label{eq:marginalproblemgeneric}
+    \exists {\bm{x} \geq \bm{0}} :\; \bm{M}\bm{x}=\bm{b}.
+\end{align}
+In the example we have been discussing, $\bm{M}$ would be a $48\times 64$ matrix, so that $\bm{M}\bm{x}=\bm{b}$ represents 48 equations and $\bm{x} \geq \bm{0}$ represents 64 inequalities. Note that the marginal description matrix $\bm{M}$  has only zeroes and ones as its constituent elements.
+
+ 
+ \color{blue} We begin with the marginal problem.  \color{black}
+ 
+ %There is a simple necessary condition: in 
+In order for $\hat{P}_{\bm{X}}$ to exist, \color{blue} distributions on different contexts \color{black} clearly must be consistent, in the sense that marginalizing $P_{\bm{U}_i}$ to the variables in $\bm{U}_i\cap\bm{U}_j$ results in the same distribution as marginalizing $P_{\bm{U}_j}$ to those variables.  
+%\footnote{This is difficult to express explicitly in our notation, since $P_{\bm{U}_i\cap \bm{U}_j}$ could refer to either marginal.}. 
+ %we have already seen in the previous section, 
+  In many cases, this is not sufficient; indeed, we have already seen examples of additional constraints, namely, the inequalities \eqref{eq:polymonogamyraw}, \eqref{eq:MIraw} and \eqref{eq:FritzF3raw} from \cref{Sec:DerivingInequalities}\footnote{Depending on how the contexts intersect with one another, this \emph{may} be sufficient. A precise characterization for when this occurs has been found by~\citet{vorobev_extension_1960}.}. 
+% To provide a complete solution,  one must determine not just necessary conditions on the family of distributions for these to arise as the marginals of a single distribution, but the necessary and sufficient conditions. \color{black}
+So what are the necessary and sufficient conditions?
+
+To answer this question, it helps to realize two things:
+\begin{itemize}
+	\item The set of possibilities for the distribution $P_{\bm{X}}$ is the convex hull of the deterministic assignments of values to $\bm{X}$ (the point distributions), and 
+%	Every joint distribution $P_{\bm{X}}$ is a convex combination of deterministic assignments of values to all variables (delta distributions), and conversely.
+	\item The map $P_{\bm{X}}\to (P_{\bm{U}_1},\ldots,P_{\bm{U}_n})$, describing marginalization to each of the contexts in $(\bm{U}_1,\ldots,\bm{U}_n)$, is linear.
+\end{itemize}
+Hence the image of the set of possibilities for the distribution $P_{\bm{X}}$ under the map $P_{\bm{X}}\to (P_{\bm{U}_1},\ldots,P_{\bm{U}_n})$ is exactly the convex hull of the deterministic assignments of values to $(\bm{U}_1,\ldots,\bm{U}_n)$ (more precisely, the deterministic assignments that are consistent where these contexts overlap). Since there are only finitely many such deterministic assignments, this convex hull is a polytope; it is called the \tblue{marginal polytope}~\cite{kahle_marginal_2010}. Together with the above equations on coinciding submarginals, the facet inequalities of the marginal polytope form necessary and sufficient conditions for the marginal problem to have a solution.
+
+%Thus solving the marginal problem is an instance of a facet enumeration problem, or equivalently a linear quantifier elimination problem;~\cref{sec:projalgorithms} gives an overview of how to solve this in practice. 
+
+
+% quantifier-free form in terms of inequalities such that satisfaction of all such inequalities is necessary and sufficient for marginal compatibility. An efficient algorithm to solve the marginal problem is given in \cref{sec:projalgorithms}. The marginal problem comes up in a variety of applications, and has been studied extensively; see~\cite{fritz2013marginal} for further references.
+
+As every facet enumeration problem, this can also be phrased as a problem of \tblue{linear quantifier elimination}. 
 The marginal problem is a linear system of equations and inequalities relating the unknown joint probabilities to the accessible marginal probabilities. The problem of quantifier elimination consists in finding an equivalent system of equations and inequalities that is satisfied if and only if the original system has a solution for the unknown probabilities. This requires eliminating 64 unknowns $\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}$ for each of the 64 choices of the values $a_1,\ldots,c_2$. The resulting new system consists of the coinciding-submarginals equations together with the facet inequalities of the marginal polytope.
 %joint probabilities $\{ \p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2} : (a_1 a_2 b_1 b_2 c_1 c_2) {\underline{\phantom{xxxxx}}}$, 
 %and to thereby compute the inequalities that constrain the marginal probabilities.
 %We coin the term gedankenprobability to denote any probability pertaining to a \emph{not}-pre-injectable set of inflation-DAG variables. The gedankenprobabilities evoke thought experiments, because any \purp{black box implementation of the original causal structure % \emph{in-principle}.
 
-It is helpful to formalize the marginal problem in terms of a \tblue{marginal description matrix} $\bm{M}$, a \tblue{marginal distribution vector} $\bm{b}$, and some unknown \tblue{joint distribution vector} $\bm{x}$. The marginal problem can the be stated as
-\begin{align}\label{eq:marginalproblemgeneric}
-    \exists {\bm{x} \geq \bm{0}} :\; \bm{M}\bm{x}=\bm{b},
-\end{align}
-where in the example we have been discussing, $\bm{M}$ would be a $48\times 64$ matrix, so that $\bm{M}\bm{x}=\bm{b}$ represents 48 equations and $\bm{x} \geq \bm{0}$ represents 64 inequalities. Note that the marginal description matrix $\bm{M}$  has only zeroes and ones as its constituent elements. In this formulation, a valid inequality---such as a facet of the marginal polytope---is represented by a vector $\bm{y}$ such that $\bm{y}^T\bm{M}\geq\bm{0}$. The marginal problem for a given distribution has a negative solution if and only if there is a valid inequality $\bm{y}$ with $\bm{y}^T\bm{b} < 0$. For if \cref{eq:marginalproblemgeneric} has a solution $\bm{x}$, then $\bm{y}^T\bm{M}\geq \bm{0}$ and $\bm{x}\geq \bm{0}$ imply $\bm{y}^T\bm{b} = \bm{y}^T\bm{M}\bm{x} \geq 0$; the other direction is Farkas' lemma. Upon substituting \cref{eq:preinjfactor} and deleting copy indices, such an inequality turns into a causal compatibility inequality.
+
+ %In this formulation, 
+ \color{blue} In terms of the formalization of the generic problem in terms of the marginal description matrix $\bm{M}$,\color{black}
+ a valid inequality---such as a facet of the marginal polytope---is represented by a vector $\bm{y}$ such that $\bm{y}^T\bm{M}\geq\bm{0}$. The marginal problem for a given distribution has a negative solution if and only if there is a valid inequality $\bm{y}$ with $\bm{y}^T\bm{b} < 0$. For if \cref{eq:marginalproblemgeneric} has a solution $\bm{x}$, then $\bm{y}^T\bm{M}\geq \bm{0}$ and $\bm{x}\geq \bm{0}$ imply $\bm{y}^T\bm{b} = \bm{y}^T\bm{M}\bm{x} \geq 0$; the other direction is Farkas' lemma. Upon substituting \cref{eq:preinjfactor} and deleting copy indices, such an inequality turns into a causal compatibility inequality.
 
 Linear quantifier elimination is already used in causal inference for deriving entropic causal compatibility inequalities \cite{chaves2014novel,chaves2014informationinference}. In that task, however, the unknowns being eliminated are entropies on sets of variables of which one or more is latent. By contrast, the unknowns being eliminated above are all probabilities on sets of variables all of which are observed---but on the inflated DAG rather than the original DAG.
 %The unknowns we eliminate are the not-pre-injectable joint probabilities, which are, at least on first look, quite different from probabilities involving latent variables;
@@ -1423,16 +1532,29 @@ Linear quantifier elimination is already used in causal inference for deriving e
 
 The marginal problem is a standard facet enumeration problem, in that the vertices of the polytope are given. The derivation of entropic inequalities, by contrast, is a priori only a linear quantifier elimination task, and more difficult to cast as a facet enumeration problem with given vertices, since the vertices (extremal rays) of the Shannon cone elude a simple description. As such, while facet enumeration tools are useful for deriving polynomial inequalities via the inflation technique, they are not directly available for the derivation of entropic inequalities; see \cref{sec:projalgorithms} for further details.
 
-\subsection{Witnessing incompatibility by non-sastisfiability of the marginal problem}\label{sec:satisfiable}
+%\subsection{Witnessing incompatibility by non-sastisfiability of the marginal problem}\label{sec:satisfiable}
 
-Given a particular distribution on observed nodes of the original DAG, one can use the inflation technique to probe causal compatibility as follows. Using \cref{mainlemma} along with the factorization conditions implied by ancestral independences among the variables in the maximal pre-injectable sets, \color{red} one can infer the distributions on the maximal pre-injectable sets that are implied by  the given  distribution on the images of these in the original DAG\color{black}; this was the first step in each example in \cref{subsec:witnessingincompat}. This amounts to having known numerical values for %the left-hand sides of the equations defining the marginal problem, such as \cref{eq:marginalequalities222}. 
+\begin{comment}
+Given a particular distribution on observed nodes of the original DAG, one can use the inflation technique to probe causal compatibility as follows. Using \cref{mainlemma} along with the factorization conditions implied by ancestral independences among the variables in the maximal pre-injectable sets, \color{red} one can infer the distributions on the maximal pre-injectable sets that are implied by  the given  distribution on the images of these in the original DAG\color{black}; this was the first step in each example in \cref{subsec:witnessingincompat}. 
+\end{comment}
+
+\color{blue} We turn now to a formalization of the marginal satisfiability problem.  In this case, the numerical values for 
+%the left-hand sides of the equations defining the marginal problem, such as \cref{eq:marginalequalities222}. 
 the marginal distribution vector $\bm{b}$
 %$\bm{b}\to\bm{b}_{\mbox{numeric}}$
- in \cref{eq:marginalproblemgeneric},  which we denote $\bm{b}_{\text{numeric}}$. A single linear program can then assess whether the marginal problem equalities, i.e., the matrix equality of \cref{eq:marginalproblemgeneric}, can be solved using nonnegative values for the unknown joint probabilities, $\bm{x} \geq \bm{0}$, or not. If the marginal problem cannot be satisfied, then the original distribution is witnessed as incompatible with the original DAG. 
+ in \cref{eq:marginalproblemgeneric} are given; we denote these by $\bm{b}_{\text{numeric}}$. \color{black} A single linear program can then assess whether the marginal problem equalities, i.e., the matrix equality of \cref{eq:marginalproblemgeneric}, can be solved using nonnegative values for the unknown joint probabilities, $\bm{x} \geq \bm{0}$, or not. If the marginal problem cannot be satisfied, then the original distribution is witnessed as incompatible with the original DAG. 
 
-As this satisfiability problem is a linear program, testing specific distributions for causal compatibility for a given inflation DAG is computationally inexpensive. For instance, using the rather complex Web inflation of the Triangle scenario, depicted in \cref{fig:TriFullDouble}, our numerical computations have reproduced the result of~\cite[Theorem~2.16]{fritz2012bell}, that a certain distribution considered therein is incompatible with the Triangle scenario\footnote{This distribution {\em is}, however, quantum-compatible with the Triangle scenario (\cref{sec:classicallity}).  It was constructed from a distribution that is quantum-compatible but classically-incompatible with the Bell scenario.}.
+As this satisfiability problem is a linear program, testing specific distributions for compatibility for a given inflation DAG is computationally inexpensive. For instance, using the rather complex Web inflation of the Triangle scenario, depicted in \cref{fig:TriFullDouble}, our numerical computations have reproduced the result of~\cite[Theorem~2.16]{fritz2012bell}, that a certain distribution considered therein is incompatible with the Triangle scenario\footnote{This distribution {\em is}, however, quantum-compatible with the Triangle scenario (\cref{sec:classicallity}).  It was constructed from a distribution that is quantum-compatible but classically-incompatible with the Bell scenario.}.
 
-When $\bm{M}\bm{x}=\bm{b}_{\text{numeric}}$ has no nonnegative solution $\bm{x}$, then the system is considered \emph{primal infeasible}. Many linear programming tools are capable of returning a \emph{Farkas infeasibility certificate} \cite{infeasibilitycertificates} whenever a linear system is primal infeasible\footnote{Farkas infeasibility certificates are available, for example, in \href[pdfnewwindow]{http://docs.mosek.com/8.0/pythonapi/optimizer-task-gety.html}{\textit{Mosek}}, \href[pdfnewwindow]{https://www.gurobi.com/documentation/6.5/refman/farkasdual.html}{\textit{Gurobi}}, and \href[pdfnewwindow]{http://www-01.ibm.com/support/docview.wss?uid=swg21400058}{\textit{CPLEX}}, as well as by accessing dual variables in \href[pdfnewwindow]{http://cvxr.com/cvx/doc/basics.html\#dual-variables}{\textit{cvxr}}/\href[pdfnewwindow]{http://cvxopt.org/userguide/coneprog.html\#linear-cone-programs}{\textit{cvxopt}}.}. This is given by the coefficient vector $\bm{y}$ of an inequality that is valid in the sense that $\bm{y}^T\bm{M}\geq \bm{0}$, but violated on the given data, $\bm{y}^T\bm{b}_{\text{numeric}} < 0$. In this way, witnessing the causal incompatibility of a given distribution via the inflation technique results also in a concrete causal incompatibility that may also have other applications.
+When $\bm{M}\bm{x}=\bm{b}_{\text{numeric}}$ has no nonnegative solution $\bm{x}$, then the system is considered \emph{primal infeasible}. Many linear programming tools are capable of returning a \emph{Farkas infeasibility certificate} \cite{infeasibilitycertificates} whenever a linear system is primal infeasible\footnote{Farkas infeasibility certificates are available, for example, in \href[pdfnewwindow]{http://docs.mosek.com/8.0/pythonapi/optimizer-task-gety.html}{\textit{Mosek}}, \href[pdfnewwindow]{https://www.gurobi.com/documentation/6.5/refman/farkasdual.html}{\textit{Gurobi}}, and \href[pdfnewwindow]{http://www-01.ibm.com/support/docview.wss?uid=swg21400058}{\textit{CPLEX}}, as well as by accessing dual variables in \href[pdfnewwindow]{http://cvxr.com/cvx/doc/basics.html\#dual-variables}{\textit{cvxr}}/\href[pdfnewwindow]{http://cvxopt.org/userguide/coneprog.html\#linear-cone-programs}{\textit{cvxopt}}.}. This is given by the coefficient vector $\bm{y}$ of an inequality that is valid in the sense that $\bm{y}^T\bm{M}\geq \bm{0}$, but violated on the given data, $\bm{y}^T\bm{b}_{\text{numeric}} < 0$. 
+%\color{blue} causal compability inequality 
+
+\color{blue} The Farkas infeasibility certificate therefore defines a causal compatibility inequality for the inflated DAG, one that is violated by the given family of distributions on the pre-injectable sets.  This inequality in turn defines a causal compatibility inequality for the original DAG that is violated by the given joint distribution.  In other words, if a numerically-specified distribution is witnessed as incompatible with a DAG using the technique we have described, then with little additional numerical effort, one can also obtain a causal compatibility inequality that exhibits the incompatibility.  
+
+This may well have applications for problems where it is numerically infeasible to obtain a complete solution of the marginal problem. 
+%In this way, witnessing the causal incompatibility of a given distribution via the inflation technique results also in a concrete causal incompatibility that may also have other applications.
+ \color{black} 
+
 
 \subsection{Causal compatibility inequalities via a complete solution of the marginal problem}\label{sec:CCineqs}
 
