@@ -691,7 +691,7 @@ To solve this problem, we consider the Cut inflation of the Triangle scenario, d
 The injectable sets in this case include $\brackets{A_2 C_1}$ and $\brackets{B_1 C_1}$.  Their images on the original DAG are $\brackets{AC}$ and $\brackets{BC}$ respectively.
 %We therefore consider the marginals on these sets.
 
-We will show that the distribution of Eq.~\eqref{eq:ghzdistribution1} is not compatible with the Triangle scenario by demonstrating that the contrary assumption of compatibility implies a contradiction. If the distribution of Eq.~\eqref{eq:ghzdistribution1} is compatible with the Triangle scenario, then so are its marginals on $\brackets{AC}$ and $\brackets{BC}$, which are given by:
+We will show that the distribution of \cref{eq:ghzdistribution1} is not compatible with the Triangle scenario by demonstrating that the contrary assumption of compatibility implies a contradiction. If the distribution of Eq.~\eqref{eq:ghzdistribution1} is compatible with the Triangle scenario, then so are its marginals on $\brackets{AC}$ and $\brackets{BC}$, which are given by:
 \begin{align*}
 P_{A C} = P_{B C} = \frac{[00]+[11]}{2}.
 \end{align*}
@@ -1173,7 +1173,7 @@ This section considers the problem of how to implement this procedure systematic
 In addition to providing a means of systematizing the derivation of causal compatibiity inequalities for a DAG, the concept of pre-injectable set also provides a mean of systematizing the problem of witnessing the incompatibility of a given distribution with a DAG.  This is done as follows.
 %plays a critical role not only in deriving causal compatibility inequalities but of {\em witnessing} incompatibility as well.
 
-For any given distribution on the observed variables of the original DAG, one can determine the distribution on each pre-injectable set of the inflated DAG using corollary \label{}.  One then asks whether this family of distributions are the marginals of a single joint distribution on the observed variables of the inflated DAG.  
+For any given distribution on the observed variables of the original DAG, one can determine the distribution on each pre-injectable set of the inflated DAG using \cref{maincorollary}.  One then asks whether this family of distributions are the marginals of a single joint distribution on the observed variables of the inflated DAG.  
 
 While the term ``marginal problem'' refers to deriving inequalities on a family of marginal distributions that are necessary conditions for the family to arise as the marginals of a single joint distribution, the problem of determining whether a family of numerically-specified marginal distributions arise as the marginals of a single joint distribution we will term the ``marginal satisfiability problem''.
 
@@ -1194,7 +1194,7 @@ The logic of the argument is the same up to Eq.~\eqref{ghzmarginals}, that is, w
 \begin{equation}
 P_{A_2 C_1} = P_{B_1 C_1} = \frac{1}{2} [00] +\frac{1}{2} [11]\label{marginals1}
 \end{equation}
-from the given distribution on the original DAG, Eq.~\eqref{ghzdistribution1}, and corollary \ref{}. 
+from the given distribution on the original DAG, \cref{eq:ghzdistribution1}, and \cref{maincorollary}. 
 It follows from Eq.~\eqref{marginals1} that the marginals on the injectable sets $\{ A_2\}$ and $\{ B_1\}$ are 
 %one infers that and consequently that
 \begin{equation}
@@ -1436,9 +1436,9 @@ Substantially easier than this is the problem is determining, for a numerically-
 
 
 %More precisely, a \emph{marginal problem} is specified by 
-To specify \color{blue} either sort of marginal problem \color{black},
+To specify \color{blue} either sort of marginal problem\color{black}, 
 %such a problem, 
- one must specify the full set of variables to be considered, denoted $\bm{X}$, together with a family of subsets of $\bm{X}$, denoted $(\bm{U}_1,\ldots,\bm{U}_n)$ and called \tblue{contexts}.
+one must specify the full set of variables to be considered, denoted $\bm{X}$, together with a family of subsets of $\bm{X}$, denoted $(\bm{U}_1,\ldots,\bm{U}_n)$ and called \tblue{contexts}.
 %, as well as a specification of the (finite) number of outcomes that each variable is allowed to take. 
 A family of contexts can be visualized through 
 %It may help to draw the visualize contexts in terms of 
@@ -1522,9 +1522,9 @@ The marginal problem is a linear system of equations and inequalities relating t
 %We coin the term gedankenprobability to denote any probability pertaining to a \emph{not}-pre-injectable set of inflation-DAG variables. The gedankenprobabilities evoke thought experiments, because any \purp{black box implementation of the original causal structure % \emph{in-principle}.
 
 
- %In this formulation, 
- \color{blue} In terms of the formalization of the generic problem in terms of the marginal description matrix $\bm{M}$,\color{black}
- a valid inequality---such as a facet of the marginal polytope---is represented by a vector $\bm{y}$ such that $\bm{y}^T\bm{M}\geq\bm{0}$. The marginal problem for a given distribution has a negative solution if and only if there is a valid inequality $\bm{y}$ with $\bm{y}^T\bm{b} < 0$. For if \cref{eq:marginalproblemgeneric} has a solution $\bm{x}$, then $\bm{y}^T\bm{M}\geq \bm{0}$ and $\bm{x}\geq \bm{0}$ imply $\bm{y}^T\bm{b} = \bm{y}^T\bm{M}\bm{x} \geq 0$; the other direction is Farkas' lemma. Upon substituting \cref{eq:preinjfactor} and deleting copy indices, such an inequality turns into a causal compatibility inequality.
+%In this formulation, 
+\color{blue} In terms of the formalization of the generic problem in terms of the marginal description matrix $\bm{M}$,\color{black} 
+a valid inequality---such as a facet of the marginal polytope---is represented by a vector $\bm{y}$ such that $\bm{y}^T\bm{M}\geq\bm{0}$. The marginal problem for a given distribution has a negative solution if and only if there is a valid inequality $\bm{y}$ with $\bm{y}^T\bm{b} < 0$. For if \cref{eq:marginalproblemgeneric} has a solution $\bm{x}$, then $\bm{y}^T\bm{M}\geq \bm{0}$ and $\bm{x}\geq \bm{0}$ imply $\bm{y}^T\bm{b} = \bm{y}^T\bm{M}\bm{x} \geq 0$; the other direction is Farkas' lemma. Upon substituting \cref{eq:preinjfactor} and deleting copy indices, such an inequality turns into a causal compatibility inequality.
 
 Linear quantifier elimination is already used in causal inference for deriving entropic causal compatibility inequalities \cite{chaves2014novel,chaves2014informationinference}. In that task, however, the unknowns being eliminated are entropies on sets of variables of which one or more is latent. By contrast, the unknowns being eliminated above are all probabilities on sets of variables all of which are observed---but on the inflated DAG rather than the original DAG.
 %The unknowns we eliminate are the not-pre-injectable joint probabilities, which are, at least on first look, quite different from probabilities involving latent variables;
@@ -1540,9 +1540,9 @@ Given a particular distribution on observed nodes of the original DAG, one can u
 
 \color{blue} We turn now to a formalization of the marginal satisfiability problem.  In this case, the numerical values for 
 %the left-hand sides of the equations defining the marginal problem, such as \cref{eq:marginalequalities222}. 
-the marginal distribution vector $\bm{b}$
+the marginal distribution vector $\bm{b}$ 
 %$\bm{b}\to\bm{b}_{\mbox{numeric}}$
- in \cref{eq:marginalproblemgeneric} are given; we denote these by $\bm{b}_{\text{numeric}}$. \color{black} A single linear program can then assess whether the marginal problem equalities, i.e., the matrix equality of \cref{eq:marginalproblemgeneric}, can be solved using nonnegative values for the unknown joint probabilities, $\bm{x} \geq \bm{0}$, or not. If the marginal problem cannot be satisfied, then the original distribution is witnessed as incompatible with the original DAG. 
+in \cref{eq:marginalproblemgeneric} are given; we denote these by $\bm{b}_{\text{numeric}}$. \color{black} A single linear program can then assess whether the marginal problem equalities, i.e., the matrix equality of \cref{eq:marginalproblemgeneric}, can be solved using nonnegative values for the unknown joint probabilities, $\bm{x} \geq \bm{0}$, or not. If the marginal problem cannot be satisfied, then the original distribution is witnessed as incompatible with the original DAG. 
 
 As this satisfiability problem is a linear program, testing specific distributions for compatibility for a given inflation DAG is computationally inexpensive. For instance, using the rather complex Web inflation of the Triangle scenario, depicted in \cref{fig:TriFullDouble}, our numerical computations have reproduced the result of~\cite[Theorem~2.16]{fritz2012bell}, that a certain distribution considered therein is incompatible with the Triangle scenario\footnote{This distribution {\em is}, however, quantum-compatible with the Triangle scenario (\cref{sec:classicallity}).  It was constructed from a distribution that is quantum-compatible but classically-incompatible with the Bell scenario.}.
 
@@ -2098,7 +2098,7 @@ Some evidence against such sufficiency is that we have not seen a way to use the
 % The most elementary of all causal infeasibility criteria are the conditional independence (CI) relations. Our method explicitly incorporates all marginal independence relations implied by a causal structure. We have found that some CI relations also appear to be implied by our polynomial inequalities. In future research we hope to clarify the process through which CI relations are manifested as properties of the inflated DAG.
 
 %\purp{T: yes, this should be moved, to some place where also the second to last paragraph goes. Maybe end of introduction, a paragraph on related work?}
->>>>>>> 6287c6ebe884841454b3f49e9f2d3badefc85f8f
+%>>>>>>> 6287c6ebe884841454b3f49e9f2d3badefc85f8f
 
 We have described how the inflation technique can enhance the power of many diffferent techniques for deriving causal compatibility inequalities and witnessing incompatibility, by applying the latter technique to the inflated DAG and using \cref{mainlemma} or \cref{maincorollary}.  The computational difficulty of achieving this enhancement depends on the seed technique.  We summarize the computational difficulty of the approaches that we have considered in~\cref{table:difficulties}. While this focuses on deriving inequalities, the same table applies \emph{mutatis mutandis} to the satisfiability problem. 
 %We've noted that there is a prospect for using the inflation technique to leverage arbitrary $d$-separation conditions on the inflated DAG, but this requires nonlinear quantifier elimination.  
