@@ -758,46 +758,32 @@ Of the known techniques for witnessing the incompatibility of a distribution wit
 The constraints derived in the last two sections have all made use of this basic technique, but at the level of the inflated DAG rather than the original DAG.  The constraints that one thereby infers for the original DAG reflect facts about its causal structure that cannot be expressed in terms of ancestral independences among its observed variables.  The inflation technique exposes these facts in the ancestral independences among observed variables of the inflated DAG.
 
 In the rest of this article, we shall continue to rely only on the ancestral independences among observed variables within the inflated DAG to infer compatibility constraints on the original DAG.   Nonetheless, it seems plausible that the inflation technique can also amplify the power of {\em other} techniques that do not merely consider ancestral independences among the observed variables.  We consider some prospects in \cref{sec:otherprospects}.
-%   This question, however, is left for future research.
-%any tricks that can be used to infer incompatibility or provide a necessary condition for compatibility in the inflation version of the problem can be used to infer incompatibility or provide a necessary condition for compatibility in the original version of the problem. 
-%  The most straightforward of these tricks are to consider the ancestral independences in the inflated DAG.   Because inflation tends to introduce ancestral independences than are not found in the original DAG, even these most straightforward of tricks can be leveraged to obtain nontrivial constraints.  
-
-%The fact that the inflated DAG often has ancestral independences which have no analogue in the original DAG, each of which has nontrivial consequences, is what makes the technique effective. 
-% and which imply nontrivial consequences. 
-%can be leveraged to infer incompability or provide necessary conditions for compatibility. 
-%than were the original DAG is what provides novel opportunities for  deriving 
-%has a richer structure tends to make for more such opportunites for easy constraints. 
-
-%In all of these examples, the inequality with which one starts---a constraint upon marginals that is independent of the causal structure---involves sets of observed variables that are not all injectable.  Each of these sets can, however, be partitioned into disjoint subsets each of which {\em is} injectable where the partitioning represents ancestral independence in the inflated DAG.  It is useful to have a name for such sets of observed variables: we will call them {\em pre-injectable}.  We begin by defining this notion carefully before describing our general inflation technique. 
-%\color{black}
 
 \section{Systematically Witnessing Incompatibility and Deriving Inequalities}
 \label{sec:ineqs}
 
-%\subsection{Pre-injectable sets}
-
 In the examples from the previous section, the initial inequality---a constraint upon marginals that is independent of the causal structure---involves sets of observed variables that are \emph{not} all injectable sets.  Each of these sets can, however, be partitioned into disjoint subsets each of which {\em is} injectable such that the partitioning represents ancestral independence in the inflated DAG. For instance in \cref{example:noGHZ}, the set $\{ A_2 B_1\}$ is not injectable, but it can be partitioned into the singleton sets $\{ A_2 \}$ and $\{ B_1\}$ which are ancestrally independent and each of which is injectable.  It is useful to have a name for such sets of observed variables: we call them \tblue{pre-injectable}. So for any $\bm{U}'$ in the inflated DAG $G'$,
 \begin{align}\label{eq:defpreinj}
-\bm{U}'\in\SmallNamedFunction{PreInjectableSets}{G'} \quad\text{ iff }\quad  \exists \{ \bm{U}_i \in \SmallNamedFunction{InjectableSets}{G'} \} \quad \text{s.t.}\quad \bm{U}'=\bigcup_i \bm{U}_i  \quad\text{and} \quad  \forall i\ne j: \bm{U}_i \aindep_{G'} \bm{U}_j.
-%\bm{U}\in\SmallNamedFunction{PreInjectableSets}{G'} \quad\text{ iff }\quad  \exists \{ \bm{U}_i \}_i \quad \text{s.t.}\quad \bm{U}=\bigcup_i \bm{U}_i  \quad\text{and} \quad \forall i 
-%: \bm{U}_i \in \SmallNamedFunction{InjectableSets}{G'}\quad \text{and}\quad \forall i,j
-%: \bm{U}_i \aindep \bm{U}_j.
+\begin{split}
+\bm{U}'\in & \SmallNamedFunction{PreInjectableSets}{G'} \\
+	& \quad\text{ iff }\quad  \exists \{ \bm{U}'_i \in \SmallNamedFunction{InjectableSets}{G'} \} \quad \text{s.t.}\quad \bm{U}'=\bigcup_i \bm{U}'_i  \quad\text{and} \quad  \forall i\ne j: \bm{U}'_i \aindep_{G'} \bm{U}'_j.
+\end{split}
 \end{align}
-%Equivalently, a set of nodes is pre-injectable if and only if its (weakly) connected components are injectable. 
-For example, every injectable set is trivially a pre-injectable set.  A pre-injectable set is \emph{maximal} if it is not a proper subset of another pre-injectable set.
+For example, every injectable set is trivially pre-injectable.  A pre-injectable set is \emph{maximal} if it is not a proper subset of another pre-injectable set.
 
-Because ancestral independence in the DAG implies statistical independence for any probability distribution compatible with the DAG, it follows that  if 
-$\bm{U}'$ is a pre-injectable set and $\bm{U}_1,\bm{U}_2,\ldots,\bm{U}_n$ are the ancestrally independent components of $\bm{U}'$, then 
+Because ancestral independence in the DAG implies statistical independence for any distribution compatible with the DAG, it follows that  if 
+$\bm{U}'$ is a pre-injectable set with ancestrally independent components $\bm{U}'_1,\ldots,\bm{U}'_n$, then we have the factorization
 \begin{align}\label{eq:preinjfactor}
 %\forall \bm{U}\in\SmallNamedFunction{PreInjectableSets}{G'}:	
-P_{\bm{U}'} = P_{\bm{U}_1} P_{\bm{U}_2} \cdots P_{\bm{U}_n}
+P_{\bm{U}'} = P_{\bm{U}'_1} \cdots P_{\bm{U}'_n}
 \end{align}
 for any distribution compatible with $G'$. The situation, therefore, is this: for any constraint that one can derive for the marginals on the pre-injectable sets based on the existence of a joint distribution---and hence without reference to the causal structure---one can infer a constraint that {\em does} refer to the causal structure by substituting within the derived constraint a factorization of the form of~\cref{eq:preinjfactor}.  
 
-Thus the pre-injectable sets play a crucial role in linking the original DAG with the inflated DAG: they are precisely those sets of variables whose joint distributions in the inflated model are fully specified by the causal model on the original DAG: they can be computed using \cref{mainlemma} and \cref{eq:preinjfactor}. 
+Thus the pre-injectable sets play a crucial role in linking the original DAG with the inflated DAG: they are precisely those sets of variables whose joint distributions in the inflation model are fully specified by the causal model on the original DAG: they can be computed using \cref{mainlemma} and \cref{eq:preinjfactor}. 
 
-The problem of determining the constraints on marginals that follow from the existence of a joint distribution is known as the {\em marginal problem}. Thus, we can summarize the situation as follows: an inequality derived from the marginal problem, after applying the factorizations of~\cref{eq:preinjfactor}, becomes a causal compatibility inequality for the inflated DAG. The latter inequality can then be converted into a polynomial causal compatibility inequality for the original DAG using \cref{maincorollary}.
-%We have defined causal inference as a decision problem, namely testing the consistency of some observational data with some some causal hypothesis. We have shown that this decision can sometimes be negatively answered by proxy, namely by demonstrating inconsistency of \emph{inflated} data with an \emph{inflated} hypothesis. But the inflation technique is more useful than that: we can also derive explicit \emph{inequalities} that a distribution on observable nodes needs to satisfy in order to be compatible with the causal structure. % Any such constraint is also an implicit consequence of the original hypothesis, and hence a relevant infeasibility criterion.
+he problem of determining whether a given family of marginal distributions can arise as marginals of some joint distribution is known as the {\em marginal problem}. A closely related problem is to determine necessary and sufficient \emph{constraints} that a family of marginal distributions must satisfy in order for the marginal problem to have a solution. For better clarity, we distinguish these two variants of the marginal problem as the \tblue{marginal satisfiability problem} and the \tblue{marginal constraint problem} and defer a more detailed discussion until later.
+
+Thus, we can summarize the situation as follows: an inequality derived from the marginal problem, after applying the factorizations of~\cref{eq:preinjfactor}, becomes a causal compatibility inequality for the inflated DAG. The latter inequality can then be converted into a polynomial causal compatibility inequality for the original DAG using \cref{maincorollary}.
 This section considers the problem of how to implement this procedure systematically.
 
 We will limit our attention to deriving causal compatibility inequalities expressed in terms of probabilities\footnote{Or, for binary variables, equivalently in terms of correlators, as in the first example of \cref{Sec:DerivingInequalities}.}, as these are generally the most powerful. However, the inflation technique can also be used to derive inequalities expressed in terms of entropies, as our second example from the previous section demonstrated. Indeed, we show in \cref{sec:NonShannon} that the inflation technique implies the core lemma for deriving non-Shannon-type inequalities.
