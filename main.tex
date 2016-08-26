@@ -1,63 +1,27 @@
-%\begin{filecontents}
-%  @CONTROL{apsrev41Control,title="0"%,author="48",editor="1",pages="1",year="0"}
-%\end{filecontents}
-\RequirePackage[l2tabu, orthodox]{nag}
-\RequirePackage{fixltx2e}
-\RequirePackage{fix-cm}
-\PassOptionsToPackage{pdftex,psdextra=true,
-pdfversion=1.7,
-pdfencoding=auto,
-pdfnewwindow=true,
-pdfusetitle=true,
-psdextra=true,
-%pdftoolbar=true,
-%pdfmenubar=true,
-bookmarks=true,
-bookmarksnumbered=true,
-bookmarksopen=true,
-pdfpagemode=UseThumbs,
-bookmarksopenlevel=1,
-pdfpagelabels=false
-}{hyperref}
-\PassOptionsToPackage{usenames,dvipsnames}{xcolor}
 \documentclass[aps,english,superscriptaddress,onecolumn,twoside,longbibliography,pra,floatfix,fleqn,nofootinbib]{revtex4-1}%
 
-\usepackage[utf8]{inputenx}% for arXiv use encoding ansinew
-\input{ix-utf8enc.dfu}
-%\usepackage[utf8x]{inputenc}% for arXiv use encoding ansinew
-%\usepackage{utf8mathlite}% custom style sheet for unicode-ish math
-%\usepackage{newunicodechar}
-%\newunicodechar{∫}{\int}
-%\usepackage{unicode-math}
+% packages
 \usepackage[OT1]{fontenc}
-\usepackage{ucs} %for unichar
-
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage[intlimits,fleqn]{amsmath}
-%\usepackage{mathdots}
-\usepackage{graphicx}%
-\usepackage{placeins} %for FloatBarrier
-\usepackage{afterpage} %for FloatBarrier in afterpage wrapper
-%\usepackage{flushend}
-%\usepackage{dblfloatfix}
+\usepackage{bm}
+\usepackage{graphicx}
 \usepackage[normalem]{ulem} %for sout
-\usepackage[raggedright,bf,nooneline]{subfigure}
-\renewcommand{\thesubfigure}{\alph{subfigure}}
 \usepackage{paralist}
-
-%\usepackage{ellipsis}
+\usepackage{microtype}
 \usepackage{float}% (not with floatrow)
 \usepackage{wrapfig}
-%\usepackage{floatrow}
-
+\usepackage{verbatim} %for comment command
 \usepackage{array}
 \usepackage{ragged2e}%for justifying text in tables
 \usepackage{tabularx}
-\def\tabularxcolumn#1{m{#1}}
 \usepackage{booktabs}
-%\usepackage{tabulary}
+\usepackage{showkeys}
+\usepackage[intlimits,fleqn]{mathtools} %for mathclap and prescript and more. Learning to love this package. And DeclarePairDelimeter!
+
+% tables stuff
 \newcolumntype{R}{>{\raggedleft\arraybackslash}X}
 \newcolumntype{C}{>{\centering\arraybackslash}X}
 \newcolumntype{L}{>{\raggedright\arraybackslash}X}
@@ -69,231 +33,86 @@ pdfpagelabels=false
     l%
     <{\egroup}%
 }
-\newcommand*\rot{\multicolumn{1}{T{90}{1em}}}% no optional argument here, please!
-
 \setcounter{MaxMatrixCols}{30}
-\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
-%EndMSIPreambleData
-\newtheorem{theorem}{Theorem}
-\newtheorem{acknowledgement}[theorem]{Acknowledgement}
-\newtheorem{algorithm}[theorem]{Algorithm}
-\newtheorem{axiom}[theorem]{Axiom}
-\newtheorem{claim}[theorem]{Claim}
-\newtheorem{conclusion}[theorem]{Conclusion}
-\newtheorem{condition}[theorem]{Condition}
-\newtheorem{conjecture}[theorem]{Conjecture}
-\newtheorem{corollary}[theorem]{Corollary}
-%\newtheorem{corollary}{Corollary}[theorem] - subindexing, not used here
-\newtheorem{criterion}[theorem]{Criterion}
-\newtheorem{definition}[theorem]{Definition}
-%\newtheorem{example}[theorem]{Example}
-\newtheorem{exercise}[theorem]{Exercise}
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{notation}[theorem]{Notation}
-\newtheorem{problem}[theorem]{Problem}
-\newtheorem{prop}{Proposition}
-\newtheorem{taut}{Tautology}
-\newtheorem{remark}[theorem]{Remark}
-\newtheorem{solution}[theorem]{Solution}
-\newtheorem{summary}[theorem]{Summary}
-%\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
 
-% hyperlink stuff
+% colours and hyperlink stuff
 \usepackage[usenames,dvipsnames]{xcolor}
+\definecolor{purple}{RGB}{128,0,128}
 \definecolor{ultramarine}{RGB}{63, 0, 255}
 \definecolor{medblue}{RGB}{0, 0, 100}
 \definecolor{panblue}{RGB}{0,24,150}
 \definecolor{carmine}{RGB}{150, 0, 24}
+\definecolor{gray}{RGB}{150, 150, 150}
 \usepackage[breaklinks=true]{hyperref}
 \hypersetup{colorlinks,
 linkcolor=carmine,
 citecolor=medblue,
 urlcolor=panblue,
 anchorcolor=OliveGreen}
-%\usepackage{url}
 
-\definecolor{purple}{RGB}{128,0,128}
-\definecolor{PURPLE}{RGB}{128,0,128}
-\definecolor{BLACK}{RGB}{0,0,0}
-\definecolor{ultramarine}{RGB}{63, 0, 255}
-\definecolor{medblue}{RGB}{0, 0, 100}
-\definecolor{panblue}{RGB}{0,24,150}
-\definecolor{carmine}{RGB}{150, 0, 24}
-\definecolor{gray}{RGB}{150, 150, 150}
-
-\newcommand{\purp}[1]{{\color{purple}{#1}\color{black}}}
+% coloured text
 \newcommand*{\mred}[1]{{\color{RawSienna}{\mathbf{#1}}}}
-\newcommand*{\mblue}[1]{{\color{MidnightBlue}{\ensuremath{#1}}}}
-\newcommand*{\mpurp}[1]{{\color{Plum}{\mathbf{#1}}}}
 \newcommand*{\mgreen}[1]{{\color{OliveGreen}{\mathbf{#1}}}}
 \newcommand*{\tred}[1]{{\color{carmine}{\textbf{#1}}}}
 \newcommand*{\tblue}[1]{{\color{MidnightBlue}{\textbf{#1}}}}
 \newcommand*{\tpurp}[1]{{\color{Plum}{\textbf{#1}}}}
-\newcommand*{\tgreen}[1]{{\color{Sepia}{\textbf{#1}}}}
 
-\newcommand{\quoteby}{\raise.17ex\hbox{$\scriptstyle\sim$}}
-
-\usepackage{verbatim} %for comment command
-\usepackage{units}% for nicefrac
-\usepackage{xfrac}% for sfrac
-\newcommand{\half}[1]{\nicefrac{#1}{2}}
-
-%\usepackage{braket} %provide \bra and \Bra and \set and \Set etc...
-%\newcommand{\brackets}[1]{\lbrace{#1\rbrace}}
-%\newcommand{\brackets}{\Set}
-
-
-
-\usepackage{microtype}
-%\usepackage{MnSymbol}
-%\usepackage{mathabx}
-
+% cleveref stuff
 \usepackage[capitalise]{cleveref}
 \Crefname{eqs}{Eqs.}{Eqs.}
-
 \creflabelformat{eqs}{(#2#1#3)}
 \crefrangelabelformat{equation}{(#3#1#4-#5#2#6)}
-%\crefmultiformat{equation}{eqs.~(#2#1#3)}{ and~(#2#1#3)}{, (#2#1#3)}{ and~(#2#1#3)}
 \Crefmultiformat{equation}{Eqs.~(#2#1#3}{,#2#1#3)}{,#2#1#3}{,#2#1#3)}
 \crefrangelabelformat{eqs}{(#3#1#4-#5#2#6)}
 \Crefmultiformat{eqs}{Eqs.~(#2#1#3}{,#2#1#3)}{,#2#1#3}{,#2#1#3)}
-\Crefname{prop}{\textbf{Prop}.}{\textbf{Props}.}
-\Crefname{taut}{\textbf{Taut}.}{\textbf{Tauts}.}
+\Crefname{example}{Example}{Examples}
 \Crefname{section}{Sec.}{Secs.}
 
-%\Crefname{ineq}{Ineq.}{Ineqs.}
-%\creflabelformat{ineq}{(#2#1#3)}
-%\crefrangelabelformat{ineq}{(#3#1#4-#5#2#6)}
-%\Crefmultiformat{ineq}{Ineqs.~(#2#1#3}{,#2#1#3)}{,#2#1#3}{,#2#1#3)}
+% theorem environments
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{remark}[theorem]{Remark}
 
-%\Crefname{ineqs}{Ineqs.}{Ineqs.}
-%\creflabelformat{ineqs}{(#2#1#3)}
-%\crefrangelabelformat{ineqs}{(#3#1#4-#5#2#6)}
-%\Crefmultiformat{ineqs}{Ineqs.~(#2#1#3}{,#2#1#3)}{,#2#1#3}{,#2#1#3)}
-
-\newenvironment{topic}[1][]{\par\medskip\noindent\textbf{\rmfamily#1}}{\par\medskip\par}
-
-\newcounter{step}[section]
-\newenvironment{step}[1][]{\refstepcounter{step}\par\medskip
-   \noindent \textbf{Step~\thestep}\rmfamily#1}{\par\medskip\par}
-%\newenvironment{step}[1][Step]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
-\Crefname{step}{Step}{Steps}
-\creflabelformat{step}{#2#1#3}
-\crefrangelabelformat{step}{#3#1#4-#5#2#6}
-\Crefmultiformat{step}{Steps.~#2#1#3}{,#2#1#3}{,#2#1#3}{,#2#1#3}
-\renewcommand{\thestep}{\arabic{step}}
-
-
-\newcounter{example}[section]
-\newenvironment{example}[1][]{\refstepcounter{example}\par\medskip
-   \noindent \textbf{Example~\theexample}\rmfamily#1}{\par\medskip\par}
-%\newenvironment{step}[1][Step]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
-\Crefname{example}{Example}{Examples}
-\creflabelformat{example}{#2#1#3}
-\crefrangelabelformat{example}{#3#1#4-#5#2#6}
-\Crefmultiformat{example}{Examples~#2#1#3}{, #2#1#3}{, #2#1#3 }{and #2#1#3}
-\renewcommand{\theexample}{\arabic{example}}
-
-
-\usepackage[intlimits,fleqn]{mathtools} %for mathclap and prescript and more. Learning to love this package. And DeclarePairDelimeter!
-\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
-\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+% macros for our notation
+\newcommand{\p}[2][]{{P_{#1}}\parenths{#2}}
+\newcommand{\pfunc}[1]{P_{#1}}
+\newcommand{\An}[2][]{{\mathsf{An}_{#1}}\parenths{#2}}
+\newcommand{\Pa}[2][]{{\mathsf{Pa}_{#1}}\parenths{#2}}
+\newcommand{\Ch}[2][]{{\mathsf{Ch}_{#1}}\parenths{#2}}
+\newcommand{\SmallNamedFunction}[3][]{\operatorname{\mathsf{#2}}_{#1}\parenths{#3}}
+\newcommand{\subgraph}[2][]{\SmallNamedFunction[#1]{SubDAG}{#2}}
+\newcommand{\ansubgraph}[2][]{\SmallNamedFunction[#1]{AnSubDAG}{#2}}
+\newcommand{\nodes}[1]{\SmallNamedFunction{Nodes}{#1}}
+\newcommand{\obsnodes}[1]{\SmallNamedFunction{ObservedNodes}{#1}}
+\newcommand{\latnodes}[1]{\SmallNamedFunction{LatentNodes}{#1}}
+\newcommand{\edges}[1]{\SmallNamedFunction{Edges}{#1}}
+\newcommand{\aindep}{\perp} % for d-separation
+\newcommand{\indep}{\perp\!\!\!\!\perp} % (conditional) independence
+\newcommand{\cramp}[1]{\ensuremath{\mathord{#1}}}
+\newcommand{\eql}{\cramp{=}}
+\newcommand{\neql}{\cramp{\neq}}
 \DeclarePairedDelimiter{\parens}{\lparen}{\rparen}
 \DeclarePairedDelimiter{\parenths}{\lparen}{\rparen}
-\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
-\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
 \DeclarePairedDelimiter{\braces}{\lbrace}{\rbrace}
 \DeclarePairedDelimiter{\bracks}{\lbrack}{\rbrack}
 \DeclarePairedDelimiter{\expec}{\langle}{\rangle}
 \newcommand{\brackets}[1]{\braces*{#1}}
 
-%\usepackage{nath} %automatically pair delimiters. Provides \inline and \displayed. Adjusts \frac and /
-
-%\newcommand{\na}{\ensuremath{\mathring{a}}}
-%\newcommand{\nb}{\ensuremath{\mathring{b}}}
-%\newcommand{\nc}{\ensuremath{\mathring{c}}}
-\newcommand{\na}{\ensuremath{\overline{a}}}
-\newcommand{\nb}{\ensuremath{\overline{b}}}
-\newcommand{\nc}{\ensuremath{\overline{c}}}
-
-\newcommand{\naf}{\ensuremath{\lnot a}}
-\newcommand{\nbf}{\ensuremath{\lnot b}}
-\newcommand{\ncf}{\ensuremath{\lnot c}}
-
-\newcommand{\n}[1]{\ensuremath{\overline{#1}}}
-\newcommand{\ot}[1]{\ensuremath{\overline{#1}}}
-\newcommand{\Nor}[1]{\operatorname{\mathsf{Nor}}\!\bracks*{#1}}
-
-\newcommand{\larray}[1]{\ensuremath{\begin{array}{l}#1\end{array}}}
-\newcommand{\lparens}[1]{\ensuremath{\parens*{\larray{#1}}}}
-%\newcommand{\NamedFunction}[2]{\operatorname{\mathsf{#1}}\!\bracks*{#2}}
-%\newcommand{\NamedFunction}[2]{\operatorname{\mathsf{#1}}\!\bracks*{\larray{#2}}}
-\newcommand{\NamedFunction}[2]{\operatorname{\mathsf{#1}}\!\begin{bmatrix*}[l]#2\end{bmatrix*}}
-%\newcommand{\SmallNamedFunction}[2]{\operatorname{\mathsf{#1}}\bracks{#2}}
-\newcommand{\SmallNamedFunction}[3][]{{\operatorname{\mathsf{#2}}_{#1}}\bracks{#3}}
-\newcommand{\nap}{\ensuremath{a'}}
-\newcommand{\nbp}{\ensuremath{b'}}
-\newcommand{\ncp}{\ensuremath{c'}}
-\newcommand{\napp}{\ensuremath{a''}}
-\newcommand{\nbpp}{\ensuremath{b''}}
-\newcommand{\ncpp}{\ensuremath{c''}}
-
-\newcommand{\p}[2][]{{P_{#1}}\parenths{#2}}
-%\newcommand{\pdf}[1]{\operatorname{\mathsf{PDF}}\!\parenths{#1}}
-\newcommand{\pdf}[2][]{{P_{#1}}\parenths{#2}}
-\newcommand{\pdfp}[2][]{{P_{#1}}^{\prime}\parenths{#2}}
-\newcommand{\pfunc}[1]{P_{#1}}
-\newcommand{\An}[2][]{{\mathsf{An}_{#1}}\parenths{#2}}
-\newcommand{\Pa}[2][]{{\mathsf{Pa}_{#1}}\parenths{#2}}
-\newcommand{\Ch}[2][]{{\mathsf{Ch}_{#1}}\parenths{#2}}
-\newcommand{\subgraph}[2][]{{\operatorname{\mathsf{SubDAG}}_{#1}}\parenths[\big]{#2}}
-\newcommand{\ansubgraph}[2][]{{\operatorname{\mathsf{AnSubDAG}}_{#1}}\parenths[\big]{#2}}
-\newcommand{\pasubgraph}[2][]{{\operatorname{\mathsf{PaSubDAG}}_{#1}}\parenths[\big]{#2}}
-\newcommand{\nodes}[1]{\SmallNamedFunction{Nodes}{#1}}
-\newcommand{\edges}[1]{\SmallNamedFunction{Edges}{#1}}
-\newcommand{\namedand}[1]{\SmallNamedFunction{And}{#1}}
-\newcommand{\namedor}[1]{\SmallNamedFunction{Or}{#1}}
-%\newcommand{\aindep}{\ensuremath{\mathrel{\mathopen{\Lsh}{\scriptstyle\emptyset}\mathclose{\Rsh}}}}
-\newcommand{\aindep}{\perp}
-
-%\newcommand{\subsim}[1]{\substack{\textstyle #1\\[-0.3ex]\sim}}
-%\newcommand{\subsim}{\utilde}
-%\def\subsim#1{\mathord{\vtop{\ialign{##\crcr
-%$\hfil\displaystyle{#1}\hfil$\crcr\noalign{\kern1.5pt\nointerlineskip}
-%$\hfil\tilde{}\hfil$\crcr\noalign{\kern1.5pt}}}}}
-\newcommand{\subsim}[1]{\tilde{#1}}
-
-\newcommand{\cramp}[1]{\ensuremath{\mathord{#1}}}
-%\newcommand{\cramp}[1]{\ensuremath{\mathopen{}#1\mathclose{}}} oldway. New way is better.
-\newcommand{\eql}{\cramp{=}}
-\newcommand{\neql}{\cramp{\neq}}
-
-\usepackage{bm}
-\newcommand{\setlambda}{\bm{\lambda}}
-
-
-%%%% Tobias: to mark my edits and stuff
-\usepackage{showkeys}
-\usepackage[draft]{fixme}
-\newcommand{\btob}{\color{OliveGreen}}
-\newcommand{\etob}{\color{black}}
-
-% vertical spacing in multiline equations
+% more vertical spacing in multiline equations
 \setlength{\jot}{6pt}
 
 
 
-\let\stdsection\section
-%\renewcommand\section{\clearpage\stdsection}%every section new page
-%\usepackage{titlesec}
 
-\makeatletter
-\def\p@subsection{\thesection-}
-\makeatother
-
-
-
-\def\indep{\perp\!\!\!\!\perp}
 
 \begin{document}
 
@@ -320,31 +139,11 @@ anchorcolor=OliveGreen}
 The fundamental problem of causal inference is to determine whether or not a given probability distribution over observed variables is compatible with some causal structure. In the presence of latent variables, this is a challenging problem for which checking conditional independences is not enough. We here introduce a technique for witnessing the incompatibility of a given distribution with a given causal structure containing latent variables. It consists of  {\em inflating} the causal structure to a new one that can contain multiple copies of each of the original variables.
 
 It is also desirable to derive inequalities whose violation by a distribution witnesses the incompatibility of that distribution with the causal structure. Prominent examples of such ``causal compatibility inequalities'' are Bell inequalities and Pearl's instrumental inequality.
-% but these each pertain to only a single specific causal structure.  
-%Such inequalities arise in many fields.  
-%The problem of causal inference via incompatibility witnesses comes up in many fields. Special causal compatibility inequalities are Bell inequalities (which distinguish non-classical from classical distributions) and Tsirelson inequalities (which distinguish quantum from post-quantum distributions), and Pearl's instrumental inequality. All of these are limited to very specific causal structures. 
-%Analogues of such inequalities for more-general causal structures, i.e., necessary criteria for either classical or quantum distributions to be realizable from the structure, are highly sought after. 
-%, a process we call {\em inflation}.  
 Our inflation technique is also of relevance here: by construction, any causal compatibility inequality on the inflated structure can be translated into one for the original structure. By introducing additional $d$-separation relations, inflation often generates easy opportunities for such translations, and already the mere \emph{existence} of a joint distribution on the inflated structure usually results in nontrivial causal compatibility inequalities.
-% {\em obvious} inequalities on the inflated structure which yield nonobvious inequalities for the original structure. 
-%first \textit{inflating} the causal structure and then translating weak constraints on the inflated structure into stronger constraints on the original structure. 
-%We provide several examples of how the technique is powerful enough to rederive known results, such as the Bell inequalities, and 
 We demonstrate the technique's power by numerically classifying the causal compatibility inequalities that it entails for a particular concrete example---an inflation of the Triangle scenario with binary variables---obtaining a set of causal compatibility inequalities that are at least partly stronger than existing ones.
-%Concretely, we derive polynomial inequalities for the so-called Triangle scenario, and we show how all Bell inequalities also follow from our method. %analyze Pearl's instrumental inequality from our perspective. 
-%We also show that if one is 
-%can be used to efficiently witness their incompatibility.
-%, without requiring explicit inequalities.
-\begin{comment}
-Furthermore, given both a causal structure and a specific probability distribution, our technique can be used to efficiently witness their incompatibility, without requiring explicit inequalities. The inflation technique is therefore both relevant and practical for general causal inference tasks with latent variables.
-\end{comment}
 Finally, we discuss how to identify, among the causal compatibility inequalities that the technique yields, those that remain valid even for quantum (and post-quantum) generalizations of the notion of a causal model.
-%a quantum generalization of the notion of a causal model as well as for a post-quantum generalization of the notion of a causal model (so-called generalized probabilistic theories).  
-%Moreover, we show that our technique can be used to also derive causal compatibility inequalities for causal models that obey quantum theory and for causal models that are neither classical nor quantum but rather obey some generalized probabilistic theories.  
-%Moreover, we show how our technique can be tuned to yield either classical witnesses (i.e., that may have quantum violations), or post-classical witnesses (i.e., that hold even in the context of general probability theories), depending on whether or not the inflation implicitly broadcasts the value of a  latent variable. 
-
-
-
 \end{abstract}
+
 \maketitle
 \tableofcontents
 
@@ -362,7 +161,6 @@ We develop necessary conditions for a given distribution to be compatible with a
 %\tblue{infeasibility criteria}, i.e., observable constraints such that the their violation implies the invalidity of the hypothesis as an explanation for observational data. 
 
 In the simplest setting, the causal hypothesis consists of a directed acyclic graph (DAG) {\em all} of whose nodes correspond to observed variables. In this case, obtaining a verdict on the compatibility of a given distribution with the causal hypothesis is simple: the compatibility holds if and only if the distribution is Markov with respect to the DAG, which is to say that the distribution features all of the conditional independence relations asserted by $d$-separation with respect to the DAG. 
-%(Recall that variables $X$ and $Y$ are conditionally independent given $Z$ if $P_{X,Y|Z}(xy|z) =P_{X|Z}(x|z) P_{Y|Z}(y|z) \;\forall z: P_{Z}(z)>0.$  We denote this in the conventional way:  $(X\indep Y\text{ }|\text{ }Z)$.) 
 The compatible DAGs can be determined algorithmically solely from the distribution~\cite{pearl2009causality}.
 %. \sout{ i.e.~without having an \emph{a priori} hypothesis}
 
@@ -430,7 +228,7 @@ One uses this definition so that any correlation between two variables can alway
  %{\color{purple} R: Does Pearl include $U$ among the ancestors?  I wonder if ``ancestry'' might be better terminology.} 
 Equivalently, $\An{\bm{U}} := \bigcup_{n\in\mathbb{N}} \mathsf{Pa}^n(\bm{U})$, where $\mathsf{Pa}^n(\bm{U})$ is inductively defined via $\mathsf{Pa}^0(\bm{U}) := \bm{U}$ and $\mathsf{Pa}^{n+1}(\bm{U}) := \mathsf{Pa}(\mathsf{Pa}^n(\bm{U}))$. 
 
-A \tblue{causal structure} is a DAG $G$ that incorporates a distinction between two types of nodes: the set of observed nodes $\SmallNamedFunction{ObservedNodes}{G}$, and the set of latent nodes $\SmallNamedFunction{LatentNodes}{G}$.  %Following Ref.~[HensonLalPusey], we will term a DAG that incorporates this distinction a {\em generalized DAG}, or GDAG, and we will denote the observed nodes by triangles and the latent nodes by circles. 
+A \tblue{causal structure} is a DAG $G$ that incorporates a distinction between two types of nodes: the set of observed nodes $\obsnodes{G}$, and the set of latent nodes $\latnodes{G}$.  %Following Ref.~[HensonLalPusey], we will term a DAG that incorporates this distinction a {\em generalized DAG}, or GDAG, and we will denote the observed nodes by triangles and the latent nodes by circles. 
 Following~\cite{pusey2014gdag}, we will depict the observed nodes by triangles and the latent nodes by circles, as in~\cref{fig:TriMainDAG}.
 %~\footnote{Unlike Ref.~[HensonLalPusey], who term these {\em generalized DAGs}, we will continue to refer to them as simply DAGs. }  
 Henceforth, we will use the terms ``DAG'' and ``causal structure'' interchangeably, so that the specification of which variables are observed is considered to be part of the DAG.
@@ -443,28 +241,23 @@ Frequently we supplement the causal structure by a specification of the cardinal
  The second component of a causal model is a family of \tblue{causal parameters}.
 %Moving towards causal models, we consider \tblue{causal parameters}. 
 The causal parameters specify, for each node $X$, the conditional probability distribution over the values of the random variable $X$, given the values of the variables $\Pa{X}$.  In the case of root nodes, we have $\Pa{X} = \emptyset$, and the conditional distribution is an unconditioned distribution.
-We write $\pfunc{Y|X}$ for the conditional distribution of a variable $Y$ given a variable $X$, while the particular conditional probability of the variable $X$ taking the value $x$ given that the variable $Y$ takes the values $y$ is denoted\footnote{Although our notation suggests that all variables are either discrete or described by densities, we do not make this assumption.  All of our equations can be translated straightforwardly into proper measure-theoretic notation.} $\pdf[Y|X]{y|x}$.    Therefore, a family of causal parameters has the form
+We write $\pfunc{Y|X}$ for the conditional distribution of a variable $Y$ given a variable $X$, while the particular conditional probability of the variable $X$ taking the value $x$ given that the variable $Y$ takes the values $y$ is denoted\footnote{Although our notation suggests that all variables are either discrete or described by densities, we do not make this assumption.  All of our equations can be translated straightforwardly into proper measure-theoretic notation.} $\p[Y|X]{y|x}$.    Therefore, a family of causal parameters has the form
 \begin{align}
- \{ \pfunc{A|\Pa[G]{A}} : A \in \SmallNamedFunction{Nodes}{G} \}.
+ \{ \pfunc{A|\Pa[G]{A}} : A \in \nodes{G} \}.
 \end{align}
-%Therefore, a given set of causal parameters, denoted $F_G$, has the form
-%\begin{align}
-%F_G \equiv \{ \pfunc{A|\Pa[G]{A}} : A \in \SmallNamedFunction{Nodes}{G} \}.
-%\end{align}
 Finally, a \tblue{causal model} $M$ consists of a causal structure together with a family of causal parameters,
 \[
-	M = ( G,   \{ \pfunc{A|\Pa[G]{A}} : A \in \SmallNamedFunction{Nodes}{G} \}).
+	M = ( G,   \{ \pfunc{A|\Pa[G]{A}} : A \in \nodes{G} \}).
 \]
 A causal model specifies a joint distribution of all variables in the DAG via
 \begin{align}\label{Markov}
-P_{\nodes{G}} = \prod_{A\in \SmallNamedFunction{Nodes}{G}} \pfunc{A|\Pa[G]{A}},
+P_{\nodes{G}} = \prod_{A\in \nodes{G}} \pfunc{A|\Pa[G]{A}},
 \end{align}
 where $\prod$ denotes the usual product of functions, so that e.g.~$(P_{Y|X} \times P_Y)(x,y) := P_{Y|X}(y|x) P_X(x)$. A distribution $P_{\nodes{G}}$ arises in this way if and only if it satisfies the Markov conditions associated to $G$.
-%The subset of nodes of $G$ that are observed is denoted $\SmallNamedFunction{ObservedNodes}{G}$ and the rest are denoted $\SmallNamedFunction{LatentNodes}{G}$. 
 
 The joint distribution over the observed variables is obtained from the joint distribution over all variables by marginalization over the latent variables,
 \begin{align}\label{MarkovObserved}
-P_{\SmallNamedFunction{ObservedNodes}{G}} =  \sum_{\{X :X \in\SmallNamedFunction{LatentNodes}{G}\}} P_{\SmallNamedFunction{Nodes}{G}},
+P_{\obsnodes{G}} =  \sum_{\{X :X \in\latnodes{G}\}} P_{\nodes{G}},
 \end{align}
 where $\sum_X$ denotes marginalization over the variable $X$, so that $(\sum_X P_{XY})(y):= \sum_x P_{XY}(xy)$.
 %if $P_Y:=\sum_X P_{XY}$, then $P_Y(y) = \sum_x P_{XY}(xy)$.
@@ -583,12 +376,12 @@ For a given triple $G$, $G'$, and $M$, this definition specifies a unique inflat
 To sum up, the inflation of a causal model is a new causal model where (i) each variable in the original DAG may have counterparts in the inflated DAG with ancestral subgraphs mirroring those of the originals, and (ii) the manner in which a variable depends causally on its parents in the inflated DAG is given by the manner in which its counterpart in the original DAG depends causally on its parents. The operation of modifying a DAG and equipping the modified version with conditional probability distributions that mirror those of the original also appears in the \emph{do calculus} and \emph{twin networks} of~\citet{pearl2009causality}, and moreover bears some resemblance to the \emph{adhesivity} technique used in deriving non-Shannon-type entropic inequalities (\cref{sec:NonShannon}).
 
 We are now in a position to describe the key property of the inflation of a causal model, the one that makes it useful for causal inference. With notation as in \cref{def:inflat}, let %$P$ and $P'$ be the joint distributions over observed variables arising in a causal model $M$ and its inflation $M'$, respectively.  Finally, let
-$P_{\bm{U}}$ and $P_{\bm{U}'}$ denote marginal distributions on some sets of nodes $\bm{U}\subseteq\nodes{G}$ and $\bm{U}'\subseteq\nodes{G'}$, respectively. Then
+$P_{\bm{U}}$ and $P_{\bm{U}'}$ denote marginal distributions on some $\bm{U}\subseteq\nodes{G}$ and $\bm{U}'\subseteq\nodes{G'}$, respectively. Then
 \begin{align}\label{eq:coincidingdistrodef}
 %P'_{\bm{U}'}=P_{\bm{U}} 
 \quad\text{if }\quad \bm{U}'\sim \bm{U} \;\;\text{and}\;\; \ansubgraph[G']{\bm{U}'}\sim\ansubgraph[G]{\bm{U}}, \quad\text{then}\quad P_{\bm{U}'}=P_{\bm{U}}.
 \end{align}
-This follows from the fact that the probability distributions over $\bm{U}'$ and $\bm{U}$ depend only on their ancestral subgraphs and the parameters defined thereon, which by the definition of inflation are the same for $\bm{U}'$ and for $\bm{U}$.
+This follows from the fact that the distributions on $\bm{U}'$ and $\bm{U}$ depend only on their ancestral subgraphs and the parameters defined thereon, which by the definition of inflation are the same for $\bm{U}'$ and for $\bm{U}$.
 It is useful to have a name for those sets of observed nodes in $G'$ which satisfy the antecedent of~\cref{eq:coincidingdistrodef}, that is, for which one can find a copy-index-equivalent set in the original DAG $G$ with a copy-index-equivalent ancestral subgraph.  We call such subsets of the observed nodes of $G'$ \tblue{injectable sets},
 \begin{align}\begin{split}\label{eq:definjectable}
 &\bm{U}'\in\SmallNamedFunction{InjectableSets}{G'} \\
@@ -603,18 +396,18 @@ Similarly,  those sets of observed nodes in the original DAG $G$ which satisfy t
 Clearly, $\bm{U}\in\SmallNamedFunction{ImagesInjectableSets}{G}$ iff $\exists \bm{U}' \subseteq \SmallNamedFunction{InjectableSets}{G'}$ such that $\bm{U}\sim \bm{U}'$.
 
 
-For example in the inflation of the Triangle scenario depicted in~\cref{fig:Tri222}, the set of observed nodes $\brackets{A_1 B_1 C_1}$ is injectable because its ancestral subgraph is equivalent up to copy-indices to the ancestral subgraph of $\brackets{A B C}$ in the original DAG, and the set $\brackets{A_2 C_1}$ is injectable because its ancestral subgraph is equivalent to that of $\brackets{ A C}$ in the original DAG. 
+For example in the Spiral inflation of the Triangle scenario depicted in~\cref{fig:Tri222}, the set $\brackets{A_1 B_1 C_1}$ is injectable because its ancestral subgraph is equivalent up to copy-indices to the ancestral subgraph of $\brackets{A B C}$ in the original DAG, and the set $\brackets{A_2 C_1}$ is injectable because its ancestral subgraph is equivalent to that of $\brackets{ A C}$ in the original DAG. 
 
-A set of nodes in the inflated DAG can only be injectable if it contains at most one copy of any node from the original DAG. More strongly, it can only be injectable if its ancestral subgraph contains at most one copy of any node from the original DAG.  
+A set of nodes in the inflated DAG can only be injectable if it contains at most one copy of any node from the original DAG. More strongly, it can only be injectable if its ancestral subgraph contains at most one copy of any observed or latent node from the original DAG.  
 Thus, in \cref{fig:Tri222}, $\brackets{A_1 A_2 C_1}$ is not injectable because it contains two copies of $A$, and $\brackets{A_2 B_1 C_1}$ is not injectable because its ancestral subgraph contains two copies of $Y$. 
 
-The fact that the sets $\brackets{A_1 B_1 C_1}$ and $\brackets{A_2 C_1}$ are injectable implies, via~\cref{eq:coincidingdistrodef}, that the marginals on each of these in the inflation model are precisely equal to the marginals on their counterparts, $\brackets{A B C}$ and $\brackets{A C}$, in the original causal model, so that $P_{A_1 B_1 C_1} = P_{A B C}$ and $P_{A_2 C_1} = P_{A C}$.
-
-It is useful to express \cref{eq:coincidingdistrodef} in the language of injectable sets,
+We can now express \cref{eq:coincidingdistrodef} in the language of injectable sets,
 \begin{align}\label{keyinference}
 %\text{if }  \quad  \bm{U}'\in\SmallNamedFunction{InjectableSets}{G'} \quad \text{and} \quad \bm{U} \sim \bm{U}'  \quad\text{then}\quad P'_{\bm{U}'}=P_{\bm{U}}.
 P_{\bm{U}'}=P_{\bm{U}}\quad\text{if }  \;\; \bm{U}' \sim \bm{U}\;\; \text{and} \;\; \bm{U}'\in\SmallNamedFunction{InjectableSets}{G'}.% \quad \text{and} \quad \bm{U} \sim \bm{U}'  \quad\text{then}\quad P'_{\bm{U}'}=P_{\bm{U}}.
 \end{align}
+
+In the example of \cref{fig:Tri222}, injectability of the sets $\brackets{A_1 B_1 C_1}$ and $\brackets{A_2 C_1}$ thus implies that the marginals on each of these in anan model are equal to the marginals on their counterparts, $\brackets{A B C}$ and $\brackets{A C}$, in the original causal model, so that $P_{A_1 B_1 C_1} = P_{A B C}$ and $P_{A_2 C_1} = P_{A C}$.
 
 \subsection{Witnessing incompatibility\label{subsec:witnessingincompat}}
 
@@ -624,7 +417,7 @@ The same considerations apply for any collection of injectable sets:
 
 \begin{lemma} \label[lemma]{mainlemma}
 Let $G'$ be an inflation DAG of $G$. 
-Let $S'  \subseteq \SmallNamedFunction{InjectableSets}{G'}$ be a collection of injectable sets, and let $S \subseteq \SmallNamedFunction{ImagesInjectableSets}{G}$ be the images of this collection.   If the family of marginal distributions $\{ P_{\bm{U}} : \bm{U} \in S \}$ is compatible with $G$, then the corresponding family of marginal distributions $\{ P_{\bm{U}'} : \bm{U}' \in S' \}$ --- defined via $P           _{\bm{U}'}= P_{\bm{U}}$ for $\bm{U}' \sim \bm{U}$ --- is compatible with $G'$.
+Let $S'  \subseteq \SmallNamedFunction{InjectableSets}{G'}$ be a collection of injectable sets, and let $S \subseteq \SmallNamedFunction{ImagesInjectableSets}{G}$ be the images of this collection.   If the family of marginal distributions $\{ P_{\bm{U}} : \bm{U} \in S \}$ is compatible with $G$, then the corresponding family of marginal distributions $\{ P_{\bm{U}'} : \bm{U}' \in S' \}$, defined via $P_{\bm{U}'}= P_{\bm{U}}$ for $\bm{U}' \sim \bm{U}$, is compatible with $G'$.
 \end{lemma}
 
 We have thereby related a question about compatibility with the original causal structure to one about compatibility with the inflated causal structure.  If one can show that the new compatibility question on $G'$ is answered in the negative, then one can infer that the original question is answered in the negative as well.    Some simple examples serve to illustrate the idea.
@@ -636,7 +429,8 @@ We have thereby related a question about compatibility with the original causal 
 %[Define notational convention of $[x]$]
 %\color{black}
 
-\example{. \tred{Witnessing the incompatibility of perfect three-way correlation with the Triangle scenario.}\label{example:noGHZ}}\par\smallskip\nobreak
+\begin{example}[\tred{Incompatibility of perfect three-way correlation with the Triangle scenario}]
+\label{example:noGHZ}
 
 \begin{figure}[bh]
 \centering
@@ -655,12 +449,11 @@ We have thereby related a question about compatibility with the original causal 
 \end{minipage}
 \end{figure}
 
-
-Consider the following causal inference problem.  One is given a joint distribution over three binary variables, $P_{A B C}$, where the marginal on each variable is uniform and the three are perfectly correlated,
+Consider the following causal inference problem.  We are given a joint distribution of three binary variables, $P_{A B C}$, where the marginal on each variable is uniform and the three are perfectly correlated,
 \begin{align}\label{eq:ghzdistribution1}
-P_{A B C} =\frac{[000]+[111]}{2},\quad\text{i.e.,}\quad P_{A B C}(a b c)=\begin{cases}\tfrac{1}{2}&\text{if }\; a\eql b\eql c, \\ 0&\text{otherwise},\end{cases}
+P_{A B C} =\frac{[000]+[111]}{2},\quad\text{i.e.,}\quad P_{A B C}(a b c)=\begin{cases}\tfrac{1}{2}&\text{if }\; a = b = c, \\ 0&\text{otherwise},\end{cases}
 \end{align}
-and one would like to determine whether it is compatible with the Triangle scenario, that is, the DAG depicted in \cref{fig:TriMainDAGv2}. The notation $ [abc]$ in \cref{eq:ghzdistribution1} is shorthand for the point distribution where $A, B,$ and $C$ take the values $a, b$, and $c$ respectively; in terms of the Kronecker delta, $[abc]:= \delta_{A,a} \delta_{B,b} \delta_{C,c}$.
+and one would like to determine whether it is compatible with the Triangle scenario (\cref{fig:TriMainDAGv2}). The notation $[abc]$ in \cref{eq:ghzdistribution1} is shorthand for the deterministic distribution where $A$, $B$, and $C$ take the values $a, b$, and $c$ respectively; in terms of the Kronecker delta, $[abc]:= \delta_{A,a} \delta_{B,b} \delta_{C,c}$.
 %  \color{red} The sum-over-brackets notation in \cref{eq:ghzdistribution1} is a shorthand for indicating discrete probability distributions: the coefficient of each bracketed tuple indicates the probability of that particular joint value-assignment.
 
 Since there are no conditional independence relations among the observed variables in the Triangle scenario, there is no opportunity for ruling out the distribution on the grounds that it fails to satisfy the required conditional independences. 
@@ -668,26 +461,24 @@ Since there are no conditional independence relations among the observed variabl
 %The causal hypothesis is that the DAG corresponds to the triangle scenario, depicted in \cref{fig:Tri222}.  
 %The problem is to decide whether the given distribution is compatible with this causal hypothesis.
 
-To solve this problem, we consider the Cut inflation of the Triangle scenario, depicted in~\cref{fig:TriDagSubA2B1C1v2}.  
-The injectable sets in this case include $\brackets{A_2 C_1}$ and $\brackets{B_1 C_1}$.  Their images on the original DAG are $\brackets{AC}$ and $\brackets{BC}$ respectively.
+To solve the causal inference problem, we consider the Cut inflation (\cref{fig:TriDagSubA2B1C1v2}). The injectable sets include $\brackets{A_2 C_1}$ and $\brackets{B_1 C_1}$.  Their images on the original DAG are $\brackets{AC}$ and $\brackets{BC}$, respectively.
 %We therefore consider the marginals on these sets.
 
-We will show that the distribution of \cref{eq:ghzdistribution1} is not compatible with the Triangle scenario by demonstrating that the contrary assumption of compatibility implies a contradiction. If the distribution of Eq.~\eqref{eq:ghzdistribution1} is compatible with the Triangle scenario, then so are its marginals on $\brackets{AC}$ and $\brackets{BC}$, which are given by:
+We will show that the distribution of \cref{eq:ghzdistribution1} is not compatible with the Triangle scenario by demonstrating that the contrary assumption of compatibility implies a contradiction. If the distribution of Eq.~\eqref{eq:ghzdistribution1} is compatible, then so is the family of its marginals on $\brackets{AC}$ and $\brackets{BC}$, which are given by:
 \begin{align*}
 P_{A C} = P_{B C} = \frac{[00]+[11]}{2}.
 \end{align*}
-From the definition of inflation, together with the fact that $\brackets{A_2 C_1}$ and $\brackets{B_1 C_1}$ are injectable sets whose images on the original DAG are $\brackets{AC}$ and $\brackets{BC}$, we can infer that if the marginals $P_{A C}$ and $P_{B C}$ are compatible with the Triangle scenario, then the marginals 
+By \cref{mainlemma}, this compatibility assumption entails that the family of marginals
 \begin{align}\label{ghzmarginals}
 P_{A_2 C_1} = P_{B_1 C_1} = \frac{[00]+[11]}{2}
 \end{align}
-are compatible with the Cut inflation of the Triangle scenario.  This is the specialization of \cref{mainlemma} to this example.  
+is compatible with the Cut inflation. We now show that this is actually not the case, thereby obtaining our contradiction.  It suffices to note that (i) the only joint distribution that exhibits perfect correlation between $A_2$ and $C_1$ and between $B_1$ and $C_1$ also exhibits perfect correlation between $A_2$ and $B_1$, and (ii) $A_2$ and $B_1$ have no common ancestor in the Cut inflated DAG and hence must be marginally independent in any distribution that is compatible with it. 
 
-Finally, we show that the pair of marginals $P_{A_2 C_1}$ and $P_{B_1 C_1}$ are \emph{not} compatible with the Cut inflated DAG, thereby obtaining our contradiction.  It suffices to note that (i) the only joint distribution that exhibits perfect correlation between $A_2$ and $C_1$ and between $B_1$ and $C_1$ also exhibits perfect correlation between $A_2$ and $B_1$, and (ii) $A_2$ and $B_1$ have no common ancestor in the Cut inflated DAG and hence must be marginally independent in any distribution that is compatible with it. 
+We have therefore certified that the distribution $P_{A B C}$ of~\cref{eq:ghzdistribution1} is not compatible with the Triangle scenario, recovering a result originally proven by \citet{steudel2010ancestors}.
+\end{example}
 
-
-We have therefore certified that the joint distribution $P_{A B C}$ of~\cref{eq:ghzdistribution1} is not compatible with the Triangle causal structure, recovering a result originally proven by \citet{steudel2010ancestors}.
-
-\example{. \tred{Witnessing the incompatibility of the W-type distribution with the Triangle scenario.}\label{example:noWdist}}\par\smallskip\nobreak
+\begin{example}[\tred{Incompatibility of the W-type distribution with the Triangle scenario}]
+\label{example:noWdist}
 \begin{figure}[bh]
 \centering
 \begin{minipage}[t]{0.45\linewidth}
@@ -704,93 +495,66 @@ We have therefore certified that the joint distribution $P_{A B C}$ of~\cref{eq:
 \end{figure}
 
 
-Consider another causal inference problem concerning the Triangle scenario, namely, that of determining whether the hypothesis of the Triangle DAG is compatible with a joint distribution 
+Consider another causal inference problem on the Triangle scenario, namely, that of determining whether the distribution 
 %$P^{\text{W}}_{A B C}$
-$P_{A B C}$ of the form
 \begin{align}\label{eq:wdistribution1}
 P_{A B C}=\frac{[100]+[010]+[001]}{3},\quad\text{i.e.,}\quad P_{A B C}(a b c)=\begin{cases}\tfrac{1}{3}&\text{if }\; a + b + c = 1, \\ 0&\text{otherwise}.\end{cases}
 \end{align}
-We call this the W-type distribution\footnote{The name stems from the fact that this distribution is reminiscent of 
+is compatible with it. We call this the W-type distribution\footnote{The name stems from the fact that this distribution is reminiscent of 
 %hese \color{black} correlations are reminiscent of those one obtains for 
-the quantum state appearing in~\cite{3Qubits2Ways}, called the \emph{W state}.}. 
-%To our knowledge, the fact that the Triangle causal structure is inconsistent with the W-type distribution has not been demonstrated previously.
-
-To settle the compatibility question, we consider the Spiral inflation of the Triangle scenario (\cref{fig:Tri222v2}).
+the famous quantum state appearing in~\cite{3Qubits2Ways}, called the \emph{W state}.}. To settle this compatibility question, we consider the Spiral inflation of the Triangle scenario (\cref{fig:Tri222v2}).
 %inflated DAG of \cref{fig:Tri222v2}.  
 The injectable sets in this case include $\{A_1 B_1 C_1\}$, $\{A_2 C_1\}$, $\{B_2 A_1\}$, $\{C_2 B_1\}$,  $\{A_2\}$, $\{B_2\}$ and $\{C_2\}$. 
 
-Therefore, we turn our attention to determining whether the marginals of the W-type distribution on the images of these injectable sets are compatible with the Triangle hypothesis.  These marginals are:
+Therefore, we turn our attention to determining whether the marginals of the W-type distribution on the images of these injectable sets are compatible with the Triangle scenario.  These marginals are:
 \begin{align}
 P_{A B C}&= \frac{[100]+[010]+[001]}{3}, \label{V4}\\
 P_{A C}= P_{B A} = P_{C B} & = \frac{[10]+[01]+[00]}{3}, \label{V1}\\
 P_{A}= P_B = P_C & = \frac{2}{3}[0] + \frac{1}{3}[1]. \label{V5}
 \end{align}
-But by \cref{mainlemma}, this compatibility holds only if the associated marginals for the injectable sets, namely, 
+By \cref{mainlemma}, this compatibility holds only if the associated marginals for the injectable sets, namely, 
 \begin{align}
 P_{A_1 B_1 C_1}&= \frac{[100]+[010]+[001]}{3}, \label{W4}\\
 P_{A_2 C_1} = P_{B_2 A_1} = P_{C_2 B_1} & = \frac{[10]+[01]+[00]}{3}, \label{W1}\\
-P_{A_2} = P_{B_2} = P_{C_2} & = \frac{2}{3}[0] + \frac{1}{3}[1]. \label{W5}
+P_{A_2} = P_{B_2} = P_{C_2} & = \frac{2}{3}[0] + \frac{1}{3}[1], \label{W5}
 \end{align}
-are compatible with the Spiral inflation of the Triangle scenario (\cref{fig:Tri222v2})\color{black}.
-
-\begin{comment}
-\color{purple} 
-%Eq.~\eqref{W1} implies that one never has $A_2 \eql 1$ and $C_1\eql 0$, Eq.~\eqref{W2} implies that one never has $B_2 \eql 1$ and $A_1\eql 0$, and Eq.~\eqref{W3} implies that one never has $C_2 \eql 1$ and $B_1\eql 0$.  Similarly, Eq.~\eqref{W4} implies that one never has $A_1 =1$,  $B_1 =1$ and $C_1 =1$. 
-From Eqs.~\eqref{W1}, \eqref{W2} and \eqref{W3}  respectively, one infers that one never has $A_2 \eql 1$ and $C_1\eql 0$, one never has $B_2 \eql 1$ and $A_1\eql 0$, and one never has $C_2 \eql 1$ and $B_1\eql 0$. Similarly, Eq.~\eqref{W4} implies that one never has $A_1 =0$,  $B_1 =0$ and $C_1 =0$.  From the latter constraint one infers that at least one of $A_1$, $B_1$ and $C_1$ must be 1, which from the former constraints implies that at least one of $A_2$, $B_2$ and $C_2$ must be 0, so that it is not the case that all of $A_2$, $B_2$ and $C_2$ are 1.
-
-Recasting this argument in logical notation, where $\land$, $\lor$ and $\lnot$ denote conjunction, disjunction and negation respectively, the marginal distributions imply the truth of the following conjunction:
-%We can therefore infer the truth of the conjunction of these claims, which can be expressed in logical notation as:
-%a particular conjunction of events, namely, it implies the truth of
-\begin{align}
-\lnot [A_2 =1 \land C_1 =1] \land \lnot [B_2 =1 \land A_1 =1] \land \lnot [C_2 =1 \land B_1 =1] \land \lnot [A_1 =1 \land B_1 =1 \land C_1 =1],
-\end{align}
-and this logically implies the truth of
-\begin{align}\label{consequent}
-\lnot [A_2 =1 \land B_2 =1 \land C_2 =1].
-\end{align}
-
-However, our inflated DAG is such that $A_2$,$B_2$, and $C_2$ have no common ancestor and consequently, they are all marginally independent in any distribution consistent with this DAG.  This fact, together with Eqs.~\eqref{W5}-\eqref{W7}, implies that $A_2$,$B_2$, and $C_2$ sometimes all take the value 1, which contradicts \cref{consequent}.
-
-Consequently, the set of marginals described in Eqs.~\eqref{W4}-\eqref{W7} are \emph{not} compatible with the DAG of \cref{fig:Tri222v2}.  By \cref{mainlemma}, this implies that the set of marginals described in Eqs.~\eqref{V4}-\eqref{V7}---and therefore the W-type distribution of which they are marginals---is not compatible with the DAG of the Triangle scenario.
-\color{black}
-\end{comment}
-
-
-\cref{W1} %together with the form of $P_{\text{W}}$ 
-implies that $C_1\eql 0$ whenever $A_2 \eql 1$. It also implies that $A_1\eql 0$ whenever $B_2\eql 1$, and that $B_1\eql 0$ whenever $C_2\eql 1$, 
+are compatible with the Spiral inflation (\cref{fig:Tri222v2})\color{black}. \cref{W1} %together with the form of $P_{\text{W}}$ 
+implies that $C_1 = 0$ whenever $A_2 = 1$. It similarly implies that $A_1 = 0$ whenever $B_2 = 1$, and that $B_1 = 0$ whenever $C_2 = 1$, 
 %, that is, $A_2=1$ and $B_2=1$ and $C_2=1$.  
 %Summarizing, we have
 \begin{align} 
 \begin{split}\label{Ws}
-&A_2 \eql 1 \implies C_1\eql 0,\\
-&B_2\eql 1 \implies A_1\eql 0,\\
-&C_2 \eql 1 \implies B_1 \eql 0.
+&A_2  = 1 \:\implies\: C_1 = 0,\\
+&B_2 = 1 \:\implies\: A_1 = 0,\\
+&C_2  = 1 \:\implies\: B_1  = 0.
 \end{split}
 \end{align}
-Our inflated DAG is such that $A_2$, $B_2$ and $C_2$ have no common ancestor and consequently are marginally independent in any distribution consistent with this inflated DAG.  This fact, together with \cref{W5}, implies that %$A_2$,$B_2$, and $C_2$ sometimes all take the value 1,
+Our inflated DAG is such that $A_2$, $B_2$ and $C_2$ have no common ancestor and consequently are marginally independent in any distribution compatible with it. Together with \cref{W5}, this implies that %$A_2$,$B_2$, and $C_2$ sometimes all take the value 1,
 \begin{align} \label{WW2}
-\text{Sometimes} \quad &A_2 \eql 1\,\text{ and }\, B_2 \eql 1\,\text{ and }\, C_2 \eql 1.
+\text{Sometimes} \quad &A_2  = 1\,\text{ and }\, B_2  = 1\,\text{ and }\, C_2  = 1.
 \end{align} 
 Finally, \cref{Ws} together with \cref{WW2} entails
 \begin{align} \label{WW3}
-\text{Sometimes} \quad &A_1 \eql 0\,\text{ and }\, B_1 \eql 0\,\text{ and }\, C_1 \eql 0.
+\text{Sometimes} \quad &A_1  = 0\,\text{ and }\, B_1  = 0\,\text{ and }\, C_1  = 0.
 \end{align}
-This, however, contradicts~\cref{W4}.  Consequently, the set of marginals described in \cref{W4,W1,W5} are \emph{not} compatible with the DAG of~\cref{fig:Tri222v2}.  By \cref{mainlemma}, this implies that the set of marginals described in \cref{V4,V1,V5}---and therefore the W-type distribution of which they are marginals---is not compatible with the Triangle scenario.
+This, however, contradicts~\cref{W4}.  Consequently, the family of marginals described in \cref{W4,W1,W5} is \emph{not} compatible with the DAG of~\cref{fig:Tri222v2}.  By \cref{mainlemma}, this implies that the family of marginals described in \cref{V4,V1,V5}---and therefore the W-type distribution of which they are marginals---is not compatible with the Triangle scenario.
 % and the fact that $P_{\text{W}}$ has no weight on $[000]$.
 
-To our knowledge, this has not been demonstrated previously. In fact, the incompatibility of the W-type distribution with the Triangle scenario cannot be derived via any of the following pre-existing causal inference techniques:
-\begin{compactenum}
+To our knowledge, this is a new result. In fact, the incompatibility of the W-type distribution with the Triangle scenario cannot be derived via any of the following existing causal inference techniques:
+\begin{enumerate}
 \item Checking conditional independence relations is not relevant here, as there are \emph{no} conditional independence relations implied between any observable variables in the Triangle scenario. 
 \item The relevant Shannon-type entropic inequalities for the Triangle scenario have been classified, and they do not witness the incompatibility either~\cite{fritz2013marginal,chaves2014novel,chaves2014informationinference}. 
 \item Moreover, \emph{no} entropic inequality can witness the W-type distribution as unrealizable. \citet{weilenmann2016entropic} have constructed an inner approximation to the entropic cone of the Triangle causal structure, and the W-distribution lies inside this. In other words, a distribution with the same entropic profile as the W-type distribution \emph{can} arise from the Triangle scenario.
 \item The newly-developed method of covariance matrix causal inference due to \citet{kela2016covariance}, which gives tighter constraints than entropic inequalities for the Triangle scenario, also cannot detect the incompatibility.
-\end{compactenum}
+\end{enumerate}
 %\par\noindent But the inflation technique can, and does so very easily.
-Therefore, for this problem at least, the inflation technique appears to be more powerful. 
+Therefore, in this case at least, the inflation technique appears to be more powerful. 
 
 We have arrived at our incompatibility verdict by combining inflation with reasoning reminiscent of  Hardy's version of Bell's theorem~\cite{L.Hardy:PRL:1665,Mansfield2012}. \cref{sec:TSEM} will present a generalization of this kind of argument and its applications to causal inference. 
+\end{example}
 
-\example{. \tred{Witnessing the incompatibility of PR-box correlations with the Bell scenario.}\label{example:noPR}}\par\smallskip\nobreak
+\begin{example}[\tred{Incompatibility of PR-box correlations with the Bell scenario}]
+\label{example:noPR}
 
 Bell's theorem~\cite{bell1964einstein,Brunner2013Bell,bell1966lhvm,CHSHOriginal} concerns the question of whether the distribution obtained in an experiment involving a pair of systems that are measured at space-like separation is compatible with a causal structure of the form of \cref{fig:NewBellDAG1}. Here, the observed variables are $\brackets{A,B,X,Y}$, and $\Lambda$ is a latent variable acting as a common cause of $A$ and $B$. We shall term this causal structure the \emph{Bell scenario}. While the causal inference formulation of Bell's theorem is not the traditional one, several recent articles have introduced and advocated this perspective~[\citealp{WoodSpekkens}~(Fig.~19), \citealp{pusey2014gdag}~(Fig.~E\#2), \citealp{BeyondBellII}~(Fig.~1), \citealp{chaves2014novel}~(Fig.~1), \citealp{wolfe2015nonconvexity}~(Fig.~2b), \citealp{steeg2011relaxation}~(Fig.~2)].  
 
@@ -807,24 +571,22 @@ Bell's theorem~\cite{bell1964einstein,Brunner2013Bell,bell1966lhvm,CHSHOriginal}
 \begin{minipage}[t]{0.45\linewidth}
 \centering
 \includegraphics[scale=1]{BellDagCopy.pdf}
-\caption{An inflated DAG of the bipartite Bell scenario, where both local settings and outcome variables have been duplicated.}\label{fig:BellDagCopy1}
+\caption{An inflation DAG of the bipartite Bell scenario, where both local settings and outcome variables have been duplicated.}\label{fig:BellDagCopy1}
 \end{minipage}
 \end{figure}
 
 %P^{\text{obs-inf}}_{A_2 C_1}
 
-We consider the distribution ${P_{A B X Y} = P_{A B | X Y} P_{X} P_{Y}}$, where $P_{X}$ and $P_{Y}$ are arbitrary full-support distributions\footnote{In the literature on the Bell scenario, these variables are known as ``settings''. Generally, we may think of endogenous observable variables as settings, coloring them light green in the DAG figures. Settings variables are natural candidates for variables to condition on.} over the binary variables $X$ and $Y$, and
+We consider the distribution ${P_{A B X Y} = P_{A B | X Y} P_{X} P_{Y}}$, where $P_{X}$ and $P_{Y}$ are arbitrary full-support distributions\footnote{In the literature on the Bell scenario, these variables are known as ``settings''. Generally, we may think of observable root variables as settings, coloring them light green in the DAG figures. They are natural candidates for variables to condition on.} over the binary variables $X$ and $Y$, and
 \begin{align}\begin{split}\label{eq:PRbox}
 % & p_{\text{PR}}\parens{a b |x y}=\frac{[00|00]+[11|00]+[00|10]+[11|10]+[00|01]+[11|01]+[01|11]+[10|11]}{8}\\
 P_{A B | X Y}\parens{a b |x y}=\begin{cases}\tfrac{1}{2}&\text{if }\; a \oplus b = x \cdot y , \\ 0&\text{otherwise},\end{cases}
 \end{split}\end{align}
-a conditional distribution that was discovered by Tsirelson~\cite{Tsirelson1980} and later independently by Popescu and Rohrlich~\cite{PROriginal,PRUnit}. It has become known in the field of quantum foundations as the \emph{PR-box} after the latter authors.\footnote{The PR-box is of interest because it represents a manner in which experimental correlations could deviate from the predictions of quantum theory while still being consistent with relativity.}
+a conditional distribution that was discovered by Tsirelson~\cite{Tsirelson1980} and later independently by Popescu and Rohrlich~\cite{PROriginal,PRUnit}. It has become known in the field of quantum foundations as the \emph{PR-box} after the latter authors.\footnote{The PR-box is of interest because it represents a manner in which experimental observations could deviate from the predictions of quantum theory while still being consistent with relativity.}
 
-%\color{purple} Recall that variables $X$ and $Y$ are conditionally independent given $Z,$ which we denote by $(X\indep Y\text{ }|\text{ }Z)$ if $P_{X,Y|Z}(xy|z) =P_{X|Z}(x|z) P_{Y|Z}(y|z) \qquad\forall z: P(Z=z)>0.$ \color{black}
-
-The Bell scenario implies nontrivial conditional independences\footnote{Recall that variables $X$ and $Y$ are conditionally independent given $Z$ if $P_{XY|Z}(xy|z) = P_{X|Z}(x|z) P_{Y|Z}(y|z)$ for all $z$ with $P_{Z}(z)>0$. Such a conditional independence is denoted by $X\indep Y\text{ }|\text{ }Z$.} among the observed variables, namely, $X \indep Y$, $A \indep Y| X$, and $B \indep X|Y$, as well as those that can be generated from these by the semi-graphoid axioms \cite{WoodSpekkens}.
+The Bell scenario implies nontrivial conditional independences\footnote{Recall that variables $X$ and $Y$ are conditionally independent given $Z$ if $P_{XY|Z}(xy|z) = P_{X|Z}(x|z) P_{Y|Z}(y|z)$ for all $z$ with $P_{Z}(z)>0$. Such a conditional independence is denoted by $X\indep Y \:|\: Z$.} among the observed variables, namely, $X \indep Y$, $A \indep Y| X$, and\footnote{In the context of a Bell experiment, where $\{X,A\}$ are space-like separated from $\{Y,B\}$, the conditional independences $A \indep Y| X$ and $B \indep X|Y$ encode the impossibility of sending signals faster than the speed of light.} $B \indep X|Y$, as well as those that can be generated from these by the semi-graphoid axioms \cite{WoodSpekkens}.
 %We will use the inflation technique to show that this distribution is incompatible with the Bell scenario.
-(In the context of a Bell experiment, where $\{X,A\}$ are space-like separated from $\{Y,B\}$, the conditional independences $A \indep Y| X$, and $B \indep X|Y$ encode the impossibility of sending signals faster than the speed of light.) It is straightforward to check that these conditional independence relations are respected by the $P_{ABXY}$ resulting from~\cref{eq:PRbox}. It is well-known that this distribution is nonetheless incompatible with the Bell scenario, for example since it violates the CHSH inequality.
+It is straightforward to check that these conditional independence relations are respected by the $P_{ABXY}$ resulting from~\cref{eq:PRbox}. It is well-known that this distribution is nonetheless incompatible with the Bell scenario, for example since it violates the CHSH inequality.
 %, and they are well-known to be incompatible with the Bell scenario \cite{PROriginal,PRUnit}. 
 %Here we prove the incompatibility using the inflation technique. 
 Here we prove this incompatibility via the inflation technique, using the inflation of the Bell scenario depicted in \cref{fig:BellDagCopy1}.
@@ -839,57 +601,48 @@ Using the definition of conditional probability, we infer that
 \begin{align}
 P_{A_1 B_1 |X_1 Y_1}=P_{A_2 B_1 |X_2 Y_1}=P_{A_1 B_2 |X_1 Y_2}=P_{A_2 B_2 |X_2 Y_2}=P_{A B |X Y}\label{PRb}.
 \end{align}
-Because $\{X_1\}$, $\{X_2\}$, $\{Y_1\}$, and $\{Y_2\}$ have no common ancestor in the inflated DAG, these variables must be marginally independent in any distribution compatible with the inflated DAG. This applies in particular to the inflation model, so that $P_{X_1 X_2 Y_1 Y_2} = P_{X_1} P_{X_2} P_{Y_1} P_{Y_2}$. Given the assumption that the distributions $P_{X}$ and $P_{Y}$ are full support, it follows from~\cref{PR5} that
+Because $\{X_1\}$, $\{X_2\}$, $\{Y_1\}$, and $\{Y_2\}$ have no common ancestor in the inflated DAG, these variables must be marginally independent in any distribution compatible with the inflated DAG. This applies in particular to the inflation model, so that $P_{X_1 X_2 Y_1 Y_2} = P_{X_1} P_{X_2} P_{Y_1} P_{Y_2}$. Given the assumption that the distributions $P_{X}$ and $P_{Y}$ have full support, it follows from~\cref{PR5} that
 \begin{align}\label{PRs}
-\text{Sometimes} \quad &X_1 = 0, X_2 \eql1, Y_1 \eql 0, Y_2 \eql 1.
+\text{Sometimes} \quad &X_1 = 0\,\text{ and }\, X_2  =1\,\text{ and }\, Y_1  = 0\,\text{ and }\, Y_2  = 1.
 \end{align} 
 On the other hand, from~\cref{PRb} together with  the definition of PR-box,~\cref{eq:PRbox}, we conclude that 
 \begin{align} 
 \begin{split}
 \label{PRsi}
-&X_1 \eql 0, Y_1 \eql 0 \implies A_1\eql B_1,\\
-&X_1 \eql 0, Y_2 \eql 1 \implies A_1\eql B_2,\\
-&X_2 \eql 1, Y_1 \eql 0 \implies A_2\eql B_1,\\
-&X_2 \eql 1, Y_2 \eql 1 \implies A_2\ne B_2.
+&X_1  = 0,\: Y_1  = 0 \:\implies\: A_1 = B_1,\\
+&X_1  = 0,\: Y_2  = 1 \:\implies\: A_1 = B_2,\\
+&X_2  = 1,\: Y_1  = 0 \:\implies\: A_2 = B_1,\\
+&X_2  = 1,\: Y_2  = 1 \:\implies\: A_2\ne B_2.
 \end{split}
 \end{align}
 Combining this with~\cref{PRs}, we obtain
 \begin{align}
-\text{Sometimes} \quad &A_1\eql B_1, A_1\eql B_2, A_2\eql B_1, A_2\cramp{\ne}B_2.
+\text{Sometimes} \quad &A_1 = B_1\,\text{ and }\, A_1 = B_2\,\text{ and }\, A_2 = B_1\,\text{ and }\, A_2\neq B_2.
 \end{align} 
-No values of $A_1, A_2, B_1, B_2$ can jointly satisfy these conditions---the first three entail perfect correlation between $A_2$ and $B_2$, while the fourth entails perfect anti-correlation---so we have reached a contradiction, showing that our original assumption of compatibility between $P_{ABXY}$ and the Bell scenario must have been false.
+No values of $A_1$, $A_2$, $B_1$, and $B_2$ can jointly satisfy these conditions. So we have reached a contradiction, showing that our original assumption of compatibility of $P_{ABXY}$ with the Bell scenario must have been false.
 
-%For these values, \cref{eq:PRinflated} specifies perfect correlation between $A_1$ and $B_1$.  Similarly, it the inflated observational data also specified perfect correlation between $A_1$ and $B_2$, perfect correlation between $A_2$ and $B_1$, and perfect \emph{anti}correlation between $A_2$ and $B_2$. Those four requirements are not mutually compatible, however: since perfect correlation is transitive, the first three properties entail perfect correlation between $A_2$ and $B_2$. 
-
-The structure of this proof parallels that of standard proofs of the incompatibility of the PR-box with the Bell DAG. Standard proofs focus on a set of variables $\{A_0, A_1, B_0, B_1\}$ where $A_x$  is the value of $A$ when $X=x$ and $B_y$  is the value of $B$ when $Y=y$, and note that  the distribution
+The structure of this proof parallels that of standard proofs of the incompatibility of the PR-box with the Bell scenario. Standard proofs focus on a set of variables $\{A_0 A_1 B_0 B_1\}$ where $A_x$  is the value of $A$ when $X=x$ and $B_y$  is the value of $B$ when $Y=y$, and note that  the distribution
 %if the Bell DAG describes the experiment, then by taking 
 %the product of the probability of each of these four variables given $\lambda$, that is,
  $\sum_{\lambda} P(A_0|\lambda)P(A_1|\lambda)P(B_0|\lambda)P(B_1|\lambda)P(\lambda)$
  %(the probability of $A_0$ given $\lambda$, of $A_1$ given $\lambda$, etcetera, one obtains 
- is a joint distribution over $\{A_0, A_1, B_0, B_1\}$ for which the marginals on pairs  $\{ A_0, B_0\}$, $\{ A_0, B_1\}$, $\{ A_1, B_0\}$ and $\{ A_1, B_1\}$ are those predicted by the Bell DAG.  Finally, the existence of such a joint distribution rules out the possibility of having $A_1\eql B_1, A_1\eql B_2, A_2\eql B_1$ but $ A_2\ne B_2$ and therefore shows that the PR Box correlations are incompatible with the Bell DAG \cite{LSW,roberts_thesis}. In light of our use of \cref{PRs}, our reasoning is really the same argument in disguise.
+ is a joint distribution of these four variables for which the marginals on pairs  $\{ A_0 B_0\}$, $\{ A_0 B_1\}$, $\{ A_1 B_0\}$ and $\{ A_1 B_1\}$ are those corresponding to the conditional distribution describing the PR-box, \cref{eq:PRbox}. Finally, the existence of such a joint distribution rules out the possibility of having $A_1 = B_1$, $A_1 = B_2$, $A_2 = B_1$ but $ A_2\neq B_2$, and therefore shows that the PR-box distribution is incompatible with the Bell scenario~\cite{LSW,roberts_thesis}. In light of our use of \cref{PRs}, our reasoning is really the same argument in disguise.
 
-\cref{sec:Bellscenarios} shows that the inflation of~\cref{fig:BellDagCopy1}, with the number of copies corresponding to the cardinality of $X$ and $Y$, is enough to witness the incompatibility of any distribution that is indeed incompatible with the Bell scenario.
+\cref{sec:Bellscenarios} shows that the inflation of~\cref{fig:BellDagCopy1}, with the number of copies corresponding to the cardinality of $X$ and $Y$, is enough to witness the incompatibility of any distribution that is incompatible with the Bell scenario.
+\end{example}
 
-%  Finally, these marginals are shown to satisfy a Bell inequality, while the PR box correlations are shown to violate this inequality.   \purp{Is there a ``standard proof'' that excludes PR box without referring to Bell inequalities? Say something about the difference of the standard approach to our approach?---RWS}
-
-% The fact that there must be a joint distribution over these variables can be inferred from the structure of the Bell DAG and the fact that one can assume without loss of generality that the causal dependences are deterministic (a result known as Fine's theorem \cite{FineTheorem}).  It is then sufficient to note that the marginals given by the PR-box correlations do not arise from any joint distribution.  Nonetheless, our proof is conceptually distinct insofar as the variables to which we apply the marginal problem are not conditioned on a setting value.  And we do not require Fine's theorem.  
-
-%Many causal inference techniques can be used to derive sufficient conditions for the incompatibility of the causal hypothesis $H_{G',S'}$ with the observational data $\forall \bm{U} \in \SmallNamedFunction{PreInjectableSets}{\bm{O}}: \pdf{\bm{U}} = \pdf{\subsim{\bm{U}_1}}\pdf{\subsim{\bm{U}_2}} \dots \pdf{\subsim{\bm{U}_n}}$. We will call sets of such conditions \tblue{incompatibility witnesses}.   
-
-
-%\subsection{Deriving causal compatibility inequalities using the inflation technique}\label{Sec:DerivingInequalities}
 \subsection{Deriving causal compatibility inequalities}\label{Sec:DerivingInequalities}
 
 The inflation technique can be used not only to witness the incompatibility of a given distribution with a given causal structure, but also to derive generally applicable necessary conditions that a distribution must satisfy to be compatible with the given causal structure. When these conditions are expressed as inequalities, we will refer to them as {\em causal compatibility inequalities}.  Formally, we have:
 
 \begin{definition}
-Let $G$ be a causal structure and $S \subseteq \SmallNamedFunction{ObservedNodes}{G}$.  Let $I_S$ denote an inequality that operates on a family of marginal distributions  $\{ P_{\bm{U}}: \bm{U} \in S\}$.  Then $I_S$ is a \tblue{\em causal compatibility inequality for the causal structure $G$} whenever it is satisfied by every family of distributions $\{ P_{\bm{U}}: \bm{U} \in S\}$ that is compatible with $G$.
+Let $G$ be a causal structure and $S \subseteq 2^{\SmallNamedFunction{ObservedNodes}{G}}$.  Let $I_S$ denote an inequality that operates on a family of marginal distributions  $\{ P_{\bm{U}}: \bm{U} \in S\}$.  Then $I_S$ is a \tblue{\em causal compatibility inequality for the causal structure $G$} whenever it is satisfied by every family of marginal distributions $\{ P_{\bm{U}}: \bm{U} \in S\}$ that is compatible with $G$.
 %Consider a DAG $G$ and a set of the observed nodes thereon, $S \subseteq \SmallNamedFunction{ObservedNodes}{G}$.  Let $I_S$ denote an inequality that is evaluated on a family of marginal distributions  $\{ P_{\bm{U}}: \bm{U} \in S\}$.  The inequality $I_S$ is termed a \tblue{\em causal compatibility inequality for the DAG $G$} whenever it is satisfied by every family of distributions $\{ P_{\bm{U}}: \bm{U} \in S\}$ that is compatible with the DAG $G$.
 \end{definition}
 %\begin{definition}
 %Consider a set of distributions over subsets of observed nodes on a DAG $G$, $\{ P_{\bm{U}}: \bm{U} \in \SmallNamedFunction{Subsets}{\SmallNamedFunction{ObservedNodes}{G}}\}$.  An inequality on such a set of distributions, denoted $I(\{ P_{\bm{U}}: \bm{U} \in \SmallNamedFunction{Subsets}{\SmallNamedFunction{ObservedNodes}{G}}\} )$, is termed a {\em causal compatibility inequality} just in case it is satisfied  whenever $\{ P_{\bm{U}}: \bm{U} \in \SmallNamedFunction{Subsets}{\SmallNamedFunction{ObservedNodes}{G}}\}$ is compatible with the DAG.  
 %\end{definition}
-While violation of a causal compatibility inequality witnesses the incompatibility of a distribution with the associated causal structure, the inequality being satisfied does not guarantee that the distribution is compatible with the causal structure.  This is the sense in which it merely provides a {\em necessary} condition for compatibility. 
+While violation of a causal compatibility inequality witnesses the incompatibility with the causal structure, satisfaction of the inequality does not guarantee compatibility.  This is the sense in which it merely provides a {\em necessary} condition for compatibility. 
 
 The inflation technique is useful for deriving causal compatibility inequalities because of the following consequence of  \cref{mainlemma}:
 %\begin{corollary} \label{maincorollary}
@@ -903,103 +656,57 @@ Suppose that $G'$ is an inflation of $G$. Let $S'  \subseteq \SmallNamedFunction
 Let $I_{S'}$ be a causal compatibility inequality for $G'$ operating on families $\{ P_{\bm{U}'} : \bm{U}' \in S'\}$. Define an inequality $I_S$ as follows: in the functional form of $I_{S'}$, replace every occurrence of a term $P_{\bm{U}'}$ by $P_{\bm{U}}$ for the unique $\bm{U}\in S$ with $\bm{U} \sim \bm{U}'$. Then $I_S$ is a causal compatibility inequality for $G$ operating on families $\{ P_{\bm{U}} : \bm{U}\in S\}$.
 \end{corollary}
 
-The proof is as follows.  Suppose that the family $\{ P_{\bm{U}} : \bm{U} \in S\}$ is compatible with $G$.  By \cref{mainlemma}, it follows that the family $ \{ P_{\bm{U}'} : \bm{U}' \in S'\}$ where $P_{\bm{U}'}:= P_{\bm{U}}$ for $\bm{U}' \sim \bm{U}$  is compatible with $G'$.  Given that $I_{S'}$ is assumed to be a causal compatibility inequality for $G'$, it follows that $\{ P_{\bm{U}'} : \bm{U}' \in S'\}$ satisfies $I_{S'}$.  But by the definition of $I_{S}$, its evaluation on $\{ P_{\bm{U}} : \bm{U} \in S\}$ is equal to $I_{S'}$ evaluated on $\{ P_{\bm{U}'} : \bm{U}' \in S'\}$. Since $\{ P_{\bm{U}'} : \bm{U}' \in S'\}$ satisfies $I_{S'}$, it therefore follows that $\{ P_{\bm{U}} : \bm{U} \in S\}$ satisfies $I_{S}$. Since $\{ P_{\bm{U}} : \bm{U}\in S\}$ was an arbitrary family compatible with $G$, it follows that $I_{S}$ is a causal compatibility inequality for $G$.  
+The proof is as follows.  Suppose that the family $\{ P_{\bm{U}} : \bm{U} \in S\}$ is compatible with $G$.  By \cref{mainlemma}, it follows that the family $ \{ P_{\bm{U}'} : \bm{U}' \in S'\}$ where $P_{\bm{U}'}:= P_{\bm{U}}$ for $\bm{U}' \sim \bm{U}$  is compatible with $G'$.  Since $I_{S'}$ is a causal compatibility inequality for $G'$, it follows that $\{ P_{\bm{U}'} : \bm{U}' \in S'\}$ satisfies $I_{S'}$.  But by the definition of $I_{S}$, its evaluation on $\{ P_{\bm{U}} : \bm{U} \in S\}$ is equal to $I_{S'}$ evaluated on $\{ P_{\bm{U}'} : \bm{U}' \in S'\}$. It therefore follows that $\{ P_{\bm{U}} : \bm{U} \in S\}$ satisfies $I_{S}$. Since $\{ P_{\bm{U}} : \bm{U}\in S\}$ was an arbitrary family compatible with $G$, we conclude that $I_{S}$ is a causal compatibility inequality for $G$.  
 
-%\color{red} [No!  we can't have if and only if for the DAG G'.  If we have it at all, it's for the causal hypothesis that includes the parameter constraints. ]\color{black}
-
-%\begin{corollary} Let $G$ and $G'$ be DAGs with $G'$ an inflation of $G$. 
-%Consider the set of distributions on the injectable sets on $G'$ [...] and the set of distributions on the images on $G$ of the injectable sets on $G'$ [...]   Let $f'(...) \le C$ be an inequality on [...], where $f'$ is a function on [...] and $C$ is a constant.  Let $f(...)$ be the function on [...] that is obtained as follows: for each injectable set $\bm{U'}$, replace $P'_{\bm{U}'}$ with $P_{\bm{U}}$ in $f'(...)$.  In this case, $f'(...) \le C$ is a causal compatibility inequality for the DAG $G'$ if and only if $f(...) \le C$ is a causal compatibility inequality for the DAG $G$.
-%\end{corollary}
-
-%\begin{corollary} Let $G$ and $G'$ be DAGs with $G'$ an inflation of $G$. 
-%Consider the set of distributions on the injectable sets of observed variables [...] and the set of distributions on the images of the injectable sets of observed variables, [...]   Suppose that $f'(...) \le C$ for some function $f'$ and constant $C$ is a causal compatibility inequality for the DAG $G'$.  Let $f(...)$ be the function obtained by substituting $P_{\bm{U}}$ for $P_{\bm{U}'}$ in $f'(...)$ for each injectable set $\bm{U'}$.  Then $f(...) \le C$ is a causal compatibility inequality for the DAG $G$.
-%\end{corollary}
-
-
-%\subsection{Example applications of the inflation technique}\label{sec:examplebaddistributions}
-
-%\color{red} Lemma: Consider a collection of sets of observed variables in the inflated DAG all of which are injectable. Any necessary condition for compatibility of a distribution with the inflated DAG that can be expressed entirely in terms of the marginals on these sets implies a necessary condition for compatibility of a distribution with the original DAG which is expressed in terms of the marginals on the images of these sets.  Formally, ....
-%\color{black} 
-
-We now present some simple examples of causal compatibility inequalities for the Triangle scenario that one can derive from the inflation technique via \cref{maincorollary}.
-
-Some terminology and notation will facilitate the description of these examples. We refer to a pair of nodes which do not share any common ancestor as being \tblue{ancestrally independent}. This corresponds to being $d$-separated by the empty set~\cite{pearl2009causality,spirtes2011causation,studeny2005probabilistic,koller2009probabilistic}.  Given that the conventional notation for $X$ and $Y$ being $d$-separated by $Z$ in the DAG $G$ is $X\perp_G Y|Z$, we denote $X$ and $Y$ being ancestrally independent within $G$ as $X\perp_G Y$.  Generalizing to sets, $\bm{U}\aindep_G \bm{V}$ indicates that no node in $\bm{U}$ shares a common ancestor with any node in $\bm{V}$ within the DAG $G$, 
+We now present some simple examples of causal compatibility inequalities for the Triangle scenario that one can derive from the inflation technique via \cref{maincorollary}. Some terminology and notation will facilitate their description. We refer to a pair of nodes which do not share any common ancestor as being \tblue{ancestrally independent}. This is equivalent to being $d$-separated by the empty set~\cite{pearl2009causality,spirtes2011causation,studeny2005probabilistic,koller2009probabilistic}.  Given that the conventional notation for $X$ and $Y$ being $d$-separated by $Z$ in the DAG $G$ is $X\perp_G Y|Z$, we denote $X$ and $Y$ being ancestrally independent within $G$ as $X\perp_G Y$.  Generalizing to sets, $\bm{U}\aindep_G \bm{V}$ indicates that no node in $\bm{U}$ shares a common ancestor with any node in $\bm{V}$ within the DAG $G$, 
 \begin{align}
 \bm{U}\aindep_G \bm{V} \quad \text{iff} \quad \An[G]{\bm{U}}\cap\An[G]{\bm{V}}=\emptyset.
 \end{align}
 Furthermore, the notation ${\bm{U}\aindep_G \bm{V}\aindep_G \bm{W}}$ should be understood as indicating that $\bm{U}\aindep_G \bm{V}$ and $\bm{V}\aindep_G \bm{W}$ and $\bm{U}\aindep_G \bm{W}$.
-% Ancestral independence is equivalent to $d$-separation by the empty set~\cite{pearl2009causality,spirtes2011causation,studeny2005probabilistic,koller2009probabilistic}. 
 
-%Some terminology and notation will facilitate the description of these examples. We refer to a pair of nodes which do not share any common ancestor as being \tblue{ancestrally independent}, for which we invent the notation $X\aindep Y$. Generalizing to sets, $\bm{U}\aindep \bm{V}$ indicates that no node in $\bm{U}$ shares a common ancestor with any node in $\bm{V}$, 
-%\begin{align}
-%\bm{U}\aindep \bm{V} \quad \text{iff} \quad \An{\bm{U}}\cap\An{\bm{V}}=\emptyset.
-%\end{align}
-%Furthermore, the notation ${\bm{U}\aindep \bm{V}\aindep \bm{W}}$ should be understood as indicating that $\bm{U}\aindep \bm{V}$ and $\bm{V}\aindep \bm{W}$ and $\bm{U}\aindep \bm{W}$. Ancestral independence is equivalent to $d$-separation by the empty set~\cite{pearl2009causality,spirtes2011causation,studeny2005probabilistic,koller2009probabilistic}. 
+\begin{example}[\tred{A causal compatibility inequality in terms of \tpurp{\emph{correlators}}}]
+\label{example:polytriangle}
 
+As in \cref{example:noGHZ} of the previous section, consider the Cut inflation of the Triangle scenario (\cref{fig:TriDagSubA2B1C1v2}), where all observed variables are binary. For technical convenience, we assume that they take values in the set $\{-1,+1\}$, rather than taking values in $\{0,1\}$ as was presumed in the last section. 
 
-
-\example{. \tred{A causal compatibility inequality in terms of \tpurp{\emph{correlators}.}\label{example:polytriangle}}\par\smallskip\nobreak
-
-As in \cref{example:noGHZ} of the previous section, consider the Cut inflation of the Triangle scenario, depicted in~\cref{fig:TriDagSubA2B1C1v2}.  
-The injectable sets we make use of here are $\brackets{A_2 C_1}$, $\brackets{B_1 C_1}$, $\{ A_2\}$, and  $\brackets{B_1}$.
-
-From \cref{maincorollary}, any causal compatibility inequality for the inflated DAG that operates on the marginal distributions of $\brackets{A_2 C_1}$, $\brackets{B_1 C_1}$, $\{ A_2\}$, and  $\brackets{B_1}$ will yield a causal compatibility inequality for the original DAG that can evaluated on the marginal distributions for $\brackets{A C}$, $\brackets{B C}$, $\{ A\}$, and  $\brackets{B}$.
-We begin, therefore, by identifying a simple example of a causal compatibility inequality for the inflated DAG that is of this sort. 
- 
-In our example, all of the observed variables are binary. For technical convenience, we assume that these take values in the set $\{-1,+1\}$, rather than taking values in the set $\{0,1\}$ as was presumed in the last section. 
-
-We begin by noting that for {\em any} distribution on three binary variables $\{A_2 B_1 C_1\}$, that is, {\em regardless} of the causal structure in which they are embedded, the marginals on $\brackets{A_2 C_1}$, $\brackets{B_1 C_1}$ and $\brackets{A_2 B_1}$ satisfy the following inequality for expectation values~\cite{pitowsky_boole_1994,Pitowsky1989,kellerer_marginal_1964,leggett_garg_1985,araujo_cycle_2013},
+The injectable sets that we make use of are $\brackets{A_2 C_1}$, $\brackets{B_1 C_1}$, $\{ A_2\}$, and  $\brackets{B_1}$. From \cref{maincorollary}, any causal compatibility inequality for the inflated DAG that operates on the marginal distributions of $\brackets{A_2 C_1}$, $\brackets{B_1 C_1}$, $\{ A_2\}$, and  $\brackets{B_1}$ will yield a causal compatibility inequality for the original DAG that can be evaluated on the marginal distributions on $\brackets{A C}$, $\brackets{B C}$, $\brackets{A}$, and  $\brackets{B}$. We begin by noting that for {\em any} distribution on three binary variables $\{A_2 B_1 C_1\}$, that is, {\em regardless} of the causal structure in which they are embedded, the marginals on $\brackets{A_2 C_1}$, $\brackets{B_1 C_1}$ and $\brackets{A_2 B_1}$ satisfy the following inequality for expectation values~\cite{pitowsky_boole_1994,Pitowsky1989,kellerer_marginal_1964,leggett_garg_1985,araujo_cycle_2013},
 \begin{equation}
 	\label{eq:polymonogamyraw}
 	\langle A_2 C_1\rangle + \langle B_2 C_1 \rangle - \langle A_2 B_1 \rangle \leq 1.
 \end{equation}
-This is an example of a constraint on pairwise correlators that arises from the presumption that they are consistent with a joint distribution. (The problem of deriving such constraints is the so-called {\em marginal problem}, discussed in detail in \cref{sec:ineqs}.)
+This is an example of a constraint on pairwise correlators that arises from the presumption that they are consistent with a joint distribution. (The problem of deriving such constraints is the {\em marginal constraint problem}, discussed in detail in \cref{sec:ineqs}.)
 
 But in the Cut inflation of the Triangle scenario~(\cref{fig:TriDagSubA2B1C1v2}) $A_2$ and $B_1$ have no common ancestor and consequently any distribution compatible with this DAG must make $A_2$ and $B_1$ marginally independent.  In terms of correlators, this can be expressed as 
 %means that 
 \begin{align}\label{corrfact}
 A_2 \aindep B_1 \implies  \langle A_2 B_1 \rangle =  \langle A_2\rangle \langle B_1 \rangle.
 \end{align}
-Substituting the latter equality into~\cref{eq:polymonogamyraw}, we have
+Substituting this into~\cref{eq:polymonogamyraw}, we have
 \begin{equation}
 	\langle A_2 C_1\rangle + \langle B_2 C_1 \rangle   \leq 1 + \langle A_2 \rangle \langle B_1\rangle.
 \end{equation}
-This is an example of a simple but nontrivial causal compatibility inequality for the DAG of~\cref{fig:TriDagSubA2B1C1v2}.  
-
-Finally, by \cref{maincorollary}, and the fact that the DAG of~\cref{fig:TriDagSubA2B1C1v2} is an inflation of the Triangle scenario,
- we infer that 
-%\begin{equation}
-%	\langle A C\rangle + \langle B C \rangle - \langle A \rangle \langle B \rangle \leq 1.
-%\end{equation}
+This is an example of a simple but nontrivial causal compatibility inequality for the DAG of~\cref{fig:TriDagSubA2B1C1v2}. Finally, by \cref{maincorollary},  we infer that 
 \begin{equation}
 	\label{eq:polymonogamy}
-	\langle A C\rangle + \langle B C\rangle \leq 1 + \langle A\rangle \langle B\rangle,
+	\langle A C\rangle + \langle B C\rangle \leq 1 + \langle A\rangle \langle B\rangle
 \end{equation}
 is a causal compatibility inequality for the Triangle scenario.   This inequality expresses the fact that as long as $A$ and $B$ are not completely biased, there is a tradeoff between the strength of $AC$ correlations and the strength of $BC$ correlations.   
 
-Given the symmetry of the Triangle scenario under permutations and sign flips of $A$, $B$ and $C$, it is clear that the image of inequality~\cref{eq:polymonogamy} under any such symmetry is also a valid causal compatibility inequality.  Together, these inequalities imply monogamy\footnote{We are here using the term ``monogamy'' in the same sort of manner in which it is used in the context of entanglement theory~\cite{horo4}.}  of correlations in the Triangle scenario with binary variables:  if any two observed variables with unbiased marginals are perfectly correlated, then they are both uncorrelated with the third.
+Given the symmetry of the Triangle scenario under permutations and sign flips of $A$, $B$ and $C$, it is clear that the image of inequality~\cref{eq:polymonogamy} under any such symmetry is also a valid causal compatibility inequality.  Together, these inequalities constitute a type of monogamy\footnote{We are here using the term ``monogamy'' in the same sort of manner in which it is used in the context of entanglement theory~\cite{horo4}.}  of correlations in the Triangle scenario with binary variables:  if any two observed variables with unbiased marginals are perfectly correlated, then they are both uncorrelated with the third.
+\end{example}
 
-
-%This inequality expresses a trade-off in the strength of the correlations that can be observed between any pair of observed nodes in the Triangle scenario: at most two such pairs can be perfectly correlated. %\purp{Is this an accurate description of the constraint?  I don't see how to justify calling it ``monogamy".  ---RWS}
-
-%must be monogamous:  if $A$ and $B$ are strongly correlated 
-%we think of as a sort of monogamy inequality: it is impossible for $C$ to be strongly correlated with both $A$ and $B$, unless $A$ and $B$ are both strongly biased.
-
-\example{. \tred{A causal compatibility inequality in terms of \tpurp{\emph{entropic quantities}}.}%\label{example:entropic}
-}\smallskip\nobreak
+\begin{example}[\tred{A causal compatibility inequality in terms of \tpurp{\emph{entropic quantities}}}]
 
 One way to derive constraints that are independent of the cardinality of the observed variables is to express these in terms of the mutual information between observed variables rather than in terms of correlators.  The inflation technique can also be applied to achieve this.
 %Inequalities expressed in terms of entropies and mutual information (rather than correlators) have the advantage that one can easily derive constraints that are independent of the cardinality of the observed variables.  
 %This is the case with the inflation technique as well.  
-To see how this works in the case of the Triangle scenario, consider again the Cut inflation of the Triangle scenario~(\cref{fig:TriDagSubA2B1C1v2}).  
+To see how this works in the case of the Triangle scenario, consider again the Cut inflation~(\cref{fig:TriDagSubA2B1C1v2}).  
 
 One can follow the same logic as in the preceding example, but starting from a different constraint on marginals.  For any distribution on three variables $\{A_2 B_1 C_1\}$ of arbitrary cardinality (again, regardless of the causal structure in which they are embedded), the marginals on $\brackets{A_2 C_1}$, $\brackets{B_1 C_1}$ and $\brackets{A_2 B_1}$ satisfy the inequality~\cite[Eq.~(29)]{fritz2013marginal}
 \label{example:entropic}\begin{align}\label{eq:MIraw}
 	I(A_2 : C_1) + I(C_1 : B_1) - I(A_2 : B_1) \leq H(C_1),	
 \end{align}
-where $H(X)$ denotes the Shannon entropy of the distribution of $X$, and $I(X: Y)$ denotes the mutual information between $X$ and $Y$ with respect to the marginal on $X$ and $Y$.
-
-The fact that $A_2$ and $B_1$ have no common ancestor in the inflated DAG implies that in any distribution that is compatible with the inflated DAG, $A_2$ and $B_1$ are marginally independent.  This is expressed entropically as the vanishing of their mutual information, 
+where $H(X)$ denotes the Shannon entropy of the distribution of $X$, and $I(X: Y)$ denotes the mutual information between $X$ and $Y$ with respect to the marginal on $X$ and $Y$. The fact that $A_2$ and $B_1$ have no common ancestor in the inflated DAG implies that in any distribution that is compatible with the inflated DAG, $A_2$ and $B_1$ are marginally independent.  This is expressed entropically as the vanishing of their mutual information, 
 \begin{align}\label{entropicfact}
 A_2 \aindep B_1 \implies  I(A_2 : B_1)  =0.
 \end{align}
@@ -1007,85 +714,50 @@ Substituting the latter equality into~\cref{eq:MIraw}, we have
 \begin{align}
 	I(A_2 : C_1) + I(C_1 : B_1)  \leq H(C_1).
 \end{align}
-This is another example of a nontrivial causal compatibility inequality for the DAG of~\cref{fig:TriDagSubA2B1C1v2}.  
-
-By \cref{maincorollary}, it follows that 
+This is another example of a nontrivial causal compatibility inequality for the DAG of~\cref{fig:TriDagSubA2B1C1v2}. By \cref{maincorollary}, it follows that 
 \begin{align}\label{eq:monogomyofcorrelations}
-	I(A : C) + I(C : B) \leq H(C),
+	I(A : C) + I(C : B) \leq H(C)
 \end{align}
 is also a causal compatibility inequality for the Triangle scenario.  This inequality was originally derived in~\cite{fritz2012bell}. Our rederivation in terms of inflation coincides with the proof found by~\citet{pusey2014gdag}.
+\end{example}
 
-%To see how this distribution is incompatible with \cref{eq:tritrivial1}, note that for three \emph{identically distributed} (but not independent) binary variables a further special case of \cref{eq:tritrivial1} is
-%\begin{align*}\begin{split}
-%&\hspace{-6ex}3\p{A\cramp{=}1}\leq 1+\p{A\cramp{=}1}^2+2\p{A\cramp{=}B\cramp{=}1}.
-%\end{split}\end{align*}
-%For the W-distribution ${\p{A\cramp{=}B\cramp{=}C\cramp{=}0}=0}$, and also ${\p{A\cramp{=}1,B\cramp{=}1}=0}$, yet ${\p{A\cramp{=}1}=\nicefrac{1}{3}}$. As ${(\nicefrac{1}{3})^3\nleq 0}$ we have proven that the W-type distribution is incompatible with the Triangle scenario.
-%Earlier works have already shown that the GHZ-type distribution is incompatible with the classical Triangle scenario \cite{steudel2010ancestors,fritz2012bell,chaves2014novel}. Interestingly, however, the entropic monogamy relation $I\parens{A:B}+I\parens{A:C}\leq H\parens{A}$ which rejects the GHZ-type distribution has been shown also to hold if the hidden shared resources are non-classical, even using generalized probabilistic theories \cite[Cor. 24]{pusey2014gdag}. 
-
-
-\bigskip
-
-\example{\tred{. A causal compatibility inequality in terms of \tpurp{\emph{joint probabilities}}}}\smallskip\nobreak
-
-
-
-Consider the Spiral inflation of the Triangle scenario, depicted in~\cref{fig:Tri222v2}, with the injectable sets $\{A_1 B_1 C_1\}$, $\{A_1 B_2\}$, $\{B_1 C_2\}$, $\{ A_1, C_2\}$, $\{A_2\}$, $\{B_2\}$, and $\{C_2\}$.
-%.  The injectable sets in this case include $\{A_1 B_1 C_1\}$, $\{A_1 B_2\}$, $\{B_1 C_2\}$, $\{ A_1, C_2\}$, $\{A_2\}$, $\{B_2\}$, and $\{C_2\}$.  
-We here derive a causal compatibility inequality under the assumption that the observed variables are binary, adopting the convention that they take values in $\{0,1\}$.
+\begin{example}[\tred{A causal compatibility inequality in terms of \tpurp{\emph{joint probabilities}}}]
+Consider the Spiral inflation of the Triangle scenario (\cref{fig:Tri222v2}) with the injectable sets $\{A_1 B_1 C_1\}$, $\{A_1 B_2\}$, $\{B_1 C_2\}$, $\{ A_1, C_2\}$, $\{A_2\}$, $\{B_2\}$, and $\{C_2\}$. We derive a causal compatibility inequality under the assumption that the observed variables are binary, adopting the convention that they take values in $\{0,1\}$.
 
 We begin by noting that the following is a constraint that holds for any joint distribution of $\{A_1 B_1 C_1 A_2 B_2 C_2\}$, regardless of the causal structure, 
 \begin{align}\label{eq:FritzF3raw}
 	P_{A_2 B_2 C_2}(111) \leq P_{A_1 B_1 C_1}(000) + P_{A_1 B_2 C_2}(111) + P_{B_1 C_2 A_2}(111) + P_{A_2  C_1 B_2}(111).
 	% Mermin: \langle A_1 B_1 C_1 \rangle - \langle A_2 B_2 C_1 \rangle - \langle A_2 B_1 C_2 \rangle - \langle A_1 B_2 C_2 \rangle \leq 2.
 \end{align}
-To prove this claim, it suffices to check that the inequality holds for each of the $2^6$ deterministic assignments of values to $\{A_1 B_1 C_1 A_2 B_2 C_2\}$, from which the general case follows by linearity.  A more intuitive proof will be provided in~\cref{sec:TSEM}.
+To prove this claim, it suffices to check that the inequality holds for each of the $2^6$ deterministic assignments of outcomes to $\{A_1 B_1 C_1 A_2 B_2 C_2\}$, from which the general case follows by linearity.  A more intuitive proof will be provided in~\cref{sec:TSEM}.
 
-Next, we note that certain sets of variables have no common ancestors with other sets of variables in the inflated DAG, and we infer the marginal independence of the two sets, expressed now as a factorization of a joint distribution,
-%which is expressed as the factorization of the distributions over these variables,
+Next, we note that certain sets of variables have no common ancestors with other sets of variables in the inflated DAG, which implies marginal independences resulting in factorization of distributions,
 \begin{align}\begin{split}\label{eq:tri222fac}
-%P_{A_1 B_1 C_1} &= P_{A B C}, \\
-A_1 B_2 \aindep C_2 \implies	P_{A_1 B_2 C_2} &= P_{A_1 B_2} P_{C_2}, \\
-B_1 C_2 \aindep A_2 \implies	P_{B_1 C_2 A_2} &= P_{B_1 C_2} P_{A_2}, \\
-A_2 C_1 \aindep B_2 \implies	P_{A_2 C_1 B_2} &= P_{A_2 C_1} P_{B_2}, \\
-A_2 \aindep B_2 \aindep C_2 \implies	P_{A_2 B_2 C_2} &= P_{A_2} P_{B_2} P_{C_2} .
+A_1 B_2 \aindep C_2 \:\implies\:	P_{A_1 B_2 C_2} &= P_{A_1 B_2} P_{C_2}, \\
+B_1 C_2 \aindep A_2 \:\implies\:	P_{B_1 C_2 A_2} &= P_{B_1 C_2} P_{A_2}, \\
+A_2 C_1 \aindep B_2 \:\implies\:	P_{A_2 C_1 B_2} &= P_{A_2 C_1} P_{B_2}, \\
+A_2 \aindep B_2 \aindep C_2 \:\implies\:	P_{A_2 B_2 C_2} &= P_{A_2} P_{B_2} P_{C_2} .
 \end{split}\end{align}
 Substituting these equations into~\cref{eq:FritzF3raw}, we obtain the polynomial inequality
 \begin{equation}%\label{eq:FritzF3}
 	P_{A_2}(1) P_{B_2}(1) P_{C_2}(1) \leq P_{A_1 B_1 C_1 }(000) + P_{A_1 B_2}(11) P_{C_2}(1) + P_{B_1 C_2}(11) P_{A_2}(1) + P_{A_2 C_1}(11) P_{B_2}(1).
 	% Mermin-poly: \langle A B C\rangle \leq 2 + \langle A B\rangle \langle C\rangle + \langle B C \rangle \langle A\rangle + \langle C A\rangle \langle B\rangle,
 \end{equation}
-This, therefore, is a causal compatibility inequality for the DAG of ~\cref{fig:Tri222v2}. Finally, by \cref{maincorollary}, we infer that 
+This, therefore, is a causal compatibility inequality for the DAG of \cref{fig:Tri222v2}. Finally, by \cref{maincorollary}, we infer that 
 \begin{equation}\label{eq:FritzF3}
 	P_{A}(1) P_{B}(1) P_{C}(1) \leq P_{ABC}(000) + P_{AB}(11) P_C(1) + P_{BC}(11) P_A(1) + P_{AC}(11) P_B(1)
 	% Mermin-poly: \langle A B C\rangle \leq 2 + \langle A B\rangle \langle C\rangle + \langle B C \rangle \langle A\rangle + \langle C A\rangle \langle B\rangle,
 \end{equation}
 is a causal compatibility inequality for the Triangle scenario.  
 
-What is distinctive about this inequality is that---through the presence of the term $P_{ABC}(000)$---it takes into account genuine three-way correlations.  This inequality is strong enough to demonstrate the incompatibility of the W-type distribution of \cref{eq:wdistribution1} with the Triangle scenario: for this distribution, the right-hand side of the inequality vanishes while the left-hand side does not.
-% \cref{eq:FritzF3} requires the use of a broadcasting inflation, and therefore does not hold in the context of general probability theories.
-%, where $a,b,c\in\brackets{0,1}$.
-%The W-distribution states that the in any event in which $A,B,C$ are observed, precisely one of them will be found to equal $1$ while the other two will equal $0$. The identity of the variable which takes the value $1$ is uniformly random. In informal but intuitive notation, the W-type distribution is ${\nicefrac{1}{3}[100]+\nicefrac{1}{3}[010]+\nicefrac{1}{3}[001]}$.
-%To see how this distribution is incompatible with \cref{eq:FritzF3}, note that for three \emph{identically distributed} (but not independent) binary variables a further special case of \cref{eq:FritzF3} is
-%\begin{align*}\begin{split}
-%&\hspace{-6ex}\p{A\cramp{=}1}^3\leq \p{A\cramp{=}B\cramp{=}C\cramp{=}0} + 3\times\p{A\cramp{=}B\cramp{=}1}\p{C\cramp{=}1}.
-%\end{split}\end{align*}
-%For the W-distribution ${\p{A\cramp{=}B\cramp{=}C\cramp{=}0}=0}$, and also ${\p{A\cramp{=}1,B\cramp{=}1}=0}$, yet ${\p{A\cramp{=}1}=\nicefrac{1}{3}}$. As ${(\nicefrac{1}{3})^3\nleq 0}$ we have proven that the W-type distribution is incompatible with the Triangle scenario.
-
-\bigskip
-
-%\cref{sec:38ineqs} provides a list of further polynomial inequalities that we have derived for the Triangle scenario using the method developed in the following section.
-
+What is distinctive about this inequality is that---through the presence of the term $P_{ABC}(000)$---it takes into account genuine three-way correlations, while our earlier inequalities only depend on the two-variable marginals.  This inequality is strong enough to demonstrate the incompatibility of the W-type distribution of \cref{eq:wdistribution1} with the Triangle scenario: for this distribution, the right-hand side of the inequality vanishes while the left-hand side does not.
+\end{example}
 
 Of the known techniques for witnessing the incompatibility of a distribution with a DAG or deriving necessary conditions for compatibility, the most straightforward is to consider the constraints implied by ancestral independences among the observed variables of the DAG. 
 %There are many well-known tricks for witnessing the incompatibility of a distribution with a DAG or deriving necessary conditions for compatibility.  The absolutely most straightforward of these is to consider the ancestral independences in the DAG.   
-The constraints derived in the last two sections have all made use of this basic technique, but at the level of the inflated DAG rather than the original DAG.  The constraints that one thereby infers for the original DAG reflect facts about its causal structure that cannot be expressed in terms of ancestral independences among its observed variables.  The inflation technique manages to expose these facts in the ancestral independences among observed variables of the inflated DAG.
-%These facts can, however, be revealed in the ancestral independences among that are found in various inflations of the DAG.   In particular, facts about the original DAG that concern ancestral independences refering to {\em latent} variables \
-%Such facts become exposed as ancestral independences among {\em observed variables} in the inflated DAG.
-%``knows'' what allows the inflation technique to derive subtle constraints at the level of the original DAG from stra in these cases.  
+The constraints derived in the last two sections have all made use of this basic technique, but at the level of the inflated DAG rather than the original DAG.  The constraints that one thereby infers for the original DAG reflect facts about its causal structure that cannot be expressed in terms of ancestral independences among its observed variables.  The inflation technique exposes these facts in the ancestral independences among observed variables of the inflated DAG.
 
-%The inflation technique is such that by exploring such basic constraints at the level of the inflated DAG, one obtains more nuanced and subtle constraints at the level of the original DAG.  Because inflation tends to introduce ancestral independences than are not found in the original DAG
-
-In the rest of this article, we shall continue to rely only on the ancestral independences among observed variables within the inflated DAG to infer compatibility constraints on the original DAG.   Nonetheless, it is possible that the inflation technique can also amplify the power of {\em other} techniques that do not merely consider ancestral independences among the observed variables.  We consider some prospects in \cref{sec:otherprospects}.
+In the rest of this article, we shall continue to rely only on the ancestral independences among observed variables within the inflated DAG to infer compatibility constraints on the original DAG.   Nonetheless, it seems plausible that the inflation technique can also amplify the power of {\em other} techniques that do not merely consider ancestral independences among the observed variables.  We consider some prospects in \cref{sec:otherprospects}.
 %   This question, however, is left for future research.
 %any tricks that can be used to infer incompatibility or provide a necessary condition for compatibility in the inflation version of the problem can be used to infer incompatibility or provide a necessary condition for compatibility in the original version of the problem. 
 %  The most straightforward of these tricks are to consider the ancestral independences in the inflated DAG.   Because inflation tends to introduce ancestral independences than are not found in the original DAG, even these most straightforward of tricks can be leveraged to obtain nontrivial constraints.  
@@ -1104,7 +776,7 @@ In the rest of this article, we shall continue to rely only on the ancestral ind
 
 %\subsection{Pre-injectable sets}
 
-In the examples from the previous section, the initial inequality---a constraint upon marginals that is independent of the causal structure---involves sets of observed variables that are \emph{not} all injectable sets.  Each of these sets can, however, be partitioned into disjoint subsets each of which {\em is} injectable whenever the partitioning represents ancestral independence in the inflated DAG.   For instance, in the first example from the previous section, the set $\{ A_2 B_1\}$ is not injectable but it can be partitioned into the singleton sets $\{ A_2 \}$ and $\{ B_1\}$ which are ancestrally independent and each of which is injectable.  It is useful to have a name for such sets of observed variables: we call them \tblue{pre-injectable}. So for a set of observable nodes $\bm{U}'$ in the inflated DAG $G'$,
+In the examples from the previous section, the initial inequality---a constraint upon marginals that is independent of the causal structure---involves sets of observed variables that are \emph{not} all injectable sets.  Each of these sets can, however, be partitioned into disjoint subsets each of which {\em is} injectable such that the partitioning represents ancestral independence in the inflated DAG. For instance in \cref{example:noGHZ}, the set $\{ A_2 B_1\}$ is not injectable, but it can be partitioned into the singleton sets $\{ A_2 \}$ and $\{ B_1\}$ which are ancestrally independent and each of which is injectable.  It is useful to have a name for such sets of observed variables: we call them \tblue{pre-injectable}. So for any $\bm{U}'$ in the inflated DAG $G'$,
 \begin{align}\label{eq:defpreinj}
 \bm{U}'\in\SmallNamedFunction{PreInjectableSets}{G'} \quad\text{ iff }\quad  \exists \{ \bm{U}_i \in \SmallNamedFunction{InjectableSets}{G'} \} \quad \text{s.t.}\quad \bm{U}'=\bigcup_i \bm{U}_i  \quad\text{and} \quad  \forall i\ne j: \bm{U}_i \aindep_{G'} \bm{U}_j.
 %\bm{U}\in\SmallNamedFunction{PreInjectableSets}{G'} \quad\text{ iff }\quad  \exists \{ \bm{U}_i \}_i \quad \text{s.t.}\quad \bm{U}=\bigcup_i \bm{U}_i  \quad\text{and} \quad \forall i 
@@ -1205,7 +877,6 @@ Summarizing, we have shown that, through the inflation technique, the marginal p
 % The potential of using inflation as tool for deriving entropic inequalities is considered separately in \cref{sec:NonShannon}.
 
 To obtain a complete solution of the marginal problem, one must determine all the facets of the \tblue{marginal polytope}, for which we discuss algorithms in~\cref{sec:projalgorithms}.
-% The causal compatibility inequalities one thereby obtains are polynomial in the probabilities.  The rest of this section describes the steps for deriving all such inequalities.  
 Computing all these facets is computationally costly.  It is therefore useful to also consider relaxations of the marginal problem that are less computationally burdensome by deriving valid linear inequalities which may or may not bound the marginal polytope tightly.
 %Since computing all the facets of the marginal polytope is computationally costly, a useful simplification of the problem is to derive instead only a collection 
 We describe one such approach based on possibilistic Hardy-type paradoxes and the hypergraph transversal problem. This strategy requires the least computational effort, but is limited in that it only yields inequalities of a very particular form.  We describe this approach in \cref{sec:TSEM}.
@@ -1224,8 +895,8 @@ In the narrative below the marginal problem is discussed first; the nonlinear st
 
 Preliminary to every strategy is the identification of the pre-injectable sets, so we begin with this problem.
 
-\subsection{Identifying the pre-injectable sets}\label{step:findpreinjectable}
-%\topic{\tred{Identifying the Pre-Injectable Sets}}\label{step:findpreinjectable}
+\subsection{Identifying the pre-injectable sets}
+\label{step:findpreinjectable}
 
 To identify the pre-injectable sets of an inflation DAG, we must first identify the injectable sets. This problem can be reduced to identifying the injectable pairs, because if all of the pairs in a set of nodes are injectable, then so too is the set itself.  The latter claim is proven as follows.   
 %To prove this, it suffices to prove that if all of the pairs in a set of nodes are injectable, then so too is the set itself.  
@@ -1233,7 +904,6 @@ Let $\varphi : G' \to G$ be the projection map from the inflated DAG $G'$ to
 the original DAG $G$, corresponding to removing the copy-indices.  Then $\varphi$ has the characteristic feature that it takes edges to edges: if $A  \to B$ in $G'$, then also $\varphi(A) \to \varphi(B)$ in $G$. Conversely, if
 $\varphi(A) \to \varphi(B)$ in $G$ then also $A \to B$ in $G'$; this follows from the
 assumption that $G'$ is an inflation of $G$. 
-%(It's secretly the *pair* (G',p) that is the inflation, but I think that we've already discussed that over lunch at some point.)
 A set $\bm{U} \subseteq \SmallNamedFunction{ObservedNodes}{G'}$ is injectable if and only if the
 restriction of $\varphi$ to the ancestors of $\bm{U}$ is an injective map. 
 %This is simply a more formal way to state the definition of an injective set. 
@@ -1267,7 +937,6 @@ The nodes of the pre-injection graph are taken to be the injectable sets in $G'$
 The pre-injectable sets correspond to the cliques of the pre-injection graph: the union of all the injectable sets that make up the nodes of a clique is a pre-injectable set, while the individual nodes already give us the partition into injectable sets relevant for the factorization relation of \cref{eq:preinjfactor}. 
 %represented by such a clique results in a pre-injectable set. 
 For our purposes, it is sufficient to enumerate the maximal pre-injectable sets, so that one only needs to consider the maximal cliques of the pre-injection graph.
-%Since it is sufficient to only consider the maximal pre-injectable sets, one can eliminate all those pre-injectable sets that are contained in other ones, as a final step.
 
 
 %Let us also define the \tblue{ancestral dependence graph}, in which two nodes are adjacent if they share a common ancestor, and its complement the \tblue{ancestral independence graph}, in the ancestrally independent nodes are adjacent. To ascertain the factorization of a node set $\bm{U}$ into ancestrally-independent partitions one considers the subgraph on  $\bm{U}$ of the ancestral dependence graph: the ancestrally-independent partitions are identically the distinct connected components of that subgraph. By examining the injection graph and the ancestral dependence graph, therefore, one is able to quickly determine all injectable sets and all ancestral independence relations.
@@ -1356,24 +1025,11 @@ From \cref{fig:injection222,fig:preinjectiongraph222}, we easily infer the injec
 \end{align}
 %where we have placed commas in the maximal pre-injectable sets in order to indicate how each of these arises as a disjoint union of injectable sets with disjoint ancestry, which one can read off from the corresponding clique in the independence graph. 
 Using the ancestral independence relations, the marginal distributions for the maximal pre-injectable sets factorize in the manner described by the right-hand side of \cref{eq:tri222fac}.
-%This results in the distributions on the pre-injectable sets being given in terms of distribution on the original DAG via
-%\begin{align}\label{eq:preinjectableuses222}
-%\begin{split}
-%&\forall{a b c}:\; \begin{cases}
-%\pdf[A_1 B_1 C_1]{a b c} = \pdf[A B C]{a b c} \\
-%\pdf[A_1 B_2 C_2]{a b c} = \pdf[C]{c}\pdf[A B]{a b}\\%\pdf{C}\pdf{A B}\\
-%\pdf[A_2 B_1 C_2]{a b c} = \pdf[A]{a}\pdf[B C]{b c}\\
-%\pdf[A_2 B_2 C_1]{a b c} = \pdf[B]{b}\pdf[A C]{a c}\\
-%\pdf[A_2 B_2 C_2]{a b c} = \pdf[A]{a}\pdf[B]{b}\pdf[C]{c}
-%\end{cases}\end{split}
-%\end{align}
-%\cref{eq:preinjectableuses222} is an equivalent restatement of \cref{eq:tri222fac}. 
-%Having identified the pre-injectable sets (and how to use them), we next consider various ways to invoke constraints on the distributions over the pre-injectable sets.
 
 Having identified the pre-injectable sets together with the factorization relations implied by ancestral independences, we now discuss how to obtain constraints on the marginal distributions over the pre-injectable sets.
 
-\subsection{The marginal problem and the marginal satisfiability problem}\label{step:marginalsproblem}
-%\subsection{Constraining distributions over the pre-injectable sets via the marginal problem}
+\subsection{The marginal problem and the marginal satisfiability problem}
+\label{step:marginalsproblem}
 
 For a given set of variables and a family of subsets thereof, determining the constraints that must hold for a family of distributions over these subsets to be obtainable as the marginals of a joint distribution over the full set of variables is known as the {\em marginal problem}.
 %family of marginal distributions, each defined on a subset of the variables, determining whether there exists a joint probability distribution over the full set of variables from which all of these can be obtained as marginal distributions is known as the {\em marginal problem}.
@@ -1417,16 +1073,16 @@ maximal pre-injectable sets in \cref{eq:basicsetup222}.
 % In order for the five pre-injectable sets in \cref{eq:preinjectableuses222} to be marginally compatible there must exist 64 nonnegative joint probabilities, i.e. satisfying
 Besides normalization of probability, the only constraint on the probabilities making up the joint distribution is nonnegativity,
 \begin{align}\label{eq:nonnegativity}
-\forall{a_1 a_2 b_1 b_2 c_1 c_2}:\; \pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2} \geq 0.
+\forall{a_1 a_2 b_1 b_2 c_1 c_2}:\; \p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2} \geq 0.
 \end{align}
 We require the joint distribution to reproduce the marginal distribution on each context via
 \begin{align}\label[eqs]{eq:marginalequalities222}
 \begin{split}
-&\forall{a_1 b_1 c_1}:\;\pdf[A_1 B_1 C_1]{a_1 b_1 c_1} = \sum\nolimits_{a_2 b_2 b_2}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
-&\forall{a_1 b_2 c_2}:\;\pdf[A_1 B_2 C_2]{a_1 b_2 c_2} = \sum\nolimits_{a_2 b_1 c_1}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
-&\forall{a_2 b_1 c_2}:\;\pdf[A_2 B_1 C_2]{a_2 b_1 c_2} = \sum\nolimits_{a_1 b_2 c_1}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
-&\forall{a_2 b_2 c_1}:\;\pdf[A_2 B_2 C_1]{a_2 b_2 c_1} = \sum\nolimits_{a_1 b_1 c_2}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
-&\forall{a_2 b_2 c_2}:\;\pdf[A_2 B_2 C_2]{a_2 b_2 c_2} = \sum\nolimits_{a_1 b_1 c_1}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}.
+&\forall{a_1 b_1 c_1}:\;\p[A_1 B_1 C_1]{a_1 b_1 c_1} = \sum\nolimits_{a_2 b_2 b_2}\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
+&\forall{a_1 b_2 c_2}:\;\p[A_1 B_2 C_2]{a_1 b_2 c_2} = \sum\nolimits_{a_2 b_1 c_1}\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
+&\forall{a_2 b_1 c_2}:\;\p[A_2 B_1 C_2]{a_2 b_1 c_2} = \sum\nolimits_{a_1 b_2 c_1}\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
+&\forall{a_2 b_2 c_1}:\;\p[A_2 B_2 C_1]{a_2 b_2 c_1} = \sum\nolimits_{a_1 b_1 c_2}\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
+&\forall{a_2 b_2 c_2}:\;\p[A_2 B_2 C_2]{a_2 b_2 c_2} = \sum\nolimits_{a_1 b_1 c_1}\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}.
 \end{split}
 \end{align}
 %For example in the case of binary variables, we therefore 
@@ -1470,7 +1126,6 @@ As every facet enumeration problem, this can also be phrased as a problem of \tb
 The marginal problem is a linear system of equations and inequalities relating the unknown joint probabilities to the accessible marginal probabilities. The problem of quantifier elimination consists in finding an equivalent system of equations and inequalities that is satisfied if and only if the original system has a solution for the unknown probabilities. This requires eliminating 64 unknowns $\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}$ for each of the 64 choices of the values $a_1,\ldots,c_2$. The resulting new system consists of the coinciding-submarginals equations together with the facet inequalities of the marginal polytope.
 %joint probabilities $\{ \p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2} : (a_1 a_2 b_1 b_2 c_1 c_2) {\underline{\phantom{xxxxx}}}$, 
 %and to thereby compute the inequalities that constrain the marginal probabilities.
-%We coin the term gedankenprobability to denote any probability pertaining to a \emph{not}-pre-injectable set of inflation-DAG variables. The gedankenprobabilities evoke thought experiments, because any \purp{black box implementation of the original causal structure % \emph{in-principle}.
 
 
 %In this formulation, 
@@ -1482,12 +1137,6 @@ Linear quantifier elimination is already used in causal inference for deriving e
 \cref{sec:Bellscenarios} will partly elucidate the relation.
 
 The marginal problem is a standard facet enumeration problem, in that the vertices of the polytope are given. The derivation of entropic inequalities, by contrast, is a priori only a linear quantifier elimination task, and more difficult to cast as a facet enumeration problem with given vertices, since the vertices (extremal rays) of the Shannon cone elude a simple description. As such, while facet enumeration tools are useful for deriving polynomial inequalities via the inflation technique, they are not directly available for the derivation of entropic inequalities; see \cref{sec:projalgorithms} for further details.
-
-%\subsection{Witnessing incompatibility by non-sastisfiability of the marginal problem}\label{sec:satisfiable}
-
-\begin{comment}
-Given a particular distribution on observed nodes of the original DAG, one can use the inflation technique to probe causal compatibility as follows. Using \cref{mainlemma} along with the factorization conditions implied by ancestral independences among the variables in the maximal pre-injectable sets, \color{red} one can infer the distributions on the maximal pre-injectable sets that are implied by  the given  distribution on the images of these in the original DAG\color{black}; this was the first step in each example in \cref{subsec:witnessingincompat}. 
-\end{comment}
 
 \color{blue} We turn now to a formalization of the marginal satisfiability problem.  In this case, the numerical values for 
 %the left-hand sides of the equations defining the marginal problem, such as \cref{eq:marginalequalities222}. 
@@ -1608,29 +1257,6 @@ Applying the factorization of probabilities according to ancestral independences
 \)}
 \end{align*}
 A star next to the index of an inequality indicates that the inequality can also be derived by considering the possibilistic constraints per \cref{sec:TSEM}. It is likely that these 37 symmetry classes of causal compatibility inequalities are not a minimal generating set, where a minimal generating set is defined to be one such that, for every inequality, there is a distribution that violates it while satisfying all of the others. 
-%; we have not yet checked whether for every inequality there is a distribution which violates that inequality but satisfies all the others.
-%
-%\clearpage
-%\label{page:nontrivlist}
-%\includepdf[pages=1,scale=0.90,link,linkname=nontriv,pagecommand={\refstepcounter{includepdfpage}\label{nontriv.\theincludepdfpage}}]{nontrivlist.pdf}
-%
-%\begin{figure}[H]
-% \includegraphics[width=\textwidth]{nontrivlist.pdf}\label{nontriv.humanreadable}
-%\end{figure}
-%
-%
-
-
-%This is the approach that we will consider in the next section.
-%Note that if one merely has linear inequalities that contain the marginal polytope rather than describing its facets, one can still follow the above prescription for deriving causal compatibility inequalities.  This is the approach that we will consider in the next section.
-
-
-
-% When solving the marginal problem is too difficult, one may consider solving a relaxation of it, instead. One extremely computationally amenable relaxation of the marginal problem is to enumerate probabilistic Hardy-type paradoxes. This is discussed later on in  \cref{sec:TSEM}.
-
-%\topic{\tred{Constraining Possible Distributions over Pre-Injectable Sets via Hardy Paradoxes}}
-
-%Although solving the marginal problem can be highly optimized, it can still prove computationally difficult. It is therefore sometimes useful to consider relaxations of the marginal problem. The \emph{full} marginal problem is to find inequalities on the marginal distributions such that the inequalities are satisfied \emph{if and only if} the given marginal distributions can be extended. It is much easier to generate necessary-but-insufficient inequalities, i.e. satisfied by all compatible marginal distributions but such that no-violation does not certify marginal compatibility. We have identified a technique for rapidly generating such quantifier-free inequalities by restricting the search to inequalities of a very particular form. We found this alternative technique — trading generality for speed — to be extraordinarily practical. The type of inequalities that we consider are given by a certain class of tautologies in classical propositional logic, see \cref{sec:TSEM} for further details.
 
 
 \subsection{Causal compatibility inequalities via Hardy-type inferences from logical tautologies}\label{sec:TSEM}
@@ -1642,14 +1268,6 @@ Enumerating all the facets of the marginal polytope is computationally feasible 
 In the literature on Bell inequalities, it has been noticed that incompatibility with the Bell DAG can sometimes be witnessed by merely looking at which joint outcomes have zero probability and which ones have nonzero probability. In other words, instead of considering the \emph{probability} of an outcome, the inconsistency of some marginal distributions can be evident from considering only the \emph{possibility} or \emph{impossibility} of each outcome. This insight is originally due to~\citet{L.Hardy:PRL:1665}, and versions of Bell's theorem that are based on the violation of such \tblue{possibilistic constraints} are known as \tblue{Hardy-type paradoxes}~\cite{Garuccio95,CabelloHardyInequality,Braun08,Mancinska14,LSW}; a partial classification of these can be found in~\cite{Mansfield2012}. The method that we describe in the second half of this section can be used to compute a complete classification of possibilistic constraints for \emph{any} marginal problem.
 
 Possibilistic constraints follow from a consideration of {\em logical relations} that can hold among deterministic assignments to the observed variables. Such logical constraints can also be leveraged to derive probabilistic constraints instead of possibilistic ones, as shown in~\cite{Pitowsky1989,Ghirardi08}. This results in a partial solution to any given (probabilistic) marginal problem. Essentially, we solve a possibilistic marginal problem \cite{Mansfield2012}, then upgrade the possibilistic inequalities into probabilistic inequalities, resulting in a set of probabilistic inequalities whose cumulative satisfaction is a necessary but insufficient condition for satisfying the corresponding probabilistic marginal problem. We now demonstrate how to systematically derive all inequalities of this type.
-
-%We have already provided a simple example of this sort of argument in \cref{Sec:DerivingInequalities}, in the argument used to demonstrate that the marginal distributions of Eqs.~\eqref{W4}-\eqref{W7} are incompatible with the DAG depicted in Fig.~\ref{fig:Tri222v2}.   For our present purposes, it is useful to recast the argument of \cref{Sec:DerivingInequalities} into a new but manifestly equivalent form.  First, one notes that the following proposition is a logical tautology for binary variables:
-%\begin{align}\begin{split}\label{tautology1}
-%&\lnot [A_2 \eql 1 \land C_1 \eql 1] \bigwedge \lnot [B_2 \eql 1 \land A_1 \eql 1] \bigwedge \lnot [C_2 \eql 1 \land B_1 \eql 1] \bigwedge \lnot [A_1 \eql 0 \land B_1 \eql 0 \land C_1 \eql 0]\\
-% &\qquad\implies
-%\lnot [A_2 \eql 1 \land B_2 \eql 1 \land C_2 \eql 1].
-%\end{split}\end{align}
-%Next, one notes that the given distribution and causal structure imply that the antecedent is true while the consequent is false for every valuation in the support of the distribution, so that the distribution and causal structure together imply a contradiction.
 
 We have already provided a simple example of a Hardy-type argument in \cref{Sec:DerivingInequalities}, in the logic used to demonstrate that the marginal distributions of \cref{W4,W1,W5} are incompatible with the DAG depicted in \cref{fig:Tri222v2}.   For our present purposes, it is useful to recast the argument of \cref{Sec:DerivingInequalities} into a new but manifestly equivalent form.    
 
@@ -1717,7 +1335,6 @@ The following tautology provides a constraint on marginal deterministic assignme
 %A possibilistic constraint that follows from logic alone, and therefore is true regardless of the joint distribution over $A, B, C$, is this one:
 %One Hardy-type possibilistic constraint which we would want to enumerate is
 \begin{align}\label{GHZtautology}
-%    \bracks{\mgreen{A \eql a}, \mgreen{C \eql c}} \implies \bracks{\mgreen{A \eql a}, B \eql b} \bigvee \bracks{B \eql \n{b}, \mgreen{C \eql c}}
  \bracks{\mgreen{A \eql 1}, \mgreen{C \eql 1}} \implies \bracks{\mgreen{A \eql 1}, B \eql 1} \lor \bracks{B \eql 0, \mgreen{C \eql 1}}.
 \end{align}
 Applying the union bound, one obtains a constraint on marginal distributions,\footnote{This inequality is equivalent to \cref{eq:polymonogamyraw}.}
@@ -1771,7 +1388,6 @@ is such a minimal transversal: every assignment of values to all variables which
 
 We convert these implications into inequalities in the usual way via the union bound (i.e., replacing ``$\Rightarrow$'' by ``$\leq$'' at the level of probabilities and the disjunctions by sums). For example the constraint on marginal deterministic assignments \cref{eq:F3implicationform} translates into the constraint on marginal distributions
 \begin{align}\label{eq:F3rawprobform}
-%    P_{A_2 B_2 C_2}\parens{\mgreen{a_2} \mgreen{b_2} \mgreen{c_2}} \leq \p{\n{a_1} \n{b_1} \n{c_1}}+\p{a_1 \mgreen{b_2 c_2}}+\p{\mgreen{a_2} b_1 \mgreen{c_2}}+\p{\mgreen{a_2 b_2} c_1}
     P_{A_2 B_2 C_2}\parens{\mgreen{1} \mgreen{1} \mgreen{1}} \leq P_{A_1 B_1 C_1}\parens{0 0 0}+P_{A_1 B_2 C_2}\parens{1 \mgreen{1 1}}+P_{A_2 B_1 C_2}\parens{\mgreen{1} 1 \mgreen{1}}+P_{A_2 B_2 C_1}\parens{\mgreen{1 1} 1}.
 \end{align}
 %\[
@@ -1793,7 +1409,6 @@ In conclusion, facet enumeration is the preferable method for deriving inequalit
 
 \cref{maincorollary} states that any causal compatibility inequality on the injectable sets of an inflation DAG $G'$ can be translated into a causal compatibility inequality on the original DAG $G$. Consequently any technique for deriving causal compatibility inequalities on $G'$ can potentially be amplified by the inflation technique.  As we discovered in \cref{sec:ineqs}, even weak constraints at the level of the inflated DAG can translate into strong constraints at the level of the original DAG. In the following two subsections, we consider two additional possibilities for constraints that might be exploited in this way to derive better inequalities.
 
-%\topic{\tred{Constraining Possible Distributions over Pre-Injectable Sets via Conditional Independence Relations}}
 \subsection{Using \textit{d}-separation relations of the inflated DAG}\label{sec:fulldsep}
 
 In \cref{sec:ineqs}, we considered deriving causal compatibility inequalities on the inflated DAG by taking valid inequalities for the marginal polytope on the pre-injectable sets of the inflated DAG, and then making of use the ancestral independences to factorize the joint distributions on the pre-injectable sets into those on the injectable sets.
@@ -1821,13 +1436,9 @@ For example, in the Spiral inflation of the Triangle scenario~(\cref{fig:Tri222}
  Every probability that appears in such an equation, though not defined on an injectable set, can still be expressed as a marginal of the joint distribution over all observed variables.  For instance, we can express $\p[A_2 B_2]{a_2 b_2}$ as
 %  like this must occur as a marginal as well, i.e.,~it can be written as a sum of various joint probabilities, as in
 \begin{align}
-%\begin{array}{lll}
-\forall{a_2 b_2}:\;\pdf[A_2 B_2]{a_2 b_2} = \sum\nolimits_{a_1 b_1 c_1 c_2}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}.
-%\forall{a_1 a_2 b_2 c_2}:&\;\pdf[A_1 A_2 B_2 C_2]{a_1 a_2 b_2 c_2} \to& \sum\nolimits_{b_1 c_1}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
-%\forall{a_1 a_2 b_2}:&\;\pdf[A_1 A_2 B_2]{a_1 a_2 b_2} \to\quad& \sum\nolimits_{b_1 c_1 c_2}\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}
-%\end{array}
+\forall{a_2 b_2}:\;\p[A_2 B_2]{a_2 b_2} = \sum\nolimits_{a_1 b_1 c_1 c_2}\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}.
 \end{align}
-Upon substituting such relations into~\cref{nonlinearequality}, one obtains a system of polynomial equations and inequalities in terms of the observable joint probabilities.  We can then proceed as we did before, eliminating the unknowns $\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}$ from this system. The additional difficulty now is that some the equations are nonlinear. This idea even applies to some ancestral independences between sets that are not pre-injectable: for example, $A_1 A_2 B_2 \indep C_2$ is also guaranteed in the Spiral inflation of the Triangle scenario~(\cref{fig:Tri222}), and results in a polynomial equation closely related to \cref{nonlinearequality}.
+Upon substituting such relations into~\cref{nonlinearequality}, one obtains a system of polynomial equations and inequalities in terms of the observable joint probabilities.  We can then proceed as we did before, eliminating the unknowns $\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}$ from this system. The additional difficulty now is that some the equations are nonlinear. This idea even applies to some ancestral independences between sets that are not pre-injectable: for example, $A_1 A_2 B_2 \indep C_2$ is also guaranteed in the Spiral inflation of the Triangle scenario~(\cref{fig:Tri222}), and results in a polynomial equation closely related to \cref{nonlinearequality}.
 %In particular, the number of unknown quantities to be eliminated is still the same, but now the system of equations and inequalities is nonlinear. 
 %Note also that incorporating such constraints also increases the number of quantifier which must be eliminated, as additional non-injectable probabilities are now featured in the equalities corresponding to conditional independence which do not appear in the unconstrained marginal problem. 
 
@@ -1846,7 +1457,6 @@ If one is seeking merely to assess the compatibility of a {\em given} distributi
 It is also possible to use a mixed strategy of linear and nonlinear quantifier elimination, such as \citet{ChavesPolynomial} advocates. The explicit results of~\cite{ChavesPolynomial} are directly causal implications of the \emph{original} DAG, achieved by applying a mixed quantifier elimination strategy. Perhaps further causal compatibility inequalities will be derivable by applying such a mixed quantifier elimination strategy to inflation DAGs.
 
 \subsection{Using copy-index equivalence on the inflated DAG}\label{Sec:copyindexequivalence}
-%\topic{\tred{Constraining Possible Distributions over Pre-Injectable Sets via Coinciding Marginals}}
 
 By the definition of an inflated model (\cref{def:inflat}), if two variables in the inflated DAG $G'$ are copy-index-equivalent, $A_i \sim A_j$, then each depends on its parents in the same fashion as $A$ depends on its parents in the original DAG $G$. Hence $A_i$ and $A_j$ have the same dependence on their parents.  Formally, from $A_i \sim A$ and \cref{eq:funcdependences}, we infer that $\pfunc{A_i| \Pa[G']{A_i}}=\pfunc{A|\Pa[G]{A}}$, and similarly $\pfunc{A_j| \Pa[G']{A_j}}=\pfunc{A|\Pa[G]{A}}$.  These two equations imply that 
 \begin{align}\label{copyindexequivalence}
@@ -1875,16 +1485,13 @@ These constraints entail that $P_{A_1 A_2 B_2}$ must be symmetric under exchange
 
 %we can no longer describe the resulting constraints as ``coincidence'' of marginal distributions for a pair of contexts.  The resulting constraint might simply by a restriction on the marginal distribution for a single context.]  If $\varphi$ is not the identity map, then the equation $P_{\bm{U}} = P_{\bm{V}}$ is nontrivial even when $\bm{U}=\bm{V}$: in this case, it is effectively requiring $P_{\bm{U}}$ to be invariant under permuting the variables according to the automorphism $\varphi$.
 
-Parameters such as $\p[A_1 A_2 B_1]{a_1 a_2 b}$, $\p[A_1 A_2 B_2]{a_1 a_2 b}$ and $\p[A_1 A_2]{a_1 a_2}$ can each be expressed as sums of the $\pdf[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}$, so that relations such as \cref{CIEconsequence,CIEconsequence2} each constitute an additional equation that can be added to the system of equalities and inequalities that constitute the starting point of the satisfiability problem (if one is seeking to test the compatibility of a given distribution with the inflated DAG) or the quantifier elimination problem (if one is seeking to derive causal compatibility inequalities for the inflated DAG).  If any such additional constraints yield stronger constraints at the level of the inflated DAG, then they may translate into stronger constraints at the level of the original DAG.
+Parameters such as $\p[A_1 A_2 B_1]{a_1 a_2 b}$, $\p[A_1 A_2 B_2]{a_1 a_2 b}$ and $\p[A_1 A_2]{a_1 a_2}$ can each be expressed as sums of the $\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}$, so that relations such as \cref{CIEconsequence,CIEconsequence2} each constitute an additional equation that can be added to the system of equalities and inequalities that constitute the starting point of the satisfiability problem (if one is seeking to test the compatibility of a given distribution with the inflated DAG) or the quantifier elimination problem (if one is seeking to derive causal compatibility inequalities for the inflated DAG).  If any such additional constraints yield stronger constraints at the level of the inflated DAG, then they may translate into stronger constraints at the level of the original DAG.
 
 %  incorporated into either linear or nonlinear quantifier eliminations in order to derive stronger causal compatibility inequalities. 
 The general problem of finding pairs of marginal contexts in the inflated DAG for which relations of copy-index-equivalence imply equality of the marginal distributions, and the conditions under which such equalities may yield tighter inequalities, are discussed in \cref{sec:coincidingdetails}.
 
 
-%Even if the original hypothesis does not constrain possible causal models beyond $d$-separation, The inflation hypothesis is (in all nontrivial cases) more than just that: every inflated model also satisfies $\pdf{A_i| \Pa{A_i}}=\pdf{A_j|\Pa{A_j}}$, per \cref{eq:funcdependences}.
-% Consequently, the distributions over different injectable sets must occasionally coincide, i.e. $\pdf{\bm{X}}=\pdf{\bm{Y}}$ whenever both $\bm{X}$ and $\bm{Y}$ are injectable, and $\subsim{\bm{X}}=\subsim{\bm{Y}}$.
 
-%This implies cases that distributions over certain sets of nodes must coincide in any inflated model. For example, $P_{\bm{X}} = P_{\bm{Y}}$ certainly holds whenever $\bm{X}$ and $\bm{Y}$ are injectable and $\subsim{\bm{X}} = \subsim{\bm{Y}}$, but adding this constraint to the quantifier elimination problem does not help as both sides of this equations are already determined by the original distribution. However, this type of equation also follows in some cases when $\bm{X}$ and $\bm{Y}$ are not injectable. 
 %For example, $P_{A_1 A_2 B_1}=P_{A_1 A_2 B_2}$ follows from \cref{fig:Tri222} and the inflation hypothesis, even though $\brackets{A_1 A_2 B_1}$ and $\brackets{A_1 A_2 B_2}$ are not injectable sets.
 
 %Hence equations such as 
@@ -1905,9 +1512,7 @@ The general problem of finding pairs of marginal contexts in the inflated DAG fo
 
 
 
-%\purp{It is interesting to compare the technique for deriving polynomial inequalities here to that in in Ref. \cite{ChavesPolynomial}. On the one hand, our initial set of linear inequalities is much stronger, as we work with the inflated DAG whereas \citet{ChavesPolynomial} considers only the original DAG. This allows us to analyze scenarios which Ref. \cite{ChavesPolynomial} cannot, namely those without any observable conditional independence relations, such as the Triangle scenario. On the other hand, Ref. \cite{ChavesPolynomial} purportedly incorporates any kind of observable conditional independence relation, whereas we account only for \emph{unconditional} independence relations, per \cref{step:fac}. A careful examination of Ref. \cite{ChavesPolynomial}, however, reveals that only unconditional independence relations are utilized in all the examples there. To that extent, therefore, all the explicit results in Ref. \cite{ChavesPolynomial} are implied by the inflation technique.}
 
-%We note that our polynomial inequalities are related to those introduced recently by \citet{ChavesPolynomial}, in that our inequalities subsume the explicit results of Ref. \cite{ChavesPolynomial}. \purp{NEEDS CONFIRMATION!} \citet{ChavesPolynomial} exploits conditional independence at the observable level only, whereas our technique is applicable to scenarios even without any observable CI relations, such as the Triangle scenario.
 
 
 
@@ -2016,10 +1621,9 @@ precisely as we would want to do in constructing inequalities on our inflated DA
 We have described the \emph{inflation technique} for doing causal inference with latent variables.
 %For a given DAG under consideration, one can construct many new DAGs, termed {\em inflations} of this DAG, which duplicate one or more of the nodes of the original DAG, while preserving their ancestral subgraph.  Furthermore, the causal parameters that one adds to the inflated DAG are constrained to mirror the causal dependences of the original DAG.
 % An inflated DAG naturally carries inflated models, and the existence of an inflated model implies inequalities which constrain the set of distributions on observable nodes compatible with the original causal structure. Polynomial inequalities can be obtained through \emph{linear} inequalities which are necessary conditions for a collection of given marginal distributions to arise from a joint distribution (marginal problem). For deriving such inequalities in turn, we have considered the methods of computing all facets of the marginal polytope via facet enumeration, and deriving looser constraints more efficiently by enumerating hypergraph transversals.
-<<<<<<< HEAD
-We have shown that many existing techniques for witnessing incompatibility and for deriving causal compatibility inequalities can be enhanced by the inflation technique, independently of whether these pertain to entropic quantities, correlators or probabilities.  Furthermore, we have shown how a complete or partial solution of the marginal problem for the pre-injectable sets of the inflated DAG can be leveraged to obtain causal compatibility inequalities  for the original DAG.  These inequalities are polynomial in the joint probabilities of the observed variables.  As far as we can tell, our inequalities are not related to the nonlinear causal compatibility inequalities which have been derived specifically to constrain classical networks \cite{TavakoliStarNetworks,RossetNetworks,TavakoliNoncyclicNetworks}, nor to the nonlinear inequalities which account for interventions to a given causal structure \cite{kang2007polynomialconstraints,steeg2011relaxation}.
-=======
-We have shown that many pre-existing techniques for witnessing incompatability and for deriving causal compatibility inequaities can be enhanced by the inflation technique.  In particular, it can enhance existing methods regardless of whether these pertain to entropic quantitites, correlators or probabilities.  Furthermore, we have shown how a complete or partial solution of the marginal problem for the pre-injectable sets of the inflated DAG can be leveraged to obtain causal compatibility inequalities  for the original DAG.  These inequalities are not necessarily linear in the probabilities for joint valuations of the observed variables, that is, they are typically nonlinear (i.e., polynomial) inequalities.  As far as we can tell, our inequalities are not related to the nonlinear causal compatibility inequalities which have been derived specifically to constrain classical networks \cite{TavakoliStarNetworks,RossetNetworks,TavakoliNoncyclicNetworks}, nor to the nonlinear inequalities which account for interventions on a given causal structure \cite{kang2007polynomialconstraints,steeg2011relaxation}.
+
+We have shown that many existing techniques for witnessing incompatibility and for deriving causal compatibility inequalities can be enhanced by the inflation technique, independently of whether these pertain to entropic quantities, correlators or probabilities.
+Furthermore, we have shown how a complete or partial solution of the marginal problem for the pre-injectable sets of the inflated DAG can be leveraged to obtain causal compatibility inequalities  for the original DAG.  These inequalities are polynomial in the joint probabilities of the observed variables.  As far as we can tell, our inequalities are not related to the nonlinear causal compatibility inequalities which have been derived specifically to constrain classical networks \cite{TavakoliStarNetworks,RossetNetworks,TavakoliNoncyclicNetworks}, nor to the nonlinear inequalities which account for interventions to a given causal structure \cite{kang2007polynomialconstraints,steeg2011relaxation}.
 
 %The resulting polynomial inequalities are necessary conditions on a joint distribution to be explained by the causal structure.   
 Because our technique is capable of exhibiting the incompatibility of the W-type distribution with the Triangle scenario, while entropic techniques cannot, it follows that our polynomial inequalities are stronger than entropic inequalities in at least some cases (see \cref{example:noWdist} of \cref{subsec:witnessingincompat}).   
@@ -2027,18 +1631,7 @@ Because our technique is capable of exhibiting the incompatibility of the W-type
 A single causal structure has an unlimited number of potential inflations. Selecting a good inflation from which strong polynomial inequalities can be derived is an interesting challenge. To this end, it would be desirable to understand how particular features of the original causal structure are exposed when different nodes in the DAG are duplicated. By isolating which features are exposed in each inflation, we could conceivably quantify the utility for causal inference of each inflation. In so doing, we might find that inflated DAGs beyond a certain level of variable duplication need not be considered. The multiplicity beyond which further inflation is irrelevant may be related to the maximum degree of those polynomials which tightly characterize a causal scenario. Presently, however, it is not clear how to upper bound either number, or whether finite upper bounds can even be expected.
 
 
-Causal compatibility inequalities are, by definition, merely {\em necessary} conditions for compatibility.  For some DAGs, the inflation technique is able to derive sufficient conditions as well.  This occurs for the Bell scenario, as noted in \cref{sec:Bellscenarios}.  We currently do not know whether or not the inflation technique can be used to also obtain sufficient conditions for an arbitrary DAG (for instance, by applying the technique to all inflations of a DAG or some finite family of inflations).
-%to what extent they can also be considered sufficient.  
-%The fact that and there is somewhat conflicting evidence: as we have seen, the inflated DAG approach reproduces all Bell inequalities; but on the other hand, 
-Some evidence against such sufficiency is that we have not seen a way to use the inflation technique to rederive Pearl's instrumental inequality.
-%The fact that  we have not been able to use it to rederive Pearl's instrumental inequality suggests that it may not be possible to obtain sufficient conditions from it.  
- %, although the instrumental scenario also contains only one latent node. % yet just how strong they are is still unclear. A distribution might satisfy all our polynomial inequalities and yet not be realizable from the causal structure. %What would such superficially-feasible distributions look like? Are inflated DAG inequalities ever tight? 
-% Our methods yields tight causal infeasibility criteria for Bell scenarios, but those scenarios are exceptional in that the sets of realizable distributions form a convex polytope.
-
-% The most elementary of all causal infeasibility criteria are the conditional independence (CI) relations. Our method explicitly incorporates all marginal independence relations implied by a causal structure. We have found that some CI relations also appear to be implied by our polynomial inequalities. In future research we hope to clarify the process through which CI relations are manifested as properties of the inflated DAG.
-
-%\purp{T: yes, this should be moved, to some place where also the second to last paragraph goes. Maybe end of introduction, a paragraph on related work?}
-%>>>>>>> 6287c6ebe884841454b3f49e9f2d3badefc85f8f
+Causal compatibility inequalities are, by definition, merely {\em necessary} conditions for compatibility. Depending on what kind of causal inference methods one uses at the level of an inflation DAG $G'$, one may or may not obtain sufficient conditions. An interesting question is: if one only uses the existence of a joint distribution at the level of $G'$, then does one obtain sufficient conditions as $G'$ varies? In other words: if a given distribution is such that for every $G'$, the associated marginal problem is solvable, then is the distribution compatible with the original DAG? This occurs for the Bell scenario, where it is enough to consider only one particular inflation (\cref{sec:Bellscenarios}). Some evidence against sufficiency in the general case is that we have not seen a way to use the inflation technique to rederive Pearl's instrumental inequality.
 
 We have described how the inflation technique can enhance the power of many diffferent techniques for deriving causal compatibility inequalities and witnessing incompatibility, by applying the latter technique to the inflated DAG and using \cref{mainlemma} or \cref{maincorollary}.  The computational difficulty of achieving this enhancement depends on the seed technique.  We summarize the computational difficulty of the approaches that we have considered in~\cref{table:difficulties}. While this focuses on deriving inequalities, the same table applies \emph{mutatis mutandis} to the satisfiability problem. 
 %We've noted that there is a prospect for using the inflation technique to leverage arbitrary $d$-separation conditions on the inflated DAG, but this requires nonlinear quantifier elimination.  
@@ -2100,20 +1693,15 @@ For the remainder of this section, we focus on the ``only ancestral independence
 %The resulting polynomial inequalities are necessary conditions on a joint distribution to be explained by the causal structure.   
 Since this technique is capable of exhibiting the incompatibility of the W-type distribution with the Triangle scenario, while entropic techniques cannot, it follows that our polynomial inequalities are stronger than entropic inequalities in at least some cases (see \cref{example:noWdist} of \cref{subsec:witnessingincompat}).   
 
-A single causal structure has unlimited potential inflations. Selecting a good inflation from which strong polynomial inequalities can be derived is an interesting challenge. To this end, it would be desirable to understand how particular features of the original causal structure are exposed when different nodes in the DAG are duplicated. By isolating which features are exposed in each inflation, we could conceivably quantify the causal inference strength of each inflation. In so doing, we might find that inflated DAGs beyond a certain level of variable duplication need not be considered. This may be related to the maximum degree of those polynomials which tightly characterize the distributions compatible with a causal structure. Presently, however, it is not clear how to upper bound either number, or whether finite upper bounds can even be expected.
+A single causal structure has unlimited potential inflations. Selecting a good inflation from which strong polynomial inequalities can be derived is an interesting challenge. To this end, it would be desirable to understand how particular features of the original causal structure are exposed when different nodes in the DAG are duplicated. By isolating which features are exposed in each inflation, we could conceivably quantify the causal inference strength of each inflation. In so doing, we might find that inflated DAGs beyond a certain level of variable duplication need not be considered. This may be related to the maximum degree of those polynomials which tightly characterize the distributions compatible with a causal structure. Presently, however, it is not clear how to upper bound either number, or whether a tight characterization by polynomial inequalities is even possible.
 
 
-Causal compatibility inequalities are, by definition, merely {\em necessary} conditions for compatibility. Depending on what kind of causal inference methods one uses at the level of an inflation DAG $G'$, one may or may not obtain sufficient conditions. An interesting question is: if one only uses the existence of a joint distribution at the level of $G'$, then does one obtain sufficient conditions as $G'$ varies? In other words: if a given distribution is such that for every $G'$, the associated marginal problem is solvable, then is the distribution compatible with the original DAG? This occurs e.g.~the Bell scenario, where it is enough to consider only one particular inflation (\cref{sec:Bellscenarios}).  We currently do not know whether or not the inflation technique can be used to also obtain sufficient conditions for an arbitrary DAG (for instance, by applying the technique to all inflations of a DAG or some finite family of inflations).
-%to what extent they can also be considered sufficient.  
-%The fact that and there is somewhat conflicting evidence: as we have seen, the inflated DAG approach reproduces all Bell inequalities; but on the other hand, 
-Some evidence against such sufficiency is that we have not seen a way to use the inflation technique to rederive Pearl's instrumental inequality.
 %The fact that  we have not been able to use it to rederive Pearl's instrumental inequality suggests that it may not be possible to obtain sufficient conditions from it.  
  %, although the instrumental scenario also contains only one latent node. % yet just how strong they are is still unclear. A distribution might satisfy all our polynomial inequalities and yet not be realizable from the causal structure. %What would such superficially-feasible distributions look like? Are inflated DAG inequalities ever tight? 
 % Our methods yields tight causal infeasibility criteria for Bell scenarios, but those scenarios are exceptional in that the sets of realizable distributions form a convex polytope.
 
 % The most elementary of all causal infeasibility criteria are the conditional independence (CI) relations. Our method explicitly incorporates all marginal independence relations implied by a causal structure. We have found that some CI relations also appear to be implied by our polynomial inequalities. In future research we hope to clarify the process through which CI relations are manifested as properties of the inflated DAG.
 
-%\purp{T: yes, this should be moved, to some place where also the second to last paragraph goes. Maybe end of introduction, a paragraph on related work?}
 
 
 
@@ -2127,7 +1715,7 @@ for compatibility with a causal model in {\em any} generalized probabilistic the
 
 It would be enlightening to understand the extent to which our (classical) polynomial inequalities for a given DAG can be violated by a distribution arising in a quantum causal model for that DAG, that is, the extent to which our inequalities can exhibit  a quantum-classical separation for DAGs other than the Bell scenario.  A variety of techniques exist for estimating the amount by which a Bell inequality \cite{NPA2008Long,I3322NPA1} is violated in quantum theory, but even finding a quantum violation of one of our \emph{polynomial} inequalities presents a new task for which we currently lack a systematic approach. Nevertheless, we know that there exists a difference between classical and quantum also beyond Bell scenarios~\cite[Theorem~2.16]{fritz2012bell}, and we hope that our polynomial inequalities will perform better in witnessing this difference than entropic inequalities do~\cite{pusey2014gdag,Chaves2015infoquantum}.
 
-Finally, we believe that it may be possible to generalize the inflation technique to derive inequalities that are necessary conditions for the compatibilty of a joint distribution over observed variables with a {\em quantum} causal model.  This may provide an alternative approach to understanding the Tsirelson bound \cite{Brunner2013Bell}.
+Finally, we hope that it is possible to generalize the inflation technique to derive inequalities that are necessary conditions for the compatibilty of a joint distribution of observed variables with a {\em quantum} causal model.  This may provide an alternative approach to understanding the Tsirelson bound \cite{Brunner2013Bell}.
 
 %that one inflated DAG is or is not ``stronger" than another? Can we upper bound the maximum dimension of those polynomials which in-principle tightly characterize a given causal structure? A ``yes" answer to any of the aformentioned questions means that that perhaps inflated DAGs beyond a certain level of complexity need not be considered. These remain open questions, however.
 
@@ -2138,18 +1726,14 @@ Finally, we believe that it may be possible to generalize the inflation techniqu
 
 
 \begin{acknowledgments}
-%\bigskip\noindent\textbf{Acknowledgments}
 E.W.~would like to thank Rafael Chaves and T.C. Fraser for suggestions which have improved this manuscript. T.F.~would like to thank Nihat Ay and Guido Mont\'ufar for discussion and references. This research was supported in part by Perimeter Institute for Theoretical Physics. Research at Perimeter Institute is supported by the Government of Canada through the Department of Innovation, Science and Economic Development Canada and by the Province of Ontario through the Ministry of Research, Innovation and Science.
 \end{acknowledgments}
 
 
-\onecolumngrid
-\newpage
 \appendix
 \numberwithin{equation}{section}
-%\renewcommand{\theequation}{A-\arabic{equation}}
-\setcounter{equation}{0}
-\renewcommand\section{\clearpage\stdsection}
+\let\stdsection\section
+\renewcommand{\section}{\clearpage\stdsection} % new page for each section
 
 
 
@@ -2166,7 +1750,6 @@ A generic facet enumeration problem takes a matrix $\bm{V}\in\mathbb{R}^{d\times
 	\left\{\: \bm{b}\in\mathbb{R}^d \quad\bigg|\quad \exists \bm{x}\in\mathbb{R}^n:\; \bm{b} = \bm{V}\bm{x} ,\;\; \bm{x}\geq \bm{0},\;\; {{\sum_i}{x_i}}=1 \:\right\}.
 \end{align}
 To solve the marginal problem one uses the marginal description matrix introduced in \cref{step:marginalsproblem} as the input to the facet enumeration algorithm, i.e. $\bm{V}=\bm{M}$, see \cref{eq:marginalproblemgeneric}.
-% It should be evident from Eqs. (\ref{eq:nonnegativity}-\ref{eq:marginalequalities222}) that the marginal problem is precisely of this form. The individual probabilities of the joint outcome correspond to the weights in the convex hull problem. Recasting the marginal problem as a convex hull problem means that optimized convex hull algorithms can be used to directly solve the marginal problem. Fine's Theorem~\cite{FineTheorem} also follows along these lines. Fine's theorem states that the existence of a joint distribution is equivalent to having the observables marginal distribution lie inside the convex hull of all deterministic joint distributions. \purp{Tobias, can you say the previous sentence better perhaps?}
 % Geometrically, linear quantifier elimination is equivalent to projecting a high-dimensional polytope in halfspace representation (inequalities and equalities) into a lower-dimensional quotient space.
 % Polytope projection is a well-understood problem in combinatorial optimization,
 
@@ -2230,7 +1813,6 @@ It may also be possible to exploit special features of marginal polytopes in ord
 
 %It turns out that we can optimize the detection of redundant halfspaces when considering polyhedral cones as opposed to polytopes. Happily, the inequalities that pertain to the nonnegativity of probability describe a polytope which is identically the intersection of a cone with a hyperplane. The cone is given by the usual nonnegativity inequalities, just without defining $\p{}=1$. The hyperplane, then, is exactly $\p{}=1$. As the hyperplane-intersection constraint has no bearing on the quantifiers, we can set it aside, perform the projection, and then re-incorporate the $\p{}=1$ normalization condition after the Fourier-Motzkin procedure has completed.
 
-%Consider a polyhedral cone with halfspace representation $W=\brackets{\vec{x}\,|\hat{A}.\vec{x}\geq \bm{0}}$. Each row in $\hat{A}$ is an inequality. Now consider the polar dual of $W$, namely $W^*=\brackets{\vec{x}\,|\exists_{\bm{v}\geq\bm{0}}:\, \hat{A}^{T}.\bm{v}=\vec{x}}$, in extremal-rays representation. Every halfspace (row of $\hat{A}$) in $W$ is associated with a ray (column of $\hat{A}^{T}$) in $W^*$. Critically, though, every irredundant halfspace in $W$ corresponds to an \emph{extremal} ray in $W^*$. Determining if a given ray is extremal or not is a computationally fast task. A ray in $W^*$ is \emph{not} extremal if it \emph{can} be expressed as a \emph{positive} linear combination of the other rays in $W^*$. \purp{Comment about one-to-one if $W$ is convex. Otherwise this trick detects only some, but not all, of the redundant inequalities. Also, citations needed.}
 
 %Thus, the computational tool required is one which accepts as input the matrix $\hat{M}$ and the column vector $\vec{b}$, and which determines if the linear system of equations $\hat{M}.\bm{v}=\vec{b}$ has any solutions such that all the elements of $\bm{v}$ are nonnegative.
 
@@ -2238,57 +1820,6 @@ It may also be possible to exploit special features of marginal polytopes in ord
 
 % Below, we present two possible \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$} implementations which assess if a given column $\vec{b}$ can be expressed as a positive linear combination of the columns of $\hat{M}$. The former function is easy to understand, but the latter utilizes efficient low-level code and \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$}'s internal error-handling to rapidly recognize infeasible linear programs.
 
-\begin{comment}
-\begin{align*}
- &\hspace{-\mathindent}\texttt{PositiveLinearSolveTest}[{M}\_?\texttt{MatrixQ},{b}\_]{:=}
- \texttt{With}[\{{vars}=\texttt{Thread}[\texttt{Subscript}[x,{\texttt{Dimensions}[{M}][[2]]}]]\},
- \\&\texttt{Resolve}[
- \texttt{Exists}[\texttt{Evaluate}[{vars}],\;
- \texttt{AllTrue}[{vars},\;\texttt{NonNegative}],
- \\&\texttt{And}\texttt{@@}\texttt{Thread}[{M}.\texttt{vars}==\texttt{Flatten}[{b}]]]]];
-%\\\shortintertext{or, using efficient lower-level functions,}
-       \\&\hspace{-\mathindent}\text{or}\quad\texttt{PositiveLinearSolveTest}[{M}\_?\texttt{MatrixQ},{b}\_]\texttt{/;Dimensions}[{b}]\texttt{===}\{\texttt{Length}[{M}],1\}{:=}
-       \\&\hspace{-6ex}\texttt{Module}[\{{rowcount},{columncount},{fakeobjective},{zeroescolumn}\},
-       \\&\hspace{-5ex}\{{rowcount},{columncount}\}=\texttt{Dimensions}[{M}];
-       \\&\hspace{-5ex}{fakeobjective}=\texttt{SparseArray}[\{\},\{{columncount}\},0.0];
-       \,{zeroescolumn}=\texttt{SparseArray}[\{\},\{{rowcount},1\}];
-       \\&\hspace{-5ex}\texttt{Internal$\grave{}$HandlerBlock}[\{\texttt{Message},\texttt{Switch}[\#1,\texttt{Hold}[\texttt{Message}[\texttt{LinearProgramming::lpsnf},\_\_\_],\_],\texttt{Throw}[\texttt{False}]]\texttt{\&}\},
-       \\&\texttt{Quiet}[\texttt{Catch}[
-       \\&\quad\texttt{LinearProgramming}[{fakeobjective},{M},\texttt{Join}[{b},{zeroescolumn},2],\texttt{Method}\to \texttt{Simplex}];\texttt{True}
-       \\&],\{\texttt{LinearProgramming::lpsnf}\}]]];
-\end{align*}
-To illustrate examples of a when a positive solution to the linear system exists and when it does not, consider the following two examples:.
-\begin{align*}
-%&\hspace{-\mathindent}
-&\texttt{PositiveLinearSolveTest}[
-\begin{pmatrix}
- 1 & 0 & 1 \\
- 0 & 1 & -1 
-\end{pmatrix},
-\begin{pmatrix}
- 1 \\
- -2 
-\end{pmatrix}]\;==\;\texttt{False} 
-%\quad\text{and}\quad
-\\&\texttt{PositiveLinearSolveTest}[
-\begin{pmatrix}
- 1 & 0 & 1 \\
- 0 & 1 & -2 
-\end{pmatrix},
-\begin{pmatrix}
- 1 \\
- -1 
-\end{pmatrix}]\;==\;\texttt{True} 
-\end{align*}
-
-If $\hat{A}$ is the matrix who's rows are nonnegativity inequalities, then the following test determines if row $n$ is redundant. 
-\begin{align*}
- &\hspace{-\mathindent}\texttt{RedundantRowQ}[A\_?\texttt{MatrixQ},n\_\texttt{Integer}]\text{:=}\texttt{PositiveLinearSolveTest@@Reverse}[\texttt{Transpose/@TakeDrop}[A,\{n\}]].
-\end{align*}
-Note that a \texttt{True} response from \texttt{RedundantRowQ} indicates that the row $n$ is redundant.
-
-%Obtaining a redundancy-free collection of (convex) polyhedral-cone inequalities is therefore related to obtaining a non-negative factorization of a matrix. \purp{Need citation. Also, give explicit connection between NN factorization and redundancy elimination. Does this connection appears elsewhere in the literature?}
-\end{comment}
 
 
 
@@ -2299,14 +1830,8 @@ Note that a \texttt{True} response from \texttt{RedundantRowQ} indicates that th
 
 
 
-
-%\section{On Identifying Coinciding Marginal Distributions}\label{sec:coincidingdetails}
-%\section{On Identifying pairs of marginal contexts for which the marginal distributions are equal}\label{sec:coincidingdetails}
 \section{Constraints on marginal distributions from copy-index equivalence relations}\label{sec:coincidingdetails}
 
-%\purp{T: All the copy bijections that we ever use are also graph isomorphisms, so there's no point in introducing the notion of copy bijection separately}
-
-%By restricting our attention to inflated models, we see that sometimes the distributions of different injectable sets coincide, i.e. $\pdf{\bm{X}}=\pdf{\bm{Y}}$ whenever both $\bm{X}$ and $\bm{Y}$ are injectable, and $\subsim{\bm{X}}=\subsim{\bm{Y}}$. Sometimes sets of random variables which are \emph{not} injectable, however, can also be shown to have necessarily coinciding distributions. Coinciding (not necessarily injectable) marginal distributions among the inflated DAG variables is a consequence of \cref{eq:funcdependences}. For example, we can verify that $\pdf{A_1 A_2 B_1}=\pdf{A_1 A_2 B_2}$ follows from \cref{fig:Tri222}, even though $\brackets{A_1 A_2 B_1}$ and $\brackets{A_1 A_2 B_2}$ are not injectable sets. Here we formalize this type of constraint more generally.
 
 In \cref{Sec:copyindexequivalence}, we noted that every copy of a variable in an inflation model has the same probabilistic dependence on its parents as every other copy (see~\cref{copyindexequivalence}), and that it follows that for certain pairs of marginal contexts the marginal distributions are necessarily equal.  In this section, we describe how to identify such pairs of contexts. 
 
@@ -2336,7 +1861,6 @@ Let $G'$ be an inflation of $G$, and let $\bm{U},\bm{V}\subseteq\nodes{G'}$. The
 This applies in particular when $\bm{V} = \bm{U}$, in which case the statement is that the distribution $P_{\bm{U}}$ is invariant under permuting the variables according to $\varphi$.
 
 \cref{lem:coincide} is best illustrated by returning to our example from \cref{Sec:copyindexequivalence} 
-%. \purp{do you mean \cref{example:noWdist} of \cref{subsec:witnessingincompat}}.
 which considered the Spiral inflation of~\cref{fig:Tri222} and the pair of contexts $\bm{U} = \{ A_1 A_2 B_1\}$ and $\bm{V} =\{ A_1 A_2 B_2\}$. The map 
 %We illustrate Lemma~\ref{lem:coincide} with an example. For the inflation of~\cref{fig:Tri222}, the map
 \begin{align}\label{copyisomorph}
@@ -2390,10 +1914,6 @@ In order to avoid any possibility of confusion, we emphasize that it is not a pl
 Take as the original DAG the instrumental scenario of \citet{pearl1995instrumental}, and consider the inflation depicted in \cref{fig:IScopyDAG}.  Consider the pair of contexts $\bm{U} = \{ X_1 Y_2 Z_1\}$ and $\bm{V}= \{ X_1 Y_2 Z_2\}$ on the inflated DAG. Since $\subgraph{\bm{U}}$ and $\subgraph{\bm{V}}$ are not isomorphic, there is no copy isomorphism between the two. On the other hand, 
 %Because each context has no two variables that are copy-index equivalent, there is a unique copy isomorphism between them, namely,
 the ancestral subgraphs are both given by the DAG of~\cref{fig:ancestralsubgraphnotenough}, so that the identity map is a copy isomorphism between $\ansubgraph{X_1 Y_2 Z_1}$ and $\ansubgraph{X_1 Y_2 Z_2}$.
-
-% If two sets $\bm{X}$ and $\bm{Y}$ are inflationarily isomorphic, then $P(\bm{X}) = P(\bm{Y})$ in any inflated model.
-
-%In other words, $\pdf{\bm{X}}=\pdf{\bm{Y}}$ if and only if an inflationary graph isomorphism exists between $\ansubgraph[G']{\bm{X}}$ and $\ansubgraph[G']{\bm{Y}}$ which preserves the inflationary isomorphism between $\bm{X}$ and $\bm{Y}$. 
 
 One can try to make use of \cref{lem:coincide} when deriving polynomial inequalities with inflation via solving the marginal problem, by imposing the resulting equation $P_{\bm{U}} = P_{\bm{V}}$ as an additional constraint for every inflationary isomorphism $\varphi : \bm{U}\to\bm{V}$ between sets of observable nodes. This is advantageous to speed up to the linear quantifier elimination, since one can solve each of the resulting equations for one of the unknown joint probabilities and thereby eliminate that probability directly without Fourier-Motzkin elimination. Moreover, one could hope that these additional equations also result in tighter constraints on the marginal problem, which would in turn yielder tighter causal compatibility inequalities. Our computations have so far not revealed any example of such a tightening.
 
@@ -2455,7 +1975,7 @@ The following representative causal compatibility inequalities for the DAG of~\c
 For example, the second inequality may be explicitly derived as follows. A Hardy-type tautology on the variables of the inflation DAG implies the following constraint on marginals:
 %One Hardy-type probabilistic inequality required for consistency of marginal distributions is
 \begin{align}\label{eq:hardyforpienaar}
-     \pdf[A_1 A_2 D E_2]{0100} \leq \pdf[A_1 A_2 E_2 F_1]{0100} + \pdf[A_1 A_2 D F_1]{0101} .
+     \p[A_1 A_2 D E_2]{0100} \leq \p[A_1 A_2 E_2 F_1]{0100} + \p[A_1 A_2 D F_1]{0101} .
 \end{align}
 Applying factorization as per the ancestral independence relations of the inflated DAG, we obtain 
 %the precursor to \cref{eq:DAG15ineqs}, namely
@@ -2488,69 +2008,6 @@ Finally, it may be worth noting that the inflation of~\cref{fig:Inflated15} is p
 %Interesting, the distribution $P^{\text{Pien}}$ can also be certified incompatible with \cref{fig:GDAG15} using only our results from the Triangle scenario. By marginalizing over the random variable $A$ in \cref{eq:pienaardistro} we obtain tripartite distribution which is rejected by inequality $\#8$ in \cref{tab:machinereadable} and in the table of inequalities on \cpageref{page:nontrivlist}. This is the same inequality which rejects the W-distribution defined in \cref{eq:wdistribution1}.
 
 
-
-%\purp{T: I've commented this out since we're not concerned here with observational equivalence, and I have the feeling that it would still require a major clean-up operation. The example of 6 observationally equivalent DAGs is not very good since they are all equivalent to A <-- S --> B, which doesn't contain any latent nodes}
-\begin{comment}
-\clearpage\section{Recognizing observationally equivalent DAGs}
-
-%\purp{Notes to self: Comment about matching-up latent variables between causal structures, for ObsEquiv test.}
-
-%Without loss of generality we herein consider only deterministic DAGs where all latent variables are parentless. \purp{Either prove this, or remove it. If not invoked we should discuss adding edges TO latent variables.}
-
-One expects that an edge $A\to B$ can be added to DAG $G$ while leaving $G$ observationally invariant if the new connection does not introduce any new information about observable variables to $B$. %If the added connection does inform $B$ about some observable $C$, that's still ok so long as the new informational cannot be exploited to increase the correlation between $B$ and $C$.
-We can formalize this notion in the language of sufficient statistics. To do so, however, a few background definitions are in order.
-
-\tblue{Perfectly Predictable:} The random variable $X$ is perfectly predictable from a set of variables $\bm{Z}$, hereafter $\mblue{\bm{Z}\vDash X}$, if $X$ can be completely inferred from knowledge of $\bm{Z}$ alone. In a deterministic DAG, for example, every non-root node is perfectly predictable given its parents, ${\NamedFunction{pa}{\!X\!}\vDash X}$. Indeed, in a deterministic DAG the node $X$ is perfectly predictable from $\bm{Z}$ if $X$ is a deterministic descendant of $\bm{Z}$. Operationally, $X$ is a deterministic descendant of $Z$ if the intersection of {[the ancestors of $X$]} with {[the non-ancestors of $Z$]} is a subset of {[the descendants of $Z$]}. Happily though, perfectly predictability can be extrapolated from a causal structure with minimal effort: ${\bm{Z}\vDash X}$ if every directed path to $X$ from any root node is blocked by $\bm{Z}$. 
-
-\tblue{Markov Blanket:} The Markov Blanket for a set of nodes $\bm{V}$, hereafter $\mblue{\NamedFunction{MB}{\!\bm{V}\!}}$, is the set of all of $\bm{V}$'s children, parents, and co-parents. The Markov Blanket is so defined because the nodes in $\bm{V}$ are conditionally independent of \emph{everything} given $\NamedFunction{MB}{\!\bm{V}\!}$. If the random variables in the Markov Blanket $\NamedFunction{MB}{\!\bm{V}\!}$ are known, then information about nodes inside $\bm{V}$ has no bearing on nodes outside the Markov Blanket and vice versa.
-
-\tblue{Markov Partition:} \purp{New! I made this up Nov 24. Useful do you think?} A set of variables $\bm{Z}$ is a Markov Partition for a pair of random variables $X$ and $Y$, hereafter $\mblue{X\cramp{\dashv}\bm{Z}\cramp{\vdash}Y}$, if the pair are conditionally independent of eachother given \emph{any superset} of $\bm{Z}$. Operationally, this means that $X$ and $Y$ are $d$-separated by every superset of $\bm{Z}$. Equivalently, ${X\cramp{\dashv}\bm{Z}\cramp{\vdash}Y}$ if $\NamedFunction{MB}{\!\bm{V}\!}\subseteq \bm{Z}$ and $X\in \bm{V}$ while $Y\not\in \bm{V}$, or if $\NamedFunction{MB}{\!\bm{V}\!}\subseteq \bm{Z}$ and $Y\in \bm{V}$ while $X\not\in \bm{V}$. Happily though, Markov Partitions can be extrapolated from a causal structure with minimal effort: ${X\cramp{\dashv}\bm{Z}\cramp{\vdash}Y}$ if and only if $X$ and $Y$ would be in \emph{disconnected components} under the deletion of all edges initiation from $\bm{Z}$. 
-
-\tblue{Sufficient Statistic:} A set of nodes $\bm{Z}$ is a sufficient statistic for $A$ relative to $X$, hereafter $\mblue{\bm{Z}\vdash A|X}$,
-%$\bm{Z}\in\NamedFunction{SS}{\!A|X\!}$, 
-if and only if all inferences about $X$ which can be made given knowledge of $A$ are also inferable \emph{without} knowing $A$ but with knowing $\bm{Z}$ instead. In other words, learning $A$ can never teach anything new about $X$ if $\bm{Z}$ is already known. If $X=A$, then the \emph{only way} $\bm{Z}$ can stand in for $A$ when making inferences about $A$ is if $A$ is perfectly predicable given $\bm{Z}$, i.e. ${\bm{Z}\vdash A|A\iff \bm{Z}\vDash A}$. If $A\neq B$ then there are four \purp{and only four?)} ways that $\bm{Z}\vdash A|X$ can be implied by a DAG: If $\bm{Z}\vDash A$, if $\bm{Z}\vDash X$, if $\NamedFunction{MB}{\!\bm{V}\!}\subseteq \bm{Z}$ and $A\in \bm{V}$ while $X\not\in \bm{V}$, or if $\NamedFunction{MB}{\!\bm{V}\!}\subseteq \bm{Z}$ and $X\in \bm{V}$ while $A\not\in \bm{V}$. \purp{Alternatively:} If $A\neq B$ then there are THREE ways that $\bm{Z}\vdash A|X$ can be implied by a DAG: If $\bm{Z}\vDash A$, if $\bm{Z}\vDash X$, and if ${A\cramp{\dashv}\bm{Z}\cramp{\vdash}X}$.
-
-\begin{theorem}\label{theo:edgeadding}
-An edge $A\to B$ can be added to $G$ without observational impact if $\NamedFunction{pa}{\!B\!}$ are a sufficient statistic for $A$ relative to all observable nodes, i.e. $\forall{\text{observable }X}:\NamedFunction{pa}{\!B\!}\vdash A|X$.\\
-In particular, the edge $A\to B$ can always be added whenever $\NamedFunction{pa}{\!B\!}\vDash A$, including, but not limited to, the instance  $\NamedFunction{pa}{\!A\!}\subseteq \NamedFunction{pa}{\!B\!}$.\\
-Furthermore, the edge $\Lambda\to B$ can be also always be added whenever $\Lambda$ is latent and $\NamedFunction{MB}{\!\Lambda\!}\subseteq\NamedFunction{pa}{\!B\!}$.
-\end{theorem}
-
-We can also define an analogous condition for when an edge can be removed from a DAG without impacting it observationally.
-\begin{corollary}\label{cor:edgedropping}
-An edge $A\to B$ can be dropped from $G$ to form $G'$ such that $G$ and $G'$ are observationally equivalent if \sout{and only if} the edge $A\to B$ can be added (back) to $G'$ while leaving $G'$ observationally invariant per \cref{theo:edgeadding}.
-\end{corollary}
-
-On the subject of adding observationally-invariant edges, it is important to recognize when latent nodes can be introduced (or dropped) without observational impact.
-\begin{theorem}\label{theo:latentadding}
-A (root) latent node $\Lambda$ can be removed from $G$ without observational impact if $\Lambda$ has only one child node and no co-parents ($\Lambda$ is ``equivalent to local randomness"), or if $\Lambda$'s children are also all children of another single latent node ($\Lambda$ is ``covered-for by another latent node"). Conversely, a new root latent node $\Lambda$ can be introduced along with various outgoing edges, without observational impact, if $\Lambda$ would be equivalent to local randomness or covered-for by another latent node.
-\end{theorem}
-
-\clearpage
-Naturally, two causal structures are observationally equivalent if one can be transformed into the other without observational impact, via \cref{theo:edgeadding,theo:latentadding}. Some examples of observationally equivalent scenarios, and the steps which interconvert them, are given in \cref{fig:equivalences}.
-\begin{figure}[hb]
-\centering
-\includegraphics[width=\linewidth]{ObservationalEquivalencesExamples.pdf}
-\caption{A set of observational equivalent causal structures. The reasons the changes are observational invariant are as follows: \\
-(a)$\sim$(b) because $\Gamma$ is useless in (b), and as such $\Gamma$ can be dropped from (b) per \cref{theo:latentadding}.\\
-(b)$\sim$(c) because $\NamedFunction{MB}{\!\Gamma\!}\subseteq\NamedFunction{pa}{\!A\!}$ in (b), and as such $\Gamma\to A$ can be added to (b) per \cref{theo:edgeadding}.\\
-(c)$\sim$(d) because $\Lambda$ is redundant to $\Gamma$ in (c), and as such $\Lambda$ can be dropped from (c) per \cref{theo:latentadding}.\\
-(d)$\sim$(e) because $\NamedFunction{pa}{\!S\!}\subseteq\NamedFunction{pa}{\!A\!}$ in (e), and as such $S\to A$ can be added to (e) per \cref{theo:edgeadding}.\\
-(e)$\sim$(f) because $\NamedFunction{pa}{\!A\!}\subseteq\NamedFunction{pa}{\!S\!}$ in (e), and as such $A\to S$ can be added to (e) per \cref{theo:edgeadding}.
-}\label{fig:equivalences}
-\end{figure}
-
-%Recall now the two steps of the transformation $\mathsf{ReduceToPCC}$. Imagine after the first step is finished, that an edge $A\to B$ remains, where $A$ is not a root node. Have directly connected all causal pathways, we know that $\NamedFunction{pa}{\!A\!}\subseteq\NamedFunction{pa}{\!B\!}$. As such, $\NamedFunction{pa}{\!B\!}\vDash A$, that is to say, $A$ is perfectly predictable given the parents of $B$. By \cref{theo:edgeadding}, therefore, if the edge $A \to B$ were not in the DAG, we would be able to add that edge without observational impact. By \cref{cor:edgedropping}, therefore, removing that edge has no observational impact. Indeed, the second step of $\mathsf{ReduceToPCC}$ leaves the post-first-step DAG observationally invariant. This allows us to quickly determine if a DAG is PCC-lossless.
-
-%\begin{prop}\label{prop:PCClossless}
-%A causal structure $G$ is PCC-lossless if every new edge in $\NamedFunction{ReduceToPCC}{\!G\!}$ relative to $G$ can be accounted for by adding edges to $G$ while leaving $G$ observationally invariant, pursuant to %\cref{theo:edgeadding,theo:latentadding}.
-%\end{prop}
-
-%%%%%%%%%%%% Enumeration via lowercase letters
-\renewcommand{\labelenumi}{(\alph{enumi})}
-\renewcommand{\theenumi}{(\alph{enumi})}
-\renewcommand{\labelitemi}{$\circ$}
-\end{comment}
 
 
 
@@ -2755,94 +2212,6 @@ as \cref{eq:aBell} is obtained from \cref{eq:preBell} by dividing both sides by 
 	\mathrel{\lor} [ & A_2 \eql 1, B_2 \eql 1, \mgreen{X_1 \eql 0}, \mgreen{Y_1\eql 0}, \mgreen{X_2 \eql 1}, \mgreen{Y_2 \eql 1}].
 \end{split}\end{align}
 which corresponds to the original ``Hardy paradox''~\cite{L.Hardy:PRL:1665} in our notation.
-
-\begin{comment}
-
-
-\color{purple} Worth noting that possibilistic marginal problem is sufficient to get the Bell inequalities?  If so, here's the beginning of the story. 
-
-The tautology that we have used can be expressed as
-\begin{align}
-&[ X_1 \eql 0 \land X_2\eql 1 \land Y_1 \eql 0 \land Y_2 \eql 1]\\
-& \implies 
- [ X_1 \eql 0 \land Y_1 \eql 0 \land A_1\ne B_1] \lor  [ X_1 \eql 0 \land Y_2 \eql 1 \land A_1\ne B_2]\\
-&\lor [ X_2 \eql 1 \land Y_1 \eql 0 \land A_2\ne B_1] \lor [ X_2 \eql 1 \land Y_2 \eql 1 \land A_2 \eql  B_2].
-\end{align}
-which implies, by the union bound that
-\begin{align}
-%P_{X_1 X_2Y_1  Y_2}(0101) \le \sum_{x} P_{ X_1 Y_1 A_1 B_1] }(00 x\bar{x} ) + \sum_{ x} P_{ X_1 Y_2 A_1 B_2] }(01 x\bar{x} ) + \sum_{ x} P_{ X_2 Y_1 A_2 B_1] }(01 x\bar{x} ) + \sum_{x} P_{ X_2 Y_2 A_1 B_2 }(01 xx ).
- \p{a_1 b_1 x_1 y_1}\p{\n{x}_2} \p{\n{y}_2}
-&\leq
- \p{a_1 \n{b}_2 x_1 \n{y}_2}\p{\n{x}_2} \p{y_1} +\p{\n{a}_2 b_1 \n{x}_2 y_1}\p{x_1}\p{\n{y}_2}+  \p{a_2 b_2 \n{x}_2 \n{y}_2}\p{x_1} \p{y_1}
-\end{align}
-
-
-
-Using the ancestral independence of $X_1$, $X_2$, $Y_1$, and $Y_2$, we infer that $P_{X_1 X_2Y_1  Y_2} = P_{X_1} P_{ X_2} P_{Y_1} P_{Y_2}$.  
-
-Dividing through by $P_{X_1} P_{ X_2} P_{Y_1} P_{Y_2}$, we get...
-
-\color{black}
-\end{comment}
-\begin{comment}
-Analysis of the inflated DAG in \cref{fig:BellDagCopy1} shows that  
-\begin{align}\label{eq:bellypolymapped}
- \p{a b x y}\p{\n{x}} \p{\n{y}}
-&\leq
- \p{a \n{b} x \n{y}}\p{\n{x}}\p{y} +  \p{\n{a} b \n{x} y}\p{x} \p{\n{y}}+\p{a b \n{x} \n{y}}\p{x} \p{y}
-\\
-\shortintertext{by virtue of the unmapped (but factored) inequality}
-\label{eq:bellypolyunmapped}
- \p{a_1 b_1 x_1 y_1}\p{\n{x}_2} \p{\n{y}_2}
-&\leq
- \p{a_1 \n{b}_2 x_1 \n{y}_2}\p{\n{x}_2} \p{y_1} +\p{\n{a}_2 b_1 \n{x}_2 y_1}\p{x_1}\p{\n{y}_2}+  \p{a_2 b_2 \n{x}_2 \n{y}_2}\p{x_1} \p{y_1}
-\end{align}
-where \emph{every} probability appearing in \cref{eq:bellypolyunmapped} maps to the original scenario, hence yielding \cref{eq:bellypolymapped}. To derive the usual Bell inequalities from \cref{eq:bellypolymapped} we switch to conditional probabilities via ${\p{a b x y}\to\p{a b | x y}\p{x y}=\p{a b | x y}\p{x}\p{y}}$ which, after dividing both sides of \cref{eq:bellypolymapped} by $\p{x}\p{\n{x}}\p{y}\p{\n{y}}$, yields
-\begin{align}\label{eq:chwithneg}
-&\p{a b | x y}
-\leq
-{\p{a \n{b} | x \n{y}} + \p{\n{a} b | \n{x} y}+\p{a b | \n{x} \n{y}}}
-\\
-\hspace{-\mathindent}\text{or, equivalently,}\quad
-\label{eq:chwithoutneg}
-&{\p{a b | x y}+\p{a b | x \n{y}} + \p{a b | \n{x} y}}
-\leq
-{\p{a|\n{x}}+\p{b|\n{y}} + \p{a b | \n{x} \n{y}}}
-\end{align}
-which is precisely the Clauser-Horne (CH) inequality \cite{CHInequality} for the Bell scenario. Note that to obtain \cref{eq:chwithoutneg} from \cref{eq:chwithneg} we implicitly made use of the no-signalling assumptions, namely $\p{a|x y}=\p{a|x}$ and $\p{b| x y}=\p{b | y}$. The CH inequality is the \emph{unique} Bell inequality (up to permutations) for the Bell scenario if $\brackets{A,B,X,Y}$ are all binary, and hence the CH inequality is a necessary and sufficient criterion to ascertain if correlations are compatible with that Bell scenario variant.
-
-The causal structure of a Bell scenario can also be formulated directly in terms of conditional random variables. For example, the conditional-structure interpretation of \cref{fig:BellDagCopy1} is \cref{fig:BellConditionalDAG}. 
-
-\begin{figure}[t]
-\centering
-\begin{minipage}[t]{0.45\linewidth}
-\centering
-\includegraphics[scale=1]{BellDagConditionForm.pdf}
-\caption{The causal structure of the Bell scenario expressed in a form which makes use of conditional random variables.}\label{fig:BellConditionalDAG}
-\end{minipage}
-%\hfill
-%\begin{minipage}[t]{0.45\linewidth}
-%\centering
-%\includegraphics[scale=1]{BellDagCopy.pdf}
-%\caption{An inflated DAG of the Bell scenario, where both local settings variables have been duplicated.}\label{fig:BellDagCopy}
-%\end{minipage}
-\end{figure}
-
-The Bell inequalities are then self-evident from \cref{fig:BellConditionalDAG} without the need for an inflated DAG. The conditional-structure formulation innately implies its own inaccessible gedankenprobabilities, such as $\{\p{a|x , a|\n{x}}$, $\p{a|x , \n{a}|\n{x}},...\}$ etc. By eliminating these gedankenprobabilities from the set of inequalities generated by $0\leq \pdf{A|x , A|\n{x} , B|y , B|\n{y}}$ we obtain
-\begin{align}\label{eq:bellcondeq}
-0
-\leq
-{\p{a|\n{x}} + \p{b|\n{y}} + \p{a|x , b|y} -\p{a|x ,b|\n{y}} -\p{a|\n{x} , b|y} -\p{a|\n{x} , b|\n{y}}}\,,
-\end{align}
-for example. It should be clear that \cref{eq:bellcondeq} is equivalent to \cref{eq:chwithoutneg}.
-\end{comment}
-
-%We can perform quantifier elimination on the set of (polynomial) inequalities given by $0\leq \pdf{A|x , A|\n{x} , B|y , B|\n{y}}$. The use of a conditional-structure DAG innately implies certain inaccessible gedankenprobabilities, such as $\{\p{a|x , a|\n{x}}$, $\p{a|x , \n{a}|\n{x}},...\}$ etc. 
-%\purp{Rob says kill next two paragraphs?}
-
-%Conditional-structure gedankenprobabilities are somewhat different from the inflated DAG kind, in that they reference multiple counterfactual events, such as ``What is the probability that Alice would choose to visit the museum \emph{IF} (given that) it's a rainy day in Maryland \emph{AND} that Alice would choose to go the beach \emph{IF} (given that) it's sunny in Maryland?". By contrast, unconditional gedankenprobabilities which live on an inflated DAG reference multiple heterofactual (for lack of a better word) events, such as ``What is the probability that Alice-copy-\#1 chooses to visit the museum \emph{AND} that it's raining in Maryland-copy-\#1 \emph{AND} that Alice-copy-\#2 chooses to go the beach \emph{AND} that it's sunny in Maryland-copy-\#2?". 
-
-%Joint counterfactual probabilities are experimentally inaccessible, just the same as joint heterofactual probabilities are. Suppose one could establish both Alice's propensity for going to the museum when it rains and her propensity for going to the beach when it's sunny. Even so, neither the joint counterfactual probability nor the joint heterofactual probability can be established from that limited data. For example, the value of the hidden variable ${\Lambda\cramp{=}\lambda}$ may influence Alice's willingness to get out of bed at all, or determine if she is on-call as a volunteer EMT on a particular day, or $\lambda$ might encode if Alice is travelling out-of-state. If we could measure $\p{a|x , \n{a}|\n{x}},...\}$ we might learn that Alice's likelihood of visiting the museum if it rains in Maryland is highly correlated with her likelihood of visiting the beach when it's sunny in Maryland. Or we might learn that those two counterfactual probabilities are relatively statistically independent. The ``hidden-ness" of the classical variable corresponding to the latent node shields the gedankenprobabilities from being determined. 
 
 
 
