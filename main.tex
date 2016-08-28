@@ -32,7 +32,7 @@ pdfpagelabels=false
 \usepackage{ragged2e}%for justifying text in tables
 \usepackage{tabularx}
 \usepackage{booktabs}
-\usepackage{showkeys}
+%\usepackage{showkeys}
 \usepackage[intlimits,fleqn]{mathtools} %for mathclap and prescript and more. Learning to love this package. And DeclarePairDelimeter!
 
 % tables stuff
@@ -108,6 +108,8 @@ anchorcolor=OliveGreen}
 \newcommand{\nodes}[1]{\SmallNamedFunction{Nodes}{#1}}
 \newcommand{\obsnodes}[1]{\SmallNamedFunction{ObservedNodes}{#1}}
 \newcommand{\latnodes}[1]{\SmallNamedFunction{LatentNodes}{#1}}
+\newcommand{\inflations}[1]{\SmallNamedFunction{Inflations}{#1}}
+\newcommand{\DAG}[1]{\SmallNamedFunction{DAG}{#1}}
 \newcommand{\edges}[1]{\SmallNamedFunction{Edges}{#1}}
 \newcommand{\aindep}{\perp} % for d-separation
 \newcommand{\indep}{\perp\!\!\!\!\perp} % (conditional) independence
@@ -148,10 +150,10 @@ anchorcolor=OliveGreen}
 
 
 \begin{abstract}
-The fundamental problem of causal inference is to determine whether or not a given probability distribution over observed variables is compatible with some causal structure. In the presence of latent variables, this is a challenging problem for which checking conditional independences is not enough. We here introduce a technique for witnessing the incompatibility of a given distribution with a given causal structure containing latent variables. It consists of  {\em inflating} the causal structure to a new one that can contain multiple copies of each of the original variables.
+The fundamental problem of causal inference is to determine whether or not a given probability distribution of observed variables is compatible with some causal structure. In the presence of latent variables, this is a challenging problem for which checking conditional independences is usually not enough. We here introduce a technique for witnessing the incompatibility of a given distribution with a given causal structure containing latent variables. It consists of  {\em inflating} the causal structure to a new one that can contain multiple copies of each of the original variables.
 
 It is also desirable to derive inequalities whose violation by a distribution witnesses the incompatibility of that distribution with the causal structure. Prominent examples of such ``causal compatibility inequalities'' are Bell inequalities and Pearl's instrumental inequality.
-Our inflation technique is also of relevance here: by construction, any causal compatibility inequality on the inflated structure can be translated into one for the original structure. By introducing additional $d$-separation relations, inflation often generates easy opportunities for such translations, and already the mere \emph{existence} of a joint distribution on the inflated structure usually results in nontrivial causal compatibility inequalities.
+Our inflation technique also achieves this: any causal compatibility inequality on the inflated structure can be translated into one for the original structure. By introducing additional $d$-separation relations, inflation often generates easy opportunities for such translations, and already the mere \emph{existence} of a joint distribution on the inflated structure together with ancestral independences usually results in nontrivial causal compatibility inequalities.
 We demonstrate the technique's power by numerically classifying the causal compatibility inequalities that it entails for a particular concrete example---an inflation of the Triangle scenario with binary variables---obtaining a set of causal compatibility inequalities that are at least partly stronger than existing ones.
 Finally, we discuss how to identify, among the causal compatibility inequalities that the technique yields, those that remain valid even for quantum (and post-quantum) generalizations of the notion of a causal model.
 \end{abstract}
@@ -247,7 +249,7 @@ A given distribution of observed variables is said to be \tblue{compatible} with
 We now introduce the notion of \tblue{an inflation of a causal model}.
 If a causal model lives on a DAG $G$, then an inflation of this model lives on an \tblue{inflation DAG} $G'$.  
 
-There are many possible choices of inflation DAGs $G'$ for a given $G$, forming a set $\SmallNamedFunction{Inflations}{G}$. The particular choice of $G'\in \SmallNamedFunction{Inflations}{G}$ then determines the inflation model completely: the family of causal parameters of the inflation model $M'$ is determined by a function $M' = \SmallNamedFunction[G\to G']{Inflation}{M}$ that we define below. We begin by defining when a DAG $G'$ is an inflation of $G$, building on some preliminary definitions. 
+There are many possible choices of inflation DAGs $G'$ for a given $G$, forming a set $\inflations{G}$. The particular choice of $G'\in \inflations{G}$ then determines the inflation model completely: the family of causal parameters of the inflation model $M'$ is determined by a function $M' = \SmallNamedFunction[G\to G']{Inflation}{M}$ that we define below. We begin by defining when a DAG $G'$ is an inflation of $G$, building on some preliminary definitions. 
 
 For a subset of nodes $\bm{V}\subseteq\nodes{G}$, we denote the \tblue{induced subgraph} on $\bm{V}$ by $\subgraph[G]{\bm{V}}$. It consists of the nodes $\bm{V}$ and those edges of $G$ which have both endpoints in $\bm{V}$. Of special importance to us is the 
 \tblue{ancestral subgraph} $\ansubgraph[G]{\bm{V}}$, which is the subgraph induced by the ancestry of $\bm{V}$, $\ansubgraph[G]{\bm{V}}\coloneqq\subgraph[G]{\An[G]{\bm{V}}}$. 
@@ -256,9 +258,9 @@ In an inflation DAG $G'$, every node is also labelled by a node of $G$. More pre
 
 In order to be an inflation, $G'$ must locally mirror the causal structure of $G$:
 \begin{definition}
-	The DAG $G'$ is said to be an \tblue{inflation} of $G$, that is, $G' \in \SmallNamedFunction{Inflations}{G}$, if and only if for every $A_i\in\nodes{G'}$, the ancestral subgraph of $A_i$ in $G'$ is equivalent, under removal of the copy-index, to the ancestral subgraph of $A$ in $G$,
+	The DAG $G'$ is said to be an \tblue{inflation} of $G$, that is, $G' \in \inflations{G}$, if and only if for every $A_i\in\nodes{G'}$, the ancestral subgraph of $A_i$ in $G'$ is equivalent, under removal of the copy-index, to the ancestral subgraph of $A$ in $G$,
 \begin{align}\label{eq:definflationDAG}
-G' \in\SmallNamedFunction{Inflations}{G} \quad\text{ iff }\quad \forall A_i\in \SmallNamedFunction{Nodes}{G'}:\; \ansubgraph[G']{A_i}\sim\ansubgraph[G]{A}.
+G' \in\inflations{G} \quad\text{ iff }\quad \forall A_i\in \nodes{G'}:\; \ansubgraph[G']{A_i}\sim\ansubgraph[G]{A}.
 \end{align}
 \end{definition}
 
@@ -315,9 +317,9 @@ We now define the function $\mathsf{Inflation}_{G\to G'}$, that is, we specify h
 
 \begin{definition}
 \label[definition]{def:inflat}
-Consider causal models $M$ and $M'$ where $\SmallNamedFunction{DAG}{M}=G$ and $\SmallNamedFunction{DAG}{M'}=G'$, where $G'$ is an inflation of $G$. Then $M'$ is said to be the {\em \tblue{$G\to G'$ inflation of $M$}}, that is, $M' = \SmallNamedFunction[G\to G']{Inflation}{M}$,  if and only if for every node $A_i$ in $G'$, the manner in which $A_i$ depends causally on its parents within $G'$ is the same as the manner in which $A$ depends causally on its parents within $G$.  Noting that $A_i \sim A$ and that $\Pa[G']{A_i} \sim \Pa[G]{A}$ by~\cref{eq:definflationDAG}, one can formalize this condition as:
+Consider causal models $M$ and $M'$ where $\DAG{M}=G$ and $\DAG{M'}=G'$, where $G'$ is an inflation of $G$. Then $M'$ is said to be the {\em \tblue{$G\to G'$ inflation of $M$}}, that is, $M' = \SmallNamedFunction[G\to G']{Inflation}{M}$,  if and only if for every node $A_i$ in $G'$, the manner in which $A_i$ depends causally on its parents within $G'$ is the same as the manner in which $A$ depends causally on its parents within $G$.  Noting that $A_i \sim A$ and that $\Pa[G']{A_i} \sim \Pa[G]{A}$ by~\cref{eq:definflationDAG}, one can formalize this condition as:
 \begin{align}\label{eq:funcdependences}
- \forall A_i \in \SmallNamedFunction{Nodes}{G'}:\; \pfunc{A_i| \Pa[G']{A_i}}=\pfunc{A|\Pa[G]{A}}.
+ \forall A_i \in \nodes{G'}:\; \pfunc{A_i| \Pa[G']{A_i}}=\pfunc{A|\Pa[G]{A}}.
 \end{align}
 \end{definition}
 
@@ -334,13 +336,13 @@ This follows from the fact that the distributions on $\bm{U}'$ and $\bm{U}$ depe
 It is useful to have a name for those sets of observed nodes in $G'$ which satisfy the antecedent of~\cref{eq:coincidingdistrodef}, that is, for which one can find a copy-index-equivalent set in the original DAG $G$ with a copy-index-equivalent ancestral subgraph.  We call such subsets of the observed nodes of $G'$ \tblue{injectable sets},
 \begin{align}\begin{split}\label{eq:definjectable}
 &\bm{U}'\in\SmallNamedFunction{InjectableSets}{G'} \\
-&\quad\text{ iff }\quad \exists \bm{U}\subseteq \SmallNamedFunction{ObservedNodes}{G} \;\; :\;\; \bm{U}'\sim\bm{U} \;\;\text{and}\;\; \ansubgraph[G']{\bm{U}'}\sim\ansubgraph[G]{\bm{U}}.
+&\quad\text{ iff }\quad \exists \bm{U}\subseteq \obsnodes{G} \;\; :\;\; \bm{U}'\sim\bm{U} \;\;\text{and}\;\; \ansubgraph[G']{\bm{U}'}\sim\ansubgraph[G]{\bm{U}}.
 \end{split}\end{align}
 
 Similarly,  those sets of observed nodes in the original DAG $G$ which satisfy the antecedent of~\cref{eq:coincidingdistrodef}, that is, for which one can find a corresponding set in the inflation DAG $G'$ with a copy-index-equivalent ancestral subgraph, we describe as \tblue{images of the injectable sets},
 \begin{align}\begin{split}\label{eq:defimageinjectable}
 & \bm{U}\in\SmallNamedFunction{ImagesInjectableSets}{G} \\
-& \quad\text{ iff }\quad \exists \bm{U}' \subseteq \SmallNamedFunction{ObservedNodes}{G'} \;\; :\;\; \bm{U'}\sim\bm{U} \;\;\text{and}\;\; \ansubgraph[G']{\bm{U}'}\sim\ansubgraph[G]{\bm{U}}.
+& \quad\text{ iff }\quad \exists \bm{U}' \subseteq \obsnodes{G'} \;\; :\;\; \bm{U'}\sim\bm{U} \;\;\text{and}\;\; \ansubgraph[G']{\bm{U}'}\sim\ansubgraph[G]{\bm{U}}.
 \end{split}\end{align}
 Clearly, $\bm{U}\in\SmallNamedFunction{ImagesInjectableSets}{G}$ iff $\exists \bm{U}' \subseteq \SmallNamedFunction{InjectableSets}{G'}$ such that $\bm{U}\sim \bm{U}'$.
 
@@ -563,7 +565,7 @@ The structure of this proof parallels that of standard proofs of the incompatibi
 The inflation technique can be used not only to witness the incompatibility of a given distribution with a given causal structure, but also to derive generally applicable necessary conditions that a distribution must satisfy to be compatible with the given causal structure. When these conditions are expressed as inequalities, we will refer to them as {\em causal compatibility inequalities}.  Formally, we have:
 
 \begin{definition}
-Let $G$ be a causal structure and $S \subseteq 2^{\SmallNamedFunction{ObservedNodes}{G}}$.  Let $I_S$ denote an inequality that operates on a family of marginal distributions  $\{ P_{\bm{U}}: \bm{U} \in S\}$.  Then $I_S$ is a \tblue{\em causal compatibility inequality for the causal structure $G$} whenever it is satisfied by every family of marginal distributions $\{ P_{\bm{U}}: \bm{U} \in S\}$ that is compatible with $G$.
+Let $G$ be a causal structure and $S \subseteq 2^{\obsnodes{G}}$.  Let $I_S$ denote an inequality that operates on a family of marginal distributions  $\{ P_{\bm{U}}: \bm{U} \in S\}$.  Then $I_S$ is a \tblue{\em causal compatibility inequality for the causal structure $G$} whenever it is satisfied by every family of marginal distributions $\{ P_{\bm{U}}: \bm{U} \in S\}$ that is compatible with $G$.
 \end{definition}
 While violation of a causal compatibility inequality witnesses the incompatibility with the causal structure, satisfaction of the inequality does not guarantee compatibility.  This is the sense in which it merely provides a {\em necessary} condition for compatibility. 
 
@@ -722,7 +724,7 @@ The pre-injectable sets play a crucial role in linking the original DAG with the
 
 To identify the pre-injectable sets of an inflation DAG $G'$, we must first identify the injectable sets. This problem can be reduced to identifying the injectable pairs of nodes, because if all of the pairs in a set of nodes are injectable, then so too is the set itself. This can be proven as follows.   
 Let $\varphi : G' \to G$ be the projection map from $G'$ to the original DAG $G$, corresponding to removing copy-indices.  Then $\varphi$ has the characteristic feature that it preserves and reflects edges to edges: if $A  \to B$ in $G'$, then also $\varphi(A) \to \varphi(B)$ in $G$, and vice versa; this follows from the assumption that $G'$ is an inflation of $G$. 
-A set $\bm{U} \subseteq \SmallNamedFunction{ObservedNodes}{G'}$ is injectable if and only if the
+A set $\bm{U} \subseteq \obsnodes{G'}$ is injectable if and only if the
 restriction of $\varphi$ to $\An{U}$ is an injective map. 
 But now injectivity of a map means precisely that no two different
 elements of the domain get mapped to the same element of the codomain.
@@ -1111,7 +1113,7 @@ So what distinguishes applications of the inflation technique that yield inequal
 
 
 \begin{definition}
-In $G'\in\SmallNamedFunction{Inflations}{G}$, an \tblue{inflationary fan-out} is a latent node that has two or more children that are copy-index equivalent.  
+In $G'\in\inflations{G}$, an \tblue{inflationary fan-out} is a latent node that has two or more children that are copy-index equivalent.  
 \end{definition}
 
  The Web and Spiral inflations of the Triangle scenario, depicted in \cref{fig:TriFullDouble} and \cref{fig:Tri222} respectively,
@@ -1223,21 +1225,20 @@ It may also be possible to exploit special features of marginal polytopes in ord
 
 \section{Constraints on marginal distributions from copy-index equivalence relations}\label{sec:coincidingdetails}
 
+In \cref{copyindexequivalence}, we noted that every copy of a variable in an inflation model has the same probabilistic dependence on its parents as every other copy. It followed that for certain pairs of marginal contexts, the marginal distributions in any inflation model are necessarily equal. We now describe how to identify such pairs of contexts. 
 
-In \cref{Sec:copyindexequivalence}, we noted that every copy of a variable in an inflation model has the same probabilistic dependence on its parents as every other copy (see~\cref{copyindexequivalence}), and that it follows that for certain pairs of marginal contexts the marginal distributions are necessarily equal.  In this section, we describe how to identify such pairs of contexts. 
 
-
-Given sets of nodes $\bm{U},\bm{V}\subseteq\nodes{G'}$ in an inflation DAG $G'$, let us say that a map $\varphi:\bm{U}\to\bm{V}$ is a \tblue{copy isomorphism} if it is a graph isomorphism\footnote{A graph isomorphism is a bijective map between the nodes of one graph and the nodes of another, such that both the map and its inverse take edges to edges.} between $\subgraph{\bm{U}}$ and $\subgraph{\bm{V}}$ such that $\varphi(X)\sim X$ for all $X\in\bm{U}$, meaning that $\varphi$ maps every node $X\in\bm{U}$ to a node $\varphi(X)\in\bm{V}$ that is equivalent to $X$ under dropping the copy-index.
+Given $\bm{U},\bm{V}\subseteq\nodes{G'}$ in an inflation DAG $G'$, let us say that a map $\varphi:\bm{U}\to\bm{V}$ is a \tblue{copy isomorphism} if it is a graph isomorphism\footnote{A graph isomorphism is a bijective map between the nodes of one graph and the nodes of another, such that both the map and its inverse take edges to edges.} between $\subgraph{\bm{U}}$ and $\subgraph{\bm{V}}$ such that $\varphi(X)\sim X$ for all $X\in\bm{U}$, meaning that $\varphi$ maps every node $X\in\bm{U}$ to a node $\varphi(X)\in\bm{V}$ that is equivalent to $X$ under dropping the copy-index.
 
 Furthermore, we say that a copy isomorphism $\varphi : \bm{U}\to\bm{V}$ is an \tblue{inflationary isomorphism} whenever it can be extended to a copy isomorphism on the ancestral subgraphs, $\Phi : \An{\bm{U}}\to\An{\bm{V}}$. 
-Any copy isomorphism $\Phi: \An{\bm{U}}\to\An{\bm{V}}$ defines an inflationary isomorphism $\varphi:\bm{U}\to\bm{V}$ if and only if $\Phi(\bm{U}) = \bm{V}$.
+A copy isomorphism $\Phi: \An{\bm{U}}\to\An{\bm{V}}$ defines an inflationary isomorphism $\varphi:\bm{U}\to\bm{V}$ if and only if $\Phi(\bm{U}) = \bm{V}$.
 So in practice, one can either start with $\varphi : \bm{U}\to\bm{V}$ and try to extend it to $\Phi : \An{\bm{U}}\to\An{\bm{V}}$, or start with such a $\Phi$ and see whether it maps $\bm{U}$ to $\bm{V}$ and thereby restricts to a $\varphi$.
 
-For given $\bm{U}$ and $\bm{V}$, a sufficient condition for equality of their marginal distributions in the inflation is that there exists an inflationary isomorphism between them.  Because $\bm{U}$ and $\bm{V}$ might themselves contain several variables that are copy-index equivalent (recall the examples of \cref{Sec:copyindexequivalence}), equating the distribution $P_{\bm{U}}$ with the distribution $P_{\bm{V}}$ in an unambiguous fashion requires one to specify a correspondence between the variables that make up $\bm{U}$ and those that make up $\bm{V}$. This is exactly the data provided by the inflationary isomorphism $\varphi$.  This result is summarized in the following lemma.
+For given $\bm{U}$ and $\bm{V}$, a sufficient condition for equality of their marginal distributions in an inflation model is that there exists an inflationary isomorphism between them.  Because $\bm{U}$ and $\bm{V}$ might themselves contain several variables that are copy-index equivalent (recall the examples of \cref{Sec:copyindexequivalence}), equating the distribution $P_{\bm{U}}$ with the distribution $P_{\bm{V}}$ in an unambiguous fashion requires one to specify a correspondence between the variables that make up $\bm{U}$ and those that make up $\bm{V}$. This is exactly the data provided by the inflationary isomorphism $\varphi$.  This result is summarized in the following lemma.
 
 
 \begin{lemma}
-Let $G'$ be an inflation of $G$, and let $\bm{U},\bm{V}\subseteq\nodes{G'}$. Then every inflationary isomorphism $\varphi:\bm{U}\to\bm{V}$ induces an equality $P_{\bm{U}} = P_{\bm{V}}$ for every inflation model, where the variables in $\bm{U}$ are identified with those in $\bm{V}$ according to $\varphi$.
+Let $G'$ be an inflation of $G$, and let $\bm{U},\bm{V}\subseteq\nodes{G'}$. Then every inflationary isomorphism $\varphi:\bm{U}\to\bm{V}$ induces an equality $P_{\bm{U}} = P_{\bm{V}}$ for inflation models, where the variables in $\bm{U}$ are identified with those in $\bm{V}$ according to $\varphi$.
 \label[lemma]{lem:coincide}
 \end{lemma}
 
@@ -1264,7 +1265,7 @@ is easily verified to be a copy isomorphism between $\subgraph{\bm{U}}$ and $\su
 \begin{align}
 \Phi' \: : \: X_1\mapsto X_1,\qquad Y_1\mapsto Y_2, \qquad Y_2 \mapsto Y_1, \qquad Z_1 \mapsto Z_2,
 \end{align}
-so that $\varphi'$ is verified to be an inflationary isomorphism. From \cref{lem:coincide}, we then conclude that any inflated model also satisfies $P_{A_1 A_2 B_1} = P_{A_2 A_1 B_2}$.  (And this in turn implies that for the context $\{A_1 A_2\}$, the marginal distribution satisfies $P_{A_1 A_2} = P_{A_2 A_1}$.)
+so that $\varphi'$ is verified to be an inflationary isomorphism. From \cref{lem:coincide}, we then conclude that any inflation model also satisfies $P_{A_1 A_2 B_1} = P_{A_2 A_1 B_2}$.  (And this in turn implies that for the context $\{A_1 A_2\}$, the marginal distribution satisfies $P_{A_1 A_2} = P_{A_2 A_1}$.)
 
 
 \begin{figure}[b]
@@ -1286,9 +1287,7 @@ so that $\varphi'$ is verified to be an inflationary isomorphism. From \cref{lem
     \end{minipage}
 \end{figure}
 
-In order to avoid any possibility of confusion, we emphasize that it is not a plain copy isomorphism between the subgraphs of $\bm{U}$ and $\bm{V}$ themselves which results in coinciding marginal distributions, nor a copy isomorphism between the ancestral subgraphs of $\bm{U}$ and $\bm{V}$. It is rather an inflationary isomorphism between the subgraphs, i.e., a copy isomorphism between the ancestral subgraphs that restricts to a copy isomorphism between the subgraphs. To see why a copy isomorphism between ancestral subgraphs {\em by itself} may not be sufficient for deriving equality of marginal distributions, we offer the following example.
-
-Take as the original DAG the instrumental scenario of \citet{pearl1995instrumental}, and consider the inflation depicted in \cref{fig:IScopyDAG}.  Consider the pair of contexts $\bm{U} = \{ X_1 Y_2 Z_1\}$ and $\bm{V}= \{ X_1 Y_2 Z_2\}$ on the inflation DAG. Since $\subgraph{\bm{U}}$ and $\subgraph{\bm{V}}$ are not isomorphic, there is no copy isomorphism between the two. On the other hand, 
+In order to avoid any possibility of confusion, we emphasize that it is not a plain copy isomorphism between the subgraphs of $\bm{U}$ and $\bm{V}$ themselves which results in coinciding marginal distributions, nor a copy isomorphism between the ancestral subgraphs of $\bm{U}$ and $\bm{V}$. It is rather an inflationary isomorphism between the subgraphs, i.e., a copy isomorphism between the ancestral subgraphs that restricts to a copy isomorphism between the subgraphs. To see why a copy isomorphism between ancestral subgraphs {\em by itself} may not be sufficient for deriving equality of marginal distributions, we offer the following example. Take as the original DAG the instrumental scenario of \citet{pearl1995instrumental}, and consider the inflation depicted in \cref{fig:IScopyDAG}.  Consider the pair of contexts $\bm{U} = \{ X_1 Y_2 Z_1\}$ and $\bm{V}= \{ X_1 Y_2 Z_2\}$ on the inflation DAG. Since $\subgraph{\bm{U}}$ and $\subgraph{\bm{V}}$ are not isomorphic, there is no copy isomorphism between the two. On the other hand, 
 the ancestral subgraphs are both given by the DAG of~\cref{fig:ancestralsubgraphnotenough}, so that the identity map is a copy isomorphism between $\ansubgraph{X_1 Y_2 Z_1}$ and $\ansubgraph{X_1 Y_2 Z_2}$.
 
 One can try to make use of \cref{lem:coincide} when deriving polynomial inequalities with inflation via solving the marginal problem, by imposing the resulting equation $P_{\bm{U}} = P_{\bm{V}}$ as an additional constraint for every inflationary isomorphism $\varphi : \bm{U}\to\bm{V}$ between sets of observed nodes. This is advantageous to speed up to the linear quantifier elimination, since one can solve each of the resulting equations for one of the unknown joint probabilities and thereby eliminate that probability directly without Fourier-Motzkin elimination. Moreover, one could hope that these additional equations also result in tighter constraints on the marginal problem, which would in turn yielder tighter causal compatibility inequalities. Our computations have so far not revealed any example of such a tightening.
@@ -1296,11 +1295,11 @@ One can try to make use of \cref{lem:coincide} when deriving polynomial inequali
 In some cases, this lack of impact can be explained as follows.
 Suppose that $\varphi:\bm{U}\to\bm{V}$ is an inflationary isomorphism 
 which is not just the restriction of a copy isomorphism between the ancestral subgraphs, but even the restriction of a copy automorphism 
-$\Phi':G'\to G'$ of the entire inflation DAG onto itself; in particular, this assumption implies that $\Phi'$ also restricts to a copy isomorphism $\Phi:\An{\bm{U}}\to\An{\bm{V}}$ between the ancestral subgraphs. In this case, the irrelevance of the additional constraint $P_{\bm{U}} = P_{\bm{V}}$ to the marginal problem for inflated models can be explained by the following argument. 
+$\Phi':G'\to G'$ of the entire inflation DAG onto itself; in particular, this assumption implies that $\Phi'$ also restricts to a copy isomorphism $\Phi:\An{\bm{U}}\to\An{\bm{V}}$ between the ancestral subgraphs. In this case, the irrelevance of the additional constraint $P_{\bm{U}} = P_{\bm{V}}$ to the marginal problem for inflation models can be explained by the following argument. 
 
-Suppose that some joint distribution $P_{\SmallNamedFunction{ObservedNodes}{G'}}$ solves the unconstrained marginal problem, i.e.,~without requiring $P_{\bm{U}} = P_{\bm{V}}$. Now apply $\Phi'$ to the variables in $P_{\SmallNamedFunction{ObservedNodes}{G'}}$, switching the variables around, to generate a new distribution $P':=P_{\Phi'(\SmallNamedFunction{ObservedNodes}{G'})}$. Because the set of marginal distributions that arise from inflation models is invariant under this switching of variables, we conclude that $P'$ is also a solution to the unconstrained marginal problem. Taking the uniform mixture of $P$ and $P'$ is therefore still a solution of the unconstrained marginal problem. But this uniform mixture also satisfies the supplementary constraint $P_{\bm{U}} = P_{\bm{V}}$. Hence the supplementary constraint is satisfiable whenever the unconstrained marginal problem is solvable, which makes adding the constraint irrelevant.
+Suppose that some joint distribution $P_{\obsnodes{G'}}$ solves the unconstrained marginal problem, i.e.,~without requiring $P_{\bm{U}} = P_{\bm{V}}$. Now apply $\Phi'$ to the variables in $P_{\obsnodes{G'}}$, switching the variables around, to generate a new distribution $P'_{\obsnodes{G'}}:=P_{\Phi'(\obsnodes{G'})}$. Because the set of marginal distributions that arise from inflation models is invariant under this switching of variables, we conclude that $P'$ is also a solution to the unconstrained marginal problem. Taking the uniform mixture of $P$ and $P'$ is therefore still a solution of the unconstrained marginal problem. But this uniform mixture also satisfies the supplementary constraint $P_{\bm{U}} = P_{\bm{V}}$. Hence the supplementary constraint is satisfiable whenever the unconstrained marginal problem is solvable, which makes adding the constraint irrelevant.
 
-This argument does not tell us anything when the inflationary isomorphism $\varphi:\bm{U}\to\bm{V}$ cannot be extended to a copy automorphism of the entire inflation DAG. It also does not apply if one uses $d$-separation conditions beyond ancestral independence  on the inflation DAG as additional constraints, because in this case the set of compatible distributions is not necessarily convex.  In either of these cases, it is unclear whether or not constraints arising from copy-index equivalence could yield tighter inequalities. 
+This argument does not apply when the inflationary isomorphism $\varphi:\bm{U}\to\bm{V}$ cannot be extended to a copy automorphism of the entire inflation DAG. It also does not apply if one uses $d$-separation conditions beyond ancestral independence on the inflation DAG as additional constraints (\cref{sec:fulldsep}), because in this case the set of compatible distributions is not necessarily convex.  In either of these cases, it is unclear whether or not constraints arising from copy-index equivalence could yield tighter inequalities. 
 
 
 
@@ -1355,8 +1354,8 @@ In \citet{pianaar2016interesting}, it was shown that the following distribution,
 
 It is easily verified that this distribution violates the causal compatibility inequality of~\cref{eq:DAG15ineqs}.  It is in this sense that the inflation technique can show that the DAG of \cref{fig:GDAG15} is interesting. 
 
-There is another way to see that this distribution is not compatible with~\cref{eq:DAG15ineqs} using the inflation technique.  First, one notes that any marginal distribution on $DEF$ that is compatible with the DAG of \cref{fig:GDAG15} is necessarily also compatible the triangle scenario (with $D$, $E$ and $F$ as observed variables).
-Second, one notes that the marginal distribution $P^{\text{Pien}}_{D E F}$ is incompatible with the triangle scenario, since it violates inequality \#8 of~\cref{sec:CCineqs}.  This is the same inequality which rejects the W-distribution of~\cref{eq:wdistribution1}.
+There is a different way to see that this distribution is not compatible with~\cref{eq:DAG15ineqs} using our results from the main text.  First, any marginal distribution on $DEF$ that is compatible with the DAG of \cref{fig:GDAG15} is necessarily also compatible the Triangle scenario, with $D$, $E$ and $F$ as observed variables.
+Second, the marginal distribution $P^{\text{Pien}}_{D E F}$ is incompatible with the Triangle scenario, since it violates inequality \#8 of~\cref{sec:CCineqs}.  This is the same inequality which rejects the W-distribution of~\cref{eq:wdistribution1}.
 Like the W-distribution, the distribution $P^{\text{Pien}}$
  not only satisfies all Shannon-type entropic inequalities pertinent to~\cref{fig:GDAG15}, but lies within an inner approximation to the genuine entropy cone for that scenario\footnote{This is due to Weilenmann and Colbeck (personal communication).}. In other words, there exists a distribution with the same joint and marginal entropies as  $P^{\text{Pien}}$ which \emph{is} compatible with \cref{fig:GDAG15}.
 
@@ -1382,10 +1381,10 @@ As it turns out, the inflation technique is also useful outside of the problem o
 
 The proof via inflation is as follows.
 \begin{proof}
-	We begin by noting that every possible joint distribution $P_{ABC}$ is compatible with a DAG of the form of~\cref{fig:beforecopy}.  This follows from the fact that one may take $X$ to be any \tblue{sufficient statistic} for the joint variable $(A,C)$ given $B$, such as $X := (A,B,C)$.  Next, we consider the inflation of \cref{fig:beforecopy} depicted in~\cref{fig:aftercopy}. The maximal injectable sets are $\{ A_1 B_1 C_1\}$ and $\{A_2 B_1\}$.  By \cref{mainlemma}, because $P_{ABC}$ is assumed to be compatible with~\cref{fig:beforecopy}, it follows that the family of marginals $\{ P_{A_1 B_1 C_1}, P_{A_2 B_1}\}$, where $P_{A_1 B_1 C_1}:= P_{A B C}$ and $P_{A_2 B_1} := P_{AB}$, is compatible with the inflation of~\cref{fig:aftercopy}. The resulting joint distribution $P_{A_1 A_2 B_1 C_1}$ has marginals $P_{A_1 B_1}= P_{A_2 B_1} =P_{AB}$ and satisfies the conditional independence relation $A_2 \indep A_1 C_1 \:|\: B_1$, since $A_2$ is $d$-separated from $A_1 C_1$ by $B_1$ in \cref{fig:aftercopy}.
+Every joint distribution $P_{ABC}$ is compatible with a DAG of the form of~\cref{fig:beforecopy}.  This follows from the fact that one may take $X$ to be any \tblue{sufficient statistic} for the joint variable $(A,C)$ given $B$, such as $X := (A,B,C)$.  Next, we consider the inflation of \cref{fig:beforecopy} depicted in~\cref{fig:aftercopy}. The maximal injectable sets are $\{ A_1 B_1 C_1\}$ and $\{A_2 B_1\}$.  By \cref{mainlemma}, because $P_{ABC}$ is assumed to be compatible with~\cref{fig:beforecopy}, it follows that the family of marginals $\{ P_{A_1 B_1 C_1}, P_{A_2 B_1}\}$, where $P_{A_1 B_1 C_1}:= P_{A B C}$ and $P_{A_2 B_1} := P_{AB}$, is compatible with the inflation of~\cref{fig:aftercopy}. The resulting joint distribution $P_{A_1 A_2 B_1 C_1}$ has marginals $P_{A_1 B_1}= P_{A_2 B_1} =P_{AB}$ and satisfies the conditional independence relation $A_2 \indep A_1 C_1 \:|\: B_1$, since $A_2$ is $d$-separated from $A_1 C_1$ by $B_1$ in \cref{fig:aftercopy}.
 \end{proof}
 
-While it is also not hard to write down the distribution constructed in the proof explicitly as $P_{A_1 A_2 B_1 C_1} := P_{A_1 B_1 C_1} P_{A_2 B_1} P_{B_1}^{-1}$~\cite[Lemma~15.8]{yeung_network_2008}, the fact that one can rederive it using the inflation technique is significant.  For one, all the non-Shannon type inequalities derived by \citet{zeger_2011_nonshannon} are obtained by applying some Shannon type inequality to the distribution that is implied to exist by the Copy Lemma.  Our result shows, therefore, that one can understand these non-Shannon type inequalities for a DAG as arising from Shannon-type inequalities applied to an inflation DAG.  Indeed, it may be that the inflation technique may be a more general-purpose tool for deriving non-Shannon-type entropic inequalities.  A natural direction for future research is to explore whether more sophisticated applications of the inflation technique might result  in \emph{new} examples of such inequalities. 
+While it is also not hard to write down the distribution constructed in the proof explicitly as $P_{A_1 A_2 B_1 C_1} := P_{A_1 B_1 C_1} P_{A_2 B_1} P_{B_1}^{-1}$~\cite[Lemma~15.8]{yeung_network_2008}, the fact that one can rederive it using the inflation technique is significant.  For one, all the non-Shannon type inequalities derived by \citet{zeger_2011_nonshannon} are obtained by applying some Shannon-type inequality to the distribution that is implied to exist by the Copy Lemma.  Our result shows, therefore, that one can understand these non-Shannon type inequalities for a DAG as arising from Shannon-type inequalities applied to an inflation DAG.  Indeed, it may be that the inflation technique may be a more general-purpose tool for deriving non-Shannon-type entropic inequalities.  A natural direction for future research is to explore whether more sophisticated applications of the inflation technique might result  in \emph{new} examples of such inequalities. 
 
 
 \begin{figure}[H]
@@ -1493,7 +1492,7 @@ The existence of a joint distribution over all six variables---i.e.~the existenc
 \begin{align}
 	\forall{a b x_1 x_2 y_1 y_2}: \quad P_{A_1 B_1 | X_1 X_2 Y_1 Y_2}(a b | x_1 x_2 y_1 y_2)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2 | X_1 X_2 Y_1 Y_2}(a a' b b'|x_1 x_2 y_1 y_2),
 \end{align}
-and similarly for the other three conditional distributions under consideration. For consistency with the causal hypothesis, \cref{eq:bellfactor} therefore implies that the original distribution must satisfy in particular
+and similarly for the other three conditional distributions under consideration. For compatibility with the Bell scenario, \cref{eq:bellfactor} therefore implies that the original distribution must satisfy in particular
 \begin{align}\begin{split}\label{eq:finalBellstep}\forall{a b}:\; \begin{cases}
 	P_{A B | X Y}(a b | 0 0)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2| X_1 X_2 Y_1 Y_2}(a a' b b'|0101) \\
 	P_{A B | X Y}(a b | 1 0)  =  \sum\nolimits_{a',b'} P_{A_1 A_2 B_1 B_2| X_1 X_2 Y_1 Y_2}(a' a b b'|0101) \\
@@ -1502,14 +1501,14 @@ and similarly for the other three conditional distributions under consideration.
 \end{cases}\end{split}\end{align}
 The possibility to write the conditional probabilities in the Bell scenario in this form is equivalent to the existence of a latent variable model, as noted in Fine's theorem~\cite{FineTheorem}. Thus, the existence of a solution to our marginal problem implies the existence of a latent variable model for the original distribution; the converse follows from our \cref{mainlemma}. Hence the inflation DAG of~\cref{fig:BellDagCopy1} provides necessary and sufficient conditions for the compatibility of the original distribution with the Bell scenario causal structure.
 
-Moreover, it is possible to describe the marginal polytope over the pre-injectable sets of~\cref{eq:bellcontexts}, resulting in a concrete correspondence between tight Bell inequalities and the facets of our marginal polytope. This is based on the observation that the ``settings'' variables $X_1$ to $Y_4$ occur in all four contexts. The marginal polytope lives in $\oplus_{i=1}^4 \mathbb{R}^{2^6} = \oplus_{i=1}^4 (\mathbb{R}^2)^{\otimes 6}$, where each tensor factor has basis vectors corresponding to the two possible outcomes of each variable, and the direct summands enumerate the four contexts. It is given by the convex hull of the points
+Moreover, it is possible to describe the marginal polytope over the pre-injectable sets of~\cref{eq:bellcontexts}, resulting in a concrete correspondence between tight Bell inequalities and the facets of our marginal polytope. This is based on the observation that the ``settings'' variables $X_1$ to $Y_2$ occur in all four contexts. The marginal polytope lives in $\oplus_{i=1}^4 \mathbb{R}^{2^6} = \oplus_{i=1}^4 (\mathbb{R}^2)^{\otimes 6}$, where each tensor factor has basis vectors corresponding to the two possible outcomes of each variable, and the direct summands enumerate the four contexts. It is given by the convex hull of the points
 \begin{align*}
 	(e_{A_1} & \otimes e_{B_1} \otimes e_{X_1} \otimes e_{X_2} \otimes e_{Y_1} \otimes e_{Y_2}) \\
 	\oplus\: (e_{A_1} & \otimes e_{B_2} \otimes e_{X_1} \otimes e_{X_2} \otimes e_{Y_1} \otimes e_{Y_2}) \\
 	\oplus\: (e_{A_2} & \otimes e_{B_1} \otimes e_{X_1} \otimes e_{X_2} \otimes e_{Y_1} \otimes e_{Y_2}) \\
 	\oplus\: (e_{A_2} & \otimes e_{B_2} \otimes e_{X_1} \otimes e_{X_2} \otimes e_{Y_1} \otimes e_{Y_2}),
 \end{align*}
-where all six variables range over their possible values. Since the last four tensor factors occur in every direct summand in exactly the same way, the resulting polytope is linearly isomorphic to the convex hull of the points
+where all six variables range over their possible values. Since the last four tensor factors occur in every direct summand in exactly the same way, we can also write the point as
 \[
 	\left[ (e_{A_1} \otimes e_{B_1}) \oplus (e_{A_1} \otimes e_{B_2}) \oplus (e_{A_2} \otimes e_{B_1}) \oplus (e_{A_2} \otimes e_{B_2})\right] \otimes \left[ e_{X_1} \otimes e_{X_2} \otimes e_{Y_1} \otimes e_{Y_2}\right]
 \]
@@ -1530,7 +1529,7 @@ so that dividing by the right-hand side results in one of the conventional forms
 \[
 	\sum_{a,b} (-1)^{a + b} \left( P_{AB|XY}(ab|00) + P_{AB|XY}(ab|01) + P_{AB|XY}(ab|10) - P_{AB|XY}(ab|11) \right) \leq 2.
 \]
-In conclusion, the inflation technique is powerful enough to get a precise characterization of all distributions compatible with the Bell causal structure, and our technique for generating polynomial inequalities through solving the marginal problem recovers all Bell inequalities.
+In conclusion, the inflation technique is powerful enough to get a precise characterization of all distributions compatible with the Bell causal structure, and our technique for generating polynomial inequalities through solving the marginal constraint problem recovers all Bell inequalities.
 
 Some Bell inequalities may also be derived using the hypergraph transversals technique discussed in \cref{sec:TSEM}. For example, the inequality
 \begin{align}\label{eq:preBell}\begin{split}
