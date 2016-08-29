@@ -82,6 +82,8 @@ anchorcolor=OliveGreen}
 \Crefname{example}{Example}{Examples}
 \Crefname{section}{Sec.}{Secs.}
 
+
+
 % theorem environments
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}[theorem]{Lemma}
@@ -90,11 +92,20 @@ anchorcolor=OliveGreen}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{definition}[theorem]{Definition}
 \theoremstyle{definition}
-\newtheorem{example}[theorem]{Example}
-\newtheorem{exercise}[theorem]{Exercise}
+%\newtheorem{example}{Example}
+\newtheorem{exercise}{Exercise}
 \newtheorem{notation}[theorem]{Notation}
 \newtheorem{problem}[theorem]{Problem}
 \newtheorem{remark}[theorem]{Remark}
+
+\newcounter{example}[section]
+\newenvironment{example}[1][]{\refstepcounter{example}\par\medskip
+   \noindent \textbf{Example~\theexample}\hspace{1em}\rmfamily#1}{\par\medskip\par}
+\Crefname{example}{Example}{Examples}
+\creflabelformat{example}{#2#1#3}
+\crefrangelabelformat{example}{#3#1#4-#5#2#6}
+\Crefmultiformat{example}{Examples~#2#1#3}{, #2#1#3}{, #2#1#3 }{and #2#1#3}
+\renewcommand{\theexample}{\arabic{example}}
 
 % macros for our notation
 \newcommand{\p}[2][]{{P_{#1}}\parenths{#2}}
@@ -645,7 +656,7 @@ Consider the Spiral inflation of the Triangle scenario (\cref{fig:Tri222v2}) wit
 
 We begin by noting that the following is a constraint that holds for any joint distribution of $\{A_1 B_1 C_1 A_2 B_2 C_2\}$, regardless of the causal structure, 
 \begin{align}\label{eq:FritzF3raw}
-	P_{A_2 B_2 C_2}(000) \leq P_{A_1 B_2 C_2}(000) + P_{B_1 C_2 A_2}(000) + P_{A_2 C_1 B_2}(000) + P_{A_1 B_1 C_1}(111).
+	P_{A_2 B_2 C_2}(111) \leq P_{A_1 B_2 C_2}(111) + P_{B_1 C_2 A_2}(111) + P_{A_2 C_1 B_2}(111) + P_{A_1 B_1 C_1}(000).
 \end{align}
 To prove this claim, it suffices to check that the inequality holds for each of the $2^6$ deterministic assignments of outcomes to $\{A_1 B_1 C_1 A_2 B_2 C_2\}$, from which the general case follows by linearity.  A more intuitive proof will be provided in~\cref{sec:TSEM}.
 
@@ -658,15 +669,15 @@ A_2 \aindep B_2 \aindep C_2 \:\implies\:	P_{A_2 B_2 C_2} &= P_{A_2} P_{B_2} P_{C
 \end{split}\end{align}
 Substituting these equations into~\cref{eq:FritzF3raw}, we obtain the polynomial inequality
 \begin{equation}
-	P_{A_2}(0) P_{B_2}(0) P_{C_2}(0) \leq P_{A_1 B_2}(00) P_{C_2}(0) + P_{B_1 C_2}(00) P_{A_2}(0) + P_{A_2 C_1}(00) P_{B_2}(0) + P_{A_1 B_1 C_1}(111).
+	P_{A_2}(1) P_{B_2}(1) P_{C_2}(1) \leq P_{A_1 B_2}(11) P_{C_2}(1) + P_{B_1 C_2}(11) P_{A_2}(1) + P_{A_2 C_1}(11) P_{B_2}(1) + P_{A_1 B_1 C_1}(000).
 \end{equation}
 This, therefore, is a causal compatibility inequality for the DAG of \cref{fig:Tri222v2}. Finally, by \cref{maincorollary}, we infer that 
 \begin{equation}\label{eq:FritzF3}
-	P_{A}(0) P_{B}(0) P_{C}(0) \leq P_{AB}(00) P_C(0) + P_{BC}(00) P_A(0) + P_{AC}(00) P_B(0) + P_{ABC}(111)
+	P_{A}(1) P_{B}(1) P_{1}(0) \leq P_{AB}(11) P_C(1) + P_{BC}(11) P_A(`) + P_{AC}(11) P_B(1) + P_{ABC}(000)
 \end{equation}
 is a causal compatibility inequality for the Triangle scenario.  
 
-What is distinctive about this inequality is that---through the presence of the term $P_{ABC}(111)$---it takes into account genuine three-way correlations, while our earlier inequalities only depend on the two-variable marginals.  This inequality is strong enough to demonstrate the incompatibility of the W-type distribution of \cref{eq:wdistribution1} with the Triangle scenario: for this distribution, the right-hand side of the inequality vanishes while the left-hand side does not.
+What is distinctive about this inequality is that---through the presence of the term $P_{ABC}(000)$---it takes into account genuine three-way correlations, while our earlier inequalities only depend on the two-variable marginals.  This inequality is strong enough to demonstrate the incompatibility of the W-type distribution of \cref{eq:wdistribution1} with the Triangle scenario: for this distribution, the right-hand side of the inequality vanishes while the left-hand side does not.
 \end{example}
 
 Of the known techniques for witnessing the incompatibility of a distribution with a DAG or deriving necessary conditions for compatibility, the most straightforward is to consider the constraints implied by ancestral independences among the observed variables of the DAG. 
@@ -948,15 +959,15 @@ However, the Spiral inflation (\cref{fig:Tri222v2}) is such that $A_2$, $B_2$, a
 
 We are here interested in recasting the argument in a manner amenable to systematic generalization. This is done as follows. We work in a marginal scenario where the contexts are $\{A_2 B_2 C_2\}$, $\{A_2 C_1\}$, $\{B_2 A_1\}$, $\{C_2 B_1\}$, and  $\{A_1 B_1 C_1\}$, and all variables are binary. The first step of the argument is to note that\footnote{Here, $\land$, $\lor$ and $\lnot$ denote conjunction, disjunction and negation respectively.}
 \begin{align}\begin{split}\label{tautology1}
-&\lnot [A_2 \eql 0, C_1 \eql 0] \bigwedge \lnot [B_2 \eql 0, A_1 \eql 0] \bigwedge \lnot [C_2 \eql 0, B_1 \eql 0] \bigwedge \lnot [A_1 \eql 1, B_1 \eql 1, C_1 \eql 1]\\
+&\lnot [A_2 \eql 1, C_1 \eql 1] \bigwedge \lnot [B_2 \eql 1, A_1 \eql 1] \bigwedge \lnot [C_2 \eql 1, B_1 \eql 1] \bigwedge \lnot [A_1 \eql 0, B_1 \eql 0, C_1 \eql 0]\\
  &\qquad\implies
-\lnot [A_2 \eql 0, B_2 \eql 0, C_2 \eql 0].
+\lnot [A_2 \eql 1, B_2 \eql 1, C_2 \eql 1].
 \end{split}\end{align}
 is a logical tautology for binary variables. It can be understood as a constraint on marginal {\em deterministic assignments}, which can be thought of as a logical counterpart of a linear inequality bounding the marginal polytope. The second and final step of the argument notes that the given marginal distributions are such that the antecedent is always true, while the consequent is sometimes false.
 
 To see how to translate this into a constraint on marginal {\em distributions}, we rewrite \cref{tautology1} in its contrapositive form,
 \begin{align}\begin{split}\label{tautology2}
-&[\mgreen{A_2 \eql 0} , \mgreen{B_2 \eql 0} , \mgreen{C_2 \eql 0}]  \implies [\mgreen{A_2 \eql 0}, C_1 \eql 0] \lor  [\mgreen{B_2 \eql 0}, A_1 \eql 0] \lor  [\mgreen{C_2 \eql 0}, B_1 \eql 0] \lor  [A_1 \eql 1, B_1 \eql 1, C_1 \eql 1].
+&[\mgreen{A_2 \eql 1} , \mgreen{B_2 \eql 1} , \mgreen{C_2 \eql 1}]  \implies [\mgreen{A_2 \eql 1}, C_1 \eql 1] \lor  [\mgreen{B_2 \eql 1}, A_1 \eql 1] \lor  [\mgreen{C_2 \eql 1}, B_1 \eql 1] \lor  [A_1 \eql 0, B_1 \eql 0, C_1 \eql 0].
 \end{split}\end{align}
 Next, we note that if a logical tautology can be expressed as
 \begin{align}\label{eq:inference}
@@ -968,7 +979,7 @@ then by applying the union bound---which asserts that the probability of at leas
 \end{align}
 Applying this to \cref{tautology2} in particular yields
 \begin{align}\label{eq:F3rawweak}
-P_{A_2 B_2 C_2}\parens{\mgreen{0} \mgreen{0} \mgreen{0}} \leq P_{A_1 B_2}\parens{0 \mgreen{0 }}+P_{ B_1 C_2}\parens{ 0 \mgreen{0}}+P_{A_2 C_1}\parens{\mgreen{0 } 0}+P_{A_1 B_1 C_1}\parens{1 1 1},
+P_{A_2 B_2 C_2}\parens{\mgreen{1} \mgreen{1} \mgreen{1}} \leq P_{A_1 B_2}\parens{1 \mgreen{1 }}+P_{ B_1 C_2}\parens{ 1 \mgreen{1}}+P_{A_2 C_1}\parens{\mgreen{1 } 1}+P_{A_1 B_1 C_1}\parens{0 0 0},
 \end{align}
 which is a constraint on the marginal {\em distributions}.
  
@@ -991,7 +1002,7 @@ We outline the general procedure using the marginal scenario of~\cref{fig:simpli
 As before, we will express the constraints on marginal deterministic assignments as logical implications with
 a valuation (assignment of outcomes) on one of the contexts as the \tblue{antecedent} and a disjunction over valuations on contexts as the \tblue{consequent}. In the following, we explain how to generate \emph{all} such implications which are tight in the sense that the consequent is minimal, i.e., involves as few terms as possible in the disjunction. 
 
-First, we fix the antecedent by choosing some context and a joint valuation of its variables. In order to generate all constraints on marginal deterministic assignments, one will have to perform this procedure for \emph{every} context as the antecedent and every choice of valuation thereon. For the sake of concreteness, we take the above example with $\bracks{\mgreen{A_2 \eql 0}, \mgreen{B_2 \eql 0}, \mgreen{C_2 \eql 0}}$ as the antecedent.  
+First, we fix the antecedent by choosing some context and a joint valuation of its variables. In order to generate all constraints on marginal deterministic assignments, one will have to perform this procedure for \emph{every} context as the antecedent and every choice of valuation thereon. For the sake of concreteness, we take the above example with $\bracks{\mgreen{A_2 \eql 1}, \mgreen{B_2 \eql 1}, \mgreen{C_2 \eql 1}}$ as the antecedent.  
 Each logical implication we consider is required to have the property that any variable that appears in both the antecendent and the consequent must be given the same value in both. 
 
 To formally determine all valid consequents, we consider two hypergraphs, or equivalently 0/1-matrices with rows that enumerate the vertices and columns that correspond to hyperedges, so that the $1$'s indicate the incidences between vertices and hyperedges.
@@ -999,20 +1010,20 @@ To formally determine all valid consequents, we consider two hypergraphs, or equ
 Each vertex in the first hypergraph corresponds to a valuation on some particular context. 
 Each hyperedge corresponds to a possible joint valuations of \emph{all} the variables. Such a hyperedge contains a vertex if the valuation represented by the hyperedge is an extension of the valuation represented by the vertex. For example the hyperedge $\bracks{A_1 \eql 0, \mgreen{A_2 \eql 1}, B_1 \eql 0, \mgreen{B_2 \eql 1}, C_1 \eql 1, \mgreen{C_2 \eql 1}}$ contains the vertex $\bracks{A_1 \eql 0,  \mgreen{B_2 \eql 1}, \mgreen{C_2 \eql 1}}$. In our example following \cref{fig:simplicialcomplex222}, this initial hypergraph has $5\cdot 2^3 = 40$ vertices and $2^6 = 64$ hyperedges. In 0/1-matrix notation, this first hypergraph is precisely the marginal description matrix $\bm{M}$ introduced near \cref{eq:marginalproblemgeneric}.
 
-The second hypergraph is a subhypergraph of the first one. We delete from the first hypergraph all vertices and hyperedges which contradict the outcomes supposed by the antecedent. For example, the vertex $\bracks{\mgreen{A_2 \eql 1}, \mred{B_2 \eql 0}, C_1 \eql 1}$ contradicts the antecedent $\bracks{\mgreen{A_2 \eql 0}, \mgreen{B_2 \eql 0}, \mgreen{C_2 \eql 0}}$. We also delete the vertex corresponding to the antecedent itself. In our example, this second hypergraph has $2^3 + 3\cdot 2^1 = 14$ vertices and $2^3 = 8$ hyperedges.
+The second hypergraph is a subhypergraph of the first one. We delete from the first hypergraph all vertices and hyperedges which contradict the outcomes supposed by the antecedent. For example, the vertex $\bracks{\mgreen{A_2 \eql 1}, \mred{B_2 \eql 0}, C_1 \eql 1}$ contradicts the antecedent $\bracks{\mgreen{A_2 \eql 1}, \mgreen{B_2 \eql 1}, \mgreen{C_2 \eql 0}}$. We also delete the vertex corresponding to the antecedent itself. In our example, this second hypergraph has $2^3 + 3\cdot 2^1 = 14$ vertices and $2^3 = 8$ hyperedges.
 
 All valid (minimal) consequents are (minimal) \tblue{transversals} of this latter hypergraph. A transversal is a set of vertices which has the property that it intersects every hyperedge in at least one vertex. In order to get implications which are as tight as possible, it is sufficient to enumerate only the minimal transversals. Doing so is a well-studied problem in computer science with various natural reformulations and for which manifold algorithms have been developed~\cite{eiter_dualization_2008}.
 
 In our example, it is not hard to check that the consequent of
 \begin{align}\begin{split}\label{eq:F3implicationform}
-	\bracks{\mgreen{A_2 \eql 0}, \mgreen{B_2 \eql 0}, \mgreen{C_2 \eql 0}}  \quad\Longrightarrow\quad & \bracks{A_1 \eql 0, \mgreen{B_2 \eql 0}, \mgreen{C_2 \eql 0}} \lor \bracks{\mgreen{A_2 \eql 0}, B_1 \eql 0, \mgreen{C_2 \eql 0}} \\
-	 \lor & \bracks{\mgreen{A_2 \eql 0}, \mgreen{B_2 \eql 0}, C_1 \eql 0} \lor \bracks{A_1 \eql 1, B_1 \eql 1, C_1 \eql 1}
+	\bracks{\mgreen{A_2 \eql 1}, \mgreen{B_2 \eql 1}, \mgreen{C_2 \eql 1}}  \quad\Longrightarrow\quad & \bracks{A_1 \eql 1, \mgreen{B_2 \eql 1}, \mgreen{C_2 \eql 1}} \lor \bracks{\mgreen{A_2 \eql 1}, B_1 \eql 1, \mgreen{C_2 \eql 1}} \\
+	 \lor & \bracks{\mgreen{A_2 \eql 1}, \mgreen{B_2 \eql 1}, C_1 \eql 1} \lor \bracks{A_1 \eql 0, B_1 \eql 0, C_1 \eql 0}
 \end{split}\end{align}
 is such a minimal transversal: every assignment of values to all variables which extends the assignment on the left-hand side satisfies at least one of the terms on the right, but this ceases to hold as soon as one removes any one term on the right. 
 
 We convert these implications into inequalities in the usual way via the union bound (i.e., replacing ``$\Rightarrow$'' by ``$\leq$'' at the level of probabilities and the disjunctions by sums). For example \cref{eq:F3implicationform} translates into the constraint on marginal distributions
 \begin{align}\label{eq:F3rawprobform}
-    P_{A_2 B_2 C_2}\parens{\mgreen{0} \mgreen{0} \mgreen{0}} \leq P_{A_1 B_2 C_2}\parens{0 \mgreen{0 0}}+P_{A_2 B_1 C_2}\parens{\mgreen{0} 0 \mgreen{0}}+P_{A_2 B_2 C_1}\parens{\mgreen{0 0} 0} + P_{A_1 B_1 C_1}\parens{1 1 1}.
+    P_{A_2 B_2 C_2}\parens{\mgreen{1} \mgreen{1} \mgreen{1}} \leq P_{A_1 B_2 C_2}\parens{1 \mgreen{1 1}}+P_{A_2 B_1 C_2}\parens{\mgreen{1} 1 \mgreen{1}}+P_{A_2 B_2 C_1}\parens{\mgreen{1 1} 1} + P_{A_1 B_1 C_1}\parens{0 0 0}.
 \end{align}
 This inequality is a strengthening of \cref{eq:F3rawweak}.  \cref{eq:F3rawprobform} was used earlier in this article as the starting point of our third example of how to derive a causal compatibility inequality for the Triangle scenario, \cref{eq:FritzF3raw}. Because \cref{eq:F3implicationform} is the progenitor of this inequality, it can be thought of as the progenitor of the causal compatibility inequality that one derives from it, namely, \cref{eq:FritzF3}.  
 
