@@ -673,7 +673,7 @@ Substituting these equations into~\cref{eq:FritzF3raw}, we obtain the polynomial
 \end{equation}
 This, therefore, is a causal compatibility inequality for the DAG of \cref{fig:Tri222v2}. Finally, by \cref{maincorollary}, we infer that 
 \begin{equation}\label{eq:FritzF3}
-	P_{A}(1) P_{B}(1) P_{1}(0) \leq P_{AB}(11) P_C(1) + P_{BC}(11) P_A(`) + P_{AC}(11) P_B(1) + P_{ABC}(000)
+	P_{A}(1) P_{B}(1) P_{1}(0) \leq P_{AB}(11) P_C(1) + P_{BC}(11) P_A(1) + P_{AC}(11) P_B(1) + P_{ABC}(000)
 \end{equation}
 is a causal compatibility inequality for the Triangle scenario.  
 
@@ -1331,42 +1331,49 @@ One way to close this loophole would be to show that the novel Shannon-type ineq
 \centering
 \begin{minipage}[t]{0.4\linewidth}
 \centering
-\includegraphics[scale=1]{scen15DAGV2.pdf}
+\includegraphics[scale=1]{scen15DAGV3.pdf}
 \caption{DAG \#15 in Ref. \cite{pusey2014gdag}.}\label{fig:GDAG15}
 \end{minipage}
 \hfill
 \begin{minipage}[t]{0.5\linewidth}
 \centering
-\includegraphics[scale=1]{scen15InflationDAGV2.pdf}
+\includegraphics[scale=1]{scen15InflationDAGV3.pdf}
 \caption{A useful inflation of \cref{fig:GDAG15}.}\label{fig:Inflated15}
 \end{minipage}
 \end{figure}
 
 The following representative causal compatibility inequalities for the DAG of~\cref{fig:GDAG15} follow from the inflation technique applied to causal compatibility inequalities for the inflation DAG of \cref{fig:Inflated15}, where the latter are obtained from Hardy-type tautologies as described in \cref{sec:TSEM}:
 \begin{align}
-\p[A]{0} \p[A D E]{0 0 0} \leq {\p[A E]{0 0} \p[A F]{0 0}  + \p[A]{0} \p[A D F]{0 0 1}}, \\
-\p[A]{0}\p[A D E]{1 0 0} \leq {\p[A E]{1 0} \p[A F]{0 0} + \p[A]{1} \p[A D F]{0 0 1}}.
+%\p[A]{0} \p[A D E]{0 0 0} \leq {\p[A E]{0 0} \p[A F]{0 0}  + \p[A]{0} \p[A D F]{0 0 1}}, \\
+%\p[A]{0}\p[A D E]{1 0 0} \leq {\p[A E]{1 0} \p[A F]{0 0} + \p[A]{1} \p[A D F]{0 0 1}}.
+\p[Y]{0} \p[Y\! A C]{0 0 0} \leq {\p[Y\! A]{0 0} \p[Y\! B]{0 0}  + \p[Y]{0} \p[Y\! B C]{0 1 0}}, \\
+\p[Y]{0}\p[Y\! A C]{1 0 0} \leq {\p[Y\! A]{1 0} \p[Y\! B]{0 0} + \p[Y]{1} \p[Y\! B C]{0 1 0}}.
 \label{eq:DAG15ineqs}
 \end{align}
 For example, the second inequality may be explicitly derived as follows. A Hardy-type tautology on the variables of the inflation DAG implies the following constraint on marginals:
 \begin{align}\label{eq:hardyforpienaar}
-     \p[A_1 A_2 D E_2]{0100} \leq \p[A_1 A_2 E_2 F_1]{0100} + \p[A_1 A_2 D F_1]{0101} .
+     %\p[A_1 A_2 D E_2]{0100} \leq \p[A_1 A_2 E_2 F_1]{0100} + \p[A_1 A_2 D F_1]{0101} .
+     \p[Y_1 Y_2 A_2 C_1]{0100} \leq \p[Y_1 Y_2 A_2 B_1]{0100} + \p[Y_1 Y_2 B_1 C_1 ]{0110} .
 \end{align}
 Applying factorization as per the ancestral independence relations of the inflation DAG, we obtain 
 \begin{align}
- \p[A_1]{0} \p[A_2 D E_2]{100} \leq \p[A_2 E_2]{10} \p[A_1 F_1]{00} + \p[A_2]{1} \p[A_1 D F_1]{001},   
+ %\p[A_1]{0} \p[A_2 D E_2]{100} \leq \p[A_2 E_2]{10} \p[A_1 F_1]{00} + \p[A_2]{1} \p[A_1 D F_1]{001},   
+ \p[Y_1]{0} \p[Y_2 C_1 A_2]{100} \leq \p[Y_2 A_2]{10} \p[Y_1 B_1]{00} + \p[Y_2]{1} \p[Y_1 B_1 C_1]{010}, 
 \end{align}
 and finally translating this into a causal compatibility inequality on the original DAG using \cref{maincorollary}, we obtain \cref{eq:DAG15ineqs}. 
  
-In \citet{pianaar2016interesting}, it was shown that the following distribution, which is easily verified to satisfy the CI relations among the observed variables of \cref{fig:GDAG15}, namely, $A\indep D$ and $E\indep F | A$~\cite{pusey2014gdag}, is nonetheless incompatible with \cref{fig:GDAG15}:
+In \citet{pianaar2016interesting}, it was shown that the following distribution, which is easily verified to satisfy the CI relations among the observed variables of \cref{fig:GDAG15}, namely, 
+%$A\indep D$ and $E\indep F | A$
+$Y\indep C$ and $A\indep B | Y$~\cite{pusey2014gdag}, is nonetheless incompatible with \cref{fig:GDAG15}:
 \begin{align}\label{eq:pienaardistro}
-	P^{\text{Pien}}_{A D E F}:=\frac{[0000]+[0101]+[1000]+[1110]}{4},\quad\text{i.e.}\quad P^{\text{Pien}}_{A D E F}(a d e f):=\begin{cases}\tfrac{1}{4}&\text{if }  a\cdot d = e \text{ and }  (a \oplus 1)\cdot d = f, \\ 0&\text{otherwise}.\end{cases}
+	%P^{\text{Pien}}_{A D E F}:=\frac{[0000]+[0101]+[1000]+[1110]}{4},\quad\text{i.e.}\quad P^{\text{Pien}}_{A D E F}(a d e f):=\begin{cases}\tfrac{1}{4}&\text{if }  a\cdot d = e \text{ and }  (a \oplus 1)\cdot d = f, \\ 0&\text{otherwise}.\end{cases}
+    P^{\text{Pien}}_{Y\! A B C}:=\frac{[0000]+[0011]+[1000]+[1101]}{4},\quad\text{i.e.}\quad P^{\text{Pien}}_{Y\! A B C}(y a b c):=\begin{cases}\tfrac{1}{4}&\text{if }  y\cdot c = a \text{ and }  (y \oplus 1)\cdot c = b, \\ 0&\text{otherwise}.\end{cases}
 \end{align}
 
 It is easily verified that this distribution violates the causal compatibility inequality of~\cref{eq:DAG15ineqs}.  It is in this sense that the inflation technique can show that the DAG of \cref{fig:GDAG15} is interesting. 
 
-There is a different way to see that this distribution is not compatible with~\cref{eq:DAG15ineqs} using our results from the main text.  First, any marginal distribution on $DEF$ that is compatible with the DAG of \cref{fig:GDAG15} is necessarily also compatible the Triangle scenario, with $D$, $E$ and $F$ as observed variables.
-Second, the marginal distribution $P^{\text{Pien}}_{D E F}$ is incompatible with the Triangle scenario, since it violates inequality \#8 of~\cref{sec:CCineqs}.  This is the same inequality which rejects the W-distribution of~\cref{eq:wdistribution1}.
+There is a different way to see that this distribution is not compatible with~\cref{eq:DAG15ineqs} using our results from the main text.  First, any marginal distribution on $ABC$ that is compatible with the DAG of \cref{fig:GDAG15} is necessarily also compatible the Triangle scenario, with $A$, $B$ and $C$ being the three observed variables.
+Second, the marginal distribution $P^{\text{Pien}}_{A B C}$ is incompatible with the Triangle scenario, since it violates inequality \#8 of~\cref{sec:CCineqs}.  This is the same inequality which rejects the W-distribution of~\cref{eq:wdistribution1}.
 Like the W-distribution, the distribution $P^{\text{Pien}}$
  not only satisfies all Shannon-type entropic inequalities pertinent to~\cref{fig:GDAG15}, but lies within an inner approximation to the genuine entropy cone for that scenario\footnote{This is due to Weilenmann and Colbeck (personal communication).}. In other words, there exists a distribution with the same joint and marginal entropies as  $P^{\text{Pien}}$ which \emph{is} compatible with \cref{fig:GDAG15}.
 
