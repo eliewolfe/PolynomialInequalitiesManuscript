@@ -1231,8 +1231,296 @@ It may also be possible to exploit special features of marginal polytopes in ord
 
 
 
-
-
+\section{Explicit Marginal Description Matrix of the Spiral Inflation with Binary Observables}
+The marginalization description matrix has 64 columns and 40 rows. For compact presentation we present the matrix of zeroes and ones in sparse form, where blank grids indicate zero and $\bullet$ indicated one. We have also placed the submatrix corresponding to each preinjectable set in a seperate grid. 
+\begin{align}
+\hspace{-\mathindent}\resizebox{\linewidth}{!}{\(
+\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|
+   c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+  \hline
+ \bullet & \bullet & & & \bullet & \bullet & & & & &
+   & & & & & & \bullet & \bullet & & & \bullet &
+   \bullet & & & & & & & & & &
+   & & & & & & & & & &
+   & & & & & & & & & &
+   & & & & & & & & & &
+   & & \\\hline
+ & & \bullet & \bullet & & & \bullet & \bullet & & &
+   & & & & & & & & \bullet & \bullet & &
+   & \bullet & \bullet & & & & & & & &
+   & & & & & & & & & &
+   & & & & & & & & & &
+   & & & & & & & & & &
+   & & \\\hline
+ & & & & & & & & \bullet & \bullet &
+   & & \bullet & \bullet & & & & & & & &
+   & & & \bullet & \bullet & & & \bullet & \bullet & &
+   & & & & & & & & & &
+   & & & & & & & & & &
+   & & & & & & & & & &
+   & & \\\hline
+ & & & & & & & & & & \bullet
+   & \bullet & & & \bullet & \bullet & & & & & &
+   & & & & & \bullet & \bullet & & & \bullet &
+   \bullet & & & & & & & & & &
+   & & & & & & & & & &
+   & & & & & & & & & &
+   & & \\\hline
+ & & & & & & & & & &
+   & & & & & & & & & & &
+   & & & & & & & & & &
+   & \bullet & \bullet & & & \bullet & \bullet & & & &
+   & & & & & & & \bullet & \bullet & &
+   & \bullet & \bullet & & & & & & & &
+   & & \\\hline
+ & & & & & & & & & &
+   & & & & & & & & & & &
+   & & & & & & & & & &
+   & & & \bullet & \bullet & & & \bullet & \bullet & &
+   & & & & & & & & & \bullet &
+   \bullet & & & \bullet & \bullet & & & & & &
+   & & \\\hline
+ & & & & & & & & & &
+   & & & & & & & & & & &
+   & & & & & & & & & &
+   & & & & & & & & & \bullet &
+   \bullet & & & \bullet & \bullet & & & & & &
+   & & & & & \bullet & \bullet & & & \bullet &
+   \bullet & & \\\hline
+ & & & & & & & & & &
+   & & & & & & & & & & &
+   & & & & & & & & & &
+   & & & & & & & & & &
+   & \bullet & \bullet & & & \bullet & \bullet & & & &
+   & & & & & & & \bullet & \bullet & &
+   & \bullet & \bullet \\\hline\hline
+ \bullet & & \bullet & & & & & & \bullet & & \bullet
+   & & & & & & \bullet & & \bullet & & &
+   & & & \bullet & & \bullet & & & & &
+   & & & & & & & & & &
+   & & & & & & & & & &
+   & & & & & & & & & &
+   & & \\\hline
+ & \bullet & & \bullet & & & & & & \bullet &
+   & \bullet & & & & & & \bullet & & \bullet & &
+   & & & & \bullet & & \bullet & & & &
+   & & & & & & & & & &
+   & & & & & & & & & &
+   & & & & & & & & & &
+   & & \\\hline
+ & & & & \bullet & & \bullet & & & &
+   & & \bullet & & \bullet & & & & & & \bullet &
+   & \bullet & & & & & & \bullet & & \bullet &
+   & & & & & & & & & &
+   & & & & & & & & & &
+   & & & & & & & & & &
+   & & \\\hline
+ & & & & & \bullet & & \bullet & & &
+   & & & \bullet & & \bullet & & & & & &
+   \bullet & & \bullet & & & & & & \bullet & &
+   \bullet & & & & & & & & & &
+   & & & & & & & & & &
+   & & & & & & & & & &
+   & & \\\hline
+ & & & & & & & & & &
+   & & & & & & & & & & &
+   & & & & & & & & & &
+   & \bullet & & \bullet & & & & & & \bullet &
+   & \bullet & & & & & & \bullet & & \bullet &
+   & & & & & \bullet & & \bullet & & &
+   & & \\\hline
+ & & & & & & & & & &
+   & & & & & & & & & & &
+   & & & & & & & & & &
+   & & \bullet & & \bullet & & & & & &
+   \bullet & & \bullet & & & & & & \bullet & &
+   \bullet & & & & & & \bullet & & \bullet & &
+   & & \\\hline
+ & & & & & & & & & &
+   & & & & & & & & & & &
+   & & & & & & & & & &
+   & & & & & \bullet & & \bullet & & &
+   & & & \bullet & & \bullet & & & & &
+   & \bullet & & \bullet & & & & & & \bullet &
+   & \bullet & \\\hline
+ & & & & & & & & & &
+   & & & & & & & & & & &
+   & & & & & & & & & &
+   & & & & & & \bullet & & \bullet & &
+   & & & & \bullet & & \bullet & & & &
+   & & \bullet & & \bullet & & & & & &
+   \bullet & & \bullet \\\hline\hline
+ \bullet & & \bullet & & \bullet & & \bullet & & & &
+   & & & & & & & & & & &
+   & & & & & & & & & &
+   & \bullet & & \bullet & & \bullet & & \bullet & & &
+   & & & & & & & & & &
+   & & & & & & & & & &
+   & & \\\hline
+ & \bullet & & \bullet & & \bullet & & \bullet & & &
+   & & & & & & & & & & &
+   & & & & & & & & & &
+   & & \bullet & & \bullet & & \bullet & & \bullet & &
+   & & & & & & & & & &
+   & & & & & & & & & &
+   & & \\\hline
+ & & & & & & & & \bullet & & \bullet
+   & & \bullet & & \bullet & & & & & & &
+   & & & & & & & & & &
+   & & & & & & & & & \bullet &
+   & \bullet & & \bullet & & \bullet & & & & &
+   & & & & & & & & & &
+   & & \\\hline
+ & & & & & & & & & \bullet &
+   & \bullet & & \bullet & & \bullet & & & & & &
+   & & & & & & & & & &
+   & & & & & & & & & &
+   \bullet & & \bullet & & \bullet & & \bullet & & & &
+   & & & & & & & & & &
+   & & \\\hline
+ & & & & & & & & & &
+   & & & & & & \bullet & & \bullet & & \bullet &
+   & \bullet & & & & & & & & &
+   & & & & & & & & & &
+   & & & & & & & \bullet & & \bullet &
+   & \bullet & & \bullet & & & & & & &
+   & & \\\hline
+ & & & & & & & & & &
+   & & & & & & & \bullet & & \bullet & &
+   \bullet & & \bullet & & & & & & & &
+   & & & & & & & & & &
+   & & & & & & & & \bullet & &
+   \bullet & & \bullet & & \bullet & & & & & &
+   & & \\\hline
+ & & & & & & & & & &
+   & & & & & & & & & & &
+   & & & \bullet & & \bullet & & \bullet & & \bullet &
+   & & & & & & & & & &
+   & & & & & & & & & &
+   & & & & & \bullet & & \bullet & & \bullet &
+   & \bullet & \\\hline
+ & & & & & & & & & &
+   & & & & & & & & & & &
+   & & & & \bullet & & \bullet & & \bullet & &
+   \bullet & & & & & & & & & &
+   & & & & & & & & & &
+   & & & & & & \bullet & & \bullet & &
+   \bullet & & \bullet \\\hline\hline
+ \bullet & \bullet & & & & & & & \bullet & \bullet &
+   & & & & & & & & & & &
+   & & & & & & & & & &
+   & \bullet & \bullet & & & & & & & \bullet &
+   \bullet & & & & & & & & & &
+   & & & & & & & & & &
+   & & \\\hline
+ & & \bullet & \bullet & & & & & & & \bullet
+   & \bullet & & & & & & & & & &
+   & & & & & & & & & &
+   & & & \bullet & \bullet & & & & & &
+   & \bullet & \bullet & & & & & & & &
+   & & & & & & & & & &
+   & & \\\hline
+ & & & & \bullet & \bullet & & & & &
+   & & \bullet & \bullet & & & & & & & &
+   & & & & & & & & & &
+   & & & & & \bullet & \bullet & & & &
+   & & & \bullet & \bullet & & & & & &
+   & & & & & & & & & &
+   & & \\\hline
+ & & & & & & \bullet & \bullet & & &
+   & & & & \bullet & \bullet & & & & & &
+   & & & & & & & & & &
+   & & & & & & & \bullet & \bullet & &
+   & & & & & \bullet & \bullet & & & &
+   & & & & & & & & & &
+   & & \\\hline
+ & & & & & & & & & &
+   & & & & & & \bullet & \bullet & & & &
+   & & & \bullet & \bullet & & & & & &
+   & & & & & & & & & &
+   & & & & & & & \bullet & \bullet & &
+   & & & & & \bullet & \bullet & & & &
+   & & \\\hline
+ & & & & & & & & & &
+   & & & & & & & & \bullet & \bullet & &
+   & & & & & \bullet & \bullet & & & &
+   & & & & & & & & & &
+   & & & & & & & & & \bullet &
+   \bullet & & & & & & & \bullet & \bullet & &
+   & & \\\hline
+ & & & & & & & & & &
+   & & & & & & & & & & \bullet &
+   \bullet & & & & & & & \bullet & \bullet & &
+   & & & & & & & & & &
+   & & & & & & & & & &
+   & \bullet & \bullet & & & & & & & \bullet &
+   \bullet & & \\\hline
+ & & & & & & & & & &
+   & & & & & & & & & & &
+   & \bullet & \bullet & & & & & & & \bullet &
+   \bullet & & & & & & & & & &
+   & & & & & & & & & &
+   & & & \bullet & \bullet & & & & & &
+   & \bullet & \bullet \\\hline\hline
+ \bullet & & \bullet & & & & & & \bullet & & \bullet
+   & & & & & & & & & & &
+   & & & & & & & & & &
+   & \bullet & & \bullet & & & & & & \bullet &
+   & \bullet & & & & & & & & &
+   & & & & & & & & & &
+   & & \\\hline
+ & \bullet & & \bullet & & & & & & \bullet &
+   & \bullet & & & & & & & & & &
+   & & & & & & & & & &
+   & & \bullet & & \bullet & & & & & &
+   \bullet & & \bullet & & & & & & & &
+   & & & & & & & & & &
+   & & \\\hline
+ & & & & \bullet & & \bullet & & & &
+   & & \bullet & & \bullet & & & & & & &
+   & & & & & & & & & &
+   & & & & & \bullet & & \bullet & & &
+   & & & \bullet & & \bullet & & & & &
+   & & & & & & & & & &
+   & & \\\hline
+ & & & & & \bullet & & \bullet & & &
+   & & & \bullet & & \bullet & & & & & &
+   & & & & & & & & & &
+   & & & & & & \bullet & & \bullet & &
+   & & & & \bullet & & \bullet & & & &
+   & & & & & & & & & &
+   & & \\\hline
+ & & & & & & & & & &
+   & & & & & & \bullet & & \bullet & & &
+   & & & \bullet & & \bullet & & & & &
+   & & & & & & & & & &
+   & & & & & & & \bullet & & \bullet &
+   & & & & & \bullet & & \bullet & & &
+   & & \\\hline
+ & & & & & & & & & &
+   & & & & & & & \bullet & & \bullet & &
+   & & & & \bullet & & \bullet & & & &
+   & & & & & & & & & &
+   & & & & & & & & \bullet & &
+   \bullet & & & & & & \bullet & & \bullet & &
+   & & \\\hline
+ & & & & & & & & & &
+   & & & & & & & & & & \bullet &
+   & \bullet & & & & & & \bullet & & \bullet &
+   & & & & & & & & & &
+   & & & & & & & & & &
+   & \bullet & & \bullet & & & & & & \bullet &
+   & \bullet & \\\hline
+ & & & & & & & & & &
+   & & & & & & & & & & &
+   \bullet & & \bullet & & & & & & \bullet & &
+   \bullet & & & & & & & & & &
+   & & & & & & & & & &
+   & & \bullet & & \bullet & & & & & &
+   \bullet & & \bullet \\\hline
+\end{array}
+\)}
+\end{align}
 
 \section{Constraints on marginal distributions from copy-index equivalence relations}\label{sec:coincidingdetails}
 
