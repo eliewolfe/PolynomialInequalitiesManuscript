@@ -166,27 +166,14 @@ anchorcolor=OliveGreen}
 
 
 \begin{abstract}
-%The fundamental problem of causal inference is to determine whether or not a given probability distribution of observed variables is compatible with some causal structure. In the presence of latent variables, this is a challenging problem for which algorithms based on conditional independence relations are not sufficient.  We here introduce a technique for witnessing the incompatibility of a given distribution with a given causal structure containing latent variables. It consists of  {\em inflating} the causal structure to a new one that can contain multiple copies of each of the original variables.
-
-%It is also desirable to derive inequalities whose violation by a distribution witnesses the incompatibility of that distribution with the causal structure. Prominent examples of such ``causal compatibility inequalities'' are Bell inequalities and Pearl's instrumental inequality.Our inflation technique also achieves this: any causal compatibility inequality on the inflated structure can be translated into one for the original structure. By introducing additional $d$-separation relations, inflation often generates easy opportunities for such translations, and already the mere \emph{existence} of a joint distribution on the inflated structure together with ancestral independences usually results in nontrivial causal compatibility inequalities. We demonstrate the technique's power by numerically classifying the causal compatibility inequalities that it entails for a particular concrete example---an inflation of the Triangle scenario with binary variables---obtaining a set of causal compatibility inequalities that are at least partly stronger than existing ones. Finally, we discuss how to identify, among the causal compatibility inequalities that the technique yields, those that remain valid even for quantum (and post-quantum) generalizations of the notion of a causal model.
-
-%The fundamental problem of causal inference is to determine whether or not a given probability distribution on observed variables is compatible with some causal structure. In the presence of latent variables, this is a challenging problem because conditional independence relations alone are generally not sufficient.  In such cases, one can identify nontrivial ``causal compatibility inequalities'' whose violation by a distribution witnesses the incompatibility of that distribution with the causal structure. Bell inequalities and Pearl's instrumental inequality are two prominent examples.  We here introduce a new technique for deriving such inequalities.  We define an {\em inflation} of the causal structure---a new causal structure that can contain multiple copies of each of the original variables, but where the copies mirror the ancestral relations that hold among the original variables---and we show that every causal compatibility inequality on the inflation can be translated into a causal compatibility inequality on the original causal structure.  Even weak constraints at the level of the inflation, such as statistical independences implied by variables having disjoint causal ancestries, can yield strong constraints at the level of the original causal structure.   We describe an algorithm for deriving {\em all} of the inequalities on the original causal structure that follow from such independences, and demonstrate its use on a particular concrete example, an inflation of the Triangle scenario with binary variables, where it yields inequalities that are provably stronger than those obtainable by pre-existing techniques.  We also describe an algorithm that derives only a subset of these inequalities but is much more efficient.  Furthermore, we show that when a given distribution is incompatible with some causal structure, the inflation technique provides an efficient means of verifying this fact and of providing an inequaility that witnesses it.  Finally, we discuss how to identify, among the inequalities that the technique yields, those that remain valid even for quantum (and post-quantum) generalizations of the notion of a causal model.
-
-%The inequalities we derive are provably stronger than those obtained by pre-existing techniques in the sense that we can identify distributions whose incompatibility with the triangle scenario is detected by our inequalities but not by these other techniques.  
 
 The fundamental problem of causal inference is to determine whether or
 not a given probability distribution on observed variables is compatible
 with some causal structure. In the presence of latent variables, this is
-challenging because conditional independence relations alone generally cannot decide the issue. 
-%are generally not sufficient. 
-We here introduce the {\em inflation technique} for tackling this problem. \color{blue} An inflation of a causal
+challenging because conditional independence relations alone generally cannot decide the issue. We here introduce the {\em inflation technique} for tackling this problem. An inflation of a causal
 structure is a new causal structure that can contain multiple copies of
 each of the original variables, but where the ancestry of each copy mirrors that of the original. 
 If a given distribution is compatible with the original causal structure, then it defines distributions over certain subsets of the variables on the new causal structure that are compatible with the latter.  It follows that compatibility constraints at the inflation level can be translated to compatibility constraints at the level of the original causal structure, and it turns out that even if the former are weak---such as observable statistical independences implied by disjoint causal ancestry---the latter can be strong.  
-\color{black}
-%Compatibility between a distribution and the original causal structure implies compatibility between an induced family 
-%Every causal model on the original causal structure defines a unique causal model on the inflation. 
-%Even weak constraints at the level of the inflation, such as observable statistical independences implied by disjoint causal ancestry, can then witness the incompatibility of the original distribution with the original causal structure.
 
 The inflation technique also provides a means of deriving inequalities whose violation by a
 distribution witnesses its incompatibility with the causal structure---such as Bell inequalities and Pearl's instrumental inequality.   We describe an algorithm for deriving
@@ -195,9 +182,7 @@ follow from ancestral independences in the inflation. Applied to an inflation of
 Triangle scenario with binary variables, it yields inequalities that are
 stronger in at least some aspects than those obtainable by existing
 methods. We also describe an algorithm that derives a weaker set of
-inequalities but is much more efficient. Finally, we discuss which inflations are such that the inequalities one obtains from them
-%how to identify, among the inequalities that the technique yields, those that
-remain valid even for quantum (and post-quantum) generalizations of the
+inequalities but is much more efficient. Finally, we discuss which inflations are such that the inequalities one obtains from them remain valid even for quantum (and post-quantum) generalizations of the
 notion of a causal model.
 
 
@@ -942,7 +927,6 @@ Summarizing, we have shown how to leverage the marginal satisfiability problem t
 \subsection{A list of causal compatibility inequalities for the Triangle scenario}
 \label{sec:CCineqs}
 
-\color{blue}
 As an example of the above method, we present all of the causal compatibility inequalities that one can derive for the Triangle scenario with binary observed variables using ancestral independences in the Spiral inflation (\cref{fig:Tri222}). 
 %The contexts for the marginal problem are the maximal pre-injectable sets of \cref{eq:basicsetup222} and \cref{fig:simplicialcomplex222}. 
  To present these in an efficient manner, we leverage symmetries of the set of inequalities.  
@@ -951,7 +935,6 @@ Clearly, a permutation of the observed variables is a symmetry whenever it exten
 to a graph automorphism, which is a permutation of all nodes that takes edges to edges. Furthermore, any permutation among the values assigned to an individual observed variable (i.e., the sample space of that variable) is a symmetry of the set of inequalities, as is any composition of such permutations. 
 %Furthermore, any permutation among the set of values assigned to the set of observed variables is also a symmetry of the set of inequalities.  
 In the case of the Triangle DAG, all 6 permutations of the three observed variables are symmetries, and there are $2^3$ permutations of the triple of the values of these three variables (the products of local permutations) that are symmetries.  A given inequality, therefore, can lead to at most 48 distinct inequalities under the action of the symmetry operations.  We have found numerically that there are 37 classes of nontrivial inequalities that are inequivalent relative to these symmetry operations.\footnote{An inequality is nontrivial if it is violated by at least one distribution.} We here present a single representative inequality from each of these classes.  The full set can be obtained by closing under the symmetry operations.  We have here chosen to express these inequalities in terms of correlators (where the two possible values of each variables to be $\{-1,+1\}$), rather than in terms of joint probabilities, because such a presentation is more compact.
-\color{black}
 %With respect to symmetry transformations generated by permutations of the observed variables that are symmetries of the DAG and flipping the value of one variable, our facet enumeration computation shows that the marginal polytope has 64 symmetry classes of facets. Applying the factorization of probabilities according to ancestral independences per \cref{eq:preinjfactor,eq:basicsetup222} and converting into inequalities for the original DAG using \cref{maincorollary} results in 64 polynomial inequalities up to symmetry. 
 % However, there is no guarantee that each one of these inequalities is nontrivial at the level of the original DAG, where nontriviality of an inequality means that it is violated by at least one distribution. Numerically, we find that only 37 of the inequalities are indeed nontrivial, and we present these here in correlator form\footnote{A machine-readable version of this list of inequalities may be found in \cref{sec:38ineqs}.}:
 \begin{align*}
@@ -1200,7 +1183,7 @@ The general problem of finding pairs of marginal contexts in the inflation DAG f
 \subsection{Causal inference in quantum theory and in generalized probabilistic theories}
 \label{sec:classicallity}
 
-\color{blue}
+
 Recent work has sought to explore quantum generalizations of the notion of a causal model, termed {\em quantum causal models} \cite{leifer2013conditionalstates,pusey2014gdag,BeyondBellII,Chaves2015infoquantum,ried2015quantum}. 
 %There has also been some work on generalizations of the notion of a causal model to the even broader framework of generalized probabilistic theories (GPTs)~\cite{pusey2014gdag}.   This framework includes, as special cases, quantum theory, classical theories as well as many alternatives to these.  
 We here use 
@@ -1211,7 +1194,8 @@ the quantum generalization that is implied by the approach of~\cite{pusey2014gda
 The causal structures are still represented by DAGs, with a distinction between observed and latent nodes.  However, the latent nodes are now associated with sets of quantum channels and the observed nodes are now associated with sets of quantum  measurements.  Observed nodes are still labelled by random variables, which represent the outcome of the associated measurement. 
 %nodes are no longer associated exclusively with random variables, they are also associated with quantum channels. 
  %There is also a distinction between two types of edges.  
-One also makes a distinction between edges in the DAG that carry classical information and edges that carry quantum information.\footnote{This notion of quantum causal model can also be formulated in a manner that does not require a distinction between two kinds of edges~\cite{BeyondBellII}.} 
+One also makes a distinction between edges in the DAG that carry classical information and edges that carry quantum information.\footnote{In many
+cases this notion of quantum causal model can also be formulated in a manner that does not require a distinction between two kinds of edges~\cite{BeyondBellII}.} 
 % and quantum edges in the DAG.  
  An observed node can have incoming edges of either type: 
 %For an observed node that is associated to a random variable $X$, the outgoing edges all carry classical information.  Specifically, they communicate the value of $X$ to each of its children in the DAG.  
@@ -1219,7 +1203,7 @@ One also makes a distinction between edges in the DAG that carry classical infor
 those that come from other observed nodes carry classical information, while those that come from latent nodes carry quantum information.  Each quantum measurement in the set that is associated to an observed node acts on the collection of quantum systems received by this node (i.e., on the tensor product of the Hilbert spaces associated to the incoming edges).  The classical variables that are received by the node act collectively as a control variable, determining which measurement in the set is implemented.  Finally, the random variable that is associated to the node encodes the outcome of the measurement.  All of the outgoing edges of an observed node are classical and simply broadcast the outcome of the measurement to the children nodes. 
 %
 A latent node can also have incoming edges that carry classical variables as well as incoming edges that carry quantum systems.   Each quantum channel in the set that is associated to a latent node takes the collection of quantum systems associated to the incoming edges as its quantum input and the collection of quantum systems associated to the outgoing edges as its quantum output (the input and output spaces need not have the same dimension).  The classical variables that are received by the node act collectively as a control variable, determining which channel in the set is implemented.
-\color{black}
+
 
 
 %now in a quantum causal model the outgoing edges of latent nodes are different from the other ones: they carry physical systems, meaning that each such edge must be labelled by a Hilbert space. Each latent node takes all its incoming information---represented by its observed parent variables together with the incoming physical systems---and turns it into outgoing information via a quantum channel. Similarly, an observed node takes all its incoming information and applies a joint measurement on its incoming physical systems as well as some classical information processing resulting in an outcome for its associated variable. Root variables can be thought of as settings or preparation procedures, while terminal nodes often represent the outcomes of measurements that are used in an experiment on quantum systems. In most cases that are of interest to quantum foundations, this notion of quantum causal model can also be formulated in a manner that does not require a distinction between two kinds of edges~\cite{BeyondBellII}.
@@ -1263,7 +1247,7 @@ contain one or more inflationary fan-outs, as does the inflation of the Bell DAG
 Our main observation is that if one uses an inflation DAG without an inflationary fan-out, then the resulting inequalities derived by the inflation technique will all be GPT valid. In other words, one can only hope to detect a GPT-classical separation if one uses an inflation DAG that \emph{has} at least one inflationary fan-out. We now explain the intuition for why this is the case. 
 In the classical causal model obtained by inflation, the copy-index-equivalent children of an inflationary fan-out causally depend on their parent node in precisely the same way as their counterparts in the original DAG do. For example, this dependence may be such that these two children are exact \emph{copies} of the inflationary fan-out node. So when one tries to write down a quantum or GPT version of our notion of inflation, one quickly runs into trouble: in quantum theory, the {\em no-broadcasting theorem} shows that such duplication is impossible in a strong sense~\cite{NoCloningQuantum1996}, and an analogous theorem holds for GPTs~\cite{NoCloningGeneral2006}. This is why in the presence of an inflationary fan-out, one cannot expect our inequalities to hold in the quantum or GPT case, which is consistent with the fact that they often do have quantum and GPT violations.
 
-\color{blue}
+
 On the other hand, for any inflation DAG that does not contain an inflationary fan-out, the notion of an inflation model generalizes to the quantum case, as follows.  By the definition of inflation, any node in $G'$ has an equivalent set of incoming edges to its counterpart in $G$, while by the assumption that the inflation DAG does not contain any inflationary fan-outs, any node in $G'$ has either the equivalent set of outgoing edges as its counterpart in $G$, or some pruning of this set.  In the former case, 
 %Specifically, if a latent node in $G'$ has the same outgoing and incoming edges as its counterpart in $G$ does, then 
 one associates to this node the same set of quantum channels (if it is a latent node) or measurements (if it is an observed node) that are associated to its counterpart. In the latter case, one simply applies the partial trace operation on the pruned edges (if it is a latent node) or a marginalization on the pruned edges (if it is an observed node).  
@@ -1276,7 +1260,7 @@ That these prescriptions make sense depends crucially on the assumption that $G'
 
 All of these assertions about inflation DAGs that do not contain any inflationary fan-outs apply not only to quantum causal models, but to GPT causal models as well, using the definition of the latter provided in \cite{pusey2014gdag}.  
 %All of the exact same statements apply likewise in the GPT case.
-\color{black}
+
 
 In the remainder of this section, we discuss the relation between the quantum and the GPT case. Since quantum theory is a particular generalized probabilistic theory, quantum compatibility trivially implies GPT compatibility. Through the work of Tsirelson \cite{Tsirelson1980} and \citet{PROriginal}, it is known that the converse is not true: the Bell scenario manifests a GPT-quantum separation.  The identification of distributions witnessing this difference, and the derivation of quantum causal compatibility inequalities with GPT violations, has been a focus of much foundational research in recent years. Traditionally, the foundational question has always been: why does quantum theory predict correlations that are {\em stronger} than one would expect classically?  But now there is a new question being asked: why does quantum theory only allow correlations that are {\em weaker} than those predicted by other GPTs?  There has been some interesting progress in identifying physical principles that can pick out the precise correlations that are exhibited by quantum theory \cite{PopescuReviewNatureComm,ScaraniML,Rohrlich2014,InfoCausArXiv,LONatureComm,LOExploring,EPNBody,barnum2014interference,AlmostQuantum}.  Further opportunities for identifying such principles would be useful.  This motivates the problem of classifying DAGs into those which have a quantum-classical separation, those which have a GPT-quantum separation and those which have both. Similarly, one can try to classify causal compatibility \emph{inequalities} into those which are GPT-valid, those which are GPT-violable but quantumly valid, and those which are quantum-violable but classically valid. 
 
@@ -2119,8 +2103,8 @@ $Y\indep C$ and $A\indep B | Y$~\cite{pusey2014gdag}, is nonetheless incompatibl
 \end{align}
 It is easily verified that this distribution violates the causal compatibility inequality of~\cref{eq:DAG15ineqs}.  It is in this sense that the inflation technique can show that the DAG of \cref{fig:GDAG15} is interesting. 
 
-\color{blue}
-There is a different way to see that this distribution is not compatible with the DAG of \cref{fig:GDAG15} using our results from the main text.  We consider the marginal on $ABC$ of $P^{\text{Pien}}_{Y\! A B C}$, which is
+
+There is an alternative way to see that this distribution is not compatible with the DAG of \cref{fig:GDAG15} using our results from the main text.  We consider the marginal on $ABC$ of $P^{\text{Pien}}_{Y\! A B C}$, which is
 \begin{align}\label{eq:pienaardistroABC}
     P^{\text{Pien}}_{ A B C}:=\frac{1}{2}[000]+\frac{1}{4}[011]+\frac{1}{4}[101].
 \end{align}
@@ -2132,7 +2116,7 @@ Clearly, this can be obtained from the inequality of \cref{eq:FritzF3} (the one 
 %, since it violates inequality \#8 of~\cref{sec:CCineqs}.  This is the same inequality which rejects the W-distribution of~\cref{eq:wdistribution1}.
 
 Just as the incompatibility of the W-distribution with the Triangle scenario was not detectable by entropic inequalities, as we noted in our discussion of \cref{example:noWdist} from \cref{subsec:witnessingincompat}, the same is true for the incompatibility of the distribution $P^{\text{Pien}}_{YABC}$ with the DAG of \cref{fig:GDAG15}. $P^{\text{Pien}}_{YABC}$ not only satisfies all Shannon-type entropic inequalities pertinent to the DAG of~\cref{fig:GDAG15}, but lies within an inner approximation to the genuine entropy cone for that scenario\footnote{This is due to Weilenmann and Colbeck (personal communication).}. In other words, there exists a distribution with the same joint and marginal entropies as  $P^{\text{Pien}}_{YABC}$ which \emph{is} compatible with the DAG of \cref{fig:GDAG15}.
-\color{black}
+
 
 Finally, it may be worth noting that the inflation DAG depicted in~\cref{fig:Inflated15} is precisely the ``bilocality scenario'' investigated by~\citet{BilocalCorrelations}.  Therefore, the inflation technique permits us to translate every causal compatibility inequality for the bilocality scenario into a causal compatibility inequality for the DAG of~\cref{fig:GDAG15}.
 
