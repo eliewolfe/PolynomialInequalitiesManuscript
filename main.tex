@@ -1,9 +1,10 @@
+\pdfoutput=1
 \PassOptionsToPackage{pdftex,
 pdfversion=1.7,
 pdfencoding=auto,
 pdfnewwindow=true,
 pdfusetitle=true,
-psdextra=true,
+%psdextra=true,
 %pdftoolbar=true,
 %pdfmenubar=true,
 bookmarks=true,
@@ -11,8 +12,10 @@ bookmarksnumbered=true,
 bookmarksopen=true,
 pdfpagemode=UseThumbs,
 bookmarksopenlevel=1,
-pdfpagelabels=false
+pdfpagelabels=false,
+breaklinks=true
 }{hyperref}
+\PassOptionsToPackage{usenames,dvipsnames,table}{xcolor}
 \documentclass[aps,english,superscriptaddress,onecolumn,twoside,longbibliography,pra,floatfix,fleqn,nofootinbib]{revtex4-1}%
 
 % packages
@@ -60,7 +63,7 @@ pdfpagelabels=false
 \definecolor{panblue}{RGB}{0,24,150}
 \definecolor{carmine}{RGB}{150, 0, 24}
 \definecolor{gray}{RGB}{150, 150, 150}
-\usepackage[breaklinks=true]{hyperref}
+\usepackage[pdftex,pdfversion=1.7,pdfencoding=auto,pdfnewwindow=true,pdfusetitle=true,bookmarks=true,bookmarksnumbered=true,bookmarksopen=true,pdfpagemode=UseThumbs,bookmarksopenlevel=1,pdfpagelabels=false,breaklinks=true]{hyperref}
 \hypersetup{colorlinks,
 linkcolor=carmine,
 citecolor=medblue,
@@ -167,23 +170,7 @@ anchorcolor=OliveGreen}
 
 \begin{abstract}
 
-The fundamental problem of causal inference is to determine whether or
-not a given probability distribution on observed variables is compatible
-with some causal structure. In the presence of latent variables, this is
-challenging because conditional independence relations alone generally cannot decide the issue. We here introduce the {\em inflation technique} for tackling this problem. An inflation of a causal
-structure is a new causal structure that can contain multiple copies of
-each of the original variables, but where the ancestry of each copy mirrors that of the original. 
-If a given distribution is compatible with the original causal structure, then it defines distributions over certain subsets of the variables on the new causal structure that are compatible with the latter.  It follows that compatibility constraints at the inflation level can be translated to compatibility constraints at the level of the original causal structure, and it turns out that even if the former are weak---such as observable statistical independences implied by disjoint causal ancestry---the latter can be strong.  
-
-The inflation technique also provides a means of deriving inequalities whose violation by a
-distribution witnesses its incompatibility with the causal structure---such as Bell inequalities and Pearl's instrumental inequality.   We describe an algorithm for deriving
-{\em all} of the inequalities for the original causal structure that
-follow from ancestral independences in the inflation. Applied to an inflation of the
-Triangle scenario with binary variables, it yields inequalities that are
-stronger in at least some aspects than those obtainable by existing
-methods. We also describe an algorithm that derives a weaker set of
-inequalities but is much more efficient. Finally, we discuss which inflations are such that the inequalities one obtains from them remain valid even for quantum (and post-quantum) generalizations of the
-notion of a causal model.
+The problem of causal inference is to determine if a given probability distribution on observed variables is compatible with some causal structure. The difficult case is when the structure includes latent variables.  We here introduce the \emph{inflation technique} for tackling this problem. An inflation of a causal structure is a new causal structure that can contain multiple copies of each of the original variables, but where the ancestry of each copy mirrors that of the original. For every distribution compatible with the original causal structure we identify a corresponding family of distributions, over certain subsets of inflation variables, which is compatible with the inflation structure. It follows that compatibility constraints at the inflation level can be translated to compatibility constraints at the level of the original causal structure; even if the former are weak, such as observable statistical independences implied by disjoint causal ancestry, the translated constraints can be strong. In particular, we can derive inequalities whose violation by a distribution witnesses that distribution's incompatibility with the causal structure (of which Bell inequalities and Pearl's instrumental inequality are prominent examples). We describe an algorithm for deriving \emph{all} of the inequalities for the original causal structure that follow from ancestral independences in the inflation. Applied to an inflation of the Triangle scenario with binary variables, it yields inequalities that are stronger in at least some aspects than those obtainable by existing methods. We also describe an algorithm that derives a weaker set of inequalities but is much more efficient. Finally, we discuss which inflations are such that the inequalities one obtains from them remain valid even for quantum (and post-quantum) generalizations of the notion of a causal model.
 
 
 \end{abstract}
