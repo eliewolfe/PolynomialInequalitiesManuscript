@@ -236,14 +236,14 @@ While we present our technique primarily as a tool for standard causal inference
 
 A \tblue{causal model} consists of a pair of objects: a \tblue{causal structure} and a family of \tblue{causal parameters}.  We define each in turn. 
 First, recall that a directed acyclic graph (DAG) $G$ consists of a finite set of nodes $\nodes{G}$ and a set of directed edges $\edges{G}$, where a directed edge is an ordered pair of nodes, so that $\edges{G}\subseteq\nodes{G}\times\nodes{G}$. This directed graph is assumed to be \emph{acylic}, which means that there is no way to start and end at the same node by traversing edges forward.
- In the context of a causal model, each node $X\in\nodes{G}$ carries a random variable that we denote by the same letter $X$. A directed edge $X\to Y$ corresponds to the possibility of a direct causal influence from the variable $X$ to the variable $Y$. In this way, the edges implement causal relations.
+In the context of a causal model, each node $X\in\nodes{G}$ carries a random variable that we denote by the same letter $X$. A directed edge $X\to Y$ corresponds to the possibility of a direct causal influence from the variable $X$ to the variable $Y$. In this way, the edges implement causal relations.
 
 Our terminology for the causal relations between the nodes in a DAG is the standard one. The parents of a node $X$ in $G$ are defined as those nodes from which an outgoing edge terminates at $X$, i.e.~$\Pa[G]{X} = \{\:Y\:|\:Y\to X\:\}$. (When the graph $G$ is clear from the context, we omit the subscript.) Similarly, the children of a node $X$ are defined as those nodes at which edges originating at $X$ terminate, i.e.~$\Ch[G]{X} = \{\:Y\:|\: X\to Y\:\}$. If $\bm{U}$ is a set of nodes, then we put $\Pa[G]{\bm{U}} := \bigcup_{X\in\bm{U}} \Pa[G]{X}$ and $\Ch[G]{\bm{U}} := \bigcup_{X\in\bm{U}} \Ch[G]{X}$. The \tblue{ancestors} of a set of nodes $\bm{U}$, denoted $\An[G]{\bm{U}}$, are defined as those nodes which have a directed \emph{path} to some node in $\bm{U}$, including the nodes in $\bm{U}$ themselves\footnote{The inclusion of a node within the set of its ancestors is contrary to the colloquial use of the term ``ancestors''. 
 One uses this definition so that any correlation between two variables can always be attributed to a common ``ancestor''. This includes, for instance, the case where one variable is a parent of the other.
 }. 
 Equivalently, $\An{\bm{U}} := \bigcup_{n\in\mathbb{N}} \mathsf{Pa}^n(\bm{U})$, where $\mathsf{Pa}^n(\bm{U})$ is inductively defined via $\mathsf{Pa}^0(\bm{U}) := \bm{U}$ and $\mathsf{Pa}^{n+1}(\bm{U}) := \mathsf{Pa}(\mathsf{Pa}^n(\bm{U}))$. 
 
-A \tblue{causal structure} is a DAG $G$ that incorporates a distinction between two types of nodes: the set of observed nodes $\obsnodes{G}$, and the set of latent nodes $\latnodes{G}$.  
+A \tblue{causal structure} is a DAG $G$ that incorporates a distinction between two types of nodes: the set of observed nodes $\obsnodes{G}$, and the set of latent nodes $\latnodes{G}$\footnote{\tpurp{\citet[Def. 2.3.2]{pearl2009causality} uses the term \emph{latent structure} when referring to a DAG supplemented by a specification of latent nodes, whereas here that specification is implicit in our term \emph{causal structure}.}}. 
 Following~\cite{pusey2014gdag}, we will depict the observed nodes by triangles and the latent nodes by circles, as in~\cref{fig:TriMainDAG}.
 Henceforth, we will use the terms ``DAG'' and ``causal structure'' interchangeably, so that the specification of which variables are observed is considered to be part of the DAG.
 Frequently, we supplement the causal structure by a specification of the cardinalities of the observed variables. While these are finite in all our examples, the inflation technique applies just as well in the case of continuous variables.
@@ -680,6 +680,7 @@ is also a causal compatibility inequality for the Triangle scenario.  This inequ
 
 \begin{example}[\tred{A causal compatibility inequality in terms of \tpurp{\emph{joint probabilities}}}]
 \label{example:probineq}
+
 Consider the Spiral inflation of the Triangle scenario (\cref{fig:Tri222v2}) with the injectable sets $\{A_1 B_1 C_1\}$, $\{A_1 B_2\}$, $\{B_1 C_2\}$, $\{ A_1, C_2\}$, $\{A_2\}$, $\{B_2\}$, and $\{C_2\}$. We derive a causal compatibility inequality under the assumption that the observed variables are binary, adopting the convention that they take values in $\{0,1\}$.
 
 We begin by noting that the following is a constraint that holds for any joint distribution of $\{A_1 B_1 C_1 A_2 B_2 C_2\}$, regardless of the causal structure, 
@@ -858,7 +859,7 @@ The third step in our procedure is determining whether the given distributions o
 To specify either sort of marginal problem, one must specify the full set of variables to be considered, denoted $\bm{X}$, together with a family of subsets of $\bm{X}$, denoted $(\bm{U}_1,\ldots,\bm{U}_n)$ and called \tblue{contexts}. The family of contexts can be visualized through the simplicial complex that it generates, as illustrated in~\cref{fig:simplicialcomplex222}. A \tblue{marginal scenario} consists of a specification of contexts together with a specification of the cardinality of each variable. Every joint distribution $P_{\bm{X}}$ defines a family of marginal distributions $(P_{\bm{U}_1},\ldots,P_{\bm{U}_n})$ through marginalization,  $P_{\bm{U}_i} := \sum_{\bm{X} \setminus \bm{U}_i} P_{\bm{X}}$. The marginal problem concerns the converse inference. In the marginal satisfiability problem, a concrete family of distributions $(P_{\bm{U}_1},\ldots,P_{\bm{U}_n})$ is given, and one wants to decide whether there exists a joint distribution $\hat{P}_{\bm{X}}$ such that $P_{\bm{U}_i} = \sum_{\bm{X}\setminus\bm{U}_i} \hat{P}_{\bm{X}}$ for all $i$. In the marginal constraint problem, one seeks to find conditions on the family of distributions $(P_{\bm{U}_1},\ldots,P_{\bm{U}_n})$, considered as parameters, for when a joint distribution $\hat{P}_{\bm{X}}$ exists which reproduces these as marginals, $P_{\bm{U}_i} = \sum_{\bm{X}\setminus\bm{U}_i} \hat{P}_{\bm{X}}$ for all $i$.
  
 In order for $\hat{P}_{\bm{X}}$ to exist,  distributions on different contexts must be consistent on the intersection of contexts, that is, marginalizing $P_{\bm{U}_i}$ to the variables in $\bm{U}_i\cap\bm{U}_j$ must result in the same distribution as marginalizing $P_{\bm{U}_j}$ to those variables.  
-  In many cases, this is not sufficient\footnote{Depending on how the contexts intersect with one another, this \emph{may} be sufficient. A precise characterization for when this occurs has been found by~\citet{vorobev_extension_1960}.}; indeed, we have already seen examples of additional constraints, namely, the inequalities \eqref{eq:polymonogamyraw}, \eqref{eq:MIraw} and \eqref{eq:FritzF3raw} from \cref{Sec:DerivingInequalities}.
+  In many cases, this is not sufficient\footnote{Depending on how the contexts intersect with one another, this \emph{may} be sufficient. A precise characterization for when this occurs has been found by~\citet{vorobev_extension_1960}\tpurp{, see also \citet[Thm. 2]{chaves2016limitedmarginals} for a generalization which also enables significant shortcuts in solving the marginal constraint problem}.}; indeed, we have already seen examples of additional constraints, namely, the inequalities \eqref{eq:polymonogamyraw}, \eqref{eq:MIraw} and \eqref{eq:FritzF3raw} from \cref{Sec:DerivingInequalities}.
 So what are the necessary and sufficient conditions? To answer this question, it helps to realize two things:
 \begin{itemize}
 	\item The set of possibilities for the distribution $P_{\bm{X}}$ is the convex hull of the deterministic assignments of values to $\bm{X}$ (the deterministic distributions), and 
@@ -1116,17 +1117,45 @@ In conclusion, facet enumeration is the preferred method for deriving inequaliti
 
 In \cref{sec:ineqs}, we considered causal inference by studying the existence of a joint distribution on observed nodes of the inflation DAG, and then making use of the ancestral independences to factorize the joint distributions on the pre-injectable sets into those on the injectable sets.
 
-It is natural to wonder whether one can sometimes make use of facts about the causal structure that go beyond ancestral independences.  It is standard practice, when deriving compatibility conditions for a DAG, to make use of arbitrary $d$-separation relations among variables: if, in a given DAG, $\bm{X}$ and $\bm{Y}$ are $d$-separated\footnote{The notion of $d$-separation is treated at length in~\cite{pearl2009causality,studeny2005probabilistic,WoodSpekkens,pusey2014gdag}, so we elect not to review it here.} by $\bm{Z}$, then a distribution is compatible with that DAG only if it satisfies the conditional independence relation $\bm{X}\indep\bm{Y}|\bm{Z}$. For $\bm{Z} = \emptyset$, this specializes to ancestral independence of $\bm{X}$ and $\bm{Y}$. Thus it is natural to ask: can the inflation technique also sensibly make use of other $d$-separation relations among sets of observed variables?
-
-
+It is natural to wonder whether one can sometimes make use of facts about the causal structure that go beyond ancestral independences.  It is standard practice, when deriving compatibility conditions for a DAG, to make use of arbitrary $d$-separation relations among variables: if, in a given DAG, $\bm{X}$ and $\bm{Y}$ are $d$-separated\footnote{The notion of $d$-separation is treated at length in~\cite{pearl2009causality,studeny2005probabilistic,WoodSpekkens,pusey2014gdag}, so we elect not to review it here.} by $\bm{Z}$, then a distribution is compatible with that DAG only if it satisfies the conditional independence relation $\bm{X}\indep\bm{Y}|\bm{Z}$. For $\bm{Z} = \emptyset$, this specializes to ancestral independence of $\bm{X}$ and $\bm{Y}$. Thus it is natural to ask: can the inflation technique also sensibly make use of other $d$-separation relations among sets of observed variables? \tpurp{Yes, many $d$-separation relations can be incorporated into the marginal problem for by simply generalizing the notion of pre-injectable sets, although some $d$-separation relations can only be accounted for via nonlinear quantifier elimination.}
 
 Every conditional independence relation $\bm{X}\indep\bm{Y}|\bm{Z}$ can be expressed as a polynomial equation in terms of probabilities: while it is most commonly written as $P_{\bm{X}\bm{Y}|\bm{Z}}(\bm{x}\bm{y}|\bm{z})=P_{\bm{X}|\bm{Z}}(\bm{x}|\bm{z})P_{\bm{Y}|\bm{Z}}(\bm{y}|\bm{z})$ for all $\bm{x}$, $\bm{y}$, and $\bm{z}$, it can also be written in terms of unconditional probabilities, where it takes the form
 \[
-\forall{\bm{x} \bm{y} \bm{z}}: \p[\bm{X}\bm{Y}\bm{Z}]{\bm{x}\bm{y}\bm{z}}\p[\bm{Z}]{\bm{z}}=\p[\bm{X}\bm{Z}]{\bm{x}\bm{z}}\p[\bm{Y}\bm{Z}]{\bm{y}\bm{z}}
+\forall{\bm{x} \bm{y} \bm{z}}: \p[\bm{X}\bm{Y}\bm{Z}]{\bm{x}\bm{y}\bm{z}}\p[\bm{Z}]{\bm{z}}=\p[\bm{X}\bm{Z}]{\bm{x}\bm{z}}\p[\bm{Y}\bm{Z}]{\bm{y}\bm{z}}.
 \]
-Such a nonlinear constraint can be incorporated as a further restriction on the joint distributions compatible with the inflation DAG, supplementing the basic constraints of nonnegativity of probabilities for the joint distribution of the observed variables and the constraints implied by ancestral independences.
+Such a nonlinear constraint can generically be incorporated as a further restriction on the joint distributions compatible with the inflation DAG, supplementing the basic constraints of nonnegativity of probabilities for the joint distribution of the observed variables and the constraints implied by ancestral independences. \tpurp{Note, however, that if the sets ${\bm{X'}\bm{Z'}}$ and ${\bm{Y'}\bm{Z'}}$ are both injectable in some inflation DAG $G'$ and $\bm{X'}$ and $\bm{Y'}$ are $d$-separated by $\bm{Z'}$, then the distribution over ${\bm{X'}\bm{Y'}\bm{Z'}}$ can be defined wholly in terms of injectable sets,
+\begin{align}\label{eq:dsepsub}
+    \p[\bm{X'}\bm{Y'}\bm{Z'}]{\bm{x}\bm{y}\bm{z}}=\begin{cases}\frac{\p[\bm{X}\bm{Z}]{\bm{x}\bm{z}}\p[\bm{Y}\bm{Z}]{\bm{y}\bm{z}}}{\p[\bm{Z}]{\bm{z}}} & \quad\text{if }\p[\bm{Z}]{\bm{z}}\cramp{>}0 \\
+    0 & \quad\text{if }\p[\bm{Z}]{\bm{z}}\cramp{=} 0
+    \end{cases}.
+\end{align}
+It is therefore straightforward to obtain causal compatibility criteria incorporating the conditional independence implied by the $d$-separation as follows: Treat ${\bm{X'}\bm{Y'}\bm{Z'}}$ as a \tblue{super-pre-injectable} set, in the sense that it counts as a member of the family of \emph{knowable} marginal distributions in $G'$. Inequalities which reference $P_{\bm{X'}\bm{Y'}\bm{Z'}}$ can be obtained through linear programming by demanding the consistency of all the knowable marginal distributions in $G'$. Such linear constraints become polynomial by making the substitution per \cref{eq:dsepsub}, and can then be translated into constraints for the original DAG $G$ per \cref{maincorollary}.} 
 
-For example, in the Spiral inflation of the Triangle scenario~(\cref{fig:Tri222}), $A_1$ and $C_2$ are $d$-separated by $\{A_2 B_2\}$, in addition to being ancestrally independent. Hence one can try to incorporate the constraint that 
+\tpurp{The notion of super-pre-injectability is recursive: The set ${\bm{X'}\bm{Y'}\bm{Z'}}$ is super-pre-injectable if $\bm{X'}$ and $\bm{Y'}$ are $d$-separated by $\bm{Z'}$ and both ${\bm{X'}\bm{Z'}}$ and ${\bm{Y'}\bm{Z'}}$ are super-pre-injectable. It should be clear the pre-injectability defined in \cref{eq:defpreinj} is a special case of super-pre-injectability. It is likely that one could obtain stronger polynomial inequalities -- equivalently, stronger witnessing power when testing a specific distribution -- by considering maximal super-pre-injectable sets instead of maximal pre-injectable sets. For brevity, the authors do not include explicit examples here. 
+An illustration highlighting the contrast between pre-injectable sets and super-pre-injectable sets is given in \cref{fig:pearlsuperinflation}. The two $d$-separation criteria implying ${X_1 Y_1}\indep{X_3 X_6 Y_3 Y_6}|{Z_1}$ and ${X_3 Y_3}\indep{X_6 Y_6}|{Z_2}$ can be leveraged to define a marginal distribution over a super-pre-injectable set: 
+\begin{align}
+    \p[X_1 X_3 X_6 Y_1 Y_3 Y_6 Z_1 Z_2]{x x' x'' y y' y'' z z'}=\begin{cases}\frac{\p[X_1 Y_1 Z_1]{x y z}\p[X_3 Y_3 Z_1 ]{x' y' z}\p[X_6 Y_6 Z_2]{x'' y'' z'}}{\p[Z_1]{z}\p[Z_2]{z'}} & \quad\text{if }\p[Z_1]{z}\cramp{>}0 \land \p[Z_2]{z'}\cramp{>}0\\
+    0 & \quad\text{if }\p[Z_1]{z}\cramp{=}0 \lor \p[Z_2]{z'}\cramp{=}0
+    \end{cases}.
+\end{align}
+On the other hand, even super-pre-injectability is unable to incorporate the constraint ${X_1 X_2 Y_1 Y_2}\indep{X_5 X_6 Y_5 Y_6}|{Z_1 Z_2}$ resulting from the corresponding $d$-separation in \cref{fig:pearlsuperinflation}.}
+
+\begin{figure}[b]
+    \centering
+    \begin{minipage}[t]{0.22\linewidth}      \centering
+    \includegraphics[scale=1]{ISorigDAG.pdf}
+    \caption{The instrumental scenario of \citet{pearl1995instrumental}.}
+    \label{fig:ISorigDAGdespexample}
+    \end{minipage}\hfill
+    \begin{minipage}[t]{0.75\linewidth}      \centering
+    \includegraphics[scale=1]{ISsuperinflationDAG.pdf}
+    \caption{An inflation DAG of the instrumental scenario illustrating super-pre-injectable sets. The massive set ${X_1 X_3 X_6 Y_1 Y_3 Y_6 Z_1 Z_2}$ is super-pre-injectable, whereas the largest pre-injectable sets contain only six variables, such as ${X_1 X_4 Y_1 Y_4 Z_1 Z_2}$.}
+    \label{fig:pearlsuperinflation}
+    \end{minipage}
+\end{figure}
+
+
+Not all  $d$-separation criteria in the inflation DAG can be incorporated linearly, however. For example, in the Spiral inflation of the Triangle scenario~(\cref{fig:Tri222}), $A_1$ and $C_2$ are $d$-separated by $\{A_2 B_2\}$, in addition to being ancestrally independent. Hence one can try to incorporate the constraint that 
 \begin{align}\label{nonlinearequality}
 \forall{a_1 a_2 b_2 c_2}: \p[A_1 A_2 B_2 C_2]{a_1 a_2 b_2 c_2}\p[A_2 B_2]{a_2 b_2}=\p[A_1 A_2 B_2]{a_1 a_2 b_2}\p[A_2 B_2 C_2]{a_2 b_2 c_2}
 \end{align}
@@ -1999,17 +2028,17 @@ so that $\varphi'$ is verified to be an inflationary isomorphism. From \cref{lem
 
 \begin{figure}[b]
     \centering
-    \begin{minipage}[t]{0.2\linewidth}      \centering
+    \begin{minipage}[t]{0.22\linewidth}      \centering
     \includegraphics[scale=1]{ISorigDAG.pdf}
     \caption{The instrumental scenario of \citet{pearl1995instrumental}.}
     \label{fig:ISorigDAG}
     \end{minipage}\hfill
-    \begin{minipage}[t]{0.3\linewidth}      \centering
+    \begin{minipage}[t]{0.4\linewidth}      \centering
     \includegraphics[scale=1]{IScopyDAG.pdf}
     \caption{An inflation DAG of the instrumental scenario which illustrates why coinciding ancestral subgraphs doesn't necessarily imply coinciding marginal distributions.}
     \label{fig:IScopyDAG}
     \end{minipage}\hfill    
-    \begin{minipage}[t]{0.3\linewidth}      \centering
+    \begin{minipage}[t]{0.28\linewidth}      \centering
     \includegraphics[scale=1]{ISancestorDAG.pdf}
     \caption{The ancestral subgraph of \cref{fig:IScopyDAG} for either $\{X_1 Y_2 Z_1\}$ or $\{X_1 Y_2 Z_2\}$.}
     \label{fig:ancestralsubgraphnotenough}
