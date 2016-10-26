@@ -1234,7 +1234,7 @@ Such a nonlinear constraint can generically be incorporated as a further restric
     0 & \quad\text{if }\p[\bm{Z}]{\bm{z}}\cramp{=} 0
     \end{cases}.
 \end{align}
-It is therefore straightforward to obtain causal compatibility criteria incorporating the conditional independence implied by the $d$-separation as follows: Treat $\{\bm{X'}\bm{Y'}\bm{Z'}\}$ as a \tblue{expressible} set, in the sense that it counts as a member of the family of \emph{knowable} marginal distributions in $G'$. Inequalities which reference $P_{\bm{X'}\bm{Y'}\bm{Z'}}$ can be obtained through linear programming by demanding the consistency of all the knowable marginal distributions in $G'$. Such linear constraints become polynomial by making the substitution per \cref{eq:dsepsub}, and can then be translated into constraints for the original DAG $G$ per \cref{maincorollary}.} 
+It is therefore straightforward to obtain causal compatibility criteria incorporating the conditional independence implied by the $d$-separation as follows: Treat $\{\bm{X'}\bm{Y'}\bm{Z'}\}$ as an \tblue{expressible} set, in the sense that it counts as a member of the family of \emph{knowable} marginal distributions in $G'$. Inequalities which reference $P_{\bm{X'}\bm{Y'}\bm{Z'}}$ can be obtained through linear programming by demanding the consistency of all the knowable marginal distributions in $G'$. Such linear constraints become polynomial by making the substitution per \cref{eq:dsepsub}, and can then be translated into constraints for the original DAG $G$ per \cref{maincorollary}.} 
 
 
 
@@ -1243,16 +1243,18 @@ It is therefore straightforward to obtain causal compatibility criteria incorpor
 
 \tpurp{
 An illustration highlighting the contrast between pre-injectable sets and expressible sets is given in \cref{fig:pearlsuperinflation}. The two $d$-separation criteria ${X_1 Y_1}\aindep{X_3 Y_3}|{Z_1}$ and ${X_1 X_3 Y_1 Y_3 Z_1}\aindep{X_6 Y_6 Z_2}$ can be leveraged to define a marginal distribution over an expressible set: 
-\begin{align}\hspace{-\mathindent}
-    \p[X_1 X_3 X_6 Y_1 Y_3 Y_6 Z_1 Z_2]{x x' x'' y y' y'' z z'}=\begin{cases}\frac{\p[X_1 Y_1 Z_1]{x y z}\p[X_3 Y_3 Z_1 ]{x' y' z}\p[X_6 Y_6 Z_2]{x'' y'' z'}}{\p[Z_2]{z'}} & \quad\text{if }\p[Z_1]{z}\cramp{>}0 \\
-    0 & \quad\text{if }\p[Z_1]{z}\cramp{=}0 
-    \end{cases}.
-\end{align}
-Similarly, two $d$-separation criteria ${X_1 Y_1}\aindep{X_3 Y_3}\aindep{X_5 Y_5}|{Z_1}$ and ${X_1 X_3 X_5 Y_1 Y_3 Y_5 Z_1}\aindep{Z_2}$ give rise to the factorization of the  expressible set: 
-\begin{align}\hspace{-\mathindent}
-    \p[X_1 X_3 X_5 Y_1 Y_3 Y_5 Z_1 Z_2]{x x' x'' y y' y'' z z'}=\begin{cases}\frac{\p[X_1 Y_1 Z_1]{x y z}\p[X_3 Y_3 Z_1 ]{x' y' z}\p[X_5 Y_5 Z_1]{x'' y'' z}\p[Z_2]{z'}}{{\p[Z_1]{z}}^2} & \quad\text{if }\p[Z_1]{z}\cramp{>}0 \\
-    0 & \quad\text{if }\p[Z_1]{z}\cramp{=}0 
-    \end{cases}.
+\begin{align}%\hspace{-\mathindent}
+%    \p[X_1 X_3 X_6 Y_1 Y_3 Y_6 Z_1 Z_2]{x x' x'' y y' y'' z z'}=\begin{cases}\frac{\p[X_1 Y_1 Z_1]{x y z}\p[X_3 Y_3 Z_1 ]{x' y' z}\p[X_6 Y_6 Z_2]{x'' y'' z'}}{\p[Z_1]{z}} & \quad\text{if }\p[Z_1]{z}\cramp{>}0 \\
+%    0 & \quad\text{if }\p[Z_1]{z}\cramp{=}0 
+%    \end{cases}.
+    P_{X_1 X_3 X_6 Y_1 Y_3 Y_6 Z_1 Z_2}=\frac{P_{X_1 Y_1 Z_1} P_{X_3 Y_3 Z_1} P_{X_6 Y_6 Z_2}}{P_{Z_1}} .
+\end{align}%\hspace{-\mathindent}
+Similarly, the two $d$-separation criteria ${X_1 Y_1}\aindep{X_3 Y_3}\aindep{X_5 Y_5}|{Z_1}$ and ${X_1 X_3 X_5 Y_1 Y_3 Y_5 Z_1}\aindep{Z_2}$ give rise to the factorization of the  expressible set: 
+\begin{align}
+%    \p[X_1 X_3 X_5 Y_1 Y_3 Y_5 Z_1 Z_2]{x x' x'' y y' y'' z z'}=\begin{cases}\frac{\p[X_1 Y_1 Z_1]{x y z}\p[X_3 Y_3 Z_1 ]{x' y' z}\p[X_5 Y_5 Z_1]{x'' y'' z}\p[Z_2]{z'}}{{\p[Z_1]{z}}^2} & \quad\text{if }\p[Z_1]{z}\cramp{>}0 \\
+%    0 & \quad\text{if }\p[Z_1]{z}\cramp{=}0 
+%    \end{cases}.
+    P_{X_1 X_3 X_5 Y_1 Y_3 Y_5 Z_1 Z_2}=\frac{P_{X_1 Y_1 Z_1}P_{X_3 Y_3 Z_1}P_{X_5 Y_5 Z_1}P_{Z_2}}{{P_{Z_1}}^2} .
 \end{align}
 On the other hand, even expressibility is unable to incorporate the $d$-separation relation ${X_1 X_2 Y_1 Y_2}\aindep{X_5 X_6 Y_5 Y_6}|{Z_1 Z_2}$ inherent in \cref{fig:pearlsuperinflation}.} 
 
