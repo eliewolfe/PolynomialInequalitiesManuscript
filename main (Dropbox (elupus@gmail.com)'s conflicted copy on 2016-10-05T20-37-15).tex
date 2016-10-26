@@ -130,8 +130,8 @@ anchorcolor=OliveGreen}
 \newcommand{\inflations}[1]{\SmallNamedFunction{Inflations}{#1}}
 \newcommand{\DAG}[1]{\SmallNamedFunction{DAG}{#1}}
 \newcommand{\edges}[1]{\SmallNamedFunction{Edges}{#1}}
-\newcommand{\aindep}{\ensuremath{\cramp{\perp_d}}} % for d-separation
-\newcommand{\indep}{\cramp{\perp\!\!\!\!\perp}} % (conditional) independence
+\newcommand{\aindep}{\perp} % for d-separation
+\newcommand{\indep}{\perp\!\!\!\!\perp} % (conditional) independence
 \newcommand{\cramp}[1]{\ensuremath{\mathord{#1}}}
 \newcommand{\eql}{\cramp{=}}
 \DeclarePairedDelimiter{\parens}{\lparen}{\rparen}
@@ -598,7 +598,6 @@ The structure of this proof parallels that of standard proofs of the incompatibi
 \cref{sec:Bellscenarios} shows that the inflation of the Bell scenario of the form  of~\cref{fig:BellDagCopy1}  is sufficient to witness the incompatibility of any distribution that is incompatible with the Bell scenario.
 \end{example}
 
-\begin{comment}
 \color{blue}
 \begin{example}[\tred{Incompatibility of Pienaar correlations with a modification of the Triangle scenario}]
 \label{example:Pienaar}
@@ -622,29 +621,24 @@ Consider the DAG of \cref{fig:GDAG15}.  This is a modification of the Triangle s
 \end{figure}
 
 In \citet{pianaar2016interesting}, it was shown that the following distribution, which is easily verified to satisfy the CI relations among the observed variables in the Modified Triangle Scenario, namely, $Y\indep C$ and $A\indep B | Y$~\cite{pusey2014gdag}, is nonetheless incompatible with it:
-\begin{align}\label{eq:Pienaar}
+\begin{align}\label{eq:pienaardistro}
     P^{\text{Pien}}_{A B C Y}:=\frac{[0000]+[0110]+[0001]+[1011]}{4},\quad\text{i.e.,}\quad P^{\text{Pien}}_{Y\! A B C}(y a b c):=\begin{cases}\tfrac{1}{4}&\text{if }  y\cdot c = a \text{ and }  (y \oplus 1)\cdot c = b, \\ 0&\text{otherwise}.\end{cases}
 \end{align}
 
-Here, we will establish this incompatibility using the inflation technique.  To do so, we use the inflation of the Modified Triangle scernario that is depicted in \cref{fig:Inflated15} and which we term the Parachute Inflation.  
+Here, we will establish this incompatibility using the inflation technique.  To do so, we use the Parachute inflation of the Modified Triangle scrnario, depicted in \cref{fig:Inflated15}.  
 The injectable sets include $\brackets{A_1 B_1 C_1 Y_1}$ and $\brackets{A_2 B_1 C_2 Y_1}$.  They share the same  image on the original DAG, namely, the set of all observed variables, $\brackets{ABCY}$. It follows that
 \begin{align}
-P_{A_1 B_1 C_1 Y_1} = P_{A_2 B_1 C_2 Y_1} =P^{\text{Pien}}_{ABCY}.\label{eqsPien}
+P_{A_1 B_1 C_1 Y_1} = P_{A_2 B_1 C_2 Y_1} =P^{\text{Pien}}_{ABCY}.
 \end{align}
 
-If $P^{\text{Pien}}_{ABCY}$ is compatible with the Modified Triangle Scenario, then by \cref{mainlemma}, $P_{A_1 B_1 C_1 Y_1}$ and $ P_{A_2 B_1 C_2 Y_1}$ are compatible with the Parachute inflation of the Modified Triangle Scenario.  We can show that $P^{\text{Pien}}_{ABCY}$ is {\em incompatible} with the Modified Triangle Scenario,  therefore, by assuming that $P_{A_1 B_1 C_1 Y_1}$ and $ P_{A_2 B_1 C_2 Y_1}$ are compatible with the Parachute inflation of the Modified Triangle Scenario and deriving a contradiction.
+If $P^{\text{Pien}}_{ABCY}$ is compatible with the Modified Triangle Scenario, then by Lemma ?, $P_{A_1 B_1 C_1 Y_1}$ and $ P_{A_2 B_1 C_2 Y_1}$ are compatible with the Parachute inflation of the Modified Triangle Scenario.  To show that $P^{\text{Pien}}_{ABCY}$ is {\em incompatible} with the Modified Triangle Scenario, we assume do so, we assume that $P_{A_1 B_1 C_1 Y_1}$ and $ P_{A_2 B_1 C_2 Y_1}$ are compatible with the Parachute inflation of the Modified Triangle Scenario and derive a contradiction.
 
 %With a slight rewriting of Eq.~\ref{eq:pienaardistro}, we have
-Note first that we can rewrite Eq.~\ref{eq:Pienaar} as
+Note first that we can rewrite Eq.~\ref{eq:pienaardistro} as
 \begin{align}
-P_{A B C Y}= \frac{1}{2}([00]_{BC}+[11]_{BC})[0]_A [0]_Y + \frac{1}{2}([00]_{AC}+[11]_{AC}) [0]_B [1]_Y,
+P_{A B C Y}= \frac{1}{2}([00]_{BC}+[11]_{BC})[0]_A [0]_Y + \frac{1}{2}([00]_{AC}+[11]_{AC}) [0]_B [1]_Y
 \end{align}
-in which form it is evident that 
-\begin{align}
-P_{A C | Y=1} = \frac{1}{2}([00]_{A C}+[11]_{A C}),\label{ACYe1}\\
-P_{B C | Y=0} = \frac{1}{2}([00]_{B C}+[11]_{B C}),\label{BCYe0}.
-\end{align}
-Given Eq.~\ref{eqsPien}, we infer that
+It follows that
 \begin{align}
 P_{A_1 C_1 | Y_1=1} = \frac{1}{2}([00]_{A_1 C_1}+[11]_{A_1 C_1}),\label{A1C1Y1e1}\\
 P_{A_2 C_2 |Y_1=1} = \frac{1}{2}([00]_{A_2 C_2}+[11]_{A_2 C_2}).\label{A2C2Y1e1}
@@ -677,7 +671,9 @@ Finally, we note that any distribution $P_{A_1 A_2 C_1 C_2 Y_1}$ which has margi
 \begin{align}
 P_{A_1 A_2 C_1 C_2 | Y_1=1} = \frac{1}{2}([0000]_{A_1 A_2 C_1 C_2}+[1111]_{A_1 A_2 C_1 C_2})\label{A1A2C1C2Y1e1}.
 \end{align}
-The reason is that if $A_1$ and $C_1$ are perfectly correlated, as in \cref{A1C1Y1e1}, and $A_2$ and $C_2$ are perfectly correlated, as in \cref{A2C2Y1e1}, and $C_1$ and $C_2$ are perfectly correlated, as in \cref{C1C2Y1e1}, then $A_1$ and $A_2$ must be perfectly correlated as well.  Indeed, marginalizing \cref{A1A2C1C2Y1e1} over $C_1 C_2$, we obtain
+The reason is that if $A_1$ and $C_1$ are perfectly correlated, as in \cref{A1C1Y1e1}, and $A_2$ and $C_2$ are perfectly correlated, as in \cref{A2C2Y1e1}, and $C_1$ and $C_2$ are perfectly correlated, as in \cref{C1C2Y1e1}, then $A_1$ and $A_2$ must be perfectly correlated as well. 
+
+Marginalizing \cref{A1A2C1C2Y1e1} over $C_1 C_2$, we obtain
 \begin{align}
 P_{A_1 A_2  | Y_1=1} = \frac{1}{2}([00]_{A_1 A_2}+[11]_{A_1 A_2})\label{A1A2Y1e1}.
 \end{align}
@@ -686,7 +682,6 @@ Finally, we note that in the Parachute inflation of the Modified Triangle Scenar
 
 \end{example}
 \color{black}
-\end{comment}
 
 \subsection{Deriving causal compatibility inequalities}
 \label{Sec:DerivingInequalities}
@@ -707,11 +702,11 @@ Let $I_{S'}$ be a causal compatibility inequality for $G'$ operating on families
 
 The proof is as follows.  Suppose that the family $\{ P_{\bm{U}} : \bm{U} \in S\}$ is compatible with $G$.  By \cref{mainlemma}, it follows that the family $ \{ P_{\bm{U}'} : \bm{U}' \in S'\}$ where $P_{\bm{U}'}:= P_{\bm{U}}$ for $\bm{U}' \sim \bm{U}$  is compatible with $G'$.  Since $I_{S'}$ is a causal compatibility inequality for $G'$, it follows that $\{ P_{\bm{U}'} : \bm{U}' \in S'\}$ satisfies $I_{S'}$.  But by the definition of $I_{S}$, its evaluation on $\{ P_{\bm{U}} : \bm{U} \in S\}$ is equal to $I_{S'}$ evaluated on $\{ P_{\bm{U}'} : \bm{U}' \in S'\}$. It therefore follows that $\{ P_{\bm{U}} : \bm{U} \in S\}$ satisfies $I_{S}$. Since $\{ P_{\bm{U}} : \bm{U}\in S\}$ was an arbitrary family compatible with $G$, we conclude that $I_{S}$ is a causal compatibility inequality for $G$.  
 
-We now present some simple examples of causal compatibility inequalities for the Triangle scenario that one can derive from the inflation technique via \cref{maincorollary}. Some terminology and notation will facilitate their description. We refer to a pair of nodes which do not share any common ancestor as being \tblue{ancestrally independent}. This is equivalent to being $d$-separated by the empty set~\cite{pearl2009causality,spirtes2011causation,studeny2005probabilistic,koller2009probabilistic}.  Given that the conventional notation for $X$ and $Y$ being $d$-separated by $Z$ in the DAG $G$ is $X\aindep Y|Z$, we denote $X$ and $Y$ being ancestrally independent within $G$ as $X\aindep Y$.  Generalizing to sets, $\bm{U}\aindep \bm{V}$ indicates that no node in $\bm{U}$ shares a common ancestor with any node in $\bm{V}$ within the DAG $G$, 
+We now present some simple examples of causal compatibility inequalities for the Triangle scenario that one can derive from the inflation technique via \cref{maincorollary}. Some terminology and notation will facilitate their description. We refer to a pair of nodes which do not share any common ancestor as being \tblue{ancestrally independent}. This is equivalent to being $d$-separated by the empty set~\cite{pearl2009causality,spirtes2011causation,studeny2005probabilistic,koller2009probabilistic}.  Given that the conventional notation for $X$ and $Y$ being $d$-separated by $Z$ in the DAG $G$ is $X\perp_G Y|Z$, we denote $X$ and $Y$ being ancestrally independent within $G$ as $X\perp_G Y$.  Generalizing to sets, $\bm{U}\aindep_G \bm{V}$ indicates that no node in $\bm{U}$ shares a common ancestor with any node in $\bm{V}$ within the DAG $G$, 
 \begin{align}
-\bm{U}\aindep \bm{V} \quad \text{iff} \quad \An[G]{\bm{U}}\cap\An[G]{\bm{V}}=\emptyset.
+\bm{U}\aindep_G \bm{V} \quad \text{iff} \quad \An[G]{\bm{U}}\cap\An[G]{\bm{V}}=\emptyset.
 \end{align}
-Furthermore, the notation ${\bm{U}\aindep \bm{V}\aindep \bm{W}}$ should be understood as indicating that $\bm{U}\aindep \bm{V}$ and $\bm{V}\aindep \bm{W}$ and $\bm{U}\aindep \bm{W}$. \tpurp{Moreover, we will use ${\bm{U}\aindep \bm{V}\aindep \bm{W} | \bm{S}}$ to compactly indicate the simultaneous $d$-separation relations $\bm{U}\aindep \bm{V}| \bm{S}$ and $\bm{V}\aindep \bm{W}| \bm{S}$ and $\bm{U}\aindep \bm{W}| \bm{S}$.}
+Furthermore, the notation ${\bm{U}\aindep_G \bm{V}\aindep_G \bm{W}}$ should be understood as indicating that $\bm{U}\aindep_G \bm{V}$ and $\bm{V}\aindep_G \bm{W}$ and $\bm{U}\aindep_G \bm{W}$.
 
 \begin{example}[\tred{A causal compatibility inequality in terms of \tpurp{\emph{correlators}}}]
 \label{example:polytriangle}
@@ -727,7 +722,7 @@ This is an example of a constraint on pairwise correlators that arises from the 
 
 But in the Cut inflation of the Triangle scenario~(\cref{fig:TriDagSubA2B1C1v2}) $A_2$ and $B_1$ have no common ancestor and consequently any distribution compatible with this DAG must make $A_2$ and $B_1$ marginally independent.  In terms of correlators, this can be expressed as 
 \begin{align}\label{corrfact}
-A_2 \aindep B_1 \implies A_2 \indep B_1 \implies  \langle A_2 B_1 \rangle =  \langle A_2\rangle \langle B_1 \rangle.
+A_2 \aindep B_1 \implies  \langle A_2 B_1 \rangle =  \langle A_2\rangle \langle B_1 \rangle.
 \end{align}
 Substituting this into~\cref{eq:polymonogamyraw}, we have
 \begin{equation}
@@ -816,7 +811,7 @@ In the examples from the previous section, the initial inequality---a constraint
 \begin{align}\label{eq:defpreinj}
 \begin{split}
 \bm{U}'\in & \SmallNamedFunction{PreInjectableSets}{G'} \\
-	& \quad\text{ iff }\quad  \exists \{ \bm{U}'_i \in \SmallNamedFunction{InjectableSets}{G'} \} \quad \text{s.t.}\quad \bm{U}'=\bigcup_i \bm{U}'_i  \quad\text{and} \quad  \forall i\ne j: \bm{U}'_i \aindep \bm{U}'_j \text{ in }G'.
+	& \quad\text{ iff }\quad  \exists \{ \bm{U}'_i \in \SmallNamedFunction{InjectableSets}{G'} \} \quad \text{s.t.}\quad \bm{U}'=\bigcup_i \bm{U}'_i  \quad\text{and} \quad  \forall i\ne j: \bm{U}'_i \aindep_{G'} \bm{U}'_j.
 \end{split}
 \end{align}
 Every injectable set is trivially pre-injectable.  A pre-injectable set will be termed \emph{maximal} if it is not a proper subset of another pre-injectable set.
@@ -1234,29 +1229,18 @@ Such a nonlinear constraint can generically be incorporated as a further restric
     0 & \quad\text{if }\p[\bm{Z}]{\bm{z}}\cramp{=} 0
     \end{cases}.
 \end{align}
-It is therefore straightforward to obtain causal compatibility criteria incorporating the conditional independence implied by the $d$-separation as follows: Treat $\{\bm{X'}\bm{Y'}\bm{Z'}\}$ as a \tblue{expressible} set, in the sense that it counts as a member of the family of \emph{knowable} marginal distributions in $G'$. Inequalities which reference $P_{\bm{X'}\bm{Y'}\bm{Z'}}$ can be obtained through linear programming by demanding the consistency of all the knowable marginal distributions in $G'$. Such linear constraints become polynomial by making the substitution per \cref{eq:dsepsub}, and can then be translated into constraints for the original DAG $G$ per \cref{maincorollary}.} 
+It is therefore straightforward to obtain causal compatibility criteria incorporating the conditional independence implied by the $d$-separation as follows: Treat $\{\bm{X'}\bm{Y'}\bm{Z'}\}$ as a \tblue{super-pre-injectable} set, in the sense that it counts as a member of the family of \emph{knowable} marginal distributions in $G'$. Inequalities which reference $P_{\bm{X'}\bm{Y'}\bm{Z'}}$ can be obtained through linear programming by demanding the consistency of all the knowable marginal distributions in $G'$. Such linear constraints become polynomial by making the substitution per \cref{eq:dsepsub}, and can then be translated into constraints for the original DAG $G$ per \cref{maincorollary}.} 
 
-
-
-\tpurp{The notion of expressibility is recursive: The set $\{\bm{X'}\bm{Y'}\bm{Z'}\}$ is expressible if $\bm{X'}\aindep\bm{Y'}|\bm{Z'}$ and both $\{\bm{X'}\bm{Z'}\}$ and $\{\bm{Y'}\bm{Z'}\}$ are expressible. It should be clear the pre-injectability defined in \cref{eq:defpreinj} is a special case of expressibility. It is likely that one could obtain stronger polynomial inequalities -- equivalently, stronger witnessing power when testing a specific distribution -- by considering maximal expressible sets instead of maximal pre-injectable sets. For brevity, the authors do not include explicit examples here.} 
-
-
-\tpurp{
-An illustration highlighting the contrast between pre-injectable sets and expressible sets is given in \cref{fig:pearlsuperinflation}. The two $d$-separation criteria ${X_1 Y_1}\aindep{X_3 Y_3}|{Z_1}$ and ${X_1 X_3 Y_1 Y_3 Z_1}\aindep{X_6 Y_6 Z_2}$ can be leveraged to define a marginal distribution over an expressible set: 
-\begin{align}\hspace{-\mathindent}
-    \p[X_1 X_3 X_6 Y_1 Y_3 Y_6 Z_1 Z_2]{x x' x'' y y' y'' z z'}=\begin{cases}\frac{\p[X_1 Y_1 Z_1]{x y z}\p[X_3 Y_3 Z_1 ]{x' y' z}\p[X_6 Y_6 Z_2]{x'' y'' z'}}{\p[Z_2]{z'}} & \quad\text{if }\p[Z_1]{z}\cramp{>}0 \\
-    0 & \quad\text{if }\p[Z_1]{z}\cramp{=}0 
+\tpurp{The notion of super-pre-injectability is recursive: The set $\{\bm{X'}\bm{Y'}\bm{Z'}\}$ is super-pre-injectable if $\bm{X'}$ and $\bm{Y'}$ are $d$-separated by $\bm{Z'}$ and both $\{\bm{X'}\bm{Z'}\}$ and $\{\bm{Y'}\bm{Z'}\}$ are super-pre-injectable. It should be clear the pre-injectability defined in \cref{eq:defpreinj} is a special case of super-pre-injectability. It is likely that one could obtain stronger polynomial inequalities -- equivalently, stronger witnessing power when testing a specific distribution -- by considering maximal super-pre-injectable sets instead of maximal pre-injectable sets. For brevity, the authors do not include explicit examples here. 
+An illustration highlighting the contrast between pre-injectable sets and super-pre-injectable sets is given in \cref{fig:pearlsuperinflation}. The two $d$-separation criteria implying ${X_1 Y_1}\indep{X_3 X_6 Y_3 Y_6 Z_2}|{Z_1}$ and ${X_3 Y_3}\indep{X_6 Y_6}|{Z_2}$ can be leveraged to define a marginal distribution over a super-pre-injectable set: 
+\begin{align}
+    \p[X_1 X_3 X_6 Y_1 Y_3 Y_6 Z_1 Z_2]{x x' x'' y y' y'' z z'}=\begin{cases}\frac{\p[X_1 Y_1 Z_1]{x y z}\p[X_3 Y_3 Z_1 ]{x' y' z}\p[X_6 Y_6 Z_2]{x'' y'' z'}}{\p[Z_1]{z}\p[Z_2]{z'}} & \quad\text{if }\p[Z_1]{z}\cramp{>}0 \land \p[Z_2]{z'}\cramp{>}0\\
+    0 & \quad\text{if }\p[Z_1]{z}\cramp{=}0 \lor \p[Z_2]{z'}\cramp{=}0
     \end{cases}.
 \end{align}
-Similarly, two $d$-separation criteria ${X_1 Y_1}\aindep{X_3 Y_3}\aindep{X_5 Y_5}|{Z_1}$ and ${X_1 X_3 X_5 Y_1 Y_3 Y_5 Z_1}\aindep{Z_2}$ give rise to the factorization of the  expressible set: 
-\begin{align}\hspace{-\mathindent}
-    \p[X_1 X_3 X_5 Y_1 Y_3 Y_5 Z_1 Z_2]{x x' x'' y y' y'' z z'}=\begin{cases}\frac{\p[X_1 Y_1 Z_1]{x y z}\p[X_3 Y_3 Z_1 ]{x' y' z}\p[X_5 Y_5 Z_1]{x'' y'' z}\p[Z_2]{z'}}{{\p[Z_1]{z}}^2} & \quad\text{if }\p[Z_1]{z}\cramp{>}0 \\
-    0 & \quad\text{if }\p[Z_1]{z}\cramp{=}0 
-    \end{cases}.
-\end{align}
-On the other hand, even expressibility is unable to incorporate the $d$-separation relation ${X_1 X_2 Y_1 Y_2}\aindep{X_5 X_6 Y_5 Y_6}|{Z_1 Z_2}$ inherent in \cref{fig:pearlsuperinflation}.} 
+On the other hand, even super-pre-injectability is unable to incorporate the constraint ${X_1 X_2 Y_1 Y_2}\indep{X_5 X_6 Y_5 Y_6}|{Z_1 Z_2}$ resulting from the corresponding $d$-separation in \cref{fig:pearlsuperinflation}.}
 
-\begin{figure}[h]
+\begin{figure}[b]
     \centering
     \begin{minipage}[t]{0.22\linewidth}      \centering
     \includegraphics[scale=1]{ISorigDAG.pdf}
@@ -1265,26 +1249,23 @@ On the other hand, even expressibility is unable to incorporate the $d$-separati
     \end{minipage}\hfill
     \begin{minipage}[t]{0.75\linewidth}      \centering
     \includegraphics[scale=1]{ISsuperinflationDAG.pdf}
-    \caption{An inflation DAG of the instrumental scenario illustrating expressible sets. The massive eight-variables set $\{X_1 X_3 X_6 Y_1 Y_3 Y_6 Z_1 Z_2\}$ is expressible, whereas the largest pre-injectable sets contain only six variables, such as $\{X_1 X_4 Y_1 Y_4 Z_1 Z_2\}$.}
+    \caption{An inflation DAG of the instrumental scenario illustrating super-pre-injectable sets. The massive set $\{X_1 X_3 X_6 Y_1 Y_3 Y_6 Z_1 Z_2\}$ is super-pre-injectable, whereas the largest pre-injectable sets contain only six variables, such as $\{X_1 X_4 Y_1 Y_4 Z_1 Z_2\}$.}
     \label{fig:pearlsuperinflation}
     \end{minipage}
 \end{figure}
 
-A more familiar example of $d$-separation criteria in the inflation DAG which cannot be incorporated linearly via expressible sets if the relation $A_1\aindep C_2|A_2 B_2$ in the Spiral inflation of the Triangle scenario~(\cref{fig:Tri222}).
 
-%Not all  $d$-separation criteria in the inflation DAG can be incorporated linearly, however. For example, in the Spiral inflation of the Triangle scenario~(\cref{fig:Tri222}), $A_1\aindep C_2|A_2 B_2$ in addition to the simple ancestral independence $A_1\aindep C_2$. 
-
-The constraint 
+Not all  $d$-separation criteria in the inflation DAG can be incorporated linearly, however. For example, in the Spiral inflation of the Triangle scenario~(\cref{fig:Tri222}), $A_1$ and $C_2$ are $d$-separated by $\{A_2 B_2\}$, in addition to being ancestrally independent. Hence one can try to incorporate the constraint that 
 \begin{align}\label{nonlinearequality}
 \forall{a_1 a_2 b_2 c_2}: \p[A_1 A_2 B_2 C_2]{a_1 a_2 b_2 c_2}\p[A_2 B_2]{a_2 b_2}=\p[A_1 A_2 B_2]{a_1 a_2 b_2}\p[A_2 B_2 C_2]{a_2 b_2 c_2}
 \end{align}
-can be recast as a nonlinear restriction on the existence of joint distribution by relating each marginal probability appearing in \cref{nonlinearequality} to a corresponding sum over joint probabilities; for instance substituting
+ Every probability that appears in such an equation, though not defined on an injectable set, can still be expressed as a marginal of the joint distribution of all observed variables.  For instance, we can express $\pfunc{A_2 B_2}$ as
 \begin{align}
-\p[A_2 B_2]{a_2 b_2} \to \sum\nolimits_{a_1 b_1 c_1 c_2}\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}.
+\forall{a_2 b_2}:\;\p[A_2 B_2]{a_2 b_2} = \sum\nolimits_{a_1 b_1 c_1 c_2}\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}.
 \end{align}
-To obtain constraints on the expressible sets we can then proceed with quantifier elimination as we did before, eliminating the unknowns $\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}$ from this system. The additional difficulty now is that some of the equations are nonlinear. %This idea even applies to some ancestral independences between sets that are not pre-injectable: for example, $A_1 A_2 B_2 \indep C_2$ is also guaranteed in the Spiral inflation of the Triangle scenario~(\cref{fig:Tri222}), and results in a polynomial equation closely related to \cref{nonlinearequality}.
+Upon substituting such relations into~\cref{nonlinearequality}, one obtains a system of polynomial equations and inequalities in terms of the joint probabilities.  We can then proceed with quantifier elimination as we did before, eliminating the unknowns $\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}$ from this system. The additional difficulty now is that some of the equations are nonlinear. This idea even applies to some ancestral independences between sets that are not pre-injectable: for example, $A_1 A_2 B_2 \indep C_2$ is also guaranteed in the Spiral inflation of the Triangle scenario~(\cref{fig:Tri222}), and results in a polynomial equation closely related to \cref{nonlinearequality}.
 
-On the one hand, many modern computer algebra systems do have functions capable of tackling nonlinear quantifier elimination symbolically\footnote{For example \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://reference.wolfram.com/language/ref/Resolve.html}{\texttt{Resolve}} command, \textit{Redlog}'s \href[pdfnewwindow]{http://www.redlog.eu/documentation/reals/rlqe.php}{\texttt{rlposqe}}, or \textit{Maple$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://maplesoft.com/support/help/Maple/view.aspx?path=RegularChains/SemiAlgebraicSetTools/RepresentingQuantifierFreeFormula}{\texttt{RepresentingQuantifierFreeFormula}}.}. 
+Many modern computer algebra systems have functions capable of tackling nonlinear quantifier elimination symbolically\footnote{For example \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://reference.wolfram.com/language/ref/Resolve.html}{\texttt{Resolve}} command, \textit{Redlog}'s \href[pdfnewwindow]{http://www.redlog.eu/documentation/reals/rlqe.php}{\texttt{rlposqe}}, or \textit{Maple$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://maplesoft.com/support/help/Maple/view.aspx?path=RegularChains/SemiAlgebraicSetTools/RepresentingQuantifierFreeFormula}{\texttt{RepresentingQuantifierFreeFormula}}.}. 
 Currently, however, it is generally not practical to perform nonlinear quantifier elimination on large polynomial systems with many unknowns to be eliminated. It may help to exploit results on the concrete algebraic-geometric structure of these particular systems~\cite{garcia_bayesian_2005}. 
 
 If one is seeking merely to assess the compatibility of a {\em given} distribution with the causal structure, then one can avoid the quantifier elimination problem and simply try and solve an existence problem: after substituting the values that the given distribution prescribes for the outcomes on pre-injectable sets into the polynomial system in terms of the unknown global joint probabilities, one must only determine whether that system has a solution. Most computer algebra systems can resolve such \emph{satisfiability} questions quite easily\footnote{For example \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://reference.wolfram.com/language/Experimental/ref/ExistsRealQ.html}{\texttt{Reduce\`{}ExistsRealQ}} function. Specialized satisfiability software such as SMT-LIB's \href[pdfnewwindow]{http://smtlib.cs.uiowa.edu/solvers.shtml}{\texttt{check-sat}} \cite{BarFT-SMTLIB} are particularly apt for this purpose.}.
@@ -2198,7 +2179,7 @@ One way to close this loophole would be to show that the novel Shannon-type ineq
 \begin{minipage}[t]{0.4\linewidth}
 \centering
 \includegraphics[scale=1]{scen15DAGV3.pdf}
-\caption{DAG \#15 in Ref. \cite{pusey2014gdag}. \tpurp{The implied observable conditional independence relations are generated by $C\indep Y$ and $A\indep B| Y$.}}\label{fig:GDAG15}
+\caption{DAG \#15 in Ref. \cite{pusey2014gdag}.}\label{fig:GDAG15}
 \end{minipage}
 \hfill
 \begin{minipage}[t]{0.5\linewidth}
@@ -2254,34 +2235,6 @@ Just as the incompatibility of the W-distribution with the Triangle scenario was
 
 
 Finally, it may be worth noting that the inflation DAG depicted in~\cref{fig:Inflated15} is precisely the ``bilocality scenario'' investigated by~\citet{BilocalCorrelations}.  Therefore, the inflation technique permits us to translate every causal compatibility inequality for the bilocality scenario into a causal compatibility inequality for the DAG of~\cref{fig:GDAG15}.
-
-\tpurp{
-Other interesting DAGs are as follows.}
-\begin{figure}[b]
-\centering
-\begin{minipage}[t]{0.4\linewidth}
-\centering
-\includegraphics[scale=1]{scen16DAG.pdf}
-\caption{DAG \#16 in Ref. \cite{pusey2014gdag}. The implied observable conditional independence relations are generated by $C\indep Y$.}\label{fig:GDAG16}
-\end{minipage}
-\hfill
-\begin{minipage}[t]{0.5\linewidth}
-\centering
-\includegraphics[scale=1]{scen16InflationDAG.pdf}
-\caption{A useful inflation of \cref{fig:GDAG16}. The expressible sets include $\{A_1,B_1,C_2,Y_1,Y_2\}$, $\{A_2,B_2,C_1,Y_1,Y_2\}$, $\{A_2,B_2,C_2,Y_1,Y_2\}$, and $\{A_1,B_1,C_1,Y_1,Y_2\}$. }\label{fig:Inflated16}
-\end{minipage}\\
-\begin{minipage}[t]{0.4\linewidth}
-\centering
-\includegraphics[scale=1]{scen20DAG.pdf}
-\caption{DAG \#20 in Ref. \cite{pusey2014gdag}. The implied observable conditional independence relations are generated by $C\indep Y$ and $A \aindep Y|B$.}\label{fig:GDAG20}
-\end{minipage}
-\hfill
-\begin{minipage}[t]{0.5\linewidth}
-\centering
-\includegraphics[scale=1]{scen20InflationDAG.pdf}
-\caption{A useful inflation of \cref{fig:GDAG20}. The expressible sets include $\{A_1,B_1,C_2,Y_1,Y_2\}$, $\{A_2,B_2,C_1,Y_1,Y_2\}$, $\{A_2,B_2,C_2,Y_1,Y_2\}$, and $\{A_1,B_1,C_1,Y_1,Y_2\}$, just as in \cref{fig:Inflated16}.}\label{fig:Inflated20}
-\end{minipage}
-\end{figure}
 
 
 
