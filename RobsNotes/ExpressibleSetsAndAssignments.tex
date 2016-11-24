@@ -16,7 +16,8 @@ pdfpagelabels=false,
 breaklinks=true
 }{hyperref}
 \PassOptionsToPackage{usenames,dvipsnames,table}{xcolor}
-\documentclass[aps,english,superscriptaddress,onecolumn,twoside,longbibliography,pra,floatfix,fleqn,nofootinbib]{revtex4-1}%
+\documentclass[aps,english,superscriptaddress,onecolumn,twoside,longbibliography,pra,floatfix,fleqn,notitlepage,nofootinbib]{revtex4-1}
+
 
 % packages
 \usepackage[OT1]{fontenc}
@@ -152,12 +153,11 @@ anchorcolor=OliveGreen}
 \begin{document}
 
 \title{Expressible sets and expressible assignments}
-
 \author{RWS}
-
-%\date{}                                           % Activate to display a given date or no date
-
+\date{Nov. 20, 2016}                                           % Activate to display a given date or no date
 \maketitle
+%\tableofcontents
+
 %\section{}
 %\subsection{}
 
@@ -373,7 +373,7 @@ Consider the instrumental scenario of Fig.~\ref{fig:instrumental}.
 \end{minipage}
 \end{figure}
 
-Pearl has found causal compatibility inequalities, termed the instrumental inequalities.  If the observed variables are binary, then they have the following form:
+Pearl has found causal compatibility inequalities that apply to it.  These are termed the instrumental inequalities.  If the observed variables are binary, then they have the following form:
 \begin{align}
 P_{XY|Z}(00|0) +  P_{XY|Z}(00|0) \le 1,\nonumber\\
 P_{XY|Z}(10|0) +  P_{XY|Z}(11|1) \le 1,\nonumber\\
@@ -444,7 +444,7 @@ This inequality has, in fact, a highly intuitive proof.  Given that Bob's settin
 
 %Because we are assuming the settings and outcomes of our Bell scenario to be binary, our game 
 
-Note that if one modifies the game to one wherein Bob must guess the {\em negation} of Alice's input (BGNAI), the probability of success is still bounded above by $\frac{1}{2}$, and we derive Eq.~\eqref{BGNAI}. 
+Note that if one modifies the game to one wherein Bob must guess the {\em negation} of Alice's input, the probability of success is still bounded above by $\frac{1}{2}$, and we derive Eq.~\eqref{BGNAI}. 
 
 
 \begin{comment}
@@ -615,9 +615,9 @@ which we showed previously to imply the instrumental inequality.
 
 \begin{thebibliography}{10}
 
-\bibitem{localorthog} Fritz, T., Sainz, A. B., Augusiak, R., Brask, J. B., Chaves, R., Leverrier, A., and Ac�n, A., Local orthogonality as a multipartite principle for quantum correlations. Nature communications {\bf 4},  2263 (2013).
+\bibitem{localorthog} Fritz, T., Sainz, A. B., Augusiak, R., Brask, J. B., Chaves, R., Leverrier, A., and Acin, A., Local orthogonality as a multipartite principle for quantum correlations. Nature communications {\bf 4},  2263 (2013).
 
-\bibitem{GYNI} Ac�n, A., Almeida, M. L., Augusiak, R., and Brunner, N., Guess your neighbour�s input: no quantum advantage but an advantage for quantum theory. In Quantum Theory: Informational Foundations and Foils (pp. 465-496). Springer Netherlands (2-16). 
+\bibitem{GYNI} Acin, A., Almeida, M. L., Augusiak, R., and Brunner, N., Guess your neighbour�s input: no quantum advantage but an advantage for quantum theory. In Quantum Theory: Informational Foundations and Foils (pp. 465-496). Springer Netherlands (2-16). 
 
 \end{thebibliography}
 

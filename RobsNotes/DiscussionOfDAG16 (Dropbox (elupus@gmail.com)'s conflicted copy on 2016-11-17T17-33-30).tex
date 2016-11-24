@@ -354,102 +354,7 @@ Finally, we note that in the Parachute inflation of the Modified Triangle Scenar
 \color{black}
 \end{comment}
 
-\section{Instrumental inequality via expressible assignments in the Bell scenario}
-
-
-Consider the instrumental scenario of Fig.~\ref{fig:instrumental}.  
-\begin{figure}[htb]
-\centering
-\begin{minipage}[h!]{0.4\linewidth}
-\centering
-\includegraphics[scale=0.1]{Instrumental.jpg}
-\caption{The instrumental scenario.}\label{fig:instrumental}
-\end{minipage}
-\hfill
-\begin{minipage}[htb]{0.5\linewidth}
-\centering
-\includegraphics[scale=0.3]{InterruptedInstrumental.jpg}
-\caption{The Bell scenario.}\label{fig:InterruptedInstrumental}
-\end{minipage}
-\end{figure}
-
-Pearl has found causal compatibility inequalities, termed the instrumental inequalities.  If the observed variables are binary, then they have the following form:
-\begin{align}
-P_{XY|Z}(00|0) +  P_{XY|Z}(00|0) \le 1,\nonumber\\
-P_{XY|Z}(10|0) +  P_{XY|Z}(11|1) \le 1,\nonumber\\
-P_{XY|Z}(01|0) +  P_{XY|Z}(00|1) \le 1,\nonumber\\
-P_{XY|Z}(11|0) +  P_{XY|Z}(10|1) \le 1. \label{IIlongform}
-\end{align}
-This can be summarized as 
-\begin{align}
-\forall x: \sum_y P_{XY|Z}(xy|y) \le 1,\label{IIbinary1}\\
-\forall x: \sum_y P_{XY|Z}(x (y\oplus 1)|y) \le 1,\label{IIbinary2}
-\end{align}
-
-If we label the two pairs of cause-effect-related observed variables in the Bell scenario by $X_2$, $Y_2$ and $Z_1$, $X_1$ respectively, then we can think of the Bell scenario as supporting a quasi-inflation of the instrumental scenario: for every causal model in the instrumental scenario, we can define a causal model in the Bell scenario where every variable except $X_2$ depends on its parents in exactly the manner that the corresponding variable (i.e., the one where the index is dropped) did in the Instrumental scenario.  In this mapping, $X_2$ is presumed to be a root variable that is distributed in the same manner as $X$ is in the Instrumental scenario.  
-
-We then note that although the set $\{ Y_2 Z_1 X_1 X_2\}$ is not an expressible set, assignments of the form $P_{Y_2 Z_1 |X_1 X_2} (yz|xx)$, where $X_1$ and $X_2$ take the same value, {\em are} expressible, in the sense that
-\begin{align}
-P_{Y_2 Z_1 |X_1 X_2} (yz|xx)= P_{YZ|X}(yz|x).\label{exass}
-\end{align}
-This equality follows from considering the consequences of conditioning on $X$ in the Instrumental Scenario.
-
-Eq.~\eqref{exass}  in turn implies that
-\begin{align}
-P_{XY|Z}(xy|z) = P_{Y_2 X_1 |X_2 Z_2} (yx|xz).\label{modifiedexass}
-\end{align}
-The proof is as follows.  One notes that 
-\begin{align}
-P_{YZ|X} =\frac{P_{XY|Z} P_Z }{P_X}
-\end{align}
-and that
-\begin{align}
-P_{Y_2 Z_1 |X_1 X_2} &= \frac{P_{Y_2 X_1 |X_2 Z_2} P_{Z_2}}{P_{X_1|Z_2}}\nonumber\\
-&= \frac{P_{Y_2 X_1 |X_2 Z_2} P_{Z_2}}{P_{X_1}}
-\end{align}
-where the second equality follows from the fact that $X_1 \perp X_2$ in the Bell scenario.  It is then sufficent to note that $\{X_1\}$ and $\{ Z_1\}$ are injectable in order to complete the proof.
-
-We will shortly demonstrate how the Bell scenario implies the following causal compatibility inequalities:
-\begin{align}
-\sum_y P_{Y_2 X_1 |X_2 Z_2} (yx|xy) \le 1\label{BGAI}\\
-\sum_y P_{Y_2 X_1 |X_2 Z_2} ((y\oplus 1) x|xy) \le 1\label{BGNAI}\\
-\end{align}
-Combining these with Eq.~\eqref{modifiedexass}, we obtain the Instrumental inequalities of \eqref{IIbinary1} and \eqref{IIbinary1}.  
-
-We now show how these causal compatibility inequalities in the Bell scenario are instances of bounds on the performance of a distributed guessing game.
-
-\subsection{Distributed guessing games}
-
-We recall the definition of a distributed guessing game from Ref.~\cite{{localorthog}}
-\begin{quote}
-[A distributed guessing game is]  a non-local game in which a referee has access to a set of vectors of $n$ symbols with values in $\{0,...,d-1\}$. Denote this set by $S$ and by $|S|$ its size, which can be less than $d^n$ in general. Now, the referee chooses a vector $(\tilde{a}_1,\dots,\tilde{a}_n)$ uniformly at random from $S$, and encodes it into a new vector of, again, $n$ symbols using a function $f$. However, the new symbols can now take $m$ values and, thus, $f : S\to \{0, . . . , m-1\}^n$. The resulting vector is $(x_1,...,x_n) = f(\tilde{a}_1,...,\tilde{a}_n)$. These $n$ symbols are distributed among $n$ distant players who cannot communicate and must produce individual guesses $a_1, . . . , a_n$. Their goal is to guess the initial input to the function, that is, they win whenever $a_j = \tilde{a}_j$ for all $j$. Note that the encoding function $f$ and the set $S$ are known in advance to all the players.
-\end{quote}
-
-The game known as ``Guess your neighbour's input'', abbreviated GYNI, is an instance~\cite{GYNI}.  We here make use of a simplified version of GYNI wherein one of the inputs is fixed, so that only one of the player's guessing tasks is nontrivial.  
-
-%We here make use of a two-party  distributed guessing game where only one party must guess her neighbour's input.  We call the game ``Bob must guess Alice's input'' (BGAI).  
-
-The probability of succes in such a game corresponds to a probability of achieving particular outcomes in the Bell scenario, where the hidden common cause can be considered the strategy of the two players.  
-%We imagine a causal model wherein
-The game is defined as follows; Alice's binary setting, $Z_2$, is chosen uniformly at random.  Bob's binary setting, $X_2$ is fixed with value $x$. Thus $S= \{ (0,x),(1,x)\}$, and the input pair is chosen uniformly from this set.  The probability of success in the game is clearly 
-\begin{align}
-P_{\rm succ} &= \sum_{y=0}^{1}P_{Y_2 X_1 |X_2 Z_2} (yx|xy) P(y)\nonumber\\
-&=\frac{1}{2} \sum_{y=0}^{1} P_{Y_2 X_1 |X_2 Z_2} (yx|xy),
-\end{align}
-It follows that to derive Eq.~\eqref{BGAI}, it suffices to demonstrate that 
-\begin{align}
-P_{\rm succ} \le \frac{1}{2}.
-\end{align}
-This inequality has, in fact, a highly intuitive proof.  Given that Bob's setting is fixed to be $x$, the optimal strategy involves Alice outputing $x$ with probability 1.   However, because there is no causal influence from Alice's setting variable to Bob's outcome variable, any classical strategy can do no better than the one wherein Bob simpy guesses Alice's input, in which case the probability of guessing correctly is $\frac{1}{2}$.
-
-%Because we are assuming the settings and outcomes of our Bell scenario to be binary, our game 
-
-Note that if one modifies the game to one wherein Bob must guess the {\em negation} of Alice's input (BGNAI), the probability of success is still bounded above by $\frac{1}{2}$, and we derive Eq.~\eqref{BGNAI}. 
-
-
-\begin{comment}
-\section{Failed attempt to understand Instrumental inequality via inflation}
-
+\section{Instrumental inequality}
 
 \subsection{Alternate form of the inequality}
 
@@ -465,10 +370,6 @@ It turns out that these can be obtained as special cases of the following set of
 P_{XY|Z} \le P_Y.
 \label{II2}
 \end{align}
-\color{red}
-THIS IS WRONG. As Elie has noted, the latter inequality cannot be a valid causal compatibility inequality because of the following example: if $X=Z$, and $Y=X$ and $Z$ is uniformly distribution, then we have $P_Y(0)=P_Y(1)=1/2$, but $P_{XY|Z}(00|0) = 1$. 
-\color{black}
-
 
 To see that Eq.~\eqref{II2} implies \eqref{II1}, note that it implies 
 \begin{align}
@@ -500,9 +401,13 @@ The usual way of representing the instrumental inequality is as follows:
 \max_x \sum_y \max_z P(xy|z) \le 1.
 \label{IIb1}
 \end{align}
-It too can be obtained as a special case of Eq.~\eqref{II2}.
+It too can be obtained as a special case of the following set of causal compatibility inequalities for the instrumental scenario:
+\begin{align}
+P_{YX|Z} \le P_Y.
+\label{IIb2}
+\end{align}
 
-To see that Eq.~\eqref{II2} implies \eqref{IIb1}, note that it implies 
+To see that Eq.~\eqref{IIb2} implies \eqref{IIb1}, note that it implies 
 \begin{align}
 \forall x \forall y \forall z: P_{YX|Z}(yx|z) \le P_Y (y),
 \end{align}
@@ -557,10 +462,11 @@ Consider the instrumental scenario, depicted in Fig.~\ref{fig:instrumental}, and
 
 It is straightforward to verify that 
 \begin{align}
-P_{Y_1 Z_2 |X_2 X_1} ( \cdot \cdot | xx) = P_{Y Z |X} ( \cdot \cdot | x).
+P_{Y_1 Z_2 |X_2 X_1} ( \cdot \cdot | xx) = P_{Y Z |X} ( \cdot \cdot | x)
 \label{exass1}
 \end{align}
-In this case, we say that $P_{Y_1 Z_2 |X_2 X_1}$ is an {\em expressible assignment}.
+
+ In this case, we say that $P_{Y_1 Z_2 |X_2 X_1}$ is an {\em expressible assignment}.
  
  Note that Eq.~\eqref{exass1} implies that 
   \begin{align}
@@ -569,22 +475,10 @@ In this case, we say that $P_{Y_1 Z_2 |X_2 X_1}$ is an {\em expressible assignme
 and because $X_1$ and $X_2$ are injectable, we infer that 
  \begin{align}
 P_{Y_1 Z_2 X_2 X_1} ( \cdot \cdot xx) = P_{Y Z X} ( \cdot \cdot x),
-\label{exass2}
 \end{align}
 so $P_{Y_1 Z_2 X_2 X_1} ( \cdot \cdot xx)$ is also an expressible assignment. 
 
-\color{red}
-THE ABOVE IS INCORRECT. 
-Eq.~\eqref{exass1} implies that 
-  \begin{align}
-\frac{P_{Y_1 Z_2 X_2 X_1} ( \cdot \cdot xx)}{P_{X_1 X_2}(xx)} = \frac{P_{Y Z X} ( \cdot \cdot x)}{P_{X}(x)}. 
-\end{align}
-Because $\{X_1 X_2 \}$ is not an injectable set, neither is  $P_{Y_1 Z_2 X_2 X_1} ( \cdot \cdot xx)$ an expressible assignment. 
-
-IT FOLLOWS THAT THE REST OF THE PROOF DOES NOT GO THROUGH
-\color{black}
-
-The d-separation relation $Y_1 \perp Z_2 $ in the inflation implies that 
+The d-separation relation $Y_1 \perp Z_2 | X_1 X_2$ in the inflation implies that 
 \begin{align}
 \sum_{X_1,X_2}P_{Y_1 Z_2 X_2 X_1}  = P_{Y_1} P_{Z_2}
 %\sum_{x_1,x_2}P_{Y_1 Z_2 X_2 X_1} ( \cdot \cdot x_1 x_2)
@@ -599,26 +493,17 @@ which implies that
 \end{align}
 Given that every term in the sum on the LHS is positive, the inequality holds for each such term,
 \begin{align}
-\forall  y_1 \forall z_2 \forall x: P_{Y_1 Z_2 X_2 X_1} ( y_1 z_2 x x)   \le P_{Y_1}(y_1) P_{Z_2}(z_2).
+\forall  y_1 \forall z_2 : \forall x: P_{Y_1 Z_2 X_2 X_1} ( y_1 z_2 x x)   \le P_{Y_1}(y_1) P_{Z_2}(z_2).
 \end{align}
 Conditioning on $Z_2$, we obtain
 \begin{align}
 \forall  y_1 \forall z_2 \forall x: P_{Y_1 X_2 X_1|Z_2 } ( y_1  x x|z_2 )   \le P_{Y_1}(y_1).
 \end{align}
 
-Finally, given that the singleton set $\{Y_1\}$ is an injectable set and given that $P_{Y_1 X_2 X_1|Z_2 } ( y_1  x x|z_2 ) $ is an expressible assignment (described in Eq.~\eqref{exass2}),  we conclude that
+Finally, given that the singleton set $\{Y_1\}$ is an injectable set and given that $P_{Y_1 X_2 X_1|Z_2 } ( y_1  x x|z_2 ) $ is an expressible assignment (described in Eq.~\eqref{exass1}),  we conclude that
 \begin{align}
 \forall  y \forall z  \forall x: P_{Y X | Z } ( y x|z )   \le P_{Y}(y),
 \end{align}
 which we showed previously to imply the instrumental inequality.
-\end{comment}
-
-\begin{thebibliography}{10}
-
-\bibitem{localorthog} Fritz, T., Sainz, A. B., Augusiak, R., Brask, J. B., Chaves, R., Leverrier, A., and Ac�n, A., Local orthogonality as a multipartite principle for quantum correlations. Nature communications {\bf 4},  2263 (2013).
-
-\bibitem{GYNI} Ac�n, A., Almeida, M. L., Augusiak, R., and Brunner, N., Guess your neighbour�s input: no quantum advantage but an advantage for quantum theory. In Quantum Theory: Informational Foundations and Foils (pp. 465-496). Springer Netherlands (2-16). 
-
-\end{thebibliography}
 
 \end{document}  
