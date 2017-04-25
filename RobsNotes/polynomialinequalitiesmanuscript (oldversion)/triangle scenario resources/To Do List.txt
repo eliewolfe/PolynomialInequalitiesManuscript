@@ -1,0 +1,3 @@
+-convert inference arguments to True/False for simplification
+-merge Tobias method into Spekkens manuscript?
+-Note that "monogomy" entropic inequality must hold for quantum case per DOI: 10.1038/ncomms6766
