@@ -1,0 +1,178 @@
+For the Triangle scenario, a different style of inequality derivation is also possible. 
+\begin{prop} \label{prop:AllPowerful}
+The Triangle causal structure (\cref{fig:TriDAG}) implies that, for any $\brackets{x,x',x'',x''',y,y',y'',y''',z,z',z'',z'''}$,
+\begin{align*}\begin{split}
+&\lparens{
+\p{x ,y,z}
+\\\times\p{x',y',z'}
+\\\times\p{x'',y'',z''}
+}\leq 
+\lparens{\p{x, y'''}\p{x'}\p{x'',y'',z''} 
+\\+\p{y', z'''}\p{y''}\p{x,y,z}
+\\+\p{z'', x'''}\p{z}\p{x',y', z'}
+\\+\p{\n{x'''},\n{y'''},\n{z'''}}}.
+\end{split}\end{align*}
+\end{prop}
+\begin{widetext}
+\begin{proof}
+
+%We start with the tautology
+%\begin{align}\begin{split}
+%&\parens{{x^{(1)}}_{|c_1 a_1} , {y^{(2)}}_{|a_1 b_1} , {z^{(1)}}_{|b_2 c_2} , {x^{(2)}}_{|c_2 a_2} , {y^{(1)}}_{|a_3 b_3} , {z^{(2)}}_{|b_3 c_3} } \implies
+%\\& \parens{ {x^{(1)}}_{|c_1 a_1} , {y^{(-1)}}_{|a_1 b_3} , {z^{(1)}}_{|b_2 c_2} , {x^{(2)}}_{|c_2 a_2} }
+%\\& \bigvee \parens{ {y^{(1)}}_{|a_3 b_3} , {z^{(-1)}}_{|b_3 c_2} , {x^{(1)}}_{|c_1 a_1} , {y^{(2)}}_{|a_1 b_1} }
+%\\& \bigvee \parens{ {z^{(1)}}_{|b_2 c_2} , {x^{(-1)}}_{|c_2 a_1} , {y^{(1)}}_{|a_3 b_3} , {z^{(2)}}_{|b_3 c_3} }
+%\\& \bigvee \parens{ \n{y^{(-1)}}_{|a_1 b_3} , \n{z^{(-1)}}_{|b_3 c_2} , \n{x^{(-1)}}_{|c_2 a_1} }
+%\end{split}\end{align}
+%which implies the response-function inequality
+%\begin{align}\begin{split}
+%&\p{{x^{(1)}}_{|c_1 a_1} , {y^{(2)}}_{|a_1 b_1} }\p{ {z^{(1)}}_{|b_2 c_2} , {x^{(2)}}_{|c_2 a_2} }\p{ {y^{(1)}}_{|a_3 b_3} , {z^{(2)}}_{|b_3 c_3} } \leq
+%\\& \p{ {x^{(1)}}_{|c_1 a_1} , {y^{(-1)}}_{|a_1 b_3} }\p{ {z^{(1)}}_{|b_2 c_2} , {x^{(2)}}_{|c_2 a_2} , {y^{(3)}}_{|c_2 a_2} }
+%\\& +\p{ {y^{(1)}}_{|a_3 b_3} , {z^{(-1)}}_{|b_3 c_2} }\p{ {x^{(1)}}_{|c_1 a_1} , {y^{(2)}}_{|a_1 b_1} , {z^{(3)}}_{|c_1 a_1}}
+%\\& +\p{ {z^{(1)}}_{|b_2 c_2} , {x^{(-1)}}_{|c_2 a_1} }\p{ {y^{(1)}}_{|a_3 b_3} , {z^{(2)}}_{|b_3 c_3} , {x^{(3)}}_{|c_3 a_3} }
+%\\& +\p{ \n{y^{(-1)}}_{|a_1 b_3} , \n{z^{(-1)}}_{|b_3 c_2} , \n{x^{(-1)}}_{|c_2 a_1} }
+%\end{split}\end{align}
+
+We start with the tautology
+\begin{align}
+&\NamedFunction{And}{
+\parens{{x^{(1)}}_{|c_1 a_1} , {y^{(1)}}_{|a_1 b_1} , {z^{(1)}}_{|b_1 c_1} } \,,
+\\ \parens{ {x^{(2)}}_{|c_2 a_2} , {y^{(2)}}_{|a_2 b_2} , {z^{(2)}}_{|b_2 c_2} } \,, 
+\\ \parens{ {x^{(3)}}_{|c_3 a_3} , {y^{(3)}}_{|a_3 b_3} , {z^{(3)}}_{|b_3 c_3} } } \implies
+\NamedFunction{Or}{\begin{array}{l}
+ \parens{ {x^{(1)}}_{|c_1 a_1} , {y^{(-1)}}_{|a_1 b_2} , {x^{(2)}}_{|a_2 c_2} , {x^{(3)}}_{|c_3 a_3} , {y^{(3)}}_{|a_3 b_3} , {z^{(3)}}_{|b_3 c_3} } \,,
+\\ \parens{ {y^{(2)}}_{|a_2 b_2} , {z^{(-1)}}_{|b_2 c_3} , {y^{(3)}}_{|a_3 b_3}, {x^{(1)}}_{|c_1 a_1} , {y^{(1)}}_{|a_1 b_1} , {z^{(1)}}_{|b_1 c_1} } \,,
+\\ \parens{ {z^{(3)}}_{|b_3 c_3} , {x^{(-1)}}_{|c_3 a_1} , {z^{(1)}}_{|b_1 c_1} , {x^{(2)}}_{|c_2 a_2} , {y^{(2)}}_{|a_2 b_2} , {z^{(2)}}_{|b_2 c_2} } \,,
+\\ \parens{ \n{x^{(-1)}}_{|c_3 a_1} , \n{y^{(-1)}}_{|a_1 b_2} , \n{z^{(-1)}}_{|b_2 c_3} }
+\end{array}} 
+\end{align}
+
+which implies the response-function inequality
+\begin{align}
+&\parens*{\begin{array}{l}
+  \p{ {x^{(1)}}_{|c_1 a_1} , {y^{(1)}}_{|a_1 b_1} , {z^{(1)}}_{|b_1 c_1} }
+   \\\times\p{ {x^{(2)}}_{|c_2 a_2} , {y^{(2)}}_{|a_2 b_2} , {z^{(2)}}_{|b_2 c_2} }
+   \\\times\p{ {x^{(3)}}_{|c_3 a_3} , {y^{(3)}}_{|a_3 b_3} , {z^{(3)}}_{|b_3 c_3} }
+\end{array}}
+         \leq
+ \parens*{\begin{array}{l}
+\p{ {x^{(1)}}_{|c_1 a_1} , {y^{(-1)}}_{|a_1 b_2} }\p{ {x^{(2)}}_{|a_2 c_2} }\p{ {x^{(3)}}_{|c_3 a_3} , {y^{(3)}}_{|a_3 b_3} , {z^{(3)}}_{|b_3 c_3} }
+\\ + \p{ {y^{(2)}}_{|a_2 b_2} , {z^{(-1)}}_{|b_2 c_3} }\p{ {y^{(3)}}_{|a_3 b_3} }\p{ {x^{(1)}}_{|c_1 a_1} , {y^{(1)}}_{|a_1 b_1} , {z^{(1)}}_{|b_1 c_1} }
+\\ + \p{ {z^{(3)}}_{|b_3 c_3} , {x^{(-1)}}_{|c_3 a_1} }\p{ {z^{(1)}}_{|b_1 c_1} }\p{ {x^{(2)}}_{|c_2 a_2} , {y^{(2)}}_{|a_2 b_2} , {z^{(2)}}_{|b_2 c_2} }
+\\ + \p{ \n{x^{(-1)}}_{|c_3 a_1} , \n{y^{(-1)}}_{|a_1 b_2} , \n{z^{(-1)}}_{|b_2 c_3} }
+\end{array}}
+\end{align}
+or, equivalently,
+\begin{align}
+&\parens*{\begin{array}{l}
+  \p{ {x^{(1)}} , {y^{(1)}} , {z^{(1)}} | a_1 b_1 c_1}
+   \\\times\p{ {x^{(2)}} , {y^{(2)}} , {z^{(2)}} | a_2 b_2 c_2}
+   \\\times\p{ {x^{(3)}} , {y^{(3)}} , {z^{(3)}} | a_3 b_3 c_3}
+\end{array}}
+         \leq
+ \parens*{\begin{array}{l}
+    \p{ {x^{(1)}} , {y^{(-1)}} | a_1 b_2 c_1 }\p{{x^{(2)}}_{| a_2 c_2} }\p{ {x^{(3)}} , {y^{(3)}} , {z^{(3)}} | a_3 b_3 c_3 }
+\\ +\p{ {y^{(2)}} , {z^{(-1)}} | a_2 b_2 c_3 }\p{{y^{(3)}}_{| a_3 b_3} }\p{ {x^{(1)}} , {y^{(1)}} , {z^{(1)}} | a_1 b_1 c_1 }
+\\ +\p{ {z^{(3)}} , {x^{(-1)}} | a_1 b_3 c_3 }\p{{z^{(1)}}_{| b_1 c_1} }\p{ {x^{(2)}} , {y^{(2)}} , {z^{(2)}} | a_2 b_2 c_2 }
+\\ + \p{ \n{x^{(-1)}} , \n{y^{(-1)}} , \n{z^{(-1)}} | a_1 b_2 c_3}
+\end{array}}
+\end{align}
+
+In the factorization chosen, every indexed latent variables appears in precisely one multivariate conditional probability. As such we can marginalize both sides to obtain
+\begin{align}
+&\parens*{\begin{array}{l}
+  \p{ {x^{(1)}} , {y^{(1)}} , {z^{(1)}} }
+   \\\times\p{ {x^{(2)}} , {y^{(2)}} , {z^{(2)}} }
+   \\\times\p{ {x^{(3)}} , {y^{(3)}} , {z^{(3)}} }
+\end{array}}
+         \leq
+ \parens*{\begin{array}{l}
+    \p{ {x^{(1)}} , {y^{(-1)}} }\p{{x^{(2)}} }\p{ {x^{(3)}} , {y^{(3)}} , {z^{(3)}} }
+\\ +\p{ {y^{(2)}} , {z^{(-1)}} }\p{{y^{(3)}} }\p{ {x^{(1)}} , {y^{(1)}} , {z^{(1)}} }
+\\ +\p{ {z^{(3)}} , {x^{(-1)}} }\p{{z^{(1)}} }\p{ {x^{(2)}} , {y^{(2)}} , {z^{(2)}} }
+\\ + \p{ \n{x^{(-1)}} , \n{y^{(-1)}} , \n{z^{(-1)}} }
+\end{array}}
+\end{align}
+which concludes the proof.
+\end{proof}
+
+
+We can obtain even more general inequalities for the Triangle scenario with just a bit more creativity. Starting from the tautology
+\begin{align}
+&\NamedFunction{And}{\begin{array}{l}
+\parens{{x^{(1)}}_{|c_1 a_1} , {y^{(1)}}_{|a_1 b_1} , {z^{(1)}}_{|b_1 c_1} } \,,
+\\ \parens{ {x^{(2)}}_{|c_2 a_2} , {y^{(2)}}_{|a_2 b_2} , {z^{(2)}}_{|b_2 c_2} } \,, 
+\\ \parens{ {x^{(3)}}_{|c_3 a_3} , {y^{(3)}}_{|a_3 b_3} , {z^{(3)}}_{|b_3 c_3} } \end{array}} \implies
+\NamedFunction{Or}{\begin{array}{l}
+ \parens{ {x^{(1)}}_{|c_1 a_1} , {y^{(-1)}}_{|a_1 b_2} , {x^{(2)}}_{|a_2 c_2} , {x^{(3)}}_{|c_3 a_3} , {y^{(3)}}_{|a_3 b_3} , {z^{(3)}}_{|b_3 c_3} } \,,
+\\ \parens{ {y^{(2)}}_{|a_2 b_2} , {z^{(-1)}}_{|b_2 c_3} , {y^{(3)}}_{|a_3 b_3} , {x^{(1)}}_{|c_1 a_1} , {y^{(1)}}_{|a_1 b_1} , {z^{(1)}}_{|b_1 c_1} } \,,
+\\ \parens{ {z^{(3)}}_{|b_3 c_3} , {x^{(-1)}}_{|c_3 a_1} , {z^{(1)}}_{|b_1 c_1} , {x^{(2)}}_{|c_2 a_2} , {y^{(2)}}_{|a_2 b_2} , {z^{(2)}}_{|b_2 c_2} } \,,
+\\ \parens{ {z^{(2)}}_{|a_2 b_2} , {y^{(-2)}}_{|a_1 b_2} , {z^{(1)}}_{|b_1 c_1} , {x^{(3)}}_{|c_3 a_3} , {y^{(3)}}_{|a_3 b_3} , {z^{(3)}}_{|b_3 c_3} } \,,
+\\ \parens{ {x^{(3)}}_{|c_3 a_3} , {z^{(-2)}}_{|b_2 c_3} , {x^{(2)}}_{|c_2 a_2} , {x^{(1)}}_{|c_1 a_1} , {y^{(1)}}_{|a_1 b_1} , {z^{(1)}}_{|b_1 c_1} } \,,
+\\ \parens{ {y^{(1)}}_{|a_1 b_1} , {x^{(-2)}}_{|c_3 a_1} , {y^{(3)}}_{|a_3 b_3} , {x^{(2)}}_{|c_2 a_2} , {y^{(2)}}_{|a_2 b_2} , {z^{(2)}}_{|b_2 c_2} } \,,
+\\ \Nor{ {x^{(-1)}}_{|c_3 a_1} , {y^{(-1)}}_{|a_1 b_2} , {z^{(-1)}}_{|b_2 c_3} , {x^{(-2)}}_{|c_3 a_1} , {y^{(-2)}}_{|a_1 b_2} , {z^{(-2)}}_{|b_2 c_3} }
+\end{array}} 
+\end{align}
+we obtain the response-function inequality
+\begin{align}
+&\parens*{\begin{array}{l}
+  \p{ {x^{(1)}}_{|c_1 a_1} , {y^{(1)}}_{|a_1 b_1} , {z^{(1)}}_{|b_1 c_1} }
+   \\\times\p{ {x^{(2)}}_{|c_2 a_2} , {y^{(2)}}_{|a_2 b_2} , {z^{(2)}}_{|b_2 c_2} }
+   \\\times\p{ {x^{(3)}}_{|c_3 a_3} , {y^{(3)}}_{|a_3 b_3} , {z^{(3)}}_{|b_3 c_3} }
+\end{array}}
+         \leq
+ \parens*{\begin{array}{l}
+\p{ {x^{(1)}}_{|c_1 a_1} , {y^{(-1)}}_{|a_1 b_2} }\p{ {x^{(2)}}_{|a_2 c_2} }\p{ {x^{(3)}}_{|c_3 a_3} , {y^{(3)}}_{|a_3 b_3} , {z^{(3)}}_{|b_3 c_3} }
+\\ + \p{ {y^{(2)}}_{|a_2 b_2} , {z^{(-1)}}_{|b_2 c_3} }\p{ {y^{(3)}}_{|a_b b_3} }\p{ {x^{(1)}}_{|c_1 a_1} , {y^{(1)}}_{|a_1 b_1} , {z^{(1)}}_{|b_1 c_1} }
+\\ + \p{ {z^{(3)}}_{|b_3 c_3} , {x^{(-1)}}_{|c_3 a_1} }\p{ {z^{(1)}}_{|b_1 c_1} }\p{ {x^{(2)}}_{|c_2 a_2} , {y^{(2)}}_{|a_2 b_2} , {z^{(2)}}_{|b_2 c_2} }
+\\ + \p{ {z^{(2)}}_{|a_2 b_2} , {y^{(-2)}}_{|a_1 b_2} }\p{ {z^{(1)}}_{|b_1 c_1} }\p{ {x^{(3)}}_{|c_3 a_3} , {y^{(3)}}_{|a_3 b_3} , {z^{(3)}}_{|b_3 c_3} } \,,
+\\ + \p{ {x^{(3)}}_{|c_3 a_3} , {z^{(-2)}}_{|b_2 c_3} }\p{ {x^{(2)}}_{|c_2 a_2} }\p{ {x^{(1)}}_{|c_1 a_1} , {y^{(1)}}_{|a_1 b_1} , {z^{(1)}}_{|b_1 c_1} } \,,
+\\ + \p{ {y^{(1)}}_{|a_1 b_1} , {x^{(-2)}}_{|c_3 a_1} }\p{ {y^{(3)}}_{|a_3 b_3} }\p{ {x^{(2)}}_{|c_2 a_2} , {y^{(2)}}_{|a_2 b_2} , {z^{(2)}}_{|b_2 c_2} } \,,
+\\ + \p{\Nor{ {x^{(-1)}}_{|c_3 a_1} , {y^{(-1)}}_{|a_1 b_2} , {z^{(-1)}}_{|b_2 c_3} , {x^{(-2)}}_{|c_3 a_1} , {y^{(-2)}}_{|a_1 b_2} , {z^{(-2)}}_{|b_2 c_3} }}
+\end{array}}
+\end{align}
+or, equivalently,
+\begin{align}
+&\parens*{\begin{array}{l}
+  \p{ {x^{(1)}} , {y^{(1)}} , {z^{(1)}} | a_1 b_1 c_1}
+   \\\times\p{ {x^{(2)}} , {y^{(2)}} , {z^{(2)}} | a_2 b_2 c_2}
+   \\\times\p{ {x^{(3)}} , {y^{(3)}} , {z^{(3)}} | a_3 b_3 c_3}
+\end{array}}
+         \leq
+ \parens*{\begin{array}{l}
+    \p{ {x^{(1)}} , {y^{(-1)}} | a_1 b_2 c_1 }\p{{x^{(2)}}_{| a_2 c_2} }\p{ {x^{(3)}} , {y^{(3)}} , {z^{(3)}} | a_3 b_3 c_3 }
+\\ +\p{ {y^{(2)}} , {z^{(-1)}} | a_2 b_2 c_3 }\p{{y^{(3)}}_{| a_b b_3} }\p{ {x^{(1)}} , {y^{(1)}} , {z^{(1)}} | a_1 b_1 c_1 }
+\\ +\p{ {z^{(3)}} , {x^{(-1)}} | a_1 b_3 c_3 }\p{{z^{(1)}}_{| b_1 c_1} }\p{ {x^{(2)}} , {y^{(2)}} , {z^{(2)}} | a_2 b_2 c_2 }
+\\ +\p{ {z^{(2)}} , {y^{(-2)}} | a_1 b_2 c_2 }\p{{z^{(1)}}_{| b_1 c_1} }\p{ {x^{(3)}} , {y^{(3)}} , {z^{(3)}} | a_3 b_3 c_3 }
+\\ +\p{ {x^{(3)}} , {z^{(-2)}} | a_3 b_2 c_3 }\p{{x^{(2)}}_{| c_2 a_2} }\p{ {x^{(1)}} , {y^{(1)}} , {z^{(1)}} | a_1 b_1 c_1 }
+\\ +\p{ {y^{(1)}} , {x^{(-2)}} | a_1 b_1 c_3 }\p{{y^{(3)}}_{| a_3 b_3} }\p{ {x^{(2)}} , {y^{(2)}} , {z^{(2)}} | a_2 b_2 c_2 }
+\\ + \p{ \Nor{ {x^{(-1)}} , {y^{(-1)}} , {z^{(-1)}} , {x^{(-2)}} , {y^{(-2)}} , {z^{(-2)}} } | a_1 b_2 c_3}
+\end{array}}
+\end{align}
+where once again, in the factorization chosen, every indexed latent variables appears in precisely one multivariate conditional probability. As such we can marginalize both sides to obtain
+\begin{prop} \label{prop:AllPowerful2}
+The Triangle causal structure (\cref{fig:TriDAG}) implies that
+\begin{align*}
+&\parens*{\begin{array}{l}
+  \p{ {x^{(1)}} , {y^{(1)}} , {z^{(1)}} }
+   \\\times\p{ {x^{(2)}} , {y^{(2)}} , {z^{(2)}} }
+   \\\times\p{ {x^{(3)}} , {y^{(3)}} , {z^{(3)}} }
+\end{array}}
+         \leq
+ \parens*{\begin{array}{l}
+    \p{ {x^{(1)}} , {y^{(-1)}} }\p{{x^{(2)}} }\p{ {x^{(3)}} , {y^{(3)}} , {z^{(3)}} }
+\\ +\p{ {y^{(2)}} , {z^{(-1)}} }\p{{y^{(3)}} }\p{ {x^{(1)}} , {y^{(1)}} , {z^{(1)}} }
+\\ +\p{ {z^{(3)}} , {x^{(-1)}} }\p{{z^{(1)}} }\p{ {x^{(2)}} , {y^{(2)}} , {z^{(2)}} }
+\\ +\p{ {z^{(2)}} , {y^{(-2)}} }\p{{z^{(1)}} }\p{ {x^{(3)}} , {y^{(3)}} , {z^{(3)}} }
+\\ +\p{ {x^{(3)}} , {z^{(-2)}} }\p{{x^{(2)}} }\p{ {x^{(1)}} , {y^{(1)}} , {z^{(1)}} }
+\\ +\p{ {y^{(1)}} , {x^{(-2)}} }\p{{y^{(3)}} }\p{ {x^{(2)}} , {y^{(2)}} , {z^{(2)}} }
+\\ + \p{ \Nor{ {x^{(-1)}} , {y^{(-1)}} , {z^{(-1)}} , {x^{(-2)}} , {y^{(-2)}} , {z^{(-2)}} } }
+\end{array}}
+\end{align*}
+\end{prop} 
+which implies \cref{prop:AllPowerful} as a special case. 
+
+\purp{Are all of Tobias's inequalities are just special cases of \cref{prop:AllPowerful2}? NO! But (a), (b), and (f) are.\\}
+\purp{Perhaps this new more-powerful inequality per \cref{prop:AllPowerful2} can detect Tobias quantum correlation for the Triangle scenario?}
+
+\end{widetext}
