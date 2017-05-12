@@ -773,26 +773,39 @@ This section considers the problem of how to generalize the above examples of ca
 
 As far as causal compatibility inequalities are concerned, we limit ourselves to those expressed in terms of probabilities\footnote{Or, for binary variables, equivalently in terms of correlators, as in the first example of \cref{Sec:DerivingInequalities}.}, as these are generally the most powerful. However, essentially the same techniques can be used to derive inequalities expressed in terms of entropies~\cite{fritz2013marginal}, as demonstrated in \cref{ex:entropic}. 
 
- An \tblue{expressible set} of variables in an inflation DAG is one for which the joint distribution can be expressed as a function of distributions on injectable sets of variables in the inflation DAG by making repeated use of the conditional independences implied by $d$-separation relations.
-In the examples from the previous section, the initial inequality---a constraint upon marginals that is independent of the causal structure---involves sets of observed variables that are \emph{not} all injectable sets.  Each of these sets can, however, be partitioned into disjoint subsets each of which {\em is} injectable such that all of the variables in one set are ancestrally independent of all of the variables in the other.
-   For instance, in \cref{example:polytriangle}, the set $\{ A_2 B_1\}$ is not injectable, but it can be partitioned into the singleton sets $\{ A_2 \}$ and $\{ B_1\}$ which are ancestrally independent and each of which is injectable. Consequently, the set $\{ A_2 B_1\}$ is expressible.   
+In the examples from the previous section, the initial inequality---a constraint upon marginals that is independent of the causal structure---involves sets of observed variables that are \emph{not} all injectable sets. However, the Markov conditions on the inflation DAGs nevertheless allowed us to \emph{express} the distribution on these sets in terms of the known distributions on the injectable sets. For instance, in \cref{example:polytriangle}, the set $\{ A_2 B_1\}$ is not injectable, but it can be partitioned into the singleton sets $\{ A_2 \}$ and $\{ B_1\}$ which are ancestrally independent, so that we could compute $P_{A_2 B_1} = P_{A_2} P_{B_1} = P_A P_B$ for every inflation model. In general, we have:
 
-In this article, we will focus primarily on sets of observed variables that are expressible by virtue of being a union of injectable sets that are ancestrally independent, so that the joint distribution thereon is a product of distributions on the injectable sets. It is useful to have a name for expressible sets of this sort: we call them \tblue{ai-expressible}.
-   So for any $\bm{U}'$ in the inflation DAG $G'$,
+\begin{definition}
+Given an inflation DAG $G'$, the \tblue{expressible sets} are the smallest family of subsets of $\nodes{G'}$ such that:
+\begin{enumerate}
+\item Every injectable set is expressible;
+\item If $A,B,C\subseteq\nodes{G'}$ are expressible and $A\aindep B\:|\:C$, then $A\cup B\cup C$ is also expressible;
+\item If $A\subseteq\nodes{G'}$ is expressible, then so is every subset of $A$.
+\end{enumerate}
+\end{definition}
+
+Thus a set of nodes in an inflation DAG is expressible if and only if it can be obtained by starting with a collection of injectable sets and recursively forming unions of $d$-separated triples and taking subsets. Expressible sets are important since in an inflation model, the distribution of the variables making up an expressible set can be computed explicitly from the known distributions on the injectable sets, by repeatedly using the conditional independences implied by $d$-separation and taking marginals. \cref{example:Pienaar} provides a good example.
+
+Except in \cref{sec:interestingproof}, in the remainder of this article we will limit ourselves to working with expressible sets of a particularly simple kind and leave the investigation of more general expressible sets to future work.
+
+\begin{definition}
+A set of nodes $A\subseteq\nodes{G'}$ is \tblue{ai-expressible} if it can be written as a union of injectable sets that are ancestrally independent,
 \begin{align}\label{eq:defpreinj}
 \begin{split}
 \bm{U}'\in & \SmallNamedFunction{AI-ExpressibleSets}{G'} \\
 	& \quad\text{ iff }\quad  \exists \{ \bm{U}'_i \in \SmallNamedFunction{InjectableSets}{G'} \} \quad \text{s.t.}\quad \bm{U}'=\bigcup_i \bm{U}'_i  \quad\text{and} \quad  \forall i\ne j: \bm{U}'_i \aindep \bm{U}'_j \text{ in }G'.
 \end{split}
 \end{align}
-Every injectable set is trivially ai-expressible.  An ai-expressible set will be termed \emph{maximal} if it is not a proper subset of another ai-expressible set. We leave the investigation of more general expressible sets 
+An ai-expressible set is \emph{maximal} if it is not a proper subset of another ai-expressible set.
+\end{definition}
 
-Because ancestral independence in the DAG implies statistical independence for any distribution compatible with the DAG, it follows that  if 
-$\bm{U}'$ is an ai-expressible set with ancestrally independent components $\bm{U}'_1,\ldots,\bm{U}'_n$, then we have the factorization
+Because ancestral independence in $G'$ implies statistical independence for any compatible distribution, it follows that if $\bm{U}'$ is an ai-expressible set with ancestrally independent and injectable components $\bm{U}'_1,\ldots,\bm{U}'_n$, then we have the factorization
 \begin{align}\label{eq:preinjfactor}
 P_{\bm{U}'} = P_{\bm{U}'_1} \cdots P_{\bm{U}'_n}
 \end{align}
-for any distribution compatible with $G'$. The situation, therefore, is this: for any constraint that one can derive for the marginals on the ai-expressible sets based on the existence of a joint distribution---and hence without reference to the causal structure---one can infer a constraint that {\em does} refer to the causal structure by substituting within the derived constraint a factorization of the form of~\cref{eq:preinjfactor}. This results in a causal compatibility inequality of a very weak form that only takes into account the independences between observed variables.
+for any distribution compatible with $G'$. The situation, therefore, is this: for any constraint that one can derive for the marginals on the ai-expressible sets based on the existence of a joint distribution---and hence without reference to the causal structure---one can infer a constraint that {\em does} refer to the causal structure by substituting within the derived constraint a factorization of the form of~\cref{eq:preinjfactor}. This results in a causal compatibility inequality on $G'$ of a very weak form that only takes into account the independences between observed variables.
+
+
 
 As a build-up to our exposition of a systematic application of the inflation technique, we now revisit \cref{example:noGHZ}.  As before, to demonstrate the incompatibility of the distribution of \cref{eq:ghzdistribution1} with the Triangle scenario, we assume compatibility and derive a contradiction.  Given the distribution of \cref{eq:ghzdistribution1}, \cref{mainlemma} implies that the marginal distributions on the injectable sets of the Cut inflation of the Triangle scenario are 
 \begin{equation}
@@ -814,7 +827,7 @@ We have therefore derived a contradiction and consequently can infer the incompa
 
 Generalizing to an arbitrary DAG, therefore, the procedure is as follows:
 \begin{enumerate}
-\item Based on the inflation DAG under consideration, identify the ai-expressible sets and how they each partition into injectable sets.
+\item Based on the inflation DAG under consideration, identify the ai-expressible sets and how they each partition into ancestrally independent injectable sets.
 \item From the given distribution on the original DAG, infer the family of marginal distributions on the ai-expressible sets of the inflation DAG as follows: the distribution on any injectable set is equal to the corresponding distribution on its image in the original DAG; the distribution on any ai-expressible set is the product of the distributions on the injectable sets into which it is partitioned.
 \item Determine whether the family of distributions obtained in step 2 are the marginals of a single joint distribution. If not, then the original distribution is incompatible with the original DAG; otherwise, it may or may not be compatible.
 \end{enumerate}
