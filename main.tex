@@ -148,8 +148,8 @@ anchorcolor=OliveGreen}
 \begin{abstract}
 
 The problem of causal inference is to determine if a given probability distribution on observed variables is compatible with some causal structure. The difficult case is when the causal structure includes latent variables.  We here introduce the \emph{inflation technique} for tackling this problem. An inflation of a causal structure is a new causal structure that can contain multiple copies of each of the original variables, but where the ancestry of each copy mirrors that of the original. 
-%\color{cyan} Given a distribution of the observed variables that is compatible with the original causal structure, and a distribution over the copies that is compatible with the inflated causal structure, it can be shown that the marginal distributions of certain subsets of the copies must match the marginal distributions of the corresponding subset of the original variables. It follows that compatibility constraints for the inflation can be translated to compatibility constraints for the original causal structure. \color{black}
-\color{cyan} Given a distribution of the observed variables that is compatible with the original causal structure, and a distribution over the copies that is compatible with the inflated causal structure, it can be shown that the marginal distributions of certain subsets of the copies are expressible as functions of the marginal distributions of certain subsets of the original variables. It follows that compatibility constraints for the inflation can be translated to compatibility constraints for the original causal structure. \color{black}
+%\color{cyan} Given a distribution of the observed variables that is compatible with the original causal structure, and a distribution over the copies that is compatible with the inflated causal structure, it can be shown that the marginal distributions of certain subsets of the copies are expressible as functions of the marginal distributions of certain subsets of the original variables. It follows that compatibility constraints for the inflation can be translated to compatibility constraints for the original causal structure. \color{black}
+\color{olive} To every distribution of the observed variables that is compatible with the original causal structure, we associate a family of marginal distributions on the inflated causal structure by expressing them as functions of some of the original distribution's marginals. It follows that compatibility constraints for the inflation can be translated into compatibility constraints for the original causal structure. \color{black}
  Even if the constraints at the level of inflation are weak, such as observable statistical independences implied by disjoint causal ancestry, the translated constraints can be quite strong. We apply this method to derive new inequalities whose violation by a distribution witnesses that distribution's incompatibility with the causal structure (of which Bell inequalities and Pearl's instrumental inequality are prominent examples). We describe an algorithm for deriving all such inequalities for the original causal structure that follow from ancestral independences in the inflation. Applied to an inflation of the Triangle scenario with binary variables, it yields inequalities that are stronger in at least some aspects than those obtainable by existing methods. We also describe an algorithm that derives a weaker set of inequalities but is much more efficient. Finally, we discuss which inflations are such that the inequalities one obtains from them remain valid even for quantum (and post-quantum) generalizations of the notion of a causal model.
 
 \end{abstract}
@@ -215,8 +215,9 @@ A \tblue{causal structure} is a DAG that incorporates a distinction between two 
 and the set of latent nodes \footnote{\citet[Def. 2.3.2]{pearl2009causality} uses the term \emph{latent structure} when referring to a DAG supplemented by a specification of latent nodes, whereas here that specification is implicit in our term \emph{causal structure}.}. 
 Following~\cite{pusey2014gdag}, we will depict the observed nodes by triangles and the latent nodes by circles, as in~\cref{fig:TriMainDAG}\footnote{Note that this convention differs from that of~\cite{leifer2013conditionalstates}, where triangles represent classical variables and circles represent quantum systems.}.
 %\color{red} Henceforth, we will use the terms ``DAG'' and ``causal structure'' interchangeably, so that the specification of which variables are observed is considered to be part of the DAG.
-\color{cyan} Henceforth, we will use $G$ to refer to the causal structure rather than just the DAG, so that $G$ includes a specification of which variables are observed, denoted $\obsnodes{G}$, and which are latent, denoted $\latnodes{G}$. \color{black}
+ Henceforth, we will use $G$ to refer to the causal structure rather than just the DAG, so that $G$ includes a specification of which variables are observed, denoted $\obsnodes{G}$, and which are latent, denoted $\latnodes{G}$.
 Frequently, we will also imagine the causal structure to include a specification of the cardinalities of the observed variables. While these are finite in all of our examples, the inflation technique applies just as well in the case of continuous variables.
+\color{olive} Although we will not do so in this work, the inflation technique can also be applied in the presence of other types of constraints, e.g.~when all variables are assumed to be Gaussian. \color{black}
 
 
 
@@ -252,12 +253,9 @@ A given family of marginal distributions on a family of subsets of observed vari
 
 \subsection{Inflations of a causal model}
 
-We now introduce the notion of \tblue{an inflation of a causal model}.
-\color{cyan} If a causal model specifies a causal structure $G$, then an inflation of this model specifies a new causal structure, $G'$, which we refer to as an inflation of $G$.  
+We now introduce the notion of \tblue{an inflation of a causal model}. If a causal model specifies a causal structure $G$, then an inflation of this model specifies a new causal structure, $G'$, which we refer to as an inflation of $G$.  
 %We refer to $G'$ as the  \tblue{inflated causal structure}. \color{black}
-\color{cyan}
 %define an {\em inflation causal structure} and that this is obtained from the inflated causal structure by simply categorizing the nodes of the inflated causal structure in exactly the way that they are categorized in the original causal structure.  That is, the observed/latent distinction of the inflation causal strucutre is inherited fro the original causal structure: if $X$ is latent in the original causal structure, then any $X_i$ in the inflated causal structure is latent, etectera.  (As an aside, note that we also allowed that information about cardinality of variables was considered part of the causal structure, so it is perhaps worth mentioning explicitly that the cardinalities of the variables in the inflation causal structure are inherited from the original causal structure.)   An {\em inflation causal model} is then an inflated causal structure together with parameters. 
-\color{black}
 For a given causal structure $G$, there are many causal structures $G'$ constituting an inflation of $G$.  We denote the set of such causal structions $\inflations{G}$. 
 %There are many possible choices of inflations causal structures $G'$ for a given $G$, forming a set $\inflations{G}$. 
 The particular choice of $G'\in \inflations{G}$ then determines how to map a causal model $M$ on $G$ into a causal model $M'$ on $G'$, 
@@ -270,9 +268,10 @@ For a subset of nodes $\bm{V}\subseteq\nodes{G}$, we denote the \tblue{induced s
 
 In an inflated causal structure $G'$, every node is also labelled by a node of $G$.   That is, every node of the inflated causal structure $G'$ is a copy of some node of the original causal structure $G$, and the copies of a node $A$ of $G$ in $G'$ are denoted $A_1,\ldots, A_k$. 
 The subscript that indexes the copies is termed the \tblue{copy-index}.
-\color{cyan} A copy is classified as observed or latent based on the classification of the original.  Similarly, any constraints on cardinality are also inherited from the original.
+ A copy is classified as observed or latent based on the classification of the original.  Similarly, any constraints on cardinality
+\color{olive} or other types of constraints such as Gaussianity \color{black}
+ are also inherited from the original.
 %whether the corresponding node in the original causal structure was classified as observed or latent. 
-\color{black}
 When two objects (e.g.~nodes, sets of nodes, causal structures, etc\ldots) are the same up to copy-indices, then we use $\sim$ to indicate this, as in $A_i\sim A_j\sim A$. In particular, $\bm{U}\sim\bm{U}'$ for sets of nodes $\bm{U}\subseteq\nodes{G}$ and $\bm{U}'\subseteq\nodes{G'}$ if and only if $\bm{U}'$ contains exactly one copy of every node in $\bm{U}$. Similarly, $\subgraph[G']{\bm{U}'}\sim\subgraph[G]{\bm{U}}$ means that in addition to $\bm{U}\sim\bm{U}'$, an edge is present between two nodes in $\bm{U}'$ if and only if it is present between the two associated nodes in $\bm{U}$.
 
 In order to be an inflation, $G'$ must locally mirror the causal structure of $G$:
@@ -705,7 +704,8 @@ This section considers the problem of how to generalize the above examples of ca
 
 As far as causal compatibility inequalities are concerned, we limit ourselves to those expressed in terms of probabilities\footnote{Or, for binary variables, equivalently in terms of correlators, as in the first example of \cref{Sec:DerivingInequalities}.}, as these are generally the most powerful. However, essentially the same techniques can be used to derive inequalities expressed in terms of entropies~\cite{fritz2013marginal}, as demonstrated in \cref{ex:entropic}. 
 
-In the examples from the previous section, the initial inequality---a constraint upon marginals that is independent of the causal structure---involves sets of observed variables that are \emph{not} all injectable sets. However, the Markov conditions on the inflated causal structures nevertheless allowed us to \emph{express} the distribution on these sets in terms of the known distributions on the injectable sets. For instance, in \cref{example:polytriangle}, the set $\{ A_2 B_1\}$ is not injectable, but it can be partitioned into the singleton sets $\{ A_2 \}$ and $\{ B_1\}$ which are ancestrally independent, so that one has $P_{A_2 B_1} = P_{A_2} P_{B_1} = P_A P_B$ in every inflated causal model.  \color{cyan} This motivates us to define the notion of an \tblue{expressible set} of variables in an inflated causal structure as one for which the joint distribution can be expressed as a function of distributions over injectable sets by making repeated use of the conditional independences implied by $d$-separation relations. More formally,
+In the examples from the previous section, the initial inequality---a constraint upon marginals that is independent of the causal structure---involves sets of observed variables that are \emph{not} all injectable sets. However, the Markov conditions on the inflated causal structures nevertheless allowed us to \emph{express} the distribution on these sets in terms of the known distributions on the injectable sets. For instance, in \cref{example:polytriangle}, the set $\{ A_2 B_1\}$ is not injectable, but it can be partitioned into the singleton sets $\{ A_2 \}$ and $\{ B_1\}$ which are ancestrally independent, so that one has $P_{A_2 B_1} = P_{A_2} P_{B_1} = P_A P_B$ in every inflated causal model.  This motivates us to define the notion of an \tblue{expressible set} of variables in an inflated causal structure as one for which the joint distribution can be expressed as a function of distributions over injectable sets by making repeated use of the conditional independences implied by $d$-separation relations \color{olive} as well as marginalization\color{black} . More formally,
+
 \begin{definition}
 Consider an inflation $G'$ of a causal structure $G$.  A set of variables $U \subset \nodes{G'}$ is said to be {\em expressible} if it is injectable or if it can be obtained from a collection of injectable sets by recursively applying the following rules:
 \begin{enumerate}
@@ -714,7 +714,7 @@ Consider an inflation $G'$ of a causal structure $G$.  A set of variables $U \su
 \item If $A\subseteq\nodes{G'}$ is expressible, then so is every subset of $A$.
 \end{enumerate}
 \end{definition}
-An expressible set is \emph{maximal} if it is not a proper subset of another ai-expressible set.
+An expressible set is \emph{maximal} if it is not a proper subset of another expressible set.
 \color{black}
 
 %In general, we have:
@@ -2480,6 +2480,5 @@ which corresponds to the original ``Hardy paradox''~\cite{L.Hardy:PRL:1665} in o
 \let\cleardoublepage\clearpage
 \setlength{\bibsep}{3pt plus 3pt minus 2pt}
 \bibliographystyle{apsrev4-1}
-\nocite{apsrev41Control}
 \bibliography{hardyinference}
 \end{document}
