@@ -200,7 +200,7 @@ Besides the entropic techniques discussed above, our method is the first systema
 
 We present our technique primarily as a tool for standard causal inference, but we also briefly discuss applications to {\em quantum} causal models~\cite{leifer2013conditionalstates,pusey2014gdag,BeyondBellII,Chaves2015infoquantum,ried2015quantum,costa2016quantum,allen2016quantum} and causal models within generalized probabilistic theories~\cite{pusey2014gdag} (\cref{sec:classicallity}).  In particular, we discuss when our inequalities are necessary conditions for a distribution of observed variables to be compatible with a given causal structure within any generalized probabilistic theory~\cite{hardy2001quantum,barrett2007information} rather than simply within classical probability theory.
 
-\section{Basic definitions of causal models and compatibility}\label{sec:definitions}
+\section{Basic Definitions of Causal Models and Compatibility}\label{sec:definitions}
 
 A \tblue{causal model} consists of a pair of objects: a \tblue{causal structure} and a family of \tblue{causal parameters}.  We define each in turn. 
 First, recall that a directed acyclic graph (DAG) $G$ consists of a finite set of nodes $\nodes{G}$ and a set of directed edges $\edges{G}\subseteq\nodes{G}\times\nodes{G}$, meaning that an edge is an ordered pair of nodes, such that this directed graph is \emph{acylic}, which means that there is no way to start and end at the same node by traversing edges forward.
@@ -249,9 +249,9 @@ A given distribution $P_{\obsnodes{G}}$ is \tblue{compatible} with a given causa
 A given family of marginal distributions on a family of subsets of observed variables is \tblue{compatible} with a given causal structure if and only if there exists a joint distribution of observed variables that yields these marginals and is compatible with the causal structure.
 \end{definition}
 
-\section{The inflation technique for causal inference}
+\section{The Inflation Technique for Causal Inference}
 
-\subsection{Inflations of a causal model}
+\subsection{Inflations of a Causal Model}
 
 We now introduce the notion of \tblue{an inflation of a causal model}. If a causal model specifies a causal structure $G$, then an inflation of this model specifies a new causal structure, $G'$, which we refer to as an inflation of $G$.  
 %We refer to $G'$ as the  \tblue{inflated causal structure}. \color{black}
@@ -378,7 +378,7 @@ P_{\bm{U}'}=P_{\bm{U}}\quad\text{if }  \;\; \bm{U}' \sim \bm{U}\;\; \text{and} \
 
 In the example of \cref{fig:Tri222}, injectability of the sets $\brackets{A_1 B_1 C_1}$ and $\brackets{A_2 C_1}$ thus implies that the marginals on each of these are equal to the marginals on their counterparts, $\brackets{A B C}$ and $\brackets{A C}$, in the original causal model, so that $P_{A_1 B_1 C_1} = P_{A B C}$ and $P_{A_2 C_1} = P_{A C}$.
 
-\subsection{Witnessing incompatibility}
+\subsection{Witnessing Incompatibility}
 \label{subsec:witnessingincompat}
 
 Finally, we can explain why inflation is relevant for deciding whether a distribution is compatible with a causal structure.  For a family of marginal distributions $\{ P_{\bm{U}} : \bm{U} \in \SmallNamedFunction{ImagesInjectableSets}{G}\}$ to be compatible with $G$, there must be a causal model $M$ that yields a joint distribution with this family as its marginals. Looking at the inflation model $M' = \SmallNamedFunction[G\to G']{Inflation}{M}$, \cref{keyinference} implies that $M'$ has the corresponding family of marginals given by $\{ P_{\bm{U}'} : \bm{U}' \in \SmallNamedFunction{InjectableSets}{G'}\}$ with $P_{\bm{U}'} = P_{\bm{U}}$ for $\bm{U}'\sim\bm{U}$, and thus this family is compatible with $G'$.
@@ -576,7 +576,7 @@ The structure of this argument parallels that of standard proofs of the incompat
 \end{example}
 
 
-\subsection{Deriving causal compatibility inequalities}
+\subsection{Deriving Causal Compatibility Inequalities}
 \label{Sec:DerivingInequalities}
 
 The inflation technique can be used not only to witness the incompatibility of a given distribution with a given causal structure, but also to derive necessary conditions that a distribution must satisfy to be compatible with the given causal structure. When these conditions are expressed as inequalities, we will refer to them as {\em causal compatibility inequalities}.  Formally, we have:
@@ -694,7 +694,7 @@ The constraints derived in the last two sections have all made use of this basic
 
 In the rest of this article, we shall continue to rely only on the ancestral independences among observed variables within the inflated causal structure to derive examples of compatibility constraints on the original causal structure.   Nonetheless, it seems plausible that the inflation technique can also amplify the power of {\em other} techniques that do not merely consider ancestral independences among the observed variables.  We consider some prospects in \cref{sec:otherprospects}.
 
-\section{Systematically witnessing incompatibility and deriving inequalities}
+\section{Systematically Witnessing Incompatibility and Deriving Inequalities}
 \label{sec:ineqs}
 
 This section considers the problem of how to generalize the above examples of causal inference via the inflation technique to a systematic procedure. We start by introducing the crucial concept of an \emph{expressible set},
@@ -706,7 +706,7 @@ As far as causal compatibility inequalities are concerned, we limit ourselves to
 
 In the examples from the previous section, the initial inequality---a constraint upon marginals that is independent of the causal structure---involves sets of observed variables that are \emph{not} all injectable sets. However, the Markov conditions on the inflated causal structures nevertheless allowed us to \emph{express} the distribution on these sets in terms of the known distributions on the injectable sets. For instance, in \cref{example:polytriangle}, the set $\{ A_2 B_1\}$ is not injectable, but it can be partitioned into the singleton sets $\{ A_2 \}$ and $\{ B_1\}$ which are ancestrally independent, so that one has $P_{A_2 B_1} = P_{A_2} P_{B_1} = P_A P_B$ in every inflated causal model.  This motivates us to define the notion of an \tblue{expressible set} of variables in an inflated causal structure as one for which the joint distribution can be expressed as a function of distributions over injectable sets by making repeated use of the conditional independences implied by $d$-separation relations \color{olive} as well as marginalization\color{black} . More formally,
 
-\begin{definition}
+\begin{definition}\label{def:expressible}
 Consider an inflation $G'$ of a causal structure $G$.  A set of variables $U \subset \nodes{G'}$ is said to be {\em expressible} if it is injectable or if it can be obtained from a collection of injectable sets by recursively applying the following rules:
 \begin{enumerate}
 %\item Every injectable set is expressible;
@@ -780,7 +780,7 @@ The procedure for systematically deriving causal compatibility inequalities is a
 
 The ai-expressible sets play a crucial role in linking the original causal structure with the inflated causal structure.  They are precisely those sets of variables whose joint distributions in the inflation model are fully specified by the causal model on the original causal structure, as they can be computed using \cref{eq:preinjfactor} and \cref{mainlemma}. So we begin with the problem of identifying the ai-expressible sets systematically.
 
-\subsection{Identifying the ai-expressible sets}
+\subsection{Identifying the AI-Expressible Sets}
 \label{step:findpreinjectable}
 
 To identify the ai-expressible sets of an inflated causal structure $G'$, we must first identify the injectable sets. This problem can be reduced to identifying the injectable pairs of nodes, because if all of the pairs in a set of nodes are injectable, then so too is the set itself. This can be proven as follows.   
@@ -839,7 +839,7 @@ From \cref{fig:injection222,fig:preinjectiongraph222}, we easily infer the injec
 \brackets{A_1 B_1},\:\brackets{A_1 C_1},\:\brackets{B_1 C_1},\\
 \brackets{A_1 B_2}.\:\brackets{A_2 C_1},\:\brackets{B_1 C_2},\\
 \brackets{A_1 B_1 C_1}
-\end{matrix}}_{\substack{\text{the injectable sets}}}}
+\end{matrix}}_{\substack{\text{The injectable sets}}}}
 \qquad\qquad
 {\underbrace{\begin{matrix}
 \brackets{A_1 B_1 C_1} \\
@@ -847,7 +847,7 @@ From \cref{fig:injection222,fig:preinjectiongraph222}, we easily infer the injec
 \brackets{B_1 C_2 A_2} \\
 \brackets{C_1 A_2 B_2} \\
 \brackets{A_2 B_2 C_2}
-\end{matrix}}_{\substack{\text{the maximal}\\\text{ai-expressible sets}}}}
+\end{matrix}}_{\substack{\text{The maximal}\\\text{ai-expressible sets}}}}
 \qquad
 {\underbrace{\begin{matrix}
 \\
@@ -855,12 +855,12 @@ From \cref{fig:injection222,fig:preinjectiongraph222}, we easily infer the injec
 \{B_1 C_2\} \aindep \{ A_2\} \\
 \{C_1 A_2\} \aindep \{ B_2\} \\
 \{A_2\} \aindep \{B_2\} \aindep \{ C_2\}
-\end{matrix}}_{\substack{\text{the relevant}\\\text{ancestral independences}}}}
+\end{matrix}}_{\substack{\text{The relevant}\\\text{ancestral independences}}}}
 \end{align}
 
 Having identified the ai-expressible sets and how they partition into injectable sets, we now infer the factorization relations implied by ancestral independences, which is \cref{eq:tri222fac} in the Spiral example. Next, we discuss the other ingredient of our systematic procedure: the marginal problem.
 
-\subsection{The marginal problem and its solution}
+\subsection{The Marginal Problem and its Solution}
 \label{step:marginalsproblem}
 
 The third step in our procedure is determining whether the given distributions on ai-expressible sets can arise as marginals of one joint distribution on all observed nodes of the inflated causal structure. In general, the problem of determining whether a given family of distributions can arise as marginals of some joint distribution is known as the {\em marginal problem}\footnote{For further references and an outline of the long history of the marginal problem, see~\cite{fritz2013marginal}. An alternative account using the language of presheaves can also be found in~\cite{abramsky_contextuality_2011}.}. In order to derive causal compatibility inequalities, one must solve the closely related problem of determining necessary and sufficient \emph{constraints} that a family of marginal distributions must satisfy in order for the marginal problem to have a solution. For better clarity, we distinguish these two variants of the marginal problem as the \tblue{marginal satisfiability problem} and the \tblue{marginal constraint problem}. The generic \tblue{marginal problem} will be used as an umbrella term referring to both types.
@@ -899,21 +899,29 @@ Since linear programming is quite easy, probing specific distributions for compa
 In the case of the marginal constraint problem, the vector $\bm{b}$ is not given, but one rather wants to find conditions on $\bm{b}$ that hold if and only if \cref{eq:marginalproblemgeneric} has a solution. As per the above, this is a problem of \tblue{facet enumeration}\footnote{In \cref{sec:projalgorithms}, we provide an overview of techniques for facet enumeration.} for the marginal polytope. Equivalently, it is the problem of \tblue{linear quantifier elimination}\footnote{Linear quantifier elimination has already been used in causal inference for deriving entropic causal compatibility inequalities \cite{chaves2014novel,chaves2014informationinference}. In that task, however, the unknowns being eliminated are entropies on sets of variables of which one or more is latent. By contrast, the unknowns being eliminated above are all probabilities on sets of variables all of which are observed---but on the inflated causal structure rather than the original causal structure.} for the system of \cref{eq:marginalproblemgeneric}: one tries to find a system of linear equations and inequalities in $\bm{b}$ such that some $\bm{b}$ satisfies the system if and only if \cref{eq:marginalproblemgeneric} has a solution. There is a unique minimal system achieving this, and it consists of the constraints of consistency on the intersections of contexts (mentioned above), together with the facet inequalities of the marginal polytope. Taken together, these form a system of linear equations and inequalities that is equivalent to \cref{eq:marginalproblemgeneric}, but does not contain any quantifiers. In our application, the equations expressing consistency on the intersections of contexts are guaranteed to hold automatically, so that only the facet inequalities are of interest to us.
 
 In terms of \cref{eq:marginalproblemgeneric}, a valid inequality for the marginal distribution vector $\bm{b}$---such as a facet inequality of the marginal polytope---can always be expressed as $\bm{y}^T\bm{b}\geq 0$ for some vector $\bm{y}$.
-Validity of an inequality $\bm{y}^T\bm{b}\geq 0$ means precisely that $\bm{y}^T\bm{M}\geq\bm{0}$, since the columns of $\bm{M}$ are the vertices of the marginal polytope. The marginal satisfiability problem for a given vector $\bm{b}_0$ has no solution if and only if there is a vector $\bm{y}$ that yields a valid inequality but for which $\bm{y}^T\bm{b}_0 < 0$. Necessity follows by noting that if \cref{eq:marginalproblemgeneric} does have a solution $\bm{x}$ for a given vector $\bm{b}_0$, then the fact that $\bm{y}^T\bm{M}\geq \bm{0}$ and the fact that $\bm{x}\geq \bm{0}$ implies that $\bm{y}^T\bm{b}_0 = \bm{y}^T\bm{M}\bm{x} \geq 0$.  Sufficiency follows from Farkas' lemma.  Most linear programming tools are capable of returning a \emph{Farkas infeasibility certificate} \cite{infeasibilitycertificates} whenever a linear program has no solution.  In our case, if the marginal problem is infeasible for a vector $\bm{b}_0$, then the certificate is a vector $\bm{y}$ that yields a valid inequality but for which $\bm{y}^T\bm{b}_0 < 0$.\footnote{Farkas infeasibility certificates are available, for example, in \href[pdfnewwindow]{http://docs.mosek.com/8.0/pythonapi/optimizer-task-gety.html}{\textit{Mosek}}, \href[pdfnewwindow]{https://www.gurobi.com/documentation/6.5/refman/farkasdual.html}{\textit{Gurobi}}, and \href[pdfnewwindow]{http://www-01.ibm.com/support/docview.wss?uid=swg21400058}{\textit{CPLEX}}, as well as by accessing dual variables in \href[pdfnewwindow]{http://cvxr.com/cvx/doc/basics.html\#dual-variables}{\textit{cvxr}}/\href[pdfnewwindow]{http://cvxopt.org/userguide/coneprog.html\#linear-cone-programs}{\textit{cvxopt}}.}.
+Validity of an inequality $\bm{y}^T\bm{b}\geq 0$ means precisely that $\bm{y}^T\bm{M}\geq\bm{0}$, since the columns of $\bm{M}$ are the vertices of the marginal polytope. The marginal satisfiability problem for a given vector $\bm{b}_0$ has no solution if and only if there is a vector $\bm{y}$ that yields a valid inequality but for which $\bm{y}^T\bm{b}_0 < 0$. Necessity follows by noting that if \cref{eq:marginalproblemgeneric} does have a solution $\bm{x}$ for a given vector $\bm{b}_0$, then the fact that $\bm{y}^T\bm{M}\geq \bm{0}$ and the fact that $\bm{x}\geq \bm{0}$ implies that $\bm{y}^T\bm{b}_0 = \bm{y}^T\bm{M}\bm{x} \geq 0$.  Sufficiency follows from Farkas' lemma.  Most linear programming tools are capable of returning a \emph{Farkas infeasibility certificate} \cite{infeasibilitycertificates} whenever a linear program has no solution.  In our case, if the marginal problem is infeasible for a vector $\bm{b}_0$, then the certificate is a vector $\bm{y}$ that yields a valid inequality but for which $\bm{y}^T\bm{b}_0 < 0$.\footnote{Farkas infeasibility certificates are available in \href[pdfnewwindow]{http://docs.mosek.com/8.0/pythonapi/optimizer-task-gety.html}{\textit{Mosek}}, \href[pdfnewwindow]{https://www.gurobi.com/documentation/6.5/refman/farkasdual.html}{\textit{Gurobi}}, and \href[pdfnewwindow]{http://www-01.ibm.com/support/docview.wss?uid=swg21400058}{\textit{CPLEX}}, as well as by accessing dual variables in \href[pdfnewwindow]{http://cvxr.com/cvx/doc/basics.html\#dual-variables}{\textit{cvxr}}/\href[pdfnewwindow]{http://cvxopt.org/userguide/coneprog.html\#linear-cone-programs}{\textit{cvxopt}}.}.
 
 Upon substituting the factorization relations of \cref{eq:preinjfactor} and deleting copy indices, any valid inequality for the marginal problem
 turns into a causal compatibility inequality. This applies both to facet inequalities of the marginal polytope, and to Farkas infeasibility certificates. In the latter case, one obtains an explicit causal compatibility inequality which witnesses the given distribution as incompatible with the given causal structure. In other words, if a given distribution is witnessed as incompatible with a causal structure using the technique we have described, then with little additional numerical effort, one can also obtain a causal compatibility inequality that exhibits the incompatibility. This may have applications to problems where the facet enumeration is computationally intractable.
 
 Summarizing, we have shown how to leverage the marginal satisfiability problem to witness causal incompatibility of particular distributions, and how to leverage the marginal constraint problem to derive causal compatibility inequalities.
 
-\subsection{A list of causal compatibility inequalities for the Triangle scenario}
+\subsection{A List of Causal Compatibility Inequalities for the Triangle scenario}
 \label{sec:CCineqs}
 
-As an example of the above method, we present all of the causal compatibility inequalities that one can derive for the Triangle scenario with binary observed variables using ancestral independences in the Spiral inflation (\cref{fig:Tri222}). 
- To present these in an efficient manner, we leverage symmetries of the set of inequalities.  
-Clearly, a permutation of the observed variables is a symmetry whenever it extends
-to a graph automorphism, which is a permutation of all nodes that takes edges to edges. Furthermore, any permutation among the values assigned to an individual observed variable (i.e., the sample space of that variable) is a symmetry of the set of inequalities, as is any composition of such permutations. 
-In the case of the Triangle scenario, all 6 permutations of the three observed variables are symmetries, and there are $2^3$ permutations of the triple of the values of these three variables (the products of local permutations) that are symmetries.  A given inequality, therefore, can lead to up to $6\times 2^3 = 48$ distinct inequalities under the action of the symmetry operations. We have found numerically that there are four classes of irredundant inequalities that are inequivalent relative to these symmetry operations.\footnote{An inequality is irredundant if at least one distribution violates it without violating any of the other inequalities.} We here present a single representative inequality from each of these classes; the multiplicity of inequalities contained in each symmetry class is marked in parentheses to the right of each representative. The full set can be obtained by closing under the symmetry operations.  We have here chosen to express these inequalities in terms of correlators (where the two possible values of each variables to be $\{-1,+1\}$), rather than in terms of joint probabilities, because such a presentation is more compact.
+\color{purple} As an example of the above method, we present a \tblue{complete irredundant} subset of the causal compatibility inequalities that one can derive for the Triangle scenario, presuming binary observed variables, by means of using ancestral independences in the Spiral inflation (\cref{fig:Tri222}). Completeness is defined by the full inequality set and the complete subset both identifying the same set of distributions. Irredundancy is defined by the irredundant subset containing no redundant inequalities; an inequality is said to redundant to the others if every distributions which violates the redundant inequality also violates at least one of the other inequalities. %An irredundant set of inequalities is therefore defined as one in which no inequality is redundant. 
+Note that we are careful to say ``a" complete irredundant set instead of ``the" complete irredundant set, because an initially-redundant set might admit multiple complete irredundant subsets.
+
+For the specific problem at hand, we found that the 4884 inequalities corresponding to the facets of the relevant marginal polytope form a highly redundant set. We exploited linear programming techniques to quickly identify a 1433-inequalities complete subset. To further prune away redundant inequalities we successively employed nonlinear maximization on each inequality's left-hand-side, to determine if it could be violated pursuant to all the other inequalities; inequalities found to be redundant were then \emph{immediately} dropped from the set before testing the next candidate for redundancy\footnote{Is it advantageous to group the inequalities into symmetry classes \emph{prior} to pruning away redundant inequalities, so that entire classes of inequalities can be discarded when finding that a single representative is redundant \emph{to the other classes}.}. This post-processing led us to identify 60 irredundant inequalities which admit the same set of satisfying distributions as admitted by the original 4884. Of the 60, we recognized 8 as uninteresting positivity inequalities, e.g. $\p[ABC]{abc}\geq 0$, so our nontrivial results consist of 52 polynomial inequalities.
+
+To present those inequalities in an efficient manner, we further grouped them into four symmetry classes, here enumerating only one inequality from each class; the multiplicity of inequalities contained in each symmetry class is marked in parentheses to the right of each representative.
+The symmetry group for any causal structure with finite-cardinality observed variable is generated by those permutations of the observed variables which can be extended to automorphisms of the (original) DAG, as well as 
+%to a graph automorphism, which is a permutation of all nodes that takes edges to edges. Furthermore, 
+any permutation among the discrete values assigned to an individual observed variable (i.e., bijections on the sample space of that variable).% is a symmetry of the set of inequalities, as is any composition of such permutations. 
+In the case of the Triangle scenario with binary observed variables, the symmetry group therefore has 48 elements, comprised of the 6 permutations of the three observed variables, the 3 local binary-value relabellings, and all their compositions, $(48=6\times 2\times 2\times 2)$. % as well as the $2^3$ permutations of the triple of the values of these three variables (the products of local permutations) that are symmetries. %Up to $6\times 2^3 = 48$ distinct inequalities, therefore, can be members of a single symmetry class. We have found numerically that there are four classes of irredundant inequalities that are inequivalent relative to these symmetry operations. We here present a single representative inequality from each of these classes; the multiplicity of inequalities contained in each symmetry class is marked in parentheses to the right of each representative. The full set can be obtained by closing under the symmetry operations. 
+\color{black}
+
+We have here chosen to express these inequalities in terms of correlators (where the two possible values of each variables to be $\{-1,+1\}$), rather than in terms of joint probabilities, because such a presentation is more compact.
 \begin{align}\label{eq:ghzrejectclass}
 0\leq 1& - \expec{A C} - \expec{B C} + \expec{A} \expec{B} &&(\times 12) \\\label{eq:wrejectclass}
 \begin{split}0\leq 3& - \expec{A} - \expec{B} - \expec{C} +2 \expec{A B} +2 \expec{A C} +2 \expec{B C} + \expec{A B C} \\&\quad+ \expec{A} \expec{B} + \expec{A} \expec{C} + \expec{B} \expec{C} - \expec{A} \expec{B C} - \expec{B}
@@ -926,7 +934,7 @@ All the inequalities \labelcref{eq:ghzrejectclass,eq:wrejectclass,eq:symclass3,e
 
 A machine-readable and closed-under-symmetries version of this list of inequalities may be found in \cref{sec:38ineqs}.
 
-\subsection{Causal compatibility inequalities via Hardy-type inferences from logical tautologies}\label{sec:TSEM}
+\subsection{Causal Compatibility Inequalities via Hardy-type Inferences from Logical Tautologies}\label{sec:TSEM}
 
 Enumerating all the facets of the marginal polytope is computationally feasible only for small examples. But our method transforms \emph{every} inequality that bounds the marginal polytope into a causal compatibility inequality. We now present a general approach for deriving a special type of such inequalities very quickly.
 
@@ -1021,11 +1029,11 @@ Inequalities that one derives from hypergraph transversals are generally weaker 
 
 In conclusion, facet enumeration is the preferred method for deriving inequalities for the marginal problem when it is computationally tractable.  When it is not, enumerating hypergraph transversals presents a good alternative.
 
-\section{Further prospects for the inflation technique}\label{sec:otherprospects}
+\section{Further Prospects for the Inflation Technique}\label{sec:otherprospects}
 
 \cref{mainlemma} and \cref{maincorollary} state that any causal inference technique on an inflated causal structure $G'$ can be transferred to the original causal structure $G$. In the previous section, we have found that even extremely weak techniques on $G'$---namely the constraints implied by the existence of a joint distribution together with ancestral independences---can lead to significant and new results for causal inference on $G$. In the following three subsections, we consider some additional possibilities for constraints that might be exploited in this way to enhance the power of inflation further.
 
-\subsection{Using \textit{d}-separation relations on the inflated causal structure}\label{sec:fulldsep}
+\subsection{Appealing to \textit{d}-Separation Relations in the Inflated Causal Structure beyond Ancestral Independance}\label{sec:fulldsep}
 
 In \cref{sec:ineqs}, we considered the inflation technique using sets of observed variables on the inflated causal structure that were 
 ai-expressible, that is, that can be written as a union of injectable sets that are ancestrally independent.
@@ -1051,7 +1059,7 @@ As before, these causal compatibility inequalities for the inflation are transla
 
 In~\cref{sec:interestingproof}, we provide a concrete example of how a $d$-separation relation distinct from ancestral independence can be useful both for the problem of witnessing the incompatibilty of a specific distribution with a causal structure and for the problem of deriving causal compatibility inequalities.
 
-The notion of expressibility is recursive: The set $\{\bm{X'}\bm{Y'}\bm{Z'}\}$ is expressible if $\bm{X'}\aindep\bm{Y'}|\bm{Z'}$ and $\{\bm{X'}\bm{Z'}\}$, $\{\bm{Y'}\bm{Z'}\}$ and  $\{\bm{Z'}\}$ are all expressible. 
+Per \cref{def:expressible}, the notion of expressibility is recursive: The set $\{\bm{X'}\bm{Y'}\bm{Z'}\}$ is expressible if $\bm{X'}\aindep\bm{Y'}|\bm{Z'}$ and $\{\bm{X'}\bm{Z'}\}$, $\{\bm{Y'}\bm{Z'}\}$ and  $\{\bm{Z'}\}$ are all expressible. 
 In general, one can obtain stronger causal compatibility inequalities, and stronger witnessing power when testing the compatibility of a specific distribution, by determining the maximal expressible sets instead of restricting attention to the maximal ai-expressible sets. 
 
 \begin{comment}
@@ -1081,7 +1089,7 @@ On the other hand, even expressibility is unable to incorporate the $d$-separati
 \end{figure}
 \end{comment}
 
-\subsection{Using copy-index equivalence on the inflated causal structure}\label{Sec:copyindexequivalence}
+\subsection{Imposing Symmetries from Copy-Index-Equivalent Subgraphs of the Inflated Causal Structure}\label{Sec:copyindexequivalence}
 
 By the definition of an inflation model (\cref{def:inflat}), if two variables in the inflated causal structure $G'$ are copy-index-equivalent, $A_i \sim A_j$, then each depends on its parents in the same fashion as $A$ depends on its parents in the original causal structure $G$, meaning that $\pfunc{A_i| \Pa[G']{A_i}}=\pfunc{A|\Pa[G]{A}}$ and $\pfunc{A_j| \Pa[G']{A_j}}=\pfunc{A|\Pa[G]{A}}$. Thus by transitivity, also $A_i$ and $A_j$ have the same dependence on their parents,
 \begin{align}\label{copyindexequivalence}
@@ -1104,7 +1112,7 @@ Parameters such as $\p[A_1 A_2 B_1]{a_1 a_2 b}$, $\p[A_1 A_2 B_2]{a_1 a_2 b}$ an
 
 The general problem of finding pairs of contexts in the inflated causal structure for which relations of copy-index-equivalence imply equality of the marginal distributions, and the conditions under which such equalities may yield tighter inequalities, are discussed in more detail in \cref{sec:coincidingdetails}.
 
-\subsection{Nonlinear constraints} 
+\subsection{Incorporating Nonlinear Constraints} 
 
 In deriving causal compatibility inequalities and in witnessing causal incompatibility of a specific distribution, we restricted ourselves to starting from the marginal problem where the contexts are the (ai-)expressible sets, and wherein one imposes only linear constraints derived from the marginal problem.  In this approach, facts about the causal structure only get incorporated in the construction of the marginal distribution on each expressible set, and the quantifier elimination step of the computational algorithm is linear.  However, one can also incorporate facts about the causal structure as constraints on the quantifier elimination problem at the cost making the quantifier elimination problem nonlinear. 
 
@@ -1145,7 +1153,7 @@ If one is seeking merely to assess the compatibility of a {\em given} distributi
 
 It is also possible to use a mixed strategy of linear and nonlinear quantifier elimination, such as \citet{ChavesPolynomial} advocates. The explicit results of~\cite{ChavesPolynomial} are directly causal implications of the \emph{original} causal structure, achieved by applying a mixed quantifier elimination strategy. Perhaps further causal compatibility inequalities will be derivable by applying such a mixed quantifier elimination strategy to the inflated causal structure.
 
-\subsection{Causal inference in quantum theory and in generalized probabilistic theories}
+\subsection{Causal Inference in Quantum Theory and in Generalized Probabilistic Theories}
 \label{sec:classicallity}
 
 Recent work has sought to explore quantum generalizations of the notion of a causal model, termed {\em quantum causal models} \cite{leifer2013conditionalstates,pusey2014gdag,BeyondBellII,Chaves2015infoquantum,ried2015quantum,costa2016quantum,allen2016quantum}. 
@@ -1255,9 +1263,9 @@ E.W.~would like to thank Rafael Chaves and T.C. Fraser for suggestions which hav
 \let\stdsection\section
 \renewcommand{\section}{\clearpage\stdsection} %
 
-\section{Algorithms for solving the marginal constraint problem}\label{sec:projalgorithms}
+\section{Algorithms for Solving the Marginal Constraint Problem}\label{sec:projalgorithms}
 
-By solving the marginal constraint problem, what we mean is to determine all the facets of the marginal polytope for a given marginal scenario. Since the vertices of this polytope are precisely the deterministic assignments of values to all variables, which are easy to enumerate, solving the marginal problem is an instance of a \tblue{facet enumeration problem}: given the vertices of a convex polytope, determine its facets. This is a well-studied problem in combinatorial optimization for which a variety of algorithms are available~\cite{avis_convexhull_2015}. 
+By solving the marginal constraint problem, what we mean is to determine all the facets of the marginal polytope for a given marginal scenario. Since the vertices of this polytope are precisely the deterministic assignments of values to all variables, which are easy to enumerate, solving the marginal constraint problem is an instance of a \tblue{facet enumeration problem}: given the vertices of a convex polytope, determine its facets. This is a well-studied problem in combinatorial optimization for which a variety of algorithms are available~\cite{avis_convexhull_2015}. 
 
 A generic facet enumeration problem takes a matrix $\bm{V}\in\mathbb{R}^{d\times n}$, which lists the vertices as its columns, and asks for an inequality description of the set of vectors $\bm{b}\in\mathbb{R}^d$ that can be written as a convex combination of the vertices using weights $\bm{x}\in\mathbb{R}^n$ that are nonnegative and normalized,
 \begin{align}
@@ -1274,7 +1282,7 @@ Other algorithms for facet enumeration that are not based on linear quantifier e
 
 It may also be possible to exploit special features of marginal polytopes in order to facilitate their facet enumeration, such as their high degree of symmetry: permuting the outcomes of each variable maps the polytope to itself, which already generates a sizeable symmetry group, and oftentimes there are additional symmetries given by permuting some of the variables. This simplifies the problem of facet enumeration~\cite{bremner_symmetries_2009,Schurmann2013}, and it may be interesting to apply dedicated software\footnote{Such as \href[pdfnewwindow]{http://comopt.ifi.uni-heidelberg.de/software/PANDA/}{\textit{PANDA}}, \href[pdfnewwindow]{http://mathieudutour.altervista.org/Polyhedral/}{\textit{Polyhedral}}, or \href[pdfnewwindow]{http://www.math.uni-rostock.de/~rehn/software/sympol.html}{\textit{SymPol}}. The authors found \textit{SymPol} to be rather effective for some small test problems, using the options ``\texttt{./sympol -a --cdd}".} to the facet enumeration problem of marginal polytopes~\cite{Kaibel2010,rehn_tools_2012,panda_2015}.
 
-\section{Explicit marginal description matrix of the Spiral inflation with binary observed variables}\label{sec:explicitmatrix}
+\section{Explicit Marginal Description Matrix of the Spiral Inflation with Binary Observed Variables}\label{sec:explicitmatrix}
 
 Recall that the five maximal ai-expressible sets of the Spiral inflation are $\{A_1 B_1 C_1\}$, $\{A_1 B_2 C_2\}$, $\{A_2 B_1 C_2\}$, $\{A_2 B_2 C_1\}$ and $\{A_2 B_2 C_2\}$, as illustrated in \cref{fig:simplicialcomplex222}. Taking the variables to be binary, each ai-expressible set corresponds to $2^3=8$ equations pertinent to the marginal problem. The five \emph{sets} of equations which relate the marginal probabilities to a posited joint distribution are given by
 \begin{align}\label[eqs]{eq:marginalequalities222}
@@ -1873,11 +1881,11 @@ The marginal description matrix has 64 columns and 40 rows. For compact presenta
 \end{align}
 \end{comment}
 
-\section{Constraints on marginal distributions from copy-index equivalence relations}\label{sec:coincidingdetails}
+\section{Constraints on Marginal Distributions from Copy-Index Equivalence Relations}\label{sec:coincidingdetails}
 
-In \cref{copyindexequivalence}, we noted that every copy of a variable in an inflation model has the same probabilistic dependence on its parents as every other copy. It followed that for certain pairs of marginal contexts, the marginal distributions in any inflation model are necessarily equal. We now describe how to identify such pairs of contexts. 
+In \cref{copyindexequivalence}, we noted that every copy of a variable in an inflation model has the same probabilistic dependence on its parents as every other copy. It followed that for certain pairs of marginal contexts, the marginal distributions in any inflation model are necessarily equal. We now describe not only how to identify all such pairs of contexts, but also how to identify weak pairs, who's corresponding symmetry imposition cannot help strengthen the final constraints.
 
-Given $\bm{U},\bm{V}\subseteq\nodes{G'}$ in an inflated causal structure $G'$, let us say that a map $\varphi:\bm{U}\to\bm{V}$ is a \tblue{copy isomorphism} if it is a graph isomorphism\footnote{A graph isomorphism is a bijective map between the nodes of one graph and the nodes of another, such that both the map and its inverse take edges to edges.} between $\subgraph{\bm{U}}$ and $\subgraph{\bm{V}}$ such that $\varphi(X)\sim X$ for all $X\in\bm{U}$, meaning that $\varphi$ maps every node $X\in\bm{U}$ to a node $\varphi(X)\in\bm{V}$ that is equivalent to $X$ under dropping the copy-index.
+Given $\bm{U},\bm{V}\subseteq\nodes{G'}$ in an inflated causal structure $G'$, let us say that a map $\varphi:\bm{U}\to\bm{V}$ is a \tblue{copy isomorphism} if it is a graph isomorphism\footnote{A graph isomorphism is a bijective map between the nodes of one graph and the nodes of another, such that both the map and its inverse take edges to edges.} between $\subgraph{\bm{U}}$ and $\subgraph{\bm{V}}$ such that $\varphi(X)\sim X$ for all $X\in\bm{U}$, meaning that $\varphi$ maps every node $X\in\bm{U}$ to a node $\varphi(X)\in\bm{V}$ that is equivalent to $X$ under dropping the copy-index\footnote{\color{purple}Copy isomorphisms can be thought of isomorphisms of \emph{colored} graphs, where every original-scenario variable is given a unique color, but where the copy index is ignored.}.
 
 Furthermore, we say that a copy isomorphism $\varphi : \bm{U}\to\bm{V}$ is an \tblue{inflationary isomorphism} whenever it can be extended to a copy isomorphism on the ancestral subgraphs, $\Phi : \An{\bm{U}}\to\An{\bm{V}}$. 
 A copy isomorphism $\Phi: \An{\bm{U}}\to\An{\bm{V}}$ defines an inflationary isomorphism $\varphi:\bm{U}\to\bm{V}$ if and only if $\Phi(\bm{U}) = \bm{V}$.
@@ -1948,7 +1956,7 @@ Suppose that some joint distribution $P_{\obsnodes{G'}}$ solves the unconstraine
 
 This argument does not apply when the inflationary isomorphism $\varphi:\bm{U}\to\bm{V}$ cannot be extended to a copy automorphism of the entire inflated causal structure. It also does not apply if one uses $d$-separation conditions beyond ancestral independence on the inflated causal structure as additional constraints (\cref{sec:fulldsep}), because in this case the set of compatible distributions is not necessarily convex.  In either of these cases, it is unclear whether or not constraints arising from copy-index equivalence could yield tighter inequalities. 
 
-\section{Using the inflation technique to certify a causal structure as ``interesting"\label{sec:interestingproof}}
+\section{Using the Inflation Technique to Certify a Causal Structure as ``Interesting"\label{sec:interestingproof}}
 
 By considering all possible $d$-separation relations on the observed nodes of a causal structure, one can infer the set of all conditional independence (CI) relations that must hold in any distribution compatible with it. Due to the presence of latent variables, satisfying these CI relations 
 is generally not sufficient for compatibility. Henson, Lal and Pusey (HLP) \cite{pusey2014gdag} introduced the term \tblue{interesting} for those causal structures for which this happens, and derived a partial classification of causal structures into interesting and non-interesting ones by
@@ -2024,7 +2032,7 @@ Finally, it may be worth noting that the inflation depicted in~\cref{fig:Inflate
 \begin{minipage}[t]{0.3\linewidth}
 \centering
 \includegraphics[scale=1]{scen15DAG.pdf}
-\caption{Causal structure \#15 in \cite{pusey2014gdag}. The $d$-separation relations are $C\aindep Y$ and $A \aindep B\,|\,Y$.}\label{fig:GDAG15morecircular}
+\caption{Causal structure \#15 in \cite{pusey2014gdag}. The $d$-separation relations are $C\aindep Y$ and $A \aindep B\,|\,Y$.}\label{fig:GDAG15}
 \end{minipage}
 \hfill
 \begin{minipage}[t]{0.3\linewidth}
@@ -2041,7 +2049,7 @@ Finally, it may be worth noting that the inflation depicted in~\cref{fig:Inflate
 \hfill
 \end{figure}
 
-\subsection{Certifying that HLP's causal structure \#16 is interesting} 
+\subsection{Certifying that Henson-Lal-Pusey's Causal Structure \#16 is ``Interesting"} 
 \label{example:Pienaar}
 
 \begin{figure}[htb]
@@ -2059,17 +2067,17 @@ Finally, it may be worth noting that the inflation depicted in~\cref{fig:Inflate
 \end{minipage}
 \end{figure}
 
-\citet{pianaar2016interesting} identified a distribution which satisfies the only CI relation that must hold among the observed variables in HLP's causal structure \#16, namely, $C\indep Y$, but which is nonetheless incompatible with it:
+\citet{pianaar2016interesting} identified a distribution which satisfies the only CI relation that must hold among the observed variables in  HLP's causal structure \#16 (\cref{fig:GDAG16} here), namely, $C\indep Y$, but which is nonetheless incompatible with it:
 \begin{align}\label{eq:pienaardistro}
-\!    P^{\text{P}}_{A B C Y}:=\frac{[0000]+[0110]+[0001]+[1011]}{4},\quad\text{i.e.,}\quad P^{\text{P}}_{A B C Y}(a b c y)=\begin{cases}\tfrac{1}{4}&\text{if }  y\cdot c = a \text{ and }  (y \oplus 1)\cdot c = b, \\ 0&\text{otherwise}.\end{cases}
+\!    P^{\text{Pienaar}}_{A B C Y}:=\frac{[0000]+[0110]+[0001]+[1011]}{4},\quad\text{i.e.,}\quad P^{\text{Pienaar}}_{A B C Y}(a b c y)=\begin{cases}\tfrac{1}{4}&\text{if }  y\cdot c = a \text{ and }  (y \oplus 1)\cdot c = b, \\ 0&\text{otherwise}.\end{cases}
 \end{align}
 It is useful to compute the conditional on $Y$,
 \begin{align}\label{eq:pienaardistroconditiona}
-  P^{\text{P}}_{A B C|Y}(\cdot \cdot \cdot | y)=\begin{cases}\frac{1}{2}\parenths{[000]+[011]}&\text{if }  y\eql 0, \\ \frac{1}{2}\parenths{[000]+[101]}&\text{if }  y\eql 1.\end{cases}
+  P^{\text{Pienaar}}_{A B C|Y}(\cdot \cdot \cdot | y)=\begin{cases}\frac{1}{2}\parenths{[000]+[011]}&\text{if }  y\eql 0, \\ \frac{1}{2}\parenths{[000]+[101]}&\text{if }  y\eql 1.\end{cases}
 \end{align}
 This makes it evident that the distribution can be described as follows: if $Y=0$, then $A=0$ while $B$ and $C$ are uniformly random and perfectly correlated, while if $Y=1$, then $B=0$ and $A$ and $C$ are uniformly random and perfectly correlated.
 
-Here, we will establish the incompatibility of Pienaar's distribution with HLP's causal structure \#16 using the inflation technique.  To do so, we use the inflation
+Here, we will establish the incompatibility of Pienaar's distribution with HLP's causal structure \#16 (reproduced in \cref{fig:GDAG16new} here) using the inflation technique.  To do so, we use the inflation
 depicted in \cref{fig:Inflated16new}, which we term the {\em Russian dolls} inflation.  
 We will make use of the fact that $\{ A_1 C_1 Y_1\}$, $\{ B_2 C_2 Y_2\}$ and $\{B_2 C_1 Y_2 \}$ are injectable sets, together with the fact that $\{ A_1 C_2 Y_1\}$ is an expressible set. 
 
@@ -2087,28 +2095,28 @@ It follows that the distribution $P_{A_1 C_2 Y_1}$ in the inflation model associ
 \begin{align}
 \begin{split}
 \label{injsnew}
-P_{B_2 C_2 Y_2}(bc y)&= P^{\text{P}}_{BCY}(bc y), \\
-P_{A_1 C_1  Y_1}(ac y)&= P^{\text{P}}_{ACY}(ac y),\\
-P_{B_2 C_1 Y_2}(bc y)&= P^{\text{P}}_{BCY}(bc y),
+P_{B_2 C_2 Y_2}(bc y)&= P^{\text{Pienaar}}_{BCY}(bc y), \\
+P_{A_1 C_1  Y_1}(ac y)&= P^{\text{Pienaar}}_{ACY}(ac y),\\
+P_{B_2 C_1 Y_2}(bc y)&= P^{\text{Pienaar}}_{BCY}(bc y),
 \end{split}
 \end{align} 
 and from \cref{express0} and~\eqref{express1}, as well as the injectability of $\{A_1 B_1 Y_1\}, \{C_2 B_1 Y_1\},$ and $\{B_1 Y_1\}$, 
 we infer that 
 \begin{align}
-P_{A_1 C_2 Y_1}(a c y) = \sum_{b} \frac{P^{\text{P}}_{A B Y}(a b y) P^{\text{P}}_{C B Y}(c b y) }{P^{\text{P}}_{B Y}(b y)}.
+P_{A_1 C_2 Y_1}(a c y) = \sum_{b} \frac{P^{\text{Pienaar}}_{A B Y}(a b y) P^{\text{Pienaar}}_{C B Y}(c b y) }{P^{\text{Pienaar}}_{B Y}(b y)}.
 \label{express1old}
 \end{align}
 
 We are now in a position to derive a contradiction.  
 Our derivation will begin by setting $Y_2=0$ and $Y_1=1$.  It is therefore convenient to condition on $Y_1$ and $Y_2$ in the distributions of interest and set them equal to these values, and to express these in terms of the conditioned Pienaar distribution via \cref{injsnew},
 \begin{align}
-P_{B_2 C_2 |Y_2}(bc| 0)&= P^{\text{P}}_{BC|Y}(bc|0) \nonumber\\
-P_{A_1 C_1  |Y_1}(ac|1)&= P^{\text{P}}_{AC|Y}(ac|1)\nonumber\\
-P_{B_2 C_1 |Y_2}(bc|0)&= P^{\text{P}}_{BC|Y}(bc|0) 
+P_{B_2 C_2 |Y_2}(bc| 0)&= P^{\text{Pienaar}}_{BC|Y}(bc|0) \nonumber\\
+P_{A_1 C_1  |Y_1}(ac|1)&= P^{\text{Pienaar}}_{AC|Y}(ac|1)\nonumber\\
+P_{B_2 C_1 |Y_2}(bc|0)&= P^{\text{Pienaar}}_{BC|Y}(bc|0) 
 \end{align} 
 and similarly from \cref{express1old},
 \begin{align}
-P_{A_1 C_2 |Y_1}(ac|1)  &=\sum_{b} \frac{P^{\text{P}}_{A B |Y}(a b| 1) P^{\text{P}}_{C B| Y}(c b |1) }{P^{\text{P}}_{B |Y}(b |1)}.
+P_{A_1 C_2 |Y_1}(ac|1)  &=\sum_{b} \frac{P^{\text{Pienaar}}_{A B |Y}(a b| 1) P^{\text{Pienaar}}_{C B| Y}(c b |1) }{P^{\text{Pienaar}}_{B |Y}(b |1)}.
 \end{align}
 From these and \cref{eq:pienaardistroconditiona}, we infer
 \begin{align}
@@ -2137,7 +2145,7 @@ These three statements imply that
 However, \cref{inj4} implies that the probability of $C_2=0\; \text{and}\;A_1=0$ is only $p=1/4$.  
 We have therefore arrived at a contradiction.  This establishes the incompatibility of the Pienaar distribution with HLP's causal structure \#16. Our reasoning is again a form of the Hardy-type arguments from \cref{sec:TSEM}.
 
-\subsection{Deriving a causal compatibility inequality for HLP's causal structure \#16}
+\subsection{Deriving a Causal Compatibility Inequality for HLP's Causal Structure \#16}
 
 We can also turn the above argument into an inequality. Using the methods of \cref{sec:TSEM}, it is straightforward to show that the assumption of a joint distribution on $\{ A_1 B_2 C_1 Y_1 Y_2\}$ implies the inequality on marginals,
 \begin{align}\label{startingineq}
@@ -2171,16 +2179,17 @@ this inequality can be expressed in the form
 \end{align}
 This inequality is strong enough to witness the incompatibility of Pienaar's distribution \cref{eq:pienaardistro} with HLP's causal structure $\#16$.
 
-\subsection{Certifying that HLP's causal structures \#15 and \#20 are interesting} 
+\subsection{Certifying that Henson-Lal-Pusey's Causal Structures \#15 and \#20 are ``Interesting"} 
 
-Any distribution $P_{ABCY}$ that is incompatible with HLP's causal structure \#16 is also incompatible with HLP's causal structures \#15 and \#20 because the causal models defined by HLP's causal structures \#15 and \#20 are included among the causal models defined by HLP's causal structure \#16.  Consequently, \cref{ntccineqDAG} is also a valid causal compatibility inequality for HLP's causal structure \#15 and for HLP's causal structure \#20.
+Any distribution $P_{ABCY}$ that is incompatible with HLP's causal structure \#16 is also incompatible with HLP's causal structures \#15 (\cref{fig:GDAG15} here) and \#20 (\cref{fig:GDAG20} here) because the causal models defined by HLP's causal structures \#15 and \#20 are included among the causal models defined by HLP's causal structure \#16 (\cref{fig:GDAG16} here).  Consequently, \cref{ntccineqDAG} is also a valid causal compatibility inequality for HLP's causal structure \#15 and for HLP's causal structure \#20.
 
-It follows that if one can find a distribution that exhibits all of the observable CI relations implied by HLP's causal structures \#15 and \#20, namely, $C\indep Y$, $A\indep B\,|\,Y$ and $A\indep Y\,|\,B$, and which moreover is incompatible with HLP's causal structure \#16, then this proves---in one go---that HLP's causal structures \#15, \#16 and \#20 are interesting. Any distribution $P_{ABCY}$ with the conditional
+It follows that if one can find a distribution that exhibits all of the observable CI relations implied by \emph{either} of HLP's causal structures \#15 and \#20, namely, $C\indep Y$ (per \#15 \emph{and} \#16), $A\indep B\,|\,Y$ (per \#15), and $A\indep Y\,|\,B$ (per \#20), and which moreover is \emph{not} compatible with HLP's causal structure \#16, then this proves---in one go---that HLP's causal structures \#15, \#16 and \#20 are interesting. Any distribution $P_{ABCY}$ with the conditional\footnote{We take the definition of the conditional $P_{A B C|Y}$ from the distribution $P_{ABCY}$ as also implying $P_Y(0) > 0$ and $P_Y(1) > 0$.}
 \begin{align}\label{eq:allcirespectingdistro}
   P_{A B C|Y}(a b c| y):=
   \begin{cases}\frac{1}{4}\parenths{[000]+[111]+[011]+[100]}&\text{if }  y\eql 0, \\ \frac{1}{4}\parenths{[000]+[111]+[010]+[101]}&\text{if }  y\eql 1,\end{cases}
 \end{align}
-and any marginal $P_Y$ satisfying $P_Y(0) > 0$ and $P_Y(1) > 0$, achieves this because it satisfies the required CI relations while also violating \cref{ntccineqDAG}.
+%and any marginal $P_Y$ satisfying $P_Y(0) > 0$ and $P_Y(1) > 0$, 
+achieves this because it satisfies the required CI relations while also violating \cref{ntccineqDAG}.
 
 \begin{comment}
 Consider now the Rocket inflation for HLP's causal structure \#16 (\cref{fig:GDAG16}), depicted in \cref{fig:Inflated16}. All four of the expressible sets that we will consider
@@ -2228,7 +2237,7 @@ Even better, however, is that \cref{eq:nontrivpolyfor16} can be used to show tha
 Note that $P^{\text{SU}}$ simultaneously respects  $C\indep Y$, $A\indep B|Y$, and $A\indep Y|B$, meaning that it does noes conflict with the observable conditional independence relations of causal structures \#15, \#16, and \#20. Neverless $P^{\text{SU}}$ is incompatible with all three of those causal structures as a consquence of its incompatibility with causal structure \#16: any distribution which \emph{could} be generated by causal structures \#15 and \#20 is a distribution which can also be generated by causal structure \#16. Therefore we have certified all three causal scenarios as formally interesting, in a single shot. 
 \end{comment}
 
-\section{The copy lemma and non-Shannon type entropic inequalities}\label{sec:NonShannon}
+\section{The Copy Lemma and Non-Shannon type Entropic Inequalities}\label{sec:NonShannon}
 
 The inflation technique may also be useful outside beyond causal inference. As we argue in the following, inflation is secretly what underlies the \tblue{Copy Lemma} in the derivation of non-Shannon type entropic inequalities~\cite[Chapter~15]{yeung_network_2008}. The following formulation of the Copy Lemma is the one of \citet{kaced_equivalence_2013}.
 
@@ -2264,10 +2273,10 @@ While it is also not hard to write down the distribution constructed in the proo
 \end{minipage}
 \end{figure}
 
-\section{Causal compatibility inequalities for the Triangle scenario in machine-readable format}
+\section{Causal Compatibility Inequalities for the Triangle Scenario in Machine-Readable Format}
 \label{sec:38ineqs}
 
-\cref{tab:machinereadable} lists all the numerically irredundant polynomial inequalities resulting from consistent marginals of the Spiral inflation of \cref{fig:Tri222}. Stronger inequalities can be derived be considering larger inflations, such as the Web inflation of \cref{fig:TriFullDouble}. Each row in the table specifies the coefficient of the corresponding correlator monomial. As noted previously, these inequalities also follow from the hypergraph transversals technique per \cref{sec:TSEM}.  
+\cref{tab:machinereadable} lists the fifty two numerically irredundant polynomial inequalities resulting from consistent marginals of the Spiral inflation of \cref{fig:Tri222}. Stronger inequalities can be derived be considering larger inflations, such as the Web inflation of \cref{fig:TriFullDouble}. Each row in the table specifies the coefficient of the corresponding correlator monomial. As noted previously, these inequalities also follow from the hypergraph transversals technique per \cref{sec:TSEM}.  
 
 \begin{table*}[hb]\centering\caption{A machine-readable and closed-under-symmetries version of the table in \cref{sec:CCineqs}. 
  }\label{tab:machinereadable}
@@ -2381,7 +2390,7 @@ We here present the 37 distinct symmetry classes of causal compatibility inequal
 \end{table*}
 \end{comment}
 
-\section{Recovering the Bell inequalities from the inflation technique}
+\section{Recovering the Bell Inequalities from the Inflation Technique}
 \label{sec:Bellscenarios}
 
 To further illustrate the power of the inflation technique, we now demonstrate how to recover all Bell inequalities~\cite{Brunner2013Bell,bell1966lhvm,CHSHOriginal} via our method. To keep things simple we only discuss the case of a bipartite Bell scenario with two values for both ``settings'' and ``outcome'' variables, but the case of more parties and/or more values per settings or outcome variable is totally analogous.
