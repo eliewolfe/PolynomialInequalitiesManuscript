@@ -891,7 +891,7 @@ In this notation, the marginal satisfiability problem consists of determining wh
 where the component-wise inequality $\bm{x}\geq\bm{0}$ enforces the constraint that $P_{\bm{X}}$ is a probability distribution. 
 This is clearly a linear program.
 
-In the example of \cref{fig:simplicialcomplex222} with binary variables, $\bm{M}$ is a $48\times 64$ matrix, so that $\bm{M}\bm{x}=\bm{b}$ represents 48 equations and $\bm{x} \geq \bm{0}$ represents 64 inequalities; explicit representations of  $\bm{M}$, $\bm{x}$, and $\bm{b}$ for this example can be found in \cref{sec:explicitmatrix}.
+In the example of \cref{fig:simplicialcomplex222} with binary variables, $\bm{M}$ is a $48\times 64$ matrix, so that $\bm{M}\bm{x}=\bm{b}$ represents 48 equations and $\bm{x} \geq \bm{0}$ represents 64 inequalities; explicit representations of  $\bm{M}$, $\bm{x}$, and $\bm{b}$ for the simpler example of the Cut inflation can be found in \cref{sec:explicitmatrix}.
 A single linear program can then assess whether there is a solution in $\bm{x}$ for a given marginal distribution vector $\bm{b}$. If this is not the case, then the marginal satisfiability problem has a negative answer. 
 
 Since linear programming is quite easy, probing specific distributions for compatibility for a given inflated causal structure is computationally inexpensive. For instance, using the Web inflation of the Triangle scenario (\cref{fig:TriFullDouble}), which contains a large number of observed variables, our numerical computations have reproduced the result of~\cite[Theorem~2.16]{fritz2012bell}, that a certain distribution considered therein is incompatible with the Triangle scenario\footnote{This distribution {\em is}, however, quantum-compatible with the Triangle scenario (\cref{sec:classicallity}).}.
@@ -1282,6 +1282,7 @@ Other algorithms for facet enumeration that are not based on linear quantifier e
 
 It may also be possible to exploit special features of marginal polytopes in order to facilitate their facet enumeration, such as their high degree of symmetry: permuting the outcomes of each variable maps the polytope to itself, which already generates a sizeable symmetry group, and oftentimes there are additional symmetries given by permuting some of the variables. This simplifies the problem of facet enumeration~\cite{bremner_symmetries_2009,Schurmann2013}, and it may be interesting to apply dedicated software\footnote{Such as \href[pdfnewwindow]{http://comopt.ifi.uni-heidelberg.de/software/PANDA/}{\textit{PANDA}}, \href[pdfnewwindow]{http://mathieudutour.altervista.org/Polyhedral/}{\textit{Polyhedral}}, or \href[pdfnewwindow]{http://www.math.uni-rostock.de/~rehn/software/sympol.html}{\textit{SymPol}}. The authors found \textit{SymPol} to be rather effective for some small test problems, using the options ``\texttt{./sympol -a --cdd}".} to the facet enumeration problem of marginal polytopes~\cite{Kaibel2010,rehn_tools_2012,panda_2015}.
 
+\begin{comment}
 \section{Explicit Marginal Description Matrix of the Spiral Inflation with Binary Observed Variables}\label{sec:explicitmatrix}
 
 Recall that the five maximal ai-expressible sets of the Spiral inflation are $\{A_1 B_1 C_1\}$, $\{A_1 B_2 C_2\}$, $\{A_2 B_1 C_2\}$, $\{A_2 B_2 C_1\}$ and $\{A_2 B_2 C_2\}$, as illustrated in \cref{fig:simplicialcomplex222}. Taking the variables to be binary, each ai-expressible set corresponds to $2^3=8$ equations pertinent to the marginal problem. The five \emph{sets} of equations which relate the marginal probabilities to a posited joint distribution are given by
@@ -1294,7 +1295,7 @@ Recall that the five maximal ai-expressible sets of the Spiral inflation are $\{
 &\forall{a_2 b_2 c_2}:\;\p[A_2 B_2 C_2]{a_2 b_2 c_2} = \sum\nolimits_{a_1 b_1 c_1}\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}.
 \end{split}
 \end{align}
-As we noted in the main text, such conditions can be expressed in terms of a single matrix equality, $\bm{M} \bm{x} = \bm{b}$ where $\bm{x}$ is the \tblue{joint distribution vector},  $\bm{b}$ is the \tblue{marginal distribution vector}  and $\bm{M}$ is the \tblue{marginal description matrix}.  In the Sprial example, we have:
+As we noted in the main text, such conditions can be expressed in terms of a single matrix equality, $\bm{M} \bm{x} = \bm{b}$ where $\bm{x}$ is the \tblue{joint distribution vector},  $\bm{b}$ is the \tblue{marginal distribution vector}  and $\bm{M}$ is the \tblue{marginal description matrix}.  In the Spiral example, we have:
 \begin{align}
 \resizebox*{!}{\dimexpr\textheight-2\baselineskip\relax}{
    \( 
@@ -1588,304 +1589,86 @@ is
 \right).
 \)}
 \end{align}
-
-\begin{comment}
-The marginal description matrix has 64 columns and 40 rows. For compact presentation we present the matrix of zeroes and ones in sparse form, where blank grids indicate zero and $\bullet$ indicated one. We have also placed the submatrix corresponding to each preinjectable set in a separate grid. 
-\begin{align}
-\hspace{-\mathindent}\resizebox{\linewidth}{!}{\(
-\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|
-   c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
-  \hline
- \bullet & \bullet & & & \bullet & \bullet & & & & &
-   & & & & & & \bullet & \bullet & & & \bullet &
-   \bullet & & & & & & & & & &
-   & & & & & & & & & &
-   & & & & & & & & & &
-   & & & & & & & & & &
-   & & \\\hline
- & & \bullet & \bullet & & & \bullet & \bullet & & &
-   & & & & & & & & \bullet & \bullet & &
-   & \bullet & \bullet & & & & & & & &
-   & & & & & & & & & &
-   & & & & & & & & & &
-   & & & & & & & & & &
-   & & \\\hline
- & & & & & & & & \bullet & \bullet &
-   & & \bullet & \bullet & & & & & & & &
-   & & & \bullet & \bullet & & & \bullet & \bullet & &
-   & & & & & & & & & &
-   & & & & & & & & & &
-   & & & & & & & & & &
-   & & \\\hline
- & & & & & & & & & & \bullet
-   & \bullet & & & \bullet & \bullet & & & & & &
-   & & & & & \bullet & \bullet & & & \bullet &
-   \bullet & & & & & & & & & &
-   & & & & & & & & & &
-   & & & & & & & & & &
-   & & \\\hline
- & & & & & & & & & &
-   & & & & & & & & & & &
-   & & & & & & & & & &
-   & \bullet & \bullet & & & \bullet & \bullet & & & &
-   & & & & & & & \bullet & \bullet & &
-   & \bullet & \bullet & & & & & & & &
-   & & \\\hline
- & & & & & & & & & &
-   & & & & & & & & & & &
-   & & & & & & & & & &
-   & & & \bullet & \bullet & & & \bullet & \bullet & &
-   & & & & & & & & & \bullet &
-   \bullet & & & \bullet & \bullet & & & & & &
-   & & \\\hline
- & & & & & & & & & &
-   & & & & & & & & & & &
-   & & & & & & & & & &
-   & & & & & & & & & \bullet &
-   \bullet & & & \bullet & \bullet & & & & & &
-   & & & & & \bullet & \bullet & & & \bullet &
-   \bullet & & \\\hline
- & & & & & & & & & &
-   & & & & & & & & & & &
-   & & & & & & & & & &
-   & & & & & & & & & &
-   & \bullet & \bullet & & & \bullet & \bullet & & & &
-   & & & & & & & \bullet & \bullet & &
-   & \bullet & \bullet \\\hline\hline
- \bullet & & \bullet & & & & & & \bullet & & \bullet
-   & & & & & & \bullet & & \bullet & & &
-   & & & \bullet & & \bullet & & & & &
-   & & & & & & & & & &
-   & & & & & & & & & &
-   & & & & & & & & & &
-   & & \\\hline
- & \bullet & & \bullet & & & & & & \bullet &
-   & \bullet & & & & & & \bullet & & \bullet & &
-   & & & & \bullet & & \bullet & & & &
-   & & & & & & & & & &
-   & & & & & & & & & &
-   & & & & & & & & & &
-   & & \\\hline
- & & & & \bullet & & \bullet & & & &
-   & & \bullet & & \bullet & & & & & & \bullet &
-   & \bullet & & & & & & \bullet & & \bullet &
-   & & & & & & & & & &
-   & & & & & & & & & &
-   & & & & & & & & & &
-   & & \\\hline
- & & & & & \bullet & & \bullet & & &
-   & & & \bullet & & \bullet & & & & & &
-   \bullet & & \bullet & & & & & & \bullet & &
-   \bullet & & & & & & & & & &
-   & & & & & & & & & &
-   & & & & & & & & & &
-   & & \\\hline
- & & & & & & & & & &
-   & & & & & & & & & & &
-   & & & & & & & & & &
-   & \bullet & & \bullet & & & & & & \bullet &
-   & \bullet & & & & & & \bullet & & \bullet &
-   & & & & & \bullet & & \bullet & & &
-   & & \\\hline
- & & & & & & & & & &
-   & & & & & & & & & & &
-   & & & & & & & & & &
-   & & \bullet & & \bullet & & & & & &
-   \bullet & & \bullet & & & & & & \bullet & &
-   \bullet & & & & & & \bullet & & \bullet & &
-   & & \\\hline
- & & & & & & & & & &
-   & & & & & & & & & & &
-   & & & & & & & & & &
-   & & & & & \bullet & & \bullet & & &
-   & & & \bullet & & \bullet & & & & &
-   & \bullet & & \bullet & & & & & & \bullet &
-   & \bullet & \\\hline
- & & & & & & & & & &
-   & & & & & & & & & & &
-   & & & & & & & & & &
-   & & & & & & \bullet & & \bullet & &
-   & & & & \bullet & & \bullet & & & &
-   & & \bullet & & \bullet & & & & & &
-   \bullet & & \bullet \\\hline\hline
- \bullet & & \bullet & & \bullet & & \bullet & & & &
-   & & & & & & & & & & &
-   & & & & & & & & & &
-   & \bullet & & \bullet & & \bullet & & \bullet & & &
-   & & & & & & & & & &
-   & & & & & & & & & &
-   & & \\\hline
- & \bullet & & \bullet & & \bullet & & \bullet & & &
-   & & & & & & & & & & &
-   & & & & & & & & & &
-   & & \bullet & & \bullet & & \bullet & & \bullet & &
-   & & & & & & & & & &
-   & & & & & & & & & &
-   & & \\\hline
- & & & & & & & & \bullet & & \bullet
-   & & \bullet & & \bullet & & & & & & &
-   & & & & & & & & & &
-   & & & & & & & & & \bullet &
-   & \bullet & & \bullet & & \bullet & & & & &
-   & & & & & & & & & &
-   & & \\\hline
- & & & & & & & & & \bullet &
-   & \bullet & & \bullet & & \bullet & & & & & &
-   & & & & & & & & & &
-   & & & & & & & & & &
-   \bullet & & \bullet & & \bullet & & \bullet & & & &
-   & & & & & & & & & &
-   & & \\\hline
- & & & & & & & & & &
-   & & & & & & \bullet & & \bullet & & \bullet &
-   & \bullet & & & & & & & & &
-   & & & & & & & & & &
-   & & & & & & & \bullet & & \bullet &
-   & \bullet & & \bullet & & & & & & &
-   & & \\\hline
- & & & & & & & & & &
-   & & & & & & & \bullet & & \bullet & &
-   \bullet & & \bullet & & & & & & & &
-   & & & & & & & & & &
-   & & & & & & & & \bullet & &
-   \bullet & & \bullet & & \bullet & & & & & &
-   & & \\\hline
- & & & & & & & & & &
-   & & & & & & & & & & &
-   & & & \bullet & & \bullet & & \bullet & & \bullet &
-   & & & & & & & & & &
-   & & & & & & & & & &
-   & & & & & \bullet & & \bullet & & \bullet &
-   & \bullet & \\\hline
- & & & & & & & & & &
-   & & & & & & & & & & &
-   & & & & \bullet & & \bullet & & \bullet & &
-   \bullet & & & & & & & & & &
-   & & & & & & & & & &
-   & & & & & & \bullet & & \bullet & &
-   \bullet & & \bullet \\\hline\hline
- \bullet & \bullet & & & & & & & \bullet & \bullet &
-   & & & & & & & & & & &
-   & & & & & & & & & &
-   & \bullet & \bullet & & & & & & & \bullet &
-   \bullet & & & & & & & & & &
-   & & & & & & & & & &
-   & & \\\hline
- & & \bullet & \bullet & & & & & & & \bullet
-   & \bullet & & & & & & & & & &
-   & & & & & & & & & &
-   & & & \bullet & \bullet & & & & & &
-   & \bullet & \bullet & & & & & & & &
-   & & & & & & & & & &
-   & & \\\hline
- & & & & \bullet & \bullet & & & & &
-   & & \bullet & \bullet & & & & & & & &
-   & & & & & & & & & &
-   & & & & & \bullet & \bullet & & & &
-   & & & \bullet & \bullet & & & & & &
-   & & & & & & & & & &
-   & & \\\hline
- & & & & & & \bullet & \bullet & & &
-   & & & & \bullet & \bullet & & & & & &
-   & & & & & & & & & &
-   & & & & & & & \bullet & \bullet & &
-   & & & & & \bullet & \bullet & & & &
-   & & & & & & & & & &
-   & & \\\hline
- & & & & & & & & & &
-   & & & & & & \bullet & \bullet & & & &
-   & & & \bullet & \bullet & & & & & &
-   & & & & & & & & & &
-   & & & & & & & \bullet & \bullet & &
-   & & & & & \bullet & \bullet & & & &
-   & & \\\hline
- & & & & & & & & & &
-   & & & & & & & & \bullet & \bullet & &
-   & & & & & \bullet & \bullet & & & &
-   & & & & & & & & & &
-   & & & & & & & & & \bullet &
-   \bullet & & & & & & & \bullet & \bullet & &
-   & & \\\hline
- & & & & & & & & & &
-   & & & & & & & & & & \bullet &
-   \bullet & & & & & & & \bullet & \bullet & &
-   & & & & & & & & & &
-   & & & & & & & & & &
-   & \bullet & \bullet & & & & & & & \bullet &
-   \bullet & & \\\hline
- & & & & & & & & & &
-   & & & & & & & & & & &
-   & \bullet & \bullet & & & & & & & \bullet &
-   \bullet & & & & & & & & & &
-   & & & & & & & & & &
-   & & & \bullet & \bullet & & & & & &
-   & \bullet & \bullet \\\hline\hline
- \bullet & & \bullet & & & & & & \bullet & & \bullet
-   & & & & & & & & & & &
-   & & & & & & & & & &
-   & \bullet & & \bullet & & & & & & \bullet &
-   & \bullet & & & & & & & & &
-   & & & & & & & & & &
-   & & \\\hline
- & \bullet & & \bullet & & & & & & \bullet &
-   & \bullet & & & & & & & & & &
-   & & & & & & & & & &
-   & & \bullet & & \bullet & & & & & &
-   \bullet & & \bullet & & & & & & & &
-   & & & & & & & & & &
-   & & \\\hline
- & & & & \bullet & & \bullet & & & &
-   & & \bullet & & \bullet & & & & & & &
-   & & & & & & & & & &
-   & & & & & \bullet & & \bullet & & &
-   & & & \bullet & & \bullet & & & & &
-   & & & & & & & & & &
-   & & \\\hline
- & & & & & \bullet & & \bullet & & &
-   & & & \bullet & & \bullet & & & & & &
-   & & & & & & & & & &
-   & & & & & & \bullet & & \bullet & &
-   & & & & \bullet & & \bullet & & & &
-   & & & & & & & & & &
-   & & \\\hline
- & & & & & & & & & &
-   & & & & & & \bullet & & \bullet & & &
-   & & & \bullet & & \bullet & & & & &
-   & & & & & & & & & &
-   & & & & & & & \bullet & & \bullet &
-   & & & & & \bullet & & \bullet & & &
-   & & \\\hline
- & & & & & & & & & &
-   & & & & & & & \bullet & & \bullet & &
-   & & & & \bullet & & \bullet & & & &
-   & & & & & & & & & &
-   & & & & & & & & \bullet & &
-   \bullet & & & & & & \bullet & & \bullet & &
-   & & \\\hline
- & & & & & & & & & &
-   & & & & & & & & & & \bullet &
-   & \bullet & & & & & & \bullet & & \bullet &
-   & & & & & & & & & &
-   & & & & & & & & & &
-   & \bullet & & \bullet & & & & & & \bullet &
-   & \bullet & \\\hline
- & & & & & & & & & &
-   & & & & & & & & & & &
-   \bullet & & \bullet & & & & & & \bullet & &
-   \bullet & & & & & & & & & &
-   & & & & & & & & & &
-   & & \bullet & & \bullet & & & & & &
-   \bullet & & \bullet \\\hline
-\end{array}
-\)}
-\end{align}
 \end{comment}
+
+\section{Explicit Marginal Description Matrix of the Cut Inflation with Binary Observed Variables}\label{sec:explicitmatrix}
+
+The three maximal ai-expressible sets of the Cut inflation (\cref{fig:TriDagSubA2B1C1v2} on Pg. \pageref{fig:TriDagSubA2B1C1v2}) are $\{A_2 B_1\}$, $\{B_1 C_1\}$, and $\{A_2 C_1\}$. Taking the variables to be binary, each ai-expressible set corresponds to $2^2=4$ equations pertinent to the marginal problem. The three \emph{sets} of equations which relate the marginal probabilities to a posited joint distribution are given by
+\begin{align}\label[eqs]{eq:marginalequalities222}
+\begin{split}
+&\forall{a_2 b_1}:\;\p[A_2 B_1]{a_2 b_1} = \sum\nolimits_{c_1}\p[A_2 B_1 C_1]{a_2 b_1 c_1 },\\
+&\forall{b_1 c_1}:\;\p[B_1 C_1]{b_1 c_1} = \sum\nolimits_{a_2}\p[A_2 B_1 C_1]{a_2 b_1 c_1 },\\
+&\forall{a_2 c_1}:\;\p[A_2 C_1]{a_2 c_1} = \sum\nolimits_{b_1}\p[A_2 B_1 C_1]{a_2 b_1 c_1 }.
+\end{split}
+\end{align}
+As we noted in the main text, such conditions can be expressed in terms of a single matrix equality, $\bm{M} \bm{x} = \bm{b}$ where $\bm{x}$ is the \tblue{joint distribution vector},  $\bm{b}$ is the \tblue{marginal distribution vector}  and $\bm{M}$ is the \tblue{marginal description matrix}.  In the Cut example, the joint distribution vector $\bm{x}$ has 8 elements, whereas the marginal distribution vector $\bm{b}$ has 12, i.e.
+\begin{align}
+\bm{x}=\begin{pmatrix}
+ P_{A_2 B_1 C_1}(0 0 0) \\
+ P_{A_2 B_1 C_1}(0 0 1) \\
+ P_{A_2 B_1 C_1}(0 1 0) \\
+ P_{A_2 B_1 C_1}(0 1 1) \\
+ P_{A_2 B_1 C_1}(1 0 0) \\
+ P_{A_2 B_1 C_1}(1 0 1) \\
+ P_{A_2 B_1 C_1}(1 1 0) \\
+ P_{A_2 B_1 C_1}(1 1 1)
+\end{pmatrix}
+,\qquad
+\bm{b}=
+\begin{pmatrix}
+ p_{A_2 B_1}(0 0) \\
+ p_{A_2 B_1}(0 1) \\
+ p_{A_2 B_1}(1 0) \\
+ p_{A_2 B_1}(1 1) \\
+ p_{A_2 C_1}(0 0) \\
+ p_{A_2 C_1}(0 1) \\
+ p_{A_2 C_1}(1 0) \\
+ p_{A_2 C_1}(1 1) \\
+ p_{B_1 C_1}(0 0) \\
+ p_{B_1 C_1}(0 1) \\
+ p_{B_1 C_1}(1 0) \\
+ p_{B_1 C_1}(1 1)
+\end{pmatrix}=
+\begin{pmatrix}
+ P_{A_2 B_1 C_1}(0 0 \_) \\
+ P_{A_2 B_1 C_1}(0 1 \_) \\
+ P_{A_2 B_1 C_1}(1 0 \_) \\
+ P_{A_2 B_1 C_1}(1 1 \_) \\
+ P_{A_2 B_1 C_1}(0 \_ 0) \\
+ P_{A_2 B_1 C_1}(0 \_ 1) \\
+  P_{A_2 B_1 C_1}(1 \_ 0) \\
+ P_{A_2 B_1 C_1}(1 \_ 1) \\
+ P_{A_2 B_1 C_1}(\_ 0 0) \\
+ P_{A_2 B_1 C_1}(\_ 0 1) \\
+ P_{A_2 B_1 C_1}(\_ 1 0) \\
+ P_{A_2 B_1 C_1}(\_ 1 1) 
+\end{pmatrix},
+\end{align}
+and hence marginal description matrix $\bm{M}$ is a $12\times 8$ matrix of zeroes and ones, i.e.
+\begin{align}
+\bm{M}=\begin{pmatrix}
+ \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
+ {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
+ {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
+ {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} \\
+ \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
+ {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
+ {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} \\
+ {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} \\
+ \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
+ {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
+ {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} \\
+ {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} 
+\end{pmatrix}
+\end{align}
+such that $\bm{M}\bm{x}=\bm{b}$ per \cref{eq:marginalproblemgeneric}.
+
 
 \section{Constraints on Marginal Distributions from Copy-Index Equivalence Relations}\label{sec:coincidingdetails}
 
 In \cref{copyindexequivalence}, we noted that every copy of a variable in an inflation model has the same probabilistic dependence on its parents as every other copy. It followed that for certain pairs of marginal contexts, the marginal distributions in any inflation model are necessarily equal. We now describe not only how to identify all such pairs of contexts, but also how to identify weak pairs, who's corresponding symmetry imposition cannot help strengthen the final constraints.
 
-Given $\bm{U},\bm{V}\subseteq\nodes{G'}$ in an inflated causal structure $G'$, let us say that a map $\varphi:\bm{U}\to\bm{V}$ is a \tblue{copy isomorphism} if it is a graph isomorphism\footnote{A graph isomorphism is a bijective map between the nodes of one graph and the nodes of another, such that both the map and its inverse take edges to edges.} between $\subgraph{\bm{U}}$ and $\subgraph{\bm{V}}$ such that $\varphi(X)\sim X$ for all $X\in\bm{U}$, meaning that $\varphi$ maps every node $X\in\bm{U}$ to a node $\varphi(X)\in\bm{V}$ that is equivalent to $X$ under dropping the copy-index\footnote{\color{purple}Copy isomorphisms can be thought of isomorphisms of \emph{colored} graphs, where every original-scenario variable is given a unique color, but where the copy index is ignored.}.
+Given $\bm{U},\bm{V}\subseteq\nodes{G'}$ in an inflated causal structure $G'$, let us say that a map $\varphi:\bm{U}\to\bm{V}$ is a \tblue{copy isomorphism} if it is a graph isomorphism\footnote{A graph isomorphism is a bijective map between the nodes of one graph and the nodes of another, such that both the map and its inverse take edges to edges.} between $\subgraph{\bm{U}}$ and $\subgraph{\bm{V}}$ such that $\varphi(X)\sim X$ for all $X\in\bm{U}$, meaning that $\varphi$ maps every node $X\in\bm{U}$ to a node $\varphi(X)\in\bm{V}$ that is equivalent to $X$ under dropping the copy-index\footnote{\color{purple}Copy isomorphisms can be thought of isomorphisms of (equitably) \tblue{colored} directed graphs \cite{lopez2014conauto,mckar2014isomorphism}, where every original-scenario variable in the inflated causal structure is given a unique color but such that the copy index is ignored.}.
 
 Furthermore, we say that a copy isomorphism $\varphi : \bm{U}\to\bm{V}$ is an \tblue{inflationary isomorphism} whenever it can be extended to a copy isomorphism on the ancestral subgraphs, $\Phi : \An{\bm{U}}\to\An{\bm{V}}$. 
 A copy isomorphism $\Phi: \An{\bm{U}}\to\An{\bm{V}}$ defines an inflationary isomorphism $\varphi:\bm{U}\to\bm{V}$ if and only if $\Phi(\bm{U}) = \bm{V}$.
