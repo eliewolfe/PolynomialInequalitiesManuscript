@@ -149,7 +149,8 @@ anchorcolor=OliveGreen}
 
 The problem of causal inference is to determine if a given probability distribution on observed variables is compatible with some causal structure. The difficult case is when the causal structure includes latent variables.  We here introduce the \emph{inflation technique} for tackling this problem. An inflation of a causal structure is a new causal structure that can contain multiple copies of each of the original variables, but where the ancestry of each copy mirrors that of the original. 
 %\color{cyan} Given a distribution of the observed variables that is compatible with the original causal structure, and a distribution over the copies that is compatible with the inflated causal structure, it can be shown that the marginal distributions of certain subsets of the copies are expressible as functions of the marginal distributions of certain subsets of the original variables. It follows that compatibility constraints for the inflation can be translated to compatibility constraints for the original causal structure. \color{black}
-\color{olive} To every distribution of the observed variables that is compatible with the original causal structure, we associate a family of marginal distributions on the inflated causal structure by expressing them as functions of some of the original distribution's marginals. It follows that compatibility constraints for the inflation can be translated into compatibility constraints for the original causal structure. \color{black}
+%\color{olive} To every distribution of the observed variables that is compatible with the original causal structure, we associate a family of marginal distributions on the inflated causal structure by expressing them as functions of some of the original distribution's marginals. It follows that compatibility constraints for the inflation can be translated into compatibility constraints for the original causal structure. \color{black}
+\color{cyan} To every distribution of the observed variables that is compatible with the original causal structure, we can identify marginal distributions on certain subsets of the copies (expressed as functions of some of the original distribution's marginals) that are compatible with the inflated causal structure. It follows that compatibility constraints for the inflation can be translated into compatibility constraints for the original causal structure.  \color{black}
  Even if the constraints at the level of inflation are weak, such as observable statistical independences implied by disjoint causal ancestry, the translated constraints can be quite strong. We apply this method to derive new inequalities whose violation by a distribution witnesses that distribution's incompatibility with the causal structure (of which Bell inequalities and Pearl's instrumental inequality are prominent examples). We describe an algorithm for deriving all such inequalities for the original causal structure that follow from ancestral independences in the inflation. Applied to an inflation of the Triangle scenario with binary variables, it yields inequalities that are stronger in at least some aspects than those obtainable by existing methods. We also describe an algorithm that derives a weaker set of inequalities but is much more efficient. Finally, we discuss which inflations are such that the inequalities one obtains from them remain valid even for quantum (and post-quantum) generalizations of the notion of a causal model.
 
 \end{abstract}
@@ -1602,7 +1603,7 @@ The three maximal ai-expressible sets of the Cut inflation (\cref{fig:TriDagSubA
 &\forall{a_2 c_1}:\;\p[A_2 C_1]{a_2 c_1} = \sum\nolimits_{b_1}\p[A_2 B_1 C_1]{a_2 b_1 c_1 }.
 \end{split}
 \end{align}
-As we noted in the main text, such conditions can be expressed in terms of a single matrix equality, $\bm{M} \bm{x} = \bm{b}$ where $\bm{x}$ is the \tblue{joint distribution vector},  $\bm{b}$ is the \tblue{marginal distribution vector}  and $\bm{M}$ is the \tblue{marginal description matrix}.  In the Cut example, the joint distribution vector $\bm{x}$ has 8 elements, whereas the marginal distribution vector $\bm{b}$ has 12, i.e.
+As we noted in the main text, such conditions can be expressed in terms of a single matrix equality, $\bm{M} \bm{x} = \bm{b}$ where $\bm{x}$ is the \tblue{joint distribution vector},  $\bm{b}$ is the \tblue{marginal distribution vector}  and $\bm{M}$ is the \tblue{marginal description matrix}.  In the Cut inflation example, the joint distribution vector $\bm{x}$ has 8 elements, whereas the marginal distribution vector $\bm{b}$ has 12, i.e.
 \begin{align}
 \bm{x}=\begin{pmatrix}
  P_{A_2 B_1 C_1}(0 0 0) \\
@@ -1645,7 +1646,7 @@ As we noted in the main text, such conditions can be expressed in terms of a sin
  P_{A_2 B_1 C_1}(\_ 1 1) 
 \end{pmatrix},
 \end{align}
-and hence marginal description matrix $\bm{M}$ is a $12\times 8$ matrix of zeroes and ones, i.e.
+and hence the marginal description matrix $\bm{M}$ is a $12\times 8$ matrix of zeroes and ones, i.e.
 \begin{align}
 \bm{M}=\begin{pmatrix}
  \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
