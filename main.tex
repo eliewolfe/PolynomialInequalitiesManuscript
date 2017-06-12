@@ -13,7 +13,7 @@ pdfpagelabels=false,
 breaklinks=true
 }{hyperref}
 \PassOptionsToPackage{usenames,dvipsnames,table}{xcolor}
-\documentclass[aps,english,10pt,superscriptaddress,onecolumn,twoside,longbibliography,pra,floatfix,fleqn,nofootinbib]{revtex4-1}%
+\documentclass[aps,english,10pt,superscriptaddress,onecolumn,twoside,longbibliography,pra,floatfix,fleqn,nofootinbib]{revtex4-1}
 
 \usepackage[OT1]{fontenc}
 \usepackage[utf8]{inputenx}
@@ -23,16 +23,16 @@ breaklinks=true
 \usepackage[intlimits,fleqn]{amsmath}
 \usepackage{bm}
 \usepackage{graphicx}
-\usepackage[normalem]{ulem} %
+\usepackage[normalem]{ulem} 
 \usepackage{paralist}
 \usepackage{microtype}
-\usepackage{float}%
+\usepackage{float}
 \usepackage{wrapfig}
 \usepackage{array}
-\usepackage{ragged2e}%
+\usepackage{ragged2e}
 \usepackage{tabularx}
 \usepackage{booktabs}
-\usepackage[intlimits,fleqn]{mathtools} %
+\usepackage[intlimits,fleqn]{mathtools}
 
 \newcolumntype{R}{>{\raggedleft\arraybackslash}X}
 \newcolumntype{C}{>{\centering\arraybackslash}X}
@@ -40,14 +40,14 @@ breaklinks=true
 \newcolumntype{J}{>{\justifying\arraybackslash}X}
 \usepackage{adjustbox}
 \usepackage{multirow}
-\newcolumntype{T}[2]{%
-    >{\adjustbox{angle=#1,lap=\width-(#2)}\bgroup}%
-    l%
-    <{\egroup}%
+\newcolumntype{T}[2]{
+    >{\adjustbox{angle=#1,lap=\width-(#2)}\bgroup}
+    l
+    <{\egroup}
 }
 \setcounter{MaxMatrixCols}{30}
 
-\usepackage{verbatim} %
+\usepackage{verbatim}
 
 \usepackage[usenames,dvipsnames,table]{xcolor}
 \definecolor{purple}{RGB}{128,0,128}
@@ -114,9 +114,9 @@ anchorcolor=OliveGreen}
 \newcommand{\inflations}[1]{\SmallNamedFunction{Inflations}{#1}}
 \newcommand{\DAG}[1]{\SmallNamedFunction{DAG}{#1}}
 \newcommand{\edges}[1]{\SmallNamedFunction{Edges}{#1}}
-\newcommand{\aindep}{\ensuremath{\perp_d}} %
-\newcommand{\indep}{\perp\!\!\!\!\perp} %
-\newcommand{\eql}{=}
+\newcommand{\aindep}{\ensuremath{\perp_d}}
+\newcommand{\indep}{\perp\!\!\!\!\perp}
+\newcommand{\eql}{\mathord{=}}
 \DeclarePairedDelimiter{\parens}{\lparen}{\rparen}
 \DeclarePairedDelimiter{\parenths}{\lparen}{\rparen}
 \DeclarePairedDelimiter{\braces}{\lbrace}{\rbrace}
@@ -148,10 +148,8 @@ anchorcolor=OliveGreen}
 \begin{abstract}
 
 The problem of causal inference is to determine if a given probability distribution on observed variables is compatible with some causal structure. The difficult case is when the causal structure includes latent variables.  We here introduce the \emph{inflation technique} for tackling this problem. An inflation of a causal structure is a new causal structure that can contain multiple copies of each of the original variables, but where the ancestry of each copy mirrors that of the original. 
-%\color{cyan} Given a distribution of the observed variables that is compatible with the original causal structure, and a distribution over the copies that is compatible with the inflated causal structure, it can be shown that the marginal distributions of certain subsets of the copies are expressible as functions of the marginal distributions of certain subsets of the original variables. It follows that compatibility constraints for the inflation can be translated to compatibility constraints for the original causal structure. \color{black}
-%\color{olive} To every distribution of the observed variables that is compatible with the original causal structure, we associate a family of marginal distributions on the inflated causal structure by expressing them as functions of some of the original distribution's marginals. It follows that compatibility constraints for the inflation can be translated into compatibility constraints for the original causal structure. \color{black}
-\color{cyan} To every distribution of the observed variables that is compatible with the original causal structure, we assign a family of marginal distributions on certain subsets of the copies (expressed as functions of some of the original distribution's marginals) that are compatible with the inflated causal structure. It follows that compatibility constraints for the inflation can be translated into compatibility constraints for the original causal structure.  \color{black}
- Even if the constraints at the level of inflation are weak, such as observable statistical independences implied by disjoint causal ancestry, the translated constraints can be quite strong. We apply this method to derive new inequalities whose violation by a distribution witnesses that distribution's incompatibility with the causal structure (of which Bell inequalities and Pearl's instrumental inequality are prominent examples). We describe an algorithm for deriving all such inequalities for the original causal structure that follow from ancestral independences in the inflation. Applied to an inflation of the Triangle scenario with binary variables, it yields inequalities that are stronger in at least some aspects than those obtainable by existing methods. We also describe an algorithm that derives a weaker set of inequalities but is much more efficient. Finally, we discuss which inflations are such that the inequalities one obtains from them remain valid even for quantum (and post-quantum) generalizations of the notion of a causal model.
+To every distribution of the observed variables that is compatible with the original causal structure, we assign a family of marginal distributions on certain subsets of the copies (expressed as functions of some of the original distribution's marginals) that are compatible with the inflated causal structure. It follows that compatibility constraints for the inflation can be translated into compatibility constraints for the original causal structure. 
+Even if the constraints at the level of inflation are weak, such as observable statistical independences implied by disjoint causal ancestry, the translated constraints can be quite strong. We apply this method to derive new inequalities whose violation by a distribution witnesses that distribution's incompatibility with the causal structure (of which Bell inequalities and Pearl's instrumental inequality are prominent examples). We describe an algorithm for deriving all such inequalities for the original causal structure that follow from ancestral independences in the inflation. Applied to an inflation of the Triangle scenario with binary variables, it yields inequalities that are stronger in at least some aspects than those obtainable by existing methods. We also describe an algorithm that derives a weaker set of inequalities but is much more efficient. Finally, we discuss which inflations are such that the inequalities one obtains from them remain valid even for quantum (and post-quantum) generalizations of the notion of a causal model.
 
 \end{abstract}
 
@@ -214,15 +212,11 @@ Equivalently, $\An{\bm{U}} := \bigcup_{n\in\mathbb{N}} \mathsf{Pa}^n(\bm{U})$, w
 
 A \tblue{causal structure} is a DAG that incorporates a distinction between two types of nodes: the set of observed nodes, 
 and the set of latent nodes \footnote{\citet[Def. 2.3.2]{pearl2009causality} uses the term \emph{latent structure} when referring to a DAG supplemented by a specification of latent nodes, whereas here that specification is implicit in our term \emph{causal structure}.}. 
-Following~\cite{pusey2014gdag}, we will depict the observed nodes by triangles and the latent nodes by circles, as in~\cref{fig:TriMainDAG}\footnote{Note that this convention differs from that of~\cite{leifer2013conditionalstates}, where triangles represent classical variables and circles represent quantum systems.}.
-%\color{red} Henceforth, we will use the terms ``DAG'' and ``causal structure'' interchangeably, so that the specification of which variables are observed is considered to be part of the DAG.
- Henceforth, we will use $G$ to refer to the causal structure rather than just the DAG, so that $G$ includes a specification of which variables are observed, denoted $\obsnodes{G}$, and which are latent, denoted $\latnodes{G}$.
-Frequently, we will also imagine the causal structure to include a specification of the cardinalities of the observed variables. While these are finite in all of our examples, the inflation technique applies just as well in the case of continuous variables.
-\color{olive} Although we will not do so in this work, the inflation technique can also be applied in the presence of other types of constraints, e.g.~when all variables are assumed to be Gaussian. \color{black}
+Following~\cite{pusey2014gdag}, we will depict the observed nodes by triangles and the latent nodes by circles, as in~\cref{fig:TriMainDAG}\footnote{Note that this convention differs from that of~\cite{leifer2013conditionalstates}, where triangles represent classical variables and circles represent quantum systems.}. Henceforth, we will use $G$ to refer to the causal structure rather than just the DAG, so that $G$ includes a specification of which variables are observed, denoted $\obsnodes{G}$, and which are latent, denoted $\latnodes{G}$.
+Frequently, we will also imagine the causal structure to include a specification of the cardinalities of the observed variables. While these are finite in all of our examples, the inflation technique applies just as well in the case of continuous variables. 
+Although we will not do so in this work, the inflation technique can also be applied in the presence of other types of constraints, e.g.~when all variables are assumed to be Gaussian. 
 
-
-
- The second component of a causal model is a family of \tblue{causal parameters}.
+The second component of a causal model is a family of \tblue{causal parameters}.
 The causal parameters specify, for each node $X$, the conditional probability distribution over the values of the random variable $X$, given the values of the variables in $\Pa{X}$.  In the case of root nodes, we have $\Pa{X} = \emptyset$, and the conditional distribution is an unconditioned distribution.
 We write $\pfunc{Y|X}$ for the conditional distribution of a variable $Y$ given a variable $X$, while the particular conditional probability of the variable $Y$ taking the value $y$ given that the variable $X$ takes the values $x$ is denoted\footnote{Although our notation suggests that all variables are either discrete or described by densities, we do not make this assumption.  All of our equations can be translated straightforwardly into proper measure-theoretic notation.} $\p[Y|X]{y|x}$.    Therefore, a family of causal parameters has the form
 \begin{align}
@@ -254,25 +248,17 @@ A given family of marginal distributions on a family of subsets of observed vari
 
 \subsection{Inflations of a Causal Model}
 
-We now introduce the notion of \tblue{an inflation of a causal model}. If a causal model specifies a causal structure $G$, then an inflation of this model specifies a new causal structure, $G'$, which we refer to as an inflation of $G$.  
-%We refer to $G'$ as the  \tblue{inflated causal structure}. \color{black}
-%define an {\em inflation causal structure} and that this is obtained from the inflated causal structure by simply categorizing the nodes of the inflated causal structure in exactly the way that they are categorized in the original causal structure.  That is, the observed/latent distinction of the inflation causal strucutre is inherited fro the original causal structure: if $X$ is latent in the original causal structure, then any $X_i$ in the inflated causal structure is latent, etectera.  (As an aside, note that we also allowed that information about cardinality of variables was considered part of the causal structure, so it is perhaps worth mentioning explicitly that the cardinalities of the variables in the inflation causal structure are inherited from the original causal structure.)   An {\em inflation causal model} is then an inflated causal structure together with parameters. 
+We now introduce the notion of \tblue{an inflation of a causal model}. If a causal model specifies a causal structure $G$, then an inflation of this model specifies a new causal structure, $G'$, which we refer to as an inflation of $G$. 
 For a given causal structure $G$, there are many causal structures $G'$ constituting an inflation of $G$.  We denote the set of such causal structions $\inflations{G}$. 
-%There are many possible choices of inflations causal structures $G'$ for a given $G$, forming a set $\inflations{G}$. 
 The particular choice of $G'\in \inflations{G}$ then determines how to map a causal model $M$ on $G$ into a causal model $M'$ on $G'$, 
-%termed a {\em $G \to G'$ inflation} of $M$:
-%the associated inflation model $M'$ on $G'$, 
 since  the family of causal parameters of $M'$ will be determined by a function $M' = \SmallNamedFunction[G\to G']{Inflation}{M}$ that we define below. We begin by defining when a causal structure $G'$ is an inflation of $G$, building on some preliminary definitions. 
 
 For a subset of nodes $\bm{V}\subseteq\nodes{G}$, we denote the \tblue{induced subgraph} on $\bm{V}$ by $\subgraph[G]{\bm{V}}$. It consists of the nodes $\bm{V}$ and those edges of $G$ which have both endpoints in $\bm{V}$. Of special importance to us is the 
 \tblue{ancestral subgraph} $\ansubgraph[G]{\bm{V}}$, which is the subgraph induced by the ancestry of $\bm{V}$, $\ansubgraph[G]{\bm{V}}\coloneqq\subgraph[G]{\An[G]{\bm{V}}}$. 
 
 In an inflated causal structure $G'$, every node is also labelled by a node of $G$.   That is, every node of the inflated causal structure $G'$ is a copy of some node of the original causal structure $G$, and the copies of a node $A$ of $G$ in $G'$ are denoted $A_1,\ldots, A_k$. 
-The subscript that indexes the copies is termed the \tblue{copy-index}.
- A copy is classified as observed or latent based on the classification of the original.  Similarly, any constraints on cardinality
-\color{olive} or other types of constraints such as Gaussianity \color{black}
- are also inherited from the original.
-%whether the corresponding node in the original causal structure was classified as observed or latent. 
+The subscript that indexes the copies is termed the \tblue{copy-index}. 
+A copy is classified as observed or latent based on the classification of the original.  Similarly, any constraints on cardinality or other types of constraints such as Gaussianity are also inherited from the original. 
 When two objects (e.g.~nodes, sets of nodes, causal structures, etc\ldots) are the same up to copy-indices, then we use $\sim$ to indicate this, as in $A_i\sim A_j\sim A$. In particular, $\bm{U}\sim\bm{U}'$ for sets of nodes $\bm{U}\subseteq\nodes{G}$ and $\bm{U}'\subseteq\nodes{G'}$ if and only if $\bm{U}'$ contains exactly one copy of every node in $\bm{U}$. Similarly, $\subgraph[G']{\bm{U}'}\sim\subgraph[G]{\bm{U}}$ means that in addition to $\bm{U}\sim\bm{U}'$, an edge is present between two nodes in $\bm{U}'$ if and only if it is present between the two associated nodes in $\bm{U}$.
 
 In order to be an inflation, $G'$ must locally mirror the causal structure of $G$:
@@ -472,21 +458,21 @@ P_{A_2 C_1} = P_{B_2 A_1} = P_{C_2 B_1} & = \frac{[10]+[01]+[00]}{3}, \label{W1}
 P_{A_2} = P_{B_2} = P_{C_2} & = \frac{2}{3}[0] + \frac{1}{3}[1], \label{W5}
 \end{align}
 are compatible with the Spiral inflation (\cref{fig:Tri222v2}). \cref{W1}
-implies that $C_1 = 0$ whenever $A_2 = 1$. It similarly implies that $A_1 = 0$ whenever $B_2 = 1$, and that $B_1 = 0$ whenever $C_2 = 1$, 
+implies that $C_1 \eql 0$ whenever $A_2 \eql 1$. It similarly implies that $A_1 \eql 0$ whenever $B_2 \eql 1$, and that $B_1 \eql 0$ whenever $C_2 \eql 1$, 
 \begin{align} 
 \begin{split}\label{Ws}
-&A_2  = 1 \:\implies\: C_1 = 0,\\
-&B_2 = 1 \:\implies\: A_1 = 0,\\
-&C_2  = 1 \:\implies\: B_1  = 0.
+&A_2  \eql 1 \:\implies\: C_1 \eql 0,\\
+&B_2 \eql 1 \:\implies\: A_1 \eql 0,\\
+&C_2  \eql 1 \:\implies\: B_1  \eql 0.
 \end{split}
 \end{align}
 The Spiral inflation is such that $A_2$, $B_2$ and $C_2$ have no common ancestor and consequently are marginally independent in any distribution compatible with it. Together with the fact that each value of these variables has a nonzero probability of occurrence (by  \cref{W5}), this implies that
 \begin{align} \label{WW2}
-\text{Sometimes} \quad &A_2  = 1\,\text{ and }\, B_2  = 1\,\text{ and }\, C_2  = 1.
+\text{Sometimes} \quad &A_2 \eql 1\,\text{ and }\, B_2 \eql 1\,\text{ and }\, C_2  = 1.
 \end{align} 
 Finally, \cref{Ws} together with \cref{WW2} entails
 \begin{align} \label{WW3}
-\text{Sometimes} \quad &A_1  = 0\,\text{ and }\, B_1  = 0\,\text{ and }\, C_1  = 0.
+\text{Sometimes} \quad &A_1 \eql 0\,\text{ and }\, B_1 \eql 0\,\text{ and }\, C_1 \eql 0.
 \end{align}
 This, however, contradicts~\cref{W4}.  Consequently, the family of marginals described in \cref{W4,W1,W5} is \emph{not} compatible with the causal structure of~\cref{fig:Tri222v2}.  By \cref{mainlemma}, this implies that the family of marginals described in \cref{V4,V1,V5}---and therefore the W-type distribution of which they are marginals---is not compatible with the Triangle scenario.
 
@@ -557,10 +543,10 @@ On the other hand, from~\cref{PRb} together with  the definition of PR-box,~\cre
 \begin{align} 
 \begin{split}
 \label{PRsi}
-&X_1  = 0,\: Y_1  = 0 \:\implies\: A_1 = B_1,\\[-1ex]
-&X_1  = 0,\: Y_2  = 1 \:\implies\: A_1 = B_2,\\[-1ex]
-&X_2  = 1,\: Y_1  = 0 \:\implies\: A_2 = B_1,\\[-1ex]
-&X_2  = 1,\: Y_2  = 1 \:\implies\: A_2\ne B_2.
+&X_1 \eql 0,\: Y_1 \eql 0 \:\implies\: A_1 = B_1,\\[-1ex]
+&X_1 \eql 0,\: Y_2 \eql 1 \:\implies\: A_1 = B_2,\\[-1ex]
+&X_2 \eql 1,\: Y_1 \eql 0 \:\implies\: A_2 = B_1,\\[-1ex]
+&X_2 \eql 1,\: Y_2 \eql 1 \:\implies\: A_2\ne B_2.
 \end{split}
 \end{align}
 Combining this with~\cref{PRs}, we obtain
@@ -705,29 +691,17 @@ This section considers the problem of how to generalize the above examples of ca
 
 As far as causal compatibility inequalities are concerned, we limit ourselves to those expressed in terms of probabilities\footnote{Or, for binary variables, equivalently in terms of correlators, as in the first example of \cref{Sec:DerivingInequalities}.}, as these are generally the most powerful. However, essentially the same techniques can be used to derive inequalities expressed in terms of entropies~\cite{fritz2013marginal}, as demonstrated in \cref{ex:entropic}. 
 
-In the examples from the previous section, the initial inequality---a constraint upon marginals that is independent of the causal structure---involves sets of observed variables that are \emph{not} all injectable sets. However, the Markov conditions on the inflated causal structures nevertheless allowed us to \emph{express} the distribution on these sets in terms of the known distributions on the injectable sets. For instance, in \cref{example:polytriangle}, the set $\{ A_2 B_1\}$ is not injectable, but it can be partitioned into the singleton sets $\{ A_2 \}$ and $\{ B_1\}$ which are ancestrally independent, so that one has $P_{A_2 B_1} = P_{A_2} P_{B_1} = P_A P_B$ in every inflated causal model.  This motivates us to define the notion of an \tblue{expressible set} of variables in an inflated causal structure as one for which the joint distribution can be expressed as a function of distributions over injectable sets by making repeated use of the conditional independences implied by $d$-separation relations \color{olive} as well as marginalization\color{black} . More formally,
+In the examples from the previous section, the initial inequality---a constraint upon marginals that is independent of the causal structure---involves sets of observed variables that are \emph{not} all injectable sets. However, the Markov conditions on the inflated causal structures nevertheless allowed us to \emph{express} the distribution on these sets in terms of the known distributions on the injectable sets. For instance, in \cref{example:polytriangle}, the set $\{ A_2 B_1\}$ is not injectable, but it can be partitioned into the singleton sets $\{ A_2 \}$ and $\{ B_1\}$ which are ancestrally independent, so that one has $P_{A_2 B_1} = P_{A_2} P_{B_1} = P_A P_B$ in every inflated causal model.  This motivates us to define the notion of an \tblue{expressible set} of variables in an inflated causal structure as one for which the joint distribution can be expressed as a function of distributions over injectable sets by making repeated use of the conditional independences implied by $d$-separation relations as well as marginalization. More formally,
 
 \begin{definition}\label{def:expressible}
 Consider an inflation $G'$ of a causal structure $G$.  A set of variables $U \subset \nodes{G'}$ is said to be {\em expressible} if it is injectable or if it can be obtained from a collection of injectable sets by recursively applying the following rules:
 \begin{enumerate}
-%\item Every injectable set is expressible;
 \item For $A,B,C\subseteq\nodes{G'}$, if $A\aindep B\:|\:C$ and $A \cup C$ and $B \cup C$ are expressible, then $A\cup B\cup C$ is also expressible;
 \item If $A\subseteq\nodes{G'}$ is expressible, then so is every subset of $A$.
 \end{enumerate}
 \end{definition}
 An expressible set is \emph{maximal} if it is not a proper subset of another expressible set.
-\color{black}
 
-%In general, we have:
-%\begin{definition}
-%Given an inflated causal structure $G'$, the \tblue{expressible sets} are the smallest family of subsets of $\nodes{G'}$ such that:
-%\begin{enumerate}
-%\item Every injectable set is expressible;
-%\item If $A,B,C\subseteq\nodes{G'}$ are expressible and $A\aindep B\:|\:C$, then $A\cup B\cup C$ is also expressible;
-%\item If $A\subseteq\nodes{G'}$ is expressible, then so is every subset of $A$.
-%\end{enumerate}
-%\end{definition}
-%Thus a set of nodes in an inflated causal structure is expressible if and only if it can be obtained by starting with a collection of injectable sets and recursively forming unions of $d$-separated triples and taking subsets. 
 
 Expressible sets are important since in an inflated model, the distribution of the variables making up an expressible set can be computed explicitly from the known distributions on the injectable sets, by repeatedly using the conditional independences implied by $d$-separation and taking marginals. \cref{example:Pienaar} provides a good example.
 
@@ -833,6 +807,7 @@ For our purposes, it is sufficient to enumerate the maximal ai-expressible sets,
 
 From \cref{fig:injection222,fig:preinjectiongraph222}, we easily infer the injectable sets and the maximal ai-expressible sets, as well as the partition of the maximal ai-expressible sets into ancestrally independent subsets. For the Spiral example, this results in:
 \begin{align}\label{eq:basicsetup222}
+\qquad
 {\underbrace{\begin{matrix}
 \, \\
 \brackets{A_1},\:\brackets{B_1},\:\brackets{C_1},\\
@@ -849,7 +824,7 @@ From \cref{fig:injection222,fig:preinjectiongraph222}, we easily infer the injec
 \brackets{C_1 A_2 B_2} \\
 \brackets{A_2 B_2 C_2}
 \end{matrix}}_{\substack{\text{The maximal}\\\text{ai-expressible sets}}}}
-\qquad
+\qquad\qquad
 {\underbrace{\begin{matrix}
 \\
 \{A_1 B_2\} \aindep \{ C_2\} \\
@@ -910,18 +885,15 @@ Summarizing, we have shown how to leverage the marginal satisfiability problem t
 \subsection{A List of Causal Compatibility Inequalities for the Triangle scenario}
 \label{sec:CCineqs}
 
-\color{olive} As an example of the above method, we have considered the Triangle scenario with binary observed variables and derived all causal compatibility inequalities which follow by means of using ancestral independences in the Spiral inflation (\cref{fig:Tri222}). We found that there are 4884 inequalities corresponding to the facets of the relevant marginal polytope, which results in 4884 polynomial causal compatibility inequalities for the Triangle scenario.
+As an example of the above method, we have considered the Triangle scenario with binary observed variables and derived all causal compatibility inequalities which follow by means of using ancestral independences in the Spiral inflation (\cref{fig:Tri222}). We found that there are 4884 inequalities corresponding to the facets of the relevant marginal polytope, which results in 4884 polynomial causal compatibility inequalities for the Triangle scenario.
 
-However, most inequalities in this set have turned out to be redundant, where an inequality is considered redundant if there is no distribution that violates this inequality but none of the others. We thus have looked for a subset of inequalities that is \emph{irredundant} (does not contain any redundant inequality) but neverthess \emph{complete} (defines the same set of distributions as the full set). While a finite system of linear inequalities always has a unique irredundant complete subset, this need not be the case for finite systems of polynomial inequalities. We speak of ``a'' complete irredundant set instead of ``the'' complete irredundant set.
+However, most inequalities in this set have turned out to be redundant, where an inequality is considered redundant if there is no distribution that violates this inequality but none of the others. We thus have looked for a subset of inequalities that is \emph{irredundant} (does not contain any redundant inequality) but neverthess \emph{complete} (defines the same set of distributions as the full set). While a finite system of linear inequalities always has a unique irredundant complete subset, this need not be the case for finite systems of polynomial inequalities; we therefore speak of ``a'' complete irredundant set instead of ``the'' complete irredundant set.
 
 We exploited linear programming techniques to quickly identify a 1433-inequalities complete subset of our original 4884 inequalities; concretely, the copy isomorphisms of \cref{sec:coincidingdetails} yield an additional list of linear equations satisfied by all inflation models, and from every set of inequalities that differ by merely a linear combination of these equations we choose one representative. To further prune away redundant inequalities, we successively employed nonlinear constrained maximization on each inequality's left-hand-side, to determine numerically if it could be violated pursuant to all the other inequalities as constraints. An inequality is found to be redundant if the solution to the constrained maximization does not exceed the inequality's right-hand side. Such an inequality was immediately dropped from the set before testing the next candidate for redundancy\footnote{It is advantageous to group the inequalities into symmetry classes \emph{prior} to pruning away redundant inequalities, so that entire classes of inequalities can be discarded when finding that a single representative is redundant \emph{to the other classes}.}. This post-processing led us to identify 60 irredundant inequalities which defines the same set of satisfying distributions as the original 4884. Of the remaining 60, we recognized 8 as uninteresting positivity inequalities, $\p[ABC]{abc}\geq 0$, so that our irredundant complete system consists of 52 polynomial inequalities.
 
-To present those inequalities in an efficient manner, we further grouped them into four symmetry classes. In \cref{eq:ghzrejectclass,eq:wrejectclass,eq:symclass3,eq:symclass4} we present one representative from each class; the multiplicity of inequalities contained in each symmetry class is marked in parentheses.
-The symmetry group for any causal structure with finite-cardinality observed variables is generated by those permutations of the observed variables which can be extended to automorphisms of the (original) DAG, as well as 
-%to a graph automorphism, which is a permutation of all nodes that takes edges to edges. Furthermore, 
-any permutation among the discrete values assigned to an individual observed variable (i.e., bijections on the sample space of that variable)% is a symmetry of the set of inequalities, as is any composition of such permutations. 
-In the case of the Triangle scenario with binary observed variables, the symmetry group therefore has 48 elements, comprised of the 6 permutations of the three observed variables, the three local binary-value relabellings, and all their compositions $(48=6\times 2\times 2\times 2)$. % as well as the $2^3$ permutations of the triple of the values of these three variables (the products of local permutations) that are symmetries. %Up to $6\times 2^3 = 48$ distinct inequalities, therefore, can be members of a single symmetry class. We have found numerically that there are four classes of irredundant inequalities that are inequivalent relative to these symmetry operations. We here present a single representative inequality from each of these classes; the multiplicity of inequalities contained in each symmetry class is marked in parentheses to the right of each representative. The full set can be obtained by closing under the symmetry operations. 
-\color{black}
+To present those inequalities in an efficient manner, we further grouped them into four symmetry classes. In \cref{eq:ghzrejectclass,eq:wrejectclass,eq:symclass3,eq:symclass4} we present one representative from each class; the multiplicity of inequalities contained in each symmetry class is marked in parentheses. 
+The symmetry group for any causal structure with finite-cardinality observed variables is generated by those permutations of the observed variables which can be extended to automorphisms of the (original) DAG, as well as any permutation among the discrete values assigned to an individual observed variable (i.e., bijections on the sample space of that variable). 
+In the case of the Triangle scenario with binary observed variables, the symmetry group therefore has 48 elements, comprised of the 6 permutations of the three observed variables, the three local binary-value relabellings, and all their compositions $(48=6\times 2\times 2\times 2)$. 
 
 We choose to express our inequalities in terms of correlators (where the two possible values of each variables to be $\{-1,+1\}$), rather than in terms of joint probabilities, because such a presentation is more compact:
 \begin{align}\label{eq:ghzrejectclass}
@@ -947,15 +919,15 @@ Possibilistic constraints follow from a consideration of {\em logical relations}
 We have already provided a simple example of a Hardy-type argument in \cref{example:noWdist}, in the logic used to demonstrate that the family of distributions of \cref{W4,W1,W5} cannot arise as the marginals of a single joint distribution. For our present purposes, it is useful to recast that argument into a new but manifestly equivalent form. First, for the family of distributions in question, we have
 \begin{align} 
 \begin{split}\label{WWs}
-&A_2 = 1 \:\implies\: C_1 = 0,\\
-&B_2 = 1 \:\implies\: A_1 = 0,\\
-&C_2  = 1 \:\implies\: B_1  = 0,\\
-\text{Never}  &\quad A_1  = 0\,\text{ and }\, B_1  = 0\,\text{ and }\, C_1  = 0.
+&A_2 \eql 1 \:\implies\: C_1 \eql 0,\\
+&B_2 \eql 1 \:\implies\: A_1 \eql 0,\\
+&C_2  \eql 1 \:\implies\: B_1  \eql 0,\\
+\text{Never}  &\quad A_1 \eql 0\,\text{ and }\, B_1 \eql 0\,\text{ and }\, C_1  \eql 0.
 \end{split}
 \end{align}
 From the last constraint one infers that at least one of $A_1$, $B_1$ and $C_1$ must be 1, which from the three other constraints implies that at least one of $A_2$, $B_2$ and $C_2$ must be 0, so that it is not the case that all of $A_2$, $B_2$ and $C_2$ are 1.  Thus~\cref{WWs} implies
 \begin{align} \label{consequent2}
-\text{Never}  \quad &A_2  = 1\,\text{ and }\, B_2  = 1\,\text{ and }\, C_2  = 1.
+\text{Never}  \quad &A_2  \eql 1\,\text{ and }\, B_2  \eql 1\,\text{ and }\, C_2  \eql 1.
 \end{align}
 However, the Spiral inflation (\cref{fig:Tri222v2}) is such that $A_2$, $B_2$, and $C_2$ have no common ancestor and consequently the distribution on the ai-expressible set $\{A_2 B_2 C_2\}$ is the product of the distributions on $A_2$, $B_2$ and $C_2$.  Since each of the latter has full support (\cref{W5}), it follows that the distribution on $\{A_2 B_2 C_2\}$ also has full support, which contradicts \cref{consequent2}.
 
@@ -1064,33 +1036,6 @@ In~\cref{sec:interestingproof}, we provide a concrete example of how a $d$-separ
 Per \cref{def:expressible}, the notion of expressibility is recursive: The set $\{\bm{X'}\bm{Y'}\bm{Z'}\}$ is expressible if $\bm{X'}\aindep\bm{Y'}|\bm{Z'}$ and $\{\bm{X'}\bm{Z'}\}$, $\{\bm{Y'}\bm{Z'}\}$ and  $\{\bm{Z'}\}$ are all expressible. 
 In general, one can obtain stronger causal compatibility inequalities, and stronger witnessing power when testing the compatibility of a specific distribution, by determining the maximal expressible sets instead of restricting attention to the maximal ai-expressible sets. 
 
-\begin{comment}
-\tpurp{
-An illustration highlighting the contrast between ai-expressible sets and expressible sets is given in \cref{fig:pearlsuperinflation}. The two $d$-separation criteria ${X_1 Y_1}\aindep{X_3 Y_3}|{Z_1}$ and ${X_1 X_3 Y_1 Y_3 Z_1}\aindep{X_6 Y_6 Z_2}$ can be leveraged to define a marginal distribution over an expressible set: 
-\begin{align}%
-    P_{X_1 X_3 X_6 Y_1 Y_3 Y_6 Z_1 Z_2}=\frac{P_{X_1 Y_1 Z_1} P_{X_3 Y_3 Z_1} P_{X_6 Y_6 Z_2}}{P_{Z_1}} .
-\end{align}%
-Similarly, the two $d$-separation criteria ${X_1 Y_1}\aindep{X_3 Y_3}\aindep{X_5 Y_5}|{Z_1}$ and ${X_1 X_3 X_5 Y_1 Y_3 Y_5 Z_1}\aindep{Z_2}$ give rise to the factorization of the  expressible set: 
-\begin{align}
-    P_{X_1 X_3 X_5 Y_1 Y_3 Y_5 Z_1 Z_2}=\frac{P_{X_1 Y_1 Z_1}P_{X_3 Y_3 Z_1}P_{X_5 Y_5 Z_1}P_{Z_2}}{{P_{Z_1}}^2} .
-\end{align}
-On the other hand, even expressibility is unable to incorporate the $d$-separation relation ${X_1 X_2 Y_1 Y_2}\aindep{X_5 X_6 Y_5 Y_6}|{Z_1 Z_2}$ inherent in \cref{fig:pearlsuperinflation}.} 
-
-\begin{figure}[h]
-    \centering
-    \begin{minipage}[t]{0.22\linewidth}      \centering
-    \includegraphics[scale=1]{ISorigDAG.pdf}
-    \caption{The instrumental scenario of \citet{pearl1995instrumental}.}
-    \label{fig:ISorigDAGdespexample}
-    \end{minipage}\hfill
-    \begin{minipage}[t]{0.75\linewidth}      \centering
-    \includegraphics[scale=1]{ISsuperinflationDAG.pdf}
-    \caption{An inflation of the instrumental scenario illustrating expressible sets. The massive eight-variables set $\{X_1 X_3 X_6 Y_1 Y_3 Y_6 Z_1 Z_2\}$ is expressible, whereas the largest ai-expressible sets contain only six variables, such as $\{X_1 X_4 Y_1 Y_4 Z_1 Z_2\}$.}
-    \label{fig:pearlsuperinflation}
-    \end{minipage}
-\end{figure}
-\end{comment}
-
 \subsection{Imposing Symmetries from Copy-Index-Equivalent Subgraphs of the Inflated Causal Structure}\label{Sec:copyindexequivalence}
 
 By the definition of an inflation model (\cref{def:inflat}), if two variables in the inflated causal structure $G'$ are copy-index-equivalent, $A_i \sim A_j$, then each depends on its parents in the same fashion as $A$ depends on its parents in the original causal structure $G$, meaning that $\pfunc{A_i| \Pa[G']{A_i}}=\pfunc{A|\Pa[G]{A}}$ and $\pfunc{A_j| \Pa[G']{A_j}}=\pfunc{A|\Pa[G]{A}}$. Thus by transitivity, also $A_i$ and $A_j$ have the same dependence on their parents,
@@ -1135,18 +1080,6 @@ One can incorporate {\em any} $d$-separation relation in the inflated causal str
 \forall{a_1 a_2 b_2 c_2}: \p[A_1 A_2 B_2 C_2]{a_1 a_2 b_2 c_2}\p[A_2 B_2]{a_2 b_2}=\p[A_1 A_2 B_2]{a_1 a_2 b_2}\p[A_2 B_2 C_2]{a_2 b_2 c_2}.
 \end{align}
 However, because $\{ A_1 A_2 B_2 C_2\}$ is not an expressible set, the method of \cref{sec:ineqs} does not take this $d$-separation relation into account.  However, it can be incorporated if \cref{nonlinearequality} is included as an additional {\em nonlinear} constraint in the quantifier elimination problem.  
-
-\begin{comment}
-The constraint 
-\begin{align}\label{nonlinearequality}
-\forall{a_1 a_2 b_2 c_2}: \p[A_1 A_2 B_2 C_2]{a_1 a_2 b_2 c_2}\p[A_2 B_2]{a_2 b_2}=\p[A_1 A_2 B_2]{a_1 a_2 b_2}\p[A_2 B_2 C_2]{a_2 b_2 c_2}
-\end{align}
-can be recast as a nonlinear restriction on the existence of joint distribution by relating each marginal probability appearing in \cref{nonlinearequality} to a corresponding sum over joint probabilities; for instance substituting
-\begin{align}
-\p[A_2 B_2]{a_2 b_2} = \sum\nolimits_{a_1 b_1 c_1 c_2}\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}.
-\end{align}
-To obtain constraints on the expressible sets we can then proceed with quantifier elimination as we did before, eliminating the unknowns $\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}$ from this system. The additional difficulty now is that some of the equations are nonlinear. %
-\end{comment}
 
 On the one hand, many modern computer algebra systems do have functions capable of tackling nonlinear quantifier elimination symbolically\footnote{For example \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://reference.wolfram.com/language/ref/Resolve.html}{\texttt{Resolve}} command, \textit{Redlog}'s \href[pdfnewwindow]{http://www.redlog.eu/documentation/reals/rlqe.php}{\texttt{rlposqe}}, or \textit{Maple$^{_{\textit{\tiny\texttrademark}}}$}'s \href[pdfnewwindow]{http://maplesoft.com/support/help/Maple/view.aspx?path=RegularChains/SemiAlgebraicSetTools/RepresentingQuantifierFreeFormula}{\texttt{RepresentingQuantifierFreeFormula}}.}. 
 Currently, however, it is generally not practical to perform nonlinear quantifier elimination on large polynomial systems with many unknowns to be eliminated. It may help to exploit results on the concrete algebraic-geometric structure of these particular systems~\cite{garcia_bayesian_2005}. 
@@ -1263,7 +1196,7 @@ E.W.~would like to thank Rafael Chaves and T.C. Fraser for suggestions which hav
 \appendix
 \numberwithin{equation}{section}
 \let\stdsection\section
-\renewcommand{\section}{\clearpage\stdsection} %
+\renewcommand{\section}{\clearpage\stdsection} 
 
 \section{Algorithms for Solving the Marginal Constraint Problem}\label{sec:projalgorithms}
 
@@ -1283,315 +1216,6 @@ The oldest-known method for facet enumeration relies on \tblue{linear quantifier
 Other algorithms for facet enumeration that are not based on linear quantifier elimination include the following. \emph{Lexicographic reverse search} (LRS)~\cite{Avis2000lrs} explores the entire polytope by repeatedly pivoting from one facet to an adjacent one, and is implemented in~\href[pdfnewwindow]{http://cgm.cs.mcgill.ca/~avis/C/lrslib/USERGUIDE.html#Installation\%20Section}{\texttt{lrs}}. Equality Set Projection (ESP)~\cite{jones2004equality,JonesThesis2005} is also based on pivoting from facet to facet, though its implementation is less stable\footnote{ESP  \cite{jones2004equality,JonesThesis2005,Jones2008} is supported by \href[pdfnewwindow]{http://people.ee.ethz.ch/~mpt/2/docs/refguide/mpt/@polytope/projection.html}{\texttt{MPT2}} but not \href[pdfnewwindow]{http://people.ee.ethz.ch/~mpt/3/}{\texttt{MPT3}}, and by the (undocumented) option of \href[pdfnewwindow]{https://github.com/tulip-control/polytope/blob/master/polytope/polytope.py\#L1412}{projection} in the \href[pdfnewwindow]{https://pypi.python.org/pypi/polytope}{\textit{polytope}} (v0.1.2 2016-07-13) python module.}. These algorithms could be interesting to use in practice, since each pivoting step churns out a new facet; by contrast, Fourier-Motzkin type algorithms only generate the entire list of facets at once, after all the quantifiers have been eliminated one by one.
 
 It may also be possible to exploit special features of marginal polytopes in order to facilitate their facet enumeration, such as their high degree of symmetry: permuting the outcomes of each variable maps the polytope to itself, which already generates a sizeable symmetry group, and oftentimes there are additional symmetries given by permuting some of the variables. This simplifies the problem of facet enumeration~\cite{bremner_symmetries_2009,Schurmann2013}, and it may be interesting to apply dedicated software\footnote{Such as \href[pdfnewwindow]{http://comopt.ifi.uni-heidelberg.de/software/PANDA/}{\textit{PANDA}}, \href[pdfnewwindow]{http://mathieudutour.altervista.org/Polyhedral/}{\textit{Polyhedral}}, or \href[pdfnewwindow]{http://www.math.uni-rostock.de/~rehn/software/sympol.html}{\textit{SymPol}}. The authors found \textit{SymPol} to be rather effective for some small test problems, using the options ``\texttt{./sympol -a --cdd}".} to the facet enumeration problem of marginal polytopes~\cite{Kaibel2010,rehn_tools_2012,panda_2015}.
-
-\begin{comment}
-\section{Explicit Marginal Description Matrix of the Spiral Inflation with Binary Observed Variables}\label{sec:explicitmatrix}
-
-Recall that the five maximal ai-expressible sets of the Spiral inflation are $\{A_1 B_1 C_1\}$, $\{A_1 B_2 C_2\}$, $\{A_2 B_1 C_2\}$, $\{A_2 B_2 C_1\}$ and $\{A_2 B_2 C_2\}$, as illustrated in \cref{fig:simplicialcomplex222}. Taking the variables to be binary, each ai-expressible set corresponds to $2^3=8$ equations pertinent to the marginal problem. The five \emph{sets} of equations which relate the marginal probabilities to a posited joint distribution are given by
-\begin{align}\label[eqs]{eq:marginalequalities222}
-\begin{split}
-&\forall{a_1 b_1 c_1}:\;\p[A_1 B_1 C_1]{a_1 b_1 c_1} = \sum\nolimits_{a_2 b_2 b_2}\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
-&\forall{a_1 b_2 c_2}:\;\p[A_1 B_2 C_2]{a_1 b_2 c_2} = \sum\nolimits_{a_2 b_1 c_1}\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
-&\forall{a_2 b_1 c_2}:\;\p[A_2 B_1 C_2]{a_2 b_1 c_2} = \sum\nolimits_{a_1 b_2 c_1}\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
-&\forall{a_2 b_2 c_1}:\;\p[A_2 B_2 C_1]{a_2 b_2 c_1} = \sum\nolimits_{a_1 b_1 c_2}\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2},\\
-&\forall{a_2 b_2 c_2}:\;\p[A_2 B_2 C_2]{a_2 b_2 c_2} = \sum\nolimits_{a_1 b_1 c_1}\p[A_1 A_2 B_1 B_2 C_1 C_2]{a_1 a_2 b_1 b_2 c_1 c_2}.
-\end{split}
-\end{align}
-As we noted in the main text, such conditions can be expressed in terms of a single matrix equality, $\bm{M} \bm{x} = \bm{b}$ where $\bm{x}$ is the \tblue{joint distribution vector},  $\bm{b}$ is the \tblue{marginal distribution vector}  and $\bm{M}$ is the \tblue{marginal description matrix}.  In the Spiral example, we have:
-\begin{align}
-\resizebox*{!}{\dimexpr\textheight-2\baselineskip\relax}{
-   \( 
-   \hspace{-\mathindent}\parbox{2cm}{\fontsize{11pt}{0pt}\selectfont the joint distribution vector $\bm{x}$ of length 64 is 
-}\quad
-   \begin{pmatrix}
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0 0 0 0 0 0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0 0 0 0 0 1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0 0 0 0 1 0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0 0 0 0 1 1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0 0 0 1 0 0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0 0 0 1 0 1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0 0 0 1 1 0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0 0 0 1 1 1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0 0 1 0 0 0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0 0 1 0 0 1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0 0 1 0 1 0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0 0 1 0 1 1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0 0 1 1 0 0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0 0 1 1 0 1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0 0 1 1 1 0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0 0 1 1 1 1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0 1 0 0 0 0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0 1 0 0 0 1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0 1 0 0 1 0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0 1 0 0 1 1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0 1 0 1 0 0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0 1 0 1 0 1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0 1 0 1 1 0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0 1 0 1 1 1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0 1 1 0 0 0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0 1 1 0 0 1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0 1 1 0 1 0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0 1 1 0 1 1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0 1 1 1 0 0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0 1 1 1 0 1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0 1 1 1 1 0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0 1 1 1 1 1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1 0 0 0 0 0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1 0 0 0 0 1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1 0 0 0 1 0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1 0 0 0 1 1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1 0 0 1 0 0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1 0 0 1 0 1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1 0 0 1 1 0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1 0 0 1 1 1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1 0 1 0 0 0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1 0 1 0 0 1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1 0 1 0 1 0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1 0 1 0 1 1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1 0 1 1 0 0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1 0 1 1 0 1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1 0 1 1 1 0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1 0 1 1 1 1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1 1 0 0 0 0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1 1 0 0 0 1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1 1 0 0 1 0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1 1 0 0 1 1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1 1 0 1 0 0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1 1 0 1 0 1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1 1 0 1 1 0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1 1 0 1 1 1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1 1 1 0 0 0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1 1 1 0 0 1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1 1 1 0 1 0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1 1 1 0 1 1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1 1 1 1 0 0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1 1 1 1 0 1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1 1 1 1 1 0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1 1 1 1 1 1} \\
-\end{pmatrix},\quad
-\parbox{2cm}{\fontsize{11pt}{0pt}\selectfont
-and the marginal distribution vector $\bm{b}$ of length 40 is 
-}\quad
-\begin{pmatrix}
- \p[A_1 B_1 C_1]{0,0,0} \\
- \p[A_1 B_1 C_1]{0,0,1} \\
- \p[A_1 B_1 C_1]{0,1,0} \\
- \p[A_1 B_1 C_1]{0,1,1} \\
- \p[A_1 B_1 C_1]{1,0,0} \\
- \p[A_1 B_1 C_1]{1,0,1} \\
- \p[A_1 B_1 C_1]{1,1,0} \\
- \p[A_1 B_1 C_1]{1,1,1} \\
- \p[A_1 B_2 C_2]{0,0,0} \\
- \p[A_1 B_2 C_2]{0,0,1} \\
- \p[A_1 B_2 C_2]{0,1,0} \\
- \p[A_1 B_2 C_2]{0,1,1} \\
- \p[A_1 B_2 C_2]{1,0,0} \\
- \p[A_1 B_2 C_2]{1,0,1} \\
- \p[A_1 B_2 C_2]{1,1,0} \\
- \p[A_1 B_2 C_2]{1,1,1} \\
- \p[A_2 B_1 C_2]{0,0,0} \\
- \p[A_2 B_1 C_2]{0,0,1} \\
- \p[A_2 B_1 C_2]{0,1,0} \\
- \p[A_2 B_1 C_2]{0,1,1} \\
- \p[A_2 B_1 C_2]{1,0,0} \\
- \p[A_2 B_1 C_2]{1,0,1} \\
- \p[A_2 B_1 C_2]{1,1,0} \\
- \p[A_2 B_1 C_2]{1,1,1} \\
- \p[A_2 B_2 C_1]{0,0,0} \\
- \p[A_2 B_2 C_1]{0,0,1} \\
- \p[A_2 B_2 C_1]{0,1,0} \\
- \p[A_2 B_2 C_1]{0,1,1} \\
- \p[A_2 B_2 C_1]{1,0,0} \\
- \p[A_2 B_2 C_1]{1,0,1} \\
- \p[A_2 B_2 C_1]{1,1,0} \\
- \p[A_2 B_2 C_1]{1,1,1} \\
- \p[A_2 B_2 C_2]{0,0,0} \\
- \p[A_2 B_2 C_2]{0,0,1} \\
- \p[A_2 B_2 C_2]{0,1,0} \\
- \p[A_2 B_2 C_2]{0,1,1} \\
- \p[A_2 B_2 C_2]{1,0,0} \\
- \p[A_2 B_2 C_2]{1,0,1} \\
- \p[A_2 B_2 C_2]{1,1,0} \\
- \p[A_2 B_2 C_2]{1,1,1} \\
-\end{pmatrix},
-\quad\text{i.e.}\quad
-\begin{pmatrix}
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0,\_,0,\_,0,\_} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0,\_,0,\_,1,\_} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0,\_,1,\_,0,\_} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0,\_,1,\_,1,\_} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1,\_,0,\_,0,\_} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1,\_,0,\_,1,\_} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1,\_,1,\_,0,\_} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1,\_,1,\_,1,\_} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0,\_,\_,0,\_,0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0,\_,\_,0,\_,1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0,\_,\_,1,\_,0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{0,\_,\_,1,\_,1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1,\_,\_,0,\_,0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1,\_,\_,0,\_,1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1,\_,\_,1,\_,0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{1,\_,\_,1,\_,1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{\_,0,0,\_,\_,0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{\_,0,0,\_,\_,1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{\_,0,1,\_,\_,0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{\_,0,1,\_,\_,1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{\_,1,0,\_,\_,0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{\_,1,0,\_,\_,1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{\_,1,1,\_,\_,0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{\_,1,1,\_,\_,1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{\_,0,\_,0,0,\_} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{\_,0,\_,0,1,\_} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{\_,0,\_,1,0,\_} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{\_,0,\_,1,1,\_} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{\_,1,\_,0,0,\_} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{\_,1,\_,0,1,\_} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{\_,1,\_,1,0,\_} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{\_,1,\_,1,1,\_} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{\_,0,\_,0,\_,0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{\_,0,\_,0,\_,1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{\_,0,\_,1,\_,0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{\_,0,\_,1,\_,1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{\_,1,\_,0,\_,0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{\_,1,\_,0,\_,1} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{\_,1,\_,1,\_,0} \\
- \p[A_1 A_2 B_1 B_2 C_1 C_2]{\_,1,\_,1,\_,1} \\
-\end{pmatrix},
-\)
-}
-\end{align}\clearpage
-and the marginal description matrix $\bm{M}$ 
-is
-
-\begin{align}
-\hspace{-\mathindent}\resizebox{0.9\linewidth}{!}{\(
-\left(
-\begin{array}{cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc}
- \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} &
-   {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0}
-   & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
- {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} &
-   {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0}
-   & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
- {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} &
-   \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0}
-   & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
- {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} &
-   {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0}
-   & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
- {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} &
-   {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1}
-   & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
- {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} &
-   {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0}
-   & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
- {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} &
-   {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0}
-   & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
- {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} &
-   {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0}
-   & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} \\
- \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} &
-   {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0}
-   & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
- {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} &
-   \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0}
-   & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
- {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} &
-   {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0}
-   & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
- {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} &
-   {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0}
-   & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
- {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} &
-   {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0}
-   & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
- {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} &
-   {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1}
-   & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
- {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} &
-   {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0}
-   & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} \\
- {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} &
-   {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0}
-   & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} \\
- \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} &
-   {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0}
-   & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
- {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} &
-   {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0}
-   & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
- {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} &
-   {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0}
-   & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
- {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} &
-   {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0}
-   & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
- {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} &
-   {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0}
-   & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
- {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} &
-   {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1}
-   & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
- {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} &
-   {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0}
-   & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} \\
- {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} &
-   \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0}
-   & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} \\
- \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} &
-   {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0}
-   & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
- {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} &
-   {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0}
-   & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
- {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} &
-   {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0}
-   & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
- {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} &
-   {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0}
-   & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
- {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} &
-   \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1}
-   & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
- {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} &
-   {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0}
-   & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
- {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} &
-   {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0}
-   & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
- {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} &
-   {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0}
-   & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & \bm{1} \\
- \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} &
-   {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0}
-   & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
- {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} &
-   {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0}
-   & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
- {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} &
-   {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0}
-   & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
- {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} &
-   {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0}
-   & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
- {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} &
-   {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0}
-   & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
- {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} &
-   \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1}
-   & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} \\
- {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} &
-   {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0}
-   & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} \\
- {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} &
-   {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0}
-   & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & \bm{1} \\
-\end{array}
-\right).
-\)}
-\end{align}
-\end{comment}
 
 \section{Explicit Marginal Description Matrix of the Cut Inflation with Binary Observed Variables}\label{sec:explicitmatrix}
 
@@ -1670,7 +1294,8 @@ such that $\bm{M}\bm{x}=\bm{b}$ per \cref{eq:marginalproblemgeneric}.
 
 In \cref{copyindexequivalence}, we noted that every copy of a variable in an inflation model has the same probabilistic dependence on its parents as every other copy. It followed that for certain pairs of marginal contexts, the marginal distributions in any inflation model are necessarily equal. We now describe not only how to identify all such pairs of contexts, but also how to identify weak pairs, who's corresponding symmetry imposition cannot help strengthen the final constraints.
 
-Given $\bm{U},\bm{V}\subseteq\nodes{G'}$ in an inflated causal structure $G'$, let us say that a map $\varphi:\bm{U}\to\bm{V}$ is a \tblue{copy isomorphism} if it is a graph isomorphism\footnote{A graph isomorphism is a bijective map between the nodes of one graph and the nodes of another, such that both the map and its inverse take edges to edges.} between $\subgraph{\bm{U}}$ and $\subgraph{\bm{V}}$ such that $\varphi(X)\sim X$ for all $X\in\bm{U}$, meaning that $\varphi$ maps every node $X\in\bm{U}$ to a node $\varphi(X)\in\bm{V}$ that is equivalent to $X$ under dropping the copy-index\footnote{\color{purple}Copy isomorphisms can be thought of isomorphisms of (equitably) \tblue{colored} directed graphs \cite{lopez2014conauto,mckar2014isomorphism}, where every original-scenario variable in the inflated causal structure is given a unique color but such that the copy index is ignored.}.
+Given $\bm{U},\bm{V}\subseteq\nodes{G'}$ in an inflated causal structure $G'$, let us say that a map $\varphi:\bm{U}\to\bm{V}$ is a \tblue{copy isomorphism} if it is a graph isomorphism\footnote{A graph isomorphism is a bijective map between the nodes of one graph and the nodes of another, such that both the map and its inverse take edges to edges.} between $\subgraph{\bm{U}}$ and $\subgraph{\bm{V}}$ such that $\varphi(X)\sim X$ for all $X\in\bm{U}$, meaning that $\varphi$ maps every node $X\in\bm{U}$ to a node $\varphi(X)\in\bm{V}$ that is equivalent to $X$ under dropping the copy-index.
+%\footnote{\color{purple}Copy isomorphisms can be thought of isomorphisms of (equitably) \tblue{colored} directed graphs \cite{lopez2014conauto,mckar2014isomorphism}, where every original-scenario variable in the inflated causal structure is given a unique color but such that the copy index is ignored.}.
 
 Furthermore, we say that a copy isomorphism $\varphi : \bm{U}\to\bm{V}$ is an \tblue{inflationary isomorphism} whenever it can be extended to a copy isomorphism on the ancestral subgraphs, $\Phi : \An{\bm{U}}\to\An{\bm{V}}$. 
 A copy isomorphism $\Phi: \An{\bm{U}}\to\An{\bm{V}}$ defines an inflationary isomorphism $\varphi:\bm{U}\to\bm{V}$ if and only if $\Phi(\bm{U}) = \bm{V}$.
@@ -1754,63 +1379,6 @@ The evidence is not conclusive, however, because the Shannon-type inequalities t
 
 One way to close this loophole would be to show that the novel Shannon-type inequalities imply constraints beyond some inner approximation to the genuine entropic cone corresponding to the CI relations among observed variables, perhaps along the lines of~\cite{weilenmann2016entropic}. Another is to use causal compatibility inequalities beyond entropic inequalities to identify some CI-respecting but incompatible distributions. \citet{pianaar2016interesting} accomplished precisely this
 by considering the different values that an observed root variable may take. In the following, we demonstrate how the inflation technique can be used for the same purpose. 
-
-\begin{comment}
-So far, we have only considered one of the three enigmatic causal structures, namely, the one depicted in~\cref{fig:GDAG15}, which differs from the Triangle scenario by virtue of the variable $Y$ being observed rather than latent.
-
-\begin{figure}[b]
-\centering
-\begin{minipage}[t]{0.4\linewidth}
-\centering
-\includegraphics[scale=1]{scen15DAGV3.pdf}
-\caption{Causal structure \#15 in Ref. \cite{pusey2014gdag}. \tpurp{The implied observable conditional independence relations are generated by $C\aindep Y$ and $A\aindep B| Y$.}}\label{fig:GDAG15}
-\end{minipage}
-\hfill
-\begin{minipage}[t]{0.5\linewidth}
-\centering
-\includegraphics[scale=1]{scen15InflationDAGV3.pdf}
-\caption{A useful inflation of \cref{fig:GDAG15}.}\label{fig:Inflated15}
-\end{minipage}
-\end{figure}
-
-We consider the inflation of \cref{fig:Inflated15}, which is analogous to the Cut inflation of the Triangle scenario.   Using Hardy-type tautologies, as described in \cref{sec:TSEM}, we obtain causal compatibility inequalities for the inflated causal structure, which in turn, via \cref{maincorollary}, yield the following causal compatibility inequalities for the causal structure of~\cref{fig:GDAG15}:
-\begin{align}
-\p[Y]{0} \p[Y\! A C]{0 0 0} \leq {\p[Y\! A]{0 0} \p[Y\! B]{0 0}  + \p[Y]{0} \p[Y\! B C]{0 1 0}}, \\
-\p[Y]{0}\p[Y\! A C]{1 0 0} \leq {\p[Y\! A]{1 0} \p[Y\! B]{0 0} + \p[Y]{1} \p[Y\! B C]{0 1 0}}.
-\label{eq:DAG15ineqs}
-\end{align}
-For example, the second inequality is derived as follows. A Hardy-type tautology on the variables of the inflated causal structure implies the following constraint on marginals:
-\begin{align}\label{eq:hardyforpienaar}
-     \p[Y_1 Y_2 A_2 C_1]{0100} \leq \p[Y_1 Y_2 A_2 B_1]{0100} + \p[Y_1 Y_2 B_1 C_1 ]{0110} .
-\end{align}
-Applying factorization as per the ancestral independence relations of the inflated causal structure, we obtain 
-\begin{align}
- \p[Y_1]{0} \p[Y_2 C_1 A_2]{100} \leq \p[Y_2 A_2]{10} \p[Y_1 B_1]{00} + \p[Y_2]{1} \p[Y_1 B_1 C_1]{010}, 
-\end{align}
-and finally translating this into a causal compatibility inequality on the original causal structure using \cref{maincorollary}, we obtain \cref{eq:DAG15ineqs}. 
- 
-In \citet{pianaar2016interesting}, it was shown that the following distribution, which is easily verified to satisfy the CI relations among the observed variables in the causal structure of \cref{fig:GDAG15}, namely, 
-$Y\indep C$ and $A\indep B | Y$~\cite{pusey2014gdag}, is nonetheless incompatible with the causal structure of \cref{fig:GDAG15}:
-\begin{align}\label{eq:pienaardistro}
-    P^{\text{P}}_{Y\! A B C}:=\frac{[0000]+[0011]+[1000]+[1101]}{4},\quad\text{i.e.,}\quad P^{\text{P}}_{Y\! A B C}(y a b c):=\begin{cases}\tfrac{1}{4}&\text{if }  y\cdot c = a \text{ and }  (y \oplus 1)\cdot c = b, \\ 0&\text{otherwise}.\end{cases}
-\end{align}
-It is easily verified that this distribution violates the causal compatibility inequality of~\cref{eq:DAG15ineqs}.  It is in this sense that the inflation technique can show that the causal structure of \cref{fig:GDAG15} is interesting. 
-
-There is an alternative way to see that this distribution is not compatible with the causal structure of \cref{fig:GDAG15} using our results from the main text.  We consider the marginal on $ABC$ of $P^{\text{P}}_{Y\! A B C}$, which is
-\begin{align}\label{eq:pienaardistroABC}
-    P^{\text{P}}_{ A B C}:=\frac{1}{2}[000]+\frac{1}{4}[011]+\frac{1}{4}[101].
-\end{align}
-First, we note that any marginal distribution on $ABC$ that is compatible with the causal structure of \cref{fig:GDAG15} is necessarily also compatible the Triangle scenario.  Second, we note that $P^{\text{P}}_{A B C}$ is incompatible with the Triangle scenario.  This follows from the fact that it violates one of the inequalities we derived in \cref{sec:CCineqs}.  \tpurp{The relevant inequality is in the symmetry class of \cref{eq:wrejectclass}, and we express it here in terms of joint probabilities:}
-\begin{equation}
-	P_{A}(1) P_{B}(1) P_{C}(0) \leq P_{AB}(11) P_C(0) + P_{BC}(10) P_A(1) + P_{AC}(10) P_B(1) + P_{ABC}(001).
-\end{equation}
-Clearly, this can be obtained from the inequality of \cref{eq:FritzF3} (the one that rejected the W-distribution of~\cref{eq:wdistribution1}) by the symmetry operation which flips the value assigned to $C$.  
-
-Just as the incompatibility of the W-distribution with the Triangle scenario was not detectable by entropic inequalities, as we noted in our discussion of \cref{example:noWdist} from \cref{subsec:witnessingincompat}, the same is true for the incompatibility of the distribution $P^{\text{P}}_{YABC}$ with the causal structure of \cref{fig:GDAG15}. $P^{\text{P}}_{YABC}$ not only satisfies all Shannon-type entropic inequalities pertinent to the causal structure of~\cref{fig:GDAG15}, but lies within an inner approximation to the genuine entropy cone for that scenario\footnote{This is due to Weilenmann and Colbeck (personal communication).}. In other words, there exists a distribution with the same joint and marginal entropies as  $P^{\text{P}}_{YABC}$ which \emph{is} compatible with the causal structure of \cref{fig:GDAG15}.
-
-Finally, it may be worth noting that the inflation depicted in~\cref{fig:Inflated15} is precisely the ``bilocality scenario'' investigated by~\citet{BilocalCorrelations}.  Therefore, the inflation technique permits us to translate every causal compatibility inequality for the bilocality scenario into a causal compatibility inequality for the causal structure of~\cref{fig:GDAG15}.
-\clearpage
-\end{comment}
 
 \begin{figure}[t]
 \centering
@@ -1971,56 +1539,9 @@ Any distribution $P_{ABCY}$ that is incompatible with HLP's causal structure \#1
 It follows that if one can find a distribution that exhibits all of the observable CI relations implied by \emph{either} of HLP's causal structures \#15 and \#20, namely, $C\indep Y$ (per \#15 \emph{and} \#16), $A\indep B\,|\,Y$ (per \#15), and $A\indep Y\,|\,B$ (per \#20), and which moreover is \emph{not} compatible with HLP's causal structure \#16, then this proves---in one go---that HLP's causal structures \#15, \#16 and \#20 are interesting. Any distribution $P_{ABCY}$ with the conditional\footnote{We take the definition of the conditional $P_{A B C|Y}$ from the distribution $P_{ABCY}$ as also implying $P_Y(0) > 0$ and $P_Y(1) > 0$.}
 \begin{align}\label{eq:allcirespectingdistro}
   P_{A B C|Y}(a b c| y):=
-  \begin{cases}\frac{1}{4}\parenths{[000]+[111]+[011]+[100]}&\text{if }  y\eql 0, \\ \frac{1}{4}\parenths{[000]+[111]+[010]+[101]}&\text{if }  y\eql 1,\end{cases}
+  \begin{cases}\frac{1}{4}\parenths{[000]+[111]+[011]+[100]}&\text{if }\,  y\eql 0, \\ \frac{1}{4}\parenths{[000]+[111]+[010]+[101]}&\text{if }\,  y\eql 1,\end{cases}
 \end{align}
-%and any marginal $P_Y$ satisfying $P_Y(0) > 0$ and $P_Y(1) > 0$, 
 achieves this because it satisfies the required CI relations while also violating \cref{ntccineqDAG}.
-
-\begin{comment}
-Consider now the Rocket inflation for HLP's causal structure \#16 (\cref{fig:GDAG16}), depicted in \cref{fig:Inflated16}. All four of the expressible sets that we will consider
- contain $Y_1$ and $Y_2$. We can, therefore, focus on the part that differs, and try to determine the constraints for the existence of a joint distribution over the contexts formed by pairing elements of $\{\{A_1,B_1\}, \{A_2,B_2\}\}$ with $\{C_1, C_2\}$. 
-
-This is very much the same idea of deriving Bell inequalities. Indeed, if $A$ and $B$ are binary variables, then the process of using Inflation to derive polynomial inequalities via \cref{fig:Inflated16} is computationally indistinguishable from deriving Bell inequalities for the scenario concerning two parties such that each party has two settings to choose from, and one of the parties observes binary outcomes whereas the other party see two bits resulting from each local measurement. Every Bell inequality for that scenario corresponds one-to-one with some polynomial inequality for causal structure \#16 derived through inflation, upon conditioning according to $Y_1\eql 1$ and $Y_2\eql 0$.
-
-\begin{figure}[b]
-\centering
-\includegraphics[scale=1]{scen16InflationDAG.pdf}
-\caption{The Rocket inflation of \cref{fig:GDAG16}. The Rocket's expressible sets are comprised of $\{A_1,B_1,C_2,Y_1,Y_2\}$, $\{A_2,B_2,C_1,Y_1,Y_2\}$, $\{A_2,B_2,C_2,Y_1,Y_2\}$, and $\{A_1,B_1,C_1,Y_1,Y_2\}$. }\label{fig:Inflated16}
-\end{figure}
-
-Here's an example a straightforward linear inequality which we can make use of:
-\begin{align}
-    \p[B_2 C_1|Y_1 Y_2]{00|10} \leq \p[B_2 C_2|Y_1 Y_2]{01|10} + \p[A_1 C_1|Y_1 Y_2]{10|10}+\p[A_1 C_2|Y_1 Y_2]{00|10}
-\end{align}
-which is translated into a polynomial inequality through the following steps.
-\begin{align}\begin{split}
-    &\p[B_2 C_1|Y_1 Y_2]{00|10} \to \p[B_2 C_1| Y_2]{00|0} \to \p[B C| Y]{00|0} \\
-    &\p[B_2 C_2|Y_1 Y_2]{01|10} \to \p[B_2 C_2| Y_2]{01|0} \to \p[B C| Y]{01|0} \\
-    &\p[A_1 C_1|Y_1 Y_2]{10|10} \to \p[A_1 C_1| Y_1]{10|1} \to \p[A C| Y]{10|1} .
-\end{split}\end{align}
-The last term cannot be treated in a similar manner, however, because $\{A_1 C_2\}$ are together neither injectable nor ai-expressible. Note that in \cref{fig:Inflated16} $A_1$ and $C_2$ both have $Z$ as a common ancestor, but $A_1$ has $X_1$ as a parent whereas $C_2$ has $X_2$ has a parent. We overcome this obstacle through the power of expressible sets: we invoke the $d-separation$ criterion $A_1 \aindep C_2 \aindep Y_2 | B_1 Y_1$ to justify $A_1 \indep C_2 \indep Y_2 | B_1 Y_1$. This allows us to transform
-\begin{align}
-   &\p[A_1 C_2|Y_1 Y_2]{00|10} \to {\sum_b}\p[A_1 B_1 C_2| Y_1]{0 b 0|1}\to {\sum_b}\p[A_1 C_2| B_1 Y_1]{00|b 1}\p[B_1]{b}\to
-   \\\nonumber& {\sum_b}\p[A_1| B_1 Y_1]{0|b1}\p[C_2| B_1 Y_1]{0|b 1}\p[B_1]{b} \to {\sum_b}\p[A_1| B_1 Y_1]{0|b 1}\p[B_1 C_2| Y_1]{b 0|1} \to {\sum_b}\p[A| B Y]{0|b 1}\p[B C| Y]{b 0|1}
-\end{align}
-where, pursuant to treating the final term in a special manner, we have obtained
-\begin{align}\label{eq:nontrivpolyfor16}\begin{split}
-&\p[B C| Y]{00|0} \leq \p[B C| Y]{01|0} +\p[A C| Y]{10|1} +{\sum_b}\p[A| B Y]{0|b 1}\p[B C| Y]{b 0|1},
-\\\text{equivalently}\quad&\p[A B C| Y]{\_00|0} \leq \p[A B C| Y]{\_01|0} +\p[A B C| Y]{1\_0|1} +{\sum_b}\frac{\p[A B C| Y]{0 b \_|1}\p[A B C| Y]{\_ b 0|1}}{\p[A B C| Y]{\_ b \_|1}}.
-\end{split}\end{align}
-A nice feature of \cref{eq:nontrivpolyfor16} is that it witnesses Pienaar's distribution given by
-\begin{align}\label{eq:pienaardistroconditiona}
-  P^{\text{P}}_{A B C|Y}(a b c| y):=\begin{cases}\frac{1}{2}\parenths{[000]+[011]}&\text{if }  y\eql 0 \\ \frac{1}{2}\parenths{[000]+[101]}&\text{if }  y\eql 1\end{cases}
-\end{align}
-as incompatible with HLP's causal structure $\#16$. 
-
-Even better, however, is that \cref{eq:nontrivpolyfor16} can be used to show that causal structure $\#16$ is incompatible with this semi-uniform distribution
-\begin{align}\label{eq:allcirespectingdistro}
-  P^{\text{SU}}_{A B C|Y}(a b c| y):=
-  \begin{cases}\frac{1}{4}\parenths{[000]+[111]+[011]+[100]}&\text{if }  y\eql 0 \\ \frac{1}{4}\parenths{[000]+[111]+[010]+[101]}&\text{if }  y\eql 1\end{cases}.
-\end{align}
-Note that $P^{\text{SU}}$ simultaneously respects  $C\indep Y$, $A\indep B|Y$, and $A\indep Y|B$, meaning that it does noes conflict with the observable conditional independence relations of causal structures \#15, \#16, and \#20. Neverless $P^{\text{SU}}$ is incompatible with all three of those causal structures as a consquence of its incompatibility with causal structure \#16: any distribution which \emph{could} be generated by causal structures \#15 and \#20 is a distribution which can also be generated by causal structure \#16. Therefore we have certified all three causal scenarios as formally interesting, in a single shot. 
-\end{comment}
 
 \section{The Copy Lemma and Non-Shannon type Entropic Inequalities}\label{sec:NonShannon}
 
@@ -2124,57 +1645,6 @@ constant & \(\expec{A}\) & \(\expec{B}\) & \(\expec{C}\) & \(\expec{A B}\) & \(\
 \end{tabular}}
 \end{table*}
 
-\begin{comment}
-
-We here present the 37 distinct symmetry classes of causal compatibility inequalities for the Triangle scenario derived in Sec.~\ref{sec:CCineqs} in a machine-readable format.  Each row in the table specifies the coefficient of each correlator that appears in the inequality.  As noted previously, inequalities \#1, \#3--4, \#8--17 and \#19--24 in the table are also implied by the hypergraph transversals technique per \cref{sec:TSEM}.
-
-\begin{table*}[ht]\centering\caption{Machine-readable version of the table in \cref{sec:CCineqs}, where each inequality is specified by the coefficients of the correlators appearing within it.
- \medskip}\label{tab:machinereadable}
-\resizebox{\textwidth}{!}{
-\begin{tabular}{lc@{\hspace{1em}}ccc@{\hspace{1em}}ccc@{\hspace{1em}}c@{\hspace{1em}}ccc@{\hspace{1em}}ccc@{\hspace{1em}}c} 
-  & constant & \(\expec{A}\) & \(\expec{B}\) & \(\expec{C}\) & \(\expec{A B}\) & \(\expec{A C}\) & \(\expec{B C}\) & \(\expec{A B C}\) & \(\expec{A}\expec{B}\) & \(\expec{A}\expec{C}\) & \(\expec{B}\expec{C}\) & \(\expec{C}\expec{A B}\) & \(\expec{B}\expec{A C}\) &
-   {\(\expec{A}\expec{B C}\)} & {\(\expec{A}\expec{B}\expec{C}\)}   \\\bottomrule
-\text{($\#$1):} & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\
- \text{($\#$2):} & 2 & 0 & 0 & 0 & 0 & -2 & 0 & 0 & 0 & 0 & 0 & -1 & 0 & 0 & 1 \\
- \text{($\#$3):} & 3 & 1 & -1 & 1 & 1 & 3 & 0 & 0 & 0 & 0 & 1 & -1 & -1 & 0 & 1 \\
- \text{($\#$4):} & 3 & 1 & -1 & 1 & 1 & 3 & 0 & 0 & 0 & 0 & 1 & 1 & -1 & 0 & -1 \\
- \text{($\#$5):} & 3 & 0 & 1 & 0 & 1 & 0 & -2 & 0 & -1 & 1 & 0 & 1 & -1 & 0 & 1 \\
- \text{($\#$6):} & 3 & 0 & 1 & 0 & 0 & -2 & -2 & 0 & 0 & 1 & 0 & -1 & -1 & 0 & 1 \\
- \text{($\#$7):} & 3 & 0 & 1 & 0 & 1 & 0 & -2 & 0 & 1 & -1 & 0 & 1 & 1 & 0 & -1 \\
- \text{($\#$8):} & 3 & 1 & 1 & 1 & 2 & 2 & 2 & -1 & 1 & 1 & 1 & 1 & 1 & 1 & -1 \\
- \text{($\#$9):} & 3 & 1 & 1 & 1 & 0 & 2 & -2 & 1 & -1 & 1 & 1 & 1 & 1 & -1 & -1 \\
- \text{($\#$10):} & 4 & 0 & 0 & 2 & -2 & -2 & 0 & -1 & 2 & 0 & 2 & 1 & 1 & 1 & 0 \\
- \text{($\#$11):} & 4 & 0 & -2 & 0 & -2 & 0 & -3 & 1 & 0 & 0 & 1 & 1 & -1 & 0 & 1 \\
- \text{($\#$12):} & 4 & 0 & -2 & 0 & -2 & -2 & -3 & 1 & 0 & 2 & 1 & 1 & 1 & 0 & -1 \\
- \text{($\#$13):} & 4 & 0 & 0 & 0 & 2 & -2 & 1 & 1 & -2 & -2 & -1 & -1 & 1 & 0 & -1 \\
- \text{($\#$14):} & 4 & 0 & 0 & 0 & 2 & -2 & 1 & 1 & -2 & 2 & -1 & 1 & 1 & 0 & 1 \\
- \text{($\#$15):} & 4 & 0 & 0 & 0 & 0 & -2 & 3 & 1 & 0 & 2 & 1 & -1 & -1 & 0 & 1 \\
- \text{($\#$16):} & 4 & 0 & -2 & 0 & -2 & -2 & -2 & 1 & 0 & 2 & 0 & 1 & 1 & -1 & 0 \\
- \text{($\#$17):} & 4 & 0 & 0 & 0 & -2 & -2 & -2 & 1 & 2 & 2 & 2 & 1 & 1 & 1 & 0 \\
- \text{($\#$18):} & 5 & 1 & 1 & 1 & 3 & 1 & -4 & 0 & -2 & 0 & 1 & 1 & -1 & 0 & 1 \\
- \text{($\#$19):} & 5 & 1 & 1 & 1 & 3 & -1 & -4 & 0 & 2 & -2 & 1 & 1 & 1 & 0 & -1 \\
- \text{($\#$20):} & 5 & 1 & -1 & 1 & 1 & 2 & -2 & -2 & -2 & -1 & 1 & 1 & -2 & -2 & 0 \\
- \text{($\#$21):} & 5 & 1 & 1 & 1 & 1 & 2 & -2 & -1 & 0 & -1 & -1 & 2 & 1 & 1 & -2 \\
- \text{($\#$22):} & 5 & -1 & 1 & 1 & 1 & 1 & -1 & 1 & -2 & -2 & 2 & -2 & -2 & -2 & 0 \\
- \text{($\#$23):} & 5 & 1 & 1 & 1 & 2 & 1 & -1 & 1 & -1 & 0 & 2 & -1 & -2 & -2 & 1 \\
- \text{($\#$24):} & 5 & 1 & 1 & 1 & -1 & 2 & 2 & 1 & -2 & -1 & -1 & 2 & 1 & -1 & -2 \\
- \text{($\#$25):} & 6 & 0 & 0 & 0 & -4 & -3 & 0 & 0 & 2 & 1 & 2 & -2 & -1 & -2 & 1 \\
- \text{($\#$26):} & 6 & -2 & 0 & 2 & -5 & -3 & 0 & 0 & 1 & 1 & 0 & -1 & 1 & -2 & 2 \\
- \text{($\#$27):} & 6 & 0 & 0 & 2 & -4 & 3 & 0 & 0 & 2 & 1 & 0 & -2 & 1 & -2 & 1 \\
- \text{($\#$28):} & 6 & 0 & 0 & 0 & 1 & -3 & 2 & 0 & 1 & 1 & -4 & 1 & -1 & -2 & -2 \\
- \text{($\#$29):} & 6 & 0 & 2 & 0 & 3 & 0 & -5 & 0 & 1 & -2 & 1 & 1 & 2 & 1 & -2 \\
- \text{($\#$30):} & 6 & 0 & 2 & 0 & 2 & -2 & 1 & 0 & -2 & 4 & -1 & 2 & 2 & 1 & 1 \\
- \text{($\#$31):} & 6 & 0 & 0 & 0 & -2 & -3 & -2 & -2 & 0 & 1 & 4 & -2 & -1 & 0 & 1 \\
- \text{($\#$32):} & 7 & 1 & 1 & 1 & 2 & 1 & -3 & 3 & 1 & -2 & 2 & 3 & 2 & -2 & -1 \\
- \text{($\#$33):} & 8 & 0 & 0 & 0 & -2 & -4 & -2 & -3 & 2 & 4 & -2 & -1 & 1 & -3 & 2 \\
- \text{($\#$34):} & 8 & 2 & 0 & -2 & -6 & 1 & 0 & 1 & 0 & -1 & 2 & 1 & 2 & -3 & 3 \\
- \text{($\#$35):} & 8 & 2 & 0 & 0 & 6 & 1 & -2 & 1 & 0 & 1 & 2 & -1 & -2 & -3 & 3 \\
- \text{($\#$36):} & 8 & 0 & -2 & -2 & 0 & -6 & 1 & 1 & 2 & 0 & -1 & 3 & 1 & -2 & -3 \\
- \text{($\#$37):} & 8 & 0 & 2 & 0 & 1 & 2 & -6 & 1 & 1 & -2 & 0 & 2 & 3 & -1 & -3 
-\end{tabular}}
-\end{table*}
-\end{comment}
-
 \section{Recovering the Bell Inequalities from the Inflation Technique}
 \label{sec:Bellscenarios}
 
@@ -2262,7 +1732,7 @@ is the inflationary precursor of the Bell inequality
 \end{align}
 as \cref{eq:aBell} is obtained from \cref{eq:preBell} by dividing both sides by $\p[X_1 Y_1 X_2 Y_2]{0011}=\p[X_1]{0} \p[Y_2]{0}\p[X_2]{1} \p[Y_2]{1}$ and then dropping copy indices. On the other hand, \cref{eq:preBell} follows directly from factorization relations on ai-expressible sets and the tautology
 \begin{align}\begin{split}
-	[ \mgreen{A_1 \eql 0}, & \mgreen{B_1 \eql 0}, \mgreen{X_1 \eql 0}, \mgreen{Y_1\eql 0}, \mgreen{X_2 \eql 1}, \mgreen{Y_2 \eql 1}]\\
+	[ \mgreen{A_1 \eql 0},\, & \mgreen{B_1 \eql 0}, \mgreen{X_1 \eql 0}, \mgreen{Y_1\eql 0}, \mgreen{X_2 \eql 1}, \mgreen{Y_2 \eql 1}]\\
  \implies 
 	[ & \mgreen{A_1 \eql 0}, B_2 \eql 0, \mgreen{X_1 \eql 0}, \mgreen{Y_1\eql 0}, \mgreen{X_2 \eql 1}, \mgreen{Y_2 \eql 1}] \\
 	\mathrel{\lor} [ & A_2 \eql 0, \mgreen{B_1 \eql 0}, \mgreen{X_1 \eql 0}, \mgreen{Y_1\eql 0}, \mgreen{X_2 \eql 1}, \mgreen{Y_2 \eql 1}] \\
