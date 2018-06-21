@@ -126,9 +126,6 @@ anchorcolor=OliveGreen}
 
 \setlength{\jot}{6pt}
 
-%%%%%%%%%%%%%%%%%% mark provisional edits
-\newcommand{\tob}[1]{\textcolor{BurntOrange}{#1}}
-
 \begin{document}
 
 \title{The Inflation Technique for Causal Inference with Latent Variables}
@@ -377,10 +374,7 @@ The same considerations apply for a {\em collection} of injectable sets:
 
 \begin{lemma} \label[lemma]{mainlemma}
 Let the causal structure $G'$ be an inflation of $G$. 
-Let $S'  \subseteq \SmallNamedFunction{InjectableSets}{G'}$ be a collection of injectable sets, and let $S \subseteq \SmallNamedFunction{ImagesInjectableSets}{G}$ be the images of this collection under the dropping of copy-indices. If 
-\tob{a distribution $P_{\nodes{G}}$ is compatible with $G$, }
-% the family of marginal distributions $\{ P_{\bm{U}} : \bm{U} \in S \}$ is compatible with $G$,
-then the corresponding family of marginal distributions $\{ P_{\bm{U}'} : \bm{U}' \in S' \}$, defined via $P_{\bm{U}'}= P_{\bm{U}}$ for $\bm{U}' \sim \bm{U}$, is compatible with $G'$.
+Let $S'  \subseteq \SmallNamedFunction{InjectableSets}{G'}$ be a collection of injectable sets, and let $S \subseteq \SmallNamedFunction{ImagesInjectableSets}{G}$ be the images of this collection under the dropping of copy-indices.   If the family of marginal distributions $\{ P_{\bm{U}} : \bm{U} \in S \}$ is compatible with $G$, then the corresponding family of marginal distributions $\{ P_{\bm{U}'} : \bm{U}' \in S' \}$, defined via $P_{\bm{U}'}= P_{\bm{U}}$ for $\bm{U}' \sim \bm{U}$, is compatible with $G'$.
 \end{lemma}
 
 We have thereby related a question about compatibility with the original causal structure to one about compatibility with the inflated causal structure.  If one can show that the new compatibility question on $G'$ is answered in the negative, then it follows that the original question is answered in the negative as well.    Some simple examples serve to illustrate the idea.
@@ -624,8 +618,6 @@ This is an example of a simple but nontrivial causal compatibility inequality fo
 is a causal compatibility inequality for the Triangle scenario.   This inequality expresses the fact that as long as $A$ and $B$ are not completely biased, there is a tradeoff between the strength of $AC$ correlations and the strength of $BC$ correlations.   
 
 Given the symmetry of the Triangle scenario under permutations and sign flips of $A$, $B$ and $C$, it is clear that the image of inequality~\eqref{eq:polymonogamy} under any such symmetry is also a valid causal compatibility inequality.  Together, these inequalities constitute a type of monogamy\footnote{We are here using the term ``monogamy'' in the same sort of manner in which it is used in the context of entanglement theory~\cite{horo4}.}  of correlations in the Triangle scenario with binary variables:  if any two observed variables with unbiased marginals are perfectly correlated, then they are both independent of the third.
-
-\tob{Moreover, since \eqref{eq:polymonogamyraw} is valid even for continuous variables with values in the interval $[-1,+1]$, it follows that the polynomial inequality \eqref{eq:polymonogamy} is valid in this case as well.}
 \end{example}
 
 \begin{example}[\tred{A causal compatibility inequality in terms of \tpurp{\emph{entropic quantities}}}]
@@ -760,13 +752,6 @@ Generalizing to an arbitrary causal structure, therefore, the procedure is as fo
 \end{enumerate}
 
 The procedure for systematically deriving causal compatibility inequalities is analogous: instead of determining whether a given family of distributions can arise as marginals of a joint distribution, one rather determines all \emph{constraints} that such a family must satisfy in order to arise from a joint distribution. These constraint translate into causal compatibility inequalities for the inflated causal structure via the ancestral independences of \cref{eq:preinjfactor}, and then into causal compatibility inequalities for the original causal structure via \cref{maincorollary}.
-
-\tob{In summary, we have used the contrapositive of \cref{mainlemma} in order to show:}
-
-\begin{theorem}
-\tob{Let $G'$ be an inflation of $G$. Let a distribution $P_{\nodes{G}}$ be given. Suppose that the family of marginal distributions $\{ P_{\bm{U}'} : \bm{U}' \in \SmallNamedFunction{AI-ExpressibleSets}{G'} \}$, defined via $P_{\bm{U}'}= P_{\bm{U}}$ for $\bm{U}' \sim \bm{U}$ on injectable sets and extended to ai-expressible sets via~\cref{eq:preinjfactor}, does not arise as the family of marginal distributions of any common joint. Then the original distribution $P_{\nodes{G}}$ is not compatible with $G$.}
-\end{theorem}
-
 
 The ai-expressible sets play a crucial role in linking the original causal structure with the inflated causal structure.  They are precisely those sets of variables whose joint distributions in the inflation model are fully specified by the causal model on the original causal structure, as they can be computed using \cref{eq:preinjfactor} and \cref{mainlemma}. So we begin with the problem of identifying the ai-expressible sets systematically.
 
