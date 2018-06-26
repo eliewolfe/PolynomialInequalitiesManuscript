@@ -56,17 +56,19 @@ breaklinks=true
 \definecolor{panblue}{RGB}{0,24,150}
 \definecolor{carmine}{RGB}{150, 0, 24}
 \definecolor{gray}{RGB}{150, 150, 150}
+\definecolor{googleblue}{RGB}{34, 0, 204}
+\definecolor{darkgreen}{RGB}{0, 80, 0}
 \usepackage[pdftex,pdfversion=1.7,pdfencoding=auto,pdfnewwindow=true,pdfusetitle=true,bookmarks=true,bookmarksnumbered=true,bookmarksopen=true,pdfpagemode=UseThumbs,bookmarksopenlevel=1,pdfpagelabels=false]{hyperref}
 \hypersetup{colorlinks,
 linkcolor=carmine,
-citecolor=medblue,
-urlcolor=panblue,
+citecolor=darkgreen,
+urlcolor=googleblue,
 anchorcolor=OliveGreen}
 
 \newcommand*{\mred}[1]{{\color{RawSienna}{\mathbf{#1}}}}
 \newcommand*{\mgreen}[1]{{\color{OliveGreen}{\mathbf{#1}}}}
 \newcommand*{\tred}[1]{{\color{carmine}{\textbf{#1}}}}
-\newcommand*{\tblue}[1]{{\color{MidnightBlue}{\textbf{#1}}}}
+\newcommand*{\tblue}[1]{{\color{medblue}{\textbf{#1}}}}
 \newcommand*{\tpurp}[1]{{\color{Plum}{{#1}}}}
 
 \usepackage[capitalise]{cleveref}
@@ -215,10 +217,10 @@ A \tblue{causal model} consists of a pair of objects: a \tblue{causal structure}
 First, recall that a directed acyclic graph (DAG) $G$ consists of a finite set of nodes $\nodes{G}$ and a set of directed edges $\edges{G}\subseteq\nodes{G}\times\nodes{G}$, meaning that an edge is an ordered pair of nodes, such that this directed graph is \emph{acylic}, which means that there is no way to start and end at the same node by traversing edges forward.
 In the context of a causal model, each node $X\in\nodes{G}$ will be equipped with a random variable that we denote by the same letter $X$. A directed edge $X\to Y$ corresponds to the possibility of a direct causal influence from the variable $X$ to the variable $Y$. In this way, the edges represent causal relations.
 
-Our terminology for the causal relations between the nodes in a DAG is the standard one. The parents of a node $X$ in $G$ are defined as those nodes from which an outgoing edge terminates at $X$, i.e.~$\Pa[G]{X} = \{\:Y\:|\:Y\to X\:\}$. When the graph $G$ is clear from the context, we omit the subscript. Similarly, the children of a node $X$ are defined as those nodes at which edges originating at $X$ terminate, i.e.~$\Ch[G]{X} = \{\:Y\:|\: X\to Y\:\}$. If $\bm{U}$ is a set of nodes, then we put $\Pa[G]{\bm{U}} := \bigcup_{X\in\bm{U}} \Pa[G]{X}$ and $\Ch[G]{\bm{U}} := \bigcup_{X\in\bm{U}} \Ch[G]{X}$. The \tblue{ancestors} of a set of nodes $\bm{U}$, denoted $\An[G]{\bm{U}}$, are defined as those nodes which have a directed path to some node in $\bm{U}$, including the nodes in $\bm{U}$ themselves\footnote{The inclusion of a node itself within the set of its ancestors is contrary to the colloquial use of the term ``ancestors''. 
+Our terminology for the causal relations between the nodes in a DAG is the standard one. The parents of a node $X$ in $G$ are defined as those nodes from which an outgoing edge terminates at $X$, i.e.~$\Pa[G]{X} = \{\:Y\:|\:Y\to X\:\}$. When the graph $G$ is clear from the context, we omit the subscript. Similarly, the children of a node $X$ are defined as those nodes at which edges originating at $X$ terminate, i.e.~$\Ch[G]{X} = \{\:Y\:|\: X\to Y\:\}$. If $\bm{X}$ is a set of nodes, then we put $\Pa[G]{\bm{X}} := \bigcup_{X\in\bm{X}} \Pa[G]{X}$ and $\Ch[G]{\bm{X}} := \bigcup_{X\in\bm{X}} \Ch[G]{X}$. The \tblue{ancestors} of a set of nodes $\bm{X}$, denoted $\An[G]{\bm{X}}$, are defined as those nodes which have a directed path to some node in $\bm{X}$, including the nodes in $\bm{X}$ themselves\footnote{The inclusion of a node itself within the set of its ancestors is contrary to the colloquial use of the term ``ancestors''. 
 One uses this definition so that any correlation between two variables can always be attributed to a common ``ancestor''. This includes, for instance, the case where one variable is a parent of the other.
 }. 
-Equivalently, $\An{\bm{U}} := \bigcup_{n\in\mathbb{N}} \mathsf{Pa}^n(\bm{U})$, where $\mathsf{Pa}^n(\bm{U})$ is defined inductively via $\mathsf{Pa}^0(\bm{U}) := \bm{U}$ and $\mathsf{Pa}^{n+1}(\bm{U}) := \mathsf{Pa}(\mathsf{Pa}^n(\bm{U}))$. 
+Equivalently, $\An{\bm{X}} := \bigcup_{n\in\mathbb{N}} \mathsf{Pa}^n(\bm{X})$, where $\mathsf{Pa}^n(\bm{X})$ is defined inductively via $\mathsf{Pa}^0(\bm{X}) := \bm{X}$ and $\mathsf{Pa}^{n+1}(\bm{X}) := \mathsf{Pa}(\mathsf{Pa}^n(\bm{X}))$. 
 
 A \tblue{causal structure} is a DAG that incorporates a distinction between two types of nodes: the set of observed nodes, 
 and the set of latent nodes \footnote{\citet[Def. 2.3.2]{pearl2009causality} uses the term \emph{latent structure} when referring to a DAG supplemented by a specification of latent nodes, whereas here that specification is implicit in our term \emph{causal structure}.}. 
@@ -230,27 +232,27 @@ The second component of a causal model is a family of \tblue{causal parameters}.
 The causal parameters specify, for each node $X$, the conditional probability distribution over the values of the random variable $X$, given the values of the variables in $\Pa{X}$.  In the case of root nodes, we have $\Pa{X} = \emptyset$, and the conditional distribution is an unconditioned distribution.
 We write $\pfunc{Y|X}$ for the conditional distribution of a variable $Y$ given a variable $X$, while the particular conditional probability of the variable $Y$ taking the value $y$ given that the variable $X$ takes the values $x$ is denoted\footnote{Although our notation suggests that all variables are either discrete or described by densities, we do not make this assumption.  All of our equations can be translated straightforwardly into proper measure-theoretic notation.} $\p[Y|X]{y|x}$.    Therefore, a family of causal parameters has the form
 \begin{align}
- \{ \pfunc{A|\Pa[G]{A}} : A \in \nodes{G} \}.
+ \{ \pfunc{X|\Pa[G]{X}} : X \in \nodes{G} \}.
 \end{align}
 Finally, a \tblue{causal model} $M$ consists of a causal structure together with a family of causal parameters,
 \[
-	M = ( G,   \{ \pfunc{A|\Pa[G]{A}} : A \in \nodes{G} \}).
+	M = ( G,   \{ \pfunc{X|\Pa[G]{X}} : X \in \nodes{G} \}).
 \]
 A causal model specifies a joint distribution of all variables in the causal structure via
 \begin{align}\label{Markov}
-P_{\nodes{G}} = \prod_{A\in \nodes{G}} \pfunc{A|\Pa[G]{A}},
+P_{\nodes{G}} = \prod_{X\in \nodes{G}} \pfunc{X|\Pa[G]{X}},
 \end{align}
 where $\prod$ denotes the usual product of functions, so that e.g.~$(P_{Y|X} \times P_Y)(x,y) = P_{Y|X}(y|x) P_X(x)$. A distribution $P_{\nodes{G}}$ arises in this way if and only if it satisfies the Markov conditions associated to $G$~\cite[Sec.~1.2]{pearl2009causality}.
 
 The joint distribution of the observed variables is obtained from the joint distribution of all variables by marginalization over the latent variables,
 \begin{align}\label{MarkovObserved}
-P_{\obsnodes{G}} =  \sum_{\{X :X \in\latnodes{G}\}} P_{\nodes{G}},
+P_{\obsnodes{G}} =  \sum_{\{U :U \in\latnodes{G}\}} P_{\nodes{G}},
 \end{align}
-where $\sum_X$ denotes marginalization over the variable $X$, so that $(\sum_X P_{XY})(y):= \sum_x P_{XY}(xy)$.
+where $\sum_U$ denotes marginalization over the (latent) variable $U$, so that $(\sum_U P_{UV})(v):= \sum_u P_{UV}(uv)$.
 
 \begin{definition}\elie{
 A given distribution $P_{\obsnodes{G}}$ is \tblue{compatible} with a given causal structure $G$ if there is some choice of the causal parameters that yields $P_{\obsnodes{G}}$ via \cref{Markov,MarkovObserved}. 
-A given \emph{family} of distributions pertaining to \emph{subsets} of observed variables is \tblue{compatible} with a given causal structure if and only if there exists some $P_{\obsnodes{G}}$  such that both \begin{compactenum}
+A given \emph{family} of distributions pertaining to \emph{subsets} of observed variables is compatible with a given causal structure if and only if there exists some $P_{\obsnodes{G}}$  such that both \begin{compactenum}
 \item $P_{\obsnodes{G}}$ is compatible with the causal structure, and 
 \item $P_{\obsnodes{G}}$  yields the given family as marginals.
 \end{compactenum}}
@@ -265,20 +267,24 @@ For a given causal structure $G$, there are many causal structures $G'$ constitu
 The particular choice of $G'\in \inflations{G}$ then determines how to map a causal model $M$ on $G$ into a causal model $M'$ on $G'$, 
 since  the family of causal parameters of $M'$ will be determined by a function $M' = \SmallNamedFunction[G\to G']{Inflation}{M}$ that we define below. We begin by defining when a causal structure $G'$ is an inflation of $G$, building on some preliminary definitions. 
 
-For a subset of nodes $\bm{V}\subseteq\nodes{G}$, we denote the \tblue{induced subgraph} on $\bm{V}$ by $\subgraph[G]{\bm{V}}$. It consists of the nodes $\bm{V}$ and those edges of $G$ which have both endpoints in $\bm{V}$. Of special importance to us is the 
-\tblue{ancestral subgraph} $\ansubgraph[G]{\bm{V}}$, which is the subgraph induced by the ancestry of $\bm{V}$, $\ansubgraph[G]{\bm{V}}\coloneqq\subgraph[G]{\An[G]{\bm{V}}}$. 
+For a subset of (observed) nodes $\bm{V}\subseteq\obsnodes{G}$, we denote the \tblue{induced subgraph} on $\bm{V}$ by $\subgraph[G]{\bm{V}}$. It consists of the nodes $\bm{V}$ and those edges of $G$ which have both endpoints in $\bm{V}$. Of special importance to us is the 
+\tblue{ancestral subgraph} $\ansubgraph[G]{\bm{V}}$, which is the subgraph induced by the ancestry of $\bm{V}$, $\ansubgraph[G]{\bm{V}}\coloneqq\subgraph[G]{\An[G]{\bm{V}}}$. \elie{Keep in mind that $\bm{V}\subseteq\obsnodes{G}$ quite often has ancestry which is not entirely observed, i.e. for which $\An[G]{\bm{V}}\not\in \obsnodes{G}$.}
 
-In an inflated causal structure $G'$, every node is also labelled by a node of $G$.   That is, every node of the inflated causal structure $G'$ is a copy of some node of the original causal structure $G$, and the copies of a node $A$ of $G$ in $G'$ are denoted $A_1,\ldots, A_k$. 
+In an inflated causal structure $G'$, every node is also labelled by a node of $G$.   That is, every node of the inflated causal structure $G'$ is a copy of some node of the original causal structure $G$, and the copies of a node $X$ of $G$ in $G'$ are denoted $X_1,\ldots, X_k$. 
 The subscript that indexes the copies is termed the \tblue{copy-index}. 
-A copy is classified as observed or latent based on the classification of the original.  Similarly, any constraints on cardinality or other types of constraints such as Gaussianity are also inherited from the original. 
-When two objects (e.g.~nodes, sets of nodes, causal structures, etc\ldots) are the same up to copy-indices, then we use $\sim$ to indicate this, as in $A_i\sim A_j\sim A$. In particular, $\bm{U}\sim\bm{U}'$ for sets of nodes $\bm{U}\subseteq\nodes{G}$ and $\bm{U}'\subseteq\nodes{G'}$ if and only if $\bm{U}'$ contains exactly one copy of every node in $\bm{U}$. Similarly, $\subgraph[G']{\bm{U}'}\sim\subgraph[G]{\bm{U}}$ means that in addition to $\bm{U}\sim\bm{U}'$, an edge is present between two nodes in $\bm{U}'$ if and only if it is present between the two associated nodes in $\bm{U}$.
+A copy is classified as observed or latent \st{based on}\elie{according to} the classification of the original.  Similarly, any constraints on cardinality or other types of constraints such as Gaussianity are also inherited from the original. 
+When two objects (e.g.~nodes, sets of nodes, causal structures, etc\ldots) are the same up to copy-indices, then we use $\sim$ to indicate this, as in $X_i\sim X_j\sim X$. In particular, $\bm{X}\sim\bm{X}'$ for sets of nodes $\bm{X}\subseteq\nodes{G}$ and $\bm{X}'\subseteq\nodes{G'}$ if and only if $\bm{X}'$ contains exactly one copy of every node in $\bm{X}$. Similarly, $\subgraph[G']{\bm{X}'}\sim\subgraph[G]{\bm{X}}$ means that in addition to $\bm{X}\sim\bm{X}'$, an edge is present between two nodes in $\bm{X}'$ if and only if it is present between the two associated nodes in $\bm{X}$.
 
 In order to be an inflation, $G'$ must locally mirror the causal structure of $G$:
 \begin{definition}
-	The causal structure $G'$ is said to be an \tblue{inflation} of $G$, that is, $G' \in \inflations{G}$, if and only if for every $A_i\in\nodes{G'}$, the ancestral subgraph of $A_i$ in $G'$ is equivalent, under removal of the copy-index, to the ancestral subgraph of $A$ in $G$,
+	The causal structure $G'$ is said to be an \tblue{inflation} of $G$, that is, $G' \in \inflations{G}$, if and only if for every $V_i\in\obsnodes{G'}$, the ancestral subgraph of $V_i$ in $G'$ is equivalent, under removal of the copy-index, to the ancestral subgraph of $V$ in $G$,
 \begin{align}\label{eq:definflationDAG}
-G' \in\inflations{G} \quad\text{ iff }\quad \forall A_i\in \nodes{G'}:\; \ansubgraph[G']{A_i}\sim\ansubgraph[G]{A}.
+G' \in\inflations{G} \quad\text{ iff }\quad \forall V_i\in \obsnodes{G'}:\; \ansubgraph[G']{V_i}\sim\ansubgraph[G]{V}.
 \end{align}
+\elie{Equivalently, the condition can be restated wholly in terms of local relationships, i.e.
+\begin{align}\label{eq:definflationDAGalt}
+G' \in\inflations{G} \quad\text{ iff }\quad \forall X_i\in \nodes{G'}:\; \Pa[G']{X_i}\sim\Pa[G]{X}.
+\end{align}}
 \end{definition}
 
 In particular, this means that an inflation is a fibration of graphs~\cite{fibgraphs}, although there are fibrations that are not inflations.
@@ -336,9 +342,9 @@ We now define the function $\mathsf{Inflation}_{G\to G'}$, that is, we specify h
 
 \begin{definition}
 \label[definition]{def:inflat}
-Consider causal models $M$ and $M'$ where $\DAG{M}=G$ and $\DAG{M'}=G'$, where $G'$ is an inflation of $G$. Then $M'$ is said to be the {\em \tblue{$G\to G'$ inflation of $M$}}, that is, $M' = \SmallNamedFunction[G\to G']{Inflation}{M}$,  if and only if for every node $A_i$ in $G'$, the manner in which $A_i$ depends causally on its parents within $G'$ is the same as the manner in which $A$ depends causally on its parents within $G$.  Noting that $A_i \sim A$ and that $\Pa[G']{A_i} \sim \Pa[G]{A}$ by~\cref{eq:definflationDAG}, one can formalize this condition as:
+Consider causal models $M$ and $M'$ where $\DAG{M}=G$ and $\DAG{M'}=G'$, where $G'$ is an inflation of $G$. Then $M'$ is said to be the {\em \tblue{$G\to G'$ inflation of $M$}}, that is, $M' = \SmallNamedFunction[G\to G']{Inflation}{M}$,  if and only if for every node $X_i$ in $G'$, the manner in which $X_i$ depends causally on its parents within $G'$ is the same as the manner in which $X$ depends causally on its parents within $G$.  Noting that $X_i \sim X$ and that $\Pa[G']{X_i} \sim \Pa[G]{X}$ by~\cref{eq:definflationDAGalt}, one can formalize this condition as:
 \begin{align}\label{eq:funcdependences}
- \forall A_i \in \nodes{G'}:\; \pfunc{A_i| \Pa[G']{A_i}}=\pfunc{A|\Pa[G]{A}}.
+ \forall X_i \in \nodes{G'}:\; \pfunc{X_i| \Pa[G']{X_i}}=\pfunc{X|\Pa[G]{X}}.
 \end{align}
 \end{definition}
 
@@ -347,23 +353,23 @@ For a given triple $G$, $G'$, and $M$, this definition specifies a unique inflat
 To sum up, the inflation of a causal model is a new causal model where (i) each variable in the original causal structure may have counterparts in the inflated causal structure with ancestral subgraphs mirroring those of the originals, and (ii) the manner in which a variable depends causally on its parents in the inflated causal structure is given by the manner in which its counterpart in the original causal structure depends causally on its parents. The operation of modifying a DAG and equipping the modified version with conditional probability distributions that mirror those of the original also appears in the \emph{do calculus} and \emph{twin networks} of~\citet{pearl2009causality}, and moreover bears some resemblance to the \emph{adhesivity} technique used in deriving non-Shannon-type entropic inequalities (see also \cref{sec:NonShannon}).
 
 We are now in a position to describe the key property of the inflation of a causal model, the one that makes it useful for causal inference. With notation as in \cref{def:inflat}, let
-$P_{\bm{U}}$ and $P_{\bm{U}'}$ denote marginal distributions on some $\bm{U}\subseteq\nodes{G}$ and $\bm{U}'\subseteq\nodes{G'}$, respectively. Then
+$P_{\bm{X}}$ and $P_{\bm{X}'}$ denote marginal distributions on some $\bm{X}\subseteq\nodes{G}$ and $\bm{X}'\subseteq\nodes{G'}$, respectively. Then
 \begin{align}\label{eq:coincidingdistrodef}
-\quad\text{if }\quad \bm{U}'\sim \bm{U} \;\;\text{and}\;\; \ansubgraph[G']{\bm{U}'}\sim\ansubgraph[G]{\bm{U}}, \quad\text{then}\quad P_{\bm{U}'}=P_{\bm{U}}.
+\quad\text{if }\quad \bm{X}'\sim \bm{X} \;\;\text{and}\;\; \ansubgraph[G']{\bm{X}'}\sim\ansubgraph[G]{\bm{X}}, \quad\text{then}\quad P_{\bm{X}'}=P_{\bm{X}}.
 \end{align}
-This follows from the fact that the distributions on $\bm{U}'$ and $\bm{U}$ depend only on their ancestral subgraphs and the parameters defined thereon, which by the definition of inflation are the same for $\bm{U}'$ and for $\bm{U}$.
+This follows from the fact that the distributions on $\bm{X}'$ and $\bm{X}$ depend only on their ancestral subgraphs and the parameters defined thereon, which by the definition of inflation are the same for $\bm{X}'$ and for $\bm{X}$.
 It is useful to have a name for those sets of observed nodes in $G'$ which satisfy the antecedent of~\cref{eq:coincidingdistrodef}, that is, for which one can find a copy-index-equivalent set in the original causal structure $G$ with a copy-index-equivalent ancestral subgraph.  We call such subsets of the observed nodes of $G'$ \tblue{injectable sets},
 \begin{align}\begin{split}\label{eq:definjectable}
-&\bm{U}'\in\SmallNamedFunction{InjectableSets}{G'} \\
-&\quad\text{ iff }\quad \exists \bm{U}\subseteq \obsnodes{G} \;\; :\;\; \bm{U}'\sim\bm{U} \;\;\text{and}\;\; \ansubgraph[G']{\bm{U}'}\sim\ansubgraph[G]{\bm{U}}.
+&\bm{V}'\in\SmallNamedFunction{InjectableSets}{G'} \\
+&\quad\text{ iff }\quad \exists \bm{V}\subseteq \obsnodes{G} \;\; :\;\; \bm{V}'\sim\bm{V} \;\;\text{and}\;\; \ansubgraph[G']{\bm{V}'}\sim\ansubgraph[G]{\bm{V}}.
 \end{split}\end{align}
 
 Similarly,  those sets of observed nodes in the original causal structure $G$ which satisfy the antecedent of~\cref{eq:coincidingdistrodef}, that is, for which one can find a corresponding set in the inflated causal structure $G'$ with a copy-index-equivalent ancestral subgraph, we describe as \tblue{images of the injectable sets} under the dropping of copy-indices,
 \begin{align}\begin{split}\label{eq:defimageinjectable}
-& \bm{U}\in\SmallNamedFunction{ImagesInjectableSets}{G} \\
-& \quad\text{ iff }\quad \exists \bm{U}' \subseteq \obsnodes{G'} \;\; :\;\; \bm{U'}\sim\bm{U} \;\;\text{and}\;\; \ansubgraph[G']{\bm{U}'}\sim\ansubgraph[G]{\bm{U}}.
+& \bm{V}\in\SmallNamedFunction{ImagesInjectableSets}{G} \\
+& \quad\text{ iff }\quad \exists \bm{V}' \subseteq \obsnodes{G'} \;\; :\;\; \bm{U'}\sim\bm{V} \;\;\text{and}\;\; \ansubgraph[G']{\bm{V}'}\sim\ansubgraph[G]{\bm{V}}.
 \end{split}\end{align}
-Clearly, $\bm{U}\in\SmallNamedFunction{ImagesInjectableSets}{G}$ iff $\exists \bm{U}' \subseteq \SmallNamedFunction{InjectableSets}{G'}$ such that $\bm{U}\sim \bm{U}'$.
+Clearly, $\bm{V}\in\SmallNamedFunction{ImagesInjectableSets}{G}$ iff $\exists \bm{V}' \subseteq \SmallNamedFunction{InjectableSets}{G'}$ such that $\bm{V}\sim \bm{V}'$.
 
 For example in the Spiral inflation of the Triangle scenario depicted in~\cref{fig:Tri222}, the set $\brackets{A_1 B_1 C_1}$ is injectable because its ancestral subgraph is equivalent up to copy-indices to the ancestral subgraph of $\brackets{A B C}$ in the original causal structure, and the set $\brackets{A_2 C_1}$ is injectable because its ancestral subgraph is equivalent to that of $\brackets{ A C}$ in the original causal structure.
 
@@ -372,7 +378,7 @@ Thus, in \cref{fig:Tri222}, $\brackets{A_1 A_2 C_1}$ is not injectable because i
 
 We can now express \cref{eq:coincidingdistrodef} in the language of injectable sets,
 \begin{align}\label{keyinference}
-P_{\bm{U}'}=P_{\bm{U}}\quad\text{if }  \;\; \bm{U}' \sim \bm{U}\;\; \text{and} \;\; \bm{U}'\in\SmallNamedFunction{InjectableSets}{G'}.
+P_{\bm{V}'}=P_{\bm{V}}\quad\text{if }  \;\; \bm{V}' \sim \bm{V}\;\; \text{and} \;\; \bm{V}'\in\SmallNamedFunction{InjectableSets}{G'}.
 \end{align}
 
 In the example of \cref{fig:Tri222}, injectability of the sets $\brackets{A_1 B_1 C_1}$ and $\brackets{A_2 C_1}$ thus implies that the marginals on each of these are equal to the marginals on their counterparts, $\brackets{A B C}$ and $\brackets{A C}$, in the original causal model, so that $P_{A_1 B_1 C_1} = P_{A B C}$ and $P_{A_2 C_1} = P_{A C}$.
@@ -380,16 +386,16 @@ In the example of \cref{fig:Tri222}, injectability of the sets $\brackets{A_1 B_
 \subsection{Witnessing Incompatibility}
 \label{subsec:witnessingincompat}
 
-Finally, we can explain why inflation is relevant for deciding whether a distribution is compatible with a causal structure.  For a family of marginal distributions $\{ P_{\bm{U}} : \bm{U} \in \SmallNamedFunction{ImagesInjectableSets}{G}\}$ to be compatible with $G$, there must be a causal model $M$ that yields a joint distribution with this family as its marginals. Looking at the inflation model $M' = \SmallNamedFunction[G\to G']{Inflation}{M}$, \cref{keyinference} implies that $M'$ has the corresponding family of marginals given by $\{ P_{\bm{U}'} : \bm{U}' \in \SmallNamedFunction{InjectableSets}{G'}\}$ with $P_{\bm{U}'} = P_{\bm{U}}$ for $\bm{U}'\sim\bm{U}$, and thus this family is compatible with $G'$.
+Finally, we can explain why inflation is relevant for deciding whether a distribution is compatible with a causal structure.  For a family of marginal distributions $\{ P_{\bm{V}} : \bm{V} \in \SmallNamedFunction{ImagesInjectableSets}{G}\}$ to be compatible with $G$, there must be a causal model $M$ that yields a joint distribution with this family as its marginals. Looking at the inflation model $M' = \SmallNamedFunction[G\to G']{Inflation}{M}$, \cref{keyinference} implies that $M'$ has the corresponding family of marginals given by $\{ P_{\bm{V}'} : \bm{V}' \in \SmallNamedFunction{InjectableSets}{G'}\}$ with $P_{\bm{V}'} = P_{\bm{V}}$ for $\bm{V}'\sim\bm{V}$, and thus this family is compatible with $G'$.
 
 The same considerations apply for a {\em collection} of injectable sets:
 
 \begin{lemma} \label[lemma]{mainlemma}
 Let the causal structure $G'$ be an inflation of $G$. 
-Let $S'  \subseteq \SmallNamedFunction{InjectableSets}{G'}$ be a collection of injectable sets, and let $S \subseteq \SmallNamedFunction{ImagesInjectableSets}{G}$ be the images of this collection under the dropping of copy-indices. If 
-\tob{a distribution $P_{\nodes{G}}$ is compatible with $G$, }
-% the family of marginal distributions $\{ P_{\bm{U}} : \bm{U} \in S \}$ is compatible with $G$,
-then the corresponding family of marginal distributions $\{ P_{\bm{U}'} : \bm{U}' \in S' \}$, defined via $P_{\bm{U}'}= P_{\bm{U}}$ for $\bm{U}' \sim \bm{U}$, is compatible with $G'$.
+Let $\mathbb{S}'  \subseteq \SmallNamedFunction{InjectableSets}{G'}$ be a collection of injectable sets, and let $\mathbb{S} \subseteq \SmallNamedFunction{ImagesInjectableSets}{G}$ be the images of this collection under the dropping of copy-indices. If 
+\tob{a distribution $P_{\obsnodes{G}}$ is compatible with $G$, }
+% the family of marginal distributions $\{ P_{\bm{V}} : \bm{V} \in S \}$ is compatible with $G$,
+then the corresponding family of marginal distributions $\{ P_{\bm{V}'} : \bm{V}' \in \mathbb{S}' \}$, defined via $P_{\bm{V}'}= P_{\bm{V}}$ for $\bm{V}' \sim \bm{V}$, is compatible with $G'$.
 \end{lemma}
 
 We have thereby related a question about compatibility with the original causal structure to one about compatibility with the inflated causal structure.  If one can show that the new compatibility question on $G'$ is answered in the negative, then it follows that the original question is answered in the negative as well.    Some simple examples serve to illustrate the idea.
@@ -584,19 +590,19 @@ The structure of this argument parallels that of standard proofs of the incompat
 The inflation technique can be used not only to witness the incompatibility of a given distribution with a given causal structure, but also to derive necessary conditions that a distribution must satisfy to be compatible with the given causal structure. When these conditions are expressed as inequalities, we will refer to them as {\em causal compatibility inequalities}.  Formally, we have:
 
 \begin{definition}
-Let $G$ be a causal structure and let $S$ be a family of subsets of the observed variables of $G$, $S \subseteq 2^{\obsnodes{G}}$.  Let $I_S$ denote an inequality that operates on the corresponding family of distributions,  $\{ P_{\bm{U}}: \bm{U} \in S\}$.  Then $I_S$ is a \tblue{\em causal compatibility inequality for the causal structure $G$} whenever it is satisfied by every family of distributions $\{ P_{\bm{U}}: \bm{U} \in S\}$ that is compatible with $G$.
+Let $G$ be a causal structure and let $\mathbb{S}$ be a family of subsets of the observed variables of $G$, $\mathbb{S} \subseteq 2^{\obsnodes{G}}$.  Let $I_{\mathbb{S}}$ denote an inequality that operates on the corresponding family of distributions,  $\{ P_{\bm{V}}: \bm{V} \in \mathbb{S}\}$.  Then $I_{\mathbb{S}}$ is a \tblue{\em causal compatibility inequality for the causal structure $G$} whenever it is satisfied by every family of distributions $\{ P_{\bm{V}}: \bm{V} \in \mathbb{S}\}$ that is compatible with $G$.
 \end{definition}
 While violation of a causal compatibility inequality witnesses the incompatibility with the causal structure, satisfaction of the inequality does not guarantee compatibility.  This is the sense in which it merely provides a {\em necessary} condition for compatibility. 
 
 The inflation technique is useful for deriving causal compatibility inequalities because of the following consequence of  \cref{mainlemma}:
 
 \begin{corollary} \label[corollary]{maincorollary}
-Suppose that $G'$ is an inflation of $G$. Let $S'  \subseteq \SmallNamedFunction{InjectableSets}{G'}$ be a family of injectable sets and $S \subseteq \SmallNamedFunction{ImagesInjectableSets}{G}$ the images of members of $S'$ under the dropping of copy-indices.
-Let $I_{S'}$ be a causal compatibility inequality for $G'$ operating on families $\{ P_{\bm{U}'} : \bm{U}' \in S'\}$. Define an inequality $I_S$ as follows: in the functional form of $I_{S'}$, replace every occurrence of a term $P_{\bm{U}'}$ by $P_{\bm{U}}$ for the unique $\bm{U}\in S$ with $\bm{U} \sim \bm{U}'$. Then $I_S$ is a causal compatibility inequality for $G$ operating on families $\{ P_{\bm{U}} : \bm{U}\in S\}$.
+Suppose that $G'$ is an inflation of $G$. Let $\mathbb{S}'  \subseteq \SmallNamedFunction{InjectableSets}{G'}$ be a family of injectable sets and $\mathbb{S} \subseteq \SmallNamedFunction{ImagesInjectableSets}{G}$ the images of members of $\mathbb{S}'$ under the dropping of copy-indices.
+Let $I_{\mathbb{S}'}$ be a causal compatibility inequality for $G'$ operating on families $\{ P_{\bm{V}'} : \bm{V}' \in \mathbb{S}'\}$. Define an inequality $I_{\mathbb{S}}$ as follows: in the functional form of $I_{\mathbb{S}'}$, replace every occurrence of a term $P_{\bm{V}'}$ by $P_{\bm{V}}$ for the unique $\bm{V}\in S$ with $\bm{V} \sim \bm{V}'$. Then $I_{\mathbb{S}}$ is a causal compatibility inequality for $G$ operating on families $\{ P_{\bm{V}} : \bm{V}\in \mathbb{S}\}$.
 \end{corollary}
 
 \begin{proof}
-Suppose that the family $\{ P_{\bm{U}} : \bm{U} \in S\}$ is compatible with $G$.  By \cref{mainlemma}, it follows that the family $ \{ P_{\bm{U}'} : \bm{U}' \in S'\}$ where $P_{\bm{U}'}:= P_{\bm{U}}$ for $\bm{U}' \sim \bm{U}$  is compatible with $G'$.  Since $I_{S'}$ is a causal compatibility inequality for $G'$, it follows that $\{ P_{\bm{U}'} : \bm{U}' \in S'\}$ satisfies $I_{S'}$.  But by the definition of $I_{S}$, its evaluation on $\{ P_{\bm{U}} : \bm{U} \in S\}$ is equal to $I_{S'}$ evaluated on $\{ P_{\bm{U}'} : \bm{U}' \in S'\}$. It therefore follows that $\{ P_{\bm{U}} : \bm{U} \in S\}$ satisfies $I_{S}$. Since $\{ P_{\bm{U}} : \bm{U}\in S\}$ was an arbitrary family compatible with $G$, we conclude that $I_{S}$ is a causal compatibility inequality for $G$.
+Suppose that the family $\{ P_{\bm{V}} : \bm{V} \in \mathbb{S}\}$ is compatible with $G$.  By \cref{mainlemma}, it follows that the family $ \{ P_{\bm{V}'} : \bm{V}' \in \mathbb{S}'\}$ where $P_{\bm{V}'}:= P_{\bm{V}}$ for $\bm{V}' \sim \bm{V}$  is compatible with $G'$.  Since $I_{\mathbb{S}'}$ is a causal compatibility inequality for $G'$, it follows that $\{ P_{\bm{V}'} : \bm{V}' \in \mathbb{S}'\}$ satisfies $I_{\mathbb{S}'}$.  But by the definition of $I_{\mathbb{S}}$, its evaluation on $\{ P_{\bm{V}} : \bm{V} \in \mathbb{S}\}$ is equal to $I_{\mathbb{S}'}$ evaluated on $\{ P_{\bm{V}'} : \bm{V}' \in \mathbb{S}'\}$. It therefore follows that $\{ P_{\bm{V}} : \bm{V} \in \mathbb{S}\}$ satisfies $I_{\mathbb{S}}$. Since $\{ P_{\bm{V}} : \bm{V}\in \mathbb{S}\}$ was an arbitrary family compatible with $G$, we conclude that $I_{\mathbb{S}}$ is a causal compatibility inequality for $G$.
 \end{proof}
 
 We now present some simple examples of causal compatibility inequalities for the Triangle scenario that one can derive from the inflation technique via \cref{maincorollary}. Some terminology and notation will facilitate their description. We refer to a pair of nodes which do not share any common ancestor as being \tblue{ancestrally independent}. This is equivalent to being $d$-separated by the empty set~\cite{pearl2009causality,spirtes2011causation,studeny2005probabilistic,koller2009probabilistic}.  Given that the conventional notation for $X$ and $Y$ being $d$-separated by $Z$ in  a DAG is $X\aindep Y|Z$, we denote $X$ and $Y$ being ancestrally independent within $G$ as $X\aindep Y$.  Generalizing to sets, $\bm{X}\aindep \bm{Y}$ indicates that no node in $\bm{X}$ shares a common ancestor with any node in $\bm{Y}$ within the causal structure $G$, 
@@ -605,7 +611,7 @@ We now present some simple examples of causal compatibility inequalities for the
 \end{align}
 \elie{Ancestral independence is closed under union; that is, $\bm{X}\aindep \bm{Y}$ and $\bm{X}\aindep \bm{Z}$ implies $\bm{X}\aindep (\bm{Y{\cup}Z)}$. Consequently, pairwise ancestral independence implies joint factorizability; i.e. $\forall_{i\neq j} \bm{X}_i\aindep \bm{Y}_j$ implies that $P_{\cup_i \bm{X}_i}=\prod_i P_{\bm{X}_i}$.}
 
-\st{Furthermore, the notation ${\bm{U}\aindep \bm{V}\aindep \bm{W}}$ should be understood as indicating that $\bm{U}\aindep \bm{V}$ and $\bm{V}\aindep \bm{W}$ and $\bm{U}\aindep \bm{W}$. Moreover, we will use ${\bm{U}\aindep \bm{V}\aindep \bm{W} | \bm{S}}$ to indicate that $\bm{U}\aindep \bm{V}| \bm{S}$ and $\bm{V}\aindep \bm{W}| \bm{S}$ and $\bm{U}\aindep \bm{W}| \bm{S}$.}
+\st{Furthermore, the notation ${\bm{X}\aindep \bm{Y}\aindep \bm{Z}}$ should be understood as indicating that $\bm{X}\aindep \bm{Y}$ and $\bm{Y}\aindep \bm{Z}$ and $\bm{X}\aindep \bm{Z}$. Moreover, we will use ${\bm{X}\aindep \bm{Y}\aindep \bm{Z} | \bm{S}}$ to indicate that $\bm{X}\aindep \bm{Y}| \bm{S}$ and $\bm{Y}\aindep \bm{Z}| \bm{S}$ and $\bm{X}\aindep \bm{Z}| \bm{S}$.}
 
 \begin{example}[\tred{A causal compatibility inequality in terms of \tpurp{\emph{correlators}}}]
 \label{example:polytriangle}
@@ -644,7 +650,7 @@ Given the symmetry of the Triangle scenario under permutations and sign flips of
 \begin{align}\label{eq:ghznoisy}
 P_{A B C} =\alpha\frac{[000]+[111]}{2}+(1-\alpha)\frac{[\text{else}]}{6},\quad\text{i.e.,}\quad P_{A B C}(a b c)=\begin{cases}\tfrac{\alpha}{2}&\text{if }\; a = b = c, \\ \tfrac{1-\alpha}{6}&\text{otherwise},\end{cases}
 \end{align}
-\elie{are certainly \emph{compatible} with the Triangle scenario for $0\leq \alpha \leq \tfrac{1}{2}$, and that such distribution are are certainly \emph{incompatible} for $\tfrac{3}{5}< \alpha \leq 1$. Although the authors were unable to derive any inequality capable of rejecting distributions where $\alpha \leq \tfrac{3}{5}$, the authors also failed to construct any explicit Triangle-scenario model which could realize a distribution where $\alpha > \tfrac{1}{2}$. The presence of this gap between our inner and outer constructions could reflect either the inadequacy of our limited model constructions or the inadequacy of those inequalities which can be derived using relatively-small inflations of the Triangle causal structure. We defer closing the gap to future work.}
+\elie{are certainly \emph{compatible} with the Triangle scenario for $0\leq \alpha \leq \tfrac{1}{2}$, and that such distribution are are certainly \emph{incompatible} for $\tfrac{5}{8}{=}0.625< \alpha \leq 1$ as a consequence of \cref{eq:polymonogamyraw}. A different inequality\footnote{$6 \expec{\_ \_} + \expec{\_ \_}^2-4\expec{\_}^2 \leq 3$, where $\expec{\_ \_}\coloneqq \frac{\expec{A B}+\expec{B C}+\expec{A C}}{3}$ and $\expec{\_ }\coloneqq \frac{\expec{A}+\expec{B}+\expec{C}}{3}$. This stronger inequality was derived by considering a Web-like inflation, see Ref.~\citep[Fig.~8c]{TC2016trianglequantum} or Ref.~\citep[Fig.~4]{Navascues2017completelysolves}.} allows us to extend the certainly-incompatible range for all $\tfrac{3\sqrt{3}}{2}-2{\approx} 0.598< \alpha$. Although the authors were unable to derive any inequality capable of rejecting distributions where $\alpha \leq 0.598$, the authors also failed to construct any explicit Triangle-scenario model which could realize a distribution where $\alpha > 0.500$. The presence of this gap between our inner and outer constructions could reflect either the inadequacy of our limited model constructions or the inadequacy of those inequalities which can be derived using relatively-small inflations of the Triangle causal structure. We defer closing the gap to future work.}
 
 \end{example}
 
@@ -722,10 +728,10 @@ As far as causal compatibility inequalities are concerned, we limit ourselves to
 In the examples from the previous section, the initial inequality---a constraint upon marginals that is independent of the causal structure---involves sets of observed variables that are \emph{not} all injectable sets. However, the Markov conditions on the inflated causal structures nevertheless allowed us to \emph{express} the distribution on these sets in terms of the known distributions on the injectable sets. For instance, in \cref{example:polytriangle}, the set $\{ A_2 B_1\}$ is not injectable, but it can be partitioned into the singleton sets $\{ A_2 \}$ and $\{ B_1\}$ which are ancestrally independent, so that one has $P_{A_2 B_1} = P_{A_2} P_{B_1} = P_A P_B$ in every inflated causal model.  This motivates us to define the notion of an \tblue{expressible set} of variables in an inflated causal structure as one for which the joint distribution can be expressed as a function of distributions over injectable sets by making repeated use of the conditional independences implied by $d$-separation relations as well as marginalization. More formally,
 
 \begin{definition}\label{def:expressible}
-Consider an inflation $G'$ of a causal structure $G$.  A set of variables $\bm{U} \subset \nodes{G'}$ is said to be {\em expressible} if it is injectable or if it can be obtained from a collection of injectable sets by recursively applying the following rules:
+Consider an inflation $G'$ of a causal structure $G$.  A set of variables $\bm{V} \subset \obsnodes{G'}$ is said to be {\em expressible} if it is injectable or if it can be obtained from a collection of injectable sets by recursively applying the following rules:
 \begin{enumerate}
-\item For $\bm{A},\bm{B},\bm{C}\subseteq\nodes{G'}$, if $\bm{A}\aindep \bm{B}\:|\:\bm{C}$ and $\bm{A} \cup \bm{C}$ and $\bm{B} \cup \bm{C}$ are expressible, then $\bm{A}\cup \bm{B}\cup \bm{C}$ is also expressible;
-\item If $\bm{A}\subseteq\nodes{G'}$ is expressible, then so is every subset of $\bm{A}$.
+\item For $\bm{A},\bm{B},\bm{C}\subseteq\obsnodes{G'}$, if $\bm{A}\aindep \bm{B}\:|\:\bm{C}$ and $\bm{A} \cup \bm{C}$ and $\bm{B} \cup \bm{C}$ are expressible, then $\bm{A}\cup \bm{B}\cup \bm{C}$ is also expressible;
+\item If $\bm{V}\subseteq\obsnodes{G'}$ is expressible, then so is every subset of $\bm{V}$.
 \end{enumerate}
 \end{definition}
 An expressible set is \emph{maximal} if it is not a proper subset of another expressible set.
@@ -736,19 +742,19 @@ Expressible sets are important since in an inflated model, the distribution of t
 With the exception of \cref{sec:interestingproof}, in the remainder of this article we will limit ourselves to working with expressible sets of a particularly simple kind and leave the investigation of more general expressible sets to future work.
 
 \begin{definition}
-A set of nodes $\bm{A}\subseteq\nodes{G'}$ is \tblue{ai-expressible} if it can be written as a union of injectable sets that are ancestrally independent,
+A set of nodes $\bm{V}\subseteq\obsnodes{G'}$ is \tblue{ai-expressible} if it can be written as a union of injectable sets that are ancestrally independent,
 \begin{align}\label{eq:defpreinj}
 \begin{split}
-\bm{U}'\in & \SmallNamedFunction{AI-ExpressibleSets}{G'} \\
-	& \quad\text{ iff }\quad  \exists \{ \bm{U}'_i \in \SmallNamedFunction{InjectableSets}{G'} \} \quad \text{s.t.}\quad \bm{U}'=\bigcup_i \bm{U}'_i  \quad\text{and} \quad  \forall i\ne j: \bm{U}'_i \aindep \bm{U}'_j \text{ in }G'.
+\bm{V}'\in & \SmallNamedFunction{AI-ExpressibleSets}{G'} \\
+	& \quad\text{ iff }\quad  \exists \{ \bm{X}'_i \in \SmallNamedFunction{InjectableSets}{G'} \} \quad \text{s.t.}\quad \bm{V}'=\bigcup_i \bm{X}'_i  \quad\text{and} \quad  \forall_{i\ne j}: \bm{X}'_i \aindep \bm{X}'_j \text{ in }G'.
 \end{split}
 \end{align}
 An ai-expressible set is \emph{maximal} if it is not a proper subset of another ai-expressible set.
 \end{definition}
 
-Because ancestral independence in $G'$ implies statistical independence for any compatible distribution, it follows that if $\bm{U}'$ is an ai-expressible set with ancestrally independent and injectable components $\bm{U}'_1,\ldots,\bm{U}'_n$, then we have the factorization
+Because ancestral independence in $G'$ implies statistical independence for any compatible distribution, it follows that if $\bm{V}'$ is an ai-expressible set with ancestrally independent and injectable components $\bm{V}'_1,\ldots,\bm{V}'_n$, then we have the factorization
 \begin{align}\label{eq:preinjfactor}
-P_{\bm{U}'} = P_{\bm{U}'_1} \cdots P_{\bm{U}'_n}
+P_{\bm{V}'} = P_{\bm{V}'_1} \cdots P_{\bm{V}'_n}
 \end{align}
 for any distribution compatible with $G'$. The situation, therefore, is this: for any constraint that one can derive for the marginals on the ai-expressible sets based on the existence of a joint distribution---and hence without reference to the causal structure---one can infer a constraint that {\em does} refer to the causal structure by substituting within the derived constraint a factorization of the form of~\cref{eq:preinjfactor}. This results in a causal compatibility inequality on $G'$ of a very weak form that only takes into account the independences between observed variables.
 
@@ -784,7 +790,7 @@ The procedure for systematically deriving causal compatibility inequalities is a
 \tob{In summary, we have used the contrapositive of \cref{mainlemma} in order to show:}
 
 \begin{theorem}
-\tob{Let $G'$ be an inflation of $G$. Let a distribution $P_{\nodes{G}}$ be given. Suppose that the family of marginal distributions $\{ P_{\bm{U}'} : \bm{U}' \in \SmallNamedFunction{AI-ExpressibleSets}{G'} \}$, defined via $P_{\bm{U}'}= P_{\bm{U}}$ for $\bm{U}' \sim \bm{U}$ on injectable sets and extended to ai-expressible sets via~\cref{eq:preinjfactor}, does not arise as the family of marginal distributions of any common joint. Then the original distribution $P_{\nodes{G}}$ is not compatible with $G$.}
+\tob{Let $G'$ be an inflation of $G$. Let a distribution $P_{\obsnodes{G}}$ be given. Suppose that the family of marginal distributions $\{ P_{\bm{V}'} : \bm{V}' \in \SmallNamedFunction{AI-ExpressibleSets}{G'} \}$, defined via $P_{\bm{V}'}= P_{\bm{V}}$ for $\bm{V}' \sim \bm{V}$ on injectable sets and extended to ai-expressible sets via~\cref{eq:preinjfactor}, does not arise as the family of marginal distributions of any common joint. Then the original distribution $P_{\obsnodes{G}}$ is not compatible with $G$.}
 \end{theorem}
 
 
@@ -795,16 +801,16 @@ The ai-expressible sets play a crucial role in linking the original causal struc
 
 To identify the ai-expressible sets of an inflated causal structure $G'$, we must first identify the injectable sets. This problem can be reduced to identifying the injectable pairs of nodes, because if all of the pairs in a set of nodes are injectable, then so too is the set itself. This can be proven as follows.   
 Let $\varphi : G' \to G$ be the projection map from $G'$ to the original causal structure $G$, corresponding to removing copy-indices.  Then $\varphi$ has the characteristic feature that it preserves and reflects edges: if $A  \to B$ in $G'$, then also $\varphi(A) \to \varphi(B)$ in $G$, and vice versa; this follows from the assumption that $G'$ is an inflation of $G$. 
-A set $\bm{U} \subseteq \obsnodes{G'}$ is injectable if and only if the
-restriction of $\varphi$ to $\An{\bm{U}}$ is an injective map. 
+A set $\bm{V} \subseteq \obsnodes{G'}$ is injectable if and only if the
+restriction of $\varphi$ to $\An{\bm{V}}$ is an injective map. 
 But now injectivity of a map means precisely that no two different
 elements of the domain get mapped to the same element of the codomain.
-So if $\bm{U}$ is injectable, then so is each of its two-element subsets;
-conversely, if $\bm{U}$ is not injectable, then $\varphi$ maps two nodes among the
-ancestors of $\bm{U}$ to the same node, which means that there are two nodes in the
+So if $\bm{V}$ is injectable, then so is each of its two-element subsets;
+conversely, if $\bm{V}$ is not injectable, then $\varphi$ maps two nodes among the
+ancestors of $\bm{V}$ to the same node, which means that there are two nodes in the
 ancestry that differ only by copy-index. Each of these two nodes must be
-an ancestor of at least some node in $\bm{U}$; if one chooses two such
-descendants, then one gets a two-element subset of $\bm{U}$ such that $\varphi$ is not
+an ancestor of at least some node in $\bm{V}$; if one chooses two such
+descendants, then one gets a two-element subset of $\bm{V}$ such that $\varphi$ is not
 injective on the ancestry of that subset, and therefore this two-element
 set of observed nodes is not injectable.
 
@@ -876,41 +882,41 @@ Having identified the ai-expressible sets and how they partition into injectable
 
 The third step in our procedure is determining whether the given distributions on ai-expressible sets can arise as marginals of one joint distribution on all observed nodes of the inflated causal structure. In general, the problem of determining whether a given family of distributions can arise as marginals of some joint distribution is known as the {\em marginal problem}\footnote{For further references and an outline of the long history of the marginal problem, see~\cite{fritz2013marginal}. An alternative account using the language of presheaves can also be found in~\cite{abramsky_contextuality_2011}.}. In order to derive causal compatibility inequalities, one must solve the closely related problem of determining necessary and sufficient \emph{constraints} that a family of marginal distributions must satisfy in order for the marginal problem to have a solution. For better clarity, we distinguish these two variants of the marginal problem as the \tblue{marginal satisfiability problem} and the \tblue{marginal constraint problem}. The generic \tblue{marginal problem} will be used as an umbrella term referring to both types.
 
-To specify either sort of marginal problem, one must specify the full set of variables to be considered, denoted $\bm{X}$, together with a family of subsets of $\bm{X}$, denoted $(\bm{U}_1,\ldots,\bm{U}_n)$ and called \tblue{contexts}. The family of contexts can be visualized through the simplicial complex that it generates, as illustrated in~\cref{fig:simplicialcomplex222}. A \tblue{marginal scenario} consists of a specification of contexts together with a specification of the cardinality of each variable. Every joint distribution $P_{\bm{X}}$ defines a family of marginal distributions $(P_{\bm{U}_1},\ldots,P_{\bm{U}_n})$ through marginalization,  $P_{\bm{U}_i} := \sum_{\bm{X} \setminus \bm{U}_i} P_{\bm{X}}$. The marginal problem concerns the converse inference. In the marginal satisfiability problem, a concrete family of distributions $(P_{\bm{U}_1},\ldots,P_{\bm{U}_n})$ is given, and one wants to decide whether there exists a joint distribution $\hat{P}_{\bm{X}}$ such that $P_{\bm{U}_i} = \sum_{\bm{X}\setminus\bm{U}_i} \hat{P}_{\bm{X}}$ for all $i$. In the marginal constraint problem, one seeks to find conditions on the family of distributions $(P_{\bm{U}_1},\ldots,P_{\bm{U}_n})$, considered as parameters, for when a joint distribution $\hat{P}_{\bm{X}}$ exists which reproduces these as marginals, $P_{\bm{U}_i} = \sum_{\bm{X}\setminus\bm{U}_i} \hat{P}_{\bm{X}}$ for all $i$.
+To specify either sort of marginal problem, one must specify the full set of variables to be considered, denoted $\bm{V}$, together with a family of subsets of $\mathbb{S}$, denoted $(\bm{V}_1,\ldots,\bm{V}_n)$ and called \tblue{contexts}. The family of contexts can be visualized through the simplicial complex that it generates, as illustrated in~\cref{fig:simplicialcomplex222}. A \tblue{marginal scenario} consists of a specification of contexts together with a specification of the cardinality of each variable. Every joint distribution $P_{\bm{V}}$ defines a family of marginal distributions $(P_{\bm{V}_1},\ldots,P_{\bm{V}_n})$ through marginalization,  $P_{\bm{V}_i} := \sum_{\bm{V} \setminus \bm{V}_i} P_{\bm{V}}$. The marginal problem concerns the converse inference. In the marginal satisfiability problem, a concrete family of distributions $(P_{\bm{V}_1},\ldots,P_{\bm{V}_n})$ is given, and one wants to decide whether there exists a joint distribution $\hat{P}_{\bm{V}}$ such that $P_{\bm{V}_i} = \sum_{\bm{V}\setminus\bm{V}_i} \hat{P}_{\bm{V}}$ for all $i$. In the marginal constraint problem, one seeks to find conditions on the family of distributions $(P_{\bm{V}_1},\ldots,P_{\bm{V}_n})$, considered as parameters, for when a joint distribution $\hat{P}_{\bm{V}}$ exists which reproduces these as marginals, $P_{\bm{V}_i} = \sum_{\bm{V}\setminus\bm{V}_i} \hat{P}_{\bm{V}}$ for all $i$.
  
-In order for $\hat{P}_{\bm{X}}$ to exist,  distributions on different contexts must be consistent on the intersection of contexts, that is, marginalizing $P_{\bm{U}_i}$ to the variables in $\bm{U}_i\cap\bm{U}_j$ must result in the same distribution as marginalizing $P_{\bm{U}_j}$ to those variables.  
+In order for $\hat{P}_{\bm{V}}$ to exist,  distributions on different contexts must be consistent on the intersection of contexts, that is, marginalizing $P_{\bm{V}_i}$ \elie{to those variables in the intersection} $\bm{V}_i\cap\bm{V}_j$ must result in the same distribution as marginalizing $P_{\bm{V}_j}$ to that intersection.  
   In many cases, this is not sufficient\footnote{Depending on how the contexts intersect with one another, this \emph{may} be sufficient. A precise characterization for when this occurs has been found by~\citet{vorobev_extension_1960}. See also \citet[Thm. 2]{chaves2016limitedmarginals} for an application of this characterization enabling computationally significant shortcuts in solving the marginal constraint problem.}; indeed, we have already seen examples of additional constraints, namely, the inequalities \eqref{eq:polymonogamyraw}, \eqref{eq:MIraw} and \eqref{eq:FritzF3raw} from \cref{Sec:DerivingInequalities}.
 So what are the necessary and sufficient conditions? To answer this question, it helps to realize two things:
 \begin{itemize}
-	\item The set of possibilities for the distribution $P_{\bm{X}}$ is the convex hull of the deterministic assignments of values to $\bm{X}$ (the deterministic distributions), and 
-	\item The map $P_{\bm{X}}\mapsto (P_{\bm{U}_1},\ldots,P_{\bm{U}_n})$, describing marginalization to each of the contexts in $(\bm{U}_1,\ldots,\bm{U}_n)$, is linear.
+	\item The set of \st{possibilities for the distribution} \elie{all valid (positive, normalized) distributions} $P_{\bm{V}}$ is precisely the convex hull of the deterministic assignments of values to $\bm{V}$ (the deterministic distributions), and 
+	\item The map $P_{\bm{V}}\mapsto (P_{\bm{V}_1},\ldots,P_{\bm{V}_n})$, describing marginalization to each of the contexts in $(\bm{V}_1,\ldots,\bm{V}_n)$, is linear.
 \end{itemize}
-Hence the image of the set of possibilities for the distribution $P_{\bm{X}}$ under the map $P_{\bm{X}}\mapsto (P_{\bm{U}_1},\ldots,P_{\bm{U}_n})$ is exactly the convex hull of the deterministic assignments of values to $(\bm{U}_1,\ldots,\bm{U}_n)$ which are consistent where these contexts overlap. Since there are only finitely many such deterministic assignments, this convex hull is a polytope; it is called the \tblue{marginal polytope}~\cite{kahle_marginal_2010}. Together with the above equations on coinciding submarginals, the facet inequalities of this polytope solve the marginal constraint problem. The marginal satisfiability problem asks about membership in the polytope; by the above, this becomes a linear program with the joint probabilities $P_{\bm{X}}$ as the unknowns.
+Hence the \emph{image} of the set of possibilities for the distribution $P_{\bm{V}}$ under the map $P_{\bm{V}}\mapsto (P_{\bm{V}_1},\ldots,P_{\bm{V}_n})$ is exactly the convex hull of the deterministic assignments of values to $(\bm{V}_1,\ldots,\bm{V}_n)$ which are consistent where these contexts overlap. Since there are only finitely many such deterministic assignments, this convex hull is a polytope; it is called the \tblue{marginal polytope}~\cite{kahle_marginal_2010}. Together with the above equations on coinciding submarginals, the facet inequalities of this polytope solve the marginal constraint problem. The marginal satisfiability problem asks about membership in the polytope; by the above, this becomes a linear program with the joint probabilities $P_{\bm{V}}$ as the unknowns.
 
 To express this more concretely, we write the marginal satisfiability problem in the form of a generic linear program.
 
-Let the \tblue{joint distribution vector} $\bm{x}$ be the vector associated with the joint probability distribution $P_{\bm{X}}$, that is, the vector whose components are the probabilities $P_{\bm{X}}(x)$.  Let the \tblue{marginal distribution vector} $\bm{b}$ be the vector that is the concatenation over $i$ of the vectors associated with the distributions $P_{\bm{U}_i}$.
+Let the \tblue{joint distribution vector} $\bm{v}$ be the vector associated with the joint probability distribution $P_{\bm{V}}$, that is, the vector whose components are the probabilities $P_{\bm{V}}(v)$.  Let the \tblue{marginal distribution vector} $\bm{b}$ be the vector that is the concatenation over $i$ of the vectors associated with the distributions $P_{\bm{V}_i}$.
 Finally, let the \tblue{marginal description matrix} $\bm{M}$ be the matrix representation of the linear map corresponding to marginalization on each of the contexts, that is, 
-$P_{\bm{X}}\to(P_{\bm{U}_1},\ldots,P_{\bm{U}_n})$  where 
-$P_{\bm{U}_i} = \sum_{\bm{X}\setminus\bm{U}_i} P_{\bm{X}}$.
+$P_{\bm{V}}\to(P_{\bm{V}_1},\ldots,P_{\bm{V}_n})$  where 
+$P_{\bm{V}_i} = \sum_{\bm{V}\setminus\bm{V}_i} P_{\bm{V}}$.
 The components of $\bm{M}$ all take the value zero or one. 
 
 In this notation, the marginal satisfiability problem consists of determining whether, for a given vector $\bm{b}$, the following constraints are feasible:
 \begin{align}\label{eq:marginalproblemgeneric}
-    \exists\, \bm{x} :{\bm{x} \geq \bm{0}} ,\; \bm{M}\bm{x}=\bm{b},
+    \exists\, \bm{v} :{\bm{v} \geq \bm{0}} ,\; \bm{M}\bm{v}=\bm{b},
 \end{align}
-where the component-wise inequality $\bm{x}\geq\bm{0}$ enforces the constraint that $P_{\bm{X}}$ is a probability distribution. 
+where the component-wise inequality $\bm{v}\geq\bm{0}$ enforces the constraint that $P_{\bm{V}}$ is a nonnegative probability distribution. 
 This is clearly a linear program.
 
-In the example of \cref{fig:simplicialcomplex222} with binary variables, $\bm{M}$ is a $48\times 64$ matrix, so that $\bm{M}\bm{x}=\bm{b}$ represents 48 equations and $\bm{x} \geq \bm{0}$ represents 64 inequalities; explicit representations of  $\bm{M}$, $\bm{x}$, and $\bm{b}$ for the simpler example of the Cut inflation can be found in \cref{sec:explicitmatrix}.
-A single linear program can then assess whether there is a solution in $\bm{x}$ for a given marginal distribution vector $\bm{b}$. If this is not the case, then the marginal satisfiability problem has a negative answer. 
+In the example of \cref{fig:simplicialcomplex222} with binary variables, $\bm{M}$ is a $48\times 64$ matrix, so that $\bm{M}\bm{v}=\bm{b}$ represents 48 equations and $\bm{v} \geq \bm{0}$ represents 64 inequalities; explicit representations of  $\bm{M}$, $\bm{v}$, and $\bm{b}$ for the simpler example of the Cut inflation can be found in \cref{sec:explicitmatrix}.
+A single linear program can then assess whether there is a solution in $\bm{v}$ for a given marginal distribution vector $\bm{b}$. If this is not the case, then the marginal satisfiability problem has a negative answer. 
 
 Since linear programming is quite easy, probing specific distributions for compatibility for a given inflated causal structure is computationally inexpensive. For instance, using the Web inflation of the Triangle scenario (\cref{fig:TriFullDouble}), which contains a large number of observed variables, our numerical computations have reproduced the result of~\cite[Theorem~2.16]{fritz2012bell}, that a certain distribution considered therein is incompatible with the Triangle scenario\footnote{This distribution {\em is}, however, quantum-compatible with the Triangle scenario (\cref{sec:classicallity}).}.
 
 In the case of the marginal constraint problem, the vector $\bm{b}$ is not given, but one rather wants to find conditions on $\bm{b}$ that hold if and only if \cref{eq:marginalproblemgeneric} has a solution. As per the above, this is a problem of \tblue{facet enumeration}\footnote{In \cref{sec:projalgorithms}, we provide an overview of techniques for facet enumeration.} for the marginal polytope. Equivalently, it is the problem of \tblue{linear quantifier elimination}\footnote{Linear quantifier elimination has already been used in causal inference for deriving entropic causal compatibility inequalities \cite{chaves2014novel,chaves2014informationinference}. In that task, however, the unknowns being eliminated are entropies on sets of variables of which one or more is latent. By contrast, the unknowns being eliminated above are all probabilities on sets of variables all of which are observed---but on the inflated causal structure rather than the original causal structure.} for the system of \cref{eq:marginalproblemgeneric}: one tries to find a system of linear equations and inequalities in $\bm{b}$ such that some $\bm{b}$ satisfies the system if and only if \cref{eq:marginalproblemgeneric} has a solution. There is a unique minimal system achieving this, and it consists of the constraints of consistency on the intersections of contexts (mentioned above), together with the facet inequalities of the marginal polytope. Taken together, these form a system of linear equations and inequalities that is equivalent to \cref{eq:marginalproblemgeneric}, but does not contain any quantifiers. In our application, the equations expressing consistency on the intersections of contexts are guaranteed to hold automatically, so that only the facet inequalities are of interest to us.
 
 In terms of \cref{eq:marginalproblemgeneric}, a valid inequality for the marginal distribution vector $\bm{b}$---such as a facet inequality of the marginal polytope---can always be expressed as $\bm{y}^T\bm{b}\geq 0$ for some vector $\bm{y}$.
-Validity of an inequality $\bm{y}^T\bm{b}\geq 0$ means precisely that $\bm{y}^T\bm{M}\geq\bm{0}$, since the columns of $\bm{M}$ are the vertices of the marginal polytope. The marginal satisfiability problem for a given vector $\bm{b}_0$ has no solution if and only if there is a vector $\bm{y}$ that yields a valid inequality but for which $\bm{y}^T\bm{b}_0 < 0$. Necessity follows by noting that if \cref{eq:marginalproblemgeneric} does have a solution $\bm{x}$ for a given vector $\bm{b}_0$, then the fact that $\bm{y}^T\bm{M}\geq \bm{0}$ and the fact that $\bm{x}\geq \bm{0}$ implies that $\bm{y}^T\bm{b}_0 = \bm{y}^T\bm{M}\bm{x} \geq 0$.  Sufficiency follows from Farkas' lemma.  Most linear programming tools are capable of returning a \emph{Farkas infeasibility certificate} \cite{infeasibilitycertificates} whenever a linear program has no solution.  In our case, if the marginal problem is infeasible for a vector $\bm{b}_0$, then the certificate is a vector $\bm{y}$ that yields a valid inequality but for which $\bm{y}^T\bm{b}_0 < 0$.\footnote{Farkas infeasibility certificates are available in \href[pdfnewwindow]{http://docs.mosek.com/8.0/pythonapi/optimizer-task-gety.html}{\textit{Mosek}}, \href[pdfnewwindow]{https://www.gurobi.com/documentation/6.5/refman/farkasdual.html}{\textit{Gurobi}}, and \href[pdfnewwindow]{http://www-01.ibm.com/support/docview.wss?uid=swg21400058}{\textit{CPLEX}}, as well as by accessing dual variables in \href[pdfnewwindow]{http://cvxr.com/cvx/doc/basics.html\#dual-variables}{\textit{cvxr}}/\href[pdfnewwindow]{http://cvxopt.org/userguide/coneprog.html\#linear-cone-programs}{\textit{cvxopt}}.}.
+Validity of an inequality $\bm{y}^T\bm{b}\geq 0$ means precisely that $\bm{y}^T\bm{M}\geq\bm{0}$, since the columns of $\bm{M}$ are the vertices of the marginal polytope. The marginal satisfiability problem for a given vector $\bm{b}_0$ has no solution if and only if there is a vector $\bm{y}$ that yields a valid inequality but for which $\bm{y}^T\bm{b}_0 < 0$. Necessity follows by noting that if \cref{eq:marginalproblemgeneric} does have a solution $\bm{v}$ for a given vector $\bm{b}_0$, then the fact that $\bm{y}^T\bm{M}\geq \bm{0}$ and the fact that $\bm{v}\geq \bm{0}$ implies that $\bm{y}^T\bm{b}_0 = \bm{y}^T\bm{M}\bm{v} \geq 0$.  Sufficiency follows from Farkas' lemma.  Most linear programming tools are capable of returning a \emph{Farkas infeasibility certificate} \cite{infeasibilitycertificates} whenever a linear program has no solution.  In our case, if the marginal problem is infeasible for a vector $\bm{b}_0$, then the certificate is a vector $\bm{y}$ that yields a valid inequality but for which $\bm{y}^T\bm{b}_0 < 0$.\footnote{Farkas infeasibility certificates are available in \href[pdfnewwindow]{http://docs.mosek.com/8.0/pythonapi/optimizer-task-gety.html}{\textit{Mosek}}, \href[pdfnewwindow]{https://www.gurobi.com/documentation/6.5/refman/farkasdual.html}{\textit{Gurobi}}, and \href[pdfnewwindow]{http://www-01.ibm.com/support/docview.wss?uid=swg21400058}{\textit{CPLEX}}, as well as by accessing dual variables in \href[pdfnewwindow]{http://cvxr.com/cvx/doc/basics.html\#dual-variables}{\textit{cvxr}}/\href[pdfnewwindow]{http://cvxopt.org/userguide/coneprog.html\#linear-cone-programs}{\textit{cvxopt}}.}.
 
 Upon substituting the factorization relations of \cref{eq:preinjfactor} and deleting copy indices, any valid inequality for the marginal problem
 turns into a causal compatibility inequality. This applies both to facet inequalities of the marginal polytope, and to Farkas infeasibility certificates. In the latter case, one obtains an explicit causal compatibility inequality which witnesses the given distribution as incompatible with the given causal structure. In other words, if a given distribution is witnessed as incompatible with a causal structure using the technique we have described, then with little additional numerical effort, one can also obtain a causal compatibility inequality that exhibits the incompatibility. This may have applications to problems where the facet enumeration is computationally intractable.
@@ -1041,7 +1047,9 @@ This inequality constitutes a strengthening of \cref{eq:F3rawweak} that we had u
 
 Inequalities that one derives from hypergraph transversals are generally weaker than those that result from a complete solution of the marginal problem. Nevertheless, many Bell inequalities are of this form, the CHSH inequality among them \cite{Ghirardi08}.  So it seems that this method is still sufficiently powerful to generate plenty of interesting inequalities. At the same time, the method is significantly less computationally costly than the full-fledged facet enumeration, even if one does it for every possible antecedent. Interestingly, \emph{all} of the irredundant polynomial inequalities represented in \cref{eq:ghzrejectclass,eq:wrejectclass,eq:symclass3,eq:symclass4} are found to be derivable by means of hypergraph transversals.
 
-In conclusion, facet enumeration is the preferred method for deriving inequalities for the marginal problem when it is computationally tractable.  When it is not, enumerating hypergraph transversals presents a good alternative.
+In conclusion, facet enumeration is the preferred method for deriving inequalities for the marginal problem when it is computationally tractable.  When it is not, enumerating hypergraph transversals presents a good alternative. 
+
+%\elie{Since the intial drafting of the maniscript, Ref.~\cite{TC2018masters} proved that every infeasible support can be witnessed by a Hardy-type inequality. That result suggests that one can bypass solving the marginal problem, and to derive interesting inequalities by seeding the hypergraph transversal algorithm discussed in \cref{sec:TSEM} with an anteceedent corresponding to the infeasible support.}
 
 \section{Further Prospects for the Inflation Technique}\label{sec:otherprospects}
 
@@ -1225,15 +1233,19 @@ We have shown that \emph{some} of the causal compatibility inequalities we deriv
 
 We have shown that the inflation technique can also be used to derive causal compatibility inequalities that hold for arbitrary generalized probabilistic theories, a significant generalization of the results of \cite{pusey2014gdag}.  Such inequalities are also very significant insofar as they constitute a restriction on the sorts of statistical correlations that could arise in a given causal scenario even if quantum theory is superseded by some alternative physical theory.  As long as the successor theory falls within the framework of generalized probabilistic theories, the restriction will hold. 
 
-Finally, an interesting open question is whether it might be possible to modify our methods somehow to derive causal compatibility inequalities that hold for quantum theory and are violated by some GPT.  If it {\em is} possible, then 
-this technique might provide an alternative approach to understanding the Tsirelson bound \cite{Brunner2013Bell}.
+Finally, an interesting question is whether it might be possible to modify our methods somehow to derive causal compatibility inequalities that hold for quantum theory and are violated by some GPT. \elie{Since the initial drafting of this manuscript, such a modification has been identified~\cite{Wolfe2018quantuminflation}.}
+%If it {\em is} possible, then this technique might provide an alternative approach to understanding the Tsirelson bound \cite{Brunner2013Bell}.
 
-A single causal structure has an unlimited number of potential inflations. Selecting a good inflation from which strong polynomial inequalities can be derived is an interesting challenge. To this end, it would be desirable to understand how particular features of the original causal structure are exposed when different nodes in the causal structure are duplicated. By isolating which features are exposed in each inflation, we could conceivably quantify the utility for causal inference of each inflation. In so doing, we might find that inflations beyond a certain level of variable duplication need not be considered. The multiplicity beyond which further inflation is irrelevant may be related to the maximum degree of those polynomials which tightly characterize a causal scenario. Presently, however, it is not clear how to upper bound either number, or whether finite upper bounds can even be expected.
+A single causal structure has an unlimited number of potential inflations. Selecting a good inflation from which strong polynomial inequalities can be derived is an interesting challenge. To this end, it would be desirable to understand how particular features of the original causal structure are exposed when different nodes in the causal structure are duplicated. By isolating which features are exposed in each inflation, we could conceivably quantify the utility for causal inference of each inflation. In so doing, we might find that inflations beyond a certain level of variable duplication need not be considered. The multiplicity beyond which further inflation is irrelevant may be related to the maximum degree of those polynomials which tightly characterize a causal scenario. Presently, however, it is not clear how to upper bound either number, \st{or whether finite upper bounds can even be expected.}\elie{though a finite upper bound on the maximum degree of the polynomials follows from the semialgebraicity of the compatible distributions, per Ref.~\cite{rosset2016finite}.}
 
-Causal compatibility inequalities are, by definition, merely {\em necessary} conditions for compatibility. Depending on what kind of causal inference methods one uses at the level of an inflated causal structure $G'$, one may or may not obtain sufficient conditions. An interesting question is: if one only uses the existence of a joint distribution and ancestral independences at the level of $G'$, then does one obtain sufficient conditions as $G'$ varies? In other words: if a given distribution is such that for every inflation $G'$, the marginal problem of \cref{sec:ineqs} is solvable, then is the distribution compatible with the original causal structure? This occurs for the Bell scenario, where it is enough to consider only one particular inflation (\cref{sec:Bellscenarios}). Some evidence against sufficiency in the general case is that we have not seen a way to use the inflation technique to rederive Pearl's instrumental inequality.
+Causal compatibility inequalities are, by definition, merely {\em necessary} conditions for compatibility. Depending on what kind of causal inference methods one uses at the level of an inflated causal structure $G'$, one may or may not obtain sufficient conditions. An interesting question is: if one only uses the existence of a joint distribution and ancestral independences at the level of $G'$, then does one obtain sufficient conditions as $G'$ varies? In other words: if a given distribution is such that for every inflation $G'$, the marginal problem of \cref{sec:ineqs} is solvable, then is the distribution compatible with the original causal structure? This occurs for the Bell scenario, where it is enough to consider only one particular inflation (\cref{sec:Bellscenarios}). 
+
+\elie{Signficantly, since the initial drafting of this manuscript, Ref.~\cite{Navascues2017completelysolves} has proven that the technique of causal inflation is capable of approximating the necessary and sufficient conditions for causal compatibility to arbitrary precision. Ref.~\cite{Navascues2017completelysolves} also provides other desiderata absent here, such as the introduction of a well-defined hierarchy of graphical inflation, as well as an explicit demonstration of the inflation technique as applied to Pearl's instrumental scenario. Other extensions to the inflation technique include Ref~\cite{Wolfe2018quantuminflation}, which introduces an explicit semidefinite programming relaxation for the linear program defined by inflation, and Ref.~\cite{TC2018masters}, which shows, among other results, that inflation can adapted to perfectly partition the set of \emph{supports} into those which are compatible with a given causal structure and those which are not.}
+
+%Some evidence against sufficiency in the general case is that we have not seen a way to use the inflation technique to rederive Pearl's instrumental inequality.
 
 \begin{acknowledgments}
-E.W.~would like to thank Rafael Chaves and T.C. Fraser for suggestions which have improved this manuscript. T.F.~would like to thank Nihat Ay and Guido Mont\'ufar for discussion and references. This project/publication was made possible in part through the support of a grant  from the John Templeton Foundation. The opinions expressed in this publication are those of the author(s) and do not necessarily reflect the views of the John Templeton Foundation. This research was supported in part by Perimeter Institute for Theoretical Physics. Research at Perimeter Institute is supported by the Government of Canada through the Department of Innovation, Science and Economic Development Canada and by the Province of Ontario through the Ministry of Research, Innovation and Science.  
+E.W.~would like to thank Rafael Chaves, Miguel Navascues, and T.C. Fraser for suggestions which have improved this manuscript. T.F.~would like to thank Nihat Ay and Guido Mont\'ufar for discussion and references. This project/publication was made possible in part through the support of a grant  from the John Templeton Foundation. The opinions expressed in this publication are those of the author(s) and do not necessarily reflect the views of the John Templeton Foundation. This research was supported in part by Perimeter Institute for Theoretical Physics. Research at Perimeter Institute is supported by the Government of Canada through the Department of Innovation, Science and Economic Development Canada and by the Province of Ontario through the Ministry of Research, Innovation and Science.  
 \end{acknowledgments}
 
 \appendix
@@ -1256,7 +1268,7 @@ The oldest-known method for facet enumeration relies on \tblue{linear quantifier
 \href[pdfnewwindow]{http://comopt.ifi.uni-heidelberg.de/software/PORTA/}{\textit{PORTA}}, \href[pdfnewwindow]{http://sbastrakov.github.io/qskeleton/}{\textit{qskeleton}}
 , and \href[pdfnewwindow]{http://www.uic.unn.ru/~zny/skeleton/}{\textit{skeleton}}. In the authors experience \href[pdfnewwindow]{http://www.uic.unn.ru/~zny/skeleton/}{\textit{skeleton}} seemed to be the most efficient. Additionally, the package \href[pdfnewwindow]{https://polymake.org/doku.php/researchdata/polymakeilp}{\textit{polymake}} offers multiple algorithms as options for computing convex hulls.}. The authors found it convenient to custom-code a linear quantifier elimination routine in \textit{Mathematica$^{_{\textit{\tiny\texttrademark}}}$}.
 
-Other algorithms for facet enumeration that are not based on linear quantifier elimination include the following. \emph{Lexicographic reverse search} (LRS)~\cite{Avis2000lrs} explores the entire polytope by repeatedly pivoting from one facet to an adjacent one, and is implemented in~\href[pdfnewwindow]{http://cgm.cs.mcgill.ca/~avis/C/lrslib/USERGUIDE.html#Installation\%20Section}{\texttt{lrs}}. Equality Set Projection (ESP)~\cite{jones2004equality,JonesThesis2005} is also based on pivoting from facet to facet, though its implementation is less stable\footnote{ESP  \cite{jones2004equality,JonesThesis2005,Jones2008} is supported by \href[pdfnewwindow]{http://people.ee.ethz.ch/~mpt/2/docs/refguide/mpt/@polytope/projection.html}{\texttt{MPT2}} but not \href[pdfnewwindow]{http://people.ee.ethz.ch/~mpt/3/}{\texttt{MPT3}}, and by the (undocumented) option of \href[pdfnewwindow]{https://github.com/tulip-control/polytope/blob/master/polytope/polytope.py\#L1412}{projection} in the \href[pdfnewwindow]{https://pypi.python.org/pypi/polytope}{\textit{polytope}} (v0.1.2 2016-07-13) python module.}. These algorithms could be interesting to use in practice, since each pivoting step churns out a new facet; by contrast, Fourier-Motzkin type algorithms only generate the entire list of facets at once, after all the quantifiers have been eliminated one by one.
+Other algorithms for facet enumeration that are not based on linear quantifier elimination include the following. \emph{Lexicographic reverse search} (LRS)~\cite{Avis2000lrs} explores the entire polytope by repeatedly pivoting from one facet to an adjacent one, and is implemented in~\href[pdfnewwindow]{http://cgm.cs.mcgill.ca/~avis/C/lrslib/USERGUIDE.html#Installation\%20Section}{\texttt{lrs}}. Equality Set Projection (ESP)~\cite{jones2004equality,JonesThesis2005} is also based on pivoting from facet to facet, though its implementation is less stable\footnote{ESP  \cite{jones2004equality,JonesThesis2005,Jones2008} is supported by \href[pdfnewwindow]{http://people.ee.ethz.ch/~mpt/2/docs/refguide/mpt/@polytope/projection.html}{\texttt{MPT2}} but not \href[pdfnewwindow]{http://people.ee.ethz.ch/~mpt/3/}{\texttt{MPT3}}, and by the (undocumented) option of \href[pdfnewwindow]{https://github.com/tulip-control/polytope/blob/master/polytope/polytope.py\#L1412}{projection} in the \href[pdfnewwindow]{https://pypi.python.org/pypi/polytope}{\textit{polytope}} (v0.1.2 2016-07-13) python module.}. These algorithms could be interesting to use in practice, since each pivoting step churns out a new facet; by contrast, Fourier-Motzkin type algorithms only generate the entire list of facets at once, after all the quantifiers have been eliminated one by one, see Ref.~\cite{Chaves2018FMprojection} for a recent comparative review.
 
 It may also be possible to exploit special features of marginal polytopes in order to facilitate their facet enumeration, such as their high degree of symmetry: permuting the outcomes of each variable maps the polytope to itself, which already generates a sizeable symmetry group, and oftentimes there are additional symmetries given by permuting some of the variables. This simplifies the problem of facet enumeration~\cite{bremner_symmetries_2009,Schurmann2013}, and it may be interesting to apply dedicated software\footnote{Such as \href[pdfnewwindow]{http://comopt.ifi.uni-heidelberg.de/software/PANDA/}{\textit{PANDA}}, \href[pdfnewwindow]{http://mathieudutour.altervista.org/Polyhedral/}{\textit{Polyhedral}}, or \href[pdfnewwindow]{http://www.math.uni-rostock.de/~rehn/software/sympol.html}{\textit{SymPol}}. The authors found \textit{SymPol} to be rather effective for some small test problems, using the options ``\texttt{./sympol -a --cdd}".} to the facet enumeration problem of marginal polytopes~\cite{Kaibel2010,rehn_tools_2012,panda_2015}.
 
@@ -1270,9 +1282,9 @@ The three maximal ai-expressible sets of the Cut inflation (\cref{fig:TriDagSubA
 &\forall{a_2 c_1}:\;\p[A_2 C_1]{a_2 c_1} = \sum\nolimits_{b_1}\p[A_2 B_1 C_1]{a_2 b_1 c_1 }.
 \end{split}
 \end{align}
-As we noted in the main text, such conditions can be expressed in terms of a single matrix equality, $\bm{M} \bm{x} = \bm{b}$ where $\bm{x}$ is the \tblue{joint distribution vector},  $\bm{b}$ is the \tblue{marginal distribution vector}  and $\bm{M}$ is the \tblue{marginal description matrix}.  In the Cut inflation example, the joint distribution vector $\bm{x}$ has 8 elements, whereas the marginal distribution vector $\bm{b}$ has 12, i.e.
+As we noted in the main text, such conditions can be expressed in terms of a single matrix equality, $\bm{M} \bm{v} = \bm{b}$ where $\bm{v}$ is the \tblue{joint distribution vector},  $\bm{b}$ is the \tblue{marginal distribution vector}  and $\bm{M}$ is the \tblue{marginal description matrix}.  In the Cut inflation example, the joint distribution vector $\bm{v}$ has 8 elements, whereas the marginal distribution vector $\bm{b}$ has 12, i.e.
 \begin{align}
-\bm{x}=\begin{pmatrix}
+\bm{v}=\begin{pmatrix}
  P_{A_2 B_1 C_1}(0 0 0) \\
  P_{A_2 B_1 C_1}(0 0 1) \\
  P_{A_2 B_1 C_1}(0 1 0) \\
@@ -1330,36 +1342,36 @@ and hence the marginal description matrix $\bm{M}$ is a $12\times 8$ matrix of z
  {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & {\scriptscriptstyle ^0} & \bm{1} 
 \end{pmatrix}
 \end{align}
-such that $\bm{M}\bm{x}=\bm{b}$ per \cref{eq:marginalproblemgeneric}.
+such that $\bm{M}\bm{v}=\bm{b}$ per \cref{eq:marginalproblemgeneric}.
 
 
 \section{Constraints on Marginal Distributions from Copy-Index Equivalence Relations}\label{sec:coincidingdetails}
 
 In \cref{sec:copyindexequivalence}, we noted that every copy of a variable in an inflation model has the same probabilistic dependence on its parents as every other copy. It followed that for certain pairs of marginal contexts, the marginal distributions in any inflation model are necessarily equal. We now describe not only how to identify all such pairs of contexts, but also how to identify weak pairs, who's corresponding symmetry imposition cannot help strengthen the final constraints.
 
-Given $\bm{U},\bm{V}\subseteq\nodes{G'}$ in an inflated causal structure $G'$, let us say that a map $\varphi:\bm{U}\to\bm{V}$ is a \tblue{copy isomorphism} if it is a graph isomorphism\footnote{A graph isomorphism is a bijective map between the nodes of one graph and the nodes of another, such that both the map and its inverse take edges to edges.} between $\subgraph{\bm{U}}$ and $\subgraph{\bm{V}}$ such that $\varphi(X)\sim X$ for all $X\in\bm{U}$, meaning that $\varphi$ maps every node $X\in\bm{U}$ to a node $\varphi(X)\in\bm{V}$ that is equivalent to $X$ under dropping the copy-index.
+Given $\bm{X},\bm{Y}\subseteq\nodes{G'}$ in an inflated causal structure $G'$, let us say that a map $\varphi:\bm{X}\to\bm{Y}$ is a \tblue{copy isomorphism} if it is a graph isomorphism\footnote{A graph isomorphism is a bijective map between the nodes of one graph and the nodes of another, such that both the map and its inverse take edges to edges.} between $\subgraph{\bm{X}}$ and $\subgraph{\bm{Y}}$ such that $\varphi(X)\sim X$ for all $X\in\bm{X}$, meaning that $\varphi$ maps every node $X\in\bm{X}$ to a node $Y{=}\varphi(X)\in\bm{Y}$ such that $Y$ is equivalent to $X$ under dropping the copy-index.
 %\footnote{\color{purple}Copy isomorphisms can be thought of isomorphisms of (equitably) \tblue{colored} directed graphs \cite{lopez2014conauto,mckar2014isomorphism}, where every original-scenario variable in the inflated causal structure is given a unique color but such that the copy index is ignored.}.
 
-Furthermore, we say that a copy isomorphism $\varphi : \bm{U}\to\bm{V}$ is an \tblue{inflationary isomorphism} whenever it can be extended to a copy isomorphism on the ancestral subgraphs, $\Phi : \An{\bm{U}}\to\An{\bm{V}}$. 
-A copy isomorphism $\Phi: \An{\bm{U}}\to\An{\bm{V}}$ defines an inflationary isomorphism $\varphi:\bm{U}\to\bm{V}$ if and only if $\Phi(\bm{U}) = \bm{V}$.
-So in practice, one can either start with $\varphi : \bm{U}\to\bm{V}$ and try to extend it to $\Phi : \An{\bm{U}}\to\An{\bm{V}}$, or start with such a $\Phi$ and see whether it maps $\bm{U}$ to $\bm{V}$ and thereby restricts to a $\varphi$.
+Furthermore, we say that a copy isomorphism $\varphi : \bm{X}\to\bm{Y}$ is an \tblue{inflationary isomorphism} whenever it can be extended to a copy isomorphism on the \emph{ancestral} subgraphs, $\Phi : \An{\bm{X}}\to\An{\bm{Y}}$. 
+A copy isomorphism $\Phi: \An{\bm{X}}\to\An{\bm{Y}}$ defines an inflationary isomorphism $\varphi:\bm{X}\to\bm{Y}$ if and only if $\Phi(\bm{X}) = \bm{Y}$.
+So in practice, one can either start with $\varphi : \bm{X}\to\bm{Y}$ and try to extend it to $\Phi : \An{\bm{X}}\to\An{\bm{Y}}$, or start with such a $\Phi$ and see whether it maps $\bm{X}$ to $\bm{Y}$ and thereby restricts to a $\varphi$.
 
-For given $\bm{U}$ and $\bm{V}$, a sufficient condition for equality of their marginal distributions in an inflation model is that there exists an inflationary isomorphism between them.  Because $\bm{U}$ and $\bm{V}$ might themselves contain several variables that are copy-index equivalent (recall the examples of \cref{sec:copyindexequivalence}), equating the distribution $P_{\bm{U}}$ with the distribution $P_{\bm{V}}$ in an unambiguous fashion requires one to specify a correspondence between the variables that make up $\bm{U}$ and those that make up $\bm{V}$. This is exactly the data provided by the inflationary isomorphism $\varphi$.  This result is summarized in the following lemma.
+For given observed $\bm{V}_1$ and $\bm{V}_2$, a sufficient condition for equality of their marginal distributions in an inflation model is that there exists an inflationary isomorphism between them.  Because $\bm{V}_1$ and $\bm{V}_2$ might themselves contain several variables that are copy-index equivalent (recall the examples of \cref{sec:copyindexequivalence}), equating the distribution $P_{\bm{V}_1}$ with the distribution $P_{\bm{V}_2}$ in an unambiguous fashion requires one to specify a correspondence between the variables that make up $\bm{V}_1$ and those that make up $\bm{V}_2$. This is exactly the data provided by the inflationary isomorphism $\varphi$.  This result is summarized in the following lemma.
 
 \begin{lemma}
-Let $G'$ be an inflation of $G$, and let $\bm{U},\bm{V}\subseteq\nodes{G'}$. Then every inflationary isomorphism $\varphi:\bm{U}\to\bm{V}$ induces an equality $P_{\bm{U}} = P_{\bm{V}}$ for inflation models, where the variables in $\bm{U}$ are identified with those in $\bm{V}$ according to $\varphi$.
+Let $G'$ be an inflation of $G$, and let $\bm{V}_1,\bm{V}_2\subseteq\obsnodes{G'}$. Then every inflationary isomorphism $\varphi:\bm{V}_1\to\bm{V}_2$ induces an equality $P_{\bm{V}_1} = P_{\bm{V}_2}$ for inflation models, where the variables in $\bm{V}_1$ are identified with those in $\bm{V}_2$ according to $\varphi$.
 \label[lemma]{lem:coincide}
 \end{lemma}
 
-This applies in particular when $\bm{V} = \bm{U}$, in which case the statement is that the distribution $P_{\bm{U}}$ is invariant under permuting the variables according to $\varphi$.
+This applies in particular when $\bm{V}_1 = \bm{V}_2$, in which case the statement is that the distribution $P_{\bm{V_1}}$ is \emph{invariant under permuting the variables} according to $\varphi$.
 
 \cref{lem:coincide} is best illustrated by returning to our example from \cref{sec:copyindexequivalence} 
-which considered the Spiral inflation of~\cref{fig:Tri222} and the pair of contexts $\bm{U} = \{ A_1 A_2 B_1\}$ and $\bm{V} =\{ A_1 A_2 B_2\}$. The map 
+which considered the Spiral inflation of~\cref{fig:Tri222} and the pair of contexts $\bm{V}_1 = \{ A_1 A_2 B_1\}$ and $\bm{V}_2 =\{ A_1 A_2 B_2\}$. The map 
 \begin{align}\label{copyisomorph}
 	\varphi \: : \: A_1 \mapsto A_1,\qquad A_2\mapsto A_2,\qquad B_1\mapsto B_2
 \end{align}
-is a copy isomorphism between $\bm{U}$ and $\bm{V}$
-because it trivially implements a graph isomorphism (both subgraphs are edgeless), and it maps each variable in $\bm{U}$ to a variable in $\bm{V}$ that is copy-index equivalent. There is a unique choice to extend $\varphi$ to a copy isomorphism $\Phi:\An{\bm{U}}\to\An{\bm{V}}$, namely, by extending~\cref{copyisomorph} to the ancestors via
+is a copy isomorphism between $\bm{V}_1$ and $\bm{V}_2$
+because it trivially implements a graph isomorphism (both subgraphs are edgeless), and it maps each variable in $\bm{V}_1$ to a variable in $\bm{V}_2$ that is copy-index equivalent. There is a unique choice to extend $\varphi$ to a copy isomorphism $\Phi:\An{\bm{V}_1}\to\An{\bm{V}_2}$, namely, by extending~\cref{copyisomorph} to the ancestors via
 \begin{align}
 \Phi \: : \: X_1\mapsto X_1,\qquad Y_1\mapsto Y_1, \qquad Y_2 \mapsto Y_2, \qquad Z_1 \mapsto Z_2,
 \end{align}
@@ -1370,11 +1382,11 @@ Similarly, the map
 \begin{align}\label{copyisomorph2}
 	\varphi' \: : \: A_1 \mapsto A_2,\qquad A_2\mapsto A_1,\qquad B_1\mapsto B_2
 \end{align}
-is easily verified to be a copy isomorphism between $\subgraph{\bm{U}}$ and $\subgraph{\bm{V}}$, and there is again a unique choice to extend $\varphi'$ to a copy isomorphism $\Phi':\ansubgraph{\bm{U}}\to\ansubgraph{\bm{V}}$, by extending~\cref{copyisomorph2} with
+is \emph{also} easily verified to be a copy isomorphism between $\subgraph{\bm{V}_1}$ and $\subgraph{\bm{V}_2}$, and there is again a unique choice to extend $\varphi'$ to a copy isomorphism $\Phi':\ansubgraph{\bm{V}_1}\to\ansubgraph{\bm{V}_2}$, by extending~\cref{copyisomorph2} with
 \begin{align}
 \Phi' \: : \: X_1\mapsto X_1,\qquad Y_1\mapsto Y_2, \qquad Y_2 \mapsto Y_1, \qquad Z_1 \mapsto Z_2,
 \end{align}
-so that $\varphi'$ is verified to be an inflationary isomorphism. From \cref{lem:coincide}, we then conclude that any inflation model also satisfies $P_{A_1 A_2 B_1} = P_{A_2 A_1 B_2}$.  (And this in turn implies that for the context $\{A_1 A_2\}$, the marginal distribution satisfies $P_{A_1 A_2} = P_{A_2 A_1}$.)
+so that $\varphi'$ too is verified to be an inflationary isomorphism. From \cref{lem:coincide}, we then conclude that every inflation model also satisfies $P_{A_1 A_2 B_1} = P_{A_2 A_1 B_2}$.  (And this in turn implies that for the context $\{A_1 A_2\}$, the marginal distribution satisfies the permutation invariance $P_{A_1 A_2} = P_{A_2 A_1}$.)
 
 \begin{figure}[b]
     \centering
@@ -1395,19 +1407,22 @@ so that $\varphi'$ is verified to be an inflationary isomorphism. From \cref{lem
     \end{minipage}
 \end{figure}
 
-In order to avoid any possibility of confusion, we emphasize that it is not a plain copy isomorphism between the subgraphs of $\bm{U}$ and $\bm{V}$ themselves which results in coinciding marginal distributions, nor a copy isomorphism between the ancestral subgraphs of $\bm{U}$ and $\bm{V}$. It is rather an inflationary isomorphism between the subgraphs, i.e., a copy isomorphism between the ancestral subgraphs that restricts to a copy isomorphism between the subgraphs. To see why a copy isomorphism between ancestral subgraphs {\em by itself} may not be sufficient for deriving equality of marginal distributions, we offer the following example. Take as the original causal structure the instrumental scenario of \citet{pearl1995instrumental}, and consider the inflation depicted in \cref{fig:IScopyDAG}.  Consider the pair of contexts $\bm{U} = \{ X_1 Y_2 Z_1\}$ and $\bm{V}= \{ X_1 Y_2 Z_2\}$ on the inflated causal structure. Since $\subgraph{\bm{U}}$ and $\subgraph{\bm{V}}$ are not isomorphic, there is no copy isomorphism between the two. On the other hand, 
+In order to avoid any possibility of confusion, we emphasize that it is not a plain copy isomorphism between the subgraphs of $\bm{V}_1$ and $\bm{V}_2$ themselves which results in coinciding marginal distributions, nor a copy isomorphism between the ancestral subgraphs of $\bm{V}_1$ and $\bm{V}_2$. Rather, it is an inflationary isomorphism between the subgraphs, i.e., a copy isomorphism between the ancestral subgraphs that restricts to a copy isomorphism between the subgraphs. To see why a copy isomorphism between ancestral subgraphs {\em by itself} may not be sufficient for deriving equality of marginal distributions, we offer the following example. Take as the original causal structure the instrumental scenario of \citet{pearl1995instrumental}, and consider the inflation depicted in \cref{fig:IScopyDAG}.  Consider the pair of contexts $\bm{V}_1 = \{ X_1 Y_2 Z_1\}$ and $\bm{V}_2 = \{ X_1 Y_2 Z_2\}$ on the inflated causal structure. Since $\subgraph{\bm{V}_1}$ and $\subgraph{\bm{V}_2}$ are not isomorphic, there is no copy isomorphism between the two. On the other hand, 
 the ancestral subgraphs are both given by the causal structure of~\cref{fig:ancestralsubgraphnotenough}, so that the identity map is a copy isomorphism between $\ansubgraph{X_1 Y_2 Z_1}$ and $\ansubgraph{X_1 Y_2 Z_2}$.
 
-One can try to make use of \cref{lem:coincide} when deriving polynomial inequalities with inflation via solving the marginal problem, by imposing the resulting equation $P_{\bm{U}} = P_{\bm{V}}$ as an additional constraint for every inflationary isomorphism $\varphi : \bm{U}\to\bm{V}$ between sets of observed nodes. This is advantageous to speed up to the linear quantifier elimination, since one can solve each of the resulting equations for one of the unknown joint probabilities and thereby eliminate that probability directly without Fourier-Motzkin elimination. Moreover, one could hope that these additional equations also result in tighter constraints on the marginal problem, which would in turn yielder tighter causal compatibility inequalities. Our computations have so far not revealed any example of such a tightening.
+One can try to make use of \cref{lem:coincide} when deriving polynomial inequalities with inflation via solving the marginal problem, by imposing the resulting equations of the form $P_{\bm{V}_1} = P_{\bm{V}_2)}$ as additional constraints, one constraint for each inflationary isomorphism $\varphi : \bm{V}_1\to\bm{V}_2$ between sets of observed nodes. This is advantageous to speed up to the linear quantifier elimination, since one can solve each of the resulting equations for one of the unknown joint probabilities and thereby eliminate that probability directly without Fourier-Motzkin elimination. Moreover, one could hope that these additional equations also result in tighter constraints on the marginal problem, which would in turn yield tighter causal compatibility inequalities. Our computations have so far not revealed any example of such a tightening.
 
 In some cases, this lack of impact can be explained as follows.
-Suppose that $\varphi:\bm{U}\to\bm{V}$ is an inflationary isomorphism 
-which is not just the restriction of a copy isomorphism between the ancestral subgraphs, but even the restriction of a copy automorphism 
-$\Phi':G'\to G'$ of the entire inflated causal structure onto itself; in particular, this assumption implies that $\Phi'$ also restricts to a copy isomorphism $\Phi:\An{\bm{U}}\to\An{\bm{V}}$ between the ancestral subgraphs. In this case, the irrelevance of the additional constraint $P_{\bm{U}} = P_{\bm{V}}$ to the marginal problem for inflation models can be explained by the following argument. 
+Suppose that $\varphi:\bm{V}_1\to\bm{V}_2$ is an inflationary isomorphism such that $\varphi$ can be extended to a copy automorphism 
+$\Phi':G'\to G'$, which maps the entirety of the inflated causal structure onto itself. An inflationary isomorphism can always be extended to some copy isomorphism between the ancestral subgraphs $\Phi:\ansubgraph{\bm{V}_1}\to\ansubgraph{\bm{V}_2}$ by definition, but not every inflationary isomorphism can also be extended to a full copy automorphism of $G'$.
+%which is not just the restriction of a copy isomorphism between the ancestral subgraphs, but even the restriction of a copy automorphism 
+%$\Phi':G'\to G'$ of the entire inflated causal structure onto itself; in particular, this assumption implies that $\Phi'$ also restricts to a copy isomorphism $\Phi:\An{\bm{V}_1}\to\An{\bm{V}_2}$ between the ancestral subgraphs. 
+In those cases where $\varphi$ \emph{can} be extended to a copy automorphism, %In this case, 
+the \emph{irrelevance} of the additional constraint $P_{\bm{V}_1} = P_{\bm{V}_2}$ to the marginal problem for inflation models can be explained by the following argument. 
 
-Suppose that some joint distribution $P_{\obsnodes{G'}}$ solves the unconstrained marginal problem, i.e.,~without requiring $P_{\bm{U}} = P_{\bm{V}}$. Now apply $\Phi'$ to the variables in $P_{\obsnodes{G'}}$, switching the variables around, to generate a new distribution $P'_{\obsnodes{G'}}:=P_{\Phi'(\obsnodes{G'})}$. Because the set of marginal distributions that arise from inflation models is invariant under this switching of variables, we conclude that $P'$ is also a solution to the unconstrained marginal problem. Taking the uniform mixture of $P$ and $P'$ is therefore still a solution of the unconstrained marginal problem. But this uniform mixture also satisfies the supplementary constraint $P_{\bm{U}} = P_{\bm{V}}$. Hence the supplementary constraint is satisfiable whenever the unconstrained marginal problem is solvable, which makes adding the constraint irrelevant.
+Suppose that some joint distribution $P_{\obsnodes{G'}}$ solves the unconstrained marginal problem, i.e.,~without requiring $P_{\bm{V}_1} = P_{\bm{V}_2}$. Now apply the automorphism $\Phi'$ to the variables in $P_{\obsnodes{G'}}$, switching the variables around, to generate a new distribution $P'_{\obsnodes{G'}}:=P_{\Phi'(\obsnodes{G'})}$. Because the set of marginal distributions that arise from inflation models is invariant under this switching of variables, we conclude that $P'$ is also a solution to the unconstrained marginal problem. Taking the uniform mixture of $P$ and $P'$ is therefore still a solution of the unconstrained marginal problem. But this uniform mixture also satisfies the supplementary constraint $P_{\bm{V}_1} = P_{\bm{V}_2}$. Hence the supplementary constraint is satisfiable whenever the unconstrained marginal problem is solvable, which makes adding the constraint irrelevant.
 
-This argument does not apply when the inflationary isomorphism $\varphi:\bm{U}\to\bm{V}$ cannot be extended to a copy automorphism of the entire inflated causal structure. It also does not apply if one uses $d$-separation conditions beyond ancestral independence on the inflated causal structure as additional constraints (\cref{sec:fulldsep}), because in this case the set of compatible distributions is not necessarily convex.  In either of these cases, it is unclear whether or not constraints arising from copy-index equivalence could yield tighter inequalities. 
+This argument does not apply when the inflationary isomorphism $\varphi:\bm{V}_1\to\bm{V}_2$ cannot be extended to a copy automorphism of the entire inflated causal structure. It also does not apply if one uses $d$-separation conditions beyond ancestral independence on the inflated causal structure as additional constraints (\cref{sec:fulldsep}), because in this case the set of compatible distributions is not necessarily convex.  In either of these cases, it is unclear whether or not constraints arising from copy-index equivalence could yield tighter inequalities. 
 
 \section{Using the Inflation Technique to Certify a Causal Structure as ``Interesting"\label{sec:interestingproof}}
 
