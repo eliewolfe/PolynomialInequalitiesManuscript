@@ -636,7 +636,16 @@ is a causal compatibility inequality for the Triangle scenario.   This inequalit
 
 Given the symmetry of the Triangle scenario under permutations and sign flips of $A$, $B$ and $C$, it is clear that the image of inequality~\eqref{eq:polymonogamy} under any such symmetry is also a valid causal compatibility inequality.  Together, these inequalities constitute a type of monogamy\footnote{We are here using the term ``monogamy'' in the same sort of manner in which it is used in the context of entanglement theory~\cite{horo4}.}  of correlations in the Triangle scenario with binary variables:  if any two observed variables with unbiased marginals are perfectly correlated, then they are both independent of the third.
 
-\tob{Moreover, since \eqref{eq:polymonogamyraw} is valid even for continuous variables with values in the interval $[-1,+1]$, it follows that the polynomial inequality \eqref{eq:polymonogamy} is valid in this case as well.}
+\tob{Moreover, since inequality \eqref{eq:polymonogamyraw} is valid even for continuous variables with values in the interval $[-1,+1]$, it follows that the polynomial inequality \eqref{eq:polymonogamy} is valid in this case as well.}
+
+\elie{Note that inequality \eqref{eq:polymonogamyraw} serves as a robust witness certifying the incompatibility of 3-way perfect correlation -- per \cref{eq:ghzdistribution1} -- with the Triangle scenario. Inequality \eqref{eq:polymonogamyraw} is robust in the sense that it rejects not only the ideal correlations of the GHZ-type distribution itself, but it also demonstrates the incompatibility of distributions \emph{close} to 3-way perfect correlation.}
+
+\elie{One might be curious as to \emph{how} close to perfect correlation one can get while still being compatible with the Triangle scenario. To partially answer this question we pursued both further inequality-derivation as well as explicit model-construction. We can confidently report that distributions of the form}
+\begin{align}\label{eq:ghznoisy}
+P_{A B C} =\alpha\frac{[000]+[111]}{2}+(1-\alpha)\frac{[\text{else}]}{6},\quad\text{i.e.,}\quad P_{A B C}(a b c)=\begin{cases}\tfrac{\alpha}{2}&\text{if }\; a = b = c, \\ \tfrac{1-\alpha}{6}&\text{otherwise},\end{cases}
+\end{align}
+\elie{are certainly \emph{compatible} with the Triangle scenario for $0\leq \alpha \leq \tfrac{1}{2}$, and that such distribution are are certainly \emph{incompatible} for $\tfrac{3}{5}< \alpha \leq 1$. Although the authors were unable to derive any inequality capable of rejecting distributions where $\alpha \leq \tfrac{3}{5}$, the authors also failed to construct any explicit Triangle-scenario model which could realize a distribution where $\alpha > \tfrac{1}{2}$. The presence of this gap between our inner and outer constructions could reflect either the inadequacy of our limited model constructions or the inadequacy of those inequalities which can be derived using relatively-small inflations of the Triangle causal structure. We defer closing the gap to future work.}
+
 \end{example}
 
 \begin{example}[\tred{A causal compatibility inequality in terms of \tpurp{\emph{entropic quantities}}}]
