@@ -1,0 +1,111 @@
+I haven’t repeated the referee comments below, so you’ll need to read this with a copy of the referee comments in hand.
+
+Thoughts on how to reply to comments of referee 1
+
+(1) Acknowledge the difference between compatibility and compatibility+faithfulness.  Point out that algorithm exists.  Questio is about efficiency.
+Not a bug but a feature. 
+
+Perhaps the referee is confusing our claim about the existence of an algorithm with the existence of some efficient algorithm.  Here’s the inefficient algorithm I have in mind. Simply range over all DAGs with the given variables, for each of these determine the CI relations that are implied by the DAG and test whether these are satisfied by the given distribution.
+
+(2) The reason is generality.  Although the examples in the article are inflations with more variables than the original DAG, this needn’t be the case in general.  To give a trivial example, if the triangle DAG was the ancestral subgraph of some set of nodes in a DAG G with a much greater number of variables, then the Cut inflation of the triangle DAG would still be considered an inflation of G even though it had a smaller number of variables than G.  
+
+(3) True, except in Eq. 9 where it is needed.  Although it could be replaced by AnSubDAG(U’) ~ AnSubDAG(U), it is better to keep the condition as U ~U’.
+No!  It is false, U \simeq U’ is a statement about two sets of variables being copy-index equivalent, and AnSubDAG(U’) ~ AnSubDAG(U) is about two DAGs being isomorphic.  For instance, if A causes B, then B \not \simeq {A,B}, however AnSubDAG(A) ~ AnSubDAG(A,B)
+
+(4) In the paragraph on p. 5 mentioning how the inflation technique is applicable to continuous variables, we should mention that these comments don’t apply to Sec. IV.  Should we remove the comment about entropies from Sec IV?
+See response to metareferee
+
+(5) I suppose we could comment on this, but there isn’t that much to say.  Elie: do you have any more insight since you did that work with Miguel?
+Elie to add something about this.
+
+(6) We hadn’t previously considered this explicitly, so nice of the referee to point it out. For d-separation conditioned on the null set, is there a difference between joint independence and pairwise independence for all pairs?  If there is, then we can revise 42 so that we demand U’_i \perp_d \cup_{j\ne i} U’_j 
+In any case, it is probably worth mentioning below Eq. 29 (the definitation of ancestral independence) that unlike conditional independence, if A perp_d B and A \perp_d C, then A perp_d BC.  Does this inference also hold for d-separation when one conditions on a non-null set?  That is, is it the case that if A perp_d B |D and A perp_d C|D then A perp_d BC|D? I guess the answer is yes.  
+
+(7) I don’t see how our description in the text differs from the equation.  When we say “common ancestor” does the refereee think that this excludes the variables themselves?  Do we elsewhere use the term “ancestor” to include the variable itself? 
+The referee is correct that having a notion of conditional d-separation here doesn’t make sense.  We are back to just talking about d-separation rather than ancestral independence with the stuff about S. 
+Footnote 7 makes this explicit.  We will repeat the caveat near our wordy defn’n of “ancestral independence”.
+
+(8)  Although we don’t use the term “ancestral independence” in the introduction, we *do* specify that this is the main focus of the work.  Specifically, we state:
+  Concretely, we consider causal compatibility inequalities for the inated causal structure that are obtained as follows.
+One begins by identifying inequalities for the marginal problem , which is the problem of determining when a given
+family of marginal distributions on some subsets of variables can arise as marginals of a global joint distribution.
+One then looks for sets of variables within the inflated causal structure with disjoint ancestries and writes down the
+factorization of their joint distribution. These factorization conditions are substituted into the marginal problem
+inequalities to obtain causal compatibility inequalities for the inated causal structure. Although these constraints
+are extremely weak, the inflation technique turns them into powerful necessary conditions for compatibility with the
+original causal structure.
+Need to rewrite the paragraph to note that of all the ways one could try to systematize the derivation of inequalities  from inlfation, we only do so for the use of a.i. relations, which is the simplest. 
+
+
+(9)  We have in mind equality constraints in addition to inequality constraints.  Probably best not to exclude these.   Currently, we say " When these conditions are expressed as inequalities, we will refer to them as causal compatibility inequalities .”  What if we switched to saying “These conditions can always be expressed as a set of inequalities.  Note that we include constraints that are equalities in this list: one can either consider an equality as a species of inequality, or if one does not favour such a definition, it suffices to note that an equality constraint can always be expressed as a pair of inequalities.  We will refer to all such conditions as causal compatibility inequalities.”
+Rewrite as: these conditions can always be expresssed as sets of inequalities footnote{ x=y is ….) which we will refer to as causal compatibiltiy inequalities.
+
+
+(10) The intuition behind rule 1 is as follows.  If A perp_d B|C, then P(ABC)= P(AC)P(BC)/P(C) (*).  If A \cup C is expressible and B\cup C is expressible, then C is expressible, and it follows that each of P(AC), P(BC) and P(C) can be written as functions of distributions on injectable sets.  But then it follows from (*) that P(ABC) can be written as a function of distributions on injectable sets.  Therefore A \cup B \cup C is expressible. 
+Perhaps one criticism of rule 1 is that it incorporates within itself rule 2.
+Tobias: what’s the proof that these are the *only* two rules? 
+Revised response: the definition the referee quotes to us misses the key caveats which the two rules formalize.  We are not trying to be completely general.  Maybe we should say that we provide a sufficient condition for something to be an expressible set.  Allows us to broaden the scope of such sets in the future without changing terminology. i.e. they are a method to check expressibility.
+ASK TOBIAS!
+
+(11) Is the referee asking for the example of Appendix D to be moved into the main text?
+sidenote: we need to fix this " Upon converting substituting conditional independence relations…”
+Sidenote: in the paragraph beginning “Per Definition 7” if X’, Y’ and Z’ are meant to refer to sets of variables, then we should refer to X’ \cup Y’ and Y’ \cup Z’ rather than {X’Z’} and {Y’Z’}.  If they are meant to refer to variables, then we are missing generality.
+
+For the triangle, we can’t find any expressible sets besides ai-expressible sets because there are no observed nodes that act as common causes on other observed nodes. the whole class of so-called “network" DAGs are like this. 
+Say something about how we *do* get dividencds from inflation using expressible sets that are not ai-expressible in Appendix D. “Deriving nontrivial constraints from…” Maybe put in the introduction.
+
+
+(12) The relevant text is this: 
+"The procedure for systematically deriving causal compatibility inequalities is analogous: instead of determining whether a given family of distributions can arise as marginals of a joint distribution, one rather determines all constraints  that such a family must satisfy in order to arise from a joint distribution.   These constraint translate into causal compatibility inequalities for the inated causal structure via the ancestral independences of Eq. (43 ), and then into causal compatibility inequalities for the original causal structure via Corollary 6 .”
+What if we said the following instead:  
+“We have just described how, from a specified joint distribution, one can solve the decision problem of whether or not it is compatible with a given causal structure.  The procedure is to focus on a particular family of marginals (on the images of injectable sets) of the given joint distribution, then from products of these, obtain the distribution on each of the ai-expressible sets.  Finally, one asks simply whether the family of distributions on the ai-expressible sets are consistent in the sense of all being marginals of a single joint distribution.  By analogous logic, the following technique allows one to systematically derive causal compatibility inequalities: find the constraints that any family of distributions on the ai-expressible sets must satisfy if these are to be consistent in the sense of all being marginals of a single joint distribution.  Next, express each distribution of this family as a product of distributions on the injectable sets, according to Eq. (43), and rewrite the constraints in terms of the family of distributions on the injectable sets.  These constraints constitue causal compatibility inequalities for the inflated causal structure.  Finally, one can rewrite the constraints in terms of the family of distributions on the images of the injectable sets, using Corollary 6, to obtain causal compatibility inequalities for the original causal structure."
+
+(13) I don’t think a formal proof would add anything here, unless I’m missing some subtlety that the referee is worried about.  
+We will add a formal proof, in the manner that Tobias suggested.
+
+(14) I’m happy if we move the example of Appendix B into the main text.  Can we improve the pedagogy in any other way?
+‘Specifically, I propose putting all the text of App. B at the end of the paragraph including Eq. (48)
+
+Thoughts on how to reply to comments of referee 2
+
+(1) okay
+
+(2) okay
+
+(3) Referee has a point.  We should instead say something like: “with applications in all areas of science that use statistical data and for which causal relations are important, such as sussing out biological pathways or determining the effectiveness of medical treatments or policy decisions.”
+Causal inference *is* a species of machine learning.  Elie to look for an example to cite.  Can we provide other citations?
+
+(4) Same request as referee 1 made. In the second paragraph of Sec. IV, where we mention entropies, we should mention how this implies that one can derive causal compatibility inequalities for arbitrary cardinality of the observed variables. This should also be said in the introduction.  Nonetheless, we need to emphasize that the important question is *not* whether inflation can derive constraints for observed variables of unbounded cardinality, but whether it can provide any advantage relative to entropy cone techniques. Insofar as the latter techniques presume that latent nodes are classical variables, they necessarily cannot attest to any inequalities being GPT valid.  On the other hand, if one starts with Shannon-type entropic inequalities among the observed variables of an inflated causal structure with no inflationary fan-outs, and then uses these to obtain entropic causal compatibility inequalities for the original causal structure, one knows that these are GPT valid. So it seems that inflation can offer some added value over the entropy cone techniques. 
+Also, the constraint on marginals that one starts with could be a nonShannon inequality.  Might this help?
+
+Throughout the paper, we need to clarify that entropic techniques apply to arbitrary *finite* cardinality, not “without assumptions about cardinality”.  
+In example 1, we need to add a short addendum pointing out that if we replace variables valued in {0,1} with ones valued in the range [0,1], and ask about perfect correlation between these three variables (with Dirac delta distributions), then we can rule out this distribution using the Cut inflation just as easily. 
+In example 4, we need to add a short addendum pointing out that if we replace variables valued in {-1,1} with ones valued in the range [-1,1], we get the same causal compatibility inequality.  
+OR MAYBE we just made the addendum to example 4 and then point out that it implies the lack of perfect correlation between the three variables in the triangle scenario.
+Mention in Intro that the systematic stuff fro Sec. IV.B does not, however, apply to continuous variables.
+
+(5) We should rewrite the sentence to read: "Later work by CHSH derived inequalities without assuming any facts about quantum correlations; this derivation can retrospectively be understood as the first derivation of a constraint arising from the causal structure of the Bell scenario alone.” 
+
+(6) We should modify this to say “Furthermore, they provided numerical evidence and an intuitive argument in favour of the hypothesis that the faraction of causal structures that are interesting increases as the total nuber of nodes increases."
+
+(7) Yes, but is it worth including in the article?  Also, Tobias: is this already known from Steudel and Ay’s work?  If so, it might be worth mentioning that inflation can rederive the general form of the Steudel and Ay result.
+ASK TOBIAS
+What about larger cardinality?  Probably subsumed under Steudel and Ay.  
+Need to emphasize that our causla compatibility inequality in terms of values in {-1,+1} generalizes Steudel and Ay’s result for triangle. And inflation allows to go beyond triangle as well.
+
+(8) Seems a pretty arbitrary thing to consider, but I guess we could do it.  If I’m not mistaken, for a mixture of perfect 3-way correlation and iid, the largest weight of perfect 3-way correlation that can be explained by the triangle scenario is 1/2.  The referee also asks for us to make a comparison with other methods.  Seems like a lot of work for little insight.
+Yes, we’ll do it.
+
+(9) Perhaps the end of example 5 is the right place to emphasize that inflation doesn’t offer any computational advantage over other techniques for deriving entropic causal compatibility inequalities (so far as we know).  The main advantage of inflation is that it provides a means (using inflations without fan-outs) of deriving GPT-valid inequalities, whereas competing approaches concern themselves with classically valid inequalities or quantum valid inequalities. 
+Regarding nonShannon inequalities, this is the content of Appendix E.  We ought to describe within the main text what appendix E demonstrates. For instance, at the top of p. 8, we could say more.  (What is the “adhesitivty technique?  We make no mention of it in Appendix E and provide no references.)
+HLP gave an example of a GPT vaid inequality.   We have a procedure for generating these. 
+Elie: the proof is simplified relative to previous techniques for deriving the same result.
+Elie’s point: we didn’t need knowledge of nonShannon inequalities to derive some of the constraints that Mirjam derived because inflation provides a means of generating these nonShannon inequalities.
+We’ll mention in the intro the connection to nonShannon inequalities
+
+
+Other edits:
+In footnote 15, “encode the impossibility of sending signals faster than the speed of light” should be removed.
+In paragraph above that including eq. 23, rather than saying “we present Hardy’s proof of this incompatibility” we should say that “we present a proof of incompatibility in the style of Hardy’s proof of Bell’s theorem”  After all, Hardy’s 1993 paper does not discuss the PR box. 
+
+
