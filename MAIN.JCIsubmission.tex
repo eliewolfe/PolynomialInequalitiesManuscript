@@ -612,7 +612,7 @@ We now present some simple examples of causal compatibility inequalities for the
 \begin{align}
 \bm{X}\aindep \bm{Y} \quad \text{iff} \quad \An[G]{\bm{X}}\cap\An[G]{\bm{Y}}=\emptyset.
 \end{align}
-\elie{Ancestral independence is closed under union; that is, $\bm{X}\aindep \bm{Y}$ and $\bm{X}\aindep \bm{Z}$ implies $\bm{X}\aindep (\bm{Y{\cup}Z)}$. Consequently, pairwise ancestral independence implies joint factorizability; i.e. $\forall_{i\neq j} \bm{X}_i\aindep \bm{X}_j$ implies that $P_{\cup_i \bm{X}_i}=\prod_i P_{\bm{X}_i}$.}
+Ancestral independence is closed under union; that is, $\bm{X}\aindep \bm{Y}$ and $\bm{X}\aindep \bm{Z}$ implies $\bm{X}\aindep (\bm{Y{\cup}Z)}$. Consequently, pairwise ancestral independence implies joint factorizability; i.e. $\forall_{i\neq j} \bm{X}_i\aindep \bm{X}_j$ implies that $P_{\cup_i \bm{X}_i}=\prod_i P_{\bm{X}_i}$.
 
 %\st{Furthermore, the notation ${\bm{X}\aindep \bm{Y}\aindep \bm{Z}}$ should be understood as indicating that $\bm{X}\aindep \bm{Y}$ and $\bm{Y}\aindep \bm{Z}$ and $\bm{X}\aindep \bm{Z}$. Moreover, we will use ${\bm{X}\aindep \bm{Y}\aindep \bm{Z} | \bm{S}}$ to indicate that $\bm{X}\aindep \bm{Y}| \bm{S}$ and $\bm{Y}\aindep \bm{Z}| \bm{S}$ and $\bm{X}\aindep \bm{Z}| \bm{S}$.}
 
@@ -645,9 +645,9 @@ is a causal compatibility inequality for the Triangle scenario.   This inequalit
 
 Given the symmetry of the Triangle scenario under permutations and sign flips of $A$, $B$ and $C$, it is clear that the image of inequality~\eqref{eq:polymonogamy} under any such symmetry is also a valid causal compatibility inequality.  Together, these inequalities constitute a type of monogamy\footnote{We are here using the term ``monogamy'' in the same sort of manner in which it is used in the context of entanglement theory~\cite{horo4}.}  of correlations in the Triangle scenario with binary variables:  if any two observed variables with unbiased marginals are perfectly correlated, then they are both independent of the third.
 
-\tob{Moreover, since inequality \eqref{eq:polymonogamyraw} is valid even for continuous variables with values in the interval $[-1,+1]$, it follows that the polynomial inequality \eqref{eq:polymonogamy} is valid in this case as well.}
+Moreover, since inequality \eqref{eq:polymonogamyraw} is valid even for continuous variables with values in the interval $[-1,+1]$, it follows that the polynomial inequality \eqref{eq:polymonogamy} is valid in this case as well.
 
-\elie{Note that inequality \eqref{eq:polymonogamyraw} serves as a robust witness certifying the incompatibility of 3-way perfect correlation (described in \cref{eq:ghzdistribution1}) with the Triangle scenario. Inequality \eqref{eq:polymonogamyraw} is robust in the sense that it demonstrates the incompatibility of distributions \emph{close} to 3-way perfect correlation.}
+Note that inequality \eqref{eq:polymonogamyraw} serves as a robust witness certifying the incompatibility of 3-way perfect correlation (described in \cref{eq:ghzdistribution1}) with the Triangle scenario. Inequality \eqref{eq:polymonogamyraw} is robust in the sense that it demonstrates the incompatibility of distributions \emph{close} to 3-way perfect correlation.
 
 \elie{One might be curious as to \emph{how} close to perfect correlation one can get while still being compatible with the Triangle scenario. To partially answer this question, we used \cref{eq:polymonogamyraw} to \emph{rule out} many distributions close to perfect correlation and we also pursued explicit model-construction to \emph{rule in} various distributions sufficiently \emph{far} from perfect correlation. Explicitly, we found that distributions of the form}
 \begin{align}\label{eq:ghznoisy}
@@ -684,7 +684,7 @@ This is another example of a nontrivial causal compatibility inequality for the 
 is also a causal compatibility inequality for the Triangle scenario.  This inequality was originally derived in~\cite{fritz2012bell}. Our rederivation in terms of inflation coincides with the proof found by~\citet{pusey2014gdag}.
 \end{example}
 
-\elie{Standard algorithms already exist for deriving entropic casual compatibility inequalities given a causal structure~\cite{fritz2013marginal,chaves2014novel,chaves2014informationinference}. We do not expect the methodology of causal inflation to offer any computation advantage in the task of deriving entropic inequalities. The advantage of the inflation approach is that it provides a narrative for explaining an entropic inequality without reference to unobserved variables. As elaborated in \cref{sec:classicallity}, this allows us to systematically derive GPT-valid entropic inequalities. A further advantage is the potential of the inflation approach to give rise to non-Shannon type inequalities, starting from Shannon type inequalities; see \cref{sec:NonShannon} for further discussion.}
+\elie{Standard algorithms already exist for deriving entropic casual compatibility inequalities given a causal structure~\cite{fritz2013marginal,chaves2014novel,chaves2014informationinference}. We do not expect the methodology of causal inflation to offer any computation advantage in the task of deriving entropic inequalities. The advantage of the inflation approach is that it provides a narrative for explaining an entropic inequality without reference to unobserved variables. As elaborated in \cref{sec:classicallity}, this consequently has applications to quantum information theory. A further advantage is the potential of the inflation approach to give rise to non-Shannon type inequalities, starting from Shannon type inequalities; see \cref{sec:NonShannon} for further discussion.}
 
 \begin{example}[\tred{A causal compatibility inequality in terms of \tpurp{\emph{joint distributions}}}]
 \label{example:probineq}
